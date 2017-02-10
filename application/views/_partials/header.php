@@ -22,7 +22,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             
-            <li class="active">
+            <li <?php echo ($curr_ctlr == 'dashboard')?'class="active"':'';?> >
               <a href="<?=site_url('dashboard');?>">
                 <i class="fa fa-dashboard fa-fw"></i> 
                   Dashboard
@@ -45,8 +45,8 @@
             </li>
             <?php }?>
             <?php if($role=="4" || $role=="1"){?>
-            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
-              <a href="<?=site_url('');?>">
+            <li <?php echo ($curr_ctlr == 'inventory')?'class="active"':'';?> >
+              <a href="<?=site_url('inventory');?>">
                  <i class="fa fa-database fa-fw"></i> 
                   Inventory
               </a>
