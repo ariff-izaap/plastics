@@ -7,20 +7,12 @@ class Dashboard_model extends App_model {
     
     function __construct()
     {
-        parent::__construct();
-
+      parent::__construct();
     }
     
-     function listing()
-    {  
-		
-            
-        
-       
-    }
-
-    
+    function listing()
+	  {  
 	
-    
+  	}
 }
 ?>

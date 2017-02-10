@@ -5,13 +5,17 @@
           <div class="avatar"><h1>IP SYSTEM</h1><?php /*?><img src="<?php echo include_img_path();?>logo.png" alt="Independent Plastics"><?php */?></div>
           <div class="form-box">
         <form name="login" method="POST">
+          <?php
+            $a = isset($_COOKIE['login']) ? json_decode($_COOKIE['login']) : "";
+            $uname = isset($a->email) ? $a->email : "";
+            $pass = isset($a->password) ? $a->password : "";
+          ?>
               <div class="form-group">
-                <input name="email" type="text" placeholder="Email">
-                <input name="password" type="password" placeholder="Password">
+                <input name="email" type="text" placeholder="Email" value="<?=$uname;?>">
+                <input name="password" type="password" placeholder="Password" value="<?=$pass;?>">
                 
                 <?php if(validation_errors() || $this->session->flashdata('log_fail1')==TRUE):?>
                 <div id="output">
-
                   <?php echo validation_errors(); ?>
 
                   <?php if($this->session->flashdata('log_fail1')==TRUE){

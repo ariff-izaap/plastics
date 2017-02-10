@@ -26,8 +26,6 @@ function get_current_user_id()
 function get_user_data()
 {
     $CI = get_instance();
-    
-        
     if($CI->session->userdata('user_data'))
     {
         return $CI->session->userdata('user_data');
@@ -38,23 +36,26 @@ function get_user_data()
     }
 }
 
-function get_user_role( $user_id = 0 )
+function get_user_role( $user_id='')
 {
-    $CI= & get_instance();
+     $CI= & get_instance();
     
     if(!$user_id) 
     {
         $user_data = get_user_data();
         return $user_data['role_id'];
     }   
+
+    exit;
     
     $CI->load->model('user_model');
-    $row = $CI->user_model->get_where(array('id' => $user_id))->row_array;
+    $row = $CI->user_model->get_where(array('id' => $user_id));
+
 
     if( !$row )
         return FALSE;
 
-    return $row['role'];
+    return $row['role_id'];
 }
 
 function get_roles()

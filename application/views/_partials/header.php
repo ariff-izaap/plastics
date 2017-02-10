@@ -14,7 +14,10 @@
             <img src="<?php echo include_img_path();?>logo_new.png" alt="Independent Plastics" />
           </a>
         </div>
-        <?php $curr_ctlr =  $this->uri->segment(1, 'index');?>
+        <?php 
+          $role = get_user_role();
+          $curr_ctlr =  $this->uri->segment(1, 'index');
+        ?>
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -25,34 +28,40 @@
                   Dashboard
               </a>
             </li>
-            
+            <?php if($role=="2" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'organization')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">
                  <i class="fa fa-clock-o fa-fw"></i>
                   Sales
               </a> 
             </li>
-
+            <?php }?>
+            <?php if($role=="3" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'employee')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">
                  <i class="fa fa-cubes fa-fw"></i>
                   Purchase
               </a>  
             </li>
-
+            <?php }?>
+            <?php if($role=="4" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">
                  <i class="fa fa-database fa-fw"></i> 
                   Inventory
               </a>
             </li>
-              <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
+            <?php }?>
+            <?php if($role=="5" || $role=="1"){?>
+            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">
                 <i class="fa fa-usd fa-fw"></i> 
                   Accounting
               </a>
             </li>
-              <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
+            <?php }?>
+            <?php if($role=="1"){?>
+            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">
                 <i class="fa fa-eye fa-fw"></i> 
                   Admin
@@ -74,9 +83,7 @@
                   Search
               </a>
             </li>
-            
-                     
-            
+            <?php }?>            
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>

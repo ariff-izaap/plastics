@@ -25,16 +25,17 @@ class Login extends Admin_controller
     
     public function login()
     {
-       
-       $this->form_validation->set_rules($this->_login_validation_rules);
+      $this->form_validation->set_rules($this->_login_validation_rules);
        
         if($this->form_validation->run())
         {
             $form = $this->input->post();
-            
-            if($this->login_model->login($form['email'], $form['password']))
+            $chk = $this->login_model->login($form['email'], $form['password']);
+            if($chk)
             {
-                redirect("dashboard");
+              if($this->input->post('forGot')=="on")
+                setcookie("login",json_encode($_POST),time() + (86400 * 30), "/");
+              redirect("dashboard");
             }
             else
             { 
