@@ -17,12 +17,13 @@
         <?php 
           $role = get_user_role();
           $curr_ctlr =  $this->uri->segment(1, 'index');
+          $child_ctlr = $this->uri->segment(2, 'index');
         ?>
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            
-            <li <?php echo ($curr_ctlr == 'dashboard')?'class="active"':'';?> >
+           <li <?php echo ($curr_ctlr == 'dashboard')?'class="active"':'';?> >
+
               <a href="<?=site_url('dashboard');?>">
                 <i class="fa fa-dashboard fa-fw"></i> 
                   Dashboard
@@ -61,12 +62,22 @@
             </li>
             <?php }?>
             <?php if($role=="1"){?>
-            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
-              <a href="<?=site_url('');?>">
+            <li class="dropdown <?php echo ($curr_ctlr == 'admin') ? "active":'';?>">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-eye fa-fw"></i> 
-                  Admin
+                  Admin 
+                  <span class="caret"></span>
               </a>
+              <ul class="dropdown-menu">
+                <li class="<?php echo ($child_ctlr == 'general_dropdowns') ? "active":'';?>">
+                  <a href="<?=site_url();?>/admin/general_dropdowns">General Dropdowns</a>
+                </li>
+                <li class="<?php echo ($child_ctlr == 'user_setup') ? "active":'';?>">
+                  <a href="<?=site_url();?>/admin/user_setup">User Setup</a>
+                </li>
+              </ul>
             </li>
+            
             <li class="dropdown">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-pie-chart fa-fw"></i> 

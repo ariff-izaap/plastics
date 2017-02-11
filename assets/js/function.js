@@ -66,6 +66,7 @@ function init_daterangepicker(seldate)
 
 function init_checkbox(selval){
 
+
 	selval = selval?selval:'';
 
 	if(selval){		
