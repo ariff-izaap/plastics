@@ -1,6 +1,5 @@
 $(function(){
-
-	//$('a,button').tooltip();
+  //$('a,button').tooltip();
 
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
@@ -21,7 +20,11 @@ $(function(){
         $('#fake-input').val($(this).val().replace("C:\\fakepath\\", ""));
     });
 
-
+    $("form#addUser #firstname,form#addUser #lastname").keyup(function(){
+      firstname = $("form#addUser #firstname").val();
+      lastname = $("form#addUser #lastname").val();
+      $("form#addUser #user_id").val(firstname.toUpperCase()+lastname.toUpperCase());
+    });
 });	
 
 function init_daterangepicker(seldate)
