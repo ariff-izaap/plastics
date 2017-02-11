@@ -7,7 +7,7 @@ class Listing
 
     private $_CI;
 
-    private $_view = '_partials/listing/default';
+    private $_view = 'listing/listing';
     private $_init_scripts = '';
     public $_per_page    = 20;
     private $_per_page_options    = array(20, 50, 100);
