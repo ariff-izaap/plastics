@@ -2,7 +2,7 @@
 
 require_once(APPPATH."libraries/Admin_controller.php");
 
-class Inventory extends Admin_Controller 
+class Inventorycolor extends Admin_Controller 
 {
 	
     function __construct()
@@ -12,7 +12,7 @@ class Inventory extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model('inventory_model');
+       $this->load->model('dashboard_model');
 	   $this->load->library('listing');    
      
 	} 
@@ -27,21 +27,18 @@ class Inventory extends Admin_Controller
         
         $this->simple_search_fields = array(                                                
                                     'name'       => 'Name',
-                                    'sku'       => 'Sku',
-                                    'quantity' => 'Quantity',
-                                    'created_date' => 'Created Date'
-                                    //'c.email'      => 'Email'                                            
+                                    'status'       => 'Status'                                       
         );
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="'.site_url('inventory/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+        $str = '<a href="'.site_url('inventorycolor/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
                 <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'organization/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('inventory_model', 'listing');
+        $listing = $this->listing->get_listings('inventorycolor_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
@@ -58,7 +55,7 @@ class Inventory extends Admin_Controller
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        $this->layout->view("frontend/inventory/index");
+        $this->layout->view("frontend/color/index");
 
 			
     }
@@ -152,11 +149,11 @@ class Inventory extends Admin_Controller
         }
 
         if($edit_id)
-            $edit_data =$this->inventory_model->get_where(array("id" => $edit_id))->row_array();
+            $edit_data =$this->org_model->get_where(array("id" => $edit_id))->row_array();
 
         $this->data['editdata']  = $edit_data;
 
-        $this->data['org_types'] = $this->inventory_model->get_where(array(),"*","product")->result_array();
+        $this->data['org_types'] = $this->org_model->get_where(array(),"*","org_type")->result_array();
 
         $this->layout->view('frontend/inventory/add');
 
@@ -164,7 +161,7 @@ class Inventory extends Admin_Controller
     
     public function delete($del_id)
     {
-        $access_data = $this->inventory_model->get_where(array("id"=>$del_id),'id')->row_array();
+        $access_data = $this->org_model->get_where(array("id"=>$del_id),'id')->row_array();
        
         $output=array();
 
