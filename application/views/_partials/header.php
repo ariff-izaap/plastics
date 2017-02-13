@@ -46,17 +46,25 @@
             </li>
             <?php }?>
             <?php if($role=="4" || $role=="1"){?>
-            <li class="dropdown <?php echo ($curr_ctlr == 'admin') ? "active":'';?>">
-              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-database fa-fw"></i> 
-                  Inventory 
+            <li <?php echo ($curr_ctlr == 'inventory')?'class="active dropdown"':'';?> >
+              <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="<?=site_url('inventory');?>">
+                 <i class="fa fa-database fa-fw"></i> 
+                  Inventory
                   <span class="caret"></span>
               </a>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo site_url();?>inventory">Product</a></li>
-                <li><a href="<?php echo site_url();?>inventorycolor/">Product Color</a></li>
-                <li><a href="<?php echo site_url();?>inventorytype">Product Types</a></li>
-              </ul>
+               <ul class="dropdown-menu">
+                    <li><a href="<?php echo site_url();?>inventory">Product</a></li>
+                    <li><a href="<?php echo site_url();?>inventorycolor/">Product Color</a></li>
+                    <li><a href="<?php echo site_url();?>inventorytype">Product Types</a></li>
+                </ul>
+               <ul class="dropdown-menu">
+                    <li><a href="<?php echo site_url();?>inventory">Product</a></li>
+                    <li><a href="<?php echo site_url();?>inventoryform">Product Form</a></li>
+                    <li><a href="<?php echo site_url();?>inventorycolor/">Product Color</a></li>
+                    <li><a href="<?php echo site_url();?>inventorytype">Product Types</a></li>
+                    <li><a href="<?php echo site_url();?>inventorypackage">Product Packages</a></li>
+                    
+                </ul>
             </li>
             <?php }?>
             <?php if($role=="5" || $role=="1"){?>

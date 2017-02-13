@@ -2,13 +2,13 @@
 
 require_once('App_model.php');
 
-class Inventorycolor_model extends App_model {
+class Inventorypackage_model extends App_model {
     
     function __construct()
     {
         parent::__construct();
 
-        $this->_table = 'product_color';
+        $this->_table = 'product_packaging';
     }
     
      function listing()

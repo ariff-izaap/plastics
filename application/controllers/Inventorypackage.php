@@ -2,7 +2,7 @@
 
 require_once(APPPATH."libraries/Admin_controller.php");
 
-class Inventorycolor extends Admin_Controller 
+class Inventorypackage extends Admin_Controller 
 {
 	
     function __construct()
@@ -12,7 +12,7 @@ class Inventorycolor extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model('inventorycolor_model');
+       $this->load->model('inventorypackage_model');
 	   $this->load->library('listing');    
      
 	} 
@@ -32,13 +32,13 @@ class Inventorycolor extends Admin_Controller
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="'.site_url('inventorycolor/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'inventorycolor/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
+        $str = '<a href="'.site_url('inventorypackage/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'inventorypackage/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('inventorycolor_model', 'listing');
+        $listing = $this->listing->get_listings('inventorypackage_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
@@ -55,22 +55,20 @@ class Inventorycolor extends Admin_Controller
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        $this->layout->view("frontend/inventory/color/index");
+        $this->layout->view("frontend/inventory/package/index");
 
 			
     }
     
     public function add( $edit_id ='')
     {
-
         try
         {
             if($this->input->post('edit_id'))            
                 $edit_id = $this->input->post('edit_id');
 
-            $this->form_validation->set_rules('name','Color Name','trim|required');
-          //  $this->form_validation->set_rules('Status','Short Name','trim|required');
-
+            $this->form_validation->set_rules('name','Package Name','trim|required');
+          
             $this->form_validation->set_error_delimiters('', '');
                 
             if ($this->form_validation->run())
@@ -84,9 +82,9 @@ class Inventorycolor extends Admin_Controller
                 {
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_id']   = get_current_user_id();    
-                    $this->inventorycolor_model->update(array("id" => $edit_id),$ins_data);
+                    $this->inventorypackage_model->update(array("id" => $edit_id),$ins_data);
 
-                    $msg = 'Color updated successfully';
+                    $msg = 'Package updated successfully';
                 }
                 else
                 {    
@@ -94,24 +92,22 @@ class Inventorycolor extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                     $ins_data['created_id']   = get_current_user_id();  
 
-                    $this->inventorycolor_model->insert($ins_data);
+                    $this->inventorypackage_model->insert($ins_data);
 
-                    $msg = 'Color added successfully';
+                    $msg = 'Package added successfully';
                 }
 
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
 
-                redirect('inventorycolor');
+                redirect('inventorypackage');
             }    
             else
             {
-            
                 $edit_data = array();
                 $edit_data['id']          = '';
                 $edit_data['name']        = '';
                 $edit_data['status']      = '';
             }
-
         }
         catch (Exception $e)
         {
@@ -121,23 +117,21 @@ class Inventorycolor extends Admin_Controller
         }
 
         if($edit_id)
-            $edit_data =$this->inventorycolor_model->get_where(array("id" => $edit_id))->row_array();
+            $edit_data =$this->inventorypackage_model->get_where(array("id" => $edit_id))->row_array();
 
          $this->data['editdata']  = $edit_data;
-
-        $this->layout->view('frontend/inventory/color/add');
-
+         $this->layout->view('frontend/inventory/package/add');
     }
     
     public function delete($del_id)
     {
-        $access_data = $this->inventorycolor_model->get_where(array("id"=>$del_id),'id')->row_array();
+        $access_data = $this->inventorypackage_model->get_where(array("id"=>$del_id),'id')->row_array();
        
         $output=array();
 
         if(count($access_data) > 0){
 
-            $this->inventorycolor_model->delete(array("id"=>$del_id));
+            $this->inventorypackage_model->delete(array("id"=>$del_id));
 
             $output['message'] ="Record deleted successfuly.";
             $output['status']  = "success";

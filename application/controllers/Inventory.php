@@ -26,17 +26,20 @@ class Inventory extends Admin_Controller
         $this->load->library('listing');         
         
         $this->simple_search_fields = array(                                                
-                                    'name'       => 'Name',
-                                    'sku'       => 'Sku',
-                                    'quantity' => 'Quantity',
-                                    'created_date' => 'Created Date'
+                                    'p.name'         => 'Name',
+                                    'p.sku'          => 'Sku',
+                                    'p.quantity'     => 'Quantity',
+                                    'p.created_date' => 'Created Date',
+                                    'pk.name' => 'Package Name',
+                                    'f.name' => 'Form Name',
+                                    'c.name' => 'Color Name'
                                     //'c.email'      => 'Email'                                            
         );
          
         $this->_narrow_search_conditions = array("start_date");
         
         $str = '<a href="'.site_url('inventory/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'organization/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
+                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'inventory/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  
         $this->listing->initialize(array('listing_action' => $str));
@@ -72,42 +75,48 @@ class Inventory extends Admin_Controller
                 $edit_id = $this->input->post('edit_id');
 
             $this->form_validation->set_rules('name','Product Name','trim|required');
-            $this->form_validation->set_rules('org_type','Type','trim|required');
-            $this->form_validation->set_rules('short_name','Short Name','trim|required');
-            $this->form_validation->set_rules('registration_no','Registration Number','trim');
-            $this->form_validation->set_rules('web_url','Web Url','trim|required');
-            $this->form_validation->set_rules('employee_count','Employess','trim|required');
-            $this->form_validation->set_rules('email','Email','trim|required');
-            $this->form_validation->set_rules('phone','Phone','trim|required');
-            $this->form_validation->set_rules('fax','Fax','trim');
-            $this->form_validation->set_rules('fax','Fax','trim');
-            $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('note','Note','trim');
+            $this->form_validation->set_rules('sku','Sku','trim|required');
+            $this->form_validation->set_rules('quantity','Quantity','trim|required');
+            $this->form_validation->set_rules('internal_lot_no','Internal lot no','trim|required');
+            $this->form_validation->set_rules('vendor_lot_no','Vendor lot no','trim|required');
+            $this->form_validation->set_rules('shipping_cost','Shipping Cost','trim|required');
+            $this->form_validation->set_rules('color_id','Color','trim|required');
+            $this->form_validation->set_rules('form_id','Form','trim|required');
+            $this->form_validation->set_rules('package_id','Package','trim|required');
+          
+//            $this->form_validation->set_rules('fax','Fax','trim');
+//            $this->form_validation->set_rules('address','Address','trim|required');
+//            $this->form_validation->set_rules('note','Note','trim');
 
             $this->form_validation->set_error_delimiters('', '');
                 
             if ($this->form_validation->run())
             {
                 $ins_data = array();
-                $ins_data['org_type']       = $this->input->post('org_type');
-                $ins_data['name']           = $this->input->post('name');
-                $ins_data['short_name']     = $this->input->post('short_name');
-                $ins_data['registration_no']= $this->input->post('registration_no');
-                $ins_data['web_url']        = $this->input->post('web_url');
-                $ins_data['employee_count'] = $this->input->post('employee_count');
-                $ins_data['email']          = $this->input->post('email');
-                $ins_data['phone']          = $this->input->post('phone');
-                $ins_data['fax']            = $this->input->post('fax');
-                $ins_data['address']        = $this->input->post('address');
-                $ins_data['note']           = $this->input->post('note');  
+                $ins_data['sku']                    = $this->input->post('sku');
+                $ins_data['name']                   = $this->input->post('name');
+                $ins_data['quantity']               = $this->input->post('quantity');
+                $ins_data['color_id']               = $this->input->post('color_id');
+                $ins_data['form_id']                = $this->input->post('form_id');
+                $ins_data['package_id']             = $this->input->post('package_id');
+                $ins_data['retail_price']           = $this->input->post('retail_price');
+                $ins_data['wholesale_price']        = $this->input->post('wholesale_price');
+                $ins_data['shipping_cost']          = $this->input->post('shipping_cost');
+                $ins_data['ref_no']                 = $this->input->post('ref_no');
+                $ins_data['internal_lot_no']        = $this->input->post('internal_lot_no');
+                $ins_data['vendor_lot_no']          = $this->input->post('vendor_lot_no');
+                $ins_data['received_at_customer']   = $this->input->post('received_at_customer');
+                $ins_data['received_in_warehouse']  = $this->input->post('received_in_warehouse');
+                
+                
 
                 if($edit_id)
                 {
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_id']   = get_current_user_id();    
-                    $this->org_model->update(array("id" => $edit_id),$ins_data);
+                    $this->inventory_model->update(array("id" => $edit_id),$ins_data);
 
-                    $msg = 'Organization updated successfully';
+                    $msg  = 'Product updated successfully';
                 }
                 else
                 {    
@@ -115,32 +124,34 @@ class Inventory extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                     $ins_data['created_id']   = get_current_user_id();  
 
-                    $this->org_model->insert($ins_data);
+                    $this->inventory_model->insert($ins_data);
 
-                    $msg = 'Organization added successfully';
+                    $msg = 'Product added successfully';
                 }
 
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
 
-                redirect('organization');
+                redirect('inventory');
             }    
             else
             {
             
                 $edit_data = array();
-                $edit_data['id']             = '';
-                $edit_data['org_type']       = '';
-                $edit_data['name']           = '';
-                $edit_data['registration_no']= '';
-                $edit_data['short_name']     = '';
-                $edit_data['web_url']        = '';
-                $edit_data['employee_count'] = '';
-                $edit_data['email']          = '';
-                $edit_data['phone']          = '';
-                $edit_data['fax']            = '';
-                $edit_data['address']        = '';
-                $edit_data['note']           = '';                
-
+                $edit_data['id']                    = '';
+                $edit_data['sku']                   = '';
+                $edit_data['name']                  = '';
+                $edit_data['color_id']              = '';
+                $edit_data['form_id']               = '';
+                $edit_data['package_id']            = '';
+                $edit_data['quantity']              = '';
+                $edit_data['retail_price']          = '';
+                $edit_data['wholesale_price']       = '';
+                $edit_data['shipping_cost']         = '';
+                $edit_data['ref_no']                = '';
+                $edit_data['internal_lot_no']       = '';
+                $edit_data['vendor_lot_no']         = '';
+                $edit_data['received_at_customer']  = '';
+                $edit_data['received_in_warehouse'] = '';
             }
 
         }
@@ -156,7 +167,11 @@ class Inventory extends Admin_Controller
 
         $this->data['editdata']  = $edit_data;
 
-        $this->data['org_types'] = $this->inventory_model->get_where(array(),"*","product")->result_array();
+        $this->data['colors'] = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
+        
+        $this->data['forms'] = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
+        
+        $this->data['packages'] = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
 
         $this->layout->view('frontend/inventory/add');
 
@@ -170,18 +185,7 @@ class Inventory extends Admin_Controller
 
         if(count($access_data) > 0){
 
-            $this->org_model->delete(array("id"=>$del_id));
-
-            $emp_data = $this->org_model->get_where(array("org_id"=>$access_data['id']),'id,emp_code','employee')->result_array();
-
-            foreach($emp_data as $emp){
-
-                $this->org_model->delete(array("id"=>$emp['id']),'employee');
-                $this->org_model->delete(array("emp_id"=>$emp['id']),'employee_details');
-                $this->org_model->delete(array("emp_id"=>$emp['id']),'employee_note');
-
-                $this->org_model->delete(array("emp_code"=>$emp['emp_code']),'timesheet');
-            }
+            $this->inventory_model->delete(array("id"=>$del_id));
 
             $output['message'] ="Record deleted successfuly.";
             $output['status']  = "success";

@@ -45,10 +45,13 @@ $config['inventory_index'] = array(
 	"base_url"	=> 	'/inventory/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'quantity'=>array('name'=>'Quantity', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'sku'=>array('name'=>'SKU', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'created_date'=>array('name'=>'Date', 'data_type' => 'link', 'sortable' => FALSE, 'default_view'=>1)                             
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),					
+						'quantity'=>array('name'=>'Quantity', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),					
+						'sku'=> array('name'=>'SKU', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'package_name' => array('name'=>'Package Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'color_name' => array('name'=>'Color', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'form_name' => array('name'=>'Form', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+						'created_date'=> array('name'=>'Date', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -120,3 +123,45 @@ $config['timesheet_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+
+$config['inventorytype_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'inventorytype/filter',
+	"base_url"	=> 	'/inventorytype/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
+						'status'=>array('name'=>'Status', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)                            
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
+
+$config['inventorypackage_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'inventorypackage/filter',
+	"base_url"	=> 	'/inventorypackage/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
+						'status'=>array('name'=>'Status', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)                            
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
+
+$config['inventoryform_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'inventoryform/filter',
+	"base_url"	=> 	'/inventoryform/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
+						'status'=>array('name'=>'Status', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)                            
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
