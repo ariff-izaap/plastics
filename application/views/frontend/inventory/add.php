@@ -8,10 +8,67 @@
 
   <div class="row">
 
-  <form name="inventory" method="POSt">
-
-      <div class="form-grid col-md-6">
+ <div class="page-header">
         
+    </div>
+    <div class="row">
+    	<div class="col-md-6">
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1default" data-toggle="tab">Default 1</a></li>
+                            <li><a href="#tab2default" data-toggle="tab">Default 2</a></li>
+                            <li><a href="#tab3default" data-toggle="tab">Default 3</a></li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
+                                    <li><a href="#tab5default" data-toggle="tab">Default 5</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1default">Default 1</div>
+                        <div class="tab-pane fade" id="tab2default">Default 2</div>
+                        <div class="tab-pane fade" id="tab3default">Default 3</div>
+                        <div class="tab-pane fade" id="tab4default">Default 4</div>
+                        <div class="tab-pane fade" id="tab5default">Default 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">Primary 1</a></li>
+                            <li><a href="#tab2primary" data-toggle="tab">Primary 2</a></li>
+                            <li><a href="#tab3primary" data-toggle="tab">Primary 3</a></li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
+                                    <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1primary">Primary 1</div>
+                        <div class="tab-pane fade" id="tab2primary">Primary 2</div>
+                        <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+                        <div class="tab-pane fade" id="tab4primary">Primary 4</div>
+                        <div class="tab-pane fade" id="tab5primary">Primary 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+  <form name="inventory" method="POST">
+      <div class="form-grid col-md-6">
         <div class="form-group  <?php echo (form_error('name'))?'error':'';?>" data-error="<?php echo (form_error('name'))? form_error('name'):'';?>">
           <label required>Inventory Name</label>
           <input type="text" name="name" class="form-control" id="name" value="<?php echo set_value('name', $editdata['name']);?>" placeholder="Product Name" />
