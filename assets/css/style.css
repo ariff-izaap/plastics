@@ -11920,6 +11920,8 @@ hr {
 }
 
 .padding-zero{padding: 0;}
+span.select2-container{width: 100% !important;}
+
 
 
 .panel.with-nav-tabs .panel-heading{
