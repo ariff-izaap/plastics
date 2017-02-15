@@ -27,6 +27,53 @@ $(function(){
     });
 });	
 
+ $('#select2_sample2').select2({
+      placeholder: "Select Value",
+      allowClear: true
+  });
+
+  $("select[name='table_type']").change(function() {
+    val = $(this).val();
+    $.ajax({
+      url:base_url+"admin/get_table_value",
+      type:"POST",
+      data:{val:val},
+      success:function(data)
+      {
+        console.log(data);
+        $("select[name='table_value_list']").html(data);
+      }
+    });
+  });
+
+  $("select[name='table_value_list']").change(function(){
+    $("input[name='table_value']").val($(this).find("option:selected").text());
+    $("form#dropdowns input[name='edit_id']").val($(this).val());
+  });
+
+  $(".add-new-dropdown").click(function(){
+    $("form#dropdowns")[0].reset();
+     $("#select2_sample2").empty();
+  });
+
+  $(".del-dropdown").click(function(){
+    con = confirm("Are sure want to delete?");
+    table = $("select[name='table_type']").val();
+    id = $("input[name='edit_id']").val();
+    if(con)
+    {
+      $.ajax({
+      url:base_url+"admin/del_table_value",
+      type:"POST",
+      data:{table:table,id:id},
+      success:function(data)
+      {
+       location.reload();
+      }
+    });
+    }
+  });
+
 function init_daterangepicker(seldate)
 {
 

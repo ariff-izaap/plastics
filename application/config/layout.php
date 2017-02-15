@@ -11,10 +11,10 @@ $config['layout']['default']['js_dir']   = 'assets/js/';
 $config['layout']['default']['css_dir']  = 'assets/css/';
 $config['layout']['default']['img_dir']     = 'assets/images/';
 $config['layout']['default']['javascripts'] = array(
-  'build/global.min','moment','daterangepicker','function'  
+  'build/global.min','moment','daterangepicker','select2.min','function'
 );
  
-$config['layout']['default']['stylesheets'] = array('style','daterangepicker');
+$config['layout']['default']['stylesheets'] = array('style','daterangepicker',"select2.min");
 
 $config['layout']['default']['description'] = '';
 $config['layout']['default']['keywords']    = '';

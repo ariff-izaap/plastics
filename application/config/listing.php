@@ -107,18 +107,18 @@ $config['employee_index'] = array(
 	"default_direction" => "DESC"
 );
 
-$config['timesheet_index'] = array(
+$config['history_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'frontend/timesheet/filter',
-	"base_url"	=> 	'/timesheet/index/',
+	//"advance_search_view" => 'frontend/timesheet/filter',
+	"base_url"	=> 	'/history/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'emp_name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'emp_code'=>array('name'=>'Emp Code', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'date'=>array('name'=>'Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1),
-						'hour'=>array('name'=>'Hours', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),                             
-						'project'=>array('name'=>'Project', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)
+						'action_id'=>array('name'=>'Action', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'action'=>array('name'=>'Action', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'line'=>array('name'=>'Comments', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),	
+						'created_name'=>array('name'=>'Action By', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						'created_date'=>array('name'=>'Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1)
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

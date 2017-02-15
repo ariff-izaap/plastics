@@ -60,9 +60,11 @@
 
 				<?php endforeach;?>
 
-				<?php $uri = $this->uri->segment(2);
+				<?php 
+				$uri = $this->uri->segment(2);
+				$uri1 = $this->uri->segment(1);
 
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history'){ ?>
 
 					<th>Action</th>
 
@@ -79,11 +81,11 @@
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
             
 				<td>
-                <?php if((isset($item['id']) && !empty($item['id']))) { ?>
+          <?php if((isset($item['id']) && !empty($item['id']))) { ?>
 
-                <?php echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';?>
-                <?php echo form_checkbox("op_select[]", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox'"); ?>
-                <?php } ?>
+          <?php echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';?>
+          <?php echo form_checkbox("op_select[]", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox'"); ?>
+          <?php } ?>
                 
 				</td>
             
@@ -98,7 +100,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"
@@ -108,6 +110,7 @@
 					<?php else:?>
 						
 						<?php 
+
 							echo $this->parser->parse_string($listing_action, $item, TRUE);
 						?>
 					<?php endif;?>
