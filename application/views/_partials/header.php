@@ -29,6 +29,18 @@
                   Dashboard
               </a>
             </li>
+            <li <?php echo ($curr_ctlr == 'vendor')?'class="active"':'';?> >
+              <a href="<?=site_url('vendor');?>">
+                 <i class="fa fa-clock-o fa-fw"></i>
+                  Vendors
+              </a> 
+            </li>
+            <li <?php echo ($curr_ctlr == 'category')?'class="active"':'';?> >
+              <a href="<?=site_url('category');?>">
+                 <i class="fa fa-clock-o fa-fw"></i>
+                  Categories
+              </a> 
+            </li>
             <?php if($role=="2" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'organization')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">

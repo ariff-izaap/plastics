@@ -83,6 +83,7 @@ class Inventory extends Admin_Controller
             $this->form_validation->set_rules('color_id','Color','trim|required');
             $this->form_validation->set_rules('form_id','Form','trim|required');
             $this->form_validation->set_rules('package_id','Package','trim|required');
+            $this->form_validation->set_rules('category_id','Color','trim|required');
           
 //            $this->form_validation->set_rules('fax','Fax','trim');
 //            $this->form_validation->set_rules('address','Address','trim|required');
@@ -96,6 +97,7 @@ class Inventory extends Admin_Controller
                 $ins_data['sku']                    = $this->input->post('sku');
                 $ins_data['name']                   = $this->input->post('name');
                 $ins_data['quantity']               = $this->input->post('quantity');
+                $ins_data['category_id']            = $this->input->post('category_id');
                 $ins_data['color_id']               = $this->input->post('color_id');
                 $ins_data['form_id']                = $this->input->post('form_id');
                 $ins_data['package_id']             = $this->input->post('package_id');
@@ -165,13 +167,11 @@ class Inventory extends Admin_Controller
         if($edit_id)
             $edit_data =$this->inventory_model->get_where(array("id" => $edit_id))->row_array();
 
-        $this->data['editdata']  = $edit_data;
-
-        $this->data['colors'] = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
-        
-        $this->data['forms'] = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
-        
-        $this->data['packages'] = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
+        $this->data['editdata']   = $edit_data;
+        $this->data['colors']     = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
+        $this->data['forms']      = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
+        $this->data['packages']   = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
+        $this->data['categories'] = $this->inventory_model->get_where(array(),"*","category")->result_array();
 
         $this->layout->view('frontend/inventory/add');
 

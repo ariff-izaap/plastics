@@ -165,3 +165,31 @@ $config['inventoryform_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 ); 
+
+$config['vendor_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'vendor/filter',
+	"base_url"	=> 	'/vendor/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)				
+					//	'status'=>array('name'=>'Status', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)                            
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
+
+$config['category_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'category/filter',
+	"base_url"	=> 	'/category/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)					
+						//'description'=>array('name'=>'Description', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)                            
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
