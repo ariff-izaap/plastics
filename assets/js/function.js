@@ -9,6 +9,7 @@ $(function(){
 	    format: 'YYYY-MM-DD',
 	  }
 	});
+    
   
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
     $(this).val(picker.startDate.format('YYYY-MM-DD'));
@@ -26,6 +27,7 @@ $(function(){
       $("form#addUser #user_id").val(firstname.toUpperCase()+lastname.toUpperCase());
     });
 });	
+
 
  $('#select2_sample2').select2({
       placeholder: "Select Value",
@@ -281,3 +283,89 @@ function capitaliseFirstLetter(string)
 {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/* Start To Punitha**/
+
+function inventory_sub()
+{
+    
+     var fdata  = $("#inventory_sub_form").serialize();
+     var edit_id= '';
+     
+        edit_id = $("#inventory_sub_form #edit_id").val();
+
+      $.ajax({
+          url:base_url+"inventory/add/"+edit_id,
+          type:"POST",
+          data:fdata,
+          dataType:'json',
+          success:function(res)
+          {
+             var status = res.status;
+             var output = res.output;
+            // alert(status);
+            if(status == 'success') {
+                 $("#inventory_add_section").html(output);
+            }
+            else
+            {
+                $("#inventory_add_section").html(output);                           
+            }
+          }
+    });
+ 
+    
+}
+
+function product_image_add(action,div_id,save_type,elm,call_back)
+{
+    if(($("#product_image").val() == '' && $("#file_name").val() == '') || $("#product_image").val() != '') {
+   
+        $("#image_upload_loader").show();
+                
+        $.ajaxFileUpload
+            		({
+    				url:base_url+"product/image_upload/"+product_id,
+    				secureuri:true,
+    				fileElementId:"product_image",
+    				dataType: 'json',
+    				data:{},
+    				success: function (data)
+    				{
+    				    if(data.status == "error"){
+    				        alert(data.msg);
+                            $("#image_upload_loader").hide();
+                            return false; 
+    				    }
+    				    else if(data.status == "success")
+                        {
+                                                              
+                              $("#file_name").val(product_id+"/"+data.file_name);
+                              $("#image_upload_loader").html("Image Uploaded.");  
+                            
+                              save_form(action,div_id,save_type,elm,call_back,true);
+                            
+                        }
+                        else
+                        {
+                             alert("Error Occured. Try again later!!");
+                             $("#image_upload_loader").hide();
+                             return false;
+                        }
+                    },
+    				error: function (data,xml, status)
+    				{
+    				       alert("Critical Error Occured!!");
+                           $("#image_upload_loader").hide();
+                           return false;
+    				}
+    			});
+       
+    }
+    else
+    {
+        save_form(action,div_id,save_type,elm,call_back,true);
+    }
+}
+
+/***End To Punitha **/

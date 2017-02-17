@@ -30,6 +30,7 @@
 				<?php echo $content; ?>
 							
 			</section>
+            <?php include_javascripts(); ?>	
 		</body>	
 	
 		
@@ -45,11 +46,12 @@
 			
 			<?php $this->load->view('_partials/footer'); ?>
 			
+            <?php include_javascripts(); ?>	
 		</body>
 
 	<?php endif; ?>	
 
-		<?php include_javascripts(); ?>		
+		<?php //include_javascripts(); ?>		
 
 		<?php 
 		

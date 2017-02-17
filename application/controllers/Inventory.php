@@ -84,6 +84,11 @@ class Inventory extends Admin_Controller
             $this->form_validation->set_rules('form_id','Form','trim|required');
             $this->form_validation->set_rules('package_id','Package','trim|required');
             $this->form_validation->set_rules('category_id','Color','trim|required');
+            $this->form_validation->set_rules('length','Length','trim|required');
+            $this->form_validation->set_rules('width','Width','trim|required');
+            $this->form_validation->set_rules('height','Height','trim|required');
+            $this->form_validation->set_rules('weight','Weight','trim|required');
+            $this->form_validation->set_rules('in_stock','In Stock','trim|required');
           
 //            $this->form_validation->set_rules('fax','Fax','trim');
 //            $this->form_validation->set_rules('address','Address','trim|required');
@@ -109,11 +114,13 @@ class Inventory extends Admin_Controller
                 $ins_data['vendor_lot_no']          = $this->input->post('vendor_lot_no');
                 $ins_data['received_at_customer']   = $this->input->post('received_at_customer');
                 $ins_data['received_in_warehouse']  = $this->input->post('received_in_warehouse');
+                $ins_data['length']                 = $this->input->post('length');
+                $ins_data['width']                  = $this->input->post('width');
+                $ins_data['height']                 = $this->input->post('height');
+                $ins_data['weight']                 = $this->input->post('weigth');
+                $ins_data['in_stock']               = $this->input->post('in_stock');
                 
-                
-
-                if($edit_id)
-                {
+                if($edit_id){
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_id']   = get_current_user_id();    
                     $this->inventory_model->update(array("id" => $edit_id),$ins_data);
@@ -126,20 +133,23 @@ class Inventory extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                     $ins_data['created_id']   = get_current_user_id();  
 
-                    $this->inventory_model->insert($ins_data);
+                    $new_id = $this->inventory_model->insert($ins_data);
 
                     $msg = 'Product added successfully';
+                    
+                    $edit_id =  $new_id;
                 }
 
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
-
-                redirect('inventory');
+                
+                $status  = 'success';
+                
+                //redirect('inventory');
             }    
             else
             {
-            
                 $edit_data = array();
-                $edit_data['id']                    = '';
+                $edit_data['id']                    = (!empty($edit_id))?$edit_id:'';
                 $edit_data['sku']                   = '';
                 $edit_data['name']                  = '';
                 $edit_data['color_id']              = '';
@@ -154,6 +164,14 @@ class Inventory extends Admin_Controller
                 $edit_data['vendor_lot_no']         = '';
                 $edit_data['received_at_customer']  = '';
                 $edit_data['received_in_warehouse'] = '';
+                $edit_data['length']                = '';
+                $edit_data['width']                 = '';
+                $edit_data['height']                = '';
+                $edit_data['weigth']                = '';
+                $edit_data['in_stock']              = '';
+                $edit_data['image_title']           = '';
+                $edit_data['file_name']             = '';
+                $status = 'error';
             }
 
         }
@@ -161,7 +179,7 @@ class Inventory extends Admin_Controller
         {
             $this->data['status']   = 'error';
             $this->data['message']  = $e->getMessage();
-                
+             
         }
 
         if($edit_id)
@@ -172,9 +190,15 @@ class Inventory extends Admin_Controller
         $this->data['forms']      = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
         $this->data['packages']   = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
         $this->data['categories'] = $this->inventory_model->get_where(array(),"*","category")->result_array();
-
-        $this->layout->view('frontend/inventory/add');
-
+        
+         if($this->input->is_ajax_request()){
+            $output  = $this->load->view('frontend/inventory/add',$this->data,true);
+            return    $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id), TRUE);
+         }
+         else
+         {
+            $this->layout->view('frontend/inventory/add');
+         }    
     }
     
     public function delete($del_id)

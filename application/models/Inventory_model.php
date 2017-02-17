@@ -19,7 +19,7 @@ class Inventory_model extends App_model {
         $this->db->join("product_form f","f.id=p.form_id");
         $this->db->join("product_packaging pk","pk.id=p.package_id");
         
-        //$this->db->group_by('c.id');
+        $this->db->group_by('p.id');
           
         foreach ($this->criteria as $key => $value) 
         {
