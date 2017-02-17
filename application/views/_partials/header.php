@@ -23,7 +23,6 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
            <li <?php echo ($curr_ctlr == 'dashboard')?'class="active"':'';?> >
-
               <a href="<?=site_url('dashboard');?>">
                 <i class="fa fa-dashboard fa-fw"></i> 
                   Dashboard
@@ -54,14 +53,14 @@
               <a href="<?=site_url('');?>">
                  <i class="fa fa-cubes fa-fw"></i>
                   Purchase
-              </a>  
+              </a>
             </li>
             <?php }?>
             <?php if($role=="4" || $role=="1"){?>
              <li class="dropdown <?php echo ($curr_ctlr == 'inventory') ? "active":'';?>">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-database fa-fw"></i> 
-                  Inventory 
+                <i class="fa fa-database fa-fw"></i>
+                  Inventory
                   <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -69,24 +68,33 @@
                 <li><a href="<?php echo site_url();?>inventoryform">Product Form</a></li>
                 <li><a href="<?php echo site_url();?>inventorycolor/">Product Color</a></li>
                 <li><a href="<?php echo site_url();?>inventorytype">Product Types</a></li>
-                <li><a href="<?php echo site_url();?>inventorypackage">Product Packages</a></li>                    
+                <li><a href="<?php echo site_url();?>inventorypackage">Product Packages</a></li>
               </ul>
             </li>
             <?php }?>
             <?php if($role=="5" || $role=="1"){?>
-            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
-              <a href="<?=site_url('');?>">
-                <i class="fa fa-usd fa-fw"></i> 
+            <li class="dropdown <?php echo ($curr_ctlr == 'accounting') ? "active":'';?>">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-dollar fa-fw"></i>
                   Accounting
+                <span class="caret"></span>
               </a>
+              <ul class="dropdown-menu">
+                <li class="<?php echo ($child_ctlr == 'shipping_orders') ? "active":'';?>">
+                  <a href="<?=site_url('accounting/shipping_orders');?>">Shipping Orders</a>
+                </li>
+                <li class="<?php echo ($child_ctlr == 'invoices') ? "active":'';?>">
+                  <a href="<?=site_url('accounting/invoices');?>">Invoices</a>
+                </li>
+              </ul>
             </li>
             <?php }?>
             <?php if($role=="1"){?>
             <li class="dropdown <?php echo ($curr_ctlr == 'admin') ? "active":'';?>">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-eye fa-fw"></i> 
-                  Admin 
-                  <span class="caret"></span>
+                <i class="fa fa-eye fa-fw"></i>
+                  Admin
+                <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li class="<?php echo ($child_ctlr == 'general_dropdowns') ? "active":'';?>">
@@ -96,12 +104,11 @@
                   <a href="<?=site_url();?>/admin/user_setup">User Setup</a>
                 </li>
               </ul>
-            </li>
-            
+            </li>            
             <li class="dropdown">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-pie-chart fa-fw"></i> 
-                  Reports 
+                <i class="fa fa-pie-chart fa-fw"></i>
+                  Reports
                   <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -110,28 +117,26 @@
             </li>
               <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
               <a href="<?=site_url('timesheet');?>">
-                <i class="fa fa-search fa-fw"></i> 
+                <i class="fa fa-search fa-fw"></i>
                   Search
               </a>
             </li>
-            <?php }?>            
+            <?php }?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-                <div class="user-pic">
-                    <img src="<?php echo include_img_path();?>default-user.jpg" alt="Independent Plastics" />
-                  
-                  <div class="dropdown custom-dropdwon">
-                    <button class="dropbtn"> <i class="fa fa-gear"></i></button>
-                      <div id="userSettings" class="dropdown-content" align="right">
-                      <a href="<?=site_url('history');?>">Site History</a>
-                      <a href="#">My Profile</a>
-                      <a href="#">Settings</a>
-                      <a href="<?php echo site_url('login/logout');?>">Sign Out</a>
-                      </div>
-                  </div>
-
+              <div class="user-pic">
+                <img src="<?php echo include_img_path();?>default-user.jpg" alt="Independent Plastics" />
+                <div class="dropdown custom-dropdwon">
+                  <button class="dropbtn"> <i class="fa fa-gear"></i></button>
+                    <div id="userSettings" class="dropdown-content" align="right">
+                    <a href="<?=site_url('history');?>">Site History</a>
+                    <a href="#">My Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="<?php echo site_url('login/logout');?>">Sign Out</a>
+                    </div>
                 </div>
+              </div>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -139,7 +144,4 @@
     </nav>
   </div>
   <div class="row">
-
     <aside class="col-sm-12 cf">
-      
-     
