@@ -21,13 +21,14 @@
 <?php endif;?>
 
 <div id="data_table">	
-
+<?php $uri1 = $this->uri->segment(1);;?>
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
 
 		<thead>
 			<tr>
+			<?php if($uri1 != "accounting"){?>
 				<th> # </th>
-
+				<?php }?>
 				<?php  $cols = 0; 
 
 				foreach ($fields as $field => $values):$cols++;?>
@@ -62,9 +63,9 @@
 
 				<?php 
 				$uri = $this->uri->segment(2);
-				$uri1 = $this->uri->segment(1);
+				
 
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting'){ ?>
 
 					<th>Action</th>
 
@@ -79,7 +80,8 @@
             
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
-            
+        <?php
+        if($uri1 != 'accounting'){ 	?>
 				<td>
           <?php if((isset($item['id']) && !empty($item['id']))) { ?>
 
@@ -88,7 +90,7 @@
           <?php } ?>
                 
 				</td>
-            
+           <?php }?> 
 				<?php foreach ($fields as $field => $row):?>
 
 				<?php if($row['default_view'] == '0') continue; ?>
@@ -100,7 +102,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"
