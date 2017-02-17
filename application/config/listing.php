@@ -166,6 +166,24 @@ $config['inventoryform_index'] = array(
 	"default_direction" => "DESC"
 ); 
 
+
+
+$config['accounting_shipping_orders'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'accounting/filter',
+	"base_url"	=> 	'/accounting/shipping_orders/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Customer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),	
+						'amount'=>array('name'=>'Amount', 'data_type' => 'money', 'sortable' => FALSE, 'default_view'=>1),
+						'ship_date'=>array('name'=>'Ship Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1),
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
+
+
 $config['vendor_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
