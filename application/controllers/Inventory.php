@@ -68,6 +68,10 @@ class Inventory extends Admin_Controller
     
     public function add( $edit_id ='')
     {
+        
+        $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
+        $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
+       // $this->layout->add_javascripts(array('product'));  
 
         try
         {
@@ -167,7 +171,7 @@ class Inventory extends Admin_Controller
                 $edit_data['length']                = '';
                 $edit_data['width']                 = '';
                 $edit_data['height']                = '';
-                $edit_data['weigth']                = '';
+                $edit_data['weight']                = '';
                 $edit_data['in_stock']              = '';
                 $edit_data['image_title']           = '';
                 $edit_data['file_name']             = '';

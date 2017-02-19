@@ -34,12 +34,7 @@
                   Vendors
               </a> 
             </li>
-            <li <?php echo ($curr_ctlr == 'category')?'class="active"':'';?> >
-              <a href="<?=site_url('category');?>">
-                 <i class="fa fa-clock-o fa-fw"></i>
-                  Categories
-              </a> 
-            </li>
+            
             <?php if($role=="2" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'organization')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">
@@ -65,11 +60,16 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a href="<?php echo site_url();?>inventory">Product</a></li>
-                <li><a href="<?php echo site_url();?>inventoryform">Product Form</a></li>
-                <li><a href="<?php echo site_url();?>inventorycolor/">Product Color</a></li>
-                <li><a href="<?php echo site_url();?>inventorytype">Product Types</a></li>
-                <li><a href="<?php echo site_url();?>inventorypackage">Product Packages</a></li>
-              </ul>
+                <li <?php echo ($curr_ctlr == 'category')?'class="active"':'';?> >
+                    <a href="<?=site_url('category');?>"><i class="fa fa-clock-o fa-fw"></i>Categories</a> 
+                </li>
+                <!--
+<li><a href="<?php //echo site_url();?>inventoryform">Product Form</a></li>
+                <li><a href="<?php //echo site_url();?>inventorycolor/">Product Color</a></li>
+                <li><a href="<?php // site_url();?>inventorytype">Product Types</a></li>
+                <li><a href="<?php //echo site_url();?>inventorypackage">Product Packages</a></li>
+             
+--> </ul>
             </li>
             <?php }?>
             <?php if($role=="5" || $role=="1"){?>

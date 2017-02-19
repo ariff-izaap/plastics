@@ -7,6 +7,7 @@
   </div>
    
     <div class="row">
+    
         <div class="col-md-12">
             <div class="panel with-nav-tabs panel-primary">
                 <div class="panel-heading">
@@ -166,20 +167,18 @@
                                  </form>
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab2primary">
-                           
-                            <div class="form-group  <?php echo (form_error('image_title'))?'error':'';?>" data-error="<?php echo (form_error('image_title'))? form_error('image_title'):'';?>">
-                              <label required>Image Title</label>
-                              <input type="text" name="image_title" class="form-control" id="image_title" value="<?php echo set_value('image_title', $editdata['image_title']);?>" placeholder="" />
-                            </div>
-                            
-                            <div class="form-group  <?php echo (form_error('file_name'))?'error':'';?>" data-error="<?php echo (form_error('file_name'))? form_error('file_name'):'';?>">
-                              <label required>Image</label>
-                              <input type="file" name="file_name" class="form-control" id="file_name" value="<?php echo set_value('file_name', $editdata['file_name']);?>"  />
-                            </div>
+                           <div class="form-group">
+    				            <label for="upload_image">Images <span class="vstar">*</span></label>
+                                <span style="font-size: 11px; color: red; font-weight:bold;">Dimensions(150 x 150)</span>
+            				    <input id="" name="product_upload_image" type="file" class="file" />
+            				    <input type="hidden" name="file_name" id="file_name" value="<?php echo set_value('file_name', $editdata['file_name']);?>" />
+                                <?php echo form_error('file_name', '<span class="help-block">', '</span>'); ?>
+            				    <br />
+        			      </div> 
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab3primary">
                             <div class="form-group col-md-2">
-                              <button type="submit" class="btn btn-block">Save</button>
+                              <button type="product_upload_imagesubmit" class="btn btn-block">Save</button>
                             </div>
                           </div>
                         <div class="tab-pane fade tabcontent" id="tab4primary">Primary 4</div>
@@ -195,5 +194,19 @@
     <br />
     
   
+
+<?php $img_url = site_url()."assets/images/product/".$editdata['file_name'];
+
+      $prev_img = (!empty($editdata['file_name']))?"<img src='$img_url' class='file-preview-image' alt='Product Image' title='Product Image'>":""; ?>
+
+<script>
+
+var prv_img = "<?php echo $prev_img; ?>";
+var page = '';
+var Id = 'product_upload_image';
+var hover_id = '';
+</script>
+
+
 
 
