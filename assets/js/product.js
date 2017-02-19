@@ -15,13 +15,11 @@ var upld_options = {};
     if(page == 'social'){
         up_folder  = 'social_icon';
         divid      = 'Images';
-       
     }    
     else
     {
         up_folder = 'product';
-        divid     = 'file_name';
-       
+        divid     = 'file_name';  
     }
      
     upld_options.uploadExtraData = {'upload_folder':up_folder,'types':'gif|jpg|png|jpeg','field':Id}, 
