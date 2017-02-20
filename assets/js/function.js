@@ -70,7 +70,7 @@ $(function(){
       data:{table:table,id:id},
       success:function(data)
       {
-       location.reload();
+        location.reload();
       }
     });
     }
@@ -152,7 +152,6 @@ function delete_record(del_url,elm){
         if( retVal == true ){
    
             $.post(base_url+del_url,{},function(data){           
-                
                 if(data.status == "success"){
                 //success message set.
                 service_message(data.status,data.message);
