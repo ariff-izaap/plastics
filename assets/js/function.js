@@ -42,7 +42,6 @@ $(function(){
       data:{val:val},
       success:function(data)
       {
-        console.log(data);
         $("select[name='table_value_list']").html(data);
       }
     });
