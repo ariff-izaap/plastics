@@ -16,6 +16,7 @@ class Admin extends Admin_Controller
 		if(!is_logged_in())
     	redirect('login');
   	$this->load->model('admin_model');
+    $this->load->model('history_model');
 	  $this->load->library('listing');
   }
 
@@ -83,10 +84,26 @@ class Admin extends Admin_Controller
       {
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $ins['updated_id'] = get_current_user_id();
-        $ins_user = $this->admin_model->update(array("id"=>$edit_id),$ins);
+        $ins_user = $this->admin_model->update(array("id"=>$edit_id),$ins,"admin_users");
+        $get_name = $this->admin_model->select("admin_users",array("id"=>$edit_id));
+        $his['action'] = "<strong>".ucwords($get_name[0]['first_name'])."( ".$get_name[0]['email']." )</strong> User has been updated";
+        $his['action_id'] = $edit_id;
+        $his['line'] = "User Updation";
+        $his['created_id'] = $this->session->userdata("user_data")['id'];
+        $his['created_date'] = date("Y-m-d H:i:s");
+        $history = $this->history_model->insert($his,"log");     
       }
       else
-        $ins_user = $this->admin_model->insert($ins);
+      {
+        $ins_user = $this->admin_model->insert($ins,"admin_users");
+        $get_name = $this->admin_model->select("admin_users",array("id"=>$ins_user));
+        $his['action']="<strong>".$get_name[0]['first_name']."(".$get_name[0]['email'].")</strong> User has been created";
+        $his['action_id'] = $ins_user;
+        $his['line'] = "User Creation";
+        $his['created_id'] = $this->session->userdata("user_data")['id'];
+        $his['created_date'] = date("Y-m-d H:i:s");
+        $history = $this->history_model->insert($his,"log");
+      }
       redirect("admin/user_setup");
     }    
     $this->layout->view("admin/add_user");
@@ -94,10 +111,17 @@ class Admin extends Admin_Controller
 
   public function delete($del_id)
   {
-    $this->admin_model->delete(array("id"=>$del_id));  
+    $get_name = $this->admin_model->select("admin_users",array("id"=>$del_id));
+    $this->admin_model->delete(array("id"=>$del_id),"admin_users");
     $output['message'] ="Record deleted successfuly.";
     $output['status']  = "success";
-    $this->_ajax_output($output, TRUE);          
+    $his['action']="<strong>".$get_name[0]['first_name']."(".$get_name[0]['email'].")</strong> User has been deleted";
+    $his['action_id'] = $del_id;
+    $his['line'] = "User Deletion";
+    $his['created_id'] = $this->session->userdata("user_data")['id'];
+    $his['created_date'] = date("Y-m-d H:i:s");
+    $history = $this->history_model->insert($his,"log");
+    $this->_ajax_output($output, TRUE);
   }
 
   public function add_edit_dropdowns($edit_id='')
@@ -116,12 +140,28 @@ class Admin extends Admin_Controller
       $ins['name'] = $form['table_value'];
 
       if(!$edit_id)
+      {
         $add = $this->admin_model->insert($ins,$this->get_table($form['table_type']));
+        $get_name = $this->admin_model->select($this->get_table($form['table_type']),array("id"=>$add));
+        $his['action'] = ucwords(str_replace("_"," ",$this->get_table($form['table_type'])))." <strong>".$get_name[0]['name']."</strong> has been created";
+        $his['action_id'] = $add;
+        $his['line'] = "Dropdown Creation";
+        $his['created_id'] = $this->session->userdata("user_data")['id'];
+        $his['created_date'] = date("Y-m-d H:i:s");
+        $history = $this->history_model->insert($his,"log");
+      }
       else
       {
         $up['name'] = $form['table_value'];
         $up['status'] = $form['status'];
         $up = $this->admin_model->update(array("id"=>$edit_id),$up,$this->get_table($form['table_type']));
+        $get_name = $this->admin_model->select($this->get_table($form['table_type']),array("id"=>$edit_id));
+        $his['action'] = ucwords(str_replace("_"," ",$this->get_table($form['table_type'])))." has been updated to <strong>".$get_name[0]['name']."</strong>";
+        $his['action_id'] = $edit_id;
+        $his['line'] = "Dropdown Updation";
+        $his['created_id'] = $this->session->userdata("user_data")['id'];
+        $his['created_date'] = date("Y-m-d H:i:s");
+        $history = $this->history_model->insert($his,"log");
       }
       $this->session->set_flashdata("success_msg","Dropdown Value Added Successfully",TRUE);
       redirect("admin/general_dropdowns");
@@ -139,6 +179,13 @@ class Admin extends Admin_Controller
     $table = trim($this->input->post("table"));
     $id = trim($this->input->post("id"));
     $this->admin_model->delete(array("id"=>$id),$this->get_table($table));
+    $get_name = $this->admin_model->select($this->get_table($table),array("id"=>$id));
+    $his['action'] = ucwords(str_replace("_"," ",$this->get_table($table)))." <strong>".$get_name[0]['name']."</strong> has been deleted";
+    $his['action_id'] = $id;
+    $his['line'] = "Dropdown Deletion";
+    $his['created_id'] = $this->session->userdata("user_data")['id'];
+    $his['created_date'] = date("Y-m-d H:i:s");
+    $history = $this->history_model->insert($his,"log");    
     $this->session->set_flashdata("success_msg","Dropdown deleted successfully",TRUE);
   }
 
@@ -187,4 +234,3 @@ class Admin extends Admin_Controller
   }
 }
 ?>
-

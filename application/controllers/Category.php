@@ -25,10 +25,7 @@ class Category extends Admin_Controller
 
         $this->load->library('listing');         
         
-        $this->simple_search_fields = array(                                                
-                                    'name'         => 'Name',
-                                                                           
-        );
+        $this->simple_search_fields = array('name'=> 'Name');
          
         $this->_narrow_search_conditions = array("start_date");
         
@@ -92,9 +89,9 @@ class Category extends Admin_Controller
                 {    
                     $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
-                   // $ins_data['created_id']   = get_current_user_id();  
-
-                    $this->category_model->insert($ins_data);
+                   // $ins_data['created_id']   = get_current_user_id();
+                    echo $ins = $this->category_model->insert($ins_data);
+                    exit;
 
                     $msg = 'Category added successfully';
                 }

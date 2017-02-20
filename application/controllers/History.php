@@ -18,9 +18,10 @@ class History extends Admin_Controller
   {
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');    
-    $this->simple_search_fields = array(                                                
-                                'c.action' => 'Action',
-                                't.line'       => 'Comments',
+    $this->simple_search_fields = array(
+                                'c.action_id' => 'ID',
+                                'c.line' => 'Action',
+                                'c.action'       => 'Comments',
                                 'c.created_id' => 'Action By',
                                 'c.created_date' => 'Date');
     $this->_narrow_search_conditions = array("start_date");    
