@@ -41,8 +41,10 @@ class Admin_model extends App_model
 		$q =  $this->db->insert($table,$data);
 		return $this->db->insert_id();
 	}
-  public function select($table)
+  public function select($table,$where='')
   {
+    if($where)
+      $this->db->where($where);
     $q =  $this->db->get($table);
     return $q->result_array();
   }

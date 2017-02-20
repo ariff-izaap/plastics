@@ -10,9 +10,9 @@ class History_model extends App_model
   
   function listing()
   {
-	  $this->_fields = "c.*,t.name as name,a.first_name as created_name";
+	  $this->_fields = "c.*,a.first_name as created_name";
     $this->db->from('log c');
-    $this->db->join("action t","c.action_id=t.id");
+    //$this->db->join("action t","c.action_id=t.id");
     $this->db->join("admin_users a","c.created_id=a.id");
     $this->db->group_by('c.id');
     foreach ($this->criteria as $key => $value)
@@ -21,10 +21,13 @@ class History_model extends App_model
           continue;
       switch ($key)
       {
+        case 'c.action_id':
+          $this->db->like($key, $value);
+        break;
         case 'c.action':
           $this->db->like($key, $value);
         break;
-        case 't.line':
+        case 'c.line':
           $this->db->like($key, $value);
         break;
         case 'c.created_id':
