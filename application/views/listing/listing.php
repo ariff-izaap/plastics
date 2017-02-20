@@ -21,12 +21,12 @@
 <?php endif;?>
 
 <div id="data_table">	
-<?php $uri1 = $this->uri->segment(1);;?>
+<?php $uri = $this->uri->segment(2);$uri1 = $this->uri->segment(1);?>
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
 
 		<thead>
 			<tr>
-			<?php if($uri1 != "accounting"){?>
+			<?php if($uri1 != "accounting" && $uri1 != "history"){?>
 				<th> # </th>
 				<?php }?>
 				<?php  $cols = 0; 
@@ -61,10 +61,7 @@
 
 				<?php endforeach;?>
 
-				<?php 
-				$uri = $this->uri->segment(2);
-				
-
+				<?php
 				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting'){ ?>
 
 					<th>Action</th>
@@ -81,7 +78,7 @@
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        if($uri1 != 'accounting'){ 	?>
+        if($uri1 != 'accounting' && $uri1 != 'history'){ 	?>
 				<td>
           <?php if((isset($item['id']) && !empty($item['id']))) { ?>
 
