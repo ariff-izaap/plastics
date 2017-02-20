@@ -11970,3 +11970,4 @@ hr {
 .panel.with-nav-tabs .nav-justified{
 	margin-bottom: -1px;
 }
+.select2-container{width: 100% !important;}
