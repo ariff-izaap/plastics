@@ -168,12 +168,14 @@
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab2primary">
                            <div class="form-group">
+                            
     				            <label for="upload_image">Images <span class="vstar">*</span></label>
                                 <span style="font-size: 11px; color: red; font-weight:bold;">Dimensions(150 x 150)</span>
             				    <input id="" name="product_upload_image" type="file" class="file" />
             				    <input type="hidden" name="file_name" id="file_name" value="<?php echo set_value('file_name', $editdata['file_name']);?>" />
                                 <?php echo form_error('file_name', '<span class="help-block">', '</span>'); ?>
             				    <br />
+                              
         			      </div> 
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab3primary">
