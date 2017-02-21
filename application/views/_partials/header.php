@@ -28,12 +28,6 @@
                   Dashboard
               </a>
             </li>
-            <li <?php echo ($curr_ctlr == 'vendor')?'class="active"':'';?> >
-              <a href="<?=site_url('vendor');?>">
-                 <i class="fa fa-clock-o fa-fw"></i>
-                  Vendors
-              </a> 
-            </li>
             
             <?php if($role=="2" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'organization')?'class="active"':'';?> >
@@ -52,7 +46,7 @@
             </li>
             <?php }?>
             <?php if($role=="4" || $role=="1"){?>
-             <li class="dropdown <?php echo ($curr_ctlr == 'inventory') ? "active":'';?>">
+             <li class="dropdown <?php echo ($curr_ctlr == 'inventory' || $curr_ctlr == 'category') ? "active":'';?>">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-database fa-fw"></i>
                   Inventory
@@ -61,15 +55,14 @@
               <ul class="dropdown-menu">
                 <li><a href="<?php echo site_url();?>inventory">Product</a></li>
                 <li <?php echo ($curr_ctlr == 'category')?'class="active"':'';?> >
-                    <a href="<?=site_url('category');?>"><i class="fa fa-clock-o fa-fw"></i>Categories</a> 
+                    <a href="<?=site_url('category');?>"> Categories</a>
                 </li>
                 <!--
-<li><a href="<?php //echo site_url();?>inventoryform">Product Form</a></li>
+                <li><a href="<?php //echo site_url();?>inventoryform">Product Form</a></li>
                 <li><a href="<?php //echo site_url();?>inventorycolor/">Product Color</a></li>
                 <li><a href="<?php // site_url();?>inventorytype">Product Types</a></li>
-                <li><a href="<?php //echo site_url();?>inventorypackage">Product Packages</a></li>
-             
---> </ul>
+                <li><a href="<?php //echo site_url();?>inventorypackage">Product Packages</a></li>-->
+               </ul>
             </li>
             <?php }?>
             <?php if($role=="5" || $role=="1"){?>
@@ -97,11 +90,19 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
+                <li class="<?php echo ($child_ctlr == 'roles') ? "active":'';?>">
+                  <a href="<?=site_url('admin/roles');?>">Roles</a>
+                </li>
                 <li class="<?php echo ($child_ctlr == 'general_dropdowns') ? "active":'';?>">
                   <a href="<?=site_url();?>/admin/general_dropdowns">General Dropdowns</a>
                 </li>
                 <li class="<?php echo ($child_ctlr == 'user_setup') ? "active":'';?>">
                   <a href="<?=site_url();?>/admin/user_setup">User Setup</a>
+                </li>
+                <li <?php echo ($curr_ctlr == 'vendor')?'class="active"':'';?> >
+                  <a href="<?=site_url('vendor');?>">
+                      Vendors
+                  </a> 
                 </li>
               </ul>
             </li>            
@@ -130,7 +131,9 @@
                 <div class="dropdown custom-dropdwon">
                   <button class="dropbtn"> <i class="fa fa-gear"></i></button>
                     <div id="userSettings" class="dropdown-content" align="right">
-                    <a href="<?=site_url('history');?>">Site History</a>
+                    <?php if($role=="1"){?>
+                      <a href="<?=site_url('history');?>">Site History</a>
+                    <?php }?>
                     <a href="#">My Profile</a>
                     <a href="#">Settings</a>
                     <a href="<?php echo site_url('login/logout');?>">Sign Out</a>

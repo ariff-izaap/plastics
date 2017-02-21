@@ -73,7 +73,8 @@ function get_roles()
     return $roles;
 }
 
-function display_flashmsg($flash){
+function display_flashmsg($flash)
+{
 
     if(!$flash)
         return FALSE;
@@ -106,7 +107,7 @@ function display_flashmsg($flash){
 
 function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_open = '', $wrap_tag_close = '')
 {
-     $CI = & get_instance();
+    $CI = & get_instance();
      
     if(is_null($data) || is_array($data) || (strcmp($data, '') === 0 && !count($row)) )
         return $data;
@@ -561,6 +562,40 @@ function is_valid_user($user_id = 0)
     $result = $CI->db->user_model->get_where(array('id' => $user_id));
 
     return $result->num_rows()?TRUE:FALSE;
+}
+
+function log_history($table='',$id='',$cat='',$action='')
+{
+  $CI = get_instance();
+  switch ($action)
+  {
+    case 'insert':
+      $data['line'] = ucwords($cat)." Insertion";
+      $action = "inserted";
+    break;
+    case 'update':
+      $data['line'] = ucwords($cat)." Updation";
+      $action = "updated";
+    break;
+    case 'delete':
+      $data['line'] = ucwords($cat)." Deletion";
+      $action = "deleted";
+    break;
+  }
+  
+  $CI->load->model('history_model');
+  $CI->load->model('admin_model');
+  $get_name = $CI->admin_model->select($table,array("id"=>$id));
+  $data['action_id'] = $id;
+  if($cat=="user")
+    $data['action']="<strong>".$get_name[0]['first_name']." (".$get_name[0]['email'].") </strong> $cat has been ".$action;
+  else
+    $data['action']="<strong>".$get_name[0]['name']."</strong> $cat has been ".$action;
+
+  $data['created_id'] = get_current_user_id();
+  $data['created_date'] = date("Y-m-d H:i:s");
+  return $CI->history_model->insert($data,"log");
+  exit;
 }
 
 ?>

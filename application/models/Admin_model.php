@@ -36,12 +36,13 @@ class Admin_model extends App_model
     }        
     return parent::listing();
   }
+
 	public function insert($data,$table=NULL)
 	{
 		$q =  $this->db->insert($table,$data);
 		return $this->db->insert_id();
 	}
-  public function select($table,$where='')
+  public function select($table='',$where='')
   {
     if($where)
       $this->db->where($where);

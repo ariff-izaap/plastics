@@ -16,6 +16,7 @@ class Admin extends Admin_Controller
 		if(!is_logged_in())
     	redirect('login');
   	$this->load->model('admin_model');
+    $this->load->model('role_model');
     $this->load->model('history_model');
 	  $this->load->library('listing');
   }
@@ -85,24 +86,12 @@ class Admin extends Admin_Controller
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $ins['updated_id'] = get_current_user_id();
         $ins_user = $this->admin_model->update(array("id"=>$edit_id),$ins,"admin_users");
-        $get_name = $this->admin_model->select("admin_users",array("id"=>$edit_id));
-        $his['action'] = "<strong>".ucwords($get_name[0]['first_name'])."( ".$get_name[0]['email']." )</strong> User has been updated";
-        $his['action_id'] = $edit_id;
-        $his['line'] = "User Updation";
-        $his['created_id'] = $this->session->userdata("user_data")['id'];
-        $his['created_date'] = date("Y-m-d H:i:s");
-        $history = $this->history_model->insert($his,"log");     
+        $log = log_history("admin_users",$edit_id,"user","update");
       }
       else
       {
         $ins_user = $this->admin_model->insert($ins,"admin_users");
-        $get_name = $this->admin_model->select("admin_users",array("id"=>$ins_user));
-        $his['action']="<strong>".$get_name[0]['first_name']."(".$get_name[0]['email'].")</strong> User has been created";
-        $his['action_id'] = $ins_user;
-        $his['line'] = "User Creation";
-        $his['created_id'] = $this->session->userdata("user_data")['id'];
-        $his['created_date'] = date("Y-m-d H:i:s");
-        $history = $this->history_model->insert($his,"log");
+        $log = log_history("admin_users",$ins_user,"user","insert");
       }
       redirect("admin/user_setup");
     }    
@@ -110,17 +99,11 @@ class Admin extends Admin_Controller
 	}
 
   public function delete($del_id)
-  {
-    $get_name = $this->admin_model->select("admin_users",array("id"=>$del_id));
-    $this->admin_model->delete(array("id"=>$del_id),"admin_users");
+  {  
     $output['message'] ="Record deleted successfuly.";
     $output['status']  = "success";
-    $his['action']="<strong>".$get_name[0]['first_name']."(".$get_name[0]['email'].")</strong> User has been deleted";
-    $his['action_id'] = $del_id;
-    $his['line'] = "User Deletion";
-    $his['created_id'] = $this->session->userdata("user_data")['id'];
-    $his['created_date'] = date("Y-m-d H:i:s");
-    $history = $this->history_model->insert($his,"log");
+    $log = log_history("admin_users",$del_id,"user","delete");
+    $this->admin_model->delete(array("id"=>$del_id),"admin_users");
     $this->_ajax_output($output, TRUE);
   }
 
@@ -142,12 +125,7 @@ class Admin extends Admin_Controller
       if(!$edit_id)
       {
         $add = $this->admin_model->insert($ins,$this->get_table($form['table_type']));
-        $get_name = $this->admin_model->select($this->get_table($form['table_type']),array("id"=>$add));
-        $his['action'] = ucwords(str_replace("_"," ",$this->get_table($form['table_type'])))." <strong>".$get_name[0]['name']."</strong> has been created";
-        $his['action_id'] = $add;
-        $his['line'] = "Dropdown Creation";
-        $his['created_id'] = $this->session->userdata("user_data")['id'];
-        $his['created_date'] = date("Y-m-d H:i:s");
+        $log = log_history($this->get_table($form['table_type']),$add,"dropdown","insert");
         $history = $this->history_model->insert($his,"log");
       }
       else
@@ -155,13 +133,7 @@ class Admin extends Admin_Controller
         $up['name'] = $form['table_value'];
         $up['status'] = $form['status'];
         $up = $this->admin_model->update(array("id"=>$edit_id),$up,$this->get_table($form['table_type']));
-        $get_name = $this->admin_model->select($this->get_table($form['table_type']),array("id"=>$edit_id));
-        $his['action'] = ucwords(str_replace("_"," ",$this->get_table($form['table_type'])))." has been updated to <strong>".$get_name[0]['name']."</strong>";
-        $his['action_id'] = $edit_id;
-        $his['line'] = "Dropdown Updation";
-        $his['created_id'] = $this->session->userdata("user_data")['id'];
-        $his['created_date'] = date("Y-m-d H:i:s");
-        $history = $this->history_model->insert($his,"log");
+        $log = log_history($this->get_table($form['table_type']),$edit_id,"dropdown","update");
       }
       $this->session->set_flashdata("success_msg","Dropdown Value Added Successfully",TRUE);
       redirect("admin/general_dropdowns");
@@ -179,57 +151,122 @@ class Admin extends Admin_Controller
     $table = trim($this->input->post("table"));
     $id = trim($this->input->post("id"));
     $this->admin_model->delete(array("id"=>$id),$this->get_table($table));
-    $get_name = $this->admin_model->select($this->get_table($table),array("id"=>$id));
-    $his['action'] = ucwords(str_replace("_"," ",$this->get_table($table)))." <strong>".$get_name[0]['name']."</strong> has been deleted";
-    $his['action_id'] = $id;
-    $his['line'] = "Dropdown Deletion";
-    $his['created_id'] = $this->session->userdata("user_data")['id'];
-    $his['created_date'] = date("Y-m-d H:i:s");
-    $history = $this->history_model->insert($his,"log");    
+    $log = log_history($this->get_table($table),$edit_id,"dropdown","delete");
     $this->session->set_flashdata("success_msg","Dropdown deleted successfully",TRUE);
+  }
+
+  public function roles()
+  {
+    $this->layout->add_javascripts(array('listing'));
+    $this->load->library('listing');
+    $this->simple_search_fields = array(                                                
+                                'c.name' => 'Name',
+                                /*'t.name'       => 'Role',
+                                'c.last_name' => 'Last Name',
+                                'c.email'      => 'Email'*/);
+    $this->_narrow_search_conditions = array("start_date");    
+    $str = '<a href="'.site_url('admin/add_edit_role/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete_role/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $this->listing->initialize(array('listing_action' => $str));
+    $listing = $this->listing->get_listings('role_model', 'listing');
+    if($this->input->is_ajax_request())
+      $this->_ajax_output(array('listing' => $listing), TRUE);    
+    $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
+    $this->data['simple_search_fields'] = $this->simple_search_fields;
+    $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
+    $this->data['per_page'] = $this->listing->_get_per_page();
+    $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());    
+    $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);
+    $this->data['listing'] = $listing;
+    $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+    $this->layout->view("admin/roles");
+  }
+
+  public function add_edit_role($edit_id='')
+  {
+    if($edit_id)
+      $edit_data = $this->admin_model->get_where(array("id" => $edit_id),"","role")->row_array();
+    else
+      $edit_data = array("id"=>"","name"=>"");
+
+    $this->data['editdata']  = $edit_data;
+    $this->form_validation->set_rules("name","Role Name","required");
+    if ($this->form_validation->run() == FALSE)
+    {
+      $this->layout->view("admin/add_role");
+    }
+    else
+    {
+      $form = $this->input->post();
+      $ins['name'] = $form['name'];
+      $edit_id = $form['edit_id'];
+      //$ins['name'] = $form['table_value'];
+
+      if(!$edit_id)
+      {
+        $add = $this->admin_model->insert($ins,"role");
+        $log = log_history("role",$add,"role","insert");
+      }
+      else
+      {
+        $up['name'] = $form['name'];
+        $up = $this->admin_model->update(array("id"=>$edit_id),$up,"role");
+        $log = log_history("role",$edit_id,"role","update");
+      }
+      $this->session->set_flashdata("success_msg","Role Added Successfully",TRUE);
+      redirect("admin/roles");
+    }
+  }
+  public function delete_role($del_id)
+  {    
+    $this->admin_model->delete(array("id"=>$del_id),"role");
+    $output['message'] ="Record deleted successfuly.";
+    $output['status']  = "success";
+    $output['log'] = log_history("role",$del_id,"role","delete");
+    $this->_ajax_output($output, TRUE);
   }
 
   function get_table($val)
   {
-     switch ($val)
-      {
-        case '1':
-          $table = "product_packaging";
-          break;
-        case '2':
-          $table = "product_form";
-          break;
-        case '3':
-          $table = "product";
-          break;
-        case '4':
-          $table = "credit_type";
-          break;
-        case '5':
-          $table = "carrier";
-          break;
-        case '6':
-          $table = "timezone";
-          break;
-        case '7':
-          $table = "state";
-          break;
-        case '8':
-          $table = "contact_type";
-          break;
-        case '9':
-          $table = "call_type";
-          break;
-        case '10':
-          $table = "sale_type";
-          break;
-        case '11':
-          $table = "product_packaging";
-          break;
-        case '12':
-          $table = "credit_type";
-          break;
-      }
+    switch ($val)
+    {
+      case '1':
+        $table = "product_packaging";
+        break;
+      case '2':
+        $table = "product_form";
+        break;
+      case '3':
+        $table = "product";
+        break;
+      case '4':
+        $table = "credit_type";
+        break;
+      case '5':
+        $table = "carrier";
+        break;
+      case '6':
+        $table = "timezone";
+        break;
+      case '7':
+        $table = "state";
+        break;
+      case '8':
+        $table = "contact_type";
+        break;
+      case '9':
+        $table = "call_type";
+        break;
+      case '10':
+        $table = "sale_type";
+        break;
+      case '11':
+        $table = "product_packaging";
+        break;
+      case '12':
+        $table = "credit_type";
+        break;
+    }
     return $table;
   }
 }

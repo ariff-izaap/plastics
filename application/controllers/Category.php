@@ -12,8 +12,9 @@ class Category extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model('category_model');
-	   $this->load->library('listing');    
+     $this->load->model('category_model');
+     $this->load->model('history_model');
+	   $this->load->library('listing');
      
 	} 
 	
@@ -62,12 +63,12 @@ class Category extends Admin_Controller
 
         try
         {
+          
             if($this->input->post('edit_id'))            
                 $edit_id = $this->input->post('edit_id');
 
             $this->form_validation->set_rules('name','Category Name','trim|required');
-           // $this->form_validation->set_rules('description','Description','trim|required');
-           
+           // $this->form_validation->set_rules('description','Description','trim|required');         
             
             $this->form_validation->set_error_delimiters('', '');
                 
@@ -75,13 +76,21 @@ class Category extends Admin_Controller
             {
                 $ins_data = array();
                 $ins_data['name']                   = $this->input->post('name');
-             //   $ins_data['description']            = $this->input->post('description');
+               //   $ins_data['description']            = $this->input->post('description');
                 
                 if($edit_id)
                 {
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     //$ins_data['updated_id']   = get_current_user_id();    
                     $this->category_model->update(array("id" => $edit_id),$ins_data);
+
+                    $get_name = $this->category_model->get_where(array("id"=>$edit_id))->row_array();
+                    $his['action']="Category has been updated to <strong>".$get_name['name']."</strong>";
+                    $his['action_id'] = $edit_id;
+                    $his['line'] = "Category Updation";
+                    $his['created_id'] = $this->session->userdata("user_data")['id'];
+                    $his['created_date'] = date("Y-m-d H:i:s");
+                    $history = $this->history_model->insert($his,"log");
 
                     $msg  = 'Category updated successfully';
                 }
@@ -90,9 +99,14 @@ class Category extends Admin_Controller
                     $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                    // $ins_data['created_id']   = get_current_user_id();
-                    echo $ins = $this->category_model->insert($ins_data);
-                    exit;
-
+                    $ins = $this->category_model->insert($ins_data);
+                    $get_name = $this->category_model->get_where(array("id"=>$ins))->row_array();
+                    $his['action']="<strong>".$get_name['name']."</strong> Category has been created";
+                    $his['action_id'] = $ins;
+                    $his['line'] = "Category Creation";
+                    $his['created_id'] = $this->session->userdata("user_data")['id'];
+                    $his['created_date'] = date("Y-m-d H:i:s");
+                    $history = $this->history_model->insert($his,"log");                    
                     $msg = 'Category added successfully';
                 }
 
@@ -101,12 +115,11 @@ class Category extends Admin_Controller
                 redirect('category');
             }    
             else
-            {
-            
-                $edit_data = array();
-                $edit_data['id']                    = '';
-                $edit_data['name']                  = '';
-                $edit_data['description']           = '';
+            {            
+              $edit_data = array();
+              $edit_data['id']                    = '';
+              $edit_data['name']                  = '';
+              $edit_data['description']           = '';
             }
 
         }
@@ -132,7 +145,14 @@ class Category extends Admin_Controller
 
         if(count($access_data) > 0){
 
+            $get_name = $this->category_model->get_where(array("id"=>$del_id))->row_array();
             $this->category_model->delete(array("id"=>$del_id));
+            $his['action']="<strong>".$get_name['name']."</strong> Category has been deleted";
+            $his['action_id'] = $del_id;
+            $his['line'] = "Category Deletion";
+            $his['created_id'] = $this->session->userdata("user_data")['id'];
+            $his['created_date'] = date("Y-m-d H:i:s");
+            $history = $this->history_model->insert($his,"log");   
 
             $output['message'] ="Record deleted successfuly.";
             $output['status']  = "success";
