@@ -1,3 +1,34 @@
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Image</h4>
+      </div>
+      <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Image Title</label>
+          <input type="text" name="image_title" class="form-control" id="image_title"  placeholder="Image Title" />
+        </div>
+        
+       <div class="form-group">
+		    <input id="product_upload_image" name="product_upload_image" type="file" class="file" />
+		    <input type="hidden" name="file_name" id="file_name" value="<?php //echo set_value('file_name', $editdata['file_name']);?>" />
+            <?php //echo form_error('file_name', '<span class="help-block">', '</span>'); ?>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>  
+
 <section class="container-fluid">
   <div class="row top-nav">
     <nav class="navbar navbar-default">

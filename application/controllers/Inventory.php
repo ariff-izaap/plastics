@@ -4,7 +4,10 @@ require_once(APPPATH."libraries/Admin_controller.php");
 
 class Inventory extends Admin_Controller 
 {
-	
+	public  $data = array();
+
+    private $upload_path = './assets/images/';
+    
     function __construct()
     {
         parent::__construct();  
@@ -62,8 +65,7 @@ class Inventory extends Admin_Controller
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
         $this->layout->view("frontend/inventory/index");
-
-			
+	
     }
     
     public function add( $edit_id ='')
@@ -71,8 +73,7 @@ class Inventory extends Admin_Controller
         
         $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
         $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
-       // $this->layout->add_javascripts(array('product'));  
-
+       
         try
         {
             if($this->input->post('edit_id'))            
@@ -94,10 +95,6 @@ class Inventory extends Admin_Controller
             $this->form_validation->set_rules('weight','Weight','trim|required');
             $this->form_validation->set_rules('in_stock','In Stock','trim|required');
           
-//            $this->form_validation->set_rules('fax','Fax','trim');
-//            $this->form_validation->set_rules('address','Address','trim|required');
-//            $this->form_validation->set_rules('note','Note','trim');
-
             $this->form_validation->set_error_delimiters('', '');
                 
             if ($this->form_validation->run())
@@ -121,7 +118,7 @@ class Inventory extends Admin_Controller
                 $ins_data['length']                 = $this->input->post('length');
                 $ins_data['width']                  = $this->input->post('width');
                 $ins_data['height']                 = $this->input->post('height');
-                $ins_data['weight']                 = $this->input->post('weigth');
+                $ins_data['weight']                 = $this->input->post('weight');
                 $ins_data['in_stock']               = $this->input->post('in_stock');
                 
                 if($edit_id){
@@ -137,17 +134,14 @@ class Inventory extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                     $ins_data['created_id']   = get_current_user_id();  
 
-                    $new_id = $this->inventory_model->insert($ins_data);
-
-                    $msg = 'Product added successfully';
-                    
+                    $new_id  = $this->inventory_model->insert($ins_data);
+                    $msg     = 'Product added successfully';
                     $edit_id =  $new_id;
                 }
 
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
                 
                 $status  = 'success';
-                
                 //redirect('inventory');
             }    
             else
@@ -186,14 +180,17 @@ class Inventory extends Admin_Controller
              
         }
 
-        if($edit_id)
-            $edit_data =$this->inventory_model->get_where(array("id" => $edit_id))->row_array();
+        if($edit_id){
+            $edit_data = $this->inventory_model->get_where(array("id" => $edit_id))->row_array();
+            $images    = $this->inventory_model->get_where(array("product_id" => $edit_id),'*','product_images')->result_array();
+        }    
 
-        $this->data['editdata']   = $edit_data;
-        $this->data['colors']     = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
-        $this->data['forms']      = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
-        $this->data['packages']   = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
-        $this->data['categories'] = $this->inventory_model->get_where(array(),"*","category")->result_array();
+        $this->data['editdata']           = $edit_data;
+        $this->data['editdata']['images'] = (!empty($images))?$images:array();
+        $this->data['colors']             = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
+        $this->data['forms']              = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
+        $this->data['packages']           = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
+        $this->data['categories']         = $this->inventory_model->get_where(array(),"*","category")->result_array();
         
          if($this->input->is_ajax_request()){
             $output  = $this->load->view('frontend/inventory/add',$this->data,true);
@@ -212,7 +209,6 @@ class Inventory extends Admin_Controller
         $output=array();
 
         if(count($access_data) > 0){
-
             $this->inventory_model->delete(array("id"=>$del_id));
 
             $output['message'] ="Record deleted successfuly.";
@@ -223,10 +219,83 @@ class Inventory extends Admin_Controller
            $output['message'] ="This record not matched by Inventory.";
            $output['status']  = "error";
         }
-        
-        $this->_ajax_output($output, TRUE);
-            
+        $this->_ajax_output($output, TRUE);   
     }
     
+    public function do_upload()
+    {
+        try
+        {
+            $form  = $this->input->post(NULL, TRUE);
+            $field = $form['field'];
+
+            if(!isset($form['upload_folder']))
+                 throw new Exception("Upload folder is empty!");
+
+            $config['upload_path']   = $this->upload_path.$form['upload_folder'].'/';
+            $config['allowed_types'] = (isset($form['types']) && !empty($form['types']))?$form['types']:'gif|jpg|png|jpeg';
+            $config['max_size']      = '10000';
+            $config['max_width']     = '300';
+            $config['max_height']    = '100';
+
+            $this->load->library('upload', $config);
+
+            if(!$this->upload->do_upload("$field"))            
+               throw new Exception($this->upload->display_errors());
+               
+            $files = $this->upload->data();  
+            
+            $ins_data = array();
+            $ins_data['file_name']      = $files['file_name'];
+            $new_id = $this->inventory_model->insert($ins_data,'product_images');
+
+            $this->data['fileuploaded']   = $files['file_name'];
+            $this->data['image_id']       = $new_id;                 
+        }
+        catch(Exception $e)
+        {
+            $this->data['error'] = $e->getMessage();    
+        }     
+
+        echo json_encode($this->data);
+        exit;
+    }
+    
+    public function update_image_title()
+    {
+        $form     = $this->input->post(NULL, TRUE);
+        $ins_data = array();
+        
+        $ins_data['image_title'] = $form['image_title'];
+        $ins_data['product_id']  = $form['product_id'];
+        $upldid                  = $form['uploaded_id'];
+        
+        $new_id = $this->inventory_model->update(array("id" => $upldid),$ins_data,'product_images');
+        
+        $output['message'] ="Image Uploaded Successfully.";
+        $output['status']  = "success";
+            
+        $this->_ajax_output($output, TRUE); 
+    }
+    
+    public function product_image_delete($del_id)
+    {
+        $access_data = $this->inventory_model->get_where(array("id"=>$del_id),'id','product_images')->row_array();
+       
+        $output=array();
+
+        if(count($access_data) > 0){
+            $this->inventory_model->delete(array("id"=>$del_id),'product_images');
+
+            $output['message'] ="Record deleted successfuly.";
+            $output['status']  = "success";
+        }
+        else
+        {
+           $output['message'] ="This record not matched by Inventory.";
+           $output['status']  = "error";
+        }
+        $this->_ajax_output($output, TRUE);   
+    }
 }
 ?>

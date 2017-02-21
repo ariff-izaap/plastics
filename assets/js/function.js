@@ -1,4 +1,5 @@
 $(function(){
+    
   //$('a,button').tooltip();
 
 	$('.singledate').daterangepicker({
@@ -301,7 +302,6 @@ function inventory_sub()
           {
              var status = res.status;
              var output = res.output;
-            // alert(status);
             if(status == 'success') {
                  $("#inventory_add_section").html(output);
             }
@@ -310,60 +310,36 @@ function inventory_sub()
                 $("#inventory_add_section").html(output);                           
             }
           }
-    });
- 
-    
+    });    
 }
 
-function product_image_add(action,div_id,save_type,elm,call_back)
+function check_product_id(event)
 {
-    if(($("#product_image").val() == '' && $("#file_name").val() == '') || $("#product_image").val() != '') {
-   
-        $("#image_upload_loader").show();
-                
-        $.ajaxFileUpload
-            		({
-    				url:base_url+"product/image_upload/"+product_id,
-    				secureuri:true,
-    				fileElementId:"product_image",
-    				dataType: 'json',
-    				data:{},
-    				success: function (data)
-    				{
-    				    if(data.status == "error"){
-    				        alert(data.msg);
-                            $("#image_upload_loader").hide();
-                            return false; 
-    				    }
-    				    else if(data.status == "success")
-                        {
-                                                              
-                              $("#file_name").val(product_id+"/"+data.file_name);
-                              $("#image_upload_loader").html("Image Uploaded.");  
-                            
-                              save_form(action,div_id,save_type,elm,call_back,true);
-                            
-                        }
-                        else
-                        {
-                             alert("Error Occured. Try again later!!");
-                             $("#image_upload_loader").hide();
-                             return false;
-                        }
-                    },
-    				error: function (data,xml, status)
-    				{
-    				       alert("Critical Error Occured!!");
-                           $("#image_upload_loader").hide();
-                           return false;
-    				}
-    			});
-       
+    var product_id = $("#edit_id").val();
+    if(product_id==''){
+        alert("Please Add Product first");
+        return false;
     }
     else
     {
-        save_form(action,div_id,save_type,elm,call_back,true);
+        $("#load_image_popup").attr({"data-toggle":"modal","data-target":"#myModal"}).trigger('click');
+        return true;
     }
+}
+
+//product image delete
+function product_image_delete(del_id)
+{
+
+      $.ajax({
+          url:base_url+"inventory/product_image_delete/"+del_id,
+          type:"POST",
+          data:{},
+          dataType:'json',
+          success:function(res){
+            service_message(res.status,res.message);
+          }
+    });    
 }
 
 /***End To Punitha **/

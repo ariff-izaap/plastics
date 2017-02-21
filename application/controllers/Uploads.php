@@ -20,7 +20,6 @@ class Uploads extends Admin_controller {
             $form = $this->input->post(NULL, TRUE);
             $field = $form['field'];
           
-          echo $field; exit;
             if(!isset($form['upload_folder']))
                  throw new Exception("Upload folder is empty!");
 

@@ -11,20 +11,18 @@
         <div class="col-md-12">
             <div class="panel with-nav-tabs panel-primary">
                 <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1primary" class="tablinks" data-toggle="tab">Add Inventory</a></li>
-                            <li><a href="#tab2primary" class="tablinks" data-toggle="tab">Inventory Images</a></li>
-                           <!-- <li><a href="#tab3primary" class="tablinks" data-toggle="tab"></a></li>-->
-                        </ul>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1primary" class="tablinks" data-toggle="tab">Add Inventory</a></li>
+                        <li><a href="#tab2primary" class="tablinks" data-toggle="tab">Inventory Images</a></li>
+                        <li><a href="#tab3primary" class="tablinks" data-toggle="tab">Vendors</a></li>
+                    </ul>
                 </div>
+                
                 <div class="panel-body">
-                  
                     <div class="tab-content">
                         <div class="tab-pane fade in active tabcontent" id="tab1primary">
                         <form name="inventory" id="inventory_sub_form" method="POST" >
-                            
                             <div class="form-grid col-md-6">
-                            
                                 <div class="form-group  <?php echo (form_error('name'))?'error':'';?>" data-error="<?php echo (form_error('name'))? form_error('name'):'';?>">
                                   <label required>Inventory Name</label>
                                   <input type="text" name="name" class="form-control" id="name" value="<?php echo set_value('name', $editdata['name']);?>" placeholder="Product Name" />
@@ -88,8 +86,7 @@
                                   <label>Quantity</label>
                                   <input type="text" name="quantity" class="form-control" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
                                 </div>
-                        
-                             
+                            
                                 <div class="form-group  <?php echo (form_error('retail_price'))?'error':'';?>" data-error="<?php echo (form_error('retail_price'))? form_error('retail_price'):'';?>">
                                   <label required>Retail Price</label>
                                   <input type="text" name="retail_price" class="form-control" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
@@ -164,42 +161,60 @@
                                 <div class="form-group col-md-2">   
                                   <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub();">Next</button>
                                 </div>
+                                
                                  </form>
+                                 
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab2primary">
-                           <div class="form-group">
-                            
-    				            <label for="upload_image">Images <span class="vstar">*</span></label>
-                                <span style="font-size: 11px; color: red; font-weight:bold;">Dimensions(150 x 150)</span>
-            				    <input id="" name="product_upload_image" type="file" class="file" />
-            				    <input type="hidden" name="file_name" id="file_name" value="<?php echo set_value('file_name', $editdata['file_name']);?>" />
-                                <?php echo form_error('file_name', '<span class="help-block">', '</span>'); ?>
-            				    <br />
-                              
-        			      </div> 
+                            <div class="col-md-12 text-right" style="padding-bottom: 20px;">
+                              <button type="button" class="btn btn-info btn-lg" id="load_image_popup"  onclick="check_product_id(this);">Upload Images</button>
+                            </div>     
+                         
+                              <table class="table table-striped table-hover tableSite table-bordered">
+                                 <tr>
+                                    <td>Title</td>
+                                    <td>Image</td>
+                                    <td>Action</td>
+                                 </tr>
+                                   <?php //print_r($editdata['images']); 
+                                       if(count($editdata['images'])>0) { 
+                                         foreach($editdata['images'] as $ekey => $evalue) {
+                                     ?>
+                                        <tr>
+                                            <td><?php echo $evalue['image_title']; ?></td>
+                                            <td><img src="<?php echo base_url(); ?>assets/images/product/<?php echo $evalue['file_name']; ?>" /></td>
+                                            <td><i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id'];?>');"></i></td>
+                                        </tr>
+                                 <?php }} 
+                                      else { ?>
+                                   <tr>
+                                    <td colspan="3"><?php echo "No Images Found!"; ?></td>
+                                   </tr>
+                                  <?php
+                                    
+                                 }?>
+                              </table>
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab3primary">
                             <div class="form-group col-md-2">
-                              <button type="product_upload_imagesubmit" class="btn btn-block">Save</button>
+                              <h4>Vendors</h4>
                             </div>
-                          </div>
+                        </div>
                         <div class="tab-pane fade tabcontent" id="tab4primary">Primary 4</div>
                         <div class="tab-pane fade tabcontent" id="tab5primary">Primary 5</div>
                     </div>
-                
-                </div>
+                 </div>
             </div>
         </div>
 	</div>
-    </div>
-    <br /> 
-    <br />
-    
-  
-
-<?php $img_url = site_url()."assets/images/product/".$editdata['file_name'];
-
-      $prev_img = (!empty($editdata['file_name']))?"<img src='$img_url' class='file-preview-image' alt='Product Image' title='Product Image'>":""; ?>
+ </div>
+<br /> 
+<br />
+ 
+<?php 
+      //$img_url  = site_url()."assets/images/product/".$editdata['file_name'];
+      $prev_img = (isset($editdata['file_name']) && !empty($editdata['file_name']))?"<img src='$img_url' class='file-preview-image' alt='Product Image' title='Product Image'>":""; 
+ ?>
 
 <script>
 
