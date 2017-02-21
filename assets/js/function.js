@@ -149,8 +149,8 @@ function delete_record(del_url,elm){
     	retVal = confirm("Are you sure to remove?");
 
         if( retVal == true ){
-   
-            $.post(base_url+del_url,{},function(data){           
+            
+            $.post(base_url+del_url,{},function(data){
                 if(data.status == "success"){
                 //success message set.
                 service_message(data.status,data.message);

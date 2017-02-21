@@ -10492,6 +10492,10 @@ a {
     display: inline-flex;
     margin-right: 5px;
     cursor: pointer; }
+    li.paginate_button.active span,li.paginate_button.active span:hover {
+    background: none;
+    border: none;
+}
     /* line 462, ../sass/_common.scss */
     .pagination li.active {
       z-index: 2;
