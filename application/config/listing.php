@@ -38,6 +38,22 @@ $config['admin_user_setup'] = array(
 	"default_direction" => "DESC"
 );
 
+
+$config['admin_roles'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'admin/filter',
+	"base_url"	=> 	'/admin/roles/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
+						/*'last_name'=>array('name'=>'Last Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'role'=>array('name'=>'Role', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)*/),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
 $config['inventory_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
