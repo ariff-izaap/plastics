@@ -23,7 +23,7 @@ class Vendor_model extends App_model {
 
             switch ($key)
             {
-                case 'p.name':
+                case 'p.business_name':
                     $this->db->like($key, $value);
                 break;
             }
@@ -31,6 +31,21 @@ class Vendor_model extends App_model {
         return parent::listing();
     }
 	
+    function get_vendors($array_format = TRUE, $where = array())
+    {
+        $this->db->where($where);
+    	$this->db->order_by('business_name');
+    	$result = $this->db->get('customer')->result_array();
+    	
+    	if(!$array_format)
+    		return $result;
+    	
+    	$vendors = array();
+    	foreach ($result as $row)
+    		$vendors[$row['id']] = $row['business_name'];
+    	
+    	return $vendors;
+    }
     
 }
 ?>

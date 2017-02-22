@@ -11,7 +11,7 @@ $config['layout']['default']['js_dir']      = 'assets/js/';
 $config['layout']['default']['css_dir']     = 'assets/css/';
 $config['layout']['default']['img_dir']     = 'assets/images/';
 $config['layout']['default']['javascripts'] = array(
-  'bootstrap.min','build/global.min','moment','daterangepicker','select2.min','function','custom');
+  'build/global.min','bootbox.min','moment','daterangepicker','select2.min','function','inventory');
  
 $config['layout']['default']['stylesheets'] = array('bootstrap.min','style','daterangepicker',"select2.min");
 

@@ -11,10 +11,10 @@
         <div class="col-md-12">
             <div class="panel with-nav-tabs panel-primary">
                 <div class="panel-heading">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab1primary" class="tablinks" data-toggle="tab">Add Inventory</a></li>
-                        <li><a href="#tab2primary" class="tablinks" data-toggle="tab">Inventory Images</a></li>
-                        <li><a href="#tab3primary" class="tablinks" data-toggle="tab">Vendors</a></li>
+                    <ul id="ProductTabs" class="nav nav-tabs">
+                        <li><a href="#tab1primary" class="tablinks" data-toggle="tab">GENERAL</a></li>
+                        <li><a href="#tab2primary" class="tablinks" >IMAGES</a></li>
+                        <li><a href="#tab3primary" class="tablinks" >VENDORS</a></li>
                     </ul>
                 </div>
                 
@@ -156,18 +156,28 @@
                         
                                 </div>
                                 <div class="form-group col-md-2 col-md-offset-8">   
-                                  <a href="<?php echo site_url('inventory');?>" class="btn btn-block active text-center">Back</a>
+                                  <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub();">Submit</button>
+                                </div>
+                                <div class="form-group col-md-2">   
+                                   <input type="reset" name="reset" value="Reset" class="btn btn-block active text-center" />
+                                </div>
+                                
+                                
+                                <!--
+<div class="form-group col-md-2 col-md-offset-8">   
+                                  <a href="<?php //echo site_url('inventory');?>" class="btn btn-block active text-center">Back</a>
                                 </div>
                                 <div class="form-group col-md-2">   
                                   <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub();">Next</button>
                                 </div>
+-->
                                 
                                  </form>
                                  
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab2primary">
                             <div class="col-md-12 text-right" style="padding-bottom: 20px;">
-                              <button type="button" class="btn btn-info btn-lg" id="load_image_popup"  onclick="check_product_id(this);">Upload Images</button>
+                              <button type="button" class="btn btn-info btn-lg" id="load_image_popup" data-target="#myModal" data-toggle="modal">Upload Images</button>
                             </div>     
                          
                               <table class="table table-striped table-hover tableSite table-bordered">
@@ -197,7 +207,22 @@
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab3primary">
                             <div class="form-group col-md-2">
-                              <h4>Vendors</h4>
+                              <h4>Add Vendors</h4>
+                               <div class="col-md-12 text-right" style="padding-bottom: 20px;">
+                                 <a href="javascript:void(0);"  class="btn btn-primary" onclick="get_form('inventory/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm','Add Vendor',this);"  >Add New Vendor Price List</a>
+                            </div> 
+                            <div id="addVendorForm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ari-hidden="true">
+                            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                            <h3 id="myModalLabel"></h3>
+                            </div>
+                            <div class="modal-body" style="height:60%;overflow:auto" >    
+                            </div>
+                            <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            <button class="btn btn-primary" onclick="save_form('product/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm','add',this,product_add_success,true);">Submit</button>
+                            </div>
+                            </div>
                             </div>
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab4primary">Primary 4</div>

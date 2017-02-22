@@ -65,14 +65,13 @@ $(function(){
     if(con)
     {
       $.ajax({
-      url:base_url+"admin/del_table_value",
-      type:"POST",
-      data:{table:table,id:id},
-      success:function(data)
-      {
-        location.reload();
-      }
-    });
+          url:base_url+"admin/del_table_value",
+          type:"POST",
+          data:{table:table,id:id},
+          success:function(data){
+            location.reload();
+          }
+      });
     }
   });
 
@@ -113,24 +112,20 @@ function init_daterangepicker(seldate)
 	}		
 }
 
-function init_checkbox(selval){
-
-
+function init_checkbox(selval)
+{
 	selval = selval?selval:'';
-
 	if(selval){		
 		$.each(selval, function( index, value ) {
 			$('#checkbox-'+value).attr('checked', true);
 		});	
 	}
-
 	$(".checkbox").checkboxradio({ icon: false });
-
 }
 
-function numbersonly(e) {
+function numbersonly(e) 
+{
   var unicode=e.charCode? e.charCode : e.keyCode
-  //alert(unicode)
   if (unicode!=8 && unicode != 46){ //if the key isn't the backspace key (which we should allow)
   if (unicode<48||unicode>57) //if not a number
     {
@@ -300,15 +295,16 @@ function inventory_sub()
           dataType:'json',
           success:function(res)
           {
-             var status = res.status;
-             var output = res.output;
-            if(status == 'success') {
-                 $("#inventory_add_section").html(output);
-            }
-            else
-            {
-                $("#inventory_add_section").html(output);                           
-            }
+            location.href = base_url+"inventory/add/"+res.edit_id;
+             //var status = res.status;
+            // var output = res.output;
+            //if(status == 'success') {
+//                 $("#inventory_add_section").html(output);
+//            }
+//            else
+//            {
+//                $("#inventory_add_section").html(output);                           
+//            }
           }
     });    
 }
@@ -330,7 +326,6 @@ function check_product_id(event)
 //product image delete
 function product_image_delete(del_id)
 {
-
       $.ajax({
           url:base_url+"inventory/product_image_delete/"+del_id,
           type:"POST",
@@ -342,4 +337,253 @@ function product_image_delete(del_id)
     });    
 }
 
+function get_form(action,div_id,title,elm,popup,fn_to_call,call_fun_args){
+
+     //remove previous service message
+     $("#div_service_message").remove();
+     
+     popup = (popup == false)?false:true;
+     call_fun_args = (call_fun_args)?call_fun_args:false;
+     fn_to_call = (fn_to_call)?fn_to_call:false;
+     
+     var loader_content = (popup)?"Loading..":capitaliseFirstLetter(div_id.replace(/_/g,' '))+" loading..";
+     
+     if(fn_to_call == 'address_add_success')
+        loader_content = 'Processing';
+
+     if(!before_ajax(elm, loader_content))
+      return false;
+
+     $.ajax({
+          url:base_url+action,
+          type: "POST",
+          data: {},
+          dataType:"json",
+          success : function(data){
+                
+               if(! after_ajax(elm,data))
+                    return false;
+            
+             //critical error
+             if(data.status == "error" && data.error_msg) {
+                    alert(data.error_msg);
+                    return false;
+                }
+            
+                if(data.form_view) 
+                {
+                    if(!popup){
+                        
+                       $("#"+div_id).html(data.form_view);
+                   
+                    }
+                    else
+                    {
+                        $("#"+div_id).find("#myModalLabel").html(title);
+                        $("#"+div_id).find(".modal-body").html(data.form_view);
+                        
+                        if((namespace == 'inventory_add' && div_id == 'addVendorForm'))
+                        {
+                            //alert(div_id);
+                          $("#"+div_id).css('width', '800px').modal({});
+                        }
+
+                        //$("#previousUrl").val(previous_url);
+                        init_modal();
+                        $('#'+div_id).modal();
+                    } 
+                   // form_utilities(div_id);
+                }
+                
+                //if(data.description)
+//                  cke_description_old_text = data.description;
+//
+//                if(data.features)
+//                  cke_features_old_text = data.features;
+//
+//               if(fn_to_call){
+//                
+//                if(call_fun_args){
+//                  fn_to_call.apply(this, call_fun_args);
+//                }
+//                else
+//                {
+//                    fn_to_call();
+//                }
+//                    
+//               }
+               
+         
+            },
+          error : function(data) {
+           after_ajax(elm,data);
+      }
+     });
+}
+
+/*The functions "before_ajax" is to avoid double-click on anchors or buttons.
+ * It should be called before each ajax process start.
+ * And also it replaces the original text or value by the argument 'content' passed by called function.
+ */ 
+
+function before_ajax(elm, content)
+{
+	if(!$(elm).length)
+		return false;
+
+	content=content?content:'Processing...';
+	
+	if($(elm).attr("disabled")=="disabled")
+    {
+		return false;
+    }
+	else
+	{
+		$(elm).attr("disabled","disabled");
+		
+		if(content)
+		{
+			var w1 = $(elm).width();
+			
+			if($(elm).is("a"))
+			{
+			 elm_old_text = $(elm).html();
+             
+			 if($(elm).hasClass("add_loader_class")){
+			     $(elm).addClass($(elm).attr("data-add_loader_class"));
+			 }
+             else
+             {
+				$(elm).text(content);
+             }
+			
+			}
+			else if($(elm).is("button"))
+			{
+				elm_old_text = $(elm).text();
+				$(elm).text(content);
+			}
+			else if($(elm).attr("type") == 'checkbox' && $(elm).parent().hasClass('add-on') && $(elm).parent().next().hasClass('add-on'))
+			{
+				elm_old_text = $(elm).parent().next().html();
+				$(elm).parent().next().html(content);
+			}
+			
+			var w2 = $(elm).width();
+			
+			if(w2<w1)
+				$(elm).width(w1);
+			
+		}
+			
+		return true;
+	}
+	
+}
+
+/*The functions "after_ajax" should be called after ajax-process end.
+ * It enables the button or anchor elemnts and resets thier original text.
+ */ 
+
+function after_ajax(elm,data)
+{
+    
+	if($(elm).length)
+	{
+		if($(elm).is("a,span"))
+		{
+		    if($(elm).hasClass("add_loader_class")){
+			     $(elm).removeClass($(elm).attr("data-add_loader_class"));
+	        }
+        
+            $(elm).removeAttr("disabled");
+            $(elm).html(elm_old_text);
+			
+		}
+		else if($(elm).is("button"))
+		{
+			$(elm).removeAttr("disabled");
+			$(elm).text(elm_old_text);
+		}
+		else if($(elm).attr("type") == 'checkbox' && $(elm).parent().hasClass('add-on') && $(elm).parent().next().hasClass('add-on'))
+		{
+			$(elm).removeAttr("disabled");
+			$(elm).parent().next().html(elm_old_text);
+		}
+	}
+	
+    if(data.access_status && data.access_status == 'denied')
+    {
+    	if(data.access_message && data.access_message != '')
+    		alert(data.access_message);
+    	else
+    		alert("Access denied.");
+        
+        return false;
+        
+    }
+    else if(data.session_status && data.session_status == 'destroyed')
+    {
+        alert("Oops!! Your session has expierd.");
+        location.href = base_url+'login';
+        return false;
+        
+    }    
+	return true;		
+}
+
+function init_modal()
+{
+  var wheight = $(window).height();
+  var modal_height = wheight-200;
+  
+  //apply this style for all modal boxes
+  $('.modal-body').css({'max-height':(modal_height+'px'),overflow:'auto'}); 
+  
+}
+
+function form_utilities(div_id){
+       // To display fancy select box.
+    	$('select').not(".boot_select_false").selectpicker();
+    	
+    	//initiate datepickers with basic features.
+    	//init_datepicker();
+        
+        //ck editor render for textarea which has the class name "ck_editor"
+       // ck_editors_render(div_id);
+        
+    	//enable tooltip on button and anchor elements by default.
+        $('a,button').tooltip();
+        
+}
+
+
+function init_datepicker(selector)
+{
+  selector = selector?selector:'.datepicker';
+	$(selector).datepicker({'format':'yyyy-mm-dd', 'autoclose':true, 'clearBtn':true});
+
+  var d1 = $("input[name*='start_date']");
+  var d2 = $("input[name*='end_date']");
+  $(d1).datepicker({'format':'yyyy-mm-dd', 'autoclose':true, 'clearBtn':true});
+  $(d2).datepicker({'format':'yyyy-mm-dd', 'autoclose':true, 'clearBtn':true});
+
+}
+
+function ck_editors_render(div_id){
+    
+    $("#"+div_id).find(".ck_editor").each(function() {
+        
+            var id = $(this).attr("id");                
+            
+            var editor_ins = CKEDITOR.instances[id];
+
+            if (editor_ins ) { 
+                CKEDITOR.remove(editor_ins);
+            }
+            
+               editors[id] = CKEDITOR.replace( id, {height: 80});  
+  
+    });
+}
 /***End To Punitha **/
