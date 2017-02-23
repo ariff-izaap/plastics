@@ -68,7 +68,7 @@ class Category extends Admin_Controller
                 $edit_id = $this->input->post('edit_id');
 
             $this->form_validation->set_rules('name','Category Name','trim|required');
-           // $this->form_validation->set_rules('description','Description','trim|required');         
+            $this->form_validation->set_rules('description','Description','trim|required');         
             
             $this->form_validation->set_error_delimiters('', '');
                 
@@ -76,50 +76,31 @@ class Category extends Admin_Controller
             {
                 $ins_data = array();
                 $ins_data['name']                   = $this->input->post('name');
-               //   $ins_data['description']            = $this->input->post('description');
+                $ins_data['description']            = $this->input->post('description');
+                $ins_data['enabled']                = $this->input->post('enabled');
                 
-                if($edit_id)
-                {
-                    $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
-                    //$ins_data['updated_id']   = get_current_user_id();    
+                if($edit_id){
+                    $ins_data['updated_date'] = date('Y-m-d H:i:s');  
                     $this->category_model->update(array("id" => $edit_id),$ins_data);
-
-                    $get_name = $this->category_model->get_where(array("id"=>$edit_id))->row_array();
-                    $his['action']="Category has been updated to <strong>".$get_name['name']."</strong>";
-                    $his['action_id'] = $edit_id;
-                    $his['line'] = "Category Updation";
-                    $his['created_id'] = $this->session->userdata("user_data")['id'];
-                    $his['created_date'] = date("Y-m-d H:i:s");
-                    $history = $this->history_model->insert($his,"log");
-
                     $msg  = 'Category updated successfully';
                 }
                 else
                 {    
                     $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
-                   // $ins_data['created_id']   = get_current_user_id();
-                    $ins = $this->category_model->insert($ins_data);
-                    $get_name = $this->category_model->get_where(array("id"=>$ins))->row_array();
-                    $his['action']="<strong>".$get_name['name']."</strong> Category has been created";
-                    $his['action_id'] = $ins;
-                    $his['line'] = "Category Creation";
-                    $his['created_id'] = $this->session->userdata("user_data")['id'];
-                    $his['created_date'] = date("Y-m-d H:i:s");
-                    $history = $this->history_model->insert($his,"log");                    
+                    $ins = $this->category_model->insert($ins_data);                  
                     $msg = 'Category added successfully';
                 }
-
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
-
                 redirect('category');
             }    
             else
             {            
               $edit_data = array();
-              $edit_data['id']                    = '';
-              $edit_data['name']                  = '';
-              $edit_data['description']           = '';
+              $edit_data['id']              = '';
+              $edit_data['name']            = '';
+              $edit_data['description']     = '';
+              $edit_data['enabled']         = '1';
             }
 
         }
@@ -127,7 +108,6 @@ class Category extends Admin_Controller
         {
             $this->data['status']   = 'error';
             $this->data['message']  = $e->getMessage();
-                
         }
 
         if($edit_id)
@@ -140,20 +120,10 @@ class Category extends Admin_Controller
     public function delete($del_id)
     {
         $access_data = $this->category_model->get_where(array("id"=>$del_id),'id')->row_array();
-       
         $output=array();
 
         if(count($access_data) > 0){
-
-            $get_name = $this->category_model->get_where(array("id"=>$del_id))->row_array();
             $this->category_model->delete(array("id"=>$del_id));
-            $his['action']="<strong>".$get_name['name']."</strong> Category has been deleted";
-            $his['action_id'] = $del_id;
-            $his['line'] = "Category Deletion";
-            $his['created_id'] = $this->session->userdata("user_data")['id'];
-            $his['created_date'] = date("Y-m-d H:i:s");
-            $history = $this->history_model->insert($his,"log");   
-
             $output['message'] ="Record deleted successfuly.";
             $output['status']  = "success";
         }
@@ -162,9 +132,7 @@ class Category extends Admin_Controller
            $output['message'] ="This record not matched by Inventory.";
            $output['status']  = "error";
         }
-        
-        $this->_ajax_output($output, TRUE);
-            
+        $this->_ajax_output($output, TRUE);   
     }
     
 }

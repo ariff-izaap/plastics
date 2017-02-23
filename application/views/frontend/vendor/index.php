@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-6 action-buttons text-right">
         <a href="javascript:void(0)" class="btn active" capsOn>Delete</a>
-        <a href="<?php echo site_url('category/add');?>" class="btn" capsOn>Create Vendor</a>
+        <a href="<?php echo site_url('vendor/add');?>" class="btn" capsOn>Create Vendor</a>
     </div>
   </div>
 

@@ -59,7 +59,16 @@
                   Dashboard
               </a>
             </li>
-            
+            <li class="dropdown <?php echo ($curr_ctlr == 'salesorder') ? "active":'';?>">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-database fa-fw"></i>
+                  Customers
+                  <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="<?php echo site_url();?>salesorder">Sales Order</a></li>
+               </ul>
+            </li>
             <?php if($role=="2" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'organization')?'class="active"':'';?> >
               <a href="<?=site_url('');?>">

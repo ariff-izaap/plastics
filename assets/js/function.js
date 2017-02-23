@@ -161,9 +161,7 @@ function delete_record(del_url,elm){
             }
             
             },"json");
-       }  
-      
-      
+       } 
 }
 
 
@@ -295,7 +293,18 @@ function inventory_sub()
           dataType:'json',
           success:function(res)
           {
-            location.href = base_url+"inventory/add/"+res.edit_id;
+            var status = res.status;
+            var output = res.output;
+                
+            if(status == 'success'){
+              location.href = base_url+"inventory/add/"+res.edit_id;
+            }
+            else
+            {
+                $("#inventory_add_section").html(output); 
+            }
+            
+            
              //var status = res.status;
             // var output = res.output;
             //if(status == 'success') {
@@ -308,6 +317,53 @@ function inventory_sub()
           }
     });    
 }
+
+function add_vendor_price_lists(action,div_id)
+{
+    
+     var fdata  = $("#form_vendor_add").serialize();
+     var edit_id= '';
+     
+        edit_id = $("#form_vendor_add #edit_id").val();
+
+      $.ajax({
+          url:base_url+action,
+          type:"POST",
+          data:fdata,
+          dataType:'json',
+          success:function(res)
+          {
+            var status = res.status;
+            var output = res.output;
+                
+            if(status == 'success'){
+              location.href = base_url+"inventory/add/"+res.product_id;
+            }
+            else
+            {
+                $("#"+div_id).find("#myModalLabel").html('Add Vendor');
+                $("#"+div_id).find(".modal-body").html(res.form_view);
+                
+                init_modal();
+                //$('#'+div_id).modal();
+               // $("#"+div_id).show();
+               // $("#"+div_id).fadeIn();
+            }
+            
+            
+             //var status = res.status;
+            // var output = res.output;
+            //if(status == 'success') {
+//                 $("#inventory_add_section").html(output);
+//            }
+//            else
+//            {
+//                $("#inventory_add_section").html(output);                           
+//            }
+          }
+    });    
+}
+
 
 function check_product_id(event)
 {
@@ -324,10 +380,10 @@ function check_product_id(event)
 }
 
 //product image delete
-function product_image_delete(del_id)
+function product_image_delete(del_id,table_name)
 {
       $.ajax({
-          url:base_url+"inventory/product_image_delete/"+del_id,
+          url:base_url+"inventory/product_image_delete/"+del_id+"/"+table_name,
           type:"POST",
           data:{},
           dataType:'json',
@@ -339,20 +395,7 @@ function product_image_delete(del_id)
 
 function get_form(action,div_id,title,elm,popup,fn_to_call,call_fun_args){
 
-     //remove previous service message
-     $("#div_service_message").remove();
-     
      popup = (popup == false)?false:true;
-     call_fun_args = (call_fun_args)?call_fun_args:false;
-     fn_to_call = (fn_to_call)?fn_to_call:false;
-     
-     var loader_content = (popup)?"Loading..":capitaliseFirstLetter(div_id.replace(/_/g,' '))+" loading..";
-     
-     if(fn_to_call == 'address_add_success')
-        loader_content = 'Processing';
-
-     if(!before_ajax(elm, loader_content))
-      return false;
 
      $.ajax({
           url:base_url+action,
@@ -360,64 +403,30 @@ function get_form(action,div_id,title,elm,popup,fn_to_call,call_fun_args){
           data: {},
           dataType:"json",
           success : function(data){
-                
-               if(! after_ajax(elm,data))
-                    return false;
-            
              //critical error
              if(data.status == "error" && data.error_msg) {
                     alert(data.error_msg);
                     return false;
                 }
-            
-                if(data.form_view) 
-                {
+                if(data.form_view){
                     if(!popup){
-                        
                        $("#"+div_id).html(data.form_view);
-                   
                     }
                     else
                     {
                         $("#"+div_id).find("#myModalLabel").html(title);
                         $("#"+div_id).find(".modal-body").html(data.form_view);
                         
-                        if((namespace == 'inventory_add' && div_id == 'addVendorForm'))
-                        {
-                            //alert(div_id);
-                          $("#"+div_id).css('width', '800px').modal({});
-                        }
-
-                        //$("#previousUrl").val(previous_url);
                         init_modal();
                         $('#'+div_id).modal();
+                        $("#"+div_id).show();
+                        $("#"+div_id).fadeIn();
                     } 
-                   // form_utilities(div_id);
-                }
-                
-                //if(data.description)
-//                  cke_description_old_text = data.description;
-//
-//                if(data.features)
-//                  cke_features_old_text = data.features;
-//
-//               if(fn_to_call){
-//                
-//                if(call_fun_args){
-//                  fn_to_call.apply(this, call_fun_args);
-//                }
-//                else
-//                {
-//                    fn_to_call();
-//                }
-//                    
-//               }
-               
-         
+                } 
             },
-          error : function(data) {
-           after_ajax(elm,data);
-      }
+           error : function(data) {
+              after_ajax(elm,data);
+           }
      });
 }
 
@@ -585,5 +594,93 @@ function ck_editors_render(div_id){
                editors[id] = CKEDITOR.replace( id, {height: 80});  
   
     });
+}
+
+function save_form(action,div_id,save_type,elm,call_back_fn,popup){
+
+     call_back_fn = call_back_fn?call_back_fn:false;
+     popup        = popup?popup:false;
+     
+     var loader_content = (popup)?"Saving..":"";       
+     
+     if(!before_ajax(elm, loader_content))
+      return false;
+     
+     post_data =  $("#"+div_id).find("form").serializeArray();
+     
+     //$("#"+div_id).find("form").find("input,select").removeAttr("disabled");
+ 
+     var obj = {
+          url:base_url+action,
+          type: "POST",
+          data: $("#"+div_id).find("form").serialize(),
+          dataType:"json",
+          error : function(data) {
+           after_ajax(elm,data);
+      }
+     };
+    
+     if(call_back_fn){
+        obj.success = function(data){
+        call_back_fn(data,div_id,elm,action,post_data,popup);
+      };
+     }   
+     else
+      obj.success = function(data){
+        if(data.status == "success"){
+            
+            if(action == 'sales_rep/add' && div_id=='repForm'){
+
+              bootbox.alert(data.msg);
+              $('#auto_fillrep').html(data.repdrop);
+              $('#repForm').modal('hide');
+            }
+            else if(action.search("user/cust_price_add")!=-1 && div_id=='cust_add_new_price')
+            {
+              bootbox.alert(data.msg); 
+              $("#custom_mytab a[href='#price_list']").trigger('click');             
+              $('#cust_add_new_price').modal('hide');
+            }
+            else
+            {
+              //success message set.
+              var alert_msg = data.msg;
+              service_message(data.status,alert_msg);
+            
+              //to close popupshow
+              $('#'+div_id).modal('hide');
+              
+              //grid refresh
+              refresh_grid();
+            } 
+
+        }
+        else if(data.status == "error")
+        {
+            //critical error
+            if(data.error_msg){
+                 bootbox.alert(data.error_msg);
+                 return false;
+            }
+
+            //price list error
+            if(data.price_error) {
+                bootbox.alert(data.price_error);
+                $(elm).removeAttr("disabled"); 
+                $(elm).text("Submit");
+                return false;
+            }
+                
+            //load validated form
+            $("#"+div_id).find(".modal-body").html(data.form_view);
+            //form_utilities(div_id);
+        }
+        
+        if(! after_ajax(elm,data))
+           return false;
+        
+      };
+    
+     $.ajax(obj);
 }
 /***End To Punitha **/

@@ -149,6 +149,7 @@ class Inventory extends Admin_Controller
                 $edit_data['color_id']              = '';
                 $edit_data['form_id']               = '';
                 $edit_data['package_id']            = '';
+                $edit_data['category_id']           = '';
                 $edit_data['quantity']              = '';
                 $edit_data['retail_price']          = '';
                 $edit_data['wholesale_price']       = '';
@@ -178,10 +179,12 @@ class Inventory extends Admin_Controller
         if($edit_id){
             $edit_data = $this->inventory_model->get_where(array("id" => $edit_id))->row_array();
             $images    = $this->inventory_model->get_where(array("product_id" => $edit_id),'*','product_images')->result_array();
+            $pricelists= $this->inventory_model->get_where(array("product_id" => $edit_id),'*','vendor_price_list')->result_array();
         }    
 
         $this->data['editdata']           = $edit_data;
         $this->data['editdata']['images'] = (!empty($images))?$images:array();
+        $this->data['editdata']['pricelts']= (!empty($pricelists))?$pricelists:array();
         $this->data['colors']             = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
         $this->data['forms']              = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
         $this->data['packages']           = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
@@ -271,15 +274,13 @@ class Inventory extends Admin_Controller
         $this->_ajax_output($output, TRUE); 
     }
     
-    public function product_image_delete($del_id)
+    public function product_image_delete($del_id,$table_name)
     {
-        $access_data = $this->inventory_model->get_where(array("id"=>$del_id),'id','product_images')->row_array();
-       
-        $output=array();
-
+        $access_data = $this->inventory_model->get_where(array("id"=>$del_id),'id',$table_name)->row_array();
+        
+        $output  = array();
         if(count($access_data) > 0){
-            $this->inventory_model->delete(array("id"=>$del_id),'product_images');
-
+            $this->inventory_model->delete(array("id"=>$del_id),$table_name);
             $output['message'] ="Record deleted successfuly.";
             $output['status']  = "success";
         }
@@ -295,9 +296,11 @@ class Inventory extends Admin_Controller
 	{
 		$this->load->model("product_vendor_model");
 		$this->load->model("vendor_model");
-
+      
 		$ajax_return_data = array();
-
+       
+       if($_POST){
+       
 		if($this->input->post('edit_id'))
 			$edit_id = $this->input->post('edit_id');
 
@@ -310,41 +313,41 @@ class Inventory extends Admin_Controller
 
 		$this->form_validation->set_rules($rules);
 
-		if ($this->form_validation->run())
+		if($this->form_validation->run())
 		{
 			$data = array();
 			$data['vendor_id'] 			= $this->input->post("vendor_id", TRUE);
 			$data['sku'] 				= $this->input->post("sku", TRUE);
-			$data['upc'] 				= $this->input->post("upc", TRUE);
-			$data['lead_time'] 			= $this->input->post("lead_time", TRUE);
+		//	$data['ups'] 				= $this->input->post("ups", TRUE);
+		//	$data['lead_time'] 			= $this->input->post("lead_time", TRUE);
 			$data['cost'] 				= $this->input->post("cost", TRUE);
 			$data['stock_level'] 		= $this->input->post("stock_level", TRUE);
 			$data['enabled'] 			= $this->input->post("enabled", TRUE);
-			$data['vendor_product_name']= $this->input->post("vendor_product_name", TRUE);
-			$data['vendor_strict_map'] 	= $this->input->post("vendor_strict_map", TRUE);
+		//	$data['vendor_product_name']= $this->input->post("vendor_product_name", TRUE);
+		//	$data['vendor_strict_map'] 	= $this->input->post("vendor_strict_map", TRUE);
 			$data['priority'] 			= $this->input->post("priority", TRUE);
 			$data['updated_id'] 		= getAdminUserId();
 			$data['in_stock'] 			= $this->input->post("in_stock", TRUE);
-			$data['auto_order'] 		= $this->input->post("auto_order", TRUE);
+			$data['in_bound'] 		    = $this->input->post("in_bound", TRUE);
 			$data['dropship_fee'] 		= $this->input->post("dropship_fee", TRUE);
+            $data['shipping_cost'] 	    = $this->input->post("shipping_cost", TRUE);
 			$data['shipping_service'] 	= $this->input->post("shipping_service", TRUE);
+            
 
 			 
-			$product_sku = get_product_sku($product_id);
-			$vendor_name = get_vendor_name($vendor_id);
+			//$product_sku = get_product_sku($product_id);
+			//$vendor_name = get_vendor_name($vendor_id);
 
 			if($edit_id)
 			{
 				//product vendor price list details update
 				$this->product_vendor_model->update(array("id" => $edit_id),$data);
 				$message = "Price list updated Successfully.";
-				
 			}
 			else
 			{
-
 				$data['created_id'] 	= getAdminUserId();
-				$data['created_time'] 	= date('Y-m-d H:i:s', local_to_gmt());
+				$data['created_date'] 	= date('Y-m-d H:i:s', local_to_gmt());
 				$data['product_id'] 	= $product_id;
 				 
 				//product vendor price list  details add
@@ -353,12 +356,13 @@ class Inventory extends Admin_Controller
 				$message = "Price list created successfully.";
 				
 			}
-			$ajax_return_data['status'] = "success";
-			$ajax_return_data['message'] = $message;
+			$ajax_return_data['status']     = "success";
+			$ajax_return_data['message']    = $message;
+            $ajax_return_data['product_id'] = $product_id;
 
 			$this->_ajax_output($ajax_return_data, TRUE);
-		}
-
+		 }
+       }
 		if($edit_id){
 			$edit_data =$this->product_vendor_model->get_where(array("id" => $edit_id))->row_array();
 			$data['edit_data']= $edit_data;
@@ -370,18 +374,19 @@ class Inventory extends Admin_Controller
 			$edit_data['product_id'] = '';
 			$edit_data['vendor_id'] = '';
 			$edit_data['sku'] = '';
-			$edit_data['upc'] = '';
-			$edit_data['lead_time'] = '';
+		//	$edit_data['ups'] = '';
+		//	$edit_data['lead_time'] = '';
 			$edit_data['cost'] = '';
 			$edit_data['stock_level'] = '';
 			$edit_data['enabled'] = '1';
-			$edit_data['vendor_product_name'] = '';
-			$edit_data['vendor_strict_map'] = '';
+		//	$edit_data['vendor_product_name'] = '';
+		//	$edit_data['vendor_strict_map'] = '';
 			$edit_data['priority'] = '';
 			$edit_data['in_stock'] = 'Yes';
-			$edit_data['auto_order'] = '0';
+			$edit_data['in_bound'] = '';
 			$edit_data['dropship_fee'] = '';
 			$edit_data['shipping_service'] = '';
+            $edit_data['shipping_cost'] = '';
 
 			$product_details = $this->inventory_model->get_where(array("id" => $product_id))->row_array();
 			$edit_data['upc'] = (isset($product_details['upc']))?$product_details['upc']:"";
@@ -396,24 +401,23 @@ class Inventory extends Admin_Controller
 		$ajax_return_data['status']    = "error";
 		$ajax_return_data['form_view'] = $output;
 		$this->_ajax_output($ajax_return_data, TRUE);
-
 	}
     
    	function get_price_list_rules($edit_id = 0)
 	{
 		$rules = array(
-				array('field' => 'vendor_id','label' => 'Vendor Id', 'rules' => ''),
-				array('field' => 'sku','label' => 'SKU', 'rules' => 'trim|required|unique_sku[vpl~'.$this->input->post("vendor_id").'~'.$edit_id.']'),
-				array('field' => 'upc','label' => 'UPC', 'rules' => 'trim|required|unique_upc[vpl~'.$this->input->post("vendor_id").'~'.$edit_id.']'),
+				array('field' => 'vendor_id','label' => 'Vendor Id', 'rules' => 'required'),
+				array('field' => 'sku','label' => 'SKU', 'rules' => 'trim|required'),
+			//	array('field' => 'ups','label' => 'UPS', 'rules' => 'trim|required'),
 				array('field' => 'cost','label' => 'Cost', 'rules' => 'trim|required|numeric|greater_than[0]'),
-				array('field' => 'lead_time','label' => 'Lead Time', 'rules' => 'trim|required|integer'),
-				array('field' => 'vendor_product_name','label' => 'Product Name', 'rules' => 'trim|required'),
-				array('field' => 'vendor_strict_map','label' => 'Strict Map', 'rules' => "trim"), //|valid_map[".$this->input->post("cost")."]"
+			//	array('field' => 'lead_time','label' => 'Lead Time', 'rules' => 'trim|required|integer'),
+			//	array('field' => 'vendor_product_name','label' => 'Product Name', 'rules' => 'trim|required'),
+			//	array('field' => 'vendor_strict_map','label' => 'Strict Map', 'rules' => "trim"), //|valid_map[".$this->input->post("cost")."]"
 				array('field' => 'stock_level','label' => 'Stock Level', 'rules' => 'trim|required|is_natural'),
-				array('field' => 'vendor_product_name','label' => 'Product Name', 'rules' => 'trim|required'),
+			//	array('field' => 'vendor_product_name','label' => 'Product Name', 'rules' => 'trim|required'),
 				array('field' => 'priority','label' => 'Priority', 'rules' => 'trim|required|integer'),
 				array('field' => 'in_stock','label' => 'In Stock', 'rules' => 'trim'),
-				array('field' => 'auto_order','label' => 'Auto Order', 'rules' => 'trim|integer'),
+			//	array('field' => 'auto_order','label' => 'Auto Order', 'rules' => 'trim|integer'),
 				array('field' => 'enabled','label' => 'Enabled', 'rules' => 'trim|integer')
 				 
 		);

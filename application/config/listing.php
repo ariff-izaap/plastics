@@ -207,7 +207,7 @@ $config['vendor_index'] = array(
 	"base_url"	=> 	'/vendor/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)				
+						'business_name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)				
 					//	'status'=>array('name'=>'Status', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)                            
 						),
 	"default_order"	=> "id",

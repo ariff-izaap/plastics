@@ -2,7 +2,7 @@
 
 require_once(APPPATH."libraries/Admin_controller.php");
 
-class Vendor extends Admin_Controller 
+class Salesorder extends Admin_Controller 
 {
 	
     function __construct()
@@ -12,7 +12,7 @@ class Vendor extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model('vendor_model');
+       $this->load->model('salesorder_model');
 	   $this->load->library('listing');    
      
 	} 

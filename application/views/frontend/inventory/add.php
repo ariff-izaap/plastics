@@ -193,7 +193,7 @@
                                         <tr>
                                             <td><?php echo $evalue['image_title']; ?></td>
                                             <td><img src="<?php echo base_url(); ?>assets/images/product/<?php echo $evalue['file_name']; ?>" /></td>
-                                            <td><i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id'];?>');"></i></td>
+                                            <td><i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id'];?>','product_images');"></i></td>
                                         </tr>
                                  <?php }} 
                                       else { ?>
@@ -206,28 +206,63 @@
                               </table>
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab3primary">
-                            <div class="form-group col-md-2">
-                              <h4>Add Vendors</h4>
+                            <div class="form-group col-md-12">
+                               
                                <div class="col-md-12 text-right" style="padding-bottom: 20px;">
-                                 <a href="javascript:void(0);"  class="btn btn-primary" onclick="get_form('inventory/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm','Add Vendor',this);"  >Add New Vendor Price List</a>
-                            </div> 
-                            <div id="addVendorForm" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ari-hidden="true">
-                            <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                            <h3 id="myModalLabel"></h3>
-                            </div>
-                            <div class="modal-body" style="height:60%;overflow:auto" >    
-                            </div>
-                            <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                            <button class="btn btn-primary" onclick="save_form('product/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm','add',this,product_add_success,true);">Submit</button>
-                            </div>
-                            </div>
-                            </div>
+                                 <button type="button" class="btn btn-info btn-lg" onclick="get_form('inventory/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm','Add Vendor',this,true);">Add New Vendor Price List</button>
+                              </div> 
+                                <div id="addVendorForm" class="modal fade"  role="dialog">
+                                    <div class="modal-dialog"> 
+                                            <!-- Modal content-->
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                            <h3 id="myModalLabel"></h3>
+                                        </div>
+                                        <div class="modal-body" style="height:60%;overflow:auto"></div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                            <button class="btn btn-primary" onclick="add_vendor_price_lists('inventory/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm');">Submit</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <table class="table table-striped table-hover tableSite table-bordered">
+                                 <tr>
+                                    <td>SKU</td>
+                                    <td>COST</td>
+                                    <td>IN STOCK</td>
+                                    <td>SHIPPING COST</td>
+                                    <td>SHIPPING SERVICE</td>
+                                    <td>ACTION</td>
+                                 </tr>
+                                   <?php //print_r($editdata['images']); 
+                                       if(count($editdata['pricelts'])>0) { 
+                                         foreach($editdata['pricelts'] as $ekey => $evalue) {
+                                     ?>
+                                        <tr>
+                                            <td><?php echo $evalue['sku']; ?></td>
+                                            <td><?php echo $evalue['cost']; ?></td>
+                                            <td><?php echo $evalue['in_stock']; ?></td>
+                                            <td><?php echo $evalue['shipping_cost']; ?></td>
+                                            <td><?php echo $evalue['shipping_service']; ?></td>
+                                            <td><i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id']; ?>','vendor_price_list');"></i></td>
+                                        </tr>
+                                 <?php }} 
+                                      else { ?>
+                                   <tr>
+                                    <td colspan="3"><?php echo "No Price lists Found!"; ?></td>
+                                   </tr>
+                                  <?php
+                                    
+                                 }?>
+                              </table>
                         </div>
-                        <div class="tab-pane fade tabcontent" id="tab4primary">Primary 4</div>
-                        <div class="tab-pane fade tabcontent" id="tab5primary">Primary 5</div>
+                        
                     </div>
+                    <div class="tab-pane fade tabcontent" id="tab4primary">Primary 4</div>
+                        <div class="tab-pane fade tabcontent" id="tab5primary">Primary 5</div>
                  </div>
             </div>
         </div>
