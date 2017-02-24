@@ -1,105 +1,104 @@
 <?php
 
+function error_found()
+{
+   header("Location:dashboard");
+}
+
 function is_logged_in()
 {
-    $CI = get_instance();
-    
-    $user_data = get_user_data();
-    
-    if( is_array($user_data) && $user_data )
-        return TRUE;
-
-    return FALSE;
-
+  $CI = get_instance();    
+  $user_data = get_user_data();    
+  if( is_array($user_data) && $user_data )
+      return TRUE;
+  
+  return FALSE;
 }
 
 function get_current_user_id()
 {
-    $CI = & get_instance();
-    
-    $current_user = get_user_data();
-    
-    if(!empty($current_user)) {
-        return $current_user['id'];
-    }
+  $CI = & get_instance();
+  
+  $current_user = get_user_data();
+  
+  if(!empty($current_user)) {
+    return $current_user['id'];
+  }
 }
 function get_user_data()
 {
-    $CI = get_instance();
-    if($CI->session->userdata('user_data'))
-    {
-        return $CI->session->userdata('user_data');
-    }
-    else
-    {
-        return FALSE;
-    }
+  $CI = get_instance();
+  if($CI->session->userdata('user_data'))
+  {
+    return $CI->session->userdata('user_data');
+  }
+  else
+  {
+    return FALSE;
+  }
 }
 
 function get_user_role( $user_id='')
 {
-     $CI= & get_instance();
-    
-    if(!$user_id) 
-    {
-        $user_data = get_user_data();
-        return $user_data['role_id'];
-    }   
+  $CI= & get_instance();  
+  if(!$user_id) 
+  {
+    $user_data = get_user_data();
+    return $user_data['role_id'];
+  }   
+  $CI->load->model('user_model');
+  $row = $CI->user_model->get_where(array('id' => $user_id));
+  if( !$row )
+    return FALSE;
 
-    exit;
-    
-    $CI->load->model('user_model');
-    $row = $CI->user_model->get_where(array('id' => $user_id));
-
-
-    if( !$row )
-        return FALSE;
-
-    return $row['role_id'];
+  return $row['role_id'];
 }
 
 function get_roles()
 {
-    $CI = & get_instance();
-    $CI->load->model('role_model');
-    $records = $CI->role_model->get_roles();
+  $CI = & get_instance();
+  $CI->load->model('role_model');
+  $records = $CI->role_model->get_roles();
 
-    $roles = array();
-    foreach ($records as $id => $val) 
-    {
-        $roles[$id] = $val;
-    }
+  $roles = array();
+  foreach ($records as $id => $val) 
+  {
+    $roles[$id] = $val;
+  }
 
-    return $roles;
+  return $roles;
 }
 
 function display_flashmsg($flash)
 {
 
-    if(!$flash)
-        return FALSE;
+  if(!$flash)
+    return FALSE;
 
-    $status = $msg = '';
+  $status = $msg = '';
 
-    if(isset($flash['success_msg'])){
-        $status = 'success';
-        $msg = $flash['success_msg'];
-    }
+  if(isset($flash['success_msg']))
+  {
+    $status = 'success';
+    $msg = $flash['success_msg'];
+  }
 
-    if(isset($flash['error_msg'])){
-        $status = 'danger';
-        $msg = $flash['error_msg'];
-    }
+  if(isset($flash['error_msg']))
+  {
+    $status = 'danger';
+    $msg = $flash['error_msg'];
+  }
 
-    if($status && $msg){
-        $str = '<div id="div_service_message" class="alert alert-'.$status.' alert-dismissible">';
-        $str.= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>';
-        
-        if($status == 'danger')
-            $status = 'error';
-        $str.='<strong>'.ucfirst($status).':&nbsp;</strong> '. strip_tags($msg) .' </div>';
+    if($status && $msg)
+    {
+      $str = '<div id="div_service_message" class="alert alert-'.$status.' alert-dismissible">';
+      $str.= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>';
+      
+      if($status == 'danger')
+          $status = 'error';
+      $str.='<strong>'.ucfirst($status).':&nbsp;</strong> '. strip_tags($msg) .' </div>';
 
-        echo $str;
+      echo $str;
     }
 
 }
@@ -107,21 +106,20 @@ function display_flashmsg($flash)
 
 function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_open = '', $wrap_tag_close = '')
 {
-    $CI = & get_instance();
-     
+    $CI = & get_instance();     
     if(is_null($data) || is_array($data) || (strcmp($data, '') === 0 && !count($row)) )
-        return $data;
+      return $data;
     
     switch ($type)
     {
         case 'string':
             break;
         case 'humanize':
-        $CI->load->helper("inflector");
-            $data = humanize($data);
-            break;
+          $CI->load->helper("inflector");
+          $data = humanize($data);
+          break;
         case 'date':
-                str2USDT($data);
+            str2USDT($data);
             break;
         case 'datetime':
             $data = str2USDate($data);
@@ -138,167 +136,146 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
         case 'link':
             $data = '<a href="'.$data.'">'.$data.'</a>';
             break;        
-    }
-    
+    }    
     return $wrap_tag_open.$data.$wrap_tag_close;
 }
 
-function employee_status(){
+function employee_status()
+{
 
-    $status = array('Joined'=>'Joined','resigned'=>'resigned','vacation'=>'vacation','unpaid leave'=>'unpaid leave','Absconding'=>'Absconding');
-
-    return $status;
-
+  $status = array('Joined'=>'Joined','resigned'=>'resigned','vacation'=>'vacation','unpaid leave'=>'unpaid leave','Absconding'=>'Absconding');
+  return $status;
 }
 
 function get_employee_types()
 {
-    $CI = & get_instance();
-    $result = $CI->db->get('org_type')->result_array();
-
-    $types = array();
-    foreach ($result as $row) 
-    {
-        $types[$row['id']] = $row['name'];
-    }
-
-    return $types;
+  $CI = & get_instance();
+  $result = $CI->db->get('org_type')->result_array();
+  $types = array();
+  foreach ($result as $row) 
+  {
+    $types[$row['id']] = $row['name'];
+  }
+  return $types;
 }
 
 function get_organizations()
 {
-    $CI = & get_instance();
-    $CI->db->select('o.id,o.name,t.name as type');
-    $CI->db->join('org_type t','o.org_type=t.id');
-    $CI->db->group_by('o.id');
-    $result = $CI->db->get('organization o')->result_array();
-
-    $types = array();
-    foreach ($result as $row) 
-    {
-        $types[$row['id']] = $row['name']. ' ('.$row['type'].')';
-    }
-
-    return $types;
+  $CI = & get_instance();
+  $CI->db->select('o.id,o.name,t.name as type');
+  $CI->db->join('org_type t','o.org_type=t.id');
+  $CI->db->group_by('o.id');
+  $result = $CI->db->get('organization o')->result_array();
+  $types = array();
+  foreach ($result as $row) 
+  {
+    $types[$row['id']] = $row['name']. ' ('.$row['type'].')';
+  }
+  return $types;
 }
 
 function get_projects()
 {
-    $CI = & get_instance();
-    $result = $CI->db->get('projects')->result_array();
-
-    $proj = array();
-    foreach ($result as $row) 
-    {
-        $proj[$row['id']] = $row['name'];
-    }
-
-    return $proj;
+  $CI = & get_instance();
+  $result = $CI->db->get('projects')->result_array();
+  $proj = array();
+  foreach ($result as $row) 
+  {
+    $proj[$row['id']] = $row['name'];
+  }
+  return $proj;
 }
 
 function get_employees($org = '')
 {
-    $CI = & get_instance();
-
-    $CI->db->select('id,emp_code,emp_name');
-    if($org)
-        $CI->db->where('org_id',$org);
-
-    $result = $CI->db->get('employee')->result_array();
-
-    $emp = array();
-    foreach ($result as $row) 
-    {
-        $emp[$row['emp_code']] = $row['emp_name'];
-    }
-
-    return $emp;
+  $CI = & get_instance();
+  $CI->db->select('id,emp_code,emp_name');
+  if($org)
+    $CI->db->where('org_id',$org);
+  $result = $CI->db->get('employee')->result_array();
+  $emp = array();
+  foreach ($result as $row) 
+  {
+    $emp[$row['emp_code']] = $row['emp_name'];
+  }
+  return $emp;
 }
 
-function check_is_working_day($date){
-
-    $day = date('l',strtotime($date));
-
-    $CI = & get_instance();
-
-    $CI->db->where('status',1);
-
-    $result = $CI->db->get('working_days')->result_array();
-
-    foreach ($result as $row) 
-    {
-        if(strtolower($row['name']) == strtolower($day))
-            return TRUE;
-    }
-
-    return FALSE;
+function check_is_working_day($date)
+{
+  $day = date('l',strtotime($date));
+  $CI = & get_instance();
+  $CI->db->where('status',1);
+  $result = $CI->db->get('working_days')->result_array();
+  foreach ($result as $row) 
+  {
+    if(strtolower($row['name']) == strtolower($day))
+      return TRUE;
+  }
+  return FALSE;
 }
 
 function str2USDate($str)
 {
-    $intTime = strtotime($str);
-    if ($intTime === false)
-         return NULL;
-    return date("m/d/Y H:i:s", $intTime);
+  $intTime = strtotime($str);
+  if ($intTime === false)
+    return NULL;
+  return date("m/d/Y H:i:s", $intTime);
 }
 
 function str2USDT($str)
 {
-    $intTime = strtotime($str);
-    if ($intTime === false)
-         return NULL;
-    return date("m/d/Y", $intTime);
+  $intTime = strtotime($str);
+  if ($intTime === false)
+    return NULL;
+  return date("m/d/Y", $intTime);
 }
 
     // no logic for server time to local time.
 function str2DBDT($str=null)
 {
-    $intTime = (!empty($str))?strtotime($str):time();
-    if ($intTime === false)
-         return NULL;
-    return date("Y-m-d H:i:s", $intTime);
+  $intTime = (!empty($str))?strtotime($str):time();
+  if ($intTime === false)
+    return NULL;
+  return date("Y-m-d H:i:s", $intTime);
 }
 
 function str2DBDate($str)
 {
-    $intTime = strtotime($str);
-    if ($intTime === false)
-        return NULL;
-    return date("Y-m-d",$intTime);
+  $intTime = strtotime($str);
+  if ($intTime === false)
+    return NULL;
+  return date("Y-m-d",$intTime);
 }
 
-function addDayswithdate($date,$days){
-
-    $date = strtotime("+".$days." days", strtotime($date));
-    return  date("m/d/Y", $date);
-
+function addDayswithdate($date,$days)
+{
+  $date = strtotime("+".$days." days", strtotime($date));
+  return  date("m/d/Y", $date);
 }
 
-function day_to_text($date) {
-    
-    $day_no = date("N",strtotime($date));
-    
-    $day_array = array(1 => "Monday" , 2 => "Tuesday" , 3 => "Wednesday" , 4 => "Thursday" , 5 => "Friday" , 6 => "Saturday" , 7 => "Sunday"  );
-    
-    return $day_array[$day_no];
+function day_to_text($date)
+{
+  $day_no = date("N",strtotime($date));
+  $day_array = array(1 => "Monday" , 2 => "Tuesday" , 3 => "Wednesday" , 4 => "Thursday" , 5 => "Friday" , 6 => "Saturday" , 7 => "Sunday"  );
+  return $day_array[$day_no];
 }
-
 
 function date_ranges($case = '')
 {
-    $dt = date('Y-m-d');
-    if(empty($case)){
-        return false;
-    }
-
-    switch($case)
-    {
-        case 'today':
-            $highdateval = $dt;
-            $lowdateval = $dt;
-        break;
-        case 'thisweek':
-            $highdateval = date('Y-m-d', strtotime('saturday this week'));
+  $dt = date('Y-m-d');
+  if(empty($case))
+  {
+    return false;
+  }
+  switch($case)
+  {
+    case 'today':
+      $highdateval = $dt;
+      $lowdateval = $dt;
+    break;
+    case 'thisweek':
+        $highdateval = date('Y-m-d', strtotime('saturday this week'));
             $lowdateval  = date('Y-m-d', strtotime('sunday last week'));
         break;
         case 'thisweektodate':
@@ -596,6 +573,13 @@ function log_history($table='',$id='',$cat='',$action='')
   $data['created_date'] = date("Y-m-d H:i:s");
   return $CI->history_model->insert($data,"log");
   exit;
+}
+
+function get_state()
+{
+   $CI = get_instance();
+   $q = $CI->db->query("select * from state where status=1")->result_array();
+   return $q;
 }
 
 ?>

@@ -62,7 +62,7 @@
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase'){ ?>
 
 					<th>Action</th>
 
@@ -78,16 +78,37 @@
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        if($uri1 != 'accounting' && $uri1 != 'history'){ 	?>
-				<td>
-          <?php if((isset($item['id']) && !empty($item['id']))) { ?>
-
-          <?php echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';?>
-          <?php echo form_checkbox("op_select[]", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox'"); ?>
-          <?php } ?>
-                
-				</td>
-           <?php }?> 
+        	if($uri1 != 'accounting' && $uri1 != 'history' && $uri == 'purchase')
+        	{ 	
+        		?>
+						<td>
+          		<?php 
+          			if((isset($item['id']) && !empty($item['id'])))
+          			{ 
+									echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';
+          				echo form_checkbox("op_select[]", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox'");
+          			} 
+          		?>
+            </td>
+           	<?php 
+          }
+          else if($uri1 != 'accounting' && $uri1 != 'history')
+        	{ 	
+        		?>
+						<td>
+          		<?php 
+          			if((isset($item['id']) && !empty($item['id'])))
+          			{ 
+									?>
+										<label class="custom-radio">&nbsp;
+										<input type="radio" name="radio_select" value="<?=$item['id'];?>" id="selectAll-<?=$item['id'];?>" class="radio"></label>
+									<?php
+          			} 
+          		?>
+            </td>
+           	<?php 
+          }
+        ?> 
 				<?php foreach ($fields as $field => $row):?>
 
 				<?php if($row['default_view'] == '0') continue; ?>
@@ -99,7 +120,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"

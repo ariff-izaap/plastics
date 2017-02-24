@@ -38,6 +38,22 @@ $config['admin_user_setup'] = array(
 	"default_direction" => "DESC"
 );
 
+$config['purchase_add_edit_purchase'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'purchase/filter',
+	"base_url"	=> 	'/purchase/add_edit_purchase/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'first_name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
+						'last_name'=>array('name'=>'Last Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'role'=>array('name'=>'Role', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
 
 $config['admin_roles'] = array(
 	"view"		=> 	'listing/listing',

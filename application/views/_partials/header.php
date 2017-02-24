@@ -78,8 +78,8 @@
             </li>
             <?php }?>
             <?php if($role=="3" || $role=="1"){?>
-            <li <?php echo ($curr_ctlr == 'employee')?'class="active"':'';?> >
-              <a href="<?=site_url('');?>">
+            <li <?php echo ($curr_ctlr == 'purchase')?'class="active"':'';?> >
+              <a href="<?=site_url('purchase');?>">
                  <i class="fa fa-cubes fa-fw"></i>
                   Purchase
               </a>
@@ -173,6 +173,7 @@
                     <div id="userSettings" class="dropdown-content" align="right">
                     <?php if($role=="1"){?>
                       <a href="<?=site_url('history');?>">Site History</a>
+                      <a href="<?=site_url('error_log');?>">Error Logs</a>
                     <?php }?>
                     <a href="#">My Profile</a>
                     <a href="#">Settings</a>
