@@ -27,7 +27,7 @@ class Uploads extends Admin_controller {
             $config['allowed_types'] = (isset($form['types']) && !empty($form['types']))?$form['types']:'gif|jpg|png|jpeg';
             $config['max_size']      = '10000';
             $config['max_width']     = '300';
-            $config['max_height']    = '100';
+            $config['max_height']    = '300';
 
             $this->load->library('upload', $config);
 

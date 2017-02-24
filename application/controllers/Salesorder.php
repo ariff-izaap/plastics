@@ -1,10 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 require_once(APPPATH."libraries/Admin_controller.php");
 
 class Salesorder extends Admin_Controller 
-{
-	
+{	
     function __construct()
     {
         parent::__construct();  
@@ -14,22 +12,20 @@ class Salesorder extends Admin_Controller
 			
        $this->load->model('salesorder_model');
 	   $this->load->library('listing');    
-     
 	} 
 	
-	
 	 public function index()
-    { 
+     { 
              
         $this->layout->add_javascripts(array('listing'));  
 
         $this->load->library('listing');         
         
         $this->simple_search_fields = array(                                                
-                                    'p.name'         => 'Name',
-                                    'p.sku'          => 'Sku',
-                                    'p.quantity'     => 'Quantity',                                            
-        );
+                                        'p.name'         => 'Name',
+                                        'p.sku'          => 'Sku',
+                                        'p.quantity'     => 'Quantity',                                            
+                                    );
          
         $this->_narrow_search_conditions = array("start_date");
         
@@ -63,7 +59,6 @@ class Salesorder extends Admin_Controller
     
     public function add( $edit_id ='')
     {
-
         try
         {
             if($this->input->post('edit_id'))            

@@ -102,7 +102,6 @@ class Category extends Admin_Controller
               $edit_data['description']     = '';
               $edit_data['enabled']         = '1';
             }
-
         }
         catch (Exception $e)
         {

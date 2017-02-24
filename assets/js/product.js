@@ -2,7 +2,7 @@
 var upld_options = {}; 
     upld_options.uploadUrl              = base_url+'inventory/do_upload';
     upld_options.allowedFileExtensions  = ['jpg','jpeg','png','gif'];
-    upld_options.maxFileSize            = 1000; //kb
+    upld_options.maxFileSize            = 2000; //kb
     upld_options.showCaption            = false;
     upld_options.dropZoneEnabled        = false;
     upld_options.showRemove             = false;

@@ -39,9 +39,6 @@
                 <input class="input-medium" name="priority" id="priority" value="<?php echo set_value('priority', $edit_data['priority'])?>" type="text">
                 <?php echo form_error('priority', '<span class="error_text">', '</span>');?>
               </div>
-              
-              
-
             </div>
           </div>
 

@@ -30,10 +30,9 @@
           <label required>Address</label>
           <select class="form-control" name="address_id" id="address_id">
             <option value="">---Select---</option>
-              <?php foreach($address as $addr):
-
+               <?php foreach($address as $addr):
                   $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
-              ?>
+               ?>
                 <option value="<?php echo $addr['id'];?>" <?php echo $sel;?> > <?php echo $addr['address1'];?> </option>
               <?php endforeach;?>
           </select>

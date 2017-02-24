@@ -510,9 +510,7 @@ function xml_obj_to_array($xml_obj) {
 
 function site_traffic()
 {
-    $CI = & get_instance();
-    
-    
+    $CI = & get_instance();    
 }
 
 
@@ -535,9 +533,7 @@ function is_valid_product($product_id = 0)
 function is_valid_user($user_id = 0)
 {
     $CI->db->load->model('user_model');
-
     $result = $CI->db->user_model->get_where(array('id' => $user_id));
-
     return $result->num_rows()?TRUE:FALSE;
 }
 
@@ -569,7 +565,7 @@ function log_history($table='',$id='',$cat='',$action='')
   else
     $data['action']="<strong>".$get_name[0]['name']."</strong> $cat has been ".$action;
 
-  $data['created_id'] = get_current_user_id();
+  $data['created_id']   = get_current_user_id();
   $data['created_date'] = date("Y-m-d H:i:s");
   return $CI->history_model->insert($data,"log");
   exit;
