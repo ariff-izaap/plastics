@@ -6,9 +6,19 @@
 		<a href="<?=site_url('purchase');?>" class="btn pull-right">Back</a>
 	</div>
 </div>
-<?php display_flashmsg($this->session->flashdata()); ?>
+<?php 
+	display_flashmsg($this->session->flashdata()); 
+	if(validation_errors())
+	{
+	?>
+		<div id="output">
+			<?=validation_errors();?>
+		</div><br>
+		<?php
+	}
+	?>
 <div class="row">
-  <form name="add_role" id="addRole" method="post">
+  <form name="add_purchase" id="addPurchase" method="post">
     <div class="form-grid">
 			<div class="form-group col-md-4 " data-error="">
         <label required="">PO Number#</label>
@@ -16,15 +26,43 @@
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12">
-      	<?=$grid;?>
+      	<table class="table table-bordered table-hover">
+      		<thead>
+      			<th>#</th><th>Name</th><th>Contact Name</th><th>Phone</th><th>State</th><th>City</th><th>Salesman</th>
+      		</thead>
+      		<tbody>
+      			<?php
+      			if($vendor)
+      			{
+      				foreach ($vendor as $key => $value)
+      				{
+      					?>
+      						<tr>
+      							<td>
+      								<label for="selectAll-<?=$value['id'];?>"  class="custom-radio">&nbsp;</label>
+      								<input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" id="selectAll-<?=$value['id'];?>">
+      							</td>
+      							<td><?=$value['business_name'];?></td>
+      							<td><?=$value['contact_name'];?></td>
+      							<td><?=$value['contact_value'];?></td>
+      							<td><?=$value['state'];?></td>
+      							<td><?=$value['city'];?></td>
+      							<td><?=$value['business_name'];?></td>
+      						</tr>
+      					<?php
+      				}
+      			}
+      			?>
+      		</tbody>
+      	</table>
       </div>
       <div class="form-group col-md-4 " data-error="">
         <label required="">Vendor Name</label>
-        <input type="text" name="vendor_name" class="form-control" id="name" value=""  placeholder="Vendor Name">
+        <input type="text" name="vendor_name" class="form-control" id="vendor_name" value=""  placeholder="Vendor Name">
       </div>
       <div class="form-group col-md-4 " data-error="">
         <label required="">Bill To Name</label>
-        <input type="text" name="bill_name" class="form-control" id="name" value=""  placeholder="Bill To Name">
+        <input type="text" name="bill_name" class="form-control" id="bill_name" value=""  placeholder="Bill To Name">
       </div>
       <div class="form-group col-md-4 " data-error="">
         <label required="">Salesman</label>
@@ -36,7 +74,7 @@
       </div>
      	<div class="form-group col-md-6 " data-error="">
         <label required="">Address 2</label>
-        <input type="text" name="address_2" class="form-control" id="address_2" value=""  placeholder="Addres 2">
+        <input type="text" name="address_2" class="form-control" id="address_2" value=""  placeholder="Address 2">
       </div>
      	<div class="form-group col-md-4 " data-error="">
         <label required="">City</label>
@@ -44,7 +82,7 @@
       </div>
       <div class="form-group col-md-4 " data-error="">
         <label required="">State</label>
-        <select class="form-control" name="state">
+        <select class="form-control" name="state" id="state">
         	<option value="">--Select State--</option>
         	<?php
         		if(get_state())
@@ -94,7 +132,7 @@
         <input type="text" name="delivery_date" class="form-control singledate" id="delivery_date" value=""  placeholder="Delviery Date">
       </div>
      	<div class="form-group col-md-4 " data-error="">
-        <label required="">Release to be Sold</label>
+        <label>Release to be Sold</label>
         <input type="checkbox" name="to_sold" class="" id="to_sold">
       </div>
       <div class="clearfix"></div>

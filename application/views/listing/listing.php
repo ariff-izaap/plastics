@@ -78,7 +78,7 @@
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        	if($uri1 != 'accounting' && $uri1 != 'history' && $uri == 'purchase')
+        	if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 != 'purchase')
         	{ 	
         		?>
 						<td>
@@ -92,17 +92,15 @@
             </td>
            	<?php 
           }
-          else if($uri1 != 'accounting' && $uri1 != 'history')
+          else if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 == 'purchase')
         	{ 	
         		?>
 						<td>
           		<?php 
           			if((isset($item['id']) && !empty($item['id'])))
           			{ 
-									?>
-										<label class="custom-radio">&nbsp;
-										<input type="radio" name="radio_select" value="<?=$item['id'];?>" id="selectAll-<?=$item['id'];?>" class="radio"></label>
-									<?php
+									echo '<label for="selectAll-'.$item['id'].'" class="custom-radio">&nbsp;</label>';
+          				echo form_radio("radio_select", $item['id'], '', "id='selectAll-{$item['id']}' class= 'radio'");
           			} 
           		?>
             </td>

@@ -45,10 +45,11 @@ $config['purchase_add_edit_purchase'] = array(
 	"base_url"	=> 	'/purchase/add_edit_purchase/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'first_name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'last_name'=>array('name'=>'Last Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'role'=>array('name'=>'Role', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
+						'business_name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),			
+						'contact_name'=>array('name'=>'Contact Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'contact_value'=>array('name'=>'Phone', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'city'=>array('name'=>'City', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						'state'=>array('name'=>'State', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );

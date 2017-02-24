@@ -4,6 +4,23 @@ require_once(APPPATH."libraries/Admin_controller.php");
 
 class Purchase extends Admin_Controller 
 {
+  protected $_purchase_validation_rules = array(
+     array('field' => 'vendor_id', 'label' => 'Vendor List', 'rules' => 'trim|required'),
+     array('field' => 'vendor_name', 'label' => 'Vendor Name', 'rules' => 'trim|required'),
+     array('field' => 'bill_name', 'label' => 'Bill To Name', 'rules' => 'trim|required'),
+     array('field' => 'salesman', 'label' => 'Salesman', 'rules' => 'trim|required'),
+     array('field' => 'address_1', 'label' => 'Address 1', 'rules' => 'trim|required'),
+     array('field' => 'address_2', 'label' => 'Address 2', 'rules' => 'trim|required'),
+     array('field' => 'city', 'label' => 'City', 'rules' => 'trim|required'),
+     array('field' => 'state', 'label' => 'State', 'rules' => 'trim|required'),
+     array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required'),
+     array('field' => 'firstname', 'label' => 'Firstname', 'rules' => 'trim|required'),
+     array('field' => 'lastname', 'label' => 'Lastname', 'rules' => 'trim|required'),
+     array('field' => 'mobile', 'label' => 'Mobile', 'rules' => 'trim|required'),
+     array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required'),
+     array('field' => 'website', 'label' => 'Website', 'rules' => 'trim|required'),
+     array('field' => 'pickup_date', 'label' => 'Pickup Date', 'rules' => 'trim|required'),
+     array('field' => 'delivery_date', 'label' => 'Delivery Date', 'rules' => 'trim|required'));
 	function __construct()
   {
   	parent::__construct();
@@ -19,29 +36,17 @@ class Purchase extends Admin_Controller
   }
   public function add_edit_purchase()
   {
-  	$this->layout->add_javascripts(array('listing'));
-    $this->load->library('listing');
-    $this->simple_search_fields = array(                                                
-                                'c.first_name' => 'Name',
-                                't.name'       => 'Role',
-                                'c.last_name' => 'Last Name',
-                                'c.email'      => 'Email');
-    $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
-    $this->listing->initialize(array('listing_action' => $str));
-    $listing = $this->listing->get_listings('admin_model', 'listing');
-    if($this->input->is_ajax_request())
-      $this->_ajax_output(array('listing' => $listing), TRUE);    
-    $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
-    $this->data['simple_search_fields'] = $this->simple_search_fields;
-    $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
-    $this->data['per_page'] = $this->listing->_get_per_page();
-    $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());    
-    $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);
-    $this->data['listing'] = $listing;
-    $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+    $this->data['vendor'] = $this->purchase_model->get_vendors();
+    $this->form_validation->set_rules($this->_purchase_validation_rules);
   	$this->data['po_id'] = $this->purchase_model->get_max_id();
-  	$this->layout->view('frontend/Purchase/add_purchase');
+    if($this->form_validation->run())
+    {
+  	}
+    $this->layout->view('frontend/Purchase/add_purchase');
+  }
+  public function get_vendor_details($id)
+  {
+    $vendor = $this->purchase_model->get_vendors(array("c.id"=>$id));
+    echo json_encode($vendor[0]);
   }
 }

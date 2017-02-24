@@ -11,22 +11,19 @@ class Vendor_model extends App_model {
         $this->_table = 'customer';
     }
     
-     function listing()
-     {  
+    function listing()
+    {
         $this->_fields = "*";
-        
-          
-        foreach ($this->criteria as $key => $value) 
+        foreach ($this->criteria as $key => $value)
         {
-            if( !is_array($value) && strcmp($value, '') === 0 )
-                continue;
-
-            switch ($key)
-            {
-                case 'p.business_name':
-                    $this->db->like($key, $value);
-                break;
-            }
+          if( !is_array($value) && strcmp($value, '') === 0 )
+              continue;
+          switch ($key)
+          {
+            case 'p.business_name':
+              $this->db->like($key, $value);
+            break;
+          }
         }
         return parent::listing();
     }
