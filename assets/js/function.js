@@ -112,6 +112,7 @@ function init_daterangepicker(seldate)
 	}		
 }
 
+
 function init_checkbox(selval)
 {
 	selval = selval?selval:'';
@@ -136,6 +137,26 @@ function numbersonly(e)
     }
   }
 }
+
+function get_vendor_details(v_url)
+{
+  $.post(base_url+v_url,{},function(data){
+      $("form#addPurchase #vendor_name").val(data.business_name);
+      $("form#addPurchase #address_1").val(data.address1);
+      $("form#addPurchase #address_2").val(data.address2);
+      $("form#addPurchase #city").val(data.city);
+      $("form#addPurchase #state").val(data.state);
+      $("form#addPurchase #zipcode").val(data.zipcode);
+      $("form#addPurchase #firstname").val(data.first_name);
+      $("form#addPurchase #lastname").val(data.last_name);
+      $("form#addPurchase #mobile").val(data.phone);
+      $("form#addPurchase #email").val(data.email);
+      $("form#addPurchase #website").val(data.web_url);
+      $("form#addPurchase #zipcode").val(data.zipcode);
+  },'json');
+}
+
+
 
 //to delete selected record from list.
 function delete_record(del_url,elm){
@@ -394,7 +415,6 @@ function product_image_delete(del_id,table_name)
 }
 
 function get_form(action,div_id,title,elm,popup,fn_to_call,call_fun_args){
-
      popup = (popup == false)?false:true;
 
      $.ajax({
