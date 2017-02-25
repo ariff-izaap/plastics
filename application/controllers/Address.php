@@ -15,6 +15,10 @@ class Address extends Admin_Controller
      $this->load->model('address_model');
      $this->load->library('listing');
      
+     $address_data = $this->address_model->get_where(array("created_id" => get_current_user_id()))->result_array();
+     //echo "<pre>";
+    // print_r($address_data);
+     $this->data['address_id'] = (count($address_data)==1)?$address_data[0]['id']:""; 
 	} 
 
     public function add( $edit_id ='')
@@ -52,7 +56,7 @@ class Address extends Admin_Controller
                 $ins_data['country']                = $this->input->post('country');
                 $ins_data['zipcode']                = $this->input->post('zipcode');
                 $ins_data['phone']                  = $this->input->post('phone');
-                
+                //echo $edit_id; exit;
                 if($edit_id){
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                     $ins_data['updated_id']   = get_current_user_id();   
@@ -68,15 +72,24 @@ class Address extends Admin_Controller
                     $msg = 'Address added successfully';
                 }
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
-                redirect("address/add/$ins");
+                redirect("address/add/$edit_id");
             }    
             else
             {            
               $edit_data = array();
-              $edit_data['id']              = '';
-              $edit_data['name']            = '';
-              $edit_data['description']     = '';
-              $edit_data['enabled']         = '1';
+              $edit_data['id']          = '';
+              $edit_data['name']        = '';
+              $edit_data['first_name']  = '';
+              $edit_data['last_name']   = '';
+              $edit_data['company']     = '';
+              $edit_data['address1']    = '';
+              $edit_data['address2']    = '';
+              $edit_data['city']        = '';
+              $edit_data['state']       = '';
+              $edit_data['country']     = '';
+              $edit_data['zipcode']     = '';
+              $edit_data['phone']       = '';
+              
             }
         }
         catch (Exception $e)
@@ -86,7 +99,7 @@ class Address extends Admin_Controller
         }
 
         if($edit_id)
-            $edit_data =$this->category_model->get_where(array("id" => $edit_id))->row_array();
+            $edit_data = $this->address_model->get_where(array("id" => $edit_id))->row_array();
 
         $this->data['editdata']  = $edit_data;
         $this->layout->view('frontend/address/add');

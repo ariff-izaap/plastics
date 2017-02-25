@@ -130,7 +130,7 @@ class Vendor extends Admin_Controller
         if($edit_id)
             $edit_data =$this->vendor_model->get_where(array("id" => $edit_id))->row_array();
         
-        $edit_data['address']    = $this->vendor_model->get_where(array('created_id' => get_current_user_id()),"*","address")->result_array();
+          $edit_data['address']    = $this->vendor_model->get_where(array('created_id' => get_current_user_id()),"*","address")->result_array();
         
          
         $this->data['editdata']  = $edit_data;
