@@ -6,7 +6,8 @@ class Inventory extends Admin_Controller
 {
 	public  $data = array();
 
-    private $upload_path = './assets/images/';
+    private $upload_path     = './assets/images/';
+    private $upload_doc_path = './assets/uploads/product/';
     
     function __construct()
     {
@@ -86,15 +87,26 @@ class Inventory extends Admin_Controller
             $this->form_validation->set_rules('form_id','Form','trim|required');
             $this->form_validation->set_rules('package_id','Package','trim|required');
             $this->form_validation->set_rules('category_id','Color','trim|required');
-            $this->form_validation->set_rules('length','Length','trim|required');
-            $this->form_validation->set_rules('width','Width','trim|required');
-            $this->form_validation->set_rules('height','Height','trim|required');
+            $this->form_validation->set_rules('row','Row','trim|required');
+            $this->form_validation->set_rules('units','Units','trim|required');
             $this->form_validation->set_rules('weight','Weight','trim|required');
             $this->form_validation->set_rules('in_stock','In Stock','trim|required');
+            $this->form_validation->set_rules('purchase_order_number','Purchase Order Number','trim|required');
+            $this->form_validation->set_rules('purchase_transportation_identifier','Purchase Transportation Identifier','trim|required');
+            $this->form_validation->set_rules('sales_transportation_identifier','Sales Transportation Identifier','trim|required');
+            $this->form_validation->set_rules('warehouse_id','Please select warehouse','trim|required');
+            $this->form_validation->set_rules('intransit_to_warehouse','Intransit to warehouse','trim|required');
+            $this->form_validation->set_rules('intransit_to_customer','Intransit to Customer','trim|required');
+            
+            //if(empty($_FILES['certificate_file_name']['name']) && empty($_POST['certification_files'])){
+//				$this->form_validation->set_rules('certificate_file_name', 'Certificate', 'required');
+//			}
           
             $this->form_validation->set_error_delimiters('', '');
                 
             if ($this->form_validation->run()){
+                
+                echo $this->input->post('sku'); exit;
                 $ins_data = array();
                 $ins_data['sku']                    = $this->input->post('sku');
                 $ins_data['name']                   = $this->input->post('name');
@@ -111,11 +123,32 @@ class Inventory extends Admin_Controller
                 $ins_data['vendor_lot_no']          = $this->input->post('vendor_lot_no');
                 $ins_data['received_at_customer']   = $this->input->post('received_at_customer');
                 $ins_data['received_in_warehouse']  = $this->input->post('received_in_warehouse');
-                $ins_data['length']                 = $this->input->post('length');
-                $ins_data['width']                  = $this->input->post('width');
-                $ins_data['height']                 = $this->input->post('height');
+                $ins_data['purchase_order_number']  = $this->input->post('purchase_order_number');
+                $ins_data['purchase_transportation_identifier']= $this->input->post('purchase_transportation_identifier');
+                $ins_data['sales_transportation_identifier']   = $this->input->post('sales_transportation_identifier');
                 $ins_data['weight']                 = $this->input->post('weight');
+                $ins_data['row']                    = $this->input->post('row');
+                $ins_data['notes']                  = $this->input->post('notes');
+                $ins_data['product']                = $this->input->post('product');
+                $ins_data['units']                  = $this->input->post('units');
+                $ins_data['item_type']              = $this->input->post('item_type');
                 $ins_data['in_stock']               = $this->input->post('in_stock');
+                $ins_data['equivalent']             = $this->input->post('equivalent');
+                $ins_data['warehouse_id']           = $this->input->post('warehouse_id');
+                $ins_data['intransit_to_warehouse'] = $this->input->post('intransit_to_warehouse');
+                $ins_data['intransit_to_customer']  = $this->input->post('intransit_to_customer');
+                
+                
+                if(!empty($_FILES['certificate_file_name']['tmp_name'])){ 
+    			  $upload_data = $this->certificate_upload();
+                  $filename    = $upload_data['certificate_file_name']['file_name'];
+    			}
+                else
+                {
+    				$filename  = $_POST['certification_files'];
+    			}
+                
+                $ins_data['certification_files']    = $filename;
                 
                 if($edit_id){
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
@@ -134,11 +167,9 @@ class Inventory extends Admin_Controller
                     $msg     = 'Product added successfully';
                     $edit_id =  $new_id;
                 }
-
-                $this->session->set_flashdata('success_msg',$msg,TRUE);
                 
+                $this->session->set_flashdata('success_msg',$msg,TRUE);
                 $status  = 'success';
-               //redirect('inventory/add/'.$new_id);
             }    
             else
             {
@@ -159,13 +190,23 @@ class Inventory extends Admin_Controller
                 $edit_data['vendor_lot_no']         = '';
                 $edit_data['received_at_customer']  = '';
                 $edit_data['received_in_warehouse'] = '';
-                $edit_data['length']                = '';
-                $edit_data['width']                 = '';
-                $edit_data['height']                = '';
+                $edit_data['row']                   = '';
+                $edit_data['notes']                 = '';
+                $edit_data['product']               = '';
+                $edit_data['units']                 = '';
+                $edit_data['item_type']             = '';
                 $edit_data['weight']                = '';
                 $edit_data['in_stock']              = '';
                 $edit_data['image_title']           = '';
                 $edit_data['file_name']             = '';
+                $edit_data['purchase_order_number'] = '';
+                $edit_data['purchase_transportation_identifier']= '';
+                $edit_data['sales_transportation_identifier']   = '';
+                $edit_data['equivalent']             = '';
+                $edit_data['warehouse_id']           = '';
+                $edit_data['intransit_to_warehouse'] = '';
+                $edit_data['intransit_to_customer']  = '';
+                $edit_data['certification_files']    = '';
                 $status = 'error';
             }
 
@@ -182,13 +223,14 @@ class Inventory extends Admin_Controller
             $pricelists= $this->inventory_model->get_where(array("product_id" => $edit_id),'*','vendor_price_list')->result_array();
         }    
 
-        $this->data['editdata']           = $edit_data;
-        $this->data['editdata']['images'] = (!empty($images))?$images:array();
+        $this->data['editdata']            = $edit_data;
+        $this->data['editdata']['images']  = (!empty($images))?$images:array();
         $this->data['editdata']['pricelts']= (!empty($pricelists))?$pricelists:array();
-        $this->data['colors']             = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
-        $this->data['forms']              = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
-        $this->data['packages']           = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
-        $this->data['categories']         = $this->inventory_model->get_where(array(),"*","category")->result_array();
+        $this->data['colors']              = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
+        $this->data['forms']               = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
+        $this->data['packages']            = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
+        $this->data['categories']          = $this->inventory_model->get_where(array(),"*","category")->result_array();
+        $this->data['warehouse']           = $this->inventory_model->get_where(array(),"*","warehouse")->result_array();
         
          if($this->input->is_ajax_request()){
             $output  = $this->load->view('frontend/inventory/add',$this->data,true);
@@ -255,6 +297,34 @@ class Inventory extends Admin_Controller
 
         echo json_encode($this->data);
         exit;
+    }
+    
+    public function certificate_upload()
+    {
+        try
+        {
+            $config['upload_path'] = BASEPATH_CUSTOM.'assets/uploads/product/certificate';
+    		$config['allowed_types'] = 'doc|docx';
+    		
+    		$this->load->library('upload', $config);
+    
+    		if(!$this->upload->do_upload('certificate_file_name')){
+    			$error = array('error' => $this->upload->display_errors());
+    			return $error;
+    		}
+    		else
+    		{
+    			$data = array('certificate_file_name' => $this->upload->data());
+    			return $data;	
+    		}           
+        }
+        catch(Exception $e)
+        {
+            $this->data['error'] = $e->getMessage();    
+        }     
+
+        //echo json_encode($this->data);
+        //exit;
     }
     
     public function update_image_title()

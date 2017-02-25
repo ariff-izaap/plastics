@@ -19,7 +19,7 @@ class Category extends Admin_Controller
 	} 
 	
 	
-	 public function index()
+ 	public function index()
     { 
              
         $this->layout->add_javascripts(array('listing'));  

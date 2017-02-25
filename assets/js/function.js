@@ -301,17 +301,29 @@ function capitaliseFirstLetter(string)
 
 function inventory_sub()
 {
+     //var fdata  = $("#inventory_sub_form").serialize();
+    var edit_id   = '';
+    var fd        = new FormData();
+    var file_data = $('input[type="file"]')[0].files; 
     
-     var fdata  = $("#inventory_sub_form").serialize();
-     var edit_id= '';
-     
+    //for(var i = 0;i<file_data.length;i++){
+        fd.append("certificate_file_name", file_data);
+   // }
+    var other_data = $('#inventory_sub_form').serializeArray();
+    
+    $.each(other_data,function(key,input){
+        fd.append(input.name,input.value);
+    });
+    
         edit_id = $("#inventory_sub_form #edit_id").val();
 
       $.ajax({
           url:base_url+"inventory/add/"+edit_id,
           type:"POST",
-          data:fdata,
-          dataType:'json',
+          data:fd,
+          contentType: false,
+          processData: false,
+         // dataType:'json',
           success:function(res)
           {
             var status = res.status;
