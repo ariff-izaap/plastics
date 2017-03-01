@@ -26,7 +26,7 @@
 
 		<thead>
 			<tr>
-			<?php if($uri1 != "accounting" && $uri1 != "history"){?>
+			<?php if($uri1 != "accounting" && $uri1 != "history" && $uri != "add_product"){?>
 				<th> # </th>
 				<?php }?>
 				<?php  $cols = 0; 
@@ -78,7 +78,7 @@
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        	if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 != 'purchase')
+        	if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 != 'purchase' && $uri != 'add_product')
         	{ 	
         		?>
 						<td>
@@ -92,7 +92,7 @@
             </td>
            	<?php 
           }
-          else if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 == 'purchase')
+          else if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 == 'purchase' && $uri != 'add_product' )
         	{ 	
         		?>
 						<td>
@@ -118,7 +118,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase' && $uri != 'add_product'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"
@@ -133,7 +133,17 @@
 						?>
 					<?php endif;?>
 				</td>
-				<?php } ?>
+				<?php } 
+				if($uri == "add_product")
+				{
+					?>
+						<td>
+							<button type="button" id="opt_<?=$item['id'];?>" class="btn btn-small" onclick="add_to_cart(<?=$item['id'];?>,<?=get_current_user_id();?>, 'form',this)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title=""> Add to Cart
+					</button>
+						</td>
+					<?php
+				}
+				?>
 			</tr>
             
     <?php endforeach; ?>
