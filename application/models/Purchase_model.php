@@ -30,5 +30,32 @@ class Purchase_model extends App_model
 		$q = $this->db->get("purchase_order");
 		return $q->row_array();
 	}
+	public function insert($data,$table=NULL)
+	{
+		$this->db->insert($table,$data);
+		return $this->db->insert_id();
+	}
 
+	public function update($where,$data,$table=NULL)
+	{
+		$this->db->where("id",$where);
+		$this->db->update($table,$data);
+	}
+
+	public function delete($where,$table=NULL)
+	{
+		$this->db->where("id",$where);
+		$this->db->delete($table);
+	}
+
+
+	public function get_purchased_products($po_id)
+	{
+		$this->db->where("a.po_id",$po_id);
+		$this->db->select("a.*,a.id as rowid,b.name as p_name,b.sku");
+		$this->db->from("purchase_order_item a");
+		$this->db->join("product b","a.product_id=b.id");
+		$q = $this->db->get();
+		return $q->result_array();
+	}
 }
