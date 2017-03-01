@@ -38,6 +38,14 @@ function get_user_data()
   }
 }
 
+function get_vendor_by_id($id='')
+{
+  $CI = get_instance();
+  $CI->load->model('purchase_model');
+ $row = $CI->purchase_model->get_vendors(array('a.id' => $id));
+  return $row;
+}
+
 function get_user_role( $user_id='')
 {
   $CI= & get_instance();  
@@ -577,5 +585,41 @@ function get_state()
    $q = $CI->db->query("select * from state where status=1")->result_array();
    return $q;
 }
+
+function get_warehouse()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from warehouse")->result_array();
+  return $q;
+}
+
+function get_shipping_type()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from shipping_type where status=1")->result_array();
+  return $q;
+}
+
+function get_carrier()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from carrier where status=1")->result_array();
+  return $q;
+}
+function get_credit_type()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from credit_type where status=1")->result_array();
+  return $q;
+}
+
+function get_product_price($id)
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select wholesale_price from product where id=$id")->row_array();
+  return $q['wholesale_price'];
+}
+
+
 
 ?>
