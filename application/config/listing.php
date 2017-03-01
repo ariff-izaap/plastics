@@ -55,6 +55,50 @@ $config['purchase_add_edit_purchase'] = array(
 );
 
 
+$config['purchase_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'purchase/filter',
+	"base_url"	=> 	'/purchase/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'pid'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'name'=>array('name'=>'Product', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'form_name'=>array('name'=>'Form', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'color_name'=>array('name'=>'Color', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'product_type'=>array('name'=>'Type', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'equivalent'=>array('name'=>'Equivalent', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						'quantity'=>array('name'=>'Quantity', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						'wholesale_price'=>array('name'=>'Wholesale Price', 'data_type' => 'money', 'sortable' => FALSE, 'default_view'=>1),
+						'package_name'=>array('name'=>'Package Name','data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+
+
+$config['purchase_add_product'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'purchase/filter',
+	"base_url"	=> 	'/purchase/add_product/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'pid'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'name'=>array('name'=>'Product', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'form_name'=>array('name'=>'Form', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'color_name'=>array('name'=>'Color', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'product_type'=>array('name'=>'Type', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'equivalent'=>array('name'=>'Equivalent', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						'quantity'=>array('name'=>'Quantity', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						'wholesale_price'=>array('name'=>'Wholesale Price', 'data_type' => 'money', 'sortable' => FALSE, 'default_view'=>1),
+						'package_name'=>array('name'=>'Package Name','data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
 
 $config['admin_roles'] = array(
 	"view"		=> 	'listing/listing',
