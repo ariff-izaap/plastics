@@ -74,6 +74,153 @@ $(function(){
       });
     }
   });
+/*
+  $.mockjaxSettings.responseTime = 500;
+
+     $.mockjax({
+            url: base_url+'purchase/add_cart',
+            response: function (data,xhr) {
+                console.log(data,xhr);
+            }
+        });
+
+   $('#username').editable({
+            url: base_url+'purchase/add_cart',
+            type: 'text',
+            value:'',
+            name: 'username',
+            title: 'Enter Quantity',
+            inputclass:'form-control input-sm',
+            showbuttons: 'right',
+             validate: function (value) {
+                if ($.trim(value) == '') return 'Enter Quantity';
+            }
+  });
+
+
+*/
+
+function add_to_cart(b,a,d,f)
+{
+  b=b?b:0;
+  d=d?d:"form";
+  var e="#"+$(f).attr("id");
+  var c=$(e).attr("data-original-title");
+  if(d=="form")
+  {
+    if(!before_ajax(e,"Updating...."))
+    {
+      return false;
+    }
+    $.ajax({
+      url:base_url+"purchase/form_add_to_cart/"+b+"/"+a+"/"+$(f).attr("id"),
+      type:"POST",
+      data:{},
+      dataType:"json",
+      success:function(g){
+        after_ajax(e,g);
+        $(e).removeAttr("data-original-title");
+        $(e).popover({
+          placement:"top",
+          title:'Add to Cart <button type="button" class="close" onclick="$(\''+e+"').popover('hide')\">&times;</button>",
+          html:"true",
+          content:g.content,
+          callback:function(){
+            $(e).tooltip("hide");
+          }
+        });
+        $(e).popover("show");
+        $("#qty").focus();
+        $(e).attr("data-original-title",c);
+      },
+      error:function(g){
+        after_ajax(f,g);
+      }
+    });
+  }
+  else
+  {
+    if(!before_ajax(f,"Updating...."))
+    {
+      return false;
+    }
+    b=$("#pid").val();
+    a=$("#vid").val();
+    e="#"+$("#elm_id").val();
+    $.ajax({
+      url:base_url+"purchase/add_cart/"+b+"/"+$("#po_id").val()+"/"+$("#qty").val()+"/",
+      type:"POST",
+      data:{},
+      dataType:"json",
+      success:function(data){
+        console.log(data);
+        after_ajax(f,data);
+        $(e).popover("hide");
+        bootbox.alert(data.message,function() {
+               location.reload();
+            });
+      },
+      error:function(g){
+        after_ajax(f,g)
+      }
+    })
+  };
+}
+
+
+function update_cart(a)
+{
+  if(!before_ajax(a,"Updating...."))
+  {
+    return false;
+  }
+  $.ajax({
+    url:base_url+"purchase/update_cart/",
+    type:"POST",
+    data:$("#viewCart").serialize(),
+    dataType:"json",
+    success:function(b){
+      console.log(b);
+      after_ajax(a,b);
+      $("#viewCart table tbody").html(b.content);
+      bootbox.alert(b.message)
+    },
+    error:function(b){
+      after_ajax(a,b);
+    }
+  });
+}
+
+function remove_cart(a,b)
+{
+  if(!before_ajax(b,"Removing...."))
+  {
+    return false;
+  }
+  $.ajax({
+    url:base_url+"purchase/remove_cart/"+a+"/"+$("#po_id").val(),
+    type:"POST",
+    data:{},
+    dataType:"json",
+    success:function(c){
+      console.log(c);
+      after_ajax(b,c);
+      if(c.count=="0")
+      {
+        bootbox.alert("Your cart is empty.",function(){
+          location.href=base_url+"purchase/add_product";  
+        });
+        
+      }
+      $("#viewCart table tbody").html(c.content);
+      bootbox.alert(c.message);
+    },
+    error:function(c){
+      after_ajax(b,c);
+    }
+  });
+}
+
 
 function init_daterangepicker(seldate)
 {
@@ -140,7 +287,9 @@ function numbersonly(e)
 
 function get_vendor_details(v_url)
 {
+   $(".purchase-loader").show();
   $.post(base_url+v_url,{},function(data){
+    $(".purchase-loader").hide();
       $("form#addPurchase #vendor_name").val(data.business_name);
       $("form#addPurchase #address_1").val(data.address1);
       $("form#addPurchase #address_2").val(data.address2);
