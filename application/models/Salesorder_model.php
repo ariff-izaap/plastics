@@ -12,15 +12,15 @@ class Salesorder_model extends App_model
   }
   
    function listing()
-  {  
+   {  
 	
-	}
-	public function get_where($where='',$fields='*',$table='',$order_by='')
-	{
-		$this->db->where($where);
-		$this->db->from('admin_users');
-		$q = $this->db->get()->row_array();
-		return $q;
-	}    
+}
+	//public function get_where($where='',$fields='*',$table='',$order_by='')
+//	{
+//		$this->db->where($where);
+//		$this->db->from('admin_users');
+//		$q = $this->db->get()->row_array();
+//		return $q;
+//	}    
 }
 ?>

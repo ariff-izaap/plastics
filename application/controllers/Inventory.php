@@ -82,21 +82,21 @@ class Inventory extends Admin_Controller
             $this->form_validation->set_rules('quantity','Quantity','trim|required');
             $this->form_validation->set_rules('internal_lot_no','Internal lot no','trim|required');
             $this->form_validation->set_rules('vendor_lot_no','Vendor lot no','trim|required');
-            $this->form_validation->set_rules('shipping_cost','Shipping Cost','trim|required');
+           // $this->form_validation->set_rules('shipping_cost','Shipping Cost','trim|required');
             $this->form_validation->set_rules('color_id','Color','trim|required');
-            $this->form_validation->set_rules('form_id','Form','trim|required');
+         //   $this->form_validation->set_rules('form_id','Form','trim|required');
             $this->form_validation->set_rules('package_id','Package','trim|required');
-            $this->form_validation->set_rules('category_id','Color','trim|required');
+        //    $this->form_validation->set_rules('category_id','Color','trim|required');
             $this->form_validation->set_rules('row','Row','trim|required');
             $this->form_validation->set_rules('units','Units','trim|required');
-            $this->form_validation->set_rules('weight','Weight','trim|required');
-            $this->form_validation->set_rules('in_stock','In Stock','trim|required');
-            $this->form_validation->set_rules('purchase_order_number','Purchase Order Number','trim|required');
-            $this->form_validation->set_rules('purchase_transportation_identifier','Purchase Transportation Identifier','trim|required');
-            $this->form_validation->set_rules('sales_transportation_identifier','Sales Transportation Identifier','trim|required');
-            $this->form_validation->set_rules('warehouse_id','Please select warehouse','trim|required');
-            $this->form_validation->set_rules('intransit_to_warehouse','Intransit to warehouse','trim|required');
-            $this->form_validation->set_rules('intransit_to_customer','Intransit to Customer','trim|required');
+        //    $this->form_validation->set_rules('weight','Weight','trim|required');
+         //   $this->form_validation->set_rules('in_stock','In Stock','trim|required');
+        //    $this->form_validation->set_rules('purchase_order_number','Purchase Order Number','trim|required');
+        //    $this->form_validation->set_rules('purchase_transportation_identifier','Purchase Transportation Identifier','trim|required');
+        //    $this->form_validation->set_rules('sales_transportation_identifier','Sales Transportation Identifier','trim|required');
+        //    $this->form_validation->set_rules('warehouse_id','Please select warehouse','trim|required');
+           // $this->form_validation->set_rules('intransit_to_warehouse','Intransit to warehouse','trim|required');
+          //  $this->form_validation->set_rules('intransit_to_customer','Intransit to Customer','trim|required');
             
             //if(empty($_FILES['certificate_file_name']['name']) && empty($_POST['certification_files'])){
 //				$this->form_validation->set_rules('certificate_file_name', 'Certificate', 'required');
@@ -106,7 +106,7 @@ class Inventory extends Admin_Controller
                 
             if ($this->form_validation->run()){
                 
-                echo $this->input->post('sku'); exit;
+               // echo $this->input->post('sku'); exit;
                 $ins_data = array();
                 $ins_data['sku']                    = $this->input->post('sku');
                 $ins_data['name']                   = $this->input->post('name');
@@ -117,7 +117,7 @@ class Inventory extends Admin_Controller
                 $ins_data['package_id']             = $this->input->post('package_id');
                 $ins_data['retail_price']           = $this->input->post('retail_price');
                 $ins_data['wholesale_price']        = $this->input->post('wholesale_price');
-                $ins_data['shipping_cost']          = $this->input->post('shipping_cost');
+              //  $ins_data['shipping_cost']          = $this->input->post('shipping_cost');
                 $ins_data['ref_no']                 = $this->input->post('ref_no');
                 $ins_data['internal_lot_no']        = $this->input->post('internal_lot_no');
                 $ins_data['vendor_lot_no']          = $this->input->post('vendor_lot_no');
@@ -141,6 +141,8 @@ class Inventory extends Admin_Controller
                 
                 if(!empty($_FILES['certificate_file_name']['tmp_name'])){ 
     			  $upload_data = $this->certificate_upload();
+                //  print_r($upload_data);
+                //  exit;
                   $filename    = $upload_data['certificate_file_name']['file_name'];
     			}
                 else

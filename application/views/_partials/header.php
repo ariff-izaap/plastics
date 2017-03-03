@@ -62,13 +62,19 @@
             
             <?php if($role=="2" || $role=="1"){?>
             <li <?php echo ($curr_ctlr == 'salesorder')?'class="active"':'';?> >
-              <a href="#">
-              <!--
-<a href="#<?php //echo site_url();?>salesorder">
--->
+               <!-- <a href="#"> -->
+                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                  <i class="fa fa-clock-o fa-fw"></i>
                   Sales
-              </a> 
+                  <span class="caret"></span>
+                </a> 
+                <ul class="dropdown-menu">
+                <li><a href="<?php echo site_url();?>salesorder/search">Search</a></li>
+                <li><a href="<?php echo site_url();?>salesorder/calllog">Call Log</a></li>
+                <li><a href="<?php echo site_url();?>salesorder/callback">Call Back</a></li>
+                <li><a href="<?php echo site_url();?>salesorder/productselection">Product Selection</a></li>
+                <li><a href="<?php echo site_url();?>salesorder/shippingorder">Shipping Order</a></li>
+               </ul>
             </li>
             <?php }?>
             <?php if($role=="3" || $role=="1"){ ?>

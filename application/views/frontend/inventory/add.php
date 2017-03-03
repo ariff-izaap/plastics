@@ -153,7 +153,7 @@
                                 <div class="form-grid col-md-6">
                                 <label>Certificate Documents:</label>
                                 <div class="form-group">
-                    				<input id="certificate_file_name" name="certificate_file_name" type="file" class="file" />
+                    				<input id="certificate_file_name" name="certificate_file_name" type="file" />
                                     <input id="certification_files" name="certification_files" type="hidden" value="<?php echo set_value('certification_files',$editdata['certification_files']); ?>" />
                                     <?php if(!empty($editdata['certification_files'])){ $image = BASEPATH_CUSTOM.'assets/uploads/product/certificate/'.$editdata['certification_files']; if(file_exists($image)) { ?>
                                     <a href="<?php echo site_url().'assets/uploads/product/certificate/'.$editdata['certification_files']; ?>" target="_blank" >Certifiacate</a>

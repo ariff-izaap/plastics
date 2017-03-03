@@ -35,7 +35,7 @@ class Salesorder extends Admin_Controller
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('vendor_model', 'listing');
+        $listing = $this->listing->get_listings('salesorder_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
@@ -47,14 +47,10 @@ class Salesorder extends Admin_Controller
         $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
         
         $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
+        $this->data['listing']    = $listing;
+        $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
         
-        $this->data['listing'] = $listing;
-        
-        $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
-        
-        $this->layout->view("frontend/vendor/index");
-
-			
+        $this->layout->view("frontend/sales/index");		
     }
     
     public function add( $edit_id ='')
@@ -70,8 +66,7 @@ class Salesorder extends Admin_Controller
             
             $this->form_validation->set_error_delimiters('', '');
                 
-            if ($this->form_validation->run())
-            {
+            if ($this->form_validation->run()){
                 $ins_data = array();
                 $ins_data['business_name']          = $this->input->post('business_name');
                 $ins_data['credit_type']            = $this->input->post('credit_type');
@@ -80,28 +75,23 @@ class Salesorder extends Admin_Controller
                 $ins_data['address_id']             = $this->input->post('address_id');
                 $ins_data['status']                 = $this->input->post('status');
                 
-                if($edit_id)
-                {
+                if($edit_id){
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     //$ins_data['updated_id']   = get_current_user_id();    
-                    $this->vendor_model->update(array("id" => $edit_id),$ins_data);
+                    $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
 
-                    $msg  = 'Vendor updated successfully';
+                    $msg  = 'Salesorder updated successfully';
                 }
                 else
                 {    
                     $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                    // $ins_data['created_id']   = get_current_user_id();  
-
-                    $this->vendor_model->insert($ins_data);
-
-                    $msg = 'Vendor added successfully';
+                    $this->salesorder_model->insert($ins_data);
+                    $msg = 'Salesorder added successfully';
                 }
-
                 $this->session->set_flashdata('success_msg',$msg,TRUE);
-
-                redirect('vendor');
+                redirect('salesorder');
             }    
             else
             {
@@ -123,25 +113,23 @@ class Salesorder extends Admin_Controller
         }
 
         if($edit_id)
-            $edit_data =$this->vendor_model->get_where(array("id" => $edit_id))->row_array();
+            $edit_data =$this->salesorder_model->get_where(array("id" => $edit_id))->row_array();
         
-        $edit_data['address']    = $this->vendor_model->get_where(array('created_id' => get_current_user_id()),"*","address")->result_array();
+        $edit_data['address']    = $this->salesorder_model->get_where(array('created_id' => get_current_user_id()),"*","address")->result_array();
         
          
         $this->data['editdata']  = $edit_data;
-        $this->layout->view('frontend/vendor/add');
+        $this->layout->view('frontend/sales/add');
     }
     
     public function delete($del_id)
     {
-        $access_data = $this->vendor_model->get_where(array("id"=>$del_id),'id')->row_array();
+        $access_data = $this->salesorder_model->get_where(array("id"=>$del_id),'id')->row_array();
        
         $output=array();
 
         if(count($access_data) > 0){
-
-            $this->vendor_model->delete(array("id"=>$del_id));
-
+            $this->salesorder_model->delete(array("id"=>$del_id));
             $output['message'] ="Record deleted successfuly.";
             $output['status']  = "success";
         }
@@ -150,10 +138,27 @@ class Salesorder extends Admin_Controller
            $output['message'] ="This record not matched by Inventory.";
            $output['status']  = "error";
         }
-        
-        $this->_ajax_output($output, TRUE);
-            
+        $this->_ajax_output($output, TRUE);    
     }
     
+    public function productselection() 
+    {
+      $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
+      $this->data['colors']              = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
+      $this->data['forms']               = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
+      $this->data['packages']            = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
+          
+      $this->layout->view('frontend/sales/productselection');  
+    }
+    
+    public function shippingorder()
+    {
+      $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
+      $this->data['colors']              = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
+      $this->data['forms']               = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
+      $this->data['packages']            = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
+          
+      $this->layout->view('frontend/sales/shippingorder');  
+    }
 }
 ?>

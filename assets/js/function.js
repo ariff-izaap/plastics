@@ -455,9 +455,9 @@ function inventory_sub()
     var fd        = new FormData();
     var file_data = $('input[type="file"]')[0].files; 
     
-    //for(var i = 0;i<file_data.length;i++){
+    for(var i = 0;i<file_data.length;i++){
         fd.append("certificate_file_name", file_data);
-   // }
+    }
     var other_data = $('#inventory_sub_form').serializeArray();
     
     $.each(other_data,function(key,input){
@@ -472,7 +472,6 @@ function inventory_sub()
           data:fd,
           contentType: false,
           processData: false,
-         // dataType:'json',
           success:function(res)
           {
             var status = res.status;
