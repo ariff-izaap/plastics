@@ -69,34 +69,38 @@ class Inventory extends Admin_Controller
     
     public function add( $edit_id ='')
     {
+        //echo "coming"; exit;
+        
         $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
         $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
        
         try
         {
+            
+            
             if($this->input->post('edit_id'))            
                 $edit_id = $this->input->post('edit_id');
 
             $this->form_validation->set_rules('name','Product Name','trim|required');
             $this->form_validation->set_rules('sku','Sku','trim|required');
             $this->form_validation->set_rules('quantity','Quantity','trim|required');
-            $this->form_validation->set_rules('internal_lot_no','Internal lot no','trim|required');
-            $this->form_validation->set_rules('vendor_lot_no','Vendor lot no','trim|required');
-           // $this->form_validation->set_rules('shipping_cost','Shipping Cost','trim|required');
+          //  $this->form_validation->set_rules('internal_lot_no','Internal lot no','trim|required');
+          //  $this->form_validation->set_rules('vendor_lot_no','Vendor lot no','trim|required');
+          //  $this->form_validation->set_rules('shipping_cost','Shipping Cost','trim|required');
             $this->form_validation->set_rules('color_id','Color','trim|required');
-         //   $this->form_validation->set_rules('form_id','Form','trim|required');
+            $this->form_validation->set_rules('form_id','Form','trim|required');
             $this->form_validation->set_rules('package_id','Package','trim|required');
-        //    $this->form_validation->set_rules('category_id','Color','trim|required');
+            $this->form_validation->set_rules('category_id','Color','trim|required');
             $this->form_validation->set_rules('row','Row','trim|required');
             $this->form_validation->set_rules('units','Units','trim|required');
-        //    $this->form_validation->set_rules('weight','Weight','trim|required');
-         //   $this->form_validation->set_rules('in_stock','In Stock','trim|required');
-        //    $this->form_validation->set_rules('purchase_order_number','Purchase Order Number','trim|required');
-        //    $this->form_validation->set_rules('purchase_transportation_identifier','Purchase Transportation Identifier','trim|required');
-        //    $this->form_validation->set_rules('sales_transportation_identifier','Sales Transportation Identifier','trim|required');
-        //    $this->form_validation->set_rules('warehouse_id','Please select warehouse','trim|required');
-           // $this->form_validation->set_rules('intransit_to_warehouse','Intransit to warehouse','trim|required');
-          //  $this->form_validation->set_rules('intransit_to_customer','Intransit to Customer','trim|required');
+            $this->form_validation->set_rules('weight','Weight','trim|required');
+       //     $this->form_validation->set_rules('in_stock','In Stock','trim|required');
+      //      $this->form_validation->set_rules('purchase_order_number','Purchase Order Number','trim|required');
+       //     $this->form_validation->set_rules('purchase_transportation_identifier','Purchase Transportation Identifier','trim|required');
+     //       $this->form_validation->set_rules('sales_transportation_identifier','Sales Transportation Identifier','trim|required');
+     //       $this->form_validation->set_rules('warehouse_id','Please select warehouse','trim|required');
+      //      $this->form_validation->set_rules('intransit_to_warehouse','Intransit to warehouse','trim|required');
+     //       $this->form_validation->set_rules('intransit_to_customer','Intransit to Customer','trim|required');
             
             //if(empty($_FILES['certificate_file_name']['name']) && empty($_POST['certification_files'])){
 //				$this->form_validation->set_rules('certificate_file_name', 'Certificate', 'required');
@@ -117,15 +121,13 @@ class Inventory extends Admin_Controller
                 $ins_data['package_id']             = $this->input->post('package_id');
                 $ins_data['retail_price']           = $this->input->post('retail_price');
                 $ins_data['wholesale_price']        = $this->input->post('wholesale_price');
-              //  $ins_data['shipping_cost']          = $this->input->post('shipping_cost');
+          //   $ins_data['shipping_cost']          = $this->input->post('shipping_cost');
                 $ins_data['ref_no']                 = $this->input->post('ref_no');
                 $ins_data['internal_lot_no']        = $this->input->post('internal_lot_no');
                 $ins_data['vendor_lot_no']          = $this->input->post('vendor_lot_no');
                 $ins_data['received_at_customer']   = $this->input->post('received_at_customer');
                 $ins_data['received_in_warehouse']  = $this->input->post('received_in_warehouse');
                 $ins_data['purchase_order_number']  = $this->input->post('purchase_order_number');
-                $ins_data['purchase_transportation_identifier']= $this->input->post('purchase_transportation_identifier');
-                $ins_data['sales_transportation_identifier']   = $this->input->post('sales_transportation_identifier');
                 $ins_data['weight']                 = $this->input->post('weight');
                 $ins_data['row']                    = $this->input->post('row');
                 $ins_data['notes']                  = $this->input->post('notes');
@@ -137,20 +139,23 @@ class Inventory extends Admin_Controller
                 $ins_data['warehouse_id']           = $this->input->post('warehouse_id');
                 $ins_data['intransit_to_warehouse'] = $this->input->post('intransit_to_warehouse');
                 $ins_data['intransit_to_customer']  = $this->input->post('intransit_to_customer');
+                $ins_data['purchase_transportation_identifier']= $this->input->post('purchase_transportation_identifier');
+                $ins_data['sales_transportation_identifier']   = $this->input->post('sales_transportation_identifier');
                 
+               // echo $_FILES['certificate_file_name']['tmp_name'];
                 
-                if(!empty($_FILES['certificate_file_name']['tmp_name'])){ 
+                if(!empty($_FILES['certificate_file_name']['tmp_name']) && (empty($_POST['certification_files']))){ 
     			  $upload_data = $this->certificate_upload();
-                //  print_r($upload_data);
-                //  exit;
+                 // print_r($upload_data); exit;
                   $filename    = $upload_data['certificate_file_name']['file_name'];
     			}
                 else
                 {
+                    //echo $_POST['certification_files']; 
     				$filename  = $_POST['certification_files'];
     			}
                 
-                $ins_data['certification_files']    = $filename;
+                 $ins_data['certification_files']    = $filename; 
                 
                 if($edit_id){
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
@@ -202,13 +207,13 @@ class Inventory extends Admin_Controller
                 $edit_data['image_title']           = '';
                 $edit_data['file_name']             = '';
                 $edit_data['purchase_order_number'] = '';
-                $edit_data['purchase_transportation_identifier']= '';
-                $edit_data['sales_transportation_identifier']   = '';
                 $edit_data['equivalent']             = '';
                 $edit_data['warehouse_id']           = '';
                 $edit_data['intransit_to_warehouse'] = '';
                 $edit_data['intransit_to_customer']  = '';
                 $edit_data['certification_files']    = '';
+                $edit_data['purchase_transportation_identifier']= '';
+                $edit_data['sales_transportation_identifier']   = '';
                 $status = 'error';
             }
 
@@ -306,7 +311,7 @@ class Inventory extends Admin_Controller
         try
         {
             $config['upload_path'] = BASEPATH_CUSTOM.'assets/uploads/product/certificate';
-    		$config['allowed_types'] = 'doc|docx';
+    		//s$config['allowed_types'] = 'doc|docx';
     		
     		$this->load->library('upload', $config);
     

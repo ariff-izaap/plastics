@@ -1,4 +1,5 @@
 
+
 //product images upload section
 var upld_options = {}; 
     upld_options.uploadUrl              = base_url+'inventory/do_upload';
@@ -18,8 +19,7 @@ var upld_options = {};
         divid      = 'Images';
     }    
     else
-    {
-        up_folder = 'product';
+    {        up_folder = 'product';
         divid     = 'file_name';  
     }
      
