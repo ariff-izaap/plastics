@@ -5147,3 +5147,1562 @@ DEBUG - 2017-03-07 08:19:38 --> Config file loaded: C:\xampp\htdocs\plastics\app
 INFO - 2017-03-07 08:19:38 --> Helper loaded: search_helper
 INFO - 2017-03-07 08:19:38 --> Helper loaded: sort_helper
 INFO - 2017-03-07 08:19:38 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:25:48 --> Config Class Initialized
+INFO - 2017-03-07 08:25:48 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:25:48 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:25:48 --> URI Class Initialized
+INFO - 2017-03-07 08:25:48 --> Router Class Initialized
+INFO - 2017-03-07 08:25:48 --> Output Class Initialized
+INFO - 2017-03-07 08:25:48 --> Security Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:25:48 --> Input Class Initialized
+INFO - 2017-03-07 08:25:48 --> Language Class Initialized
+INFO - 2017-03-07 08:25:48 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:25:48 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:25:48 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:25:48 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:25:48 --> Pagination Class Initialized
+INFO - 2017-03-07 08:25:48 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:25:48 --> Controller Class Initialized
+INFO - 2017-03-07 08:25:48 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:25:48 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:48 --> Model Class Initialized
+INFO - 2017-03-07 08:25:48 --> Model Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:48 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:25:48 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:48 --> Model Class Initialized
+DEBUG - 2017-03-07 08:25:48 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:25:48 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:25:48 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:25:48 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:25:48 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:25:48 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:25:49 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:25:49 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:25:49 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/add_product.php
+INFO - 2017-03-07 08:25:49 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:25:49 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:25:49 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:25:49 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:25:49 --> Final output sent to browser
+DEBUG - 2017-03-07 08:25:49 --> Total execution time: 0.7210
+INFO - 2017-03-07 08:25:53 --> Config Class Initialized
+INFO - 2017-03-07 08:25:53 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:25:53 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:25:53 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:25:53 --> URI Class Initialized
+INFO - 2017-03-07 08:25:53 --> Router Class Initialized
+INFO - 2017-03-07 08:25:53 --> Output Class Initialized
+INFO - 2017-03-07 08:25:53 --> Security Class Initialized
+DEBUG - 2017-03-07 08:25:53 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:25:53 --> Input Class Initialized
+INFO - 2017-03-07 08:25:53 --> Language Class Initialized
+INFO - 2017-03-07 08:25:53 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:25:53 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:25:53 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:25:53 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:25:53 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:25:53 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:25:53 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:25:53 --> Pagination Class Initialized
+INFO - 2017-03-07 08:25:53 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:25:53 --> Controller Class Initialized
+INFO - 2017-03-07 08:25:53 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:25:53 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:25:53 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:53 --> Model Class Initialized
+INFO - 2017-03-07 08:25:53 --> Model Class Initialized
+DEBUG - 2017-03-07 08:25:53 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:53 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:25:53 --> Parser Class Initialized
+INFO - 2017-03-07 08:25:53 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:25:53 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:25:53 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/checkout.php
+INFO - 2017-03-07 08:25:53 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:25:53 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:25:53 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:25:53 --> Final output sent to browser
+DEBUG - 2017-03-07 08:25:53 --> Total execution time: 0.7100
+INFO - 2017-03-07 08:25:54 --> Config Class Initialized
+INFO - 2017-03-07 08:25:54 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:25:54 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:25:54 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:25:54 --> URI Class Initialized
+INFO - 2017-03-07 08:25:54 --> Router Class Initialized
+INFO - 2017-03-07 08:25:54 --> Output Class Initialized
+INFO - 2017-03-07 08:25:54 --> Security Class Initialized
+DEBUG - 2017-03-07 08:25:54 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:25:54 --> Input Class Initialized
+INFO - 2017-03-07 08:25:54 --> Language Class Initialized
+INFO - 2017-03-07 08:25:54 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:25:54 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:25:54 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:25:54 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:25:54 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:25:54 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:25:54 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:25:54 --> Pagination Class Initialized
+INFO - 2017-03-07 08:25:54 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:25:54 --> Controller Class Initialized
+INFO - 2017-03-07 08:25:54 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:25:54 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:25:54 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:54 --> Model Class Initialized
+INFO - 2017-03-07 08:25:54 --> Model Class Initialized
+DEBUG - 2017-03-07 08:25:54 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:25:54 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:25:54 --> Parser Class Initialized
+INFO - 2017-03-07 08:25:54 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:25:54 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:25:54 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/checkout.php
+INFO - 2017-03-07 08:25:54 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:25:54 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:25:54 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:25:54 --> Final output sent to browser
+DEBUG - 2017-03-07 08:25:54 --> Total execution time: 0.7423
+INFO - 2017-03-07 08:26:50 --> Config Class Initialized
+INFO - 2017-03-07 08:26:50 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:26:50 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:26:50 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:26:50 --> URI Class Initialized
+INFO - 2017-03-07 08:26:50 --> Router Class Initialized
+INFO - 2017-03-07 08:26:50 --> Output Class Initialized
+INFO - 2017-03-07 08:26:50 --> Security Class Initialized
+DEBUG - 2017-03-07 08:26:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:26:51 --> Input Class Initialized
+INFO - 2017-03-07 08:26:51 --> Language Class Initialized
+INFO - 2017-03-07 08:26:51 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:26:51 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:26:51 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:26:51 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:26:51 --> Pagination Class Initialized
+INFO - 2017-03-07 08:26:51 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:26:51 --> Controller Class Initialized
+INFO - 2017-03-07 08:26:51 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:26:51 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:26:51 --> Model Class Initialized
+INFO - 2017-03-07 08:26:51 --> Model Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:26:51 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:26:51 --> Parser Class Initialized
+INFO - 2017-03-07 08:26:51 --> Language file loaded: language/english/form_validation_lang.php
+INFO - 2017-03-07 08:26:51 --> Model Class Initialized
+INFO - 2017-03-07 08:26:51 --> Config Class Initialized
+INFO - 2017-03-07 08:26:51 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:26:51 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:26:51 --> URI Class Initialized
+INFO - 2017-03-07 08:26:51 --> Router Class Initialized
+INFO - 2017-03-07 08:26:51 --> Output Class Initialized
+INFO - 2017-03-07 08:26:51 --> Security Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:26:51 --> Input Class Initialized
+INFO - 2017-03-07 08:26:51 --> Language Class Initialized
+INFO - 2017-03-07 08:26:51 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:26:51 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:26:51 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:26:51 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:26:51 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:26:51 --> Pagination Class Initialized
+INFO - 2017-03-07 08:26:51 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:26:51 --> Controller Class Initialized
+INFO - 2017-03-07 08:26:51 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:26:51 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:26:51 --> Model Class Initialized
+INFO - 2017-03-07 08:26:51 --> Model Class Initialized
+DEBUG - 2017-03-07 08:26:51 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:26:51 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:26:51 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:26:52 --> Listing class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:26:52 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:26:52 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:26:52 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:26:52 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:26:52 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/index.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:26:52 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:26:52 --> Final output sent to browser
+DEBUG - 2017-03-07 08:26:52 --> Total execution time: 0.7043
+INFO - 2017-03-07 08:27:07 --> Config Class Initialized
+INFO - 2017-03-07 08:27:07 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:27:07 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:27:07 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:27:07 --> URI Class Initialized
+INFO - 2017-03-07 08:27:07 --> Router Class Initialized
+INFO - 2017-03-07 08:27:07 --> Output Class Initialized
+INFO - 2017-03-07 08:27:07 --> Security Class Initialized
+DEBUG - 2017-03-07 08:27:07 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:27:07 --> Input Class Initialized
+INFO - 2017-03-07 08:27:07 --> Language Class Initialized
+INFO - 2017-03-07 08:27:07 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:27:07 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:27:07 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:27:07 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:27:07 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:27:07 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:27:07 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:27:07 --> Pagination Class Initialized
+INFO - 2017-03-07 08:27:08 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:27:08 --> Controller Class Initialized
+INFO - 2017-03-07 08:27:08 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:27:08 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:27:08 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:27:08 --> Model Class Initialized
+DEBUG - 2017-03-07 08:27:08 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:27:08 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:27:08 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:27:08 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:27:08 --> Model Class Initialized
+DEBUG - 2017-03-07 08:27:08 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:27:08 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:27:08 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:27:08 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:27:08 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:27:08 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:27:08 --> Final output sent to browser
+DEBUG - 2017-03-07 08:27:08 --> Total execution time: 0.7969
+INFO - 2017-03-07 08:29:17 --> Config Class Initialized
+INFO - 2017-03-07 08:29:17 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:29:17 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:29:17 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:29:17 --> URI Class Initialized
+INFO - 2017-03-07 08:29:17 --> Router Class Initialized
+INFO - 2017-03-07 08:29:17 --> Output Class Initialized
+INFO - 2017-03-07 08:29:17 --> Security Class Initialized
+DEBUG - 2017-03-07 08:29:17 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:29:17 --> Input Class Initialized
+INFO - 2017-03-07 08:29:17 --> Language Class Initialized
+INFO - 2017-03-07 08:29:17 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:29:17 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:29:17 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:29:17 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:29:17 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:29:17 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:29:17 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:29:17 --> Pagination Class Initialized
+INFO - 2017-03-07 08:29:17 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:29:17 --> Controller Class Initialized
+INFO - 2017-03-07 08:29:17 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:29:17 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:29:17 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:29:17 --> Model Class Initialized
+DEBUG - 2017-03-07 08:29:17 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:29:17 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:29:17 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:29:18 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:29:18 --> Model Class Initialized
+DEBUG - 2017-03-07 08:29:18 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:29:18 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:29:18 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:29:18 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:29:18 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:29:18 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:29:18 --> Final output sent to browser
+DEBUG - 2017-03-07 08:29:18 --> Total execution time: 0.7349
+INFO - 2017-03-07 08:31:57 --> Config Class Initialized
+INFO - 2017-03-07 08:31:57 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:31:57 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:31:57 --> URI Class Initialized
+INFO - 2017-03-07 08:31:57 --> Router Class Initialized
+INFO - 2017-03-07 08:31:57 --> Output Class Initialized
+INFO - 2017-03-07 08:31:57 --> Security Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:31:57 --> Input Class Initialized
+INFO - 2017-03-07 08:31:57 --> Language Class Initialized
+INFO - 2017-03-07 08:31:57 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:31:57 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:31:57 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:31:57 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:31:57 --> Pagination Class Initialized
+INFO - 2017-03-07 08:31:57 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:31:57 --> Controller Class Initialized
+INFO - 2017-03-07 08:31:57 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:31:57 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:31:57 --> Model Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:31:57 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:31:57 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:31:57 --> Model Class Initialized
+DEBUG - 2017-03-07 08:31:57 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:31:57 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:31:57 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:31:57 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:31:57 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:31:57 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:31:57 --> Final output sent to browser
+DEBUG - 2017-03-07 08:31:57 --> Total execution time: 0.7693
+INFO - 2017-03-07 08:31:58 --> Config Class Initialized
+INFO - 2017-03-07 08:31:58 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:31:58 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:31:58 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:31:58 --> URI Class Initialized
+INFO - 2017-03-07 08:31:58 --> Router Class Initialized
+INFO - 2017-03-07 08:31:58 --> Output Class Initialized
+INFO - 2017-03-07 08:31:58 --> Security Class Initialized
+DEBUG - 2017-03-07 08:31:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:31:58 --> Input Class Initialized
+INFO - 2017-03-07 08:31:58 --> Language Class Initialized
+INFO - 2017-03-07 08:31:58 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:31:58 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:31:58 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:31:58 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:31:58 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:31:59 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:31:59 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:31:59 --> Pagination Class Initialized
+INFO - 2017-03-07 08:31:59 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:31:59 --> Controller Class Initialized
+INFO - 2017-03-07 08:31:59 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:31:59 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:31:59 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:31:59 --> Model Class Initialized
+INFO - 2017-03-07 08:31:59 --> Model Class Initialized
+DEBUG - 2017-03-07 08:31:59 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:31:59 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:31:59 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:31:59 --> Listing class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:31:59 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:31:59 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:31:59 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:31:59 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:31:59 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/index.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:31:59 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:31:59 --> Final output sent to browser
+DEBUG - 2017-03-07 08:31:59 --> Total execution time: 1.0322
+INFO - 2017-03-07 08:32:00 --> Config Class Initialized
+INFO - 2017-03-07 08:32:00 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:00 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:00 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:00 --> URI Class Initialized
+INFO - 2017-03-07 08:32:00 --> Router Class Initialized
+INFO - 2017-03-07 08:32:00 --> Output Class Initialized
+INFO - 2017-03-07 08:32:00 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:00 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:00 --> Input Class Initialized
+INFO - 2017-03-07 08:32:00 --> Language Class Initialized
+INFO - 2017-03-07 08:32:00 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:00 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:00 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:00 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:00 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:00 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:00 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:01 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:01 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:01 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:01 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:01 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:01 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:01 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:01 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:01 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:01 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:01 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:01 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:01 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:01 --> Model Class Initialized
+INFO - 2017-03-07 08:32:01 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:01 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:01 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:01 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:01 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:01 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:01 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/add_purchase.php
+INFO - 2017-03-07 08:32:01 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:01 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:01 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:01 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:01 --> Total execution time: 0.6368
+INFO - 2017-03-07 08:32:03 --> Config Class Initialized
+INFO - 2017-03-07 08:32:03 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:03 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:03 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:03 --> URI Class Initialized
+INFO - 2017-03-07 08:32:03 --> Router Class Initialized
+INFO - 2017-03-07 08:32:03 --> Output Class Initialized
+INFO - 2017-03-07 08:32:03 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:03 --> Input Class Initialized
+INFO - 2017-03-07 08:32:03 --> Language Class Initialized
+INFO - 2017-03-07 08:32:03 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:03 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:03 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:03 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:03 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:03 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:03 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:03 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:03 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:03 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:03 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:03 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:03 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:03 --> Model Class Initialized
+INFO - 2017-03-07 08:32:03 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:03 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:03 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:03 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:03 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:03 --> Total execution time: 0.6139
+INFO - 2017-03-07 08:32:12 --> Config Class Initialized
+INFO - 2017-03-07 08:32:12 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:13 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:13 --> URI Class Initialized
+INFO - 2017-03-07 08:32:13 --> Router Class Initialized
+INFO - 2017-03-07 08:32:13 --> Output Class Initialized
+INFO - 2017-03-07 08:32:13 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:13 --> Input Class Initialized
+INFO - 2017-03-07 08:32:13 --> Language Class Initialized
+INFO - 2017-03-07 08:32:13 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:13 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:13 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:13 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:13 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:13 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:13 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:13 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:13 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:13 --> Model Class Initialized
+INFO - 2017-03-07 08:32:13 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:13 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:13 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:13 --> Language file loaded: language/english/form_validation_lang.php
+INFO - 2017-03-07 08:32:13 --> Config Class Initialized
+INFO - 2017-03-07 08:32:13 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:13 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:13 --> URI Class Initialized
+INFO - 2017-03-07 08:32:13 --> Router Class Initialized
+INFO - 2017-03-07 08:32:13 --> Output Class Initialized
+INFO - 2017-03-07 08:32:13 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:13 --> Input Class Initialized
+INFO - 2017-03-07 08:32:13 --> Language Class Initialized
+INFO - 2017-03-07 08:32:13 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:13 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:13 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:13 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:13 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:13 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:13 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:13 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:14 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:14 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:14 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:14 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:14 --> Model Class Initialized
+INFO - 2017-03-07 08:32:14 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:14 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:14 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:14 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:32:14 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:14 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:14 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:32:14 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:32:14 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:32:14 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:14 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/add_product.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:32:14 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:14 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:14 --> Total execution time: 0.7516
+INFO - 2017-03-07 08:32:16 --> Config Class Initialized
+INFO - 2017-03-07 08:32:16 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:16 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:16 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:16 --> URI Class Initialized
+INFO - 2017-03-07 08:32:16 --> Router Class Initialized
+INFO - 2017-03-07 08:32:16 --> Output Class Initialized
+INFO - 2017-03-07 08:32:16 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:16 --> Input Class Initialized
+INFO - 2017-03-07 08:32:16 --> Language Class Initialized
+INFO - 2017-03-07 08:32:16 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:16 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:16 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:16 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:16 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:16 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:16 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:16 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:16 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:16 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:16 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:17 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:17 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:17 --> Model Class Initialized
+INFO - 2017-03-07 08:32:17 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:17 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:17 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:17 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:18 --> Config Class Initialized
+INFO - 2017-03-07 08:32:18 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:18 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:18 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:18 --> URI Class Initialized
+INFO - 2017-03-07 08:32:18 --> Router Class Initialized
+INFO - 2017-03-07 08:32:18 --> Output Class Initialized
+INFO - 2017-03-07 08:32:18 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:18 --> Input Class Initialized
+INFO - 2017-03-07 08:32:18 --> Language Class Initialized
+INFO - 2017-03-07 08:32:18 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:18 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:18 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:18 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:18 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:18 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:18 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:18 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:18 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:18 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:18 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:18 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:18 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:18 --> Model Class Initialized
+INFO - 2017-03-07 08:32:18 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:18 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:18 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:18 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:21 --> Config Class Initialized
+INFO - 2017-03-07 08:32:21 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:21 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:21 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:21 --> URI Class Initialized
+INFO - 2017-03-07 08:32:21 --> Router Class Initialized
+INFO - 2017-03-07 08:32:21 --> Output Class Initialized
+INFO - 2017-03-07 08:32:21 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:21 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:21 --> Input Class Initialized
+INFO - 2017-03-07 08:32:21 --> Language Class Initialized
+INFO - 2017-03-07 08:32:21 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:21 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:21 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:21 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:21 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:21 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:21 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:21 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:21 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:21 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:21 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:21 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:21 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:21 --> Model Class Initialized
+INFO - 2017-03-07 08:32:21 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:21 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:21 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:21 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:32:22 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:22 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:22 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:32:22 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:32:22 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:32:22 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:22 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/add_product.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:32:22 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:22 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:22 --> Total execution time: 0.8218
+INFO - 2017-03-07 08:32:23 --> Config Class Initialized
+INFO - 2017-03-07 08:32:23 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:23 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:23 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:23 --> URI Class Initialized
+INFO - 2017-03-07 08:32:23 --> Router Class Initialized
+INFO - 2017-03-07 08:32:23 --> Output Class Initialized
+INFO - 2017-03-07 08:32:23 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:23 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:23 --> Input Class Initialized
+INFO - 2017-03-07 08:32:23 --> Language Class Initialized
+INFO - 2017-03-07 08:32:23 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:23 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:23 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:23 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:23 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:23 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:23 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:23 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:23 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:23 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:23 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:23 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:23 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:23 --> Model Class Initialized
+INFO - 2017-03-07 08:32:23 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:23 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:23 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:23 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:25 --> Config Class Initialized
+INFO - 2017-03-07 08:32:25 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:25 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:25 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:25 --> URI Class Initialized
+INFO - 2017-03-07 08:32:25 --> Router Class Initialized
+INFO - 2017-03-07 08:32:25 --> Output Class Initialized
+INFO - 2017-03-07 08:32:25 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:25 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:25 --> Input Class Initialized
+INFO - 2017-03-07 08:32:25 --> Language Class Initialized
+INFO - 2017-03-07 08:32:25 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:25 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:25 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:25 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:25 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:25 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:25 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:25 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:25 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:25 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:25 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:25 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:25 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:25 --> Model Class Initialized
+INFO - 2017-03-07 08:32:25 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:25 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:25 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:25 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:27 --> Config Class Initialized
+INFO - 2017-03-07 08:32:27 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:27 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:27 --> URI Class Initialized
+INFO - 2017-03-07 08:32:27 --> Router Class Initialized
+INFO - 2017-03-07 08:32:27 --> Output Class Initialized
+INFO - 2017-03-07 08:32:27 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:27 --> Input Class Initialized
+INFO - 2017-03-07 08:32:27 --> Language Class Initialized
+INFO - 2017-03-07 08:32:27 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:27 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:27 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:27 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:27 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:27 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:27 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:27 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:27 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:27 --> Model Class Initialized
+INFO - 2017-03-07 08:32:27 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:27 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:27 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:27 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:27 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:32:27 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:32:27 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:32:28 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:28 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/add_product.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:32:28 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:28 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:28 --> Total execution time: 0.8923
+INFO - 2017-03-07 08:32:32 --> Config Class Initialized
+INFO - 2017-03-07 08:32:32 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:32 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:32 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:32 --> URI Class Initialized
+INFO - 2017-03-07 08:32:32 --> Router Class Initialized
+INFO - 2017-03-07 08:32:32 --> Output Class Initialized
+INFO - 2017-03-07 08:32:32 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:32 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:32 --> Input Class Initialized
+INFO - 2017-03-07 08:32:32 --> Language Class Initialized
+INFO - 2017-03-07 08:32:32 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:32 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:32 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:32 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:33 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:33 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:33 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:33 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:33 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:33 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:33 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:33 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:33 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:33 --> Model Class Initialized
+INFO - 2017-03-07 08:32:33 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:33 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:33 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:33 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:33 --> File loaded: C:\xampp\htdocs\plastics\application\views\/frontend/Purchase/view_cart.php
+INFO - 2017-03-07 08:32:35 --> Config Class Initialized
+INFO - 2017-03-07 08:32:35 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:35 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:35 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:35 --> URI Class Initialized
+INFO - 2017-03-07 08:32:35 --> Router Class Initialized
+INFO - 2017-03-07 08:32:35 --> Output Class Initialized
+INFO - 2017-03-07 08:32:35 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:35 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:35 --> Input Class Initialized
+INFO - 2017-03-07 08:32:35 --> Language Class Initialized
+INFO - 2017-03-07 08:32:35 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:35 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:35 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:35 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:36 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:36 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:36 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:36 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:36 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:36 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:36 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:36 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:36 --> Model Class Initialized
+INFO - 2017-03-07 08:32:36 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:36 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:36 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:36 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:36 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:36 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:36 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/checkout.php
+INFO - 2017-03-07 08:32:36 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:36 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:36 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:36 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:36 --> Total execution time: 0.6502
+INFO - 2017-03-07 08:32:36 --> Config Class Initialized
+INFO - 2017-03-07 08:32:36 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:36 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:36 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:36 --> URI Class Initialized
+INFO - 2017-03-07 08:32:36 --> Router Class Initialized
+INFO - 2017-03-07 08:32:36 --> Output Class Initialized
+INFO - 2017-03-07 08:32:36 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:36 --> Input Class Initialized
+INFO - 2017-03-07 08:32:36 --> Language Class Initialized
+INFO - 2017-03-07 08:32:36 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:36 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:36 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:37 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:37 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:37 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:37 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:37 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:37 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:37 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:37 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:37 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:37 --> Model Class Initialized
+INFO - 2017-03-07 08:32:37 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:37 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:37 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:37 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:37 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:37 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:37 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/checkout.php
+INFO - 2017-03-07 08:32:37 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:37 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:37 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:37 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:37 --> Total execution time: 1.3132
+INFO - 2017-03-07 08:32:45 --> Config Class Initialized
+INFO - 2017-03-07 08:32:45 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:45 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:45 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:45 --> URI Class Initialized
+INFO - 2017-03-07 08:32:45 --> Router Class Initialized
+INFO - 2017-03-07 08:32:45 --> Output Class Initialized
+INFO - 2017-03-07 08:32:45 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:45 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:45 --> Input Class Initialized
+INFO - 2017-03-07 08:32:45 --> Language Class Initialized
+INFO - 2017-03-07 08:32:45 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:45 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:45 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:45 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:45 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:45 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:45 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:45 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:45 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:46 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:46 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:46 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:46 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:46 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:46 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:46 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:46 --> Model Class Initialized
+INFO - 2017-03-07 08:32:46 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:46 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:46 --> Parser Class Initialized
+INFO - 2017-03-07 08:32:46 --> Language file loaded: language/english/form_validation_lang.php
+INFO - 2017-03-07 08:32:46 --> Model Class Initialized
+INFO - 2017-03-07 08:32:46 --> Config Class Initialized
+INFO - 2017-03-07 08:32:46 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:46 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:46 --> URI Class Initialized
+INFO - 2017-03-07 08:32:46 --> Router Class Initialized
+INFO - 2017-03-07 08:32:46 --> Output Class Initialized
+INFO - 2017-03-07 08:32:46 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:46 --> Input Class Initialized
+INFO - 2017-03-07 08:32:46 --> Language Class Initialized
+INFO - 2017-03-07 08:32:46 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:46 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:46 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:46 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:46 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:46 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:46 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:46 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:46 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:46 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:46 --> Model Class Initialized
+INFO - 2017-03-07 08:32:46 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:46 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:46 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:47 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:32:47 --> Listing class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:47 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:32:47 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:32:47 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:32:47 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:47 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\frontend/Purchase/index.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:32:47 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:47 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:47 --> Total execution time: 0.8020
+INFO - 2017-03-07 08:32:49 --> Config Class Initialized
+INFO - 2017-03-07 08:32:49 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:32:49 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:32:49 --> URI Class Initialized
+INFO - 2017-03-07 08:32:49 --> Router Class Initialized
+INFO - 2017-03-07 08:32:49 --> Output Class Initialized
+INFO - 2017-03-07 08:32:49 --> Security Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:32:49 --> Input Class Initialized
+INFO - 2017-03-07 08:32:49 --> Language Class Initialized
+INFO - 2017-03-07 08:32:49 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:32:49 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:32:49 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:32:49 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:32:49 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:32:49 --> Pagination Class Initialized
+INFO - 2017-03-07 08:32:49 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:32:49 --> Controller Class Initialized
+INFO - 2017-03-07 08:32:49 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:32:49 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:49 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:49 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:32:49 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:32:49 --> Model Class Initialized
+DEBUG - 2017-03-07 08:32:49 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:32:50 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:32:50 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:32:50 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:32:50 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:32:50 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:32:50 --> Final output sent to browser
+DEBUG - 2017-03-07 08:32:50 --> Total execution time: 0.7994
+INFO - 2017-03-07 08:34:07 --> Config Class Initialized
+INFO - 2017-03-07 08:34:07 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:34:07 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:34:07 --> URI Class Initialized
+INFO - 2017-03-07 08:34:07 --> Router Class Initialized
+INFO - 2017-03-07 08:34:07 --> Output Class Initialized
+INFO - 2017-03-07 08:34:07 --> Security Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:34:07 --> Input Class Initialized
+INFO - 2017-03-07 08:34:07 --> Language Class Initialized
+INFO - 2017-03-07 08:34:07 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:34:07 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:34:07 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:34:07 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:34:07 --> Pagination Class Initialized
+INFO - 2017-03-07 08:34:07 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:34:07 --> Controller Class Initialized
+INFO - 2017-03-07 08:34:07 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:34:07 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:34:07 --> Model Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:34:07 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:34:07 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:34:07 --> Model Class Initialized
+DEBUG - 2017-03-07 08:34:07 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:34:07 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:34:07 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:34:07 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:34:07 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:34:07 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:34:07 --> Final output sent to browser
+DEBUG - 2017-03-07 08:34:07 --> Total execution time: 0.8362
+INFO - 2017-03-07 08:34:19 --> Config Class Initialized
+INFO - 2017-03-07 08:34:20 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:34:20 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:34:20 --> URI Class Initialized
+INFO - 2017-03-07 08:34:20 --> Router Class Initialized
+INFO - 2017-03-07 08:34:20 --> Output Class Initialized
+INFO - 2017-03-07 08:34:20 --> Security Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:34:20 --> Input Class Initialized
+INFO - 2017-03-07 08:34:20 --> Language Class Initialized
+INFO - 2017-03-07 08:34:20 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:34:20 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:34:20 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:34:20 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:34:20 --> Pagination Class Initialized
+INFO - 2017-03-07 08:34:20 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:34:20 --> Controller Class Initialized
+INFO - 2017-03-07 08:34:20 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:34:20 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:34:20 --> Model Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:34:20 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:34:20 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:34:20 --> Model Class Initialized
+DEBUG - 2017-03-07 08:34:20 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:34:20 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:34:20 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:34:20 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:34:21 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:34:21 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:34:21 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:34:21 --> Final output sent to browser
+DEBUG - 2017-03-07 08:34:21 --> Total execution time: 1.1959
+INFO - 2017-03-07 08:34:59 --> Config Class Initialized
+INFO - 2017-03-07 08:34:59 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:34:59 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:34:59 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:34:59 --> URI Class Initialized
+INFO - 2017-03-07 08:34:59 --> Router Class Initialized
+INFO - 2017-03-07 08:34:59 --> Output Class Initialized
+INFO - 2017-03-07 08:34:59 --> Security Class Initialized
+DEBUG - 2017-03-07 08:34:59 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:34:59 --> Input Class Initialized
+INFO - 2017-03-07 08:34:59 --> Language Class Initialized
+INFO - 2017-03-07 08:34:59 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:34:59 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:34:59 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:34:59 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:34:59 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:34:59 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:35:00 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:35:00 --> Pagination Class Initialized
+INFO - 2017-03-07 08:35:00 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:35:00 --> Controller Class Initialized
+INFO - 2017-03-07 08:35:00 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:35:00 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:35:00 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:00 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:00 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:00 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:35:00 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:35:00 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:00 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:00 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:35:00 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:35:00 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/search_bar.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/view.php
+INFO - 2017-03-07 08:35:00 --> Language file loaded: language/english/breadcrumb_lang.php
+DEBUG - 2017-03-07 08:35:00 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/breadcrumb.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\history/index.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/header.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\_partials/footer.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/init_scripts.php
+INFO - 2017-03-07 08:35:00 --> File loaded: C:\xampp\htdocs\plastics\application\views\layouts/frontend.php
+INFO - 2017-03-07 08:35:00 --> Final output sent to browser
+DEBUG - 2017-03-07 08:35:00 --> Total execution time: 0.8255
+INFO - 2017-03-07 08:35:31 --> Config Class Initialized
+INFO - 2017-03-07 08:35:31 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:35:31 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:35:31 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:35:32 --> URI Class Initialized
+INFO - 2017-03-07 08:35:32 --> Router Class Initialized
+INFO - 2017-03-07 08:35:32 --> Output Class Initialized
+INFO - 2017-03-07 08:35:32 --> Security Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:35:32 --> Input Class Initialized
+INFO - 2017-03-07 08:35:32 --> Language Class Initialized
+INFO - 2017-03-07 08:35:32 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:35:32 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:35:32 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:35:32 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:35:32 --> Pagination Class Initialized
+INFO - 2017-03-07 08:35:32 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:35:32 --> Controller Class Initialized
+INFO - 2017-03-07 08:35:32 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:35:32 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:32 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:32 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:35:32 --> Parser Class Initialized
+INFO - 2017-03-07 08:35:32 --> Config Class Initialized
+INFO - 2017-03-07 08:35:32 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:35:32 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:35:32 --> URI Class Initialized
+INFO - 2017-03-07 08:35:32 --> Router Class Initialized
+INFO - 2017-03-07 08:35:32 --> Output Class Initialized
+INFO - 2017-03-07 08:35:32 --> Security Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:35:32 --> Input Class Initialized
+INFO - 2017-03-07 08:35:32 --> Language Class Initialized
+INFO - 2017-03-07 08:35:32 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:35:32 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:35:32 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:35:32 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:35:32 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:35:32 --> Pagination Class Initialized
+INFO - 2017-03-07 08:35:32 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:35:32 --> Controller Class Initialized
+INFO - 2017-03-07 08:35:32 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:35:32 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:32 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:32 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:32 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:35:33 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:35:33 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:33 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:33 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:35:33 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:35:33 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:35:33 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:35:36 --> Config Class Initialized
+INFO - 2017-03-07 08:35:36 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:35:36 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:35:36 --> URI Class Initialized
+INFO - 2017-03-07 08:35:36 --> Router Class Initialized
+INFO - 2017-03-07 08:35:36 --> Output Class Initialized
+INFO - 2017-03-07 08:35:36 --> Security Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:35:36 --> Input Class Initialized
+INFO - 2017-03-07 08:35:36 --> Language Class Initialized
+INFO - 2017-03-07 08:35:36 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:35:36 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:35:36 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:35:36 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:35:36 --> Pagination Class Initialized
+INFO - 2017-03-07 08:35:36 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:35:36 --> Controller Class Initialized
+INFO - 2017-03-07 08:35:36 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:35:36 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:36 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:36 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:35:36 --> Parser Class Initialized
+INFO - 2017-03-07 08:35:36 --> Config Class Initialized
+INFO - 2017-03-07 08:35:36 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:35:36 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:35:36 --> URI Class Initialized
+INFO - 2017-03-07 08:35:36 --> Router Class Initialized
+INFO - 2017-03-07 08:35:36 --> Output Class Initialized
+INFO - 2017-03-07 08:35:36 --> Security Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:35:36 --> Input Class Initialized
+INFO - 2017-03-07 08:35:36 --> Language Class Initialized
+INFO - 2017-03-07 08:35:36 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:35:36 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:35:36 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:35:36 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:35:37 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:35:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:35:37 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:35:37 --> Pagination Class Initialized
+INFO - 2017-03-07 08:35:37 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:35:37 --> Controller Class Initialized
+INFO - 2017-03-07 08:35:37 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:35:37 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:35:37 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:37 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:37 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:37 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:35:37 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:35:37 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:35:37 --> Model Class Initialized
+DEBUG - 2017-03-07 08:35:37 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:35:37 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:35:37 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:35:37 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:37:30 --> Config Class Initialized
+INFO - 2017-03-07 08:37:30 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:37:30 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:37:31 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:37:31 --> URI Class Initialized
+INFO - 2017-03-07 08:37:31 --> Router Class Initialized
+INFO - 2017-03-07 08:37:31 --> Output Class Initialized
+INFO - 2017-03-07 08:37:31 --> Security Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:37:31 --> Input Class Initialized
+INFO - 2017-03-07 08:37:31 --> Language Class Initialized
+INFO - 2017-03-07 08:37:31 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:37:31 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:37:31 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:37:31 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:37:31 --> Pagination Class Initialized
+INFO - 2017-03-07 08:37:31 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:37:31 --> Controller Class Initialized
+INFO - 2017-03-07 08:37:31 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:37:31 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:31 --> Model Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:31 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:37:31 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:31 --> Model Class Initialized
+DEBUG - 2017-03-07 08:37:31 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:37:31 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:37:31 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:37:31 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:37:32 --> Config Class Initialized
+INFO - 2017-03-07 08:37:32 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:37:32 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:37:32 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:37:32 --> URI Class Initialized
+INFO - 2017-03-07 08:37:32 --> Router Class Initialized
+INFO - 2017-03-07 08:37:32 --> Output Class Initialized
+INFO - 2017-03-07 08:37:32 --> Security Class Initialized
+DEBUG - 2017-03-07 08:37:32 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:37:32 --> Input Class Initialized
+INFO - 2017-03-07 08:37:33 --> Language Class Initialized
+INFO - 2017-03-07 08:37:33 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:37:33 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:37:33 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:37:33 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:37:33 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:37:33 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:37:33 --> Pagination Class Initialized
+INFO - 2017-03-07 08:37:33 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:37:33 --> Controller Class Initialized
+INFO - 2017-03-07 08:37:33 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:37:33 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:37:33 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:33 --> Model Class Initialized
+DEBUG - 2017-03-07 08:37:33 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:33 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:37:33 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:37:33 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:33 --> Model Class Initialized
+DEBUG - 2017-03-07 08:37:33 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:37:33 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:37:33 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:37:33 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php
+INFO - 2017-03-07 08:37:43 --> Config Class Initialized
+INFO - 2017-03-07 08:37:43 --> Hooks Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> UTF-8 Support Enabled
+INFO - 2017-03-07 08:37:43 --> Utf8 Class Initialized
+INFO - 2017-03-07 08:37:43 --> URI Class Initialized
+INFO - 2017-03-07 08:37:43 --> Router Class Initialized
+INFO - 2017-03-07 08:37:43 --> Output Class Initialized
+INFO - 2017-03-07 08:37:43 --> Security Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Global POST, GET and COOKIE data sanitized
+INFO - 2017-03-07 08:37:43 --> Input Class Initialized
+INFO - 2017-03-07 08:37:43 --> Language Class Initialized
+INFO - 2017-03-07 08:37:43 --> Loader Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/layout.php
+INFO - 2017-03-07 08:37:43 --> Helper loaded: url_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: file_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: layout_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: form_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: date_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: common_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: breadcrumb_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: admin_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: shipping_helper
+INFO - 2017-03-07 08:37:43 --> Database Driver Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2017-03-07 08:37:43 --> Session: Class initialized using 'files' driver.
+DEBUG - 2017-03-07 08:37:43 --> Pagination Class Initialized
+INFO - 2017-03-07 08:37:43 --> Language file loaded: language/english/service_messages_lang.php
+INFO - 2017-03-07 08:37:43 --> Controller Class Initialized
+INFO - 2017-03-07 08:37:43 --> Form Validation Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Layout class already loaded. Second attempt ignored.
+DEBUG - 2017-03-07 08:37:43 --> Form_validation class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:43 --> Model Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Pagination class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:43 --> Encrypt Class Initialized
+INFO - 2017-03-07 08:37:43 --> Parser Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Listing class already loaded. Second attempt ignored.
+INFO - 2017-03-07 08:37:43 --> Model Class Initialized
+DEBUG - 2017-03-07 08:37:43 --> Config file loaded: C:\xampp\htdocs\plastics\application\config/listing.php
+INFO - 2017-03-07 08:37:43 --> Helper loaded: search_helper
+INFO - 2017-03-07 08:37:43 --> Helper loaded: sort_helper
+INFO - 2017-03-07 08:37:43 --> File loaded: C:\xampp\htdocs\plastics\application\views\listing/listing.php

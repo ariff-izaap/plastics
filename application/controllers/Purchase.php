@@ -91,7 +91,7 @@ class Purchase extends Admin_Controller
   {  
     $output['message'] ="Record deleted successfuly.";
     $output['status']  = "success";
-    $log = log_history("purchase_order",$del_id,"purcashe","delete");
+    $log = log_history("purchase_order",$del_id,"purchase","delete");
     $this->purchase_model->delete(array("id"=>$del_id),"purchase_order");
     $this->purchase_model->delete(array("id"=>$del_id),"purchase_order_item");
     $this->_ajax_output($output, TRUE);
@@ -245,7 +245,8 @@ class Purchase extends Admin_Controller
       $up['updated_id'] = get_current_user_id();
       $up['updated_date'] = date("Y-m-d H:i:s");
       $this->purchase_model->update(array("id"=>$form['po_id']),$up,"purchase_order");
-      $this->session->set_flashdata("success_msg","Product Added Successfully",TRUE);
+      $log = log_history("purchase_order",$form['po_id'],"purchase","insert");
+      $this->session->set_flashdata("success_msg","Purchase Order Created Successfully",TRUE);
       redirect('purchase');
     }
     $this->layout->view('frontend/Purchase/checkout');

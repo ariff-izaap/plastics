@@ -570,6 +570,8 @@ function log_history($table='',$id='',$cat='',$action='')
   $data['action_id'] = $id;
   if($cat=="user")
     $data['action']="<strong>".$get_name[0]['first_name']." (".$get_name[0]['email'].") </strong> $cat has been ".$action;
+  else if($cat=="purchase")
+    $data['action']="<strong>#".$get_name[0]['id']."</strong> purchase order has been ".$action;
   else
     $data['action']="<strong>".$get_name[0]['name']."</strong> $cat has been ".$action;
 
