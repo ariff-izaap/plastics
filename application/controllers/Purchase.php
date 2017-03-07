@@ -46,8 +46,7 @@ class Purchase extends Admin_Controller
                                 'c.pickup_date' => 'Pickup Date',
                                 'f.location'      => 'Lcoation');
     $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a href="'.site_url('purchase/add_edit_purchase/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $str = '<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -62,11 +61,13 @@ class Purchase extends Admin_Controller
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
   	$this->layout->view('frontend/Purchase/index');
   }
-  public function add_edit_purchase()
+  public function add_edit_purchase($edit_id='')
   {
     $this->data['vendor'] = $this->purchase_model->get_vendors();
     $this->form_validation->set_rules($this->_purchase_validation_rules);
   	$this->data['po_id'] = $this->purchase_model->get_max_id();
+    if($edit_id)
+      $this->data['edit_data'] = $this->purchase_model->select(array("id"=>$edit_id),"purchase_order");
     if($this->form_validation->run())
     {
       $form = $this->input->post();

@@ -190,7 +190,7 @@ $config['history_index'] = array(
 						'line'=>array('name'=>'Action', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'action'=>array('name'=>'Comments', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),	
 						'created_name'=>array('name'=>'Action By', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						'created_date'=>array('name'=>'Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1)
+						'created_date'=>array('name'=>'Date', 'data_type' => 'datetime', 'sortable' => FALSE, 'default_view'=>1)
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
