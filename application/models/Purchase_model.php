@@ -11,7 +11,36 @@ class Purchase_model extends App_model
 	  parent::__construct();
 	  $this->_table = "purchase_order";
 	}
-  
+
+  function listing()
+  {
+	  $this->_fields = "c.*,t.business_name,f.location";
+    $this->db->from('purchase_order c');
+    $this->db->join("customer t","c.vendor_id=t.id");
+    $this->db->join("warehouse f","c.warehouse_id=f.id");
+    $this->db->group_by('c.id');
+    foreach ($this->criteria as $key => $value)
+    {
+      if( !is_array($value) && strcmp($value, '') === 0 )
+          continue;
+      switch ($key)
+      {
+        case 'c.id':
+          $this->db->like($key, $value);
+        break;
+        case 't.business_name':
+          $this->db->like($key, $value);
+        break;
+        case 'c.pickup_date':
+          $this->db->like($key, $value);
+        break;
+        case 'f.location':
+          $this->db->like($key, $value);
+        break;
+      }
+    }        
+    return parent::listing();
+  }
   public function get_vendors($where='')
   {
     if($where)
@@ -38,16 +67,25 @@ class Purchase_model extends App_model
 
 	public function update($where,$data,$table=NULL)
 	{
-		$this->db->where("id",$where);
+		$this->db->where($where);
 		$this->db->update($table,$data);
+	}
+
+	public function select($where,$table=NULL)
+	{
+		$this->db->where($where);
+		$q = $this->db->get($table);
+		if($q->num_rows() > 1)
+			return $q->result_array();
+		else
+			return $q->row_array();
 	}
 
 	public function delete($where,$table=NULL)
 	{
-		$this->db->where("id",$where);
+		$this->db->where($where);
 		$this->db->delete($table);
 	}
-
 
 	public function get_purchased_products($po_id)
 	{
@@ -58,4 +96,5 @@ class Purchase_model extends App_model
 		$q = $this->db->get();
 		return $q->result_array();
 	}
+
 }

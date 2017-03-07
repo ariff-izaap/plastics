@@ -145,7 +145,7 @@
                   </a> 
                 </li>
                 <li <?php echo ($curr_ctlr == 'address')?'class="active"':'';?> >
-                  <a href="<?=site_url('address');?>">
+                  <a href="<?=site_url('address/add');?>">
                       Address
                   </a> 
                 </li>

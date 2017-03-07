@@ -62,15 +62,10 @@ $config['purchase_index'] = array(
 	"base_url"	=> 	'/purchase/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'pid'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'name'=>array('name'=>'Product', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'form_name'=>array('name'=>'Form', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'color_name'=>array('name'=>'Color', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'product_type'=>array('name'=>'Type', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'equivalent'=>array('name'=>'Equivalent', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						'quantity'=>array('name'=>'Quantity', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						'wholesale_price'=>array('name'=>'Wholesale Price', 'data_type' => 'money', 'sortable' => FALSE, 'default_view'=>1),
-						'package_name'=>array('name'=>'Package Name','data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
+						'id'=>array('name'=>'PO ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'business_name'=>array('name'=>'Vendor', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'pickup_date'=>array('name'=>'Pickup Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1),
+						'location'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );

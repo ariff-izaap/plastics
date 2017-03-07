@@ -41,16 +41,15 @@ class Purchase extends Admin_Controller
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
     $this->simple_search_fields = array(                                                
-                                'a.name' => 'Product Name',
-                                'b.name'       => 'Form Name',
-                                'c.name' => 'Color',
-                                'd.name'      => 'Product Type',
-                                'e.name'      => 'Package');
+                                'c.id' => 'PO ID',
+                                't.business_name' => 'Vendor',
+                                'c.pickup_date' => 'Pickup Date',
+                                'f.location'      => 'Lcoation');
     $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $str = '<a href="'.site_url('purchase/add_edit_purchase/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
-    $listing = $this->listing->get_listings('product_model', 'listing');
+    $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
       $this->_ajax_output(array('listing' => $listing), TRUE);
     $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
@@ -88,6 +87,16 @@ class Purchase extends Admin_Controller
     $this->layout->view('frontend/Purchase/add_purchase');
   }
 
+   public function delete($del_id)
+  {  
+    $output['message'] ="Record deleted successfuly.";
+    $output['status']  = "success";
+    $log = log_history("purchase_order",$del_id,"purcashe","delete");
+    $this->purchase_model->delete(array("id"=>$del_id),"purchase_order");
+    $this->purchase_model->delete(array("id"=>$del_id),"purchase_order_item");
+    $this->_ajax_output($output, TRUE);
+  }
+
   public function add_product()
   {
     $form = $this->session->userdata['form_purchase'];
@@ -123,7 +132,7 @@ class Purchase extends Admin_Controller
     $vendor = $this->purchase_model->get_vendors(array("c.id"=>$id));
     echo json_encode($vendor[0]);
   }
-  public function add_cart($product_id,$po_id,$qty)
+  public function add_cart($product_id,$po_id,$qty,$vendor_id)
   {
     $ins['po_id'] = $po_id;
     $ins['product_id'] = $product_id;
@@ -133,11 +142,31 @@ class Purchase extends Admin_Controller
     $ins['updated_id'] = get_current_user_id();
     $ins['created_date'] = date("Y-m-d H:i:s");
     $ins['unit_price'] = get_product_price($product_id);
-    $add = $this->purchase_model->insert($ins,"purchase_order_item");
-    $this->_ajax_output(array('message' => "Product Added Successfully"), TRUE);
+    $chk_product = $this->purchase_model->select(array("product_id"=>$product_id,"po_id"=>$po_id),"purchase_order_item");
+    $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");
+     
+    if($chk_product)
+    {
+      $up['qty'] = $chk_product['qty'] + $qty;
+      $up['updated_date'] = date("Y-m-d H:i:s");
+      $update = $this->purchase_model->update(array("product_id"=>$product_id,"po_id"=>$po_id),$up,"purchase_order_item");
+       $this->_ajax_output(array('message' => "Product Added Successfully"), TRUE);
+    }
+    else
+    {
+      if($get_vendor['vendor_id']==$vendor_id || $get_vendor['vendor_id']=='')
+      {
+        $add = $this->purchase_model->insert($ins,"purchase_order_item");
+        $this->_ajax_output(array('message' => "Product Added Successfully"), TRUE);
+      }
+      else
+        $this->_ajax_output(array('message' => "Product Added with same vendor only."), TRUE);
+    }
+    
+    
   }
 
-  public function form_add_to_cart($product_id, $po_id, $elm_id)
+  public function form_add_to_cart($product_id, $po_id, $elm_id,$vendor_id)
   {
     $content = '<div id="div_add_to_cart" >
     <div class="menu_action pull-right nowrap m_bot_10">
@@ -145,7 +174,7 @@ class Purchase extends Admin_Controller
     <input type="hidden" name="pid" id="pid" value="'.$product_id.'" class="input-small" />
     <input type="hidden" name="vid" id="vid" value="'.$po_id.'" class="input-small" />
     <input type="hidden" name="elm_id" id="elm_id" value="'.$elm_id.'" class="input-small" />
-    <a class="btn" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this)">submit</a>
+    <a class="btn" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this,'.$vendor_id.')">submit</a>
     </div>
     </div>';
   
@@ -162,7 +191,7 @@ class Purchase extends Admin_Controller
       foreach($qty_array as $k => $v)
       {
         $data = array('qty' => $v);
-        $this->purchase_model->update($k,$data,"purchase_order_item");
+        $this->purchase_model->update(array("id"=>$k),$data,"purchase_order_item");
       }
       $output = array('status' => 'success', 'message' => 'Cart updated successfully!.');
     }
@@ -182,7 +211,7 @@ class Purchase extends Admin_Controller
   
     try
     {
-      $this->purchase_model->delete($row_id,"purchase_order_item");     
+      $this->purchase_model->delete(array("id"=>$row_id),"purchase_order_item");     
       $output = array('status' => 'success', 'message' => 'Item removed successfully.');
     }
     catch(Exception $e)
@@ -215,7 +244,7 @@ class Purchase extends Admin_Controller
       $up['note'] = $form['po_notes'];
       $up['updated_id'] = get_current_user_id();
       $up['updated_date'] = date("Y-m-d H:i:s");
-      $this->purchase_model->update($form['po_id'],$up,"purchase_order");
+      $this->purchase_model->update(array("id"=>$form['po_id']),$up,"purchase_order");
       $this->session->set_flashdata("success_msg","Product Added Successfully",TRUE);
       redirect('purchase');
     }

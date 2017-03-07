@@ -70,8 +70,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <a href="<?=site_url('purchase/checkout/'.$form_product['po_id']);?>" class="btn pull-right">Checkout</a>
-        <a href="javascript:void(0);" onclick="update_cart(this);" class="btn pull-right">Update Cart</a>
+        <div class="col-md-2 pull-right">
+          <a href="<?=site_url('purchase/checkout/'.$form_product['po_id']);?>" class="btn pull-right">Checkout</a>
+        </div>
+        <div class="col-md-2 pull-right">
+          <a href="javascript:void(0);" onclick="update_cart(this);" class="btn pull-right">Update Cart</a>
+        </div>
       </div>
     </div>
 

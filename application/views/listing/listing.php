@@ -100,7 +100,7 @@
           			if((isset($item['id']) && !empty($item['id'])))
           			{ 
 									echo '<label for="selectAll-'.$item['id'].'" class="custom-radio">&nbsp;</label>';
-          				echo form_radio("radio_select", $item['id'], '', "id='selectAll-{$item['id']}' class= 'radio'");
+          				echo form_radio("radio_select", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox'");
           			} 
           		?>
             </td>
@@ -138,7 +138,7 @@
 				{
 					?>
 						<td>
-							<button type="button" id="opt_<?=$item['id'];?>" class="btn btn-small" onclick="add_to_cart(<?=$item['id'];?>,<?=get_current_user_id();?>, 'form',this)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title=""> Add to Cart
+							<button type="button" id="opt_<?=$item['id'];?>" class="btn btn-small" onclick="add_to_cart(<?=$item['id'];?>,<?=get_current_user_id();?>, 'form',this,<?=$item['vendor_id'];?>)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title=""> Add to Cart
 					</button>
 						</td>
 					<?php

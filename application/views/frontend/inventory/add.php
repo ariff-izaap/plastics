@@ -1,10 +1,10 @@
- <div id="inventory_add_section">
- <div class="row">
-    <div class="breadcrumbs">
-      <?php echo set_breadcrumb(); ?>
-        <a href="<?php echo site_url('inventory');?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
+  <div id="inventory_add_section">
+   <div class="row">
+      <div class="breadcrumbs">
+        <?php echo set_breadcrumb(); ?>
+          <a href="<?php echo site_url('inventory');?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
+      </div>
     </div>
-  </div>
    
     <div class="row">
     
