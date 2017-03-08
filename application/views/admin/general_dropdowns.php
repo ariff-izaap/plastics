@@ -19,7 +19,7 @@ if(validation_errors())
           <option value="">--Select--</option>
           <option value="1">Packaging</option>
           <option value="2">Form</option>
-          <option value="3">Products</option>
+          <option value="3">Product Type</option>
           <option value="4">Credit</option>
           <option value="5">Freight Carriers</option>
           <option value="6">Time Zones</option>

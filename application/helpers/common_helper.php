@@ -624,7 +624,7 @@ function get_address()
 function get_prodcut_type()
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from product_type")->result_array();
+  $q = $CI->db->query("select * from product_type where status=1")->result_array();
   return $q;
 }
 

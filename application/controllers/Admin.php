@@ -237,7 +237,7 @@ class Admin extends Admin_Controller
         $table = "product_form";
         break;
       case '3':
-        $table = "product";
+        $table = "product_type";
         break;
       case '4':
         $table = "credit_type";
