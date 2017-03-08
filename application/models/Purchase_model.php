@@ -50,6 +50,7 @@ class Purchase_model extends App_model
     $this->db->join("address b","a.address_id=b.id");
     $this->db->join("customer_contact c","a.id=c.customer_id");
     $this->db->join("vendor_price_list d","a.id=d.vendor_id");
+    $this->db->group_by("a.id");
     $q = $this->db->get();
     return $q->result_array();
   }

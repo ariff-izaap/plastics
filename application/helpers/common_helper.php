@@ -621,6 +621,13 @@ function get_address()
   return $q;
 }
 
+function get_prodcut_type()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from product_type")->result_array();
+  return $q;
+}
+
 function get_product_price($id)
 {
   $CI = get_instance();

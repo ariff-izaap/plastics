@@ -82,9 +82,24 @@
                                   </select>
                                 </div>
                                 <br />
-                                <div class="form-group  <?php //echo (form_error('product'))?'error':'';?>" data-error="<?php //echo (form_error('product'))? form_error('product'):'';?>">
+                                <div class="form-group  <?php echo (form_error('product'))?'error':'';?>" data-error="<?php echo (form_error('product'))? form_error('product'):'';?>">
                                   <label>Product:</label>
-                                  <input type="text" name="product" class="form-control" id="product" value="<?php echo set_value('product', $editdata['product']);?>" placeholder="Product" />
+                                   <select name="product" class="form-control" >
+                                    <option value="">--Select--</option>
+                                    <?php
+                                    if(get_prodcut_type())
+                                    {
+                                      foreach (get_prodcut_type() as $key => $value)
+                                      {
+                                        ?>
+                                        <option <?php if($value['id']==$editdata['product']){?> selected <?php }?>
+                                          value="<?=$value['id'];?>"><?=$value['name'];?></option>
+                                        <?php
+                                      }
+                                    }
+                                    ?>
+                                  </select>
+                                  <!-- <input type="text" name="product" class="form-control" id="product" value="<?php echo set_value('product', $editdata['product']);?>" placeholder="Product" /> -->
                                 </div>
                                 <br />
                                 <div class="form-group  <?php //echo (form_error('notes'))?'error':'';?>" data-error="<?php //echo (form_error('notes'))? form_error('notes'):'';?>">
@@ -94,7 +109,7 @@
                                 <br />
                                 <div class="form-group  <?php //echo (form_error('item_type'))?'error':'';?>" data-error="<?php //echo (form_error('item_type'))? form_error('item_type'):'';?>">
                                   <label required>Type:</label>
-                                  <textarea name="item_type" class="form-control" id="type"><?php echo set_value('item_type', $editdata['item_type']); ?> </textarea>
+                                   <textarea name="item_type" class="form-control" id="type"><?php echo set_value('item_type', $editdata['item_type']); ?> </textarea> 
                                 </div>
                                 <br />
                                 <div class="form-group  <?php //echo (form_error('equivalent'))?'error':'';?>" data-error="<?php //echo (form_error('equivalent'))? form_error('equivalent'):'';?>">
@@ -190,26 +205,25 @@
                                 
                                 <div class="form-group <?php echo (form_error('intransit_to_warehouse'))?'error':'';?>" data-error="<?php echo (form_error('intransit_to_warehouse'))? form_error('intransit_to_warehouse'):'';?>">
                                   <label>In Transit To Warehouse</label>
-                                  <input type="radio" name="intransit_to_warehouse" value="Yes" <?php echo set_radio('intransit_to_warehouse', '1', ($editdata['intransit_to_warehouse']=='Yes')?TRUE:""); ?> /> Yes
-                                  <input type="radio" name="intransit_to_warehouse" value="No" <?php echo set_radio('intransit_to_warehouse', '1', ($editdata['intransit_to_warehouse']=='No')?TRUE:""); ?> /> No
+                                  <input type="radio" name="intransit_to_warehouse" value="Yes" <?php echo set_radio('intransit_to_warehouse', '1', ($editdata['intransit_to_warehouse']=='Yes' || $editdata['intransit_to_warehouse']=='')?TRUE:""); ?> /> Yes
+                                  <input type="radio" name="intransit_to_warehouse" value="No" <?php echo set_radio('intransit_to_warehouse', '1', ($editdata['intransit_to_warehouse']=='No' || $editdata['intransit_to_warehouse']=='')?TRUE:""); ?> /> No
                                 </div>
-                                
                                 <div class="form-group <?php echo (form_error('intransit_to_customer'))?'error':'';?>" data-error="<?php echo (form_error('intransit_to_customer'))? form_error('intransit_to_customer'):'';?>">
                                   <label>In Transit to Customer</label>
-                                  <input type="radio" name="intransit_to_customer" value="Yes" <?php echo set_radio('intransit_to_customer', '1', ($editdata['intransit_to_customer']=='Yes')?TRUE:""); ?> /> Yes
-                                  <input type="radio" name="intransit_to_customer" value="No" <?php echo set_radio('intransit_to_customer', '1', ($editdata['intransit_to_customer']=='No')?TRUE:""); ?> /> No
+                                  <input type="radio" name="intransit_to_customer" value="Yes" <?php echo set_radio('intransit_to_customer', '1', ($editdata['intransit_to_customer']=='Yes' || $editdata['intransit_to_customer']=='')?TRUE:""); ?> /> Yes
+                                  <input type="radio" name="intransit_to_customer" value="No" <?php echo set_radio('intransit_to_customer', '1', ($editdata['intransit_to_customer']=='No' || $editdata['intransit_to_customer']=='')?TRUE:""); ?> /> No
                                 </div>
                                 
                                  <div class="form-group <?php echo (form_error('received_at_customer'))?'error':'';?>" data-error="<?php echo (form_error('received_at_customer'))? form_error('received_at_customer'):'';?>">
                                   <label>Received At Customer</label>
-                                  <input type="radio" name="received_at_customer" value="Yes" <?php echo set_radio('received_at_customer', '1', ($editdata['received_at_customer']=="Yes")?TRUE:""); ?> /> Yes
-                                  <input type="radio" name="received_at_customer" value="No" <?php echo set_radio('received_at_customer', '1', ($editdata['received_at_customer']=='No')?TRUE:""); ?> /> No
+                                  <input type="radio" name="received_at_customer" value="Yes" <?php echo set_radio('received_at_customer', '1', ($editdata['received_at_customer']=="Yes" || $editdata['received_at_customer']=="")?TRUE:""); ?> /> Yes
+                                  <input type="radio" name="received_at_customer" value="No" <?php echo set_radio('received_at_customer', '1', ($editdata['received_at_customer']=='No' || $editdata['received_at_customer']=="")?TRUE:""); ?> /> No
                                 </div>
                                 
                                  <div class="form-group <?php echo (form_error('received_in_warehouse'))?'error':'';?>" data-error="<?php echo (form_error('received_in_warehouse'))? form_error('received_in_warehouse'):'';?>">
                                   <label>Received At Warehouse</label>
-                                  <input type="radio" name="received_in_warehouse" value="Yes" <?php echo set_radio('received_in_warehouse', '1', ($editdata['received_in_warehouse']=='Yes')?TRUE:""); ?> /> Yes
-                                  <input type="radio" name="received_in_warehouse" value="No" <?php echo set_radio('received_in_warehouse', '1', ($editdata['received_in_warehouse']=='No')?TRUE:""); ?> /> No
+                                  <input type="radio" name="received_in_warehouse" value="Yes" <?php echo set_radio('received_in_warehouse', '1', ($editdata['received_in_warehouse']=='Yes' || $editdata['received_in_warehouse']=='')?TRUE:""); ?> /> Yes
+                                  <input type="radio" name="received_in_warehouse" value="No" <?php echo set_radio('received_in_warehouse', '1', ($editdata['received_in_warehouse']=='No' || $editdata['received_in_warehouse']=='')?TRUE:""); ?> /> No
                                 </div>
                                 
                               <!--  <div class="form-group  <?php //echo (form_error('length'))?'error':'';?>" data-error="<?php //echo (form_error('length'))? form_error('length'):'';?>">

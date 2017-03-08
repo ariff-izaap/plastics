@@ -79,6 +79,7 @@ class Inventory extends Admin_Controller
           $this->form_validation->set_rules('name','Product Name','trim|required');
           $this->form_validation->set_rules('sku','Sku','trim|required');
           $this->form_validation->set_rules('quantity','Quantity','trim|required');
+          $this->form_validation->set_rules('product','Product Type','trim|required');
           // $this->form_validation->set_rules('internal_lot_no','Internal lot no','trim|required');
           // $this->form_validation->set_rules('vendor_lot_no','Vendor lot no','trim|required');
           // $this->form_validation->set_rules('shipping_cost','Shipping Cost','trim|required');
@@ -105,7 +106,7 @@ class Inventory extends Admin_Controller
           $this->form_validation->set_error_delimiters('', '');
           if ($this->form_validation->run())
           {
-            // echo $this->input->post('sku'); exit;
+              // echo $this->input->post('sku'); exit;
               $ins_data = array();
               $ins_data['sku']                    = $this->input->post('sku');
               $ins_data['name']                   = $this->input->post('name');
@@ -160,45 +161,45 @@ class Inventory extends Admin_Controller
               
               $this->session->set_flashdata('success_msg',$msg,TRUE);
               $status  = 'success';
-            }    
-            else
-            {
-              $edit_data = array();
-              $edit_data['id']                    = (!empty($edit_id))?$edit_id:'';
-              $edit_data['sku']                   = '';
-              $edit_data['name']                  = '';
-              $edit_data['color_id']              = '';
-              $edit_data['form_id']               = '';
-              $edit_data['package_id']            = '';
-              $edit_data['category_id']           = '';
-              $edit_data['quantity']              = '';
-              $edit_data['retail_price']          = '';
-              $edit_data['wholesale_price']       = '';
-              $edit_data['shipping_cost']         = '';
-              $edit_data['ref_no']                = '';
-              $edit_data['internal_lot_no']       = '';
-              $edit_data['vendor_lot_no']         = '';
-              $edit_data['received_at_customer']  = '';
-              $edit_data['received_in_warehouse'] = '';
-              $edit_data['row']                   = '';
-              $edit_data['notes']                 = '';
-              $edit_data['product']               = '';
-              $edit_data['units']                 = '';
-              $edit_data['item_type']             = '';
-              $edit_data['weight']                = '';
-              $edit_data['in_stock']              = '';
-              $edit_data['image_title']           = '';
-              $edit_data['file_name']             = '';
-              $edit_data['purchase_order_number'] = '';
-              $edit_data['equivalent']             = '';
-              $edit_data['warehouse_id']           = '';
-              $edit_data['intransit_to_warehouse'] = '';
-              $edit_data['intransit_to_customer']  = '';
-              $edit_data['certification_files']    = '';
-              $edit_data['purchase_transportation_identifier']= '';
-              $edit_data['sales_transportation_identifier']   = '';
-              $status = 'error';
-            }
+          }    
+          else
+          {
+            $edit_data = array();
+            $edit_data['id']                    = (!empty($edit_id))?$edit_id:'';
+            $edit_data['sku']                   = '';
+            $edit_data['name']                  = '';
+            $edit_data['color_id']              = '';
+            $edit_data['form_id']               = '';
+            $edit_data['package_id']            = '';
+            $edit_data['category_id']           = '';
+            $edit_data['quantity']              = '';
+            $edit_data['retail_price']          = '';
+            $edit_data['wholesale_price']       = '';
+            $edit_data['shipping_cost']         = '';
+            $edit_data['ref_no']                = '';
+            $edit_data['internal_lot_no']       = '';
+            $edit_data['vendor_lot_no']         = '';
+            $edit_data['received_at_customer']  = '';
+            $edit_data['received_in_warehouse'] = '';
+            $edit_data['row']                   = '';
+            $edit_data['notes']                 = '';
+            $edit_data['product']               = '';
+            $edit_data['units']                 = '';
+            $edit_data['item_type']             = '';
+            $edit_data['weight']                = '';
+            $edit_data['in_stock']              = '';
+            $edit_data['image_title']           = '';
+            $edit_data['file_name']             = '';
+            $edit_data['purchase_order_number'] = '';
+            $edit_data['equivalent']             = '';
+            $edit_data['warehouse_id']           = '';
+            $edit_data['intransit_to_warehouse'] = '';
+            $edit_data['intransit_to_customer']  = '';
+            $edit_data['certification_files']    = '';
+            $edit_data['purchase_transportation_identifier']= '';
+            $edit_data['sales_transportation_identifier']   = '';
+            $status = 'error';
+          }
         }
         catch (Exception $e)
         {
