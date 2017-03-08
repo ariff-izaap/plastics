@@ -4,7 +4,6 @@ $(function()
        
         $('#ProductTabs a').click(function (e) {
             e.preventDefault();
-            //alert(123);
             $(this).tab('show');
         });
     
@@ -19,7 +18,9 @@ $(function()
       }
       else
       {
-        $('#ProductTabs a').attr("data-toggle",'tab').trigger('click');
+        //$("#ProductTabs a:first").trigger("click");
+        
+        //$('#ProductTabs a').attr("data-toggle",'tab').trigger('click');
       }
         $("#ProductTabs a:first").trigger("click");
 

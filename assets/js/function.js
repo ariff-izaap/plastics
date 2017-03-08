@@ -1,5 +1,7 @@
 $(function(){
     
+    
+    
   //$('a,button').tooltip();
 
 	$('.singledate').daterangepicker({
@@ -99,6 +101,7 @@ $(function(){
 
 
 */
+
 
 function add_to_cart(b,a,d,f,v)
 {
@@ -451,38 +454,21 @@ function capitaliseFirstLetter(string)
 
 function inventory_sub()
 {
-     //var fdata  = $("#inventory_sub_form").serialize();
-    var edit_id   = '';
-    var fd        = new FormData();
-    var file_data = $('input[type="file"]')[0].files; 
-    
-    for(var i = 0;i<file_data.length;i++){
-        fd.append("certificate_file_name", file_data);
-    }
-    var other_data = $('#inventory_sub_form').serializeArray();
-    
-    $.each(other_data,function(key,input){
-        fd.append(input.name,input.value);
-    });
-    
+    var fdata   = $("#inventory_sub_form").serialize();
+    var edit_id = '';
         edit_id = $("#inventory_sub_form #edit_id").val();
 
       $.ajax({
           url:base_url+"inventory/add/"+edit_id,
           type:"POST",
-          data:fd,
-          contentType: false,
-          processData: false,
+          data:fdata,
+          dataType:'json',
           success:function(res)
           {
-            console.log(res);
-            res = JSON.parse(res);
             var status = res.status;
-            var output = res.output;
-                
-            if(status == 'success')
-            {
-              //location.href = base_url+"inventory/add/"+res.edit_id;
+            var output = res.output;      
+            if(status == 'success'){
+              location.href = base_url+"inventory/add/"+res.edit_id;
             }
             else
             {

@@ -138,22 +138,7 @@ class Inventory extends Admin_Controller
               $ins_data['intransit_to_customer']  = $this->input->post('intransit_to_customer');
               $ins_data['purchase_transportation_identifier']= $this->input->post('purchase_transportation_identifier');
               $ins_data['sales_transportation_identifier']   = $this->input->post('sales_transportation_identifier');
-                
-              // echo $_FILES['certificate_file_name']['tmp_name'];
-                
-              if(!empty($_FILES['certificate_file_name']['tmp_name']) && (empty($_POST['certification_files'])))
-              { 
-    			      $upload_data = $this->certificate_upload();
-                 // print_r($upload_data); exit;
-                $filename    = $upload_data['certificate_file_name']['file_name'];
-              }
-              else
-              {
-                //echo $_POST['certification_files']; 
-    				    $filename  = $_POST['certification_files'];
-    			    }
-              
-              $ins_data['certification_files']    = $filename; 
+              $ins_data['certification_files']    = (isset($_POST['certification_files']))?$_POST['certification_files']:''; 
               
               if($edit_id)
               {
@@ -278,8 +263,8 @@ class Inventory extends Admin_Controller
             $config['upload_path']   = $this->upload_path.$form['upload_folder'].'/';
             $config['allowed_types'] = (isset($form['types']) && !empty($form['types']))?$form['types']:'gif|jpg|png|jpeg';
             $config['max_size']      = '10000';
-            $config['max_width']     = '300';
-            $config['max_height']    = '100';
+           // $config['max_width']     = '300';
+          //  $config['max_height']    = '100';
 
             $this->load->library('upload', $config);
 
@@ -306,30 +291,35 @@ class Inventory extends Admin_Controller
     
     public function certificate_upload()
     {
+        
         try
         {
-            $config['upload_path'] = BASEPATH_CUSTOM.'assets/uploads/product/certificate';
-    		//s$config['allowed_types'] = 'doc|docx';
-    		
-    		$this->load->library('upload', $config);
-    
-    		if(!$this->upload->do_upload('certificate_file_name')){
-    			$error = array('error' => $this->upload->display_errors());
-    			return $error;
-    		}
-    		else
-    		{
-    			$data = array('certificate_file_name' => $this->upload->data());
-    			return $data;	
-    		}           
+            $form  = $this->input->post(NULL, TRUE);
+            $field = $form['field'];
+
+            if(!isset($form['upload_folder']))
+                 throw new Exception("Upload folder is empty!");
+
+            $config['upload_path']   = $this->upload_doc_path.$form['upload_folder'].'/';
+            $config['allowed_types'] = (isset($form['types']) && !empty($form['types']))?$form['types']:'doc|docx';
+          
+            $this->load->library('upload', $config);
+
+            if(!$this->upload->do_upload("$field"))            
+               throw new Exception($this->upload->display_errors());
+               
+            $files = $this->upload->data();  
+            $this->data['fileuploaded']   = $files['file_name'];
+                          
         }
         catch(Exception $e)
         {
             $this->data['error'] = $e->getMessage();    
         }     
 
-        //echo json_encode($this->data);
-        //exit;
+        echo json_encode($this->data);
+        exit;
+        
     }
     
     public function update_image_title()

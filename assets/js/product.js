@@ -58,37 +58,36 @@ var upld_options = {};
 
 
 //product certificate upload section
-//
-//var upld_certificate_options = {}; 
-//    upld_certificate_options.uploadUrl              = base_url+'inventory/certificate_upload';
-//    upld_certificate_options.allowedFileExtensions  = ['doc','docx'];
-//  //  upld_certificate_options.maxFileSize            = 2000; //kb
-//    upld_certificate_options.showCaption            = false;
-//    upld_certificate_options.dropZoneEnabled        = false;
-//    upld_certificate_options.showRemove             = false;
-//    
-//    var up_folder,divid,field_name;
-//    
-//    if(prv_certificate != '')
-//        upld_certificate_options.initialPreview = [prv_certificate];
-//   
-//    upld_certificate_options.uploadExtraData = {'upload_folder':"certificate",'types':'doc|docx','field':"certificate_file_name"}, 
-//
-//    upld_certificate_options.slugCallback = function(filename) {      
-//      return filename.replace('(', '_').replace(']', '_');
-//    };
-//    
-//    $("#success_msg").html('');
-//    
-//    $("#certificate_file_name").fileinput(upld_certificate_options);
-//
-//    $(document).ready(function() {
-//         
-//        $('#certificate_file_name').on('fileuploaded', function(event, data, previewId, index) {
-//            var form = data.form, files = data.files, extra = data.extra,
-//            response = data.response, reader = data.reader;
-//             
-//            $("#certification_files").val(response.fileuploaded);       
-//        });
-//    });
-//
+
+var upld_certificate_options = {}; 
+    upld_certificate_options.uploadUrl              = base_url+'inventory/certificate_upload';
+    upld_certificate_options.allowedFileExtensions  = ['doc','docx'];
+    upld_certificate_options.maxFileSize            = 2000; //kb
+    upld_certificate_options.showCaption            = false;
+    upld_certificate_options.dropZoneEnabled        = false;
+    upld_certificate_options.showRemove             = false;
+    
+    var up_folder,divid,field_name;
+    
+    if(prv_certificate != '')
+        upld_certificate_options.initialPreview = [prv_certificate];
+   
+    upld_certificate_options.uploadExtraData = {'upload_folder':"certificate",'types':'doc|docx','field':"certificate_file_name"}, 
+
+    upld_certificate_options.slugCallback = function(filename) {      
+      return filename.replace('(', '_').replace(']', '_');
+    };
+    
+    $("#success_msg").html('');
+    
+    $("#certificate_file_name").fileinput(upld_certificate_options);
+
+    $(document).ready(function() {
+         
+        $('#certificate_file_name').on('fileuploaded', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+             
+            $("#certification_files").val(response.fileuploaded);       
+        });
+    });

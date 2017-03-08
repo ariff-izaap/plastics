@@ -13,8 +13,8 @@
                 <div class="panel-heading">
                     <ul id="ProductTabs" class="nav nav-tabs">
                         <li><a href="#tab1primary" class="tablinks" data-toggle="tab">GENERAL</a></li>
-                        <li><a href="#tab2primary" class="tablinks" >IMAGES</a></li>
-                        <li><a href="#tab3primary" class="tablinks" >VENDORS</a></li>
+                        <li><a href="#tab2primary" class="tablinks"  onclick="open_tab('tab2primary');" >IMAGES</a></li>
+                        <li><a href="#tab3primary" class="tablinks"  onclick="open_tab('tab3primary');" >VENDORS</a></li>
                     </ul>
                 </div>
                 
@@ -153,10 +153,10 @@
                                 <div class="form-grid col-md-6">
                                 <label>Certificate Documents:</label>
                                 <div class="form-group">
-                    				<input id="certificate_file_name" name="certificate_file_name" type="file" />
+                    				<input id="certificate_file_name" name="certificate_file_name" class="file" type="file" />
                                     <input id="certification_files" name="certification_files" type="hidden" value="<?php echo set_value('certification_files',$editdata['certification_files']); ?>" />
                                     <?php if(!empty($editdata['certification_files'])){ $image = BASEPATH_CUSTOM.'assets/uploads/product/certificate/'.$editdata['certification_files']; if(file_exists($image)) { ?>
-                                    <a href="<?php echo site_url().'assets/uploads/product/certificate/'.$editdata['certification_files']; ?>" target="_blank" >Certifiacate</a>
+                                    <a href="<?php echo site_url().'assets/uploads/product/certificate/'.$editdata['certification_files']; ?>" target="_blank" title="You can see already uploaded file" >Certifiacate(<?php echo $editdata['certification_files']; ?>)</a>
                                     <?php }} ?>
                                     <br />
                     				<span class="vstar" ><?php echo form_error('certification_files', '<span class="">', '</span>'); ?></span>
@@ -242,8 +242,6 @@
                                 <div class="form-group col-md-2">   
                                    <input type="reset" name="reset" value="Reset" class="btn btn-block active text-center" />
                                 </div>
-                                
-                                
                                 <!--
 <div class="form-group col-md-2 col-md-offset-8">   
                                   <a href="<?php //echo site_url('inventory');?>" class="btn btn-block active text-center">Back</a>
@@ -252,9 +250,7 @@
                                   <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub();">Next</button>
                                 </div>
 -->
-                                
-                                 </form>
-                                 
+                               </form>                                
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab2primary">
                             <div class="col-md-12 text-right" style="padding-bottom: 20px;">
@@ -267,7 +263,7 @@
                                     <td>Image</td>
                                     <td>Action</td>
                                  </tr>
-                                   <?php //print_r($editdata['images']); 
+                                   <?php 
                                        if(count($editdata['images'])>0) { 
                                          foreach($editdata['images'] as $ekey => $evalue) {
                                      ?>
@@ -279,7 +275,7 @@
                                  <?php }} 
                                       else { ?>
                                    <tr>
-                                    <td colspan="3"><?php echo "No Images Found!"; ?></td>
+                                        <td colspan="3"><?php echo "No Images Found!"; ?></td>
                                    </tr>
                                   <?php
                                     
@@ -318,7 +314,7 @@
                                     <td>SHIPPING SERVICE</td>
                                     <td>ACTION</td>
                                  </tr>
-                                   <?php //print_r($editdata['images']); 
+                                   <?php 
                                        if(count($editdata['pricelts'])>0) { 
                                          foreach($editdata['pricelts'] as $ekey => $evalue) {
                                      ?>
@@ -336,14 +332,14 @@
                                     <td colspan="3"><?php echo "No Price lists Found!"; ?></td>
                                    </tr>
                                   <?php
-                                    
-                                 }?>
+                                  }
+                                 ?>
                               </table>
                         </div>
                         
                     </div>
                     <div class="tab-pane fade tabcontent" id="tab4primary">Primary 4</div>
-                        <div class="tab-pane fade tabcontent" id="tab5primary">Primary 5</div>
+                    <div class="tab-pane fade tabcontent" id="tab5primary">Primary 5</div>
                  </div>
             </div>
         </div>
