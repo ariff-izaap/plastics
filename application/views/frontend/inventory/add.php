@@ -272,18 +272,21 @@
                             </div>     
                          
                               <table class="table table-striped table-hover tableSite table-bordered">
-                                 <tr>
-                                    <td>Title</td>
-                                    <td>Image</td>
-                                    <td>Action</td>
-                                 </tr>
+                                 <thead>
+                                    <th width="300px">Title</th>
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                 </thead>
+                                 <tbody>
                                    <?php 
                                        if(count($editdata['images'])>0) { 
                                          foreach($editdata['images'] as $ekey => $evalue) {
                                      ?>
                                         <tr>
                                             <td><?php echo $evalue['image_title']; ?></td>
-                                            <td><img src="<?php echo base_url(); ?>assets/images/product/<?php echo $evalue['file_name']; ?>" /></td>
+                                            <td>
+                                            <img src="<?php echo base_url(); ?>assets/images/product/<?php echo $evalue['file_name']; ?>" style="width:15%;height:10%;" />
+                                            </td>
                                             <td><i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id'];?>','product_images');"></i></td>
                                         </tr>
                                  <?php }} 
@@ -294,6 +297,7 @@
                                   <?php
                                     
                                  }?>
+                                 </tbody>
                               </table>
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab3primary">
