@@ -61,13 +61,11 @@ class Purchase extends Admin_Controller
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
   	$this->layout->view('frontend/Purchase/index');
   }
-  public function add_edit_purchase($edit_id='')
+  public function add_edit_purchase()
   {
     $this->data['vendor'] = $this->purchase_model->get_vendors();
     $this->form_validation->set_rules($this->_purchase_validation_rules);
-  	$this->data['po_id'] = $this->purchase_model->get_max_id();
-    if($edit_id)
-      $this->data['edit_data'] = $this->purchase_model->select(array("id"=>$edit_id),"purchase_order");
+  	$this->data['po_id'] = $this->purchase_model->get_max_id();   
     if($this->form_validation->run())
     {
       $form = $this->input->post();
