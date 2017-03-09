@@ -37,6 +37,9 @@ class Purchase_model extends App_model
         case 'f.location':
           $this->db->like($key, $value);
         break;
+        case 'c.order_status':
+          $this->db->like($key, $value);
+        break;
       }
     }        
     return parent::listing();

@@ -41,10 +41,11 @@ class Purchase extends Admin_Controller
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
     $this->simple_search_fields = array(                                                
-                                'c.id' => 'PO ID',
+                                'c.id'            => 'PO ID',
                                 't.business_name' => 'Vendor',
-                                'c.pickup_date' => 'Pickup Date',
-                                'f.location'      => 'Lcoation');
+                                'c.pickup_date'   => 'Pickup Date',
+                                'f.location'      => 'Location',
+                                'c.order_status'  => 'Order Status');
     $this->_narrow_search_conditions = array("start_date");    
     $str = '<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
@@ -69,16 +70,16 @@ class Purchase extends Admin_Controller
     if($this->form_validation->run())
     {
       $form = $this->input->post();
-      $ins['id'] = $form['po_id'];
-      $ins['vendor_id'] = $form['vendor_id'];
-      $ins['order_status'] = "NEW";
-      $ins['pickup_date'] = $form['pickup_date'];
-      $ins['estimated_delivery'] = $form['delivery_date'];
-      $ins['release_to_sold'] = isset($form['to_sold']) ? $form['to_sold'] : "No";
-      $ins['is_paid'] = "NOT PAID";
-      $ins['created_id'] = get_current_user_id();
-      $ins['updated_id'] = get_current_user_id();
-      $ins['created_date'] = date("Y-m-d H:i:s");
+      $ins['id']                  = $form['po_id'];
+      $ins['vendor_id']           = $form['vendor_id'];
+      $ins['order_status']        = "NEW";
+      $ins['pickup_date']         = $form['pickup_date'];
+      $ins['estimated_delivery']  = $form['delivery_date'];
+      $ins['release_to_sold']     = isset($form['to_sold']) ? $form['to_sold'] : "No";
+      $ins['is_paid']             = "NOT PAID";
+      $ins['created_id']          = get_current_user_id();
+      $ins['updated_id']          = get_current_user_id();
+      $ins['created_date']        = date("Y-m-d H:i:s");
       $this->purchase_model->insert($ins,"purchase_order");
       $this->session->set_userdata('form_purchase',$form);
       redirect("purchase/add_product");
@@ -86,9 +87,9 @@ class Purchase extends Admin_Controller
     $this->layout->view('frontend/Purchase/add_purchase');
   }
 
-   public function delete($del_id)
+  public function delete($del_id)
   {  
-    $output['message'] ="Record deleted successfuly.";
+    $output['message'] = "Record deleted successfuly.";
     $output['status']  = "success";
     $log = log_history("purchase_order",$del_id,"purchase","delete");
     $this->purchase_model->delete(array("id"=>$del_id),"purchase_order");
@@ -103,10 +104,10 @@ class Purchase extends Admin_Controller
     $this->load->library('listing');
     $this->simple_search_fields = array(                                                
                                 'a.name' => 'Product Name',
-                                'b.name'       => 'Form Name',
+                                'b.name' => 'Form Name',
                                 'c.name' => 'Color',
-                                'd.name'      => 'Product Type',
-                                'e.name'      => 'Package');
+                                'd.name' => 'Product Type',
+                                'e.name' => 'Package');
     $this->_narrow_search_conditions = array("start_date");    
     // $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
     //         <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
@@ -142,8 +143,7 @@ class Purchase extends Admin_Controller
     $ins['created_date'] = date("Y-m-d H:i:s");
     $ins['unit_price'] = get_product_price($product_id);
     $chk_product = $this->purchase_model->select(array("product_id"=>$product_id,"po_id"=>$po_id),"purchase_order_item");
-    $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");
-     
+    $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");     
     if($chk_product)
     {
       $up['qty'] = $chk_product['qty'] + $qty;
@@ -160,9 +160,7 @@ class Purchase extends Admin_Controller
       }
       else
         $this->_ajax_output(array('message' => "Product Added with same vendor only."), TRUE);
-    }
-    
-    
+    }        
   }
 
   public function form_add_to_cart($product_id, $po_id, $elm_id,$vendor_id)
@@ -175,9 +173,8 @@ class Purchase extends Admin_Controller
     <input type="hidden" name="elm_id" id="elm_id" value="'.$elm_id.'" class="input-small" />
     <a class="btn" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this,'.$vendor_id.')">submit</a>
     </div>
-    </div>';
-  
-   // if($this->input->is_ajax())
+    </div>';  
+    // if($this->input->is_ajax())
     $this->_ajax_output(array('content' => $content), TRUE);
   }
 
@@ -201,13 +198,11 @@ class Purchase extends Admin_Controller
 
     $this->data['products'] = $this->purchase_model->get_purchased_products($po_id);
     $output['content']    = $this->load->view('/frontend/Purchase/view_cart', $this->data, TRUE);
-    
     $this->_ajax_output($output, TRUE);
   }
 
   public function remove_cart($row_id,$po_id)
-  {
-  
+  {  
     try
     {
       $this->purchase_model->delete(array("id"=>$row_id),"purchase_order_item");     

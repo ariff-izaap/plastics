@@ -25,27 +25,27 @@
       		</thead>
       		<tbody>
       			<?php
-      			if($vendor)
-      			{
-      				foreach ($vendor as $key => $value)
-      				{
-      					?>
-      						<tr>
-      							<td>
-      								<label for="selectAll-<?=$value['id'];?>"  class="custom-radio">&nbsp;</label>
-      								<input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" id="selectAll-<?=$value['id'];?>"
-                      <?php if(isset($_POST['vendor_id'])){?> checked <?php }?> >
-      							</td>
-      							<td><?=$value['business_name'];?></td>
-      							<td><?=$value['contact_name'];?></td>
-      							<td><?=$value['contact_value'];?></td>
-      							<td><?=$value['state'];?></td>
-      							<td><?=$value['city'];?></td>
-      							<td><?=$value['business_name'];?></td>
-      						</tr>
-      					<?php
-      				}
-      			}
+        			if($vendor)
+        			{
+        				foreach ($vendor as $key => $value)
+        				{
+        					?>
+        						<tr>
+        							<td>
+        								<label for="selectAll-<?=$value['id'];?>"  class="custom-radio">&nbsp;</label>
+        								<input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" id="selectAll-<?=$value['id'];?>"
+                        <?php if(isset($_POST['vendor_id'])){?> checked <?php }?> >
+        							</td>
+        							<td><?=$value['business_name'];?></td>
+        							<td><?=$value['contact_name'];?></td>
+        							<td><?=$value['contact_value'];?></td>
+        							<td><?=$value['state'];?></td>
+        							<td><?=$value['city'];?></td>
+        							<td><?=$value['business_name'];?></td>
+        						</tr>
+        					<?php
+        				}
+        			}
       			?>
       		</tbody>
       	</table>
@@ -54,7 +54,7 @@
           {
             ?>
               <div id='output'><?php echo (form_error('vendor_id'))? strip_tags(form_error('vendor_id')):'';?></div>
-              <?php 
+            <?php 
           }
           if($_POST['vendor_id'])
           {
@@ -64,7 +64,7 @@
           {
             $data = array("vendor_name"=>"");
           }
-          ?>
+        ?>
       </div>
       <div class="form-group col-md-4 <?php echo (form_error('vendor_name'))?'error':'';?>" data-error="<?php echo (form_error('vendor_name'))? strip_tags(form_error('vendor_name')):'';?>">
         <label required="">Vendor Name</label>
@@ -106,12 +106,11 @@
         			}
         		}
        		?>
-
         </select>
       </div>
      	<div class="form-group col-md-4 <?php echo (form_error('zipcode'))?'error':'';?>" data-error="<?php echo (form_error('zipcode'))? strip_tags(form_error('zipcode')):'';?>">
         <label required="">Zipcode</label>
-        <input type="text" name="zipcode" class="form-control" id="zipcode" value="<?=$data[0]['zipcode']?>"  placeholder="Zipcode">
+        <input type="text" name="zipcode" class="form-control" id="zipcode" value="<?=$data[0]['zipcode']?>" placeholder="Zipcode">
       </div>
      	<div class="form-group col-md-4 <?php echo (form_error('firstname'))?'error':'';?>" data-error="<?php echo (form_error('firstname'))? strip_tags(form_error('firstname')):'';?>">
         <label required="">First Name</label>

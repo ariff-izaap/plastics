@@ -64,8 +64,9 @@ $config['purchase_index'] = array(
 	"fields"	=> array(   
 						'id'=>array('name'=>'PO ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'business_name'=>array('name'=>'Vendor', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'pickup_date'=>array('name'=>'Pickup Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1),
-						'location'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1)),
+						'pickup_date'=>array('name'=>'Pickup Date', 'data_type' => 'date','sortable' => FALSE, 'default_view'=>1),
+						'location'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'order_status'=>array('name'=>'Order Status', 'data_type' => 'colorize', 'sortable' => FALSE, 'default_view'=>1)),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );

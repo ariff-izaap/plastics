@@ -127,7 +127,7 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
           $data = humanize($data);
           break;
         case 'date':
-            str2USDT($data);
+            $data = str2USDT($data);
             break;
         case 'datetime':
             $data = str2USDate($data);
@@ -143,7 +143,10 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             break;
         case 'link':
             $data = '<a href="'.$data.'">'.$data.'</a>';
-            break;        
+            break;
+        case 'colorize':
+          $data = "<h2 style='font-size:14px;' class='label label-danger'>".$data."</h2>";
+        break; 
     }    
     return $wrap_tag_open.$data.$wrap_tag_close;
 }
@@ -236,7 +239,7 @@ function str2USDT($str)
   $intTime = strtotime($str);
   if ($intTime === false)
     return NULL;
-  return date("m/d/Y", $intTime);
+   return date("m/d/Y", strtotime($str));
 }
 
     // no logic for server time to local time.
