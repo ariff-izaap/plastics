@@ -160,5 +160,26 @@ class Salesorder extends Admin_Controller
           
       $this->layout->view('frontend/sales/shippingorder');  
     }
+    
+    public function search()
+    {
+        $this->data['users']  = $this->db->query("select * from customer where 1=1")->result_array();
+        $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
+        $this->layout->view('frontend/sales/search');
+    }
+    
+    public function calllog()
+    {
+        $this->data['users']  = $this->db->query("select * from customer where 1=1")->result_array();
+        $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
+        $this->layout->view('frontend/sales/calllog');
+    }
+    
+    public function callback()
+    {
+        $this->data['users']  = $this->db->query("select * from customer where 1=1")->result_array();
+        $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
+        $this->layout->view('frontend/sales/callback');
+    }
 }
 ?>
