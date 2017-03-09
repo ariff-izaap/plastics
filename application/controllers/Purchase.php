@@ -66,7 +66,7 @@ class Purchase extends Admin_Controller
   {
     $this->data['vendor'] = $this->purchase_model->get_vendors();
     $this->form_validation->set_rules($this->_purchase_validation_rules);
-  	$this->data['po_id'] = $this->purchase_model->get_max_id();   
+  	$this->data['po_id'] = $this->purchase_model->get_max_id();
     if($this->form_validation->run())
     {
       $form = $this->input->post();
@@ -80,6 +80,18 @@ class Purchase extends Admin_Controller
       $ins['created_id']          = get_current_user_id();
       $ins['updated_id']          = get_current_user_id();
       $ins['created_date']        = date("Y-m-d H:i:s");
+
+      /*Update Vendor Details*/
+      $up['first_name'] = $form['firstname'];
+      $up['last_name'] = $form['lastname'];
+      $up['phone'] = $form['mobile'];
+      $up2['email'] = $form['email'];
+      $up1['web_url'] = $form['website'];
+      $this->purchase_model->update(array("id"=>$form['vendor_id']),$up1,"customer");
+      $vendor = $this->purchase_model->get_vendors(array("a.id"=>$form['vendor_id']));
+      $address_id = $vendor[0]['address_id'];
+      $this->purchase_model->update(array("id"=>$address_id),$up,"address");
+      $this->purchase_model->update(array("customer_id"=>$form['vendor_id']),$up2,"customer_contact");
       $this->purchase_model->insert($ins,"purchase_order");
       $this->session->set_userdata('form_purchase',$form);
       redirect("purchase/add_product");
@@ -93,7 +105,7 @@ class Purchase extends Admin_Controller
     $output['status']  = "success";
     $log = log_history("purchase_order",$del_id,"purchase","delete");
     $this->purchase_model->delete(array("id"=>$del_id),"purchase_order");
-    $this->purchase_model->delete(array("id"=>$del_id),"purchase_order_item");
+    $this->purchase_model->delete(array("po_id"=>$del_id),"purchase_order_item");
     $this->_ajax_output($output, TRUE);
   }
 
@@ -127,6 +139,7 @@ class Purchase extends Admin_Controller
     $this->data['products'] = $this->purchase_model->get_purchased_products($form['po_id']);
     $this->layout->view('frontend/Purchase/add_product');
   }
+  
   public function get_vendor_details($id)
   {
     $vendor = $this->purchase_model->get_vendors(array("c.id"=>$id));
@@ -134,14 +147,14 @@ class Purchase extends Admin_Controller
   }
   public function add_cart($product_id,$po_id,$qty,$vendor_id)
   {
-    $ins['po_id'] = $po_id;
-    $ins['product_id'] = $product_id;
-    $ins['item_status'] = "New";
-    $ins['qty'] = $qty;
-    $ins['created_id'] = get_current_user_id();
-    $ins['updated_id'] = get_current_user_id();
-    $ins['created_date'] = date("Y-m-d H:i:s");
-    $ins['unit_price'] = get_product_price($product_id);
+    $ins['po_id']         = $po_id;
+    $ins['product_id']    = $product_id;
+    $ins['item_status']   = "New";
+    $ins['qty']           = $qty;
+    $ins['created_id']    = get_current_user_id();
+    $ins['updated_id']    = get_current_user_id();
+    $ins['created_date']  = date("Y-m-d H:i:s");
+    $ins['unit_price']    = get_product_price($product_id);
     $chk_product = $this->purchase_model->select(array("product_id"=>$product_id,"po_id"=>$po_id),"purchase_order_item");
     $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");     
     if($chk_product)
@@ -175,7 +188,7 @@ class Purchase extends Admin_Controller
     </div>
     </div>';  
     // if($this->input->is_ajax())
-    $this->_ajax_output(array('content' => $content), TRUE);
+    $this->_ajax_output(array('content' => $content),TRUE);
   }
 
   public function update_cart()
@@ -214,9 +227,8 @@ class Purchase extends Admin_Controller
     }
     
     $products = $this->purchase_model->get_purchased_products($po_id);
-    $this->data['products'] = $products;
-    $output['content']    = $this->load->view('/frontend/Purchase/view_cart', $this->data, TRUE);
-    
+    $this->data['products']  = $products;
+    $output['content']       = $this->load->view('/frontend/Purchase/view_cart', $this->data, TRUE);    
     $output['count'] = count($products);
     $this->_ajax_output($output, TRUE);      
   }
@@ -245,5 +257,5 @@ class Purchase extends Admin_Controller
     }
     $this->layout->view('frontend/Purchase/checkout');
   }
-
 }
+?>

@@ -74,13 +74,13 @@
               </select>
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="customer_number" class="form-control" id="customer_number" value=""  /> Include Product On the way.
+              <input type="checkbox" name="customer_number" class="" id="customer_number" value=""  /> Include Product On the way.
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="customer_number" class="form-control" id="customer_number" value="" /> Ordered But Not Shipped
+              <input type="checkbox" name="customer_number" class="" id="customer_number" value="" /> Ordered But Not Shipped
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="customer_number" class="form-control" id="customer_number" value="" /> In Warehouse
+              <input type="checkbox" name="customer_number" class="" id="customer_number" value="" /> In Warehouse
             </div>
         </div>
         <div class="form-grid col-md-4">

@@ -122,16 +122,16 @@
       </div>
      	<div class="form-group col-md-4 <?php echo (form_error('mobile'))?'error':'';?>" data-error="<?php echo (form_error('mobile'))? strip_tags(form_error('mobile')):'';?>">
         <label required="">Mobile</label>
-        <input type="text" name="mobile" class="form-control" id="mobile" value="<?=$data[0]['phone']?>"  placeholder="(XXX) XXX-XXXXX">
+        <input type="text" name="mobile" class="form-control" id="mobile" value="<?=$data[0]['phone']?>" placeholder="(XXX) XXX-XXXXX">
       </div>
      	<div class="form-group col-md-4 <?php echo (form_error('email'))?'error':'';?>" data-error="<?php echo (form_error('email'))? strip_tags(form_error('email')):'';?>">
         <label required="">Contact Email</label>
-        <input type="text" name="email" class="form-control" id="email" value="<?=$data[0]['email']?>"  placeholder="Email">
+        <input type="text" name="email" class="form-control" id="email" value="<?=$data[0]['email']?>" placeholder="Email">
       </div>
      	<div class="form-group col-md-8">
         <label>Website</label>
-        <input type="text" name="website" class="form-control" id="website" value="<?=$data[0]['web_url'];?>"  
-        	placeholder="Website e.g. http://www.example.com">
+        <input type="text" name="website" class="form-control" id="website" value="<?=$data[0]['web_url'];?>"
+          placeholder="Website e.g. http://www.example.com">
       </div>
      	<div class="form-group col-md-4 <?php echo (form_error('pickup_date'))?'error':'';?>" data-error="<?php echo (form_error('pickup_date'))? strip_tags(form_error('pickup_date')):'';?>">
         <label required="">Date for Pickup</label>
@@ -141,15 +141,53 @@
         <label required="">Estimated Date for Delivery to Customer/Warehouse</label>
         <input type="text" name="delivery_date" class="form-control singledate" id="delivery_date" value=""  placeholder="Delviery Date">
       </div>
-     	<div class="form-group col-md-4">
-        <label>Release to be Sold</label>
-        <input type="checkbox" name="to_sold" class="" id="to_sold" value="Yes">
+      <div class="form-group col-md-4">
+        <label class="">Release to be Sold</label>
+        <!-- <input type="checkbox" name="to_sold" class="" id="to_sold" value="Yes"> -->
+        <label for="selectAll-0" class="custom-checkbox">&nbsp;</label>
+        <input type="checkbox" id='selectAll-0' class= 'checkbox'  name="to_sold" value="Yes">
       </div>
       <div class="clearfix"></div>
-      <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">        
+      <div class="form-group col-md-3">
+      <label class="">Documents to Attach</label>
+      <div class="clearfix"></div>
+        <a href="#UploadModal" data-toggle="modal" class="col-md-3"><i class="fa fa-2x fa-file-zip-o"></i></a>
+        <a href="#"><i class="fa fa-2x fa-paperclip fa-rotate-270"></i> </a>
+      </div>
+      <div class="clearfix"></div>
+      <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
       <div class="form-group col-md-2">
         <button type="submit" class="btn btn-block">Save</button>
-      </div>    
+      </div>
     </div>
   </form>
+</div>
+
+<div id="UploadModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Certificate</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label class="">IP Certificate</label>
+            <input type="text" name="to_sold" class="form-control" id="to_sold" value="" placeholder="e.g. http://">
+          </div>
+          <div class="form-group col-md-12">
+            <label class="">Original Certificate</label>
+            <input type="text" name="to_sold" class="form-control" id="to_sold" value="" placeholder="e.g. http://">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Confirm</button>
+        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
 </div>
