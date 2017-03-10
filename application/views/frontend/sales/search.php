@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container search-form">
   <div class="row">
 
   <form name="inventorycolor" method="POSt">
@@ -73,7 +73,7 @@
           <input type="text" name="website" class="form-control col-md-8" id="website" />
         </div>
         <div class="row active-css">
-        <div class="col-md-4">
+        <div class="col-md-6">
         <div class="form-group">
           <input type="checkbox" name="active" class="" id="active" />
            <label>Active</label>
@@ -87,7 +87,7 @@
           <label>Customer</label>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         
         <div class="form-group ">
           <label>UPS</label>

@@ -3,12 +3,12 @@
 .formcontrol-box label.col-md-4 { padding-left:0px !important; text-align:left;}
 .formcontrol-box label.col-md-3 { padding-left:0px !important; text-align:left;}
 .button-sec { margin-bottom:40px;}
-@media (min-width:1025px)
+@media (min-width:992px)
 {
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
 .city {width:250px;}
 .zip{ width:184px;}
-.call{ width:40%; margin-right:10px; }
+.call{ width:35%; margin-right:10px; }
 .time{ width:30%;}
 .time input { width:100%;}
 .call-group .form-group { float:left;}
@@ -20,20 +20,22 @@
 .formcontrol-box .form-control.col-md-9 { width:75% !important;}
 .formcontrol-box .form-group { display: inline-block; width: 100%; margin:10px 0px;}
 .postal .form-group {float: left; width: 33.338%;}
-.postal {padding-left: 172px;}
-.active-css { padding-left:174px;}
+.postal {padding-left: 33%;}
+.active-css { padding-left:33%;}
 .call-log { height:120px;}
 .ship-box { min-height: 726px;}
 .call-group1 .form-group:nth-child(1){width:60%; float:left;}
 .call-group1 .form-group:nth-child(2){width:30%; margin: 55px 0 0 18px;}
-.call-group2 .form-group:nth-child(1){width:50%; float:left;}
+.call-group2 .form-group:nth-child(1){width:46%; float:left;}
 .call-group2 .form-group:nth-child(2){width:20%; margin: 40px 0 0 10px; float:left;}
-.call-group2 .form-group:nth-child(3){width:20%; margin: 44px 0 0 10px; float:left}
+.call-group2 .form-group:nth-child(3){width:25%; margin: 44px 0 0 10px; float:left}
 .prod-sel { min-height:800px;}
 .call-group .use { margin-top: 11px;}
+select { width:100%;}
 }
 @media ( max-width:768px)
 {
 .postal .form-group {padding-left: 0;padding-right: 0;}
 .button-sec button { margin-bottom:20px;}
+.panel-heading select { width:100%;}
 }

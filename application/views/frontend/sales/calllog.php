@@ -7,7 +7,7 @@
   </div>
 
 
-  <form name="inventorycolor" method="POSt">
+  <form name="inventorycolor" method="POSt" class="call-log">
     <div class="container">
 
   <div class="row">

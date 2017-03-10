@@ -6,7 +6,7 @@
     </div>
   </div>
   <form name="inventorycolor" method="POST">
-  <div class="container">
+  <div class="container ship-order">
   <div class="row">
       <div class="form-grid col-md-6 panel panel-default panel-bor">
       <div class="panel-heading formcontrol-box">

@@ -5,7 +5,7 @@
       
     </div>
   </div>
-  <form name="inventorycolor" method="POST">
+  <form name="inventorycolor" method="POST" class="product-sel">
   <div class="container">
   <div class="row">
       <div class="form-grid col-md-4 panel panel-default panel-bor">
@@ -162,7 +162,7 @@
          </div>
          </div>
         </div>
-        <div class="row">
+        <div class="row button-sec">
             <div class="col-md-8"></div>
             <div class="col-md-2">
                 <button type="submit" class="btn btn-block">Who Holding</button>
