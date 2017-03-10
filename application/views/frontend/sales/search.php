@@ -6,84 +6,149 @@
     </div>
   </div>
 
+  <div class="container">
   <div class="row">
 
   <form name="inventorycolor" method="POSt">
-      <div class="form-grid col-md-6">
+      <div class="form-grid col-md-6 panel panel-default panel-bor">
+      <div class="panel-heading formcontrol-box">
         <div class="form-group"  >
-          <label>Customer Number</label>
-          <input type="text"  name="customer_number" class="form-control" id="customer_number"  />
+          <label class="col-md-4">Customer Number</label>
+          <input type="text"  name="customer_number" class="form-control col-md-8" id="customer_number"  />
         </div>
         <div class="form-group " >
-          <label>Customer Name</label>
-          <input type="text" name="customer_name" class="form-control" id="customer_name" value=""/>
+          <label class="col-md-4">Customer Name</label>
+          <input type="text" name="customer_name" class="form-control col-md-8" id="customer_name" value=""/>
+        </div>
+        </div>
+        
+        <!-- panel one-->
+        
+        <div class="panel-heading formcontrol-box">
+        <div class="form-group" >
+          <label class="col-md-4">Contact Name</label>
+          <input type="text" name="contact_name" class="form-control col-md-8" id="contact_name" value=""  />
         </div>
         <div class="form-group" >
-          <label>Contact Name</label>
-          <input type="text" name="contact_name" class="form-control" id="contact_name" value=""  />
-        </div>
-        <div class="form-group" >
-          <label>Number</label>
-          <input type="text" name="contact_number" class="form-control" id="contact_number" />
+          <label class="col-md-4">Number</label>
+          <input type="text" name="contact_number" class="form-control col-md-8" id="contact_number" />
         </div>
         <div class="form-group">
-          <label>Contact Email</label>
-          <input type="text" name="contact_email" class="form-control" id="contact_number" />
+          <label class="col-md-4">Contact Email</label>
+          <input type="text" name="contact_email" class="form-control col-md-8" id="contact_number" />
         </div>
-        <h4>Bill To</h4>.
+        </div>
+        <!-- panel two-->
+         <div class="panel-heading formcontrol-box second-box">
+        <h2>Bill To</h2>
         <div class="form-group">
-          <label>Name</label>
-          <input type="text" name="bill_name" class="form-control" id="bill_name" />
+          <label class="col-md-4">Name</label>
+          <input type="text" name="bill_name" class="form-control col-md-8" id="bill_name" />
         </div>
         <div class="form-group">
-          <label>Address</label>
-          <input type="text" name="bill_address" class="form-control" id="bill_address" />
+          <label class="col-md-4">Address</label>
+          <input type="text" name="bill_address" class="form-control col-md-8" id="bill_address" />
         </div>
         <div class="form-group">
-          <label>Address 2</label>
-          <input type="text" name="bill_address2" class="form-control" id="bill_address2" />
+          <label class="col-md-4">Address 2</label>
+          <input type="text" name="bill_address2" class="form-control col-md-8" id="bill_address2" />
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group clearfix postal">
+        <div class="form-group col-md-2 city">
           <label>City</label>
           <input type="text" name="city" class="form-control" id="city" />
         </div>
+        
         <div class="form-group col-md-2">
           <label>State</label>
           <input type="text" name="state" class="form-control" id="state" />
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-2 zip">
           <label>Zip</label>
           <input type="text" name="zip" class="form-control" id="zip" />
         </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-md-4">Website</label>
+          <input type="text" name="website" class="form-control col-md-8" id="website" />
+        </div>
+        <div class="row active-css">
+        <div class="col-md-4">
         <div class="form-group">
-          <label>Website</label>
-          <input type="text" name="website" class="form-control" id="website" />
+          <input type="checkbox" name="active" class="" id="active" />
+           <label>Active</label>
         </div>
         <div class="form-group">
-          <label>Active</label>
-          <input type="checkbox" name="active" class="form-control" id="active" />
+          <input type="checkbox" name="vendor" class="" id="vendor" />
+           <label>Vendor</label>
         </div>
         <div class="form-group">
-          <label>Vendor</label>
-          <input type="checkbox" name="vendor" class="form-control" id="vendor" />
-        </div>
-        <div class="form-group">
+          <input type="checkbox" name="customer" class="" id="customer" />
           <label>Customer</label>
-          <input type="checkbox" name="customer" class="form-control" id="customer" />
         </div>
       </div>
-      <div class="form-grid col-md-6">
-        <div class="form-group"  >
+      <div class="col-md-8">
+        
+        <div class="form-group ">
+          <label>UPS</label>
+          <input type="text" name="ups" class="form-control" id="ups" />
+        </div>
+        </div>
+        </div>
+        
+        
+        </div>
+      </div>
+      <div class="form-grid col-md-6 panel panel-default panel-bor">
+      <div class="panel-heading">
+      <div class="call-group">
+        <div class="form-group call">
           <label>Last Call Search</label>
           <input type="text"  name="customer_number" class="form-control" id="customer_number"  />
         </div>
-        <div class="form-group " >
+        <div class="form-group time">
+          <label>&nbsp;</label>
+          <input type="text" class="form-control"  name="time" id="time"  />
+        </div>
+        <div class="form-group time-choose">
+            <br />
+            <select class="form-control">
+            <option value="volvo"> < </option>
+            <option value="saab"> > </option>
+            </select> 
+        </div>
+        <div class="form-group use">
+        <br />
+          <input type="checkbox"  name="customer_number" id="customer_number"  />
+          <label>Use ?</label>
+        </div>
+        </div>
+        <div class="call-group">
+        <div class="form-group call">
           <label>Call Back Search</label>
           <input type="text" name="customer_name" class="form-control" id="customer_name" value=""/>
         </div>
-        <div class="form-group " >
+        <div class="form-group time">
+          <label>&nbsp;</label>
+          <input type="text"  name="time" class="form-control" id="time"  />
+        </div>
+        <div class="form-group time-choose">
+            <br />
+            <select class="form-control">
+            <option value="volvo"> < </option>
+            <option value="saab"> > </option>
+            </select> 
+        </div>
+        <div class="form-group use">
+        <br />
+          <input type="checkbox"  name="customer_number" id="customer_number"  />
+          <label>Use ?</label>
+        </div>
+        </div>
+        
+        <div class="form-group" >
           <label>Call Person</label>
-          <select name="call_person" multiple="multiple">
+          <select name="call_person" multiple="multiple" class="form-control select-box">
            <?php if(count($users)>0) {
                      foreach($users as $ukey => $uvalue){  
             ?>
@@ -92,9 +157,11 @@
            }} ?>
           </select>
         </div>
+        </div>
+        <div class="panel-heading">
         <div class="form-group " >
           <label>Credit</label>
-          <select name="call_person" multiple="multiple">
+          <select name="call_person" multiple="multiple"  class="form-control select-box">
           <option value="none">None</option>
            <?php if(count($credit)>0) {
                      foreach($credit as $ckey => $cvalue){  
@@ -104,20 +171,24 @@
            }} ?>
           </select>
         </div>
-        <h4>Location</h4>
-        <div class="form-group col-md-2" >
+        </div>
+        
+        <div class="panel-heading">
+        <h2>Location</h2>
+        <div class="row">
+        <div class="form-group col-md-3" >
           <label>Start Time</label>
           <input type="text" name="customer_name" class="form-control" id="customer_name" value=""/>
         </div>
-        <div class="form-group col-md-2" >
+        <div class="form-group col-md-3" >
           <label>End Time</label>
           <input type="text" name="customer_name" class="form-control" id="customer_name" value=""/>
         </div>
-         <div class="form-group col-md-2" >
+         <div class="form-group col-md-3" >
           <label>Time Zone</label>
           <input type="text" name="customer_name" class="form-control" id="customer_name" value=""/>
         </div>
-         <div class="form-group col-md-6" >
+         <div class="form-group col-md-3" >
           <label>Days of Week</label>
           <select name="days_of_week" multiple="multiple">
              <option value="monday">Monday</option>
@@ -129,37 +200,45 @@
              <option value="sunday">Sunday</option>
           </select>
         </div>
+        </div>
+        <div class="formcontrol-box">
         <div class="form-group">
-          <label>Address</label>
-          <input type="text" name="loc_address" class="form-control" id="loc_address" />
+          <label class="col-md-4">Address</label>
+          <input type="text" name="loc_address" class="form-control col-md-8" id="loc_address" />
         </div>
         <div class="form-group">
-          <label>Address 2</label>
-          <input type="text" name="loc_address2" class="form-control" id="loc_address2" />
+          <label class="col-md-4">Address 2</label>
+          <input type="text" name="loc_address2" class="form-control col-md-8" id="loc_address2" />
         </div>
-        <div class="form-group col-md-2">
+        </div>
+        <div class="row">
+        <div class="form-group col-md-4">
           <label>City</label>
           <input type="text" name="loc_city" class="form-control" id="loc_city" />
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
           <label>State</label>
           <input type="text" name="loc_state" class="form-control" id="loc_state" />
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
           <label>Zip</label>
           <input type="text" name="loc_zip" class="form-control" id="loc_zip" />
         </div>
-        <div class="form-group">
-          <label>Use Times of Opereation</label>
-          <input type="checkbox" name="use_times_of_operation" class="form-control" id="use_times_of_operation" />
         </div>
         <div class="form-group">
+          
+          <input type="checkbox" name="use_times_of_operation" id="use_times_of_operation" />
+          <label>Use Times of Opereation</label>
+        </div>
+        <div class="form-group">
+          
+          <input type="checkbox" name="use_address" id="use_address" />
           <label>Use Address</label>
-          <input type="checkbox" name="use_address" class="form-control" id="use_address" />
+        </div>
         </div>
       </div>  
-     </div>
-     
+    
+     <div class="container">
      <div class="row">   
         <div class="form-group col-md-2">
           <input type="reset" class="btn btn-block" name="reset" value="Clear Form" />
@@ -168,7 +247,8 @@
           <button type="submit" class="btn btn-block">Search</button>
         </div>
     </div>
+    </div>
 
   </form>
-
+</div>
 </div>  

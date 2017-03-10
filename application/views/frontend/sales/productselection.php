@@ -6,8 +6,10 @@
     </div>
   </div>
   <form name="inventorycolor" method="POST">
+  <div class="container">
   <div class="row">
-      <div class="form-grid col-md-4">
+      <div class="form-grid col-md-4 panel panel-default panel-bor">
+       <div class="panel-heading formcontrol-box prod-sel">
             <div class="form-group" >
               <label>Shipping Order</label>
               <input type="text" name="shipping_order" class="form-control" id="shipping_order" value="" placeholder="" />
@@ -42,9 +44,10 @@
                   <?php endforeach;?>
               </select>
             </div>
-           
+          </div> 
         </div>
-        <div class="form-grid col-md-4">
+        <div class="form-grid col-md-4 panel panel-default panel-bor">
+         <div class="panel-heading formcontrol-box prod-sel">
             <div class="form-group" >
               <label>Customer Number</label>
               <input type="text" name="customer_number" class="form-control" id="customer_number" value="" placeholder="" />
@@ -82,8 +85,10 @@
             <div class="form-group" >
               <input type="checkbox" name="customer_number" class="" id="customer_number" value="" /> In Warehouse
             </div>
+            </div>
         </div>
-        <div class="form-grid col-md-4">
+        <div class="form-grid col-md-4 panel panel-default panel-bor">
+         <div class="panel-heading formcontrol-box">
             <div class="form-group" >
               <label>Type</label>
               <input type="text" name="type" class="form-control" id="type" value="" />
@@ -93,19 +98,51 @@
               <input type="text" name="equivalent" class="form-control" id="equivalent" value="" />
             </div>
             
+            
+            
+            
+            <div class="call-group2">
             <div class="form-group" >
               <label>Quantity</label>
               <input type="text" name="quantity" class="form-control" id="quantity" value="" />
             </div>
+             <div class="form-group" >
+              
+             <select class="form-control">
+            <option value="volvo"> < </option>
+            <option value="saab"> > </option>
+            </select>
+            </div>
+             <div class="form-group" >
+              
+              <input type="checkbox" name="row" class="" id="row" value="" />
+              <label>Uses ?</label>
+            </div>
+            </div>
             
+            <div class="call-group1">
             <div class="form-group" >
               <label>Row</label>
               <input type="text" name="row" class="form-control" id="row" value="" />
             </div>
+             <div class="form-group" >
+              
+              <input type="checkbox" name="row" class="" id="row" value="" />
+              <label>Uses ?</label>
+            </div>
+            </div>
+            <div class="call-group1">
             <div class="form-group" >
-              <label>Units</label>
+               <label>Units</label>
               <input type="text" name="units" class="form-control" id="units" value="" />
             </div>
+             <div class="form-group" >
+              
+              <input type="checkbox" name="row" class="" id="row" value="" />
+              <label>Uses ?</label>
+            </div>
+            </div>
+          
             <div class="form-group" >
               <label>Wholesale</label>
               <input type="text" name="wholesale" class="form-control" id="wholesale" value="" />
@@ -123,6 +160,7 @@
               <input type="text" name="vendor_lot_no" class="form-control" id="vendor_lot_no" value="" />
             </div>   
          </div>
+         </div>
         </div>
         <div class="row">
             <div class="col-md-8"></div>
@@ -133,9 +171,11 @@
                 <button type="submit" class="btn btn-block">Search</button>
             </div>
         </div>
+        </div>
         </form>
      <br />
      <br />
+     <div class="container">
        <div class="row">
             <div class="col-md-12">
              <h2>Products to Select</h2>
@@ -181,10 +221,11 @@
                   </table>
             </div>
        </div>
+       </div>
           
       <br />
       <br />
-      
+      <div class="container">
       <div class="row">
             <div class="col-md-12">
              <h2>Products in Shipping Order</h2>
@@ -230,10 +271,11 @@
                   </table>
             </div>
        </div>
+       </div>
           
       <br />
       <br />
-            
+       <div class="container button-sec">     
        <div class="row">
           <div class="col-md-2">
             <button type="button" class="col-md-2 btn btn-block">Add Product to SO</button>
@@ -253,6 +295,7 @@
          <div class="col-md-2">   
             <button type="button" class="col-md-2 btn btn-block">Create New SO</button>
          </div>
+       </div>
        </div>
   
 
