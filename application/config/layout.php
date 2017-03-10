@@ -13,7 +13,7 @@ $config['layout']['default']['img_dir']     = 'assets/images/';
 $config['layout']['default']['javascripts'] = array(
   'build/global.min','bootbox.min','moment',"jquery.mockjax","bootstrap-editable",'daterangepicker','select2.min','function','inventory');
  
-$config['layout']['default']['stylesheets'] = array('bootstrap.min','style','daterangepicker',"select2.min","bootstrap-editable");
+$config['layout']['default']['stylesheets'] = array('bootstrap.min','style','daterangepicker',"select2.min","bootstrap-editable", "custom");
 
 $config['layout']['default']['description'] = '';
 $config['layout']['default']['keywords']    = '';
