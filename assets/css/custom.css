@@ -47,6 +47,7 @@ form .error::after { right:0px !important;}
 .category { max-width:600px;}
 .add-user .form-group { width:25%; float:left;}
 .add-user1 { max-width:800px;}
+.action-buttons { padding:10px 35px !important;}
 }
 @media ( max-width:768px)
 {

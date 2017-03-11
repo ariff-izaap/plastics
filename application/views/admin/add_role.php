@@ -16,18 +16,24 @@
 	}
 ?>
 	<br>
+    <div class="container add-user1">
 <div class="row">
   <form name="add_role" id="addRole" method="post">
-    <div class="form-grid">
+  <div class="form-grid col-md-12 panel panel-default panel-bor">
+      <div class="panel-heading formcontrol-box">
+   
 			<div class="form-group col-md-4 " data-error="">
-        <label required="">Role Name</label>
-        <input type="text" name="name" class="form-control" id="name" value="<?=$editdata['name'];?>" placeholder="Role Name">
+        <label required="" class="col-md-3">Role Name</label>
+        <input type="text" name="name" class="form-control col-md-9" id="name" value="<?=$editdata['name'];?>" placeholder="Role Name">
       </div>
       <div class="clearfix"></div>
       <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">        
-      <div class="form-group col-md-2">
-        <button type="submit" class="btn btn-block">Save</button>
-      </div>    
+        
     </div>
+    </div>
+     <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-block">Save</button>
+      </div> 
   </form>
+</div>
 </div>
