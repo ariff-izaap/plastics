@@ -1,13 +1,39 @@
 $(function(){
     
-    
+    //product selection
+ //   $("#sales_product_id").click(function(){
+//        
+//        var product = $("#sales_product_id").val();
+//        //alert(product);
+//         $.ajax({
+//              url:base_url+"inventory/getproduct/"+product,
+//              type:"POST",
+//              data:{},
+//              dataType:'json',
+//              success:function(data)
+//              {
+//                 var form_id = data.product.form_id;
+//                 var pkg_id  = data.product.package_id;
+//                 var clr_id  = data.product.color_id;
+//                 var pkg_id  = data.product.package_id;
+//                 
+//                 $('.productform option').each(function() {
+//                    if($(this).val() == form_id) {
+//                        $(this).prop("selected", true);
+//                    }
+//                });
+//                 
+//              }
+//        });
+//        
+//    });
     
   //$('a,button').tooltip();
 
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
 	  showDropdowns: true,
-    autoUpdateInput: false,
+      autoUpdateInput: false,
 	  locale: {
 	    format: 'YYYY-MM-DD',
 	  }

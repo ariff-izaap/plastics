@@ -490,5 +490,15 @@ class Inventory extends Admin_Controller
 		 
 		return $rules;
 	}
+    
+   function getproduct($product_id)
+   {
+        $result = $this->inventory_model->get_where(array("id" => $product_id))->row_array();
+        
+        $output['product'] = $result;
+        $output['status']  = "success";
+            
+        $this->_ajax_output($output, TRUE); 
+   } 
 }
 ?>

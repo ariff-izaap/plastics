@@ -73,8 +73,7 @@
         </div>
         </div>
      </div>
-      </form>
-      
+     
    
      <div class="container">
      <div class="row">    

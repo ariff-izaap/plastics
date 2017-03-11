@@ -16,17 +16,17 @@
             </div>
             <div class="form-group" >
               <label>Product</label>
-              <select class="form-control" name="product_id" id="product_id" multiple="multiple">
+              <select class="form-control" name="product_id" id="sales_product_id" multiple="multiple" >
                    <?php foreach($products as $prod):
                      
-                   ?>
-                    <option value="<?php echo $prod['id'];?>"  > <?php echo $prod['name'];?> </option>
+                    ?>
+                    <option value="<?php echo $prod['name'];?>"  > <?php echo $prod['name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
             <div class="form-group">
               <label>Form</label>
-              <select class="form-control" name="form_id" id="form_id" multiple="multiple">
+              <select class="form-control productform" name="form_id" id="form_id" multiple="multiple">
                    <?php foreach($forms as $form):
                       
                    ?>
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group" >
               <label>Packaging</label>
-              <select class="form-control" name="packaging" id="packaging" multiple="multiple">
+              <select class="form-control productpackage" name="packaging" id="packaging" multiple="multiple">
                    <?php foreach($packages as $pack):
                      
                    ?>
@@ -58,7 +58,7 @@
             </div>
              <div class="form-group" >
               <label>Color</label>
-              <select class="form-control" name="color_id" id="color_id" multiple="multiple">
+              <select class="form-control productcolor" name="color_id" id="color_id" multiple="multiple">
                    <?php foreach($colors as $clr):
                       
                    ?>
@@ -68,7 +68,7 @@
             </div>
             <div class="form-group" >
               <label>Notes</label>
-              <select class="form-control" name="notes[]" id="notes" multiple="multiple">
+              <select class="form-control productnotes" name="notes[]" id="notes" multiple="multiple">
                    <?php foreach($address as $addr):
                       $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
                    ?>
@@ -77,13 +77,13 @@
               </select>
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="customer_number" class="" id="customer_number" value=""  /> Include Product On the way.
+              <input type="checkbox" name="include_product_on_the_way" class="" id="include_product_on_the_way" value=""  /> Include Product On the way.
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="customer_number" class="" id="customer_number" value="" /> Ordered But Not Shipped
+              <input type="checkbox" name="ordered_but_not_shipped" class="" id="ordered_but_not_shipped" value="" /> Ordered But Not Shipped
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="customer_number" class="" id="customer_number" value="" /> In Warehouse
+              <input type="checkbox" name="in_warehouse" class="" id="in_warehouse" value="" /> In Warehouse
             </div>
             </div>
         </div>
@@ -98,9 +98,6 @@
               <input type="text" name="equivalent" class="form-control" id="equivalent" value="" />
             </div>
             
-            
-            
-            
             <div class="call-group2">
             <div class="form-group" >
               <label>Quantity</label>
@@ -108,14 +105,14 @@
             </div>
              <div class="form-group" >
               
-             <select class="form-control">
-            <option value="volvo"> < </option>
-            <option value="saab"> > </option>
+             <select class="form-control" name="quantity_uses">
+                <option value="lessthan"> < </option>
+                <option value="greaterthan"> > </option>
             </select>
             </div>
              <div class="form-group" >
               
-              <input type="checkbox" name="row" class="" id="row" value="" />
+              <input type="checkbox" name="quantity_uses_check" class="" id="row"  />
               <label>Uses ?</label>
             </div>
             </div>
@@ -123,11 +120,10 @@
             <div class="call-group1">
             <div class="form-group" >
               <label>Row</label>
-              <input type="text" name="row" class="form-control" id="row" value="" />
+              <input type="text" name="row" class="form-control" id="row"  />
             </div>
-             <div class="form-group" >
-              
-              <input type="checkbox" name="row" class="" id="row" value="" />
+             <div class="form-group">
+              <input type="checkbox" name="row_uses_check" class="" id="row_uses_check" value="" />
               <label>Uses ?</label>
             </div>
             </div>
@@ -138,7 +134,7 @@
             </div>
              <div class="form-group" >
               
-              <input type="checkbox" name="row" class="" id="row" value="" />
+              <input type="checkbox" name="units_uses_check" class="" id="units_uses_check" value="" />
               <label>Uses ?</label>
             </div>
             </div>
