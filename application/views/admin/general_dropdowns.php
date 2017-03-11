@@ -9,8 +9,12 @@ if(validation_errors())
   echo '<div id="output">'.validation_errors()."</div>";
 ?>
 <br>
+<div class="container category">
 <div class="row">
+
   <form name="dropdowns" id="dropdowns" method="post" action="<?=site_url('admin/add_edit_dropdowns');?>">
+  <div class="form-grid col-md-12 panel panel-default panel-bor">
+      <div class="panel-heading formcontrol-box">
     <input type="hidden" name="edit_id" value="">
     <div class="form-grid">
 			<div class="form-group col-md-4 " data-error="">
@@ -49,15 +53,20 @@ if(validation_errors())
       </div>
       <div class="clearfix"></div>
       <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="">        
-      <div class="form-group col-md-2">
+     
+    </div>
+    </div>
+ <div class="form-group col-md-4">
         <button type="button" class="btn btn-block del-dropdown">Delete</button>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-4">
         <button type="button" class="btn btn-block add-new-dropdown">Add New</button>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-4">
         <button type="submit" class="btn btn-block">Save</button>
       </div>
-    </div>
-  </form>
 </div>
+  </form>
+  
+  </div>
+  </div>

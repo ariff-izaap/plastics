@@ -6,12 +6,12 @@
           <?php echo form_dropdown('search_type', $simple_search_fields, $search_conditions['search_type'], 'class="form-control"');?>      
         </div>      
         <div class="col-sm-4">
-          <div class="input-group clearfix">
+          <div class="input-group">
             <input type="text" class="form-control" name="search_text" value="<?php echo $search_conditions['search_text'];?>" placeholder="Search some stuff.">
             <span class="input-group-btn">
                 <button class="btn" type="button" id="simple_search_button" data-placement="top" data-toggle="tooltip" data-original-title="search"><span class="fa fa-search"></span></button>
             </span>
-            <a class="clear-text pull-left" href="javascript:void(0);" onclick="$.fn.clear_simple_search();" data-placement="top" data-toggle="tooltip" data-original-title="clear simple search">Clear Filter</a>
+            <a class="clear-text pull-left clear-fil" href="javascript:void(0);" onclick="$.fn.clear_simple_search();" data-placement="top" data-toggle="tooltip" data-original-title="clear simple search">Clear Filter</a>
           </div>
         </div>
       </form>

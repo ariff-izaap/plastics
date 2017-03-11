@@ -18,7 +18,7 @@
 .second-box { min-height:760px;}
 .formcontrol-box .form-control.col-md-8 { width:66.6667% !important;}
 .formcontrol-box .form-control.col-md-9 { width:75% !important;}
-.formcontrol-box .form-group { display: inline-block; width: 100%; margin:10px 0px;}
+.formcontrol-box .form-group { display: inline-block; width: 100%; margin:10px 0px; margin-bottom:20px;}
 .postal .form-group {float: left; width: 33.338%;}
 .postal {padding-left: 33%;}
 .active-css { padding-left:33%;}
@@ -32,6 +32,21 @@
 .prod-sel { min-height:800px;}
 .call-group .use { margin-top: 11px;}
 select { width:100%;}
+.cus-name .form-group { width:50% !important;}
+form .error::after { right:0px !important;}
+.city1.error::after, .state1.error::after, .zip1.error::after{
+    bottom: -46px;
+    left: 0;
+    width: 93%;
+}
+.fname1.error::after, .lname1.error::after{
+    bottom: -46px;
+    left: 0;
+    width: 93%;
+}
+.category { max-width:600px;}
+.add-user .form-group { width:25%; float:left;}
+.add-user1 { max-width:800px;}
 }
 @media ( max-width:768px)
 {
