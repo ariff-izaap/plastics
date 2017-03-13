@@ -631,6 +631,30 @@ function get_prodcut_type()
   return $q;
 }
 
+function get_prodcuts()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from product")->result_array();
+  return $q;
+}
+
+
+function get_operator()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from operator_selection")->result_array();
+  return $q;
+}
+
+function get_minlevel()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from min_level")->result_array();
+  return $q;
+}
+
+
+
 function get_product_price($id)
 {
   $CI = get_instance();

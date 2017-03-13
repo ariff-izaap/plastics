@@ -12,7 +12,7 @@ class Purchase extends Admin_Controller
      array('field' => 'address_2', 'label' => 'Address 2', 'rules' => 'trim|required'),
      array('field' => 'city', 'label' => 'City', 'rules' => 'trim|required'),
      array('field' => 'state', 'label' => 'State', 'rules' => 'trim|required'),
-     array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required'),
+     array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric'),
      array('field' => 'firstname', 'label' => 'Firstname', 'rules' => 'trim|required'),
      array('field' => 'lastname', 'label' => 'Lastname', 'rules' => 'trim|required'),
      array('field' => 'mobile', 'label' => 'Mobile', 'rules' => 'trim|required'),
@@ -26,6 +26,11 @@ class Purchase extends Admin_Controller
      array('field' => 'ship_type', 'label' => 'Ship Method', 'rules' => 'trim|required'),
      array('field' => 'carrier', 'label' => 'Ship Service', 'rules' => 'trim|required'),
      array('field' => 'credit_type', 'label' => 'Payment Term', 'rules' => 'trim|required'));
+
+   protected $_minlevel_validation_rules = array(
+     array('field' => 'name', 'label' => 'Warning Name', 'rules' => 'trim|required'),
+     array('field' => 'product', 'label' => 'Product', 'rules' => 'trim|required'),
+     array('field' => 'quantity', 'label' => 'Quantity', 'rules' => 'trim|required'));
 
 	function __construct()
   {
@@ -47,7 +52,7 @@ class Purchase extends Admin_Controller
                                 'f.location'      => 'Location',
                                 'c.order_status'  => 'Order Status');
     $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $str='<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -87,10 +92,10 @@ class Purchase extends Admin_Controller
       $up['phone'] = $form['mobile'];
       $up2['email'] = $form['email'];
       $up1['web_url'] = $form['website'];
-      $this->purchase_model->update(array("id"=>$form['vendor_id']),$up1,"customer");
       $vendor = $this->purchase_model->get_vendors(array("a.id"=>$form['vendor_id']));
       $address_id = $vendor[0]['address_id'];
       $this->purchase_model->update(array("id"=>$address_id),$up,"address");
+      $this->purchase_model->update(array("id"=>$form['vendor_id']),$up1,"customer");
       $this->purchase_model->update(array("customer_id"=>$form['vendor_id']),$up2,"customer_contact");
       $this->purchase_model->insert($ins,"purchase_order");
       $this->session->set_userdata('form_purchase',$form);
@@ -256,6 +261,50 @@ class Purchase extends Admin_Controller
       redirect('purchase');
     }
     $this->layout->view('frontend/Purchase/checkout');
+  }
+
+  public function min_level()
+  {
+    
+    $this->form_validation->set_rules($this->_minlevel_validation_rules);
+    if($this->form_validation->run())
+    {
+      $form = $this->input->post();
+      $ins['warning_name'] = $form['name'];
+      $ins['product'] = $form['product'];
+      $ins['quantity'] = $form['quantity'];
+      $ins['dropdown'] = $form['dropdown'];      
+      $ins['created_id'] = get_current_user_id();
+      $ins['created_date'] = date("Y-m-d H:i:s");
+      if($form['edit_id'])
+      {
+        $ins['updated_id'] = get_current_user_id();
+        $ins['updated_date'] = date("Y-m-d H:i:s");
+        $update =  $this->purchase_model->update(array("id"=>$form['edit_id']),$ins,"min_level");
+        $log = log_history("min_level",$form['edit_id'],"warning","update");
+        $this->session->set_flashdata("success_msg","Warning Updated Successfully",TRUE);
+      }
+      else
+      {
+        $add =  $this->purchase_model->insert($ins,"min_level");
+        $log = log_history("min_level",$add,"warning","insert");
+        $this->session->set_flashdata("success_msg","Warning Created Successfully",TRUE);
+      }      
+    }
+    $this->layout->view('frontend/Purchase/min_level');
+  }
+  public function get_min_level()
+  {
+    $id = $this->input->post('val');
+    $get_data = $this->purchase_model->select(array("id"=>$id),"min_level");
+    $this->_ajax_output($get_data, TRUE);
+  }
+  public function del_min_level()
+  {
+    $id = trim($this->input->post("id"));
+    $this->purchase_model->delete(array("id"=>$id),"min_level");
+    $log = log_history("min_level",$id,"warning","delete");
+    $this->session->set_flashdata("success_msg","Warning deleted successfully",TRUE);
   }
 }
 ?>

@@ -63,7 +63,7 @@ $(function(){
 });	
 
 
- $('#select2_sample2').select2({
+ $('.select2_sample2').select2({
       placeholder: "Select Value",
       allowClear: true
   });
@@ -86,9 +86,55 @@ $(function(){
     $("form#dropdowns input[name='edit_id']").val($(this).val());
   });
 
+   $('.warning_select').select2({
+      placeholder: "Select Warning",
+      allowClear: true,
+      }).on('change',function(){
+       val = $(this).val();
+       $.ajax({
+        type:"POST",
+        url:base_url+'purchase/get_min_level',
+        data:{val:val},
+        success:function(data)
+        {
+          console.log(data);
+           data = JSON.parse(data);
+          $('.select2_sample2').val(data.product).trigger("change");
+          $("form#minLevel input[name='edit_id']").val(data.id);
+          $("form#minLevel input[name='name']").val(data.warning_name);
+          $("form#minLevel input[name='quantity']").val(data.quantity);
+          $("form#minLevel select[name='dropdown']").val(data.dropdown).trigger("change");
+        }
+       });
+     }).on("select2:unselect",function(data)
+     {
+      $("form#minLevel")[0].reset();
+      $('.select2_sample2').val(null).trigger("change");
+     });
+
+  
+
   $(".add-new-dropdown").click(function(){
-    $("form#dropdowns")[0].reset();
-     $("#select2_sample2").empty();
+    $("form#dropdowns,form#minLevel")[0].reset();
+     $(".select2_sample2").empty();
+  });
+
+
+
+  $(".del-minlevel").click(function(){
+    con = confirm("Are sure want to delete?");
+    id = $("select[name='warning']").val();
+    if(con)
+    {
+      $.ajax({
+          url:base_url+"purchase/del_min_level",
+          type:"POST",
+          data:{id:id},
+          success:function(data){
+            location.reload();
+          }
+      });
+    }
   });
 
   $(".del-dropdown").click(function(){
@@ -323,7 +369,7 @@ function numbersonly(e)
 function get_vendor_details(v_url)
 {
    $(".purchase-loader").show();
-  $.post(base_url+v_url,{},function(data){
+    $.post(base_url+v_url,{},function(data){
     $(".purchase-loader").hide();
       $("form#addPurchase #vendor_name").val(data.business_name);
       $("form#addPurchase #address_1").val(data.address1);

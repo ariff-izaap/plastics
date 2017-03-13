@@ -21,9 +21,8 @@
 <?php endif;?>
 
 <div id="data_table">	
-<?php $uri = $this->uri->segment(2);$uri1 = $this->uri->segment(1);?>
+	<?php $uri = $this->uri->segment(2);$uri1 = $this->uri->segment(1);?>
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
-
 		<thead>
 			<tr>
 			<?php if($uri1 != "accounting" && $uri1 != "history" && $uri != "add_product"){?>
@@ -69,7 +68,6 @@
 				<?php } ?>
 			</tr>
 		</thead>
-
 		<tbody>
 			<?php if(count($list)):?>
 
@@ -146,7 +144,7 @@
 				?>
 			</tr>
             
-    <?php endforeach; ?>
+    	<?php endforeach; ?>
 
 	        <?php else:?>
 			<tr>
@@ -156,10 +154,9 @@
 			</tr>
 			<?php endif;?>
 		</tbody>
-
 	</table>
 </div>
 
-	<div class="pagination text-right pull-right" id="pagination">
-			<?php echo $pagination ?>
-	</div>
+<div class="pagination text-right pull-right" id="pagination">
+	<?php echo $pagination;?>
+</div>

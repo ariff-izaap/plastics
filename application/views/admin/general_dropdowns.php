@@ -37,7 +37,7 @@ if(validation_errors())
       </div>
       <div class="clearfix"></div>
       <div class="form-group col-md-4 " data-error="">
-      <select id="select2_sample2" name="table_value_list">
+      <select class="select2_sample2" name="table_value_list">
         <option value=""></option>
       </select>
       </div>

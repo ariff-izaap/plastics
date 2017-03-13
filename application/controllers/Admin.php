@@ -151,7 +151,7 @@ class Admin extends Admin_Controller
     $table = trim($this->input->post("table"));
     $id = trim($this->input->post("id"));
     $this->admin_model->delete(array("id"=>$id),$this->get_table($table));
-    $log = log_history($this->get_table($table),$edit_id,"dropdown","delete");
+    $log = log_history($this->get_table($table),$id,"dropdown","delete");
     $this->session->set_flashdata("success_msg","Dropdown deleted successfully",TRUE);
   }
 

@@ -78,11 +78,16 @@
             </li>
             <?php }?>
             <?php if($role=="3" || $role=="1"){ ?>
-            <li <?php echo ($curr_ctlr == 'purchase')?'class="active"':'';?> >
-              <a href="<?=site_url('purchase');?>">
+            <li class="dropdown <?php echo ($curr_ctlr == 'purchase')? "active":'';?>">
+              <a href="javascript:void(0);"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                  <i class="fa fa-cubes fa-fw"></i>
                   Purchase
+                  <span class="caret"></span>
               </a>
+               <ul class="dropdown-menu">
+                  <li><a href="<?php echo site_url('purchase');?>">Create Purchase Order</a></li>
+                  <li><a href="<?php echo site_url('purchase/min_level');?>">Min Level</a></li>
+                </ul>
             </li>
             <?php }?>
             <?php if($role=="4" || $role=="1"){?>
