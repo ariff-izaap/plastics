@@ -71,7 +71,7 @@
       <div class="form-grid col-md-6 panel panel-default panel-bor">
        <div class="panel-heading formcontrol-box">
       
-       <div class="form-group <?php echo (form_error('vendor_name'))?'error':'';?>" data-error="<?php echo (form_error('vendor_name'))? strip_tags(form_error('vendor_name')):'';?>">ds
+       <div class="form-group <?php echo (form_error('vendor_name'))?'error':'';?>" data-error="<?php echo (form_error('vendor_name'))? strip_tags(form_error('vendor_name')):'';?>">
         <label required="" class="col-md-4">Vendor Name</label>
         <input type="text" name="vendor_name" class="form-control col-md-8" id="vendor_name" value="<?=$data[0]['business_name']?>"  placeholder="Vendor Name">
       </div>
