@@ -30,6 +30,11 @@ $(function(){
     
   //$('a,button').tooltip();
 
+    $("#sales_order_search").submit(function(){
+        
+       alert(123); 
+    });
+
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
 	  showDropdowns: true,

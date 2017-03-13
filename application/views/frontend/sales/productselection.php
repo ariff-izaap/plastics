@@ -5,7 +5,7 @@
       
     </div>
   </div>
-  <form name="inventorycolor" method="POST" class="product-sel">
+  <form name="sales_order_search" method="POST" class="product-sel">
   <div class="container">
   <div class="row">
       <div class="form-grid col-md-4 panel panel-default panel-bor">
@@ -164,7 +164,7 @@
                 <button type="submit" class="btn btn-block">Who Holding</button>
             </div>
             <div class="col-md-2" style="text-align: right;">
-                <button type="submit" class="btn btn-block">Search</button>
+                <button type="submit" id="salesorder_product_search" class="btn btn-block">Search</button>
             </div>
         </div>
         </div>

@@ -175,71 +175,71 @@ class Salesorder extends Admin_Controller
         if(!empty($product_id)){
             $where .= "name like '%".$product_id."%'";
         }
-        if(!empty($form_id)){
-            $where .= " or form_id like '%".$form_id."%'";
-        }
-        
-        if(!empty($packaging)){
-            $where .= " or package_id like '%".$packaging."%'";
-        }
-        if(!empty($color_id)){
-            $where .= " or color_id like '%".$color_id."%'";
-        }
-        if(!empty($notes)){
-            $where .= " or notes like '%".$notes."%'";
-        }
-        if(!empty($row)){
-            $where .= " or row like '%".$row."%'";
-        }
-        if(!empty($quantity)){
-            $where .= " or quantity='".$quantity."'";
-        }
-        if(!empty($equivalent)){
-            $where .= " or equivalent='".$equivalent."'";
-        }
-        if(!empty($units)){
-            $where .= " or units like '%".$units."%'";
-        }
-        if(!empty($type)){
-            $where .= " or item_type like '%".$type."%'";
-        }
-        if(!empty($internal_lot_no)){
-            $where .= " or internal_lot_no='".$internal_lot_no."'";
-        }
-        if(!empty($vendor_lot_no)){
-            $where .= " or vendor_lot_no='".$vendor_lot_no."'";
-        }
-        
+       // if(!empty($form_id)){
+//            $where .= " or form_id like '%".$form_id."%'";
+//        }
+//        
+//        if(!empty($packaging)){
+//            $where .= " or package_id like '%".$packaging."%'";
+//        }
+//        if(!empty($color_id)){
+//            $where .= " or color_id like '%".$color_id."%'";
+//        }
+//        if(!empty($notes)){
+//            $where .= " or notes like '%".$notes."%'";
+//        }
+//        if(!empty($row)){
+//            $where .= " or row like '%".$row."%'";
+//        }
+//        if(!empty($quantity)){
+//            $where .= " or quantity='".$quantity."'";
+//        }
+//        if(!empty($equivalent)){
+//            $where .= " or equivalent='".$equivalent."'";
+//        }
+//        if(!empty($units)){
+//            $where .= " or units like '%".$units."%'";
+//        }
+//        if(!empty($type)){
+//            $where .= " or item_type like '%".$type."%'";
+//        }
+//        if(!empty($internal_lot_no)){
+//            $where .= " or internal_lot_no='".$internal_lot_no."'";
+//        }
+//        if(!empty($vendor_lot_no)){
+//            $where .= " or vendor_lot_no='".$vendor_lot_no."'";
+//        }
+//        
         $product_data = $this->db->query("select * from product $where ")->result_array();
         
-        $view = $this->load->view("frontend/sales/");
+       //// $view = $this->load->view("frontend/sales/");
+//        
+//        if(count($product_data) > 0){
+//            $this->salesorder_model->delete(array("id"=>$del_id));
+//            $output['message'] ="Record deleted successfuly.";
+//            $output['status']  = "success";
+//            
+//        }
+//        else
+//        {
+//           $output['message'] ="This record not matched by Inventory.";
+//           $output['status']  = "error";
+//        }
+//        $this->_ajax_output($output, TRUE);    
         
-        if(count($product_data) > 0){
-            $this->salesorder_model->delete(array("id"=>$del_id));
-            $output['message'] ="Record deleted successfuly.";
-            $output['status']  = "success";
-            
-        }
-        else
-        {
-           $output['message'] ="This record not matched by Inventory.";
-           $output['status']  = "error";
-        }
-        $this->_ajax_output($output, TRUE);    
-        
-        
+          $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
+          $this->data['colors']              = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
+          $this->data['forms']               = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
+          $this->data['packages']            = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
+          
+      $this->layout->view('frontend/sales/productselection');
       }  
       catch(Exception $e) 
       {
         
       } 
         
-      $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
-      $this->data['colors']              = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
-      $this->data['forms']               = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
-      $this->data['packages']            = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
-          
-      $this->layout->view('frontend/sales/productselection');  
+       
     }
     
     public function shippingorder()
