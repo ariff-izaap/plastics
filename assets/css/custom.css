@@ -49,6 +49,8 @@ form .error::after { right:0px !important;}
 .add-user1 { max-width:800px;}
 .action-buttons { padding:10px 35px !important;}
 }
+
+
 @media ( max-width:768px)
 {
 .postal .form-group {padding-left: 0;padding-right: 0;}
