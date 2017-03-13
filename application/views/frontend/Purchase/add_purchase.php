@@ -1,10 +1,10 @@
 <div class="row blue-mat">
-	<div class="breadcrumbs col-md-12">
-			<div class="col-md-6 breadcrumbs-span">
-				<?php echo set_breadcrumb(); ?>
-			</div>
-		<a href="<?=site_url('purchase');?>" class="btn pull-right">Back</a>
-	</div>
+  <div class="breadcrumbs col-md-12">
+      <div class="col-md-6 breadcrumbs-span">
+        <?php echo set_breadcrumb(); ?>
+      </div>
+    <a href="<?=site_url('purchase');?>" class="btn pull-right">Back</a>
+  </div>
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
 <div class="purchase-loader">
@@ -14,43 +14,43 @@
 <div class="row">
   <form name="add_purchase" id="addPurchase" method="post">
     <div class="form-grid">
-			<div class="form-group col-md-4">
+      <div class="form-group col-md-4">
         <label required="">Purchase Order #</label>
         <input type="text" name="po_id" class="form-control" id="name" value="<?=$po_id['po_id'];?>" readonly>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12">
       <h2>Vendor List</h2>
-      	<table class="table table-bordered table-hover">
-      		<thead>
-      			<th>#</th><th>Name</th><th>Contact Name</th><th>Phone</th><th>State</th><th>City</th><th>Salesman</th>
-      		</thead>
-      		<tbody>
-      			<?php
-        			if($vendor)
-        			{
-        				foreach ($vendor as $key => $value)
-        				{
-        					?>
-        						<tr>
-        							<td>
-        								<label for="selectAll-<?=$value['id'];?>"  class="custom-radio">&nbsp;</label>
-        								<input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" id="selectAll-<?=$value['id'];?>"
+        <table class="table table-bordered table-hover">
+          <thead>
+            <th>#</th><th>Name</th><th>Contact Name</th><th>Phone</th><th>State</th><th>City</th><th>Salesman</th>
+          </thead>
+          <tbody>
+            <?php
+              if($vendor)
+              {
+                foreach ($vendor as $key => $value)
+                {
+                  ?>
+                    <tr>
+                      <td>
+                        <label for="selectAll-<?=$value['id'];?>"  class="custom-radio">&nbsp;</label>
+                        <input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" id="selectAll-<?=$value['id'];?>"
                         <?php if(isset($_POST['vendor_id'])){?> checked <?php }?> >
-        							</td>
-        							<td><?=$value['business_name'];?></td>
-        							<td><?=$value['contact_name'];?></td>
-        							<td><?=$value['contact_value'];?></td>
-        							<td><?=$value['state'];?></td>
-        							<td><?=$value['city'];?></td>
-        							<td><?=$value['business_name'];?></td>
-        						</tr>
-        					<?php
-        				}
-        			}
-      			?>
-      		</tbody>
-      	</table>
+                      </td>
+                      <td><?=$value['business_name'];?></td>
+                      <td><?=$value['contact_name'];?></td>
+                      <td><?=$value['contact_value'];?></td>
+                      <td><?=$value['state'];?></td>
+                      <td><?=$value['city'];?></td>
+                      <td><?=$value['business_name'];?></td>
+                    </tr>
+                  <?php
+                }
+              }
+            ?>
+          </tbody>
+        </table>
         <?php
           if(form_error('vendor_id'))
           {
@@ -80,62 +80,62 @@
         <input type="text" name="bill_name" class="form-control col-md-8" id="bill_name" value=""  placeholder="Bill To Name">
       </div>
       
-     	<div class="form-group <?php echo (form_error('address_1'))?'error':'';?>" data-error="<?php echo (form_error('address_1'))? strip_tags(form_error('address_1')):'';?>">
+      <div class="form-group <?php echo (form_error('address_1'))?'error':'';?>" data-error="<?php echo (form_error('address_1'))? strip_tags(form_error('address_1')):'';?>">
         <label required="" class="col-md-4">Address 1</label>
         <input type="text" name="address_1" class="form-control col-md-8" id="address_1" value="<?=$data[0]['address1']?>"  placeholder="Address 1">
       </div>
-     	<div class="form-group">
+      <div class="form-group">
         <label class="col-md-4">Address 2</label>
         <input type="text" name="address_2" class="form-control col-md-8" id="address_2" value="<?=$data[0]['address2']?>"  placeholder="Address 2">
       </div>
       <div class="form-group clearfix postal">
-      	<div class="form-group col-md-2 city city1 <?php echo (form_error('city'))?'error':'';?>" data-error="<?php echo (form_error('city'))? strip_tags(form_error('city')):'';?>">
+        <div class="form-group col-md-2 city city1 <?php echo (form_error('city'))?'error':'';?>" data-error="<?php echo (form_error('city'))? strip_tags(form_error('city')):'';?>">
         <label required="" >City</label>
         <input type="text" name="city" class="form-control" id="city" value="<?=$data[0]['city']?>"  placeholder="City">
       </div>
       <div class="form-group col-md-2 state1 <?php echo (form_error('state'))?'error':'';?>" data-error="<?php echo (form_error('state'))? strip_tags(form_error('state')):'';?>">
         <label required="">State</label>
         <select class="form-control" name="state" id="state">
-        	<option value="">--Select State--</option>
-        	<?php
-        		if(get_state())
-        		{
-        			foreach (get_state() as $key => $value)
-        			{
-        				?>
-        					<option <?php if($data[0]['state']==$value['state_code']){?> selected <?php }?>
+          <option value="">--Select State--</option>
+          <?php
+            if(get_state())
+            {
+              foreach (get_state() as $key => $value)
+              {
+                ?>
+                  <option <?php if($data[0]['state']==$value['state_code']){?> selected <?php }?>
                     value="<?=$value['state_code']?>"><?=$value['state_code']?></option>
-        				<?php
-        			}
-        		}
-       		?>
+                <?php
+              }
+            }
+          ?>
         </select>
       </div>
-     	<div class="form-group col-md-2 zip zip1 <?php echo (form_error('zipcode'))?'error':'';?>" data-error="<?php echo (form_error('zipcode'))? strip_tags(form_error('zipcode')):'';?>">
+      <div class="form-group col-md-2 zip zip1 <?php echo (form_error('zipcode'))?'error':'';?>" data-error="<?php echo (form_error('zipcode'))? strip_tags(form_error('zipcode')):'';?>">
         <label required="">Zipcode</label>
         <input type="text" name="zipcode" class="form-control" id="zipcode" value="<?=$data[0]['zipcode']?>" placeholder="Zipcode">
       </div>
       </div>
       
        <div class="form-group clearfix postal cus-name">
-     	<div class="form-group col-md-6 fname1 <?php echo (form_error('firstname'))?'error':'';?>" data-error="<?php echo (form_error('firstname'))? strip_tags(form_error('firstname')):'';?>">
+      <div class="form-group col-md-6 fname1 <?php echo (form_error('firstname'))?'error':'';?>" data-error="<?php echo (form_error('firstname'))? strip_tags(form_error('firstname')):'';?>">
         <label required="">First Name</label>
         <input type="text" name="firstname" class="form-control" id="firstname" value="<?=$data[0]['first_name']?>"  placeholder="First Name">
       </div>
-     	<div class="form-group col-md-6 lname1 <?php echo (form_error('lastname'))?'error':'';?>" data-error="<?php echo (form_error('lastname'))? strip_tags(form_error('lastname')):'';?>">
+      <div class="form-group col-md-6 lname1 <?php echo (form_error('lastname'))?'error':'';?>" data-error="<?php echo (form_error('lastname'))? strip_tags(form_error('lastname')):'';?>">
         <label required="">Last Name</label>
         <input type="text" name="lastname" class="form-control" id="lastname" value="<?=$data[0]['last_name']?>"  placeholder="Last Name">
       </div>
       </div>
-     	<div class="form-group <?php echo (form_error('mobile'))?'error':'';?>" data-error="<?php echo (form_error('mobile'))? strip_tags(form_error('mobile')):'';?>">
+      <div class="form-group <?php echo (form_error('mobile'))?'error':'';?>" data-error="<?php echo (form_error('mobile'))? strip_tags(form_error('mobile')):'';?>">
         <label required="" class="col-md-4">Mobile</label>
         <input type="text" name="mobile" class="form-control col-md-8" id="mobile" value="<?=$data[0]['phone']?>" placeholder="(XXX) XXX-XXXXX">
       </div>
-     	<div class="form-group <?php echo (form_error('email'))?'error':'';?>" data-error="<?php echo (form_error('email'))? strip_tags(form_error('email')):'';?>">
+      <div class="form-group <?php echo (form_error('email'))?'error':'';?>" data-error="<?php echo (form_error('email'))? strip_tags(form_error('email')):'';?>">
         <label required="" class="col-md-4">Contact Email</label>
         <input type="text" name="email" class="form-control col-md-8" id="email" value="<?=$data[0]['email']?>" placeholder="Email">
       </div>
-     	<div class="form-group">
+      <div class="form-group">
         <label class="col-md-4">Website</label>
         <input type="text" name="website" class="form-control col-md-8" id="website" value="<?=$data[0]['web_url'];?>"
           placeholder="Website e.g. http://www.example.com">
@@ -155,11 +155,11 @@
         <label for="selectAll-0" class="custom-checkbox">&nbsp;</label>
         <input type="checkbox" id='selectAll-0' class= 'checkbox'  name="to_sold" value="Yes">
       </div>
-     	<div class="form-group <?php echo (form_error('pickup_date'))?'error':'';?>" data-error="<?php echo (form_error('pickup_date'))? strip_tags(form_error('pickup_date')):'';?>">
+      <div class="form-group <?php echo (form_error('pickup_date'))?'error':'';?>" data-error="<?php echo (form_error('pickup_date'))? strip_tags(form_error('pickup_date')):'';?>">
         <label required="">Date for Pickup</label>
         <input type="text" name="pickup_date" class="form-control singledate" id="pickup_date" value=""  placeholder="Pickup Date">
       </div>
-     	<div class="form-group <?php echo (form_error('delivery_date'))?'error':'';?>" data-error="<?php echo (form_error('delivery_date'))? strip_tags(form_error('delivery_date')):'';?>">
+      <div class="form-group <?php echo (form_error('delivery_date'))?'error':'';?>" data-error="<?php echo (form_error('delivery_date'))? strip_tags(form_error('delivery_date')):'';?>">
         <label required="">Estimated Date for Delivery to Customer/Warehouse</label>
         <input type="text" name="delivery_date" class="form-control singledate" id="delivery_date" value=""  placeholder="Delviery Date">
       </div>
