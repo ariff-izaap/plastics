@@ -51,6 +51,10 @@ form .error::after { right:0px !important;}
 .add-user1 { max-width:800px;}
 .action-buttons { padding:10px 35px !important;}
 }
+@media ( min-width: 850px ) and ( max-width: 991px ) { 
+.body_container > .calllog-control { width: 68% !important; }
+.formcontrol-box select { width: 100% !important; }
+}
 
 @media ( min-width: 769px ) and ( max-width: 846px ) {  
 form > div:last-of-type > div input {
@@ -61,6 +65,8 @@ form > div:last-of-type > div span button, form > div:last-of-type > div a {
     top: -10px;
     margin-top: 0 !important;
 }
+.formcontrol-box select { width: 100% !important; }
+.body_container > .calllog-control { width: 68% !important; }
 }
 @media ( max-width:768px){
 .postal .form-group {padding-left: 0;padding-right: 0;}
@@ -77,6 +83,9 @@ form > div { width: 50% !important; }
 .right-section > div > span { width: 77% !important; padding-left: 0; }
 #simple_search_form { padding-bottom: 56px; }
 #data_table { width: 100% !important; }
+.panel-bor { width: 100% !important; }
+.body_container > .calllog-control { width: 68% !important; }
+.formcontrol-box select { width: 100% !important; }
 }
 @media ( max-width: 767px ) { 
 #call_log{ width: 100%; }
@@ -90,65 +99,26 @@ form > div:first-of-type { float:left; }
 .right-section > div > span { width: 77% !important; padding-left: 0; }
 #simple_search_form { padding-bottom: 56px; }
 #data_table { width: 100% !important; }
-form > div:first-of-type {
-    float: left;
-    width: 32% !important;
-}
-form > div:last-of-type {
-    float: right;
-    width: 68% !important;
-}
-.right-section > div:last-of-type {
-    float: right;
-}
-.right-section > div > span:last-of-type, .right-section > div > span:first-of-type {
-    display: inline-block;
-}
-.right-section > div > span:last-of-type {
-    width: 15% !important;
-    padding-left: 0;
-    width: 61% !important;
-}
-.right-section > div > span:first-of-type {
-    width: 36% !important;
-    padding: 0;
-    text-align: left;
-}
-.right-section > div > button {
-    width: 59%;
-}
-.advanced-search .caret {
-    margin: 0 0 0 -14px;
-}
-.advanced-search .btn {
-    border-radius: 0;
-    padding: 5px 25px 5px 10px;
-    background: #fff;
-    color: #6a7987;
-    font-size: 14px;
-}
-#simple_search_button { top: -8px;
-position: relative; }
-.advanced-search .caret {
-    margin: 0 0 0 3px;
-}
-form > div:last-of-type a { position: relative;
-top: -21px; }
-form > div:last-of-type span {
-position: relative;
-top: 0px; }
-.right-section > div:first-of-type {
-    float: left;
-}
+form > div:first-of-type { float: left; width: 32% !important;}
+form > div:last-of-type { float: right; width: 68% !important; }
+.right-section > div:last-of-type { float: right;}
+.right-section > div > span:last-of-type, .right-section > div > span:first-of-type { display: inline-block; }
+.right-section > div > span:last-of-type { width: 15% !important; padding-left: 0; width: 61% !important; }
+.right-section > div > span:first-of-type { width: 36% !important; padding: 0; text-align: left; }
+.right-section > div > button { width: 59%; }
+.advanced-search .caret { margin: 0 0 0 -14px; }
+.advanced-search .btn { border-radius: 0; padding: 5px 25px 5px 10px; background: #fff; color: #6a7987; font-size: 14px; }
+#simple_search_button { top: -8px; position: relative; }
+.advanced-search .caret { margin: 0 0 0 3px; }
+form > div:last-of-type a { position: relative; top: -21px; }
+form > div:last-of-type span { position: relative; top: 0px; }
+.right-section > div:first-of-type { float: left; }
+.panel-bor { width: 100% !important; }
+.sales-cntrl-btn { float: none !important; text-align: center; margin: 0 auto; }
+.call-log > .container { width: 100% !important; }
+.body_container > .calllog-control { width: 68% !important; }
 }
 @media ( min-width: 320px ) and ( max-width: 469px ) {
-	body #simple_search_form > div {
-    width: 100% !important;
-}
-.right-section > div {
-    float: none;
-    display: block;
-    width: 100%;
-    margin-bottom: 17px;
-}
+	body #simple_search_form > div { width: 100% !important; }
+.right-section > div { float: none; display: block; width: 100%; margin-bottom: 17px; }
 	}

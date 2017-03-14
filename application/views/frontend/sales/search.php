@@ -238,7 +238,7 @@
         </div>
       </div>  
     
-     <div class="container">
+     <div class="container sales-cntrl-btn">
      <div class="row">   
         <div class="form-group col-md-2">
           <input type="reset" class="btn btn-block" name="reset" value="Clear Form" />

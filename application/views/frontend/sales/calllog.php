@@ -60,7 +60,7 @@
      </div>
       </form>
     
-     <div class="container">
+     <div class="container calllog-control">
      <div class="row">    
         <div class="form-group col-md-2">
           <input type="reset" class="btn btn-block" name="reset" value="Clear Form" />
