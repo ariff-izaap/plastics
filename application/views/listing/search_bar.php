@@ -1,4 +1,4 @@
-<div class="col-xs-12 table-sub-header text-right">
+<div class="col-xs-12 table-sub-header text-right search-bar">
   <div class="row">
     <div class="div top-lisiting-search">
       <form method="post" id="simple_search_form">

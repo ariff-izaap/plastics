@@ -51,22 +51,26 @@ form .error::after { right:0px !important;}
 .add-user1 { max-width:800px;}
 .action-buttons { padding:10px 35px !important;}
 }
+
+
+@media ( min-width: 769px ) and ( max-width: 992px ) {
+ body .btn-block { width: 68% !important; margin: 0 auto 30px auto; }
+.form-group .btn { width: 68% !important; margin: 0 auto 30px auto; }
+}
 @media ( min-width: 850px ) and ( max-width: 991px ) { 
-.body_container > .calllog-control { width: 68% !important; }
 .formcontrol-box select { width: 100% !important; }
 }
 
 @media ( min-width: 769px ) and ( max-width: 846px ) {  
-form > div:last-of-type > div input {
+.search-bar form > div:last-of-type > div input {
     margin-bottom: 20px !important;
 }
-form > div:last-of-type > div span button, form > div:last-of-type > div a {
+.search-bar form > div:last-of-type > div span button, .search-bar form > div:last-of-type > div a {
     position: relative;
     top: -10px;
     margin-top: 0 !important;
 }
 .formcontrol-box select { width: 100% !important; }
-.body_container > .calllog-control { width: 68% !important; }
 }
 @media ( max-width:768px){
 .postal .form-group {padding-left: 0;padding-right: 0;}
@@ -76,31 +80,30 @@ form > div:last-of-type > div span button, form > div:last-of-type > div a {
 .formcontrol-box > div > label { padding: 0; }
 #simple_search_form > div { width: 100%; }
 .top-lisiting-search > form, .top-lisiting-search > .right-section {  width: 100%; }
-form > div { width: 50% !important; }
-.right-section > div { width: 50%; }
-.right-section > div > button { width: 78%; }
-.right-section > div > span:first-of-type { width: 23% !important; padding: 0; text-align: left;}
+.search-bar form > div { width: 50% !important; }
+.search-bar .right-section > div { width: 50%; }
+.search-bar .right-section > div > button { width: 78%; }
+.search-bar .right-section > div > span:first-of-type { width: 23% !important; padding: 0; text-align: left;}
 .right-section > div > span { width: 77% !important; padding-left: 0; }
 #simple_search_form { padding-bottom: 56px; }
 #data_table { width: 100% !important; }
 .panel-bor { width: 100% !important; }
-.body_container > .calllog-control { width: 68% !important; }
 .formcontrol-box select { width: 100% !important; }
 }
 @media ( max-width: 767px ) { 
 #call_log{ width: 100%; }
 .formcontrol-box > div > label { padding: 0; }
 .top-lisiting-search > form, .top-lisiting-search > .right-section {  width: 100%; }
-form > div { width: 50% !important; }
-form > div:first-of-type { float:left; }
+.search-bar form > div { width: 50% !important; }
+.search-bar form > div:first-of-type { float:left; }
 .right-section > div { width: 50%; }
 .right-section > div > button { width: 78%; }
 .right-section > div > span:first-of-type { width: 23% !important; padding: 0; text-align: left;}
 .right-section > div > span { width: 77% !important; padding-left: 0; }
 #simple_search_form { padding-bottom: 56px; }
 #data_table { width: 100% !important; }
-form > div:first-of-type { float: left; width: 32% !important;}
-form > div:last-of-type { float: right; width: 68% !important; }
+.search-bar form > div:first-of-type { float: left; width: 32% !important;}
+.search-bar form > div:last-of-type { float: right; width: 68% !important; }
 .right-section > div:last-of-type { float: right;}
 .right-section > div > span:last-of-type, .right-section > div > span:first-of-type { display: inline-block; }
 .right-section > div > span:last-of-type { width: 15% !important; padding-left: 0; width: 61% !important; }
@@ -110,13 +113,14 @@ form > div:last-of-type { float: right; width: 68% !important; }
 .advanced-search .btn { border-radius: 0; padding: 5px 25px 5px 10px; background: #fff; color: #6a7987; font-size: 14px; }
 #simple_search_button { top: -8px; position: relative; }
 .advanced-search .caret { margin: 0 0 0 3px; }
-form > div:last-of-type a { position: relative; top: -21px; }
-form > div:last-of-type span { position: relative; top: 0px; }
+.search-bar form > div:last-of-type a { position: relative; top: -21px; }
+.search-bar form > div:last-of-type span { position: relative; top: 0px; }
 .right-section > div:first-of-type { float: left; }
 .panel-bor { width: 100% !important; }
 .sales-cntrl-btn { float: none !important; text-align: center; margin: 0 auto; }
 .call-log > .container { width: 100% !important; }
-.body_container > .calllog-control { width: 68% !important; }
+body .btn-block { width: 68% !important; margin: 0 auto 30px auto; }
+.form-group .btn { width: 68% !important; margin: 0 auto 30px auto; }
 }
 @media ( min-width: 320px ) and ( max-width: 469px ) {
 	body #simple_search_form > div { width: 100% !important; }
