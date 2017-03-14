@@ -32,7 +32,7 @@ $(function(){
 
     $("#sales_order_search").submit(function(){
         
-       alert(123); 
+        
     });
 
 	$('.singledate').daterangepicker({
@@ -528,6 +528,39 @@ function capitaliseFirstLetter(string)
 }
 
 /* Start To Punitha**/
+function sales_product_search()
+{
+    
+    var fdata = $("#sales_order_search").serialize();
+        
+       $.ajax({
+          url:base_url+"salesorder/productselection",
+          type:"POST",
+          data:fdata,
+          dataType:'json',
+          success:function(res)
+          {
+             var outpt = res.output;
+             $("#sales_prod_select").html('');
+             $("#sales_prod_select").html(outpt);
+          }
+    }); 
+}
+
+function product_add_to_shipment()
+{
+    var prod_id = '';
+    
+    $(".product_to_ship").each(function(){
+       if($(this). prop("checked") == true){
+         prod_id += (prod_id!='')?","+$(this).val():$(this).val();
+      }
+    });
+    $("#product_ids").val(prod_id);
+    $('#product_ship').modal();
+    $("#product_ship").show();
+    //alert(prod_id);
+}
 
 function inventory_sub()
 {

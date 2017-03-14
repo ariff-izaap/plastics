@@ -143,103 +143,115 @@ class Salesorder extends Admin_Controller
     
     public function productselection() 
     {
-      try
-      {
-        $product_id      = $_POST['product_id']; 
-        $form_id         = $_POST['form_id'];
-        $packaging       = $_POST['packaging'];
-        $customer_no     = $_POST['customer_number'];
-        $customer_na     = $_POST['customer_name'];
-        $color_id        = $_POST['color_id'];
-        $notes           = $_POST['notes'];
-        $prod_on_the_way = $_POST['include_product_on_the_way'];
-        $od_bt_not_shiped= $_POST['ordered_but_not_shipped'];
-        $in_warehouse    = $_POST['in_warehouse'];
-        $type            = $_POST['type'];
-        $equivalent      = $_POST['equivalent'];
-        $quantity        = $_POST['quantity'];
-        $quan_uses       = $_POST['quantity_uses'];
-        $quan_uses_chk   = $_POST['quantity_uses_check'];
-        $row             = $_POST['row'];
-        $row_check       = $_POST['row_uses_check'];
-        $units           = $_POST['units'];
-        $unts_uses_chk   = $_POST['units_uses_check'];
-        $wholesale       = $_POST['wholesale'];
-        $reference       = $_POST['reference'];
-        $internal_lot_no = $_POST['internal_lot_no'];
-        $vendor_lot_no   = $_POST['vendor_lot_no'];
-        
-        
-        $where = '';
-        
-        if(!empty($product_id)){
-            $where .= "name like '%".$product_id."%'";
-        }
-       // if(!empty($form_id)){
-//            $where .= " or form_id like '%".$form_id."%'";
-//        }
-//        
-//        if(!empty($packaging)){
-//            $where .= " or package_id like '%".$packaging."%'";
-//        }
-//        if(!empty($color_id)){
-//            $where .= " or color_id like '%".$color_id."%'";
-//        }
-//        if(!empty($notes)){
-//            $where .= " or notes like '%".$notes."%'";
-//        }
-//        if(!empty($row)){
-//            $where .= " or row like '%".$row."%'";
-//        }
-//        if(!empty($quantity)){
-//            $where .= " or quantity='".$quantity."'";
-//        }
-//        if(!empty($equivalent)){
-//            $where .= " or equivalent='".$equivalent."'";
-//        }
-//        if(!empty($units)){
-//            $where .= " or units like '%".$units."%'";
-//        }
-//        if(!empty($type)){
-//            $where .= " or item_type like '%".$type."%'";
-//        }
-//        if(!empty($internal_lot_no)){
-//            $where .= " or internal_lot_no='".$internal_lot_no."'";
-//        }
-//        if(!empty($vendor_lot_no)){
-//            $where .= " or vendor_lot_no='".$vendor_lot_no."'";
-//        }
-//        
-        $product_data = $this->db->query("select * from product $where ")->result_array();
-        
-       //// $view = $this->load->view("frontend/sales/");
-//        
-//        if(count($product_data) > 0){
-//            $this->salesorder_model->delete(array("id"=>$del_id));
-//            $output['message'] ="Record deleted successfuly.";
-//            $output['status']  = "success";
-//            
-//        }
-//        else
-//        {
-//           $output['message'] ="This record not matched by Inventory.";
-//           $output['status']  = "error";
-//        }
-//        $this->_ajax_output($output, TRUE);    
-        
+        try
+        {
+          
+              $this->form_validation->set_rules('product_id','Product Name','trim|required');
+              $this->form_validation->set_error_delimiters('', '');
+              
+               if($this->form_validation->run()){
+                    $product_id      = $_POST['product_id']; 
+                    $form_id         = $_POST['form_id'];
+                    $packaging       = $_POST['packaging'];
+                    $customer_no     = $_POST['customer_number'];
+                    $customer_na     = $_POST['customer_name'];
+                    $color_id        = $_POST['color_id'];
+                    $notes           = $_POST['notes'];
+                    $prod_on_the_way = $_POST['include_product_on_the_way'];
+                    $od_bt_not_shiped= $_POST['ordered_but_not_shipped'];
+                    $in_warehouse    = $_POST['in_warehouse'];
+                    $type            = $_POST['type'];
+                    $equivalent      = $_POST['equivalent'];
+                    $quantity        = $_POST['quantity'];
+                    $quan_uses       = $_POST['quantity_uses'];
+                    $quan_uses_chk   = $_POST['quantity_uses_check'];
+                    $row             = $_POST['row'];
+                    $row_check       = $_POST['row_uses_check'];
+                    $units           = $_POST['units'];
+                    $unts_uses_chk   = $_POST['units_uses_check'];
+                    $wholesale       = $_POST['wholesale'];
+                    $reference       = $_POST['reference'];
+                    $internal_lot_no = $_POST['internal_lot_no'];
+                    $vendor_lot_no   = $_POST['vendor_lot_no'];
+                  
+                   
+                    $where = '';
+                
+                    if(!empty($product_id)){
+                        $where .= "p.name like '%".$product_id."%'";
+                    }
+                   // if(!empty($form_id)){
+            //            $where .= " or form_id like '%".$form_id."%'";
+            //        }
+            //        
+            //        if(!empty($packaging)){
+            //            $where .= " or package_id like '%".$packaging."%'";
+            //        }
+            //        if(!empty($color_id)){
+            //            $where .= " or color_id like '%".$color_id."%'";
+            //        }
+            //        if(!empty($notes)){
+            //            $where .= " or notes like '%".$notes."%'";
+            //        }
+            //        if(!empty($row)){
+            //            $where .= " or row like '%".$row."%'";
+            //        }
+            //        if(!empty($quantity)){
+            //            $where .= " or quantity='".$quantity."'";
+            //        }
+            //        if(!empty($equivalent)){
+            //            $where .= " or equivalent='".$equivalent."'";
+            //        }
+            //        if(!empty($units)){
+            //            $where .= " or units like '%".$units."%'";
+            //        }
+            //        if(!empty($type)){
+            //            $where .= " or item_type like '%".$type."%'";
+            //        }
+            //        if(!empty($internal_lot_no)){
+            //            $where .= " or internal_lot_no='".$internal_lot_no."'";
+            //        }
+            //        if(!empty($vendor_lot_no)){
+            //            $where .= " or vendor_lot_no='".$vendor_lot_no."'";
+            //        }
+            //        
+                      $this->data['product_data'] = $this->db->query("select p.*,pf.name as formname,pc.name as colorname,pa.name as packagename from product p 
+                                                                       inner join product_form pf on pf.id=p.form_id
+                                                                       inner join product_color pc on pc.id=p.color_id
+                                                                       inner join product_packaging pa on pa.id=p.package_id
+                                                                       where $where ")->result_array();
+                      $this->session->set_flashdata('success_msg',$msg,TRUE);
+                      $status  = 'success';
+                  }    
+                  else
+                  {
+                    $edit_data = array();
+                    $edit_data['product_id']  = '';
+                    $status = 'error';
+                  }
+            }
+            catch (Exception $e)
+            {
+                $this->data['status']   = $status;
+                $this->data['message']  = $e->getMessage();
+            }
+
+         
           $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
           $this->data['colors']              = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
           $this->data['forms']               = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
           $this->data['packages']            = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
-          
-      $this->layout->view('frontend/sales/productselection');
-      }  
-      catch(Exception $e) 
-      {
+          $this->data['salestype']           = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
         
-      } 
-        
-       
+        if($this->input->is_ajax_request()){
+           $output = ''; 
+          $output  = $this->load->view('frontend/sales/productselection',$this->data,true);
+          return    $this->_ajax_output(array('status' => $status ,'output' => $output), TRUE);
+        }
+        else
+        {
+          $this->layout->view('frontend/sales/productselection');
+        } 
     }
     
     public function shippingorder()

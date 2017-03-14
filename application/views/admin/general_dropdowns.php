@@ -48,8 +48,8 @@ if(validation_errors())
       <div class="clearfix"></div>
       <div class="form-group col-md-6 " data-error="">
         <label required="" class="control-label col-md-12">Active</label>
-        <label><input type="radio" name="status" value="1"> Yes</label>
-        <label><input type="radio" name="status" value="0"> No</label>
+        <label><input type="radio" name="status" value="1" /> Yes</label>
+        <label><input type="radio" name="status" value="0" /> No</label>
       </div>
       <div class="clearfix"></div>
       <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="">        

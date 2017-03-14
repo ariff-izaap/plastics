@@ -73,8 +73,8 @@ class Admin extends Admin_Controller
     	$form = $this->input->post();
     	$ins['first_name'] = $form['firstname'];
     	$ins['last_name'] = $form['lastname'];
-      $ins['username'] = $form['username'];
-      $ins['user_code'] = $form['user_code'];
+       $ins['username'] = $form['username'];
+       $ins['user_code'] = $form['user_code'];
     	$ins['email'] = $form['email'];
     	$ins['password'] = md5("password");
     	$ins['role_id'] = $form['role'];
@@ -109,8 +109,8 @@ class Admin extends Admin_Controller
 
   public function add_edit_dropdowns($edit_id='')
   {
-    $this->form_validation->set_rules("table_value","Table Type Value","required");
-    $this->form_validation->set_rules("status","Active","required");
+    //$this->form_validation->set_rules("table_value","Table Type Value","required");
+   // $this->form_validation->set_rules("status","Active","required");
     if ($this->form_validation->run() == FALSE)
     {
       $this->layout->view("admin/general_dropdowns");
@@ -119,8 +119,8 @@ class Admin extends Admin_Controller
     {
       $form = $this->input->post();
       $ins['status'] = $form['status'];
-      $edit_id = $form['edit_id'];
-      $ins['name'] = $form['table_value'];
+      $edit_id       = $form['edit_id'];
+      $ins['name']   = $form['table_value'];
 
       if(!$edit_id)
       {
@@ -142,7 +142,7 @@ class Admin extends Admin_Controller
 
   public function get_table_value()
   {
-    $val = trim($this->input->post("val"));
+    echo $val = trim($this->input->post("val")); exit;
     $data['tb'] = $this->admin_model->select($this->get_table($val));    
     $this->load->view("admin/dropdown_list",$data);
   }

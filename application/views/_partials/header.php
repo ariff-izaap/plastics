@@ -72,7 +72,7 @@
                 <li><a href="<?php echo site_url();?>salesorder/search">Search</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/calllog">Call Log</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/callback">Call Back</a></li>
-                <li><a href="<?php echo site_url();?>salesorder/productselection">Product Selection</a></li>
+                <li><a href="<?php echo site_url();?>salesproductselection">Product Selection</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/shippingorder">Shipping Order</a></li>
                </ul>
             </li>

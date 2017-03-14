@@ -284,3 +284,27 @@ $config['category_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 ); 
+
+$config['salesproductselection_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'salesproductselection/filter',
+	"base_url"	=> 	'/salesproductselection/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(  
+                        'id'=>array('name'=>'Product No', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),	
+                        'form_name' => array('name'=>'Form', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'color_name' => array('name'=>'Color', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'item_type' => array('name'=>'Type', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),									
+						'equivalent'=> array('name'=>'Equivalent', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'quantity'=>array('name'=>'Quantity', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'available_qty'=> array('name'=>'Available', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+                        'wholesale_price'=> array('name'=>'Wholesale Price', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+                        'package_name' => array('name'=>'Package Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'row' => array('name'=>'Row', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
+                        'units' => array('name'=>'Units', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),                        
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 

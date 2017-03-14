@@ -61,7 +61,7 @@
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase' && $uri1!='salesproductselection'){ ?>
 
 					<th>Action</th>
 
@@ -116,7 +116,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase' && $uri != 'add_product'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase' && $uri != 'add_product' && $uri1 != 'salesproductselection'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"
@@ -124,9 +124,7 @@
 						data-original-title="view"> <i class="icon-eye-open"></i>
 					</a>
 					<?php else:?>
-						
 						<?php 
-
 							echo $this->parser->parse_string($listing_action, $item, TRUE);
 						?>
 					<?php endif;?>

@@ -38,7 +38,7 @@ class Inventory extends Admin_Controller
                                     'c.name' => 'Color Name'                                    
         );
          
-        $this->_narrow_search_conditions = array("start_date");
+        $this->_narrow_search_conditions = array("p.name");
         
         $str = '<a href="'.site_url('inventory/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
                 <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'inventory/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
@@ -69,13 +69,13 @@ class Inventory extends Admin_Controller
     
     public function add( $edit_id ='')
     {
-        //echo "coming"; exit;
         $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
         $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
         try
         {
           if($this->input->post('edit_id'))            
             $edit_id = $this->input->post('edit_id');
+            
           $this->form_validation->set_rules('name','Product Name','trim|required');
           $this->form_validation->set_rules('sku','Sku','trim|required');
           $this->form_validation->set_rules('quantity','Quantity','trim|required');
@@ -222,8 +222,8 @@ class Inventory extends Admin_Controller
         $this->data['packages'] = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
         $this->data['categories'] = $this->inventory_model->get_where(array(),"*","category")->result_array();
         $this->data['warehouse'] = $this->inventory_model->get_where(array(),"*","warehouse")->result_array();
-        if($this->input->is_ajax_request())
-        {
+        
+        if($this->input->is_ajax_request()){
           $output  = $this->load->view('frontend/inventory/add',$this->data,true);
           return    $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id), TRUE);
         }
@@ -398,8 +398,7 @@ class Inventory extends Admin_Controller
 			$data['dropship_fee'] 		= $this->input->post("dropship_fee", TRUE);
             $data['shipping_cost'] 	    = $this->input->post("shipping_cost", TRUE);
 			$data['shipping_service'] 	= $this->input->post("shipping_service", TRUE);
-            
-
+   
 			 
 			//$product_sku = get_product_sku($product_id);
 			//$vendor_name = get_vendor_name($vendor_id);
