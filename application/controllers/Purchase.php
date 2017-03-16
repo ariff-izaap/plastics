@@ -145,7 +145,7 @@ class Purchase extends Admin_Controller
                                 'c.name' => 'Color',
                                 'd.name' => 'Product Type',
                                 'e.name' => 'Package');
-    $this->_narrow_search_conditions = array("product","form","color","type","package");    
+    $this->_narrow_search_conditions = array("product","form","color","type","package","note");    
     // $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
     //         <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     // $this->listing->initialize(array('listing_action' => $str));

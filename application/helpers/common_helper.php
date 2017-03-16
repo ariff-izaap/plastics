@@ -684,6 +684,14 @@ function get_colors()
 }
 
 
+function get_product_notes()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select notes from product")->result_array();
+  return $q;
+}
+
+
 function copyFile($file,$rand,$po_id)
 {
    echo $file_to_go = str_replace("assets/uploads/purchase/tmp/".$rand."/","assets/uploads/purchase/".$po_id."/",$file);

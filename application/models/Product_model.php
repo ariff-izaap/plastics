@@ -41,6 +41,9 @@ class Product_model extends App_model
         case 'package':
           $this->db->where_in("e.name", $value);
         break;
+        case 'note':
+          $this->db->where_in("a.notes", $value);
+        break;
       }
     }        
     return parent::listing();

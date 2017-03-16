@@ -72,6 +72,25 @@
           ?>
         </select>
       </div>
+       <div class="filter-row form-group col-md-3">
+        <label>Notes</label>
+        <select name="note[]" multiple class="form-control">
+          <?php
+            if(get_product_notes())
+            {
+              foreach (get_product_notes() as $key => $value)
+              {
+                if($value['notes']!='')
+                {
+                  ?>
+                    <option value="<?=$value['notes'];?>"><?=$value['notes'];?></option>
+                  <?php
+                }
+              }
+            }
+          ?>
+        </select>
+      </div>
     </div>
   </div>
 
