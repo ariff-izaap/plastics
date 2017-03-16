@@ -18,7 +18,7 @@ class Salesproductselection extends Admin_Controller
 			
        $this->load->model(array('inventory_model','salesorder_model'));
 	   $this->load->library('listing');    
-     
+       $this->load->library('cart');
 	} 
 	
 	
@@ -48,9 +48,8 @@ class Salesproductselection extends Admin_Controller
         $this->data['per_page_options']     = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
         
         $this->data['search_bar'] = $this->load->view('frontend/salesproductselection/search_bar', $this->data, TRUE);        
-        
         $this->data['listing']    = $listing;
-        
+        $this->data['salestype']  = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
         $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
         
         $this->layout->view("frontend/salesproductselection/index");
@@ -172,7 +171,18 @@ class Salesproductselection extends Admin_Controller
         $this->_ajax_output($output, TRUE); 
     }
     
+   public function add_to_cart()
+   {
     
+    
+      $data = array(
+            'id'      => 'sku_123ABC',
+            'qty'     => 1,
+            'price'   => 39.95,
+            'name'    => 'T-Shirt',
+            'options' => array('Size' => 'L', 'Color' => 'Red')
+        );
+   } 
    	
 }
 ?>
