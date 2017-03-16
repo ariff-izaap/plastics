@@ -89,16 +89,21 @@ class Purchase extends Admin_Controller
       $ins['created_id']          = get_current_user_id();
       $ins['updated_id']          = get_current_user_id();
       $ins['created_date']        = date("Y-m-d H:i:s");
-      if(is_dir("assets/uploads/purchase/tmp/".$rand))
+      
+      echo $form['rand'];
+      if(is_dir("assets/uploads/purchase/tmp/".$form['rand']))
       {
-        /*if($form['rand'])
+        if($form['rand'])
         {
-          $files = glob("uploads/tmp/".$rand."/*.*");
-           $a = array_map("copyFile",$files,array('rand'=>$_POST['rand']),array('po_id'=>$form['po_id']));
-          array_map('unlink', glob("uploads/tmp/".$rand."/*.*"));
-          rmdir("uploads/tmp/1");
-        }*/
+
+          $files = glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*");
+          mkdir("assets/uploads/purchase/".$form['po_id'],0777,true);
+          $a = array_map("copyFile",$files,array('rand'=>$_POST['rand']),array('po_id'=>$form['po_id']));
+          array_map('unlink', glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*"));
+          rmdir("assets/uploads/purchase/tmp/".$form['rand']."");
+        }
       }
+
       /*Update Vendor Details*/
       $up['first_name'] = $form['firstname'];
       $up['last_name'] = $form['lastname'];
@@ -117,13 +122,7 @@ class Purchase extends Admin_Controller
     $this->layout->view('frontend/Purchase/add_purchase');
   }
 
-  function copyFile($file,$rand,$po_id)
-  {
 
-     $file_to_go = str_replace("uploads/tmp/".$rand."/","uploads/".$po_id."/",$file);
-     copy($file, $file_to_go);
-
-  }
 
   public function delete($del_id)
   {  
@@ -146,7 +145,7 @@ class Purchase extends Admin_Controller
                                 'c.name' => 'Color',
                                 'd.name' => 'Product Type',
                                 'e.name' => 'Package');
-    $this->_narrow_search_conditions = array("start_date");    
+    $this->_narrow_search_conditions = array("product","form","color","type","package");    
     // $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
     //         <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     // $this->listing->initialize(array('listing_action' => $str));
@@ -158,7 +157,7 @@ class Purchase extends Admin_Controller
     $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
     $this->data['per_page'] = $this->listing->_get_per_page();
     $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-    $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);
+    $this->data['search_bar'] = $this->load->view('frontend/Purchase/search_bar', $this->data, TRUE);
     $this->data['listing'] = $listing;
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
     $this->data['form_product'] = $form;
@@ -380,6 +379,11 @@ class Purchase extends Admin_Controller
     $file = "assets/uploads/purchase/tmp/".$rand."/".$name;
     unlink($file);
   }
-
+  public function get_cart_count()
+  {
+    $po_id = $this->input->post('po_id');
+    $count = $this->purchase_model->select(array("po_id"=>$po_id),"purchase_order_item");
+    $this->_ajax_output(array("count"=>count($count)),TRUE);
+  }
 }
 ?>

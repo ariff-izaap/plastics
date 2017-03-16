@@ -184,10 +184,8 @@
 			if($('.advancesearch').length)
 			{
 				$.post(base_url+'/'+current_controller+'/get_advance_filter_form/'+namespace,{},function(data){
-					
 					$("#popOverBox").html(data.advance_filter_form);
-
-					init_checkbox(timesheet_checkbox_data);					
+  				init_checkbox(timesheet_checkbox_data);					
 
 					if(current_controller=='timesheet')
 						init_daterangepicker($('.date_range').val());

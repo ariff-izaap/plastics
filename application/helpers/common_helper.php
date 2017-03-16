@@ -684,5 +684,13 @@ function get_colors()
 }
 
 
+function copyFile($file,$rand,$po_id)
+{
+   echo $file_to_go = str_replace("assets/uploads/purchase/tmp/".$rand."/","assets/uploads/purchase/".$po_id."/",$file);
+   copy($file, $file_to_go);
+
+}
+
+
 
 ?>

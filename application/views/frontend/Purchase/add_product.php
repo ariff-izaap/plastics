@@ -15,11 +15,21 @@
   </div>
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
+
+<div class="col-md-12">
+  <div id="popOverBox" style="display: block;"></div>
+</div>
+<br><br><br>
+
+<div class="col-md-12">
 <?=$grid;?>
+</div>
+
+
 <div class="clearfix"></div>
 <div class="row">
   <div class="col-md-11">
-    <a href="<?=site_url('purchase/checkout/'.$form_product['po_id']);?>" class="btn pull-right">Checkout</a>
+    <a href="javascript:void(0)" data-po-id="<?=$form_product['po_id'];?>"  class="btn pull-right checkout-btn">Checkout</a>
   </div>
 </div>
 <input type="hidden" name="po_id" id="po_id" value="<?=$form_product['po_id'];?>">
@@ -71,7 +81,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-md-2 pull-right">
-          <a href="<?=site_url('purchase/checkout/'.$form_product['po_id']);?>" class="btn pull-right">Checkout</a>
+          <a href="javascript:void(0);" data-po-id="<?=$form_product['po_id'];?>" class="btn checkout-btn pull-right">Checkout</a>
         </div>
         <div class="col-md-2 pull-right">
           <a href="javascript:void(0);" onclick="update_cart(this);" class="btn pull-right">Update Cart</a>

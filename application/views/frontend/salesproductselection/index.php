@@ -1,4 +1,3 @@
-     
   <div class="row blue-mat">
       <div class="breadcrumbs col-md-6">
         <?php echo set_breadcrumb(); ?>

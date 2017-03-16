@@ -1022,5 +1022,26 @@ $(".upload-doc").click(function(){
    
 });
 
+$(".checkout-btn").click(function(){
+  po_id = $(this).attr('data-po-id');
+  $.ajax({
+    url:base_url+'purchase/get_cart_count',
+    type:"POST",
+    data:{po_id:po_id},
+    success:function(data)
+    {
+      data = JSON.parse(data);
+     if(data.count == 0)
+      {
+        bootbox.alert("Your cart is empty.");
+        return false;
+      }
+      else
+        window.location.href = base_url+'purchase/checkout/'+po_id;
+    }
+  });
+  
+});
+
 
 /*Ram*/

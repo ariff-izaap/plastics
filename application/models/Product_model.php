@@ -26,20 +26,20 @@ class Product_model extends App_model
           continue;
       switch ($key)
       {
-        case 'a.name':
-          $this->db->like($key, $value);
+        case 'product':
+          $this->db->where_in("a.name", $value);
         break;
-        case 'b.name':
-          $this->db->like($key, $value);
+        case 'form':
+          $this->db->where_in("b.name", $value);
         break;
-        case 'c.name':
-          $this->db->like($key, $value);
+        case 'color':
+          $this->db->where_in("c.name", $value);
         break;
-        case 'd.name':
-          $this->db->like($key, $value);
+        case 'type':
+          $this->db->where_in("d.name", $value);
         break;
-        case 'e.name':
-          $this->db->like($key, $value);
+        case 'package':
+          $this->db->where_in("e.name", $value);
         break;
       }
     }        
