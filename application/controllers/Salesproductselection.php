@@ -28,20 +28,7 @@ class Salesproductselection extends Admin_Controller
 
         $this->load->library('listing');         
            
-        $this->simple_search_fields = array(                                                
-                                                'p.name'             => 'Name',
-                                                'p.sku'              => 'Sku',
-                                                'p.quantity'         => 'Quantity',
-                                                'p.row'              => 'Row',
-                                                'p.units'            => 'Units',
-                                                'p.wholesale_price'  => 'Wholesale Price',
-                                                'p.internal_lot_no'  => 'Internal Lot No',
-                                                'p.vendor_lot_no'    => 'Vendor Lot No',
-                                                'p.created_date'     => 'Created Date',
-                                                'pk.name'            => 'Package Name',
-                                                'f.name'             => 'Form Name',
-                                                'c.name'             => 'Color Name'                                    
-                                           );
+        $this->simple_search_fields = array();
          
         $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
         

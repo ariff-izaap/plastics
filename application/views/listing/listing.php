@@ -81,10 +81,11 @@
         		?>
 						<td>
           		<?php 
+                    $clk = ($uri1 == "salesproductselection")?'onclick="product_add_to_shipment()"':"";
           			if((isset($item['id']) && !empty($item['id'])))
           			{ 
 									echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';
-          				echo form_checkbox("op_select[]", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox'");
+          				echo form_checkbox("op_select[]", $item['id'], '', "id='selectAll-{$item['id']}' class= 'checkbox' $clk");
           			} 
           		?>
             </td>
