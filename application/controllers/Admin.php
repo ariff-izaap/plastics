@@ -121,9 +121,15 @@ class Admin extends Admin_Controller
       $ins['status'] = $form['status'];
       $edit_id       = $form['edit_id'];
       $ins['name']   = $form['table_value'];
+      $ins['created_id'] = get_current_user_id();
+      $ins['updated_id'] = get_current_user_id();
+      $ins['updated_date'] = date("Y-m-d H:i:s");
+      $ins['created_date'] = date("Y-m-d H:i:s");
 
       if(!$edit_id)
       {
+        $ins['updated_id'] = get_current_user_id();
+        $ins['updated_date'] = date("Y-m-d H:i:s");
         $add = $this->admin_model->insert($ins,$this->get_table($form['table_type']));
         $log = log_history($this->get_table($form['table_type']),$add,"dropdown","insert");
         //$history = $this->history_model->insert($his,"log");
@@ -265,6 +271,9 @@ class Admin extends Admin_Controller
         break;
       case '12':
         $table = "credit_type";
+        break;
+      case '13':
+        $table = "product_color";
         break;
     }
     return $table;

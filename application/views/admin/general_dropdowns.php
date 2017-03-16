@@ -22,6 +22,7 @@ if(validation_errors())
         <select name="table_type" class="form-control">
           <option value="">--Select--</option>
           <option value="1">Packaging</option>
+          <option value="13">Color</option>
           <option value="2">Form</option>
           <option value="3">Product Type</option>
           <option value="4">Credit</option>

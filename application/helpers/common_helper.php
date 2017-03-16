@@ -575,6 +575,8 @@ function log_history($table='',$id='',$cat='',$action='')
     $data['action']="<strong>".$get_name[0]['first_name']." (".$get_name[0]['email'].") </strong> $cat has been ".$action;
   else if($cat=="purchase")
     $data['action']="<strong>#".$get_name[0]['id']."</strong> purchase order has been ".$action;
+  else if($cat=="warning")
+    $data['action']="<strong>".$get_name[0]['warning_name']."</strong> $cat has been ".$action;
   else
     $data['action']="<strong>".$get_name[0]['name']."</strong> $cat has been ".$action;
 
@@ -617,6 +619,28 @@ function get_credit_type()
   $q = $CI->db->query("select * from credit_type where status=1")->result_array();
   return $q;
 }
+function get_packaging()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from product_packaging where status=1")->result_array();
+  return $q;
+}
+
+function get_product_form()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from product_form where status=1")->result_array();
+  return $q;
+}
+function get_product_color()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from product_color where status=1")->result_array();
+  return $q;
+}
+
+
+
 function get_address()
 {
   $CI = get_instance();
@@ -639,10 +663,10 @@ function get_prodcuts()
 }
 
 
-function get_operator()
+function get_operator($where='')
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from operator_selection")->result_array();
+  $q = $CI->db->query("select * from operator_selection $where")->result_array();
   return $q;
 }
 
@@ -653,15 +677,10 @@ function get_minlevel()
   return $q;
 }
 
-
-
 function get_product_price($id)
 {
   $CI = get_instance();
   $q = $CI->db->query("select wholesale_price from product where id=$id")->row_array();
   return $q['wholesale_price'];
 }
-
-
-
 ?>

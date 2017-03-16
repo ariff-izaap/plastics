@@ -8,12 +8,61 @@
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
 
+<div id="UploadModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload Document</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form action="" class="UploadDocForm" method="post" enctype="multipart/form-data">
+          
+            <div class="form-group col-md-6">
+              <label class="">Upload Document</label>
+              <input type="file" name="po_doc[]" class="form-control po_doc" id="">
+              <span class="help-block">Allowed Extension : doc,docx,pdf,xls,xlsx</span>
+            </div>            
+            <div class="clearfix"></div>            
+            <div class="col-md-12 doc-uploaded">
+              <?php
+              if(isset($_POST['rand']) && $_POST['rand']!='')
+              {
+                $fis = scandir("assets/uploads/purchase/tmp/".$_POST['rand']);
+                for ($i=2; $i < count($fis); $i++)
+                { 
+                  echo "<div id='row_".$i."'>".$fis[$i]."<a href='javascript:void(0)' data-id='".$i."' data-name='".$fis[$i]."' data-rand='".$_POST['rand']."' class='col-md-2 pull-right cancel-file'>x</a></div>";
+                }
+              }
+              ?>
+            </div>
+            <div class="clearfix"></div><br>
+            <div class="col-md-3">
+              <button type="button" class="btn upload-doc"><i class="fa fa-upload"></i> Upload</button>
+            </div>
+            <div class="clearfix"></div><br>
+            <div class="col-md-12 upload-msg">
+              
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="purchase-loader">
   <img src="<?=base_url();?>assets/img/rolling.gif">
 </div>
 <div class="container">
   <div class="row">
     <form name="add_purchase" id="addPurchase" method="post">
+      <input type="hidden" name="rand" class="rand" value="<?=$_POST['rand'];?>">
       <div class="form-grid">
         <div class="form-group col-md-4">
           <label required="">Purchase Order #</label>
@@ -77,7 +126,7 @@
             </div>
             <div class="form-group <?php echo (form_error('bill_name'))?'error':'';?>" data-error="<?php echo (form_error('bill_name'))? strip_tags(form_error('bill_name')):'';?>">
               <label required="" class="col-md-4">Bill To Name</label>
-              <input type="text" name="bill_name" class="form-control col-md-8" id="bill_name" value=""  placeholder="Bill To Name">
+              <input type="text" name="bill_name" class="form-control col-md-8" id="bill_name" value="<?=$data[0]['b_name']?>"  placeholder="Bill To Name">
             </div>      
             <div class="form-group <?php echo (form_error('address_1'))?'error':'';?>" data-error="<?php echo (form_error('address_1'))? strip_tags(form_error('address_1')):'';?>">
               <label required="" class="col-md-4">Address 1</label>
@@ -165,10 +214,9 @@
               <label class="">Documents to Attach</label>
                 <div class="clearfix"></div>
                 <a href="#UploadModal" data-toggle="modal" class="col-md-3"><i class="fa fa-2x fa-file-zip-o"></i></a>
-                <a href="#"><i class="fa fa-2x fa-paperclip fa-rotate-270"></i> </a>
-            </div>      
+            </div>
           </div>
-        </div>     
+        </div> 
         <div class="clearfix"></div>
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
         <div class="form-group col-md-2">
@@ -179,30 +227,3 @@
   </div>
 </div>
 
-<div id="UploadModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Upload Certificate</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label class="">IP Certificate</label>
-            <input type="text" name="to_sold" class="form-control" id="to_sold" value="" placeholder="e.g. http://">
-          </div>
-          <div class="form-group col-md-12">
-            <label class="">Original Certificate</label>
-            <input type="text" name="to_sold" class="form-control" id="to_sold" value="" placeholder="e.g. http://">
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>

@@ -30,7 +30,11 @@ class Purchase extends Admin_Controller
    protected $_minlevel_validation_rules = array(
      array('field' => 'name', 'label' => 'Warning Name', 'rules' => 'trim|required'),
      array('field' => 'product', 'label' => 'Product', 'rules' => 'trim|required'),
-     array('field' => 'quantity', 'label' => 'Quantity', 'rules' => 'trim|required'));
+     array('field' => 'message', 'label' => 'Message', 'rules' => 'trim|required'),
+     array('field' => 'quantity', 'label' => 'Quantity', 'rules' => 'trim|required'),
+     array('field' => 'form', 'label' => 'Product Form', 'rules' => 'trim|required'),
+     array('field' => 'packaging', 'label' => 'Product Packaging', 'rules' => 'trim|required'),
+     array('field' => 'color', 'label' => 'Product Color', 'rules' => 'trim|required'),);
 
 	function __construct()
   {
@@ -85,7 +89,16 @@ class Purchase extends Admin_Controller
       $ins['created_id']          = get_current_user_id();
       $ins['updated_id']          = get_current_user_id();
       $ins['created_date']        = date("Y-m-d H:i:s");
-
+      if(is_dir("assets/uploads/purchase/tmp/".$rand))
+      {
+        /*if($form['rand'])
+        {
+          $files = glob("uploads/tmp/".$rand."/*.*");
+           $a = array_map("copyFile",$files,array('rand'=>$_POST['rand']),array('po_id'=>$form['po_id']));
+          array_map('unlink', glob("uploads/tmp/".$rand."/*.*"));
+          rmdir("uploads/tmp/1");
+        }*/
+      }
       /*Update Vendor Details*/
       $up['first_name'] = $form['firstname'];
       $up['last_name'] = $form['lastname'];
@@ -102,6 +115,14 @@ class Purchase extends Admin_Controller
       redirect("purchase/add_product");
   	}
     $this->layout->view('frontend/Purchase/add_purchase');
+  }
+
+  function copyFile($file,$rand,$po_id)
+  {
+
+     $file_to_go = str_replace("uploads/tmp/".$rand."/","uploads/".$po_id."/",$file);
+     copy($file, $file_to_go);
+
   }
 
   public function delete($del_id)
@@ -152,6 +173,7 @@ class Purchase extends Admin_Controller
   }
   public function add_cart($product_id,$po_id,$qty,$vendor_id)
   {
+    $c = false;
     $ins['po_id']         = $po_id;
     $ins['product_id']    = $product_id;
     $ins['item_status']   = "New";
@@ -161,24 +183,40 @@ class Purchase extends Admin_Controller
     $ins['created_date']  = date("Y-m-d H:i:s");
     $ins['unit_price']    = get_product_price($product_id);
     $chk_product = $this->purchase_model->select(array("product_id"=>$product_id,"po_id"=>$po_id),"purchase_order_item");
-    $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");     
-    if($chk_product)
+    $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");
+    $product_details = $this->purchase_model->select(array("id"=>$product_id),"product");
+    $chk_warning = $this->purchase_model->select(array("product"=>$product_id,"form"=>$product_details['form_id'],"color"=>$product_details['color_id'],"packaging"=>$product_details['package_id']),"min_level");
+    if($chk_warning)
     {
-      $up['qty'] = $chk_product['qty'] + $qty;
-      $up['updated_date'] = date("Y-m-d H:i:s");
-      $update = $this->purchase_model->update(array("product_id"=>$product_id,"po_id"=>$po_id),$up,"purchase_order_item");
-       $this->_ajax_output(array('message' => "Product Added Successfully"), TRUE);
+      $dropdown = get_operator( "where id=".$chk_warning['dropdown']);
+      $exp = $qty." ".$dropdown[0]['operator']." ".$chk_warning['quantity'];
+      $c = eval(" return ($exp);");
+    }
+    if(!$c)
+    {
+      if($chk_product)
+      {
+        $up['qty'] = $chk_product['qty'] + $qty;
+        $up['updated_date'] = date("Y-m-d H:i:s");
+        $update = $this->purchase_model->update(array("product_id"=>$product_id,"po_id"=>$po_id),$up,"purchase_order_item");
+         $this->_ajax_output(array('status'=>'success','message' => "Product Added Successfully"), TRUE);
+      }
+      else
+      {
+        if($get_vendor['vendor_id']==$vendor_id || $get_vendor['vendor_id']=='')
+        {
+          $add = $this->purchase_model->insert($ins,"purchase_order_item");
+          $this->_ajax_output(array('status'=>'success','message' => "Product Added Successfully"), TRUE);
+        }
+        else
+          $this->_ajax_output(array('status'=>'success','message' => "Product Added with same vendor only."), TRUE);
+      }
     }
     else
     {
-      if($get_vendor['vendor_id']==$vendor_id || $get_vendor['vendor_id']=='')
-      {
-        $add = $this->purchase_model->insert($ins,"purchase_order_item");
-        $this->_ajax_output(array('message' => "Product Added Successfully"), TRUE);
-      }
-      else
-        $this->_ajax_output(array('message' => "Product Added with same vendor only."), TRUE);
-    }        
+      $this->_ajax_output(array('status'=>'warning','name'=>$chk_warning['warning_name'],'message' => $chk_warning['message']), TRUE);
+    }
+     //$this->_ajax_output(array('message' => $chk_warning,"valid"=>$c,"condition"=>$exp), TRUE);
   }
 
   public function form_add_to_cart($product_id, $po_id, $elm_id,$vendor_id)
@@ -235,7 +273,7 @@ class Purchase extends Admin_Controller
     $this->data['products']  = $products;
     $output['content']       = $this->load->view('/frontend/Purchase/view_cart', $this->data, TRUE);    
     $output['count'] = count($products);
-    $this->_ajax_output($output, TRUE);      
+    $this->_ajax_output($output, TRUE);  
   }
 
   public function checkout($po_id)
@@ -271,9 +309,13 @@ class Purchase extends Admin_Controller
     {
       $form = $this->input->post();
       $ins['warning_name'] = $form['name'];
+      $ins['message'] = $form['message'];
       $ins['product'] = $form['product'];
       $ins['quantity'] = $form['quantity'];
-      $ins['dropdown'] = $form['dropdown'];      
+      $ins['form'] = $form['form'];
+      $ins['packaging'] = $form['packaging'];
+      $ins['color'] = $form['color'];
+      $ins['dropdown'] = $form['dropdown'];
       $ins['created_id'] = get_current_user_id();
       $ins['created_date'] = date("Y-m-d H:i:s");
       if($form['edit_id'])
@@ -289,8 +331,10 @@ class Purchase extends Admin_Controller
         $add =  $this->purchase_model->insert($ins,"min_level");
         $log = log_history("min_level",$add,"warning","insert");
         $this->session->set_flashdata("success_msg","Warning Created Successfully",TRUE);
-      }      
+      }
+      redirect('purchase/min_level');
     }
+    $this->data['data'] = $this->input->post();
     $this->layout->view('frontend/Purchase/min_level');
   }
   public function get_min_level()
@@ -306,5 +350,36 @@ class Purchase extends Admin_Controller
     $log = log_history("min_level",$id,"warning","delete");
     $this->session->set_flashdata("success_msg","Warning deleted successfully",TRUE);
   }
+  public function do_upload()
+  {
+    $form  = $_FILES['file'];
+    $rand = $_POST['rand'];
+    if($rand=='')
+      $rand = rand();
+    if(!is_dir("assets/uploads/purchase/tmp/".$rand))
+    {
+      mkdir("assets/uploads/purchase/tmp/".$rand, 0777, true);
+    }
+
+    $config['upload_path']   = "assets/uploads/purchase/tmp/".$rand;
+    $config['allowed_types'] = 'doc|docx|pdf|xls|xlsx';
+  
+    $this->load->library('upload', $config);
+    if($this->upload->do_upload('file'))
+    {
+      $this->_ajax_output(array('rand'=>$rand,'status'=>'success','message'=>"Upload Successfully","docs"=>scandir("assets/uploads/purchase/tmp/".$rand)), TRUE);
+    }
+    else
+      $this->_ajax_output(array('rand'=>$rand,'status'=>'fail','message'=>$this->upload->display_errors(),"files"=>$form), TRUE);
+
+  }
+  public function del_upload()
+  {
+    $rand = $this->input->post('rand');
+    $name = $this->input->post('name');
+    $file = "assets/uploads/purchase/tmp/".$rand."/".$name;
+    unlink($file);
+  }
+
 }
 ?>

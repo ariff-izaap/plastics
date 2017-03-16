@@ -86,10 +86,10 @@ $(function(){
     $("form#dropdowns input[name='edit_id']").val($(this).val());
   });
 
-   $('.warning_select').select2({
+   $('.warning_select-2').select2({
       placeholder: "Select Warning",
       allowClear: true,
-      }).on('change',function(){
+      }).on('select2:select',function(){
        val = $(this).val();
        $.ajax({
         type:"POST",
@@ -102,21 +102,25 @@ $(function(){
           $('.select2_sample2').val(data.product).trigger("change");
           $("form#minLevel input[name='edit_id']").val(data.id);
           $("form#minLevel input[name='name']").val(data.warning_name);
+          $("form#minLevel textarea[name='message']").val(data.message);
           $("form#minLevel input[name='quantity']").val(data.quantity);
           $("form#minLevel select[name='dropdown']").val(data.dropdown).trigger("change");
+          $("form#minLevel select[name='form']").val(data.form).trigger("change");
+          $("form#minLevel select[name='color']").val(data.color).trigger("change");
+          $("form#minLevel select[name='packaging']").val(data.packaging).trigger("change");
         }
        });
      }).on("select2:unselect",function(data)
      {
       $("form#minLevel")[0].reset();
-      $('.select2_sample2').val(null).trigger("change");
+      $('.select2_sample2,.warning_select').val(null).trigger("change");
      });
 
   
 
   $(".add-new-dropdown").click(function(){
     $("form#dropdowns,form#minLevel")[0].reset();
-     $(".select2_sample2").empty();
+     //$(".warning_select-2").empty();
   });
 
 
@@ -238,7 +242,8 @@ function add_to_cart(b,a,d,f,v)
         after_ajax(f,data);
         $(e).popover("hide");
         bootbox.alert(data.message,function() {
-               location.reload();
+               if(data.status=="success")
+                  location.reload();
             });
       },
       error:function(g){
@@ -371,7 +376,9 @@ function get_vendor_details(v_url)
    $(".purchase-loader").show();
     $.post(base_url+v_url,{},function(data){
     $(".purchase-loader").hide();
+    console.log(data);
       $("form#addPurchase #vendor_name").val(data.business_name);
+      $("form#addPurchase #bill_name").val(data.b_name);
       $("form#addPurchase #address_1").val(data.address1);
       $("form#addPurchase #address_2").val(data.address2);
       $("form#addPurchase #city").val(data.city);
@@ -953,3 +960,67 @@ function save_form(action,div_id,save_type,elm,call_back_fn,popup){
      $.ajax(obj);
 }
 /***End To Punitha **/
+
+
+/*Ram */
+
+$("#UploadModal").on("click",".cancel-file",function(){
+  //$(".UploadDocForm")[0].reset();
+  //$(".upload-doc").html("");
+  rand = $(this).attr("data-rand");
+  name = $(this).attr("data-name");
+  id = $(this).attr("data-id");
+  $.ajax({
+     url:base_url+'purchase/del_upload',
+    type:"POST",
+    data:{rand:rand,name:name},
+    success:function(data)
+    {
+      $("#row_"+id).remove();
+    }
+  });
+});
+
+
+$(".upload-doc").click(function(){
+  var formData = new FormData();
+  formData.append('file', $('.po_doc')[0].files[0]);
+  formData.append('rand', $('.rand').val());
+  $.ajax({
+    url:base_url+'purchase/do_upload',
+    type:"POST",
+    data:formData,
+    processData: false,  // tell jQuery not to process the data
+    contentType: false,
+    success:function(data)
+    {
+      console.log(data);
+      data = JSON.parse(data);
+      $(".rand").val(data.rand);
+      if(data.status=="success")
+      {
+        style='color:green;'
+        $(".UploadDocForm .po_doc").val('');
+        var html='';
+        for(var i=2;i < data.docs.length;i++)
+        {
+          html+= "<div id='row_"+i+"'>"+
+                    data.docs[i]+
+                  "<a href='javascript:void(0)' data-id='"+i+"' data-name='"+data.docs[i]+"' data-rand='"+data.rand+"' class='col-md-2 pull-right cancel-file'>x</a></div>";
+        }
+        $(".doc-uploaded").html(html);
+      }
+      else
+        style='color:red;'
+
+      $(".upload-msg").html("<div style="+style+">"+data.message+"</div>");
+      setTimeout(function(){
+        $(".upload-msg").html("");
+      },2000);
+    }
+  });
+   
+});
+
+
+/*Ram*/
