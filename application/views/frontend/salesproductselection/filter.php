@@ -1,4 +1,4 @@
-<form name="sales_order_search" id="sales_order_search" method="POST" class="product-sel">
+<form name="advance_search_form" id="advance_search_form" method="POST" class="product-sel">
   <div class="container">
   <div class="row">
       <div class="form-grid col-md-4 panel panel-default panel-bor">
@@ -9,8 +9,10 @@
             </div>
             <div class="form-group" >
               <label>Product</label>
-              <select class="form-control" name="product_id" id="sales_product_id" multiple="multiple" >
-                   <?php foreach($products as $prod): ?>
+              <select class="form-control" name="name" id="name" multiple="multiple" >
+                   <?php $products = get_products(); 
+                  
+                         foreach($products as $prod): ?>
                     <option value="<?php echo $prod['name'];?>"  > <?php echo $prod['name'];?> </option>
                   <?php endforeach;?>
               </select>
@@ -18,15 +20,17 @@
             <div class="form-group">
               <label>Form</label>
               <select class="form-control productform" name="form_id" id="form_id" multiple="multiple">
-                   <?php foreach($forms as $form): ?>
+                   <?php $forms = get_forms(); 
+                     foreach($forms as $form): ?>
                     <option value="<?php echo $form['id'];?>"  > <?php echo $form['name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
             <div class="form-group" >
               <label>Packaging</label>
-              <select class="form-control productpackage" name="packaging" id="packaging" multiple="multiple">
-                   <?php foreach($packages as $pack):
+              <select class="form-control productpackage" name="package_id" id="package_id" multiple="multiple">
+                   <?php $packages = get_packages(); 
+                       foreach($packages as $pack):
                      
                    ?>
                     <option value="<?php echo $pack['id'];?>" > <?php echo $pack['name'];?> </option>
@@ -48,7 +52,8 @@
              <div class="form-group" >
               <label>Color</label>
               <select class="form-control productcolor" name="color_id" id="color_id" multiple="multiple">
-                   <?php foreach($colors as $clr):
+                   <?php $colors = get_colors();
+                    foreach($colors as $clr):
                       
                    ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
@@ -57,7 +62,7 @@
             </div>
             <div class="form-group" >
               <label>Notes</label>
-              <select class="form-control productnotes" name="notes[]" id="notes" multiple="multiple">
+              <select class="form-control productnotes" name="notes" id="notes" multiple="multiple">
                    <?php foreach($address as $addr):
                       $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
                    ?>
@@ -72,7 +77,7 @@
               <input type="checkbox" name="ordered_but_not_shipped" class="" id="ordered_but_not_shipped" value="" /> Ordered But Not Shipped
             </div>
             <div class="form-group" >
-              <input type="checkbox" name="in_warehouse" class="" id="in_warehouse" value="" /> In Warehouse
+              <input type="checkbox" name="received_in_warehouse" class="" id="received_in_warehouse" value="Yes" /> In Warehouse
             </div>
             </div>
         </div>
@@ -153,7 +158,11 @@
                 <button type="submit" class="btn btn-block">Who Holding</button>
             </div>
             <div class="col-md-2" style="text-align: right;">
-                <input type="button" id="salesorder_product_search" onclick="sales_product_search();" class="btn btn-block" value="Search" />
+                <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
+                <button type="button" class="btn btn-block" onclick="$.fn.submit_advance_search_form();">Search</button>
+              <!--
+  <input type="button" id="salesorder_product_search" onclick="sales_product_search();" class="btn btn-block" value="Search" />
+-->
             </div>
         </div>
         </div>

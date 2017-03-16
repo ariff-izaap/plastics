@@ -148,7 +148,7 @@
 			progress_bar_flag = true;
 			
 			$.fn.init_progress_bar();
-			
+			//alert(listing_form_data);
 			$.post(url,listing_form_data,function(rdata){
 				
 				$("#"+data_tbl).parent().html(rdata.listing);

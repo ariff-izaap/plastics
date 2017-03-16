@@ -16,7 +16,7 @@ class Salesproductselection extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model('inventory_model');
+       $this->load->model(array('inventory_model','salesorder_model'));
 	   $this->load->library('listing');    
      
 	} 
@@ -29,21 +29,21 @@ class Salesproductselection extends Admin_Controller
         $this->load->library('listing');         
            
         $this->simple_search_fields = array(                                                
-                                    'p.name'         => 'Name',
-                                    'p.sku'          => 'Sku',
-                                    'p.quantity'     => 'Quantity',
-                                     'p.row'     => 'Row',
-                                     'p.units'     => 'Units',
-                                     'p.wholesale_price'     => 'Wholesale Price',
-                                     'p.internal_lot_no' => 'Internal Lot No',
-                                     'p.vendor_lot_no' => 'Vendor Lot No',
-                                    'p.created_date' => 'Created Date',
-                                    'pk.name' => 'Package Name',
-                                    'f.name' => 'Form Name',
-                                    'c.name' => 'Color Name'                                    
-        );
+                                                'p.name'             => 'Name',
+                                                'p.sku'              => 'Sku',
+                                                'p.quantity'         => 'Quantity',
+                                                'p.row'              => 'Row',
+                                                'p.units'            => 'Units',
+                                                'p.wholesale_price'  => 'Wholesale Price',
+                                                'p.internal_lot_no'  => 'Internal Lot No',
+                                                'p.vendor_lot_no'    => 'Vendor Lot No',
+                                                'p.created_date'     => 'Created Date',
+                                                'pk.name'            => 'Package Name',
+                                                'f.name'             => 'Form Name',
+                                                'c.name'             => 'Color Name'                                    
+                                           );
          
-        $this->_narrow_search_conditions = array("p.name");
+        $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
         
         $str = '';
  
@@ -54,17 +54,17 @@ class Salesproductselection extends Admin_Controller
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
         
-        $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
+        $this->data['bulk_actions']         = array('' => 'select', 'delete' => 'Delete');
         $this->data['simple_search_fields'] = $this->simple_search_fields;
-        $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
-        $this->data['per_page'] = $this->listing->_get_per_page();
-        $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
+        $this->data['search_conditions']    = $this->session->userdata($this->namespace.'_search_conditions');
+        $this->data['per_page']             = $this->listing->_get_per_page();
+        $this->data['per_page_options']     = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
         
-        $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
+        $this->data['search_bar'] = $this->load->view('frontend/salesproductselection/search_bar', $this->data, TRUE);        
         
-        $this->data['listing'] = $listing;
+        $this->data['listing']    = $listing;
         
-        $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+        $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
         
         $this->layout->view("frontend/salesproductselection/index");
 	
