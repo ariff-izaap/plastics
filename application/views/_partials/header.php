@@ -85,7 +85,8 @@
                   <span class="caret"></span>
               </a>
                <ul class="dropdown-menu">
-                  <li><a href="<?php echo site_url('purchase');?>">Create Purchase Order</a></li>
+                  <li><a href="<?php echo site_url('purchase/add_edit_purchase');?>">Create Purchase Order</a></li>
+                  <li><a href="<?php echo site_url('purchase');?>">Purchase Order</a></li>
                   <li><a href="<?php echo site_url('purchase/min_level');?>">Min Level</a></li>
                 </ul>
             </li>
@@ -144,7 +145,12 @@
                 <li class="<?php echo ($child_ctlr == 'user_setup') ? "active":'';?>">
                   <a href="<?=site_url();?>/admin/user_setup">User Setup</a>
                 </li>
-                <li <?php echo ($curr_ctlr == 'vendor')?'class="active"':'';?> >
+                <li <?php echo ($curr_ctlr == 'warehouse')?'class="active"':'';?> >
+                  <a href="<?=site_url('warehouse');?>">
+                      Warehouse
+                  </a> 
+                </li>
+                <!-- <li <?php echo ($curr_ctlr == 'vendor')?'class="active"':'';?> >
                   <a href="<?=site_url('vendor');?>">
                       Vendors
                   </a> 
@@ -153,7 +159,7 @@
                   <a href="<?=site_url('address/add');?>">
                       Address
                   </a> 
-                </li>
+                </li> -->
               </ul>
             </li>            
             <li class="dropdown">

@@ -14,6 +14,7 @@ class Admin_model extends App_model
     $this->db->from('admin_users c');
     $this->db->join("role t","c.role_id=t.id");
     $this->db->group_by('c.id');
+
     foreach ($this->criteria as $key => $value)
     {
       if( !is_array($value) && strcmp($value, '') === 0 )

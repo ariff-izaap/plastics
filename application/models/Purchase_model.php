@@ -14,7 +14,7 @@ class Purchase_model extends App_model
 
   function listing()
   {
-	  $this->_fields = "c.*,t.business_name,f.location";
+	  $this->_fields = "c.*,t.business_name,f.city";
     $this->db->from('purchase_order c');
     $this->db->join("customer t","c.vendor_id=t.id");
     $this->db->join("warehouse f","c.warehouse_id=f.id");
@@ -25,20 +25,24 @@ class Purchase_model extends App_model
           continue;
       switch ($key)
       {
-        case 'c.id':
-          $this->db->like($key, $value);
+        case 'vendor_id':
+          $this->db->where_in("c.vendor_id", $value);
         break;
-        case 't.business_name':
-          $this->db->like($key, $value);
+        case 'so_id':
+        	switch ($value)
+        	{
+        		case '1':
+        			$this->db->where("c.so_id", '0');
+        			break;
+        		case '2':
+        			$this->db->where("c.so_id!=", '0');
+        			break;
+        	}
         break;
-        case 'c.pickup_date':
-          $this->db->like($key, $value);
-        break;
-        case 'f.location':
-          $this->db->like($key, $value);
-        break;
-        case 'c.order_status':
-          $this->db->like($key, $value);
+       case 'date_range':
+            $splitdate  = explode("|",$value);
+            $this->db->where( 'c.pickup_date >=', date( 'Y-m-d', strtotime( $splitdate[0] ) )  );
+            $this->db->where( 'c.pickup_date <=', date( 'Y-m-d', strtotime( $splitdate[1] ) )  );
         break;
       }
     }        
@@ -99,6 +103,22 @@ class Purchase_model extends App_model
 		$this->db->join("product b","a.product_id=b.id");
 		$q = $this->db->get();
 		return $q->result_array();
+	}
+
+	public function get_purchased_order($po_id)
+	{
+		$this->db->where("a.id",$po_id);
+		$this->db->select("a.*,a.id as po_id,b.business_name as vendor_name,c.type as ship_type,d.name as carrier,e.name as credit,f.name as wname,f.*,h.name as state_name,g.name as country_name");
+		$this->db->from("purchase_order a");
+		$this->db->join("customer b","a.vendor_id=b.id");
+		$this->db->join("shipping_type c","a.ship_type_id=c.id");
+		$this->db->join("carrier d","a.carrier_id=d.id");
+		$this->db->join("credit_type e","a.credit_type_id=e.id");
+		$this->db->join("warehouse f","a.warehouse_id=f.id");
+		$this->db->join("country g","f.state=g.id");
+		$this->db->join("state h","f.country=h.id");
+		$q = $this->db->get();
+		return $q->row_array();
 	}
 
 }

@@ -25,7 +25,15 @@ class Purchase extends Admin_Controller
      array('field' => 'warehouse', 'label' => 'Warehouse', 'rules' => 'trim|required'),
      array('field' => 'ship_type', 'label' => 'Ship Method', 'rules' => 'trim|required'),
      array('field' => 'carrier', 'label' => 'Ship Service', 'rules' => 'trim|required'),
-     array('field' => 'credit_type', 'label' => 'Payment Term', 'rules' => 'trim|required'));
+     array('field' => 'credit_type', 'label' => 'Payment Term', 'rules' => 'trim|required'),
+     array('field' => 'wname', 'label' => 'Warehouse Name', 'rules' => 'trim|required'),
+     array('field' => 'address1', 'label' => 'Address 1', 'rules' => 'trim|required'),
+     array('field' => 'city', 'label' => 'City', 'rules' => 'trim|required'),
+     array('field' => 'state', 'label' => 'State', 'rules' => 'trim|required'),
+     array('field' => 'country', 'label' => 'Country', 'rules' => 'trim|required'),
+     array('field' => 'phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric'),
+     array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[5]'),
+     array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'));
 
    protected $_minlevel_validation_rules = array(
      array('field' => 'name', 'label' => 'Warning Name', 'rules' => 'trim|required'),
@@ -34,7 +42,7 @@ class Purchase extends Admin_Controller
      array('field' => 'quantity', 'label' => 'Quantity', 'rules' => 'trim|required'),
      array('field' => 'form', 'label' => 'Product Form', 'rules' => 'trim|required'),
      array('field' => 'packaging', 'label' => 'Product Packaging', 'rules' => 'trim|required'),
-     array('field' => 'color', 'label' => 'Product Color', 'rules' => 'trim|required'),);
+     array('field' => 'color', 'label' => 'Product Color', 'rules' => 'trim|required'));
 
 	function __construct()
   {
@@ -49,14 +57,9 @@ class Purchase extends Admin_Controller
   {
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
-    $this->simple_search_fields = array(                                                
-                                'c.id'            => 'PO ID',
-                                't.business_name' => 'Vendor',
-                                'c.pickup_date'   => 'Pickup Date',
-                                'f.location'      => 'Location',
-                                'c.order_status'  => 'Order Status');
-    $this->_narrow_search_conditions = array("start_date");    
-    $str='<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $this->simple_search_fields = array();
+    $this->_narrow_search_conditions = array("vendor_id","so_id","date_range");    
+    $str='<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -66,9 +69,10 @@ class Purchase extends Admin_Controller
     $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
     $this->data['per_page'] = $this->listing->_get_per_page();
     $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-    $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);
+    $this->data['vendors'] = $this->purchase_model->get_vendors();
+    $this->data['search_bar'] = $this->load->view('frontend/purchase/purchase_search_bar', $this->data, TRUE);
     $this->data['listing'] = $listing;
-    $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+    $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);    
   	$this->layout->view('frontend/Purchase/index');
   }
   public function add_edit_purchase()
@@ -288,6 +292,20 @@ class Purchase extends Admin_Controller
       $up['carrier_id'] = $form['carrier'];
       $up['credit_type_id'] = $form['credit_type'];
       $up['total_amount'] = $form['total'];
+
+      /*Start Warehouse Shipping Info*/
+
+      $house['name'] = $form['wname'];
+      $house['address1'] = $form['address1'];
+      $house['address2'] = $form['address2'];
+      $house['city'] = $form['city'];
+      $house['state'] = $form['state'];
+      $house['country'] = $form['country'];
+      $house['phone'] = $form['phone'];
+      $house['email'] = $form['email'];
+      $this->purchase_model->update(array("id"=>$form['warehouse']),$house,"warehouse");
+      /*End Warehouse Shipping Info*/
+
       $up['po_message'] = $form['po_message'];
       $up['note'] = $form['po_notes'];
       $up['updated_id'] = get_current_user_id();
@@ -304,6 +322,7 @@ class Purchase extends Admin_Controller
   {
     
     $this->form_validation->set_rules($this->_minlevel_validation_rules);
+    $this->data['data'] = array("edit_id"=>"","form"=>"","packaging"=>"","color"=>"","name"=>"","message"=>"","product"=>"","quantity"=>"","dropdown"=>"");
     if($this->form_validation->run())
     {
       $form = $this->input->post();
@@ -333,7 +352,8 @@ class Purchase extends Admin_Controller
       }
       redirect('purchase/min_level');
     }
-    $this->data['data'] = $this->input->post();
+   $this->data['data'] = $this->input->post();
+    // $this->data['data'] = array("edit_id"=>"","form"=>"","packaging"=>"","color"=>"","name"=>"","message"=>"","product"=>"","quantity"=>"","dropdown"=>"");
     $this->layout->view('frontend/Purchase/min_level');
   }
   public function get_min_level()
@@ -385,5 +405,26 @@ class Purchase extends Admin_Controller
     $count = $this->purchase_model->select(array("po_id"=>$po_id),"purchase_order_item");
     $this->_ajax_output(array("count"=>count($count)),TRUE);
   }
+
+  public function get_purchase_order()
+  {
+    $data['po'] = "";
+    $id = $this->input->post('id');
+    $data['po'] = $this->purchase_model->get_purchased_order($id);
+    $data['products'] = $this->purchase_model->get_purchased_products($id);
+    $this->load->view('frontend/purchase/ajax_purchase_order',$data);
+  }
+   public function change_order_status()
+  {
+    $up = [];
+    $id = $this->input->post('id');
+    $val = $this->input->post('val');
+    $up['order_status'] = $val;
+    $output['message'] = "Order Updated successfuly.";
+    $output['status']  = "success";
+    $this->purchase_model->update(array("id"=>$id),$up,"purchase_order");   
+    $this->_ajax_output($output, TRUE);
+  }
+
 }
 ?>

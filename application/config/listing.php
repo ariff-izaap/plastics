@@ -58,15 +58,33 @@ $config['purchase_add_edit_purchase'] = array(
 $config['purchase_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'frontend/purchase/filter',
-	"base_url"	=> 	'/purchase/index/',
+	"advance_search_view" => 'frontend/purchase/filter_purchase',
+	"base_url"	=> 	'purchase/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 						'id'=>array('name'=>'PO ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'business_name'=>array('name'=>'Vendor', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'pickup_date'=>array('name'=>'Pickup Date', 'data_type' => 'date','sortable' => FALSE, 'default_view'=>1),
-						'location'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'city'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'order_status'=>array('name'=>'Order Status', 'data_type' => 'colorize', 'sortable' => FALSE, 'default_view'=>1)),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['warehouse_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'frontend/warehouse/filter',
+	"base_url"	=> 	'/warehouse/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'email'=>array('name'=>'Email', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'city'=>array('name'=>'City', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'state_name'=>array('name'=>'State', 'data_type' => 'date','sortable' => FALSE, 'default_view'=>1),
+						'phone'=>array('name'=>'Phone', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'zipcode'=>array('name'=>'Zipcode', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );

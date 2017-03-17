@@ -187,7 +187,7 @@
 					$("#popOverBox").html(data.advance_filter_form);
   				init_checkbox(timesheet_checkbox_data);					
 
-					if(current_controller=='timesheet')
+					if(current_controller=='purchase')
 						init_daterangepicker($('.date_range').val());
 					
 					//reconstruct the advance serch form

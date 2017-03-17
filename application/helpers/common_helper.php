@@ -42,7 +42,15 @@ function get_vendor_by_id($id='')
 {
   $CI = get_instance();
   $CI->load->model('purchase_model');
- $row = $CI->purchase_model->get_vendors(array('a.id' => $id));
+  $row = $CI->purchase_model->get_vendors(array('a.id' => $id));
+  return $row;
+}
+
+function get_all_vendors($id='')
+{
+  $CI = get_instance();
+  $CI->load->model('purchase_model');
+  $row = $CI->purchase_model->get_vendors();
   return $row;
 }
 
@@ -591,6 +599,13 @@ function get_state()
    return $q;
 }
 
+function get_country()
+{
+   $CI = get_instance();
+   $q = $CI->db->query("select * from country where status=1")->result_array();
+   return $q;
+}
+
 function get_warehouse()
 {
   $CI = get_instance();
@@ -698,7 +713,5 @@ function copyFile($file,$rand,$po_id)
    copy($file, $file_to_go);
 
 }
-
-
 
 ?>

@@ -23,7 +23,7 @@ class Product_model extends App_model
     foreach ($this->criteria as $key => $value)
     {
       if( !is_array($value) && strcmp($value, '') === 0 )
-          continue;
+        continue;
       switch ($key)
       {
         case 'product':

@@ -36,9 +36,9 @@
             <select id="" class="select2_sample2 form-control col-md-8" name="form" id="form" data-placeholder="Select Form">
               <option value="">--Select Form--</option>
               <?php
-                if(get_product_form())
+                if(get_forms())
                 {
-                  foreach (get_product_form() as $key => $value)
+                  foreach (get_forms() as $key => $value)
                   {
                     ?>
                       <option <?php if($data['form']==$value['id']){?> selected <?php }?>
@@ -54,9 +54,9 @@
             <select id="" class="select2_sample2 form-control col-md-8" name="packaging" id="packaging" data-placeholder="Select Packaging">
               <option value="">--Select Packaging--</option>
               <?php
-                if(get_packaging())
+                if(get_packages())
                 {
-                  foreach (get_packaging() as $key => $value)
+                  foreach (get_packages() as $key => $value)
                   {
                     ?>
                       <option <?php if($data['packaging']==$value['id']){?> selected <?php }?>
@@ -72,9 +72,9 @@
             <select id="" class="select2_sample2 form-control col-md-8" name="color" id="color" data-placeholder="Select Color">
               <option value="">--Select Color--</option>
               <?php
-                if(get_product_color())
+                if(get_colors())
                 {
-                  foreach (get_product_color() as $key => $value)
+                  foreach (get_colors() as $key => $value)
                   {
                     ?>
                       <option <?php if($data['color']==$value['id']){?> selected <?php }?>
@@ -101,9 +101,9 @@
             <select class="select2_sample2 form-control col-md-8" name="product" id="product" data-placeholder="Select Product">
               <option value="">--Select Product--</option>
               <?php
-                if(get_prodcuts())
+                if(get_products())
                 {
-                  foreach (get_prodcuts() as $key => $value)
+                  foreach (get_products() as $key => $value)
                   {
                     ?>
                       <option <?php if($data['product']==$value['id']){?> selected <?php }?>

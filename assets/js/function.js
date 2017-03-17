@@ -38,7 +38,7 @@ $(function(){
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
 	  showDropdowns: true,
-      autoUpdateInput: false,
+    sautoUpdateInput: false,
 	  locale: {
 	    format: 'YYYY-MM-DD',
 	  }
@@ -1042,6 +1042,42 @@ $(".checkout-btn").click(function(){
   });
   
 });
+
+
+$(".warehouse_select").change(function(){
+  val = $(this).val();
+  $.ajax({
+    type:"POST",
+    url:base_url+'warehouse/get_warehouse_details',
+    data:{val:val},
+    success:function(data)
+    {
+      data = JSON.parse(data);
+      $("form#checkoutForm #wname").val(data.name);
+      $("form#checkoutForm #address1").val(data.address1);
+      $("form#checkoutForm #address2").val(data.address2);
+      $("form#checkoutForm #city").val(data.city);
+      $("form#checkoutForm #phone").val(data.phone);
+      $("form#checkoutForm #email").val(data.email);
+      $("form#checkoutForm #state").val(data.state);
+      $("form#checkoutForm #country").val(data.country);
+    }
+  });
+});
+
+function get_purchase_order(id,ele)
+{
+  $.ajax({
+    type:"POST",
+    url:base_url+'purchase/get_purchase_order',
+    data:{id:id},
+    success:function(data)
+    {
+      //console.log(data);
+      $("#ViewPurchaseOrder .modal-ajax").html(data);
+    }
+  });
+}
 
 
 /*Ram*/
