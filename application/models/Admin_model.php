@@ -60,5 +60,11 @@ class Admin_model extends App_model
     $this->db->where($where);
     $this->db->delete($table);
   }
+  public function get_access_level($where)
+  {
+    $this->db->where($where);
+    $q =  $this->db->get("role_access");
+    return $q->result_array();
+  }
 }
 ?>

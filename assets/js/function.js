@@ -1143,4 +1143,19 @@ function get_purchase_order(id,ele)
   
 
 
+$(".role_id").change(function(){
+  val = $(this).val();
+  $.ajax({
+    type:"POST",
+    url:base_url+'admin/get_access_level',
+    data:{id:val},
+    success:function(data)
+    {
+      console.log(data);
+      $("form#AccessLevel .ajax_module").html(data);
+    }
+  });
+});
+
+
 /*Ram*/

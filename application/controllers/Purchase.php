@@ -75,6 +75,7 @@ class Purchase extends Admin_Controller
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);    
   	$this->layout->view('frontend/Purchase/index');
   }
+
   public function add_edit_purchase($edit_id='')
   {
     $this->data['vendor'] = $this->purchase_model->get_vendors();
@@ -95,8 +96,7 @@ class Purchase extends Admin_Controller
       $ins['pickup_date']         = $form['pickup_date'];
       $ins['estimated_delivery']  = $form['delivery_date'];
       $ins['release_to_sold']     = isset($form['to_sold']) ? $form['to_sold'] : "No";
-      $ins['is_paid']             = "NOT PAID";
-      
+      $ins['is_paid']             = "NOT PAID";      
       if(!$edit_id)
       {
         if(is_dir("assets/uploads/purchase/tmp/".$form['rand']))
@@ -141,10 +141,8 @@ class Purchase extends Admin_Controller
     $this->layout->view('frontend/Purchase/add_purchase');
   }
 
-
-
   public function delete($del_id)
-  {  
+  {
     $output['message'] = "Record deleted successfuly.";
     $output['status']  = "success";
     $log = log_history("purchase_order",$del_id,"purchase","delete");
@@ -158,13 +156,13 @@ class Purchase extends Admin_Controller
     $form = $this->session->userdata['form_purchase'];
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
-    $this->simple_search_fields = array(                                                
+    $this->simple_search_fields = array(
                                 'a.name' => 'Product Name',
                                 'b.name' => 'Form Name',
                                 'c.name' => 'Color',
                                 'd.name' => 'Product Type',
                                 'e.name' => 'Package');
-    $this->_narrow_search_conditions = array("product","form","color","type","package","note");    
+    $this->_narrow_search_conditions = array("product","form","color","type","package","note");
     // $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
     //         <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     // $this->listing->initialize(array('listing_action' => $str));
@@ -320,6 +318,7 @@ class Purchase extends Admin_Controller
       $house['phone'] = $form['phone'];
       $house['email'] = $form['email'];
       $this->purchase_model->update(array("id"=>$form['warehouse']),$house,"warehouse");
+      
       /*End Warehouse Shipping Info*/
 
       $up['po_message'] = $form['po_message'];

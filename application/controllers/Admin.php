@@ -10,6 +10,11 @@ class Admin extends Admin_Controller
                           array('field' => 'lastname', 'label' => 'Last Name', 'rules' => 'trim|required'),
                           array('field' => 'email', 'label' => 'Email Address', 'rules' => 'trim|required|valid_email'));
 
+  protected $_access_level_validation_rules = array (
+                          array('field' => 'role_id', 'label' => 'Role', 'rules' => 'trim|required'),
+                          array('field' => 'menu[]', 'label' => 'Menu', 'rules' => 'trim|required','errors'=>array('required'=>'Please Select atleast one menu')),
+                          array('field' => 'rights[]', 'label' => 'Rights', 'rules' => 'trim|required','errors'=>array('required'=>'Please Select atleast one rights')));
+
 	function __construct()
   {
   	parent::__construct();
@@ -148,7 +153,7 @@ class Admin extends Admin_Controller
 
   public function get_table_value()
   {
-    echo $val = trim($this->input->post("val")); exit;
+    $val = trim($this->input->post("val")); 
     $data['tb'] = $this->admin_model->select($this->get_table($val));    
     $this->load->view("admin/dropdown_list",$data);
   }
@@ -230,6 +235,39 @@ class Admin extends Admin_Controller
     $output['status']  = "success";
     $output['log'] = log_history("role",$del_id,"role","delete");
     $this->_ajax_output($output, TRUE);
+  }
+
+  public function access_level()
+  {
+    $this->form_validation->set_rules($this->_access_level_validation_rules);
+    if($this->form_validation->run())
+    {
+      $form = $this->input->post();
+      $ins['role_id'] = $form['role_id'];
+      $ins['menu_id'] = json_encode($form['menu']);
+      $ins['access_level'] = json_encode($form['rights']);
+      $chk = $this->admin_model->select("role_access",array("role_id"=>$form['role_id']));
+      if($chk)
+      {
+        $ins['updated_date'] = date("Y-m-d H:i:s");
+        $add = $this->admin_model->update(array("role_id"=>$form['role_id']),$ins,"role_access");
+        $this->session->set_flashdata("success_msg","Access Level updated Successfully",TRUE);
+      }
+      else
+      {
+        $ins['created_date'] = date("Y-m-d H:i:s");
+        $add = $this->admin_model->insert($ins,"role_access");
+        $this->session->set_flashdata("success_msg","Access Level created Successfully",TRUE);
+      }
+    }
+    $this->layout->view('admin/access_level');
+  }
+
+  public function get_access_level()
+  {
+    $id = $this->input->post('id');
+    $this->data['access'] = $this->admin_model->select("role_access",array("role_id"=>$id));
+    $this->load->view('admin/ajax_access_level',$this->data);
   }
 
   function get_table($val)

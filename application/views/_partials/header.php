@@ -139,6 +139,9 @@
                 <li class="<?php echo ($child_ctlr == 'roles') ? "active":'';?>">
                   <a href="<?=site_url('admin/roles');?>">Roles</a>
                 </li>
+                <li class="<?php echo ($child_ctlr == 'access_level') ? "active":'';?>">
+                  <a href="<?=site_url('admin/access_level');?>">Access Levels</a>
+                </li>
                 <li class="<?php echo ($child_ctlr == 'general_dropdowns') ? "active":'';?>">
                   <a href="<?=site_url();?>/admin/general_dropdowns">General Dropdowns</a>
                 </li>
