@@ -104,13 +104,12 @@ class Inventory extends Admin_Controller
           //}
           
           $this->form_validation->set_error_delimiters('', '');
-          if ($this->form_validation->run())
-          {
-              // echo $this->input->post('sku'); exit;
+          if($this->form_validation->run()){
               $ins_data = array();
               $ins_data['sku']                    = $this->input->post('sku');
               $ins_data['name']                   = $this->input->post('name');
               $ins_data['quantity']               = $this->input->post('quantity');
+              $ins_data['available_qty']          = $this->input->post('quantity');  
               $ins_data['category_id']            = $this->input->post('category_id');
               $ins_data['color_id']               = $this->input->post('color_id');
               $ins_data['form_id']                = $this->input->post('form_id');

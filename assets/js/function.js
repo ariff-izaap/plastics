@@ -554,20 +554,74 @@ function sales_product_search()
     }); 
 }
 
-function product_add_to_shipment()
+function product_add_to_shipment(prod_id)
 {
-    var prod_id = '';
+//$(".product_to_ship").each(function(){
+//       if($(this). prop("checked") == true){
+//         prod_id += (prod_id!='')?","+$(this).val():$(this).val();
+//      }
+//    });
+     
+    var price = $("#selectAll-"+prod_id).attr("data-price");
+    var qty   = $("#selectAll-"+prod_id).attr("data-qty");
+   // alert(qty);
+   // alert(price);
     
-    $(".product_to_ship").each(function(){
-       if($(this). prop("checked") == true){
-         prod_id += (prod_id!='')?","+$(this).val():$(this).val();
-      }
-    });
-    $("#product_ids").val(prod_id);
+    $("#price").val(price);
+    $("#quantity_available").val(qty);
+    $("#cancel").attr("data-pid",prod_id); 
+    $("#product_id").val(prod_id);
     $('#product_ship').modal();
     $("#product_ship").show();
     //alert(prod_id);
 }
+
+function modal_close(pid='')
+{
+     var pid = $("#cancel").attr("data-pid");
+     $("#"+pid).find("label").removeClass("ui-checkboxradio-checked ui-state-active");
+     $("#selectAll-"+pid).removeAttr("checked");
+     $("#product_ship").hide();
+}
+
+function sales_prod_add_to_cart()
+{
+    
+  
+    var fdata  = $("#sales_add_to_cart").serialize();
+    var qty    = $("#quantity_available").val();
+   var ord_qty = $("#quantity_to_order").val();
+  
+    if(qty<ord_qty){
+        alert("Quantity should be less than available quantity");
+        $("#quantity_to_order").val('');
+        $("#quantity_to_order").focus();
+        return false;
+    }
+    
+    $.ajax({
+          url:base_url+"salesproductselection/add_to_cart",
+          type:"POST",
+          data:fdata,
+          dataType:'json',
+          success:function(res)
+          {
+            var status = res.status;
+            var output = res.output;      
+            if(status == 'success'){
+               $("#product_shipping_lists").html(res.viewlist);
+               var pd_id = $("#cancel").attr("data-pid");
+                modal_close(pd_id);
+                $(window).scrollTop($('#product_shipping_lists').offset().top);
+            }
+            else
+            {
+              $("#inventory_add_section").html(output); 
+            }
+          }
+      });
+}
+
 
 function inventory_sub()
 {
@@ -1085,6 +1139,8 @@ function get_purchase_order(id,ele)
     }
   });
 }
+
+  
 
 
 /*Ram*/

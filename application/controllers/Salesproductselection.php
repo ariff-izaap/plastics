@@ -51,7 +51,7 @@ class Salesproductselection extends Admin_Controller
         $this->data['listing']    = $listing;
         $this->data['salestype']  = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
         $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
-        
+        $this->data['cartitems']  = $this->cart->contents();
         $this->layout->view("frontend/salesproductselection/index");
 	
     }
@@ -174,15 +174,44 @@ class Salesproductselection extends Admin_Controller
    public function add_to_cart()
    {
     
+     $this->load->library('cart');
     
-      $data = array(
-            'id'      => 'sku_123ABC',
-            'qty'     => 1,
-            'price'   => 39.95,
-            'name'    => 'T-Shirt',
-            'options' => array('Size' => 'L', 'Color' => 'Red')
-        );
-   } 
-   	
+     //post data
+     $available_quantity = $this->input->post("quantity_available");
+     $order_quantity     = $this->input->post("quantity_to_order");
+     $product_id         = $this->input->post("product_id");
+     $type_of_sale       = $this->input->post("type_of_sale");
+     $product_from       = $this->input->post("product_from");
+     $price              = $this->input->post("price");
+     
+     //getting data from db
+     $result             = $this->inventory_model->get_product_details($product_id);
+     $sale_type          = $this->inventory_model->get_where(array("id" => $type_of_sale),'*','sale_type')->row_array();
+     
+     $cart_data          = array(
+                                    'id'           => $product_id,
+                                    'qty'          => $order_quantity,
+                                    'price'        => $price,
+                                    'name'         => $result['name'],
+                                    'sale_type'    => $sale_type['name'],
+                                    'product_from' => $product_from,
+                                    'form'         => $result['form_name'],
+                                    'color'        => $result['color_name'],
+                                    'package'      => $result['package_name'],
+                                    'type'         => $result['item_type'],
+                                    'row'          => $result['row'],
+                                    'equivalent'   => $result['equivalent'],
+                               );
+                               
+     $row_id                  = $this->cart->insert($cart_data);
+    
+     $this->data['cartitems'] = $this->cart->contents(); 
+     $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
+     
+     $output['message']       = "Product added to cart successfully";
+     $output['status']        = "success";   
+     $this->_ajax_output($output, TRUE);
+   }
+   
 }
 ?>

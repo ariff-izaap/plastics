@@ -80,6 +80,15 @@ class Inventory_model extends App_model {
         return parent::listing();
     }
 	
-    
+    public function get_product_details($product_id)
+    {
+        $this->db->select("p.id,p.name,p.equivalent,p.quantity,p.row,p.item_type,p.wholesale_price,f.name as form_name,pk.name as package_name,c.name as color_name"); 
+        $this->db->from('product p');
+        $this->db->join("product_color c","c.id=p.color_id");
+        $this->db->join("product_form f","f.id=p.form_id");
+        $this->db->join("product_packaging pk","pk.id=p.package_id");
+        $this->db->where("p.id",$product_id);
+        return $this->db->get()->row_array();
+    }
 }
 ?>
