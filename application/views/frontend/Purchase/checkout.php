@@ -7,6 +7,7 @@
 	</div>
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
+
 <form action="" name="checkoutForm" id="checkoutForm"  method="post">
 	<div class="row">
 		<div class="col-md-12 title">
@@ -23,7 +24,8 @@
 	      		foreach (get_warehouse() as $key => $value)
 	      		{
 			      	?>
-			      		<option value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			      		<option <?=$edit_data['warehouse_id']==$value['id'] ? 'selected' : '';?>
+			      		 value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			      	<?php
 			      }
 			    }
@@ -32,19 +34,19 @@
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('wname'))?'error':'';?>" data-error="<?php echo (form_error('wname'))? strip_tags(form_error('wname')):'';?>">
 	      <label required="">Warehouse Name</label>
-	      <input type="text" class="form-control" name="wname" id="wname">
+	      <input type="text" class="form-control" name="wname" id="wname" value="<?=$edit_data['wname'];?>">
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('address1'))?'error':'';?>" data-error="<?php echo (form_error('address1'))? strip_tags(form_error('address1')):'';?>">
 	      <label required="">Address 1</label>
-	      <input type="text" class="form-control" name="address1" id="address1">
+	      <input type="text" class="form-control" name="address1" id="address1" value="<?=$edit_data['address1'];?>">
 	    </div>
 	    <div class="form-group col-md-12">
 	      <label>Address 2</label>
-	      <input type="text" class="form-control" name="address2" id="address2">
+	      <input type="text" class="form-control" name="address2" id="address2" value="<?=$edit_data['address2'];?>">
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('city'))?'error':'';?>" data-error="<?php echo (form_error('city'))? strip_tags(form_error('city')):'';?>">
 	      <label required="">City</label>
-	      <input type="text" class="form-control" name="city" id="city">
+	      <input type="text" class="form-control" name="city" id="city" value="<?=$edit_data['city'];?>">
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('state'))?'error':'';?>" data-error="<?php echo (form_error('state'))? strip_tags(form_error('state')):'';?>">
 	      <label required="">State</label>
@@ -84,15 +86,15 @@
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('zipcode'))?'error':'';?>" data-error="<?php echo (form_error('zipcode'))? strip_tags(form_error('zipcode')):'';?>">
 	      <label required="">Zipcode</label>
-	      <input type="text" class="form-control" name="zipcode" id="zipcode">
+	      <input type="text" class="form-control" name="zipcode" id="zipcode" value="<?=$edit_data['zipcode'];?>">
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('phone'))?'error':'';?>" data-error="<?php echo (form_error('phone'))? strip_tags(form_error('phone')):'';?>">
 	      <label required="">Phone</label>
-	      <input type="text" class="form-control" name="phone" id="phone">
+	      <input type="text" class="form-control" name="phone" id="phone" value="<?=$edit_data['phone'];?>">
 	    </div>
 	    <div class="form-group col-md-12 <?php echo (form_error('email'))?'error':'';?>" data-error="<?php echo (form_error('email'))? strip_tags(form_error('email')):'';?>">
 	      <label required="">Email</label>
-	      <input type="text" class="form-control" name="email" id="email">
+	      <input type="text" class="form-control" name="email" id="email" value="<?=$edit_data['email'];?>">
 	    </div>
 	  </div>
 	  <div class="col-md-8">
@@ -106,7 +108,8 @@
 	      		foreach (get_shipping_type() as $key => $value)
 	      		{
 			      	?>
-			      		<option value="<?=$value['id'];?>"><?=$value['type'];?></option>
+			      		<option <?=$edit_data['ship_type_id']==$value['id'] ? 'selected' : '';?>
+			      			value="<?=$value['id'];?>"><?=$value['type'];?></option>
 			      	<?php
 			      }
 			    }
@@ -123,7 +126,8 @@
 	      		foreach (get_carrier() as $key => $value)
 	      		{
 			      	?>
-			      		<option value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			      		<option <?=$edit_data['carrier_id']==$value['id'] ? 'selected' : '';?>
+			      			value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			      	<?php
 			      }
 			    }
@@ -140,7 +144,8 @@
 	      		foreach (get_credit_type() as $key => $value)
 	      		{
 			      	?>
-			      		<option value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			      		<option <?=$edit_data['credit_type_id']==$value['id'] ? 'selected' : '';?>
+			      			value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			      	<?php
 			      }
 			    }
@@ -192,7 +197,7 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-12">
 	      <label required="">PO Message</label>
-	      <textarea class="form-control" name="po_message" rows="4"></textarea>
+	      <textarea class="form-control" name="po_message" rows="4"><?=$edit_data['po_message'];?></textarea>
 	    </div>
 		</div>
 	</div>
@@ -200,7 +205,7 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-12">
 	      <label required="">PO Notes</label>
-	      <textarea class="form-control" name="po_notes" rows="4"></textarea>
+	      <textarea class="form-control" name="po_notes" rows="4"><?=$edit_data['note'];?></textarea>
 	    </div>
 		</div>
 	</div>

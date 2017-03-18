@@ -36,6 +36,14 @@
                   echo "<div id='row_".$i."'>".$fis[$i]."<a href='javascript:void(0)' data-id='".$i."' data-name='".$fis[$i]."' data-rand='".$_POST['rand']."' class='col-md-2 pull-right cancel-file'>x</a></div>";
                 }
               }
+              else if($edit_data['po_id'])
+              {
+                 $fis = scandir("assets/uploads/purchase/".$edit_data['po_id']);
+                for ($i=2; $i < count($fis); $i++)
+                { 
+                  echo "<div id='row_".$i."'>".$fis[$i]."<a href='javascript:void(0)' data-id='".$i."' data-name='".$fis[$i]."' data-rand='".$edit_data['po_id']."' data-po-id='".$edit_data['po_id']."' class='col-md-2 pull-right cancel-file'>x</a></div>";
+                }
+              }
               ?>
             </div>
             <div class="clearfix"></div><br>
@@ -55,18 +63,18 @@
     </div>
   </div>
 </div>
-
 <div class="purchase-loader">
   <img src="<?=base_url();?>assets/img/rolling.gif">
 </div>
 <div class="container">
   <div class="row">
     <form name="add_purchase" id="addPurchase" method="post">
-      <input type="hidden" name="rand" class="rand" value="<?=$_POST['rand'];?>">
+      <input type="hidden" name="rand" class="rand" value="<?=isset($_POST['rand']) ? $_POST['rand'] : $po_id;?>">
+      <input type="hidden" name="edit_id" class="edit_id" value="<?=$edit_data['po_id'];?>">
       <div class="form-grid">
         <div class="form-group col-md-4">
           <label required="">Purchase Order #</label>
-          <input type="text" name="po_id" class="form-control" id="name" value="<?=$po_id['po_id'];?>" readonly>
+          <input type="text" name="po_id" class="form-control" id="name" value="<?=$po_id;?>" readonly>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-12">
@@ -79,13 +87,16 @@
               <?php
                 if($vendor)
                 {
+                  $checked = "";
                   foreach ($vendor as $key => $value)
                   {
+                      if($edit_data['vendor_id'] == $value['id'])
+                        $checked = "checked";
                     ?>
                       <tr>
                         <td>
                           <label for="selectAll-<?=$value['id'];?>"  class="custom-radio">&nbsp;</label>
-                          <input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" id="selectAll-<?=$value['id'];?>"
+                          <input onclick="get_vendor_details('purchase/get_vendor_details/'+this.value)" type="radio" class="radio" name="vendor_id" value="<?=$value['id'];?>" <?=$checked;?> id="selectAll-<?=$value['id'];?>"
                           <?php if(isset($_POST['vendor_id'])){?> checked <?php }?> >
                         </td>
                         <td><?=$value['business_name'];?></td>
@@ -108,14 +119,13 @@
                 <div id='output'><?php echo (form_error('vendor_id'))? strip_tags(form_error('vendor_id')):'';?></div>
               <?php 
             }
-            if($_POST['vendor_id'])
+            if($_POST['vendor_id'] || $edit_data['vendor_id'])
             {
-              $data = get_vendor_by_id($_POST['vendor_id']);
+              $vendor_id = isset($_POST['vendor_id']) ? $_POST['vendor_id'] : $edit_data['vendor_id'];
+              $data = get_vendor_by_id($vendor_id);
             }
             else
-            {
               $data = array("vendor_name"=>"");
-            }
           ?>
         </div>
         <div class="form-grid col-md-6 panel panel-default panel-bor">
@@ -199,15 +209,15 @@
               <label class="">Release to be Sold</label>
               <!-- <input type="checkbox" name="to_sold" class="" id="to_sold" value="Yes"> -->
               <label for="selectAll-0" class="custom-checkbox">&nbsp;</label>
-              <input type="checkbox" id='selectAll-0' class= 'checkbox'  name="to_sold" value="Yes">
+              <input type="checkbox" id='selectAll-0' class= 'checkbox' <?=$edit_data['release_to_sold']=="Yes" ? 'checked':'';?>  name="to_sold" value="Yes">
             </div>
             <div class="form-group <?php echo (form_error('pickup_date'))?'error':'';?>" data-error="<?php echo (form_error('pickup_date'))? strip_tags(form_error('pickup_date')):'';?>">
               <label required="">Date for Pickup</label>
-              <input type="text" name="pickup_date" class="form-control singledate" id="pickup_date" value=""  placeholder="Pickup Date">
+              <input type="text" name="pickup_date" class="form-control singledate" id="pickup_date" value="<?=$edit_data['pickup_date'];?>"  placeholder="Pickup Date">
             </div>
             <div class="form-group <?php echo (form_error('delivery_date'))?'error':'';?>" data-error="<?php echo (form_error('delivery_date'))? strip_tags(form_error('delivery_date')):'';?>">
               <label required="">Estimated Date for Delivery to Customer/Warehouse</label>
-              <input type="text" name="delivery_date" class="form-control singledate" id="delivery_date" value=""  placeholder="Delviery Date">
+              <input type="text" name="delivery_date" class="form-control singledate" id="delivery_date" value="<?=$edit_data['estimated_delivery'];?>"  placeholder="Delviery Date">
             </div>      
             <div class="clearfix"></div>
             <div class="form-group">

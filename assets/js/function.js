@@ -970,13 +970,19 @@ $("#UploadModal").on("click",".cancel-file",function(){
   rand = $(this).attr("data-rand");
   name = $(this).attr("data-name");
   id = $(this).attr("data-id");
+  edit_id = $(this).attr("data-po-id");
   $.ajax({
      url:base_url+'purchase/del_upload',
     type:"POST",
-    data:{rand:rand,name:name},
+    data:{rand:rand,name:name,edit_id:edit_id},
     success:function(data)
     {
+      data = JSON.parse(data);
       $("#row_"+id).remove();
+      $(".upload-msg").html("<div style="+style+">"+data.message+"</div>");
+       setTimeout(function(){
+        $(".upload-msg").html("");
+      },2000);
     }
   });
 });
@@ -986,6 +992,7 @@ $(".upload-doc").click(function(){
   var formData = new FormData();
   formData.append('file', $('.po_doc')[0].files[0]);
   formData.append('rand', $('.rand').val());
+  formData.append('edit_id', $('.edit_id').val());
   $.ajax({
     url:base_url+'purchase/do_upload',
     type:"POST",
@@ -1006,7 +1013,7 @@ $(".upload-doc").click(function(){
         {
           html+= "<div id='row_"+i+"'>"+
                     data.docs[i]+
-                  "<a href='javascript:void(0)' data-id='"+i+"' data-name='"+data.docs[i]+"' data-rand='"+data.rand+"' class='col-md-2 pull-right cancel-file'>x</a></div>";
+                  "<a href='javascript:void(0)' data-id='"+i+"' data-po-id='"+data.po_id+"' data-name='"+data.docs[i]+"' data-rand='"+data.rand+"' class='col-md-2 pull-right cancel-file'>x</a></div>";
         }
         $(".doc-uploaded").html(html);
       }

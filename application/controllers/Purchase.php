@@ -59,7 +59,7 @@ class Purchase extends Admin_Controller
     $this->load->library('listing');
     $this->simple_search_fields = array();
     $this->_narrow_search_conditions = array("vendor_id","so_id","date_range");    
-    $str='<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
+    $str='<a href="'.site_url('purchase/add_edit_purchase/{id}').'"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -75,11 +75,17 @@ class Purchase extends Admin_Controller
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);    
   	$this->layout->view('frontend/Purchase/index');
   }
-  public function add_edit_purchase()
+  public function add_edit_purchase($edit_id='')
   {
     $this->data['vendor'] = $this->purchase_model->get_vendors();
     $this->form_validation->set_rules($this->_purchase_validation_rules);
-  	$this->data['po_id'] = $this->purchase_model->get_max_id();
+    if($edit_id)
+    {
+      $this->data['edit_data'] = $this->purchase_model->get_purchased_order($edit_id);
+  	  $this->data['po_id'] = $edit_id;
+    }
+    else
+      $this->data['po_id'] = $this->purchase_model->get_max_id()['po_id'];
     if($this->form_validation->run())
     {
       $form = $this->input->post();
@@ -90,21 +96,19 @@ class Purchase extends Admin_Controller
       $ins['estimated_delivery']  = $form['delivery_date'];
       $ins['release_to_sold']     = isset($form['to_sold']) ? $form['to_sold'] : "No";
       $ins['is_paid']             = "NOT PAID";
-      $ins['created_id']          = get_current_user_id();
-      $ins['updated_id']          = get_current_user_id();
-      $ins['created_date']        = date("Y-m-d H:i:s");
       
-      echo $form['rand'];
-      if(is_dir("assets/uploads/purchase/tmp/".$form['rand']))
+      if(!$edit_id)
       {
-        if($form['rand'])
+        if(is_dir("assets/uploads/purchase/tmp/".$form['rand']))
         {
-
-          $files = glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*");
-          mkdir("assets/uploads/purchase/".$form['po_id'],0777,true);
-          $a = array_map("copyFile",$files,array('rand'=>$_POST['rand']),array('po_id'=>$form['po_id']));
-          array_map('unlink', glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*"));
-          rmdir("assets/uploads/purchase/tmp/".$form['rand']."");
+          if($form['rand'])
+          {
+            $files = glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*");
+            mkdir("assets/uploads/purchase/".$form['po_id'],0777,true);
+            $a = array_map("copyFile",$files,array('rand'=>$_POST['rand']),array('po_id'=>$form['po_id']));
+            array_map('unlink', glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*"));
+            rmdir("assets/uploads/purchase/tmp/".$form['rand']."");
+          }
         }
       }
 
@@ -119,7 +123,18 @@ class Purchase extends Admin_Controller
       $this->purchase_model->update(array("id"=>$address_id),$up,"address");
       $this->purchase_model->update(array("id"=>$form['vendor_id']),$up1,"customer");
       $this->purchase_model->update(array("customer_id"=>$form['vendor_id']),$up2,"customer_contact");
-      $this->purchase_model->insert($ins,"purchase_order");
+      if($edit_id)
+      {
+        $ins['updated_id'] = get_current_user_id();
+        $ins['updated_date'] = date("Y-m-d H:i:s");
+        $this->purchase_model->update(array("id"=>$edit_id),$ins,"purchase_order");
+      }
+      else
+      {
+        $ins['created_id']          = get_current_user_id();
+        $ins['created_date']        = date("Y-m-d H:i:s");
+        $this->purchase_model->insert($ins,"purchase_order");
+      }
       $this->session->set_userdata('form_purchase',$form);
       redirect("purchase/add_product");
   	}
@@ -279,9 +294,10 @@ class Purchase extends Admin_Controller
     $this->_ajax_output($output, TRUE);  
   }
 
-  public function checkout($po_id)
+  public function checkout($po_id='')
   {
     $this->data['po_id'] = $po_id;
+    $this->data['edit_data'] = $this->purchase_model->get_purchased_order($po_id);
     $this->data['products'] = $this->purchase_model->get_purchased_products($po_id);
     $this->form_validation->set_rules($this->_checkout_validation_rules);
     if($this->form_validation->run())
@@ -373,20 +389,23 @@ class Purchase extends Admin_Controller
   {
     $form  = $_FILES['file'];
     $rand = $_POST['rand'];
+    $edit_id = $_POST['edit_id'];
     if($rand=='')
       $rand = rand();
     if(!is_dir("assets/uploads/purchase/tmp/".$rand))
     {
       mkdir("assets/uploads/purchase/tmp/".$rand, 0777, true);
     }
-
-    $config['upload_path']   = "assets/uploads/purchase/tmp/".$rand;
+    if($edit_id=='')
+      $config['upload_path']   = "assets/uploads/purchase/tmp/".$rand;
+    else
+      $config['upload_path']   = "assets/uploads/purchase/".$rand;
     $config['allowed_types'] = 'doc|docx|pdf|xls|xlsx';
   
     $this->load->library('upload', $config);
     if($this->upload->do_upload('file'))
     {
-      $this->_ajax_output(array('rand'=>$rand,'status'=>'success','message'=>"Upload Successfully","docs"=>scandir("assets/uploads/purchase/tmp/".$rand)), TRUE);
+      $this->_ajax_output(array('po_id'=>$edit_id,'rand'=>$rand,'status'=>'success','message'=>"Upload Successfully","docs"=>scandir($config['upload_path'])), TRUE);
     }
     else
       $this->_ajax_output(array('rand'=>$rand,'status'=>'fail','message'=>$this->upload->display_errors(),"files"=>$form), TRUE);
@@ -396,8 +415,14 @@ class Purchase extends Admin_Controller
   {
     $rand = $this->input->post('rand');
     $name = $this->input->post('name');
-    $file = "assets/uploads/purchase/tmp/".$rand."/".$name;
+    $edit_id = $this->input->post('edit_id');
+    if($edit_id)
+      $file = "assets/uploads/purchase/".$rand."/".$name;
+    else
+      $file = "assets/uploads/purchase/tmp/".$rand."/".$name;
     unlink($file);
+
+    $this->_ajax_output(array('status'=>'success','message'=>"Removed Successfully"), TRUE);
   }
   public function get_cart_count()
   {
