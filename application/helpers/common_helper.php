@@ -70,6 +70,23 @@ function get_user_role( $user_id='')
   return $row['role_id'];
 }
 
+function get_user_access_rights($role_id='')
+{
+  $CI= & get_instance();  
+  if(!$role_id) 
+  {
+    $user_data = get_user_data();
+    return $user_data['role_id'];
+  }   
+  $CI->load->model('role_model');
+  $row = $CI->role_model->get_access_rights(array('role_id' => $role_id));
+  if( !$row )
+    return FALSE;
+
+  return $row;
+}
+
+
 function get_roles()
 {
   $CI = & get_instance();
@@ -583,6 +600,8 @@ function log_history($table='',$id='',$cat='',$action='')
     $data['action']="<strong>".$get_name[0]['first_name']." (".$get_name[0]['email'].") </strong> $cat has been ".$action;
   else if($cat=="purchase")
     $data['action']="<strong>#".$get_name[0]['id']."</strong> purchase order has been ".$action;
+  else if($cat=="warning")
+    $data['action']="<strong>#".$get_name[0]['warning_name']."</strong> $cat has been ".$action;
   else
     $data['action']="<strong>".$get_name[0]['name']."</strong> $cat has been ".$action;
 

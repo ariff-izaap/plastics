@@ -47,21 +47,24 @@
         </div>
         <?php 
           $role = get_user_role();
+          $rights = get_user_access_rights($role);
+          $menu = json_decode($rights['menu_id']);
           $curr_ctlr =  $this->uri->segment(1, 'index');
           $child_ctlr = $this->uri->segment(2, 'index');
         ?>
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+          <?php if($menu->dashboard==1){?>
            <li <?php echo ($curr_ctlr == 'dashboard')?'class="active"':'';?> >
               <a href="<?=site_url('dashboard');?>">
                 <i class="fa fa-dashboard fa-fw"></i> 
                   Dashboard
               </a>
             </li>
-            
-            <?php if($role=="2" || $role=="1"){?>
-            <li <?php echo ($curr_ctlr == 'salesorder')?'class="active"':'';?> >
+          <?php }?>
+          <?php if($menu->sales==1){?>
+          <li <?php echo ($curr_ctlr == 'salesorder')?'class="active"':'';?> >
                <!-- <a href="#"> -->
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                  <i class="fa fa-clock-o fa-fw"></i>
@@ -76,8 +79,8 @@
                 <li><a href="<?php echo site_url();?>salesorder/shippingorder">Shipping Order</a></li>
                </ul>
             </li>
-            <?php }?>
-            <?php if($role=="3" || $role=="1"){ ?>
+          <?php }?>
+          <?php if($menu->purchase==1){?>  
             <li class="dropdown <?php echo ($curr_ctlr == 'purchase')? "active":'';?>">
               <a href="javascript:void(0);"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                  <i class="fa fa-cubes fa-fw"></i>
@@ -90,9 +93,7 @@
                   <li><a href="<?php echo site_url('purchase/min_level');?>">Min Level</a></li>
                 </ul>
             </li>
-            <?php }?>
-            <?php if($role=="4" || $role=="1"){?>
-             <li class="dropdown <?php echo ($curr_ctlr == 'inventory' || $curr_ctlr == 'category') ? "active":'';?>">
+            <li class="dropdown <?php echo ($curr_ctlr == 'inventory' || $curr_ctlr == 'category') ? "active":'';?>">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-database fa-fw"></i>
                   Inventory
@@ -111,7 +112,7 @@
                </ul>
             </li>
             <?php }?>
-            <?php if($role=="5" || $role=="1"){?>
+            <?php if($menu->inventory==1){?>
             <li class="dropdown <?php echo ($curr_ctlr == 'accounting') ? "active":'';?>">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-dollar fa-fw"></i>
@@ -128,7 +129,7 @@
               </ul>
             </li>
             <?php }?>
-            <?php if($role=="1"){?>
+            <?php if($menu->admin==1){?>
             <li class="dropdown <?php echo ($curr_ctlr == 'admin') ? "active":'';?>">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-eye fa-fw"></i>
@@ -164,7 +165,9 @@
                   </a> 
                 </li> -->
               </ul>
-            </li>            
+            </li>
+            <?php }?>
+            <?php if($menu->reports==1){?>
             <li class="dropdown">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-pie-chart fa-fw"></i>
@@ -175,13 +178,13 @@
                 <li><a href="javascript:void(0);">Sales Reports</a></li>
               </ul>
             </li>
-              <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
+            <?php }?>
+            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
               <a href="<?=site_url('timesheet');?>">
                 <i class="fa fa-search fa-fw"></i>
                   Search
               </a>
             </li>
-            <?php }?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>

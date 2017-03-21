@@ -4,20 +4,15 @@
 	</div>
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
-<?php
-if(validation_errors())
-  echo '<div id="output">'.validation_errors()."</div>";
-?>
-<br>
 <div class="container category">
 <div class="row">
 
   <form name="dropdowns" id="dropdowns" method="post" action="<?=site_url('admin/add_edit_dropdowns');?>">
   <div class="form-grid col-md-12 panel panel-default panel-bor">
-      <div class="panel-heading formcontrol-box">
+   <div class="panel-heading formcontrol-box">
     <input type="hidden" name="edit_id" value="">
     <div class="form-grid">
-			<div class="form-group col-md-4 " data-error="">
+			<div class="form-group padding-zero col-md-4 <?php echo (form_error('table_type'))?'error':'';?>" data-error="<?php echo (form_error('table_type'))? strip_tags(form_error('table_type')):'';?>">
         <label required="">Table Type</label>
         <select name="table_type" class="form-control">
           <option value="">--Select--</option>
@@ -43,11 +38,12 @@ if(validation_errors())
       </select>
       </div>
       <div class="clearfix"></div>
-      <div class="form-group col-md-4 " data-error="">
+      <div class="form-group padding-zero col-md-4 <?php echo (form_error('table_value'))?'error':'';?>" data-error="<?php echo (form_error('table_value'))? strip_tags(form_error('table_value')):'';?>">
+        <label>&nbsp;</label>
         <input type="text" name="table_value" class="form-control">
       </div>
       <div class="clearfix"></div>
-      <div class="form-group col-md-6 " data-error="">
+      <div class="form-group col-md-6 <?php echo (form_error('status'))?'error':'';?>" data-error="<?php echo (form_error('status'))? strip_tags(form_error('status')):'';?>">
         <label required="" class="control-label col-md-12">Active</label>
         <label><input type="radio" name="status" value="1" /> Yes</label>
         <label><input type="radio" name="status" value="0" /> No</label>

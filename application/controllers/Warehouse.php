@@ -22,6 +22,8 @@ class Warehouse extends Admin_Controller
     	redirect('login');
   	$this->load->model('warehouse_model');
 	  $this->load->library('listing');
+    $rights = get_user_access_rights($this->session->userdata('user_data')['role_id']);
+    $this->action =  json_decode($rights['access_level']);
   }
 
   public function index()
@@ -34,8 +36,12 @@ class Warehouse extends Admin_Controller
                                 'a.city'   => 'City',
                                 'a.phone'      => 'Phone',
                                 'a.zipcode'  => 'Zipcode');
-    $this->_narrow_search_conditions = array("start_date");    
-    $str='<a  href="'.site_url('warehouse/add_edit_warehouse/{id}').'" class="table-action"><i class="fa fa-edit"></i></a><a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'warehouse/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $this->_narrow_search_conditions = array("start_date");
+    $str = '&nbsp;';
+    if($this->action->edit==1)
+    $str='<a href="'.site_url('warehouse/add_edit_warehouse/{id}').'" class="table-action"><i class="fa fa-edit"></i></a>';
+    if($this->action->delete==1)
+      $str .='<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'warehouse/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('warehouse_model', 'listing');
     if($this->input->is_ajax_request())
@@ -53,6 +59,11 @@ class Warehouse extends Admin_Controller
 
   public function add_edit_warehouse($edit_id='')
   {
+    if(!$this->action->create==1)
+    {
+      $this->session->set_flashdata("error_msg","Don't have rights to create warehouse.",TRUE);
+      redirect("warehouse");
+    }
   	if($edit_id)
   		$this->data['edit_data'] = $this->warehouse_model->get_where(array("id"=>$edit_id))->row_array();
  	  $this->form_validation->set_rules($this->_warehouse_validation_rules);
@@ -96,5 +107,4 @@ class Warehouse extends Admin_Controller
     $output = $this->warehouse_model->get_where(array("id"=>$id))->row_array();
     $this->_ajax_output($output,TRUE);
   }
-
 }

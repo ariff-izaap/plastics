@@ -52,14 +52,22 @@ class Purchase extends Admin_Controller
   	$this->load->model('purchase_model');
     $this->load->model('admin_model');
 	  $this->load->library('listing');
+    $rights = get_user_access_rights($this->session->userdata('user_data')['role_id']);
+    $this->action =  json_decode($rights['access_level']);
   }
   public function index()
   {
+    $str ='&nbsp;';
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
     $this->simple_search_fields = array();
-    $this->_narrow_search_conditions = array("vendor_id","so_id","date_range");    
-    $str='<a href="'.site_url('purchase/add_edit_purchase/{id}').'"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
+    $this->_narrow_search_conditions = array("vendor_id","so_id","date_range");
+    if($this->action->edit==1)
+      $str .='<a href="'.site_url('purchase/add_edit_purchase/{id}').'"><i class="fa fa-edit"></i></a>';
+    if($this->action->delete==1)
+    $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    if($this->action->view==1)
+      $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -78,6 +86,11 @@ class Purchase extends Admin_Controller
 
   public function add_edit_purchase($edit_id='')
   {
+    if(!$this->action->create==1)
+    {
+      $this->session->set_flashdata("error_msg","Don't have rights to create purchase order.",TRUE);
+      redirect('purchase');
+    }
     $this->data['vendor'] = $this->purchase_model->get_vendors();
     $this->form_validation->set_rules($this->_purchase_validation_rules);
     if($edit_id)
@@ -353,6 +366,11 @@ class Purchase extends Admin_Controller
       $ins['created_date'] = date("Y-m-d H:i:s");
       if($form['edit_id'])
       {
+        if(!$this->action->create==1)
+        {
+          $this->session->set_flashdata("error_msg","Don't have rights to edit min level.",TRUE);
+          redirect('purchase/min_level');
+        }
         $ins['updated_id'] = get_current_user_id();
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $update =  $this->purchase_model->update(array("id"=>$form['edit_id']),$ins,"min_level");
@@ -361,6 +379,11 @@ class Purchase extends Admin_Controller
       }
       else
       {
+        if(!$this->action->create==1)
+        {
+          $this->session->set_flashdata("error_msg","Don't have rights to set min level.",TRUE);
+          redirect('purchase/min_level');
+        }
         $add =  $this->purchase_model->insert($ins,"min_level");
         $log = log_history("min_level",$add,"warning","insert");
         $this->session->set_flashdata("success_msg","Warning Created Successfully",TRUE);

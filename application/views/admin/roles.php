@@ -5,7 +5,9 @@
     </div>
     <div class="col-md-6 action-buttons text-right">
       <!-- <a href="javascript:void(0)" class="btn active">Delete</a> -->
-      <a href="<?php echo site_url('admin/add_edit_role');?>" class="btn" capsOn>Create Role</a>
+      <?php if($this->action->create==1){?>
+      	<a href="<?php echo site_url('admin/add_edit_role');?>" class="btn" capsOn>Create Role</a>
+      <?php }?>
     </div>
   </div>
 </div>

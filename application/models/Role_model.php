@@ -43,5 +43,11 @@ class Role_model extends App_model {
   	{
   		return $this->db->get("role")->result_array();
   	}
+
+    public function get_access_rights($where)
+    {
+      $this->db->where($where);
+      return $this->db->get("role_access")->row_array();
+    }
 }
 ?>

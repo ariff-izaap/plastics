@@ -27,7 +27,7 @@
 	        </select>
 	      </div>
 	      <div class="ajax_module">
-		      <div class="form-group <?php echo (form_error('menu[]'))?'error':'';?>" data-error="<?php echo (form_error('menu[]'))? strip_tags(form_error('menu[]')):'';?>">
+		      <div class="form-group <?php echo (form_error('menu[]'))?'error':'';?>" data-error="<?php echo (form_error('menu[]'))? strip_tags(form_error('menu[]')):'';?>" style="display:table;">
 					  	<label required="" class="col-md-2">Menu</label>
 					  	<div class="col-md-12">
 					  		<div class="col-md-3">
@@ -59,7 +59,7 @@
 					  </div>
 					  <div class="clearfix"></div>
 					  <br>
-					<div class="form-group <?php echo (form_error('rights[]'))?'error':'';?>" data-error="<?php echo (form_error('rights[]')) ? strip_tags(form_error('rights[]')):'';?>">
+					<div class="form-group padding-zero col-md-12 <?php echo (form_error('rights[]'))?'error':'';?>" data-error="<?php echo (form_error('rights[]')) ? strip_tags(form_error('rights[]')):'';?>" style="display:table;">
 						<label required="" class="col-md-2">Rights</label>
 						<div class="col-md-12">
 							<div class="col-md-2">

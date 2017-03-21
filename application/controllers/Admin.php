@@ -24,6 +24,8 @@ class Admin extends Admin_Controller
     $this->load->model('role_model');
     $this->load->model('history_model');
 	  $this->load->library('listing');
+    $rights = get_user_access_rights($this->session->userdata('user_data')['role_id']);
+    $this->action =  json_decode($rights['access_level']);
   }
 
   public function index()
@@ -45,9 +47,12 @@ class Admin extends Admin_Controller
                                 't.name'       => 'Role',
                                 'c.last_name' => 'Last Name',
                                 'c.email'      => 'Email');
-    $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $this->_narrow_search_conditions = array("start_date");
+    $str = '&nbsp;';
+    if($this->action->edit==1)
+      $str .='<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>';
+    if($this->action->delete==1)
+      $str .'<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('admin_model', 'listing');
     if($this->input->is_ajax_request())
@@ -65,6 +70,11 @@ class Admin extends Admin_Controller
 
 	public function add_edit_user($edit_id='')
 	{
+    if(!$this->action->create==1)
+    {
+      $this->session->set_flashdata("error_msg","Don't have rights to create new user",TRUE);
+      redirect('admin/user_setup');
+    }
     if($edit_id)
       $edit_data = $this->admin_model->get_where(array("id" => $edit_id))->row_array();
     else
@@ -78,8 +88,8 @@ class Admin extends Admin_Controller
     	$form = $this->input->post();
     	$ins['first_name'] = $form['firstname'];
     	$ins['last_name'] = $form['lastname'];
-       $ins['username'] = $form['username'];
-       $ins['user_code'] = $form['user_code'];
+      $ins['username'] = $form['username'];
+      $ins['user_code'] = $form['user_code'];
     	$ins['email'] = $form['email'];
     	$ins['password'] = md5("password");
     	$ins['role_id'] = $form['role'];
@@ -114,8 +124,9 @@ class Admin extends Admin_Controller
 
   public function add_edit_dropdowns($edit_id='')
   {
-    //$this->form_validation->set_rules("table_value","Table Type Value","required");
-   // $this->form_validation->set_rules("status","Active","required");
+    $this->form_validation->set_rules("table_value","Table Type Value","required");
+    $this->form_validation->set_rules("table_type","Table Type","required");
+    $this->form_validation->set_rules("status","Active","required");
     if ($this->form_validation->run() == FALSE)
     {
       $this->layout->view("admin/general_dropdowns");
@@ -130,17 +141,25 @@ class Admin extends Admin_Controller
       $ins['updated_id'] = get_current_user_id();
       $ins['updated_date'] = date("Y-m-d H:i:s");
       $ins['created_date'] = date("Y-m-d H:i:s");
-
       if(!$edit_id)
       {
+        if(!$this->action->create==1)
+          {
+            $this->session->set_flashdata("error_msg","Don't have rights to create dropdowns.",TRUE);
+            redirect("admin/add_edit_dropdowns");
+          }
         $ins['updated_id'] = get_current_user_id();
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $add = $this->admin_model->insert($ins,$this->get_table($form['table_type']));
         $log = log_history($this->get_table($form['table_type']),$add,"dropdown","insert");
-        //$history = $this->history_model->insert($his,"log");
       }
       else
       {
+        if(!$this->action->update==1)
+          {
+            $this->session->set_flashdata("error_msg","Don't have rights to update dropdowns.",TRUE);
+            redirect("admin/add_edit_dropdowns");
+          }
         $up['name'] = $form['table_value'];
         $up['status'] = $form['status'];
         $up = $this->admin_model->update(array("id"=>$edit_id),$up,$this->get_table($form['table_type']));
@@ -175,9 +194,12 @@ class Admin extends Admin_Controller
                                 /*'t.name'       => 'Role',
                                 'c.last_name' => 'Last Name',
                                 'c.email'      => 'Email'*/);
-    $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a href="'.site_url('admin/add_edit_role/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-            <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete_role/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    $this->_narrow_search_conditions = array("start_date");
+    $str ='&nbsp;';
+    if($this->action->edit==1)
+      $str .='<a href="'.site_url('admin/add_edit_role/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>';
+    if($this->action->delete==1)
+      $str.='<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete_role/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('role_model', 'listing');
     if($this->input->is_ajax_request())
@@ -195,6 +217,11 @@ class Admin extends Admin_Controller
 
   public function add_edit_role($edit_id='')
   {
+    if(!$this->action->create==1)
+    {
+      $this->session->set_flashdata("error_msg","Don't have rights to create role.",TRUE);
+      redirect("admin/roles");
+    }
     if($edit_id)
       $edit_data = $this->admin_model->get_where(array("id" => $edit_id),"","role")->row_array();
     else
@@ -249,12 +276,22 @@ class Admin extends Admin_Controller
       $chk = $this->admin_model->select("role_access",array("role_id"=>$form['role_id']));
       if($chk)
       {
+        if(!$this->action->edit==1)
+        {
+          $this->session->set_flashdata("error_msg","Don't have rights to update access level.",TRUE);
+          redirect("admin/access_level");
+        }
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $add = $this->admin_model->update(array("role_id"=>$form['role_id']),$ins,"role_access");
         $this->session->set_flashdata("success_msg","Access Level updated Successfully",TRUE);
       }
       else
       {
+         if(!$this->action->create==1)
+          {
+            $this->session->set_flashdata("error_msg","Don't have rights to create access level.",TRUE);
+            redirect("admin/access_level");
+          }
         $ins['created_date'] = date("Y-m-d H:i:s");
         $add = $this->admin_model->insert($ins,"role_access");
         $this->session->set_flashdata("success_msg","Access Level created Successfully",TRUE);
