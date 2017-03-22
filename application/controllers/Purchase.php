@@ -108,7 +108,7 @@ class Purchase extends Admin_Controller
       $ins['pickup_date']         = $form['pickup_date'];
       $ins['estimated_delivery']  = $form['delivery_date'];
       $ins['release_to_sold']     = isset($form['to_sold']) ? $form['to_sold'] : "No";
-      $ins['is_paid']             = "NOT PAID";      
+      $ins['is_paid']             = "NOT PAID";
       if(!$edit_id)
       {
         if(is_dir("assets/uploads/purchase/tmp/".$form['rand']))
@@ -143,6 +143,7 @@ class Purchase extends Admin_Controller
       }
       else
       {
+        $up['status']              = "INCOMPLETE";
         $ins['created_id']          = get_current_user_id();
         $ins['created_date']        = date("Y-m-d H:i:s");
         $this->purchase_model->insert($ins,"purchase_order");
@@ -318,7 +319,7 @@ class Purchase extends Admin_Controller
       $up['carrier_id'] = $form['carrier'];
       $up['credit_type_id'] = $form['credit_type'];
       $up['total_amount'] = $form['total'];
-
+      $up['status']              = "COMPLETED";
       /*Start Warehouse Shipping Info*/
 
       $house['name'] = $form['wname'];
