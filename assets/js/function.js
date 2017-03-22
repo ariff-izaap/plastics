@@ -43,10 +43,16 @@ $(function(){
 	    format: 'YYYY-MM-DD',
 	  }
 	});
+
+$('.singletime').wickedpicker({twentyFour: false, title:'Pick Time',close:'wickedpicker__close'});
     
   
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
     $(this).val(picker.startDate.format('YYYY-MM-DD'));
+  });
+
+  $('.singletime').on('apply.datetimepicker', function(ev, picker) {
+    $(this).val(picker.startDate.format('hh:mm:ss'));
   });
 
 	init_daterangepicker();
@@ -1157,5 +1163,48 @@ $(".role_id").change(function(){
   });
 });
 
+function customer_relation()
+{
+  var tab = $('.nav-tabs > .active').find('a').attr("href").replace("#","");
+   
+  form = $("form#CutomerRelation").serialize();
+  $.ajax({
+    type:"POST",
+    url:base_url+'salesorder/add_edit_customer/'+tab,
+    data:form,
+    dataType:'json',
+    success:function(data)
+    {
+      console.log(data);
+      if(data.status=="success")
+      {
+        $(".customer_add_div").html(data.output);
+        if(tab=="tab1primary")
+          $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        else if(tab=="tab2primary")
+         {
+           $('.nav-tabs li:nth-child(3)').find('a').trigger('click');          
+         }
+         else if(tab=="tab3primary")
+         {
+           location.href = base_url+"salesorder/customer_relation/";
+         }
+      }
+      else
+      {
+        $(".customer_add_div").html(data.output);
+        if(tab=="tab2primary")
+          $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        else if(tab=="tab3primary")
+          $('.nav-tabs li:nth-child(3)').find('a').trigger('click');
+      }
+    }
+  });
+
+}
+
+ $('.btnPrevious').click(function(){
+  $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+});
 
 /*Ram*/

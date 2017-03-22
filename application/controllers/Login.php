@@ -35,7 +35,16 @@ class Login extends Admin_controller
             {
               if($this->input->post('forGot')=="on")
                 setcookie("login",json_encode($_POST),time() + (86400 * 30), "/");
-              redirect("dashboard");
+              if($chk['status']=="0")
+              {
+                $this->session->set_flashdata("log_fail1","Your account is not active.",TRUE);
+                redirect("login");
+              }
+              else
+              {
+                $this->session->set_userdata('user_data', $chk);
+                redirect("dashboard");
+              }
             }
             else
             { 

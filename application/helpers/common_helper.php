@@ -618,6 +618,23 @@ function get_state()
    return $q;
 }
 
+
+function get_timezone()
+{
+   $CI = get_instance();
+   $q = $CI->db->query("select * from timezone where status=1")->result_array();
+   return $q;
+}
+
+
+function get_weeks_operate()
+{
+   $CI = get_instance();
+   $q = $CI->db->query("select * from week_days_operate where status=1")->result_array();
+   return $q;
+}
+
+
 function get_country()
 {
    $CI = get_instance();

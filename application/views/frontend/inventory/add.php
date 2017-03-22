@@ -23,7 +23,7 @@
                         <div class="tab-pane fade in active tabcontent" id="tab1primary">
                         <form name="inventory" id="inventory_sub_form" method="POST" enctype="multipart/form-data">
                            <div class="form-grid col-md-6 panel panel-default panel-bor">
-      <div class="panel-heading formcontrol-box">
+                           <div class="panel-heading formcontrol-box">
                                 <div class="form-group  <?php echo (form_error('name'))?'error':'';?>" data-error="<?php echo (form_error('name'))? form_error('name'):'';?>">
                                   <label required class="col-md-4">Inventory Name</label>
                                   <input type="text" name="name" class="form-control col-md-8" id="name" value="<?php echo set_value('name', $editdata['name']);?>" placeholder="Product Name" />

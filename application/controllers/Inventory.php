@@ -104,7 +104,8 @@ class Inventory extends Admin_Controller
           //}
           
           $this->form_validation->set_error_delimiters('', '');
-          if($this->form_validation->run()){
+          if($this->form_validation->run())
+          {
               $ins_data = array();
               $ins_data['sku']                    = $this->input->post('sku');
               $ins_data['name']                   = $this->input->post('name');

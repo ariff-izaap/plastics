@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2017 at 07:30 AM
+-- Generation Time: Mar 22, 2017 at 03:42 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -51,7 +51,8 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`id`, `name`, `first_name`, `last_name`, `company`, `address1`, `address2`, `city`, `state`, `country`, `zipcode`, `phone`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
 (1, 'Test Vendor', 'Test Vendor', 'Vendor', 'Izaap', '2nd Main Road', 'CS', 'Scottsdale', 'AZ', 'US', '800051', '4454156465', 1, 1, '2017-02-24 12:20:47', '2017-02-24 06:50:47'),
-(2, 'Test Vendor 2', 'Test Vendor', 'Vendor', 'Test Vendor 2', '40, Third Floor', 'Abraham Apt', 'Scottsdale', 'AZ', 'US', '82054', '4454156465', 1, 1, '2017-03-06 08:54:30', '2017-03-06 03:24:30');
+(2, 'Test Vendor 2', 'Test Vendor', 'Vendor', 'Test Vendor 2', '40, Third Floor', 'Abraham Apt', 'Scottsdale', 'AZ', 'US', '82054', '4454156465', 1, 1, '2017-03-06 08:54:30', '2017-03-06 03:24:30'),
+(8, 'Warehouses 1', '', '', '', '40, Third Floor', 'Suite Apt', 'Scottsdale', '1', '2', '12452', '12452', 1, 1, '2017-03-22 15:30:55', '2017-03-22 14:30:55');
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,7 @@ CREATE TABLE `admin_users` (
 
 INSERT INTO `admin_users` (`id`, `first_name`, `last_name`, `username`, `user_code`, `email`, `password`, `role_id`, `status`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
 (1, 'Admin', 'Adminsitrator', 'admin', 'ADMINADMINSITRATOR', 'email@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 1, '1', 1, 1, '2017-02-11 08:58:35', '2017-02-11 03:28:35'),
-(13, 'Ramkumar', 'Izaap', 'ramkumar', 'RAMKUMARIZAAP', 'ramkumar.izaap@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, '1', 1, 0, '2017-02-20 13:34:06', '2017-02-20 12:34:06');
+(13, 'Ramkumar', 'Izaap', 'ramkumar', 'RAMKUMARIZAAP', 'ramkumar.izaap@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, '1', 1, 1, '2017-03-22 08:25:13', '2017-03-22 02:55:13');
 
 -- --------------------------------------------------------
 
@@ -194,8 +195,20 @@ INSERT INTO `category` (`id`, `parent_id`, `name`, `description`, `category_thum
 CREATE TABLE `contact_type` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `status` enum('1','0') NOT NULL
+  `status` enum('1','0') NOT NULL,
+  `created_id` int(11) NOT NULL,
+  `updated_id` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `contact_type`
+--
+
+INSERT INTO `contact_type` (`id`, `name`, `status`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
+(1, 'Mobile', '1', 1, 1, '2017-03-22 12:56:30', '2017-03-22 07:26:30'),
+(2, 'Fax', '1', 1, 1, '2017-03-22 12:56:39', '2017-03-22 07:26:39');
 
 -- --------------------------------------------------------
 
@@ -296,7 +309,8 @@ CREATE TABLE `customer_contact` (
 
 INSERT INTO `customer_contact` (`id`, `customer_id`, `name`, `contact_type`, `contact_value`, `email`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
 (1, 1, 'Test', 1, '9875655', 'test@gmail.comn', 1, 1, '2017-02-24 12:09:25', '2017-02-24 06:39:25'),
-(2, 2, 'Test Vendor 2', 1, '151561', 'test@gmail.comn', 1, 1, '2017-03-06 18:01:02', '2017-03-06 12:31:02');
+(2, 2, 'Test Vendor 2', 1, '151561', 'test@gmail.comn', 1, 1, '2017-03-06 18:01:02', '2017-03-06 12:31:02'),
+(4, 5, 'Warehouses', 2, '23423', 'test@gmail.com', 0, 0, '0000-00-00 00:00:00', '2017-03-22 14:30:55');
 
 -- --------------------------------------------------------
 
@@ -308,7 +322,12 @@ CREATE TABLE `customer_location` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
-  `address` varchar(250) NOT NULL,
+  `address_1` varchar(255) NOT NULL,
+  `address_2` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` int(11) NOT NULL,
+  `country` int(11) NOT NULL,
+  `zipcode` varchar(255) NOT NULL,
   `definition` varchar(250) NOT NULL,
   `timezone_id` int(11) NOT NULL,
   `start_time` time NOT NULL,
@@ -317,6 +336,13 @@ CREATE TABLE `customer_location` (
   `created_date` datetime NOT NULL,
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_location`
+--
+
+INSERT INTO `customer_location` (`id`, `customer_id`, `name`, `address_1`, `address_2`, `city`, `state`, `country`, `zipcode`, `definition`, `timezone_id`, `start_time`, `end_time`, `day_of_week`, `created_date`, `updated_date`) VALUES
+(1, 5, 'Houston Location', '1601 Purdue Drive', '', 'Fayetteville', 1, 2, '28304-3674', '1,2', 3, '01:00:00', '01:00:00', 2, '0000-00-00 00:00:00', '2017-03-22 14:30:55');
 
 -- --------------------------------------------------------
 
@@ -454,7 +480,15 @@ INSERT INTO `log` (`id`, `action_id`, `action`, `line`, `created_id`, `updated_i
 (82, 19, '<strong>#19</strong> purchase order has been inserted', 'Purchase Insertion', 1, 0, '2017-03-18 10:35:39', '2017-03-18 15:05:39'),
 (83, 2, '<strong></strong> warning has been updated', 'Warning Updation', 1, 0, '2017-03-21 11:43:06', '2017-03-21 16:13:06'),
 (84, 1, '<strong></strong> warning has been updated', 'Warning Updation', 1, 0, '2017-03-21 11:43:24', '2017-03-21 16:13:24'),
-(85, 3, '<strong></strong> warning has been inserted', 'Warning Insertion', 1, 0, '2017-03-21 12:00:11', '2017-03-21 16:30:11');
+(85, 3, '<strong></strong> warning has been inserted', 'Warning Insertion', 1, 0, '2017-03-21 12:00:11', '2017-03-21 16:30:11'),
+(86, 13, '<strong>Ramkumar (ramkumar.izaap@gmail.com) </strong> user has been updated', 'User Updation', 1, 0, '2017-03-22 08:05:14', '2017-03-22 12:35:14'),
+(87, 13, '<strong>Ramkumar (ramkumar.izaap@gmail.com) </strong> user has been updated', 'User Updation', 1, 0, '2017-03-22 08:25:13', '2017-03-22 12:55:13'),
+(88, 1, '<strong>Mobile</strong> dropdown has been inserted', 'Dropdown Insertion', 1, 0, '2017-03-22 12:56:30', '2017-03-22 17:26:30'),
+(89, 2, '<strong>Fax</strong> dropdown has been inserted', 'Dropdown Insertion', 1, 0, '2017-03-22 12:56:39', '2017-03-22 17:26:39'),
+(90, 1, '<strong>ES</strong> dropdown has been inserted', 'Dropdown Insertion', 1, 0, '2017-03-22 13:36:27', '2017-03-22 18:06:27'),
+(91, 2, '<strong>IST</strong> dropdown has been inserted', 'Dropdown Insertion', 1, 0, '2017-03-22 13:36:41', '2017-03-22 18:06:41'),
+(92, 3, '<strong>MST</strong> dropdown has been inserted', 'Dropdown Insertion', 1, 0, '2017-03-22 13:36:48', '2017-03-22 18:06:48'),
+(93, 5, '<strong></strong> customer has been deleted', 'Customer Deletion', 1, 0, '2017-03-22 15:40:07', '2017-03-22 20:10:07');
 
 -- --------------------------------------------------------
 
@@ -752,6 +786,7 @@ CREATE TABLE `purchase_order` (
   `ship_type_id` int(11) NOT NULL,
   `carrier_id` int(11) NOT NULL,
   `credit_type_id` int(11) NOT NULL,
+  `status` enum('INCOMPLETE','COMPLETED') NOT NULL,
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
@@ -762,25 +797,25 @@ CREATE TABLE `purchase_order` (
 -- Dumping data for table `purchase_order`
 --
 
-INSERT INTO `purchase_order` (`id`, `vendor_id`, `order_status`, `total_amount`, `so_id`, `accounts_person_id`, `pickup_date`, `estimated_delivery`, `release_to_sold`, `po_message`, `note`, `is_vendor_stock_level_updated`, `is_paid`, `warehouse_id`, `ship_type_id`, `carrier_id`, `credit_type_id`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
-(1, 2, 'NEW', 139, 0, 0, '2017-03-17 00:00:00', '2017-03-22 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 1, 3, 2, 2, 1, 1, '2017-03-08 11:48:07', '2017-03-08 06:18:23'),
-(2, 2, 'NEW', 429, 0, 0, '2017-03-08 00:00:00', '2017-03-17 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 2, 3, 3, 5, 1, 1, '2017-03-09 11:08:54', '2017-03-09 05:40:55'),
-(3, 1, 'NEW', 0, 0, 0, '2017-03-08 00:00:00', '2017-03-23 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-09 11:11:34', '2017-03-09 10:11:34'),
-(4, 2, 'NEW', 417, 0, 0, '2017-03-25 00:00:00', '2017-03-31 00:00:00', 'No', '', '', 'No', 'NOT PAID', 2, 2, 2, 5, 1, 1, '2017-03-09 11:14:03', '2017-03-09 05:44:29'),
-(5, 2, 'NEW', 0, 0, 0, '2017-03-07 00:00:00', '2017-03-16 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-14 12:12:21', '2017-03-14 11:12:21'),
-(6, 2, 'NEW', 1136, 0, 0, '2017-03-22 00:00:00', '2017-03-31 00:00:00', 'No', '', '', 'No', 'NOT PAID', 3, 2, 3, 6, 1, 1, '2017-03-14 12:21:49', '2017-03-14 08:14:56'),
-(7, 1, 'NEW', 0, 0, 0, '2017-03-21 00:00:00', '2017-03-18 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-14 14:53:43', '2017-03-14 13:53:43'),
-(8, 2, 'NEW', 0, 0, 0, '2017-03-22 00:00:00', '2017-03-23 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-14 14:57:26', '2017-03-14 13:57:26'),
-(9, 2, 'NEW', 0, 0, 0, '2017-03-13 00:00:00', '2017-03-23 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-15 07:10:29', '2017-03-15 06:10:29'),
-(11, 1, 'NEW', 0, 0, 0, '2017-02-27 00:00:00', '2017-03-17 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-16 06:53:42', '2017-03-16 05:53:42'),
-(12, 1, 'NEW', 0, 0, 0, '2017-03-14 00:00:00', '2017-03-31 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-16 07:03:31', '2017-03-16 06:03:31'),
-(13, 2, 'NEW', 145, 0, 0, '2017-03-06 00:00:00', '2017-03-30 00:00:00', 'No', '', '', 'No', 'NOT PAID', 2, 2, 2, 5, 1, 1, '2017-03-16 07:31:12', '2017-03-16 02:24:14'),
-(14, 2, 'NEW', 0, 0, 0, '2017-03-07 00:00:00', '2017-03-07 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-16 13:47:53', '2017-03-16 12:47:53'),
-(15, 1, 'NEW', 0, 0, 0, '2017-03-14 00:00:00', '2017-03-14 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-16 13:49:25', '2017-03-16 12:49:26'),
-(16, 1, 'NEW', 0, 0, 0, '2017-02-27 00:00:00', '2017-03-24 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-16 14:03:24', '2017-03-16 13:03:24'),
-(17, 1, 'NEW', 0, 0, 0, '2017-03-05 00:00:00', '2017-04-01 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 1, 1, '2017-03-17 10:48:21', '2017-03-17 09:48:21'),
-(18, 2, 'PROCESSING', 417, 0, 0, '2017-03-29 00:00:00', '2017-03-10 00:00:00', 'Yes', 'hello', 'hi', 'No', 'NOT PAID', 2, 2, 2, 6, 1, 1, '2017-03-18 08:26:48', '2017-03-18 04:58:11'),
-(19, 2, 'PENDING', 979, 0, 0, '2017-03-18 00:00:00', '2017-03-24 00:00:00', 'Yes', 'PO - 19', 'PO - 19 Note', 'No', 'NOT PAID', 2, 2, 3, 6, 1, 1, '2017-03-18 10:34:34', '2017-03-18 05:05:39');
+INSERT INTO `purchase_order` (`id`, `vendor_id`, `order_status`, `total_amount`, `so_id`, `accounts_person_id`, `pickup_date`, `estimated_delivery`, `release_to_sold`, `po_message`, `note`, `is_vendor_stock_level_updated`, `is_paid`, `warehouse_id`, `ship_type_id`, `carrier_id`, `credit_type_id`, `status`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
+(1, 2, 'NEW', 139, 0, 0, '2017-03-17 00:00:00', '2017-03-22 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 1, 3, 2, 2, 'COMPLETED', 1, 1, '2017-03-08 11:48:07', '2017-03-08 06:18:23'),
+(2, 2, 'NEW', 429, 0, 0, '2017-03-08 00:00:00', '2017-03-17 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 2, 3, 3, 5, 'COMPLETED', 1, 1, '2017-03-09 11:08:54', '2017-03-09 05:40:55'),
+(3, 1, 'NEW', 0, 0, 0, '2017-03-08 00:00:00', '2017-03-23 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-09 11:11:34', '2017-03-09 10:11:34'),
+(4, 2, 'NEW', 417, 0, 0, '2017-03-25 00:00:00', '2017-03-31 00:00:00', 'No', '', '', 'No', 'NOT PAID', 2, 2, 2, 5, 'COMPLETED', 1, 1, '2017-03-09 11:14:03', '2017-03-09 05:44:29'),
+(5, 2, 'NEW', 0, 0, 0, '2017-03-07 00:00:00', '2017-03-16 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'COMPLETED', 1, 1, '2017-03-14 12:12:21', '2017-03-14 11:12:21'),
+(6, 2, 'NEW', 1136, 0, 0, '2017-03-22 00:00:00', '2017-03-31 00:00:00', 'No', '', '', 'No', 'NOT PAID', 3, 2, 3, 6, 'COMPLETED', 1, 1, '2017-03-14 12:21:49', '2017-03-14 08:14:56'),
+(7, 1, 'NEW', 0, 0, 0, '2017-03-21 00:00:00', '2017-03-18 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-14 14:53:43', '2017-03-14 13:53:43'),
+(8, 2, 'NEW', 0, 0, 0, '2017-03-22 00:00:00', '2017-03-23 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-14 14:57:26', '2017-03-14 13:57:26'),
+(9, 2, 'NEW', 0, 0, 0, '2017-03-13 00:00:00', '2017-03-23 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-15 07:10:29', '2017-03-15 06:10:29'),
+(11, 1, 'NEW', 0, 0, 0, '2017-02-27 00:00:00', '2017-03-17 00:00:00', 'Yes', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-16 06:53:42', '2017-03-16 05:53:42'),
+(12, 1, 'NEW', 0, 0, 0, '2017-03-14 00:00:00', '2017-03-31 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-16 07:03:31', '2017-03-16 06:03:31'),
+(13, 2, 'NEW', 145, 0, 0, '2017-03-06 00:00:00', '2017-03-30 00:00:00', 'No', '', '', 'No', 'NOT PAID', 2, 2, 2, 5, 'COMPLETED', 1, 1, '2017-03-16 07:31:12', '2017-03-16 02:24:14'),
+(14, 2, 'NEW', 0, 0, 0, '2017-03-07 00:00:00', '2017-03-07 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-16 13:47:53', '2017-03-16 12:47:53'),
+(15, 1, 'NEW', 0, 0, 0, '2017-03-14 00:00:00', '2017-03-14 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-16 13:49:25', '2017-03-16 12:49:26'),
+(16, 1, 'NEW', 0, 0, 0, '2017-02-27 00:00:00', '2017-03-24 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-16 14:03:24', '2017-03-16 13:03:24'),
+(17, 1, 'NEW', 0, 0, 0, '2017-03-05 00:00:00', '2017-04-01 00:00:00', 'No', '', '', 'No', 'NOT PAID', 0, 0, 0, 0, 'INCOMPLETE', 1, 1, '2017-03-17 10:48:21', '2017-03-17 09:48:21'),
+(18, 2, 'PROCESSING', 417, 0, 0, '2017-03-29 00:00:00', '2017-03-10 00:00:00', 'Yes', 'hello', 'hi', 'No', 'NOT PAID', 2, 2, 2, 6, 'COMPLETED', 1, 1, '2017-03-18 08:26:48', '2017-03-18 04:58:11'),
+(19, 2, 'PENDING', 979, 0, 0, '2017-03-18 00:00:00', '2017-03-24 00:00:00', 'Yes', 'PO - 19', 'PO - 19 Note', 'No', 'NOT PAID', 2, 2, 3, 6, 'COMPLETED', 1, 1, '2017-03-18 10:34:34', '2017-03-18 05:05:39');
 
 -- --------------------------------------------------------
 
@@ -897,8 +932,11 @@ CREATE TABLE `role_access` (
 --
 
 INSERT INTO `role_access` (`id`, `page_title_id`, `role_id`, `menu_id`, `access_level`, `created_date`, `updated_date`) VALUES
-(1, 0, 1, '{"dashboard":"1","sales":"1","purchase":"1","inventory":"1","accounting":"1","admin":"1","reports":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-18 11:46:05', '2017-03-21 07:48:08'),
-(2, 0, 2, '{"dashboard":"1","sales":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-21 13:44:08', '2017-03-21 12:44:08');
+(1, 0, 1, '{"dashboard":"1","sales":"1","purchase":"1","inventory":"1","accounting":"1","admin":"1","reports":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-18 11:46:05', '2017-03-22 02:23:01'),
+(2, 0, 2, '{"dashboard":"1","sales":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-21 13:44:08', '2017-03-21 12:44:08'),
+(3, 0, 3, '{"dashboard":"1","purchase":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-22 07:51:59', '2017-03-22 06:51:59'),
+(4, 0, 4, '{"dashboard":"1","inventory":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-22 07:52:10', '2017-03-22 06:52:10'),
+(5, 0, 5, '{"dashboard":"1","accounting":"1","reports":"1"}', '{"create":"1","edit":"1","delete":"1","view":"1"}', '2017-03-22 07:52:22', '2017-03-22 06:52:22');
 
 -- --------------------------------------------------------
 
@@ -1103,8 +1141,21 @@ CREATE TABLE `timezone` (
   `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `offset` varchar(20) NOT NULL,
-  `status` enum('1','0') NOT NULL
+  `status` enum('1','0') NOT NULL,
+  `created_id` int(11) NOT NULL,
+  `updated_id` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `timezone`
+--
+
+INSERT INTO `timezone` (`id`, `name`, `offset`, `status`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
+(1, 'ES', '', '1', 1, 1, '2017-03-22 13:36:27', '2017-03-22 08:06:27'),
+(2, 'IST', '', '1', 1, 1, '2017-03-22 13:36:41', '2017-03-22 08:06:41'),
+(3, 'MST', '', '1', 1, 1, '2017-03-22 13:36:48', '2017-03-22 08:06:48');
 
 -- --------------------------------------------------------
 
@@ -1470,7 +1521,7 @@ ALTER TABLE `week_days_operate`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `admin_users`
 --
@@ -1505,7 +1556,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contact_type`
 --
 ALTER TABLE `contact_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `country`
 --
@@ -1520,17 +1571,17 @@ ALTER TABLE `credit_type`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `customer_contact`
 --
 ALTER TABLE `customer_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `customer_location`
 --
 ALTER TABLE `customer_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `email_template`
 --
@@ -1545,7 +1596,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `menu`
 --
@@ -1625,7 +1676,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `role_access`
 --
 ALTER TABLE `role_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sales_order`
 --
@@ -1670,7 +1721,7 @@ ALTER TABLE `tax`
 -- AUTO_INCREMENT for table `timezone`
 --
 ALTER TABLE `timezone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `vendor_price_list`
 --

@@ -21,7 +21,9 @@
                   <?php if($this->session->flashdata('log_fail1')==TRUE){
 
                     echo "<p>".$this->session->flashdata('log_fail1')."</p>";
-                  }?>
+
+                  }
+                  ?>
 
                 </div>
                 <?php endif;?>

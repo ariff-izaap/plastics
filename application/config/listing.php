@@ -91,6 +91,25 @@ $config['warehouse_index'] = array(
 
 
 
+$config['salesorder_customer_relation'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'frontend/warehouse/filter',
+	"base_url"	=> 	'/salesorder/customer_relation/',
+	"per_page"	=>	"20",
+	"fields"	=> array(
+						'business_name'=>array('name'=>'Customer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'email'=>array('name'=>'Email', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'loc_name'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						/*'state_name'=>array('name'=>'State', 'data_type' => 'date','sortable' => FALSE, 'default_view'=>1),
+						'phone'=>array('name'=>'Phone', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'zipcode'=>array('name'=>'Zipcode', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)*/),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+
 
 $config['purchase_add_product'] = array(
 	"view"		=> 	'listing/listing',

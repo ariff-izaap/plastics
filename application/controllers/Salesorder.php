@@ -10,8 +10,9 @@ class Salesorder extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model('salesorder_model');
-	   $this->load->library('listing');    
+    $this->load->model('salesorder_model');
+    $this->load->model('admin_model');
+	  $this->load->library('listing');    
 	} 
 	
 	 public function index()
@@ -141,6 +142,15 @@ class Salesorder extends Admin_Controller
         $this->_ajax_output($output, TRUE);    
     }
     
+  public function delete_customer($del_id)
+  {  
+    $output['message'] ="Record deleted successfuly.";
+    $output['status']  = "success";
+    $log = log_history("customer",$del_id,"customer","delete");
+    $this->admin_model->delete(array("id"=>$del_id),"customer");
+    $this->_ajax_output($output, TRUE);
+  }
+
     public function productselection() 
     {
         try
@@ -314,5 +324,151 @@ class Salesorder extends Admin_Controller
         $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
         $this->layout->view('frontend/sales/callback');
     }
+
+    /* By Ram */
+
+    public function customer_relation()
+    {
+      $this->layout->add_javascripts(array('listing'));  
+      $this->load->library('listing');         
+      $this->simple_search_fields = array(                                                
+                                        'a.business_name'         => 'Customer Name',
+                                        'b.email'          => 'Email',
+                                        'c.name'     => 'Location',                                            
+                                    );
+         
+        $this->_narrow_search_conditions = array("start_date");
+        
+        $str = '<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete_customer/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
+                ';
+ 
+        $this->listing->initialize(array('listing_action' => $str));
+
+        $listing = $this->listing->get_listings('customer_model', 'listing');
+
+        if($this->input->is_ajax_request())
+            $this->_ajax_output(array('listing' => $listing), TRUE);
+        
+        $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
+        $this->data['simple_search_fields'] = $this->simple_search_fields;
+        $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
+        $this->data['per_page'] = $this->listing->_get_per_page();
+        $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
+        
+        $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
+        $this->data['listing']    = $listing;
+        $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
+      $this->layout->view('frontend/sales/customer_relation');
+    }
+
+    public function add_edit_customer($tab='',$edit_id='')
+    {
+      if($tab=="tab1primary")
+      {
+        $this->form_validation->set_rules('name','Customer Name','trim|required');
+        $this->form_validation->set_rules('bill_name','Bill To Name','trim|required');
+        $this->form_validation->set_rules('address_1','Address 1','trim|required');
+        $this->form_validation->set_rules('city','City','trim|required');
+        $this->form_validation->set_rules('state','State','trim|required');
+        $this->form_validation->set_rules('country','Country','trim|required');
+        $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
+        $this->form_validation->set_rules('zipcode','Zipcode','trim|required');       
+      }
+      else if($tab=="tab2primary")
+      {
+        $this->form_validation->set_rules('contact_name','Contact Name','trim|required');
+        $this->form_validation->set_rules('contact_value','Contact Value','trim|required');
+        $this->form_validation->set_rules('contact_type','Contact Type','trim|required');
+        $this->form_validation->set_rules('contact_email','Contact Email','trim|required|valid_email');
+      }
+      else if($tab=="tab3primary")
+      {
+        $this->form_validation->set_rules('loc_name','Location Name','trim|required');
+        $this->form_validation->set_rules('loc_address_1','Address 1','trim|required');
+        $this->form_validation->set_rules('loc_city','City','trim|required');
+        $this->form_validation->set_rules('loc_state','State','trim|required');
+        $this->form_validation->set_rules('loc_country','Country','trim|required');
+        $this->form_validation->set_rules('loc_zipcode','Zipcode','trim|required');
+        $this->form_validation->set_rules('start_time','Start Time','trim|required');
+        $this->form_validation->set_rules('end_time','End Time','trim|required');
+        $this->form_validation->set_rules('timezone','Timezone','trim|required');
+        $this->form_validation->set_rules('weeks','Days of Week','trim|required');
+        //$this->form_validation->set_rules('loc_type','Location Type','trim|required');
+      }
+      try
+      {
+        if($this->form_validation->run())
+        {
+          $status = 'success';
+          $form = $this->input->post();
+          /*Customer Address Table*/
+          if($tab=="tab3primary")
+          {
+            $ins1['name'] = $form['bill_name'];
+            $ins1['address1'] = $form['address_1'];
+            $ins1['address2'] = $form['address_2'];
+            $ins1['city'] = $form['city'];
+            $ins1['state'] = $form['state'];
+            $ins1['country'] = $form['country'];
+            $ins1['zipcode'] = $form['zipcode'];
+            $ins1['phone'] = $form['zipcode'];
+            $ins1['created_id'] = get_current_user_id();
+            $ins1['updated_id'] = get_current_user_id();
+            $ins1['created_date'] = date("Y-m-d H:i:s");
+            $a_id = $this->admin_model->insert($ins1,"address");
+            /*Customer Table*/
+            $ins['business_name'] = $form['name'];
+            $ins['web_url'] = $form['website'];
+            $ins['ups'] = $form['ups'];
+            $ins['credit_type'] = $form['credit_type'];
+            $ins['address_id'] = $a_id;
+            $c_id = $this->admin_model->insert($ins,"customer");
+            /*Customer Contact Table*/
+            $ins2['customer_id'] = $c_id;
+            $ins2['name'] = $form['contact_name'];
+            $ins2['contact_value'] = $form['contact_value'];
+            $ins2['contact_type'] = $form['contact_type'];
+            $ins2['email'] = $form['contact_email'];
+            $add = $this->admin_model->insert($ins2,"customer_contact");
+            /*Customer Location Table*/
+            $ins3['customer_id'] = $c_id;
+            $ins3['name'] = $form['loc_name'];
+            $ins3['address_1'] = $form['loc_address_1'];
+            $ins3['address_2'] = $form['loc_address_2'];
+            $ins3['city'] = $form['loc_city'];
+            $ins3['state'] = $form['loc_state'];
+            $ins3['country'] = $form['loc_country'];
+            $ins3['zipcode'] = $form['loc_zipcode'];
+            $ins3['start_time'] = date("H:i:s",strtotime($form['start_time']));
+            $ins3['end_time'] = date("H:i:s",strtotime($form['end_time']));
+            $ins3['timezone_id'] = $form['timezone'];
+            $ins3['day_of_week'] = $form['weeks'];
+            $ins3['definition'] = implode(",",$form['loc_type']);
+            $add1 = $this->admin_model->insert($ins3,"customer_location");
+          }
+        }
+        else
+        {
+          $status = 'error';
+        }
+      }
+      catch (Exception $e)
+      {
+          $this->data['status']   = 'error';
+          $this->data['message']  = $e->getMessage();
+      }
+
+      if($this->input->is_ajax_request())
+      {
+        $output  = $this->load->view('frontend/sales/add_customer_relation',$this->data,true);
+        return    $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id,"msg"=>$ins1), TRUE);
+      }
+      else
+      {
+        $this->layout->view('frontend/sales/add_customer_relation');
+      }      
+    }
+
+    /*End by Ram*/
 }
 ?>

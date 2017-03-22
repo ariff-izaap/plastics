@@ -21,13 +21,12 @@ class Login_model extends App_model
       $this->db->where('email', $email);
       $this->db->where('password', $pass);
 
+
       $user = $this->db->get()->row_array();
 
       if(count($user)>0)
-      {      
-        $this->session->set_userdata('user_data', $user);
-        
-        return true;
+      {              
+        return $user;
       }
       
       return false;

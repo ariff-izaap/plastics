@@ -77,6 +77,7 @@
                 <li><a href="<?php echo site_url();?>salesorder/callback">Call Back</a></li>
                 <li><a href="<?php echo site_url();?>salesproductselection">Product Selection</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/shippingorder">Shipping Order</a></li>
+                <li><a href="<?php echo site_url();?>salesorder/customer_relation">Customer Relationship</a></li>
                </ul>
             </li>
           <?php }?>
