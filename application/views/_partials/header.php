@@ -195,7 +195,7 @@
                     <div id="userSettings" class="dropdown-content" align="right">
                     <?php if($role=="1"){?>
                       <a href="<?=site_url('history');?>">Site History</a>
-                      <a href="<?=site_url('error_log');?>">Error Logs</a>
+                      <!-- <a href="<?=site_url('error_log');?>">Error Logs</a> -->
                     <?php }?>
                     <a href="#">My Profile</a>
                     <a href="#">Settings</a>
