@@ -20,7 +20,6 @@ class Purchase extends Admin_Controller
      array('field' => 'pickup_date', 'label' => 'Pickup Date', 'rules' => 'trim|required'),
      array('field' => 'delivery_date', 'label' => 'Delivery Date', 'rules' => 'trim|required'));
 
-
   protected $_checkout_validation_rules = array(
      array('field' => 'warehouse', 'label' => 'Warehouse', 'rules' => 'trim|required'),
      array('field' => 'ship_type', 'label' => 'Ship Method', 'rules' => 'trim|required'),
