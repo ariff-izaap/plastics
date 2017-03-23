@@ -44,8 +44,7 @@ $(function(){
 	  }
 	});
 
-$('.singletime').wickedpicker({twentyFour: false, title:'Pick Time',close:'wickedpicker__close'});
-    
+ 
   
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
     $(this).val(picker.startDate.format('YYYY-MM-DD'));
@@ -1166,11 +1165,11 @@ $(".role_id").change(function(){
 function customer_relation()
 {
   var tab = $('.nav-tabs > .active').find('a').attr("href").replace("#","");
-   
   form = $("form#CutomerRelation").serialize();
+  edit_id = $(".edit_id").val() ? $(".edit_id").val() : 0;
   $.ajax({
     type:"POST",
-    url:base_url+'salesorder/add_edit_customer/'+tab,
+    url:base_url+'salesorder/add_edit_customer/'+edit_id+'/'+tab,
     data:form,
     dataType:'json',
     success:function(data)
@@ -1180,7 +1179,9 @@ function customer_relation()
       {
         $(".customer_add_div").html(data.output);
         if(tab=="tab1primary")
+        {        
           $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        }
         else if(tab=="tab2primary")
          {
            $('.nav-tabs li:nth-child(3)').find('a').trigger('click');          
@@ -1194,9 +1195,13 @@ function customer_relation()
       {
         $(".customer_add_div").html(data.output);
         if(tab=="tab2primary")
+        {
           $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        }
         else if(tab=="tab3primary")
+        {
           $('.nav-tabs li:nth-child(3)').find('a').trigger('click');
+        }
       }
     }
   });
@@ -1206,5 +1211,14 @@ function customer_relation()
  $('.btnPrevious').click(function(){
   $('.nav-tabs > .active').prev('li').find('a').trigger('click');
 });
+
+// $('.singletime').wickedpicker({twentyFour: true, title:'Pick Time',beforeShow:''});
+
+$('.singletime').timepicker({showCloseButton: true,closeButtonText: 'Done',showPeriod: true,  amPmText: ['AM', 'PM'],
+    hours:{
+        starts: 00,                // First displayed hour
+        ends: 23                  // Last displayed hour
+    }});
+
 
 /*Ram*/

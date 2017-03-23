@@ -1,5 +1,6 @@
 $(function() 
 {
+  
     if(namespace == 'inventory_add'){
        
         $('#ProductTabs a').click(function (e) {

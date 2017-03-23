@@ -46,7 +46,10 @@ class Customer_model extends App_model
     if($where)
       $this->db->where($where);
     $q =  $this->db->get($table);
-    return $q->result_array();
+    if($q->num_rows() > 1)
+      return $q->result_array();
+    else
+      return $q->row_array();
   }
   public function update($where,$data,$table=NULL)
   {
