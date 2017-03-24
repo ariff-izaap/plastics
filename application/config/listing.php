@@ -58,8 +58,8 @@ $config['purchase_add_edit_purchase'] = array(
 $config['purchase_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'frontend/purchase/filter_purchase',
-	"base_url"	=> 	'purchase/index/',
+	"advance_search_view" => 'frontend/Purchase/filter_purchase',
+	"base_url"	=> 	'/purchase/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 						'id'=>array('name'=>'PO ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),

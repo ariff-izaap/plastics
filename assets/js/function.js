@@ -44,7 +44,7 @@ $(function(){
 	  }
 	});
 
-$('.singletime').wickedpicker({twentyFour: false, title:'Pick Time',close:'wickedpicker__close'});
+
     
   
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
@@ -1282,5 +1282,40 @@ function customer_relation()
  $('.btnPrevious').click(function(){
   $('.nav-tabs > .active').prev('li').find('a').trigger('click');
 });
+
+// $('.singletime').wickedpicker({twentyFour: true, title:'Pick Time',beforeShow:''});
+function init_timepicker()
+{
+  $('.singletime').timepicker({showCloseButton: true,closeButtonText: 'Done',showPeriod: true,  amPmText: ['AM', 'PM'],
+    hours:{
+        starts: 00,                // First displayed hour
+        ends: 23                  // Last displayed hour
+    }});
+}
+init_timepicker();
+
+function add_address()
+{
+  $.ajax({
+    type:"POST",
+    url:base_url+'salesorder/add_new_address',
+    data:'',
+    dataType:'json',
+    success:function(data)
+    {
+      console.log(data);
+      $(".ajax_address").append(data.output);
+      init_timepicker();
+    }
+  });
+}
+
+function remove_address(ele)
+{
+  $(ele).parent().parent().parent().remove();
+}
+
+
+
 
 /*Ram*/

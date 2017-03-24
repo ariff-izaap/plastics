@@ -17,7 +17,7 @@ class Purchase_model extends App_model
 	  $this->_fields = "c.*,t.business_name,f.city";
     $this->db->from('purchase_order c');
     $this->db->join("customer t","c.vendor_id=t.id");
-    $this->db->join("warehouse f","c.warehouse_id=f.id");
+    $this->db->join("warehouse f","c.warehouse_id=f.id or c.warehouse_id=0");
     $this->db->group_by('c.id');
     foreach ($this->criteria as $key => $value)
     {

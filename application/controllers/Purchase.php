@@ -78,7 +78,7 @@ class Purchase extends Admin_Controller
     $this->data['per_page'] = $this->listing->_get_per_page();
     $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
     $this->data['vendors'] = $this->purchase_model->get_vendors();
-    $this->data['search_bar'] = $this->load->view('frontend/purchase/purchase_search_bar', $this->data, TRUE);
+    // $this->data['search_bar'] = $this->load->view('frontend/Purchase/purchase_search_bar', $this->data, TRUE);
     $this->data['listing'] = $listing;
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);    
   	$this->layout->view('frontend/Purchase/index');
@@ -472,6 +472,16 @@ class Purchase extends Admin_Controller
     $output['status']  = "success";
     $this->purchase_model->update(array("id"=>$id),$up,"purchase_order");   
     $this->_ajax_output($output, TRUE);
+  }
+
+  public function create_auto_po($form,$product)
+  {   
+    $product = array("2"=>array("1"=>array("unit_price"=>"1","quantity"=>"2"),
+                      "23"=>array("unit_price"=>"59","quantity"=>"2")),
+                      "3"=>array("19"=>array("unit_price"=>"99","quantity"=>"2")));
+    $form = array("so_id"=>"1","pickup_date"=>"2017-03-04","delivery_date"=>"2017-03-25","release_to_sold"=>"Yes","paid"=>"NOT PAID","status"=>"INCOMPLETE","ship_type_id"=>"1","carrier_id"=>"1");
+    $a = create_auto_po($product,$form);
+    print_r($a);
   }
 
 }

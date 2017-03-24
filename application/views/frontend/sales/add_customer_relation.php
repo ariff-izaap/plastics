@@ -182,6 +182,11 @@
 		          </div>
 		          <div class="tab-pane fade" id="tab3primary">
 		          	<div class="row">
+		          		<div class="col-md-2 pull-right">
+		          			<button type="button" class="btn" onclick="add_address();">Add Address</button>
+		          		</div>
+		          	</div><br>
+		          	<div class="row">
 		          		<div class="col-md-3">
 		          			<div class="form-group <?php echo (form_error('loc_name'))?'error':'';?>" data-error="<?php echo (form_error('loc_name'))? strip_tags(form_error('loc_name')):'';?>">
 		          				<label required="">Location Name</label>
@@ -311,6 +316,8 @@
 		          			</div>
 		          		</div>
 
+		          	</div>
+		          	<div class="ajax_address">
 		          	</div>
 		          	<div class="row">
 		          		<div class="col-md-2 pull-right">

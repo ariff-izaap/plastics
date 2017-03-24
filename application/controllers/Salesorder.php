@@ -435,6 +435,12 @@ class Salesorder extends Admin_Controller
       }      
     }
 
+    public function add_new_address()
+    {
+        $output  =  $this->load->view('frontend/sales/ajax_new_address',$this->data,true);
+        return $this->_ajax_output(array('status' => 'success' ,'output' => $output), TRUE);
+    }
+
     /*End by Ram*/
 }
 ?>

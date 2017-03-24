@@ -750,4 +750,60 @@ function copyFile($file,$rand,$po_id)
 
 }
 
+
+function create_auto_po($product,$form)
+{
+  $CI = get_instance();
+  $CI->load->model('purchase_model');
+  if(is_array($product))
+  {
+    echo "<pre>";
+    print_r($product);
+    print_r($form);
+    foreach ($product as $vendor_id => $ploop)
+    {
+      $tot='';
+      $ins['vendor_id'] = $vendor_id;
+      $ins['order_status'] = "NEW";
+      $ins['pickup_date']         = $form['pickup_date'];
+      $ins['estimated_delivery']  = $form['delivery_date'];
+      $ins['release_to_sold']     = $form['release_to_sold'];
+      $ins['is_paid']             = $form['paid'];
+      $up['status']               = $form['status'];
+      $ins['created_id']          = get_current_user_id();
+      $ins['created_date']        = date("Y-m-d H:i:s");
+      $ins['updated_id']          = get_current_user_id();
+      $ins['updated_date']        = date("Y-m-d H:i:s");
+      $ins['so_id']               = $form['so_id'];
+      $ins['warehouse_id']        = 0;
+      $ins['ship_type_id']        = $form['ship_type_id'];
+      $ins['carrier_id']          = $form['carrier_id'];
+      $ins['credit_type_id']      = 0;
+      // $po_id = $CI->purchase_model->insert($ins,"purchase_order");
+      foreach ($ploop as $key => $pvalue)
+      {
+        $ins1['po_id']               = $po_id;
+        $ins1['unit_price']          = $pvalue['unit_price'];
+        $ins1['qty']                 = $pvalue['quantity'];
+        $ins1['product_id']          = $key;
+        $ins1['item_status']         = "NEW";
+        $ins1['created_id']          = get_current_user_id();
+        $ins1['created_date']        = date("Y-m-d H:i:s");
+        $ins1['updated_id']          = get_current_user_id();
+        $ins1['updated_date']        = date("Y-m-d H:i:s");
+        // $add = $CI->purchase_model->insert($ins1,"purchase_order_item");
+        $tot[] = $pvalue['unit_price'] * $pvalue['quantity'];
+      }
+      $up['total_amount'] = array_sum($tot);
+      // $po_id = $CI->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
+    }
+     $output = array("status"=>"success","message"=>"PO Created successfully.");
+  }
+  else
+  {
+    $output = array("status"=>"error","message"=>"Wrong Input Parameter");
+  }
+  return $CI->_ajax_output($output,TRUE);
+}
+
 ?>
