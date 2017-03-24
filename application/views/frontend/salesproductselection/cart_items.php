@@ -11,10 +11,12 @@
     <td>Wholesale Price</td>
     <td>Package</td>
     <td>Row</td>
+    <td colspan="2">Action</td>
   </tr>
   
    <?php 
        if(count($cartitems)>0) { 
+        //print_r($cartitems);
          foreach($cartitems as $cvalue) {
      ?>
         <tr>
@@ -29,6 +31,10 @@
             <td><?php echo $cvalue['price']; ?></td>
             <td><?php echo $cvalue['package']; ?></td>
             <td><?php echo $cvalue['row']; ?></td>
+            <td colspan="2">
+                <button type="button" name="update_cart" onclick="sales_update_cart('<?php echo $cvalue['rowid'];?>');" class="btn btn-default">Update Cart</button> |
+                <button type="button" name="delete_cart" onclick="delete_cart('<?php echo $cvalue['rowid']; ?>');" class="btn btn-default">Delete Cart</button>
+            </td>
         </tr>
  <?php }} 
       else { ?>
@@ -37,3 +43,36 @@
    </tr>
   <?php } ?>
 </table>
+
+<div id="updat_cart" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form name="sales_update_to_cart" id="sales_update_to_cart">
+      <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
+      <div class="modal-body">
+      <input type="hidden" name="cart_id" id="cart_id" value="" />
+       <div class="row"> 
+        <div class="form-group col-md-4">
+            <label>Quantity</label>
+            <input type="text" name="quantity" id="quantity"/>
+        </div>
+       </div>
+     </div>  
+     <div class="row">
+        <div class="form-group col-md-4">
+            <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-block" id="cancel" data-pid=""  value="Cancel" />
+        </div>
+        <div class="form-group col-md-4">  
+            <input type="button" name="up_cart" onclick="sales_update_cart('');" data-dismiss="modal"  id="confirm" class="btn btn-block" value="Update" />
+        </div>
+     </div>
+     </form>
+      
+    </div>
+  </div>
+</div>

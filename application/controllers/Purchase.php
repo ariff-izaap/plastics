@@ -51,7 +51,8 @@ class Purchase extends Admin_Controller
   	$this->load->model('purchase_model');
     $this->load->model('admin_model');
 	  $this->load->library('listing');
-    $rights = get_user_access_rights($this->session->userdata('user_data')['role_id']);
+     $userdata = $this->session->userdata('user_data'); 
+    $rights = get_user_access_rights($userdata['role_id']);
     $this->action =  json_decode($rights['access_level']);
   }
   public function index()
@@ -472,8 +473,6 @@ class Purchase extends Admin_Controller
     $this->purchase_model->update(array("id"=>$id),$up,"purchase_order");   
     $this->_ajax_output($output, TRUE);
   }
-
-  
 
 }
 ?>

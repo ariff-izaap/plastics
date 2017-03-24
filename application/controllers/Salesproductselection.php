@@ -16,7 +16,7 @@ class Salesproductselection extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model(array('inventory_model','salesorder_model'));
+       $this->load->model(array('inventory_model','salesorder_model','purchase_model'));
 	   $this->load->library('listing');    
        $this->load->library('cart');
 	} 
@@ -174,8 +174,6 @@ class Salesproductselection extends Admin_Controller
    public function add_to_cart()
    {
     
-     $this->load->library('cart');
-    
      //post data
      $available_quantity = $this->input->post("quantity_available");
      $order_quantity     = $this->input->post("quantity_to_order");
@@ -213,5 +211,61 @@ class Salesproductselection extends Admin_Controller
      $this->_ajax_output($output, TRUE);
    }
    
+   
+   public function delete_cart()
+   {
+        $cart_id  = $this->input->post("id");
+        $result   = $this->cart->remove($cart_id);
+        
+        $output['message']       = "Item removed from cart successfully";
+        $output['status']        = "success";   
+        
+        $this->data['cartitems'] = $this->cart->contents(); 
+        $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
+     
+        $this->_ajax_output($output, TRUE);
+   }
+   
+   public function update_cart()
+   {
+        $this->load->library('cart');
+        
+        $cart_id  = $this->input->post("id");
+        $quantity = $this->input->post('quantity');
+        
+        $update_cart = array(   "rowid" => $cart_id,
+                                "qty" => $quantity
+                             );
+        
+        $result   = $this->cart->update($update_cart);
+        $output['message']       = "Item updated successfully";
+        $output['status']        = "success";   
+        
+        $this->data['cartitems'] = $this->cart->contents(); 
+        $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
+     
+        $this->_ajax_output($output, TRUE);
+   }
+   
+   function get_customer_information()
+   {
+         $cust_id  = $this->input->post("id");
+         $customer = $this->salesorder_model->get_vendors(array("a.id" => $cust_id));
+        // echo $this->db->last_query();
+         //print_r($customer);
+         
+         $this->data['custome_data'] = '';
+         if(count($customer)>0){
+            $this->data['customer_data'] = $customer;
+            $output['status']           = "success";
+         }
+         else
+         {
+           $output['status']        = "error"; 
+         }
+          
+         $output['customer_view']= $this->load->view("frontend/sales/customer_details",$this->data,true);
+         $this->_ajax_output($output, TRUE);
+   }
 }
 ?>

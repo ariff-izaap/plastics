@@ -10,50 +10,19 @@ class Salesorder extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-    $this->load->model('salesorder_model');
+    $this->load->model(array('salesorder_model','purchase_model'));
     $this->load->model('admin_model');
-    $this->load->model('customer_model');
-	  $this->load->library('listing');    
+	  $this->load->library('listing');
+      $this->load->library('cart');    
 	} 
 	
 	 public function index()
      { 
-             
-        $this->layout->add_javascripts(array('listing'));  
-
-        $this->load->library('listing');         
         
-        $this->simple_search_fields = array(                                                
-                                        'p.name'         => 'Name',
-                                        'p.sku'          => 'Sku',
-                                        'p.quantity'     => 'Quantity',                                            
-                                    );
-         
-        $this->_narrow_search_conditions = array("start_date");
-        
-        $str = '<a href="'.site_url('vendor/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'vendor/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
-                ';
- 
-        $this->listing->initialize(array('listing_action' => $str));
-
-        $listing = $this->listing->get_listings('salesorder_model', 'listing');
-
-        if($this->input->is_ajax_request())
-            $this->_ajax_output(array('listing' => $listing), TRUE);
-        
-        $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
-        $this->data['simple_search_fields'] = $this->simple_search_fields;
-        $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
-        $this->data['per_page'] = $this->listing->_get_per_page();
-        $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-        
-        $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
-        $this->data['listing']    = $listing;
-        $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
-        
-        $this->layout->view("frontend/sales/index");		
-    }
+        $this->data['cartitems'] = $this->cart->contents();           
+        $this->data['customer'] = $this->purchase_model->get_vendors();
+        $this->layout->view("frontend/sales/checkout");		
+     }
     
     public function add( $edit_id ='')
     {
@@ -65,7 +34,6 @@ class Salesorder extends Admin_Controller
             $this->form_validation->set_rules('business_name','Business Name','trim|required');
             $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
            
-            
             $this->form_validation->set_error_delimiters('', '');
                 
             if ($this->form_validation->run()){
@@ -81,7 +49,6 @@ class Salesorder extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     //$ins_data['updated_id']   = get_current_user_id();    
                     $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
-
                     $msg  = 'Salesorder updated successfully';
                 }
                 else
@@ -106,14 +73,12 @@ class Salesorder extends Admin_Controller
                 $edit_data['address_id']             = '';
                 $edit_data['status']                 = '';
             }
-
         }
         catch (Exception $e)
         {
             $this->data['status']   = 'error';
             $this->data['message']  = $e->getMessage();   
         }
-
         if($edit_id)
             $edit_data =$this->salesorder_model->get_where(array("id" => $edit_id))->row_array();
         
@@ -340,7 +305,7 @@ class Salesorder extends Admin_Controller
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="'.site_url('salesorder/add_edit_customer/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a><a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete_customer/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
+        $str = '<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete_customer/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  
         $this->listing->initialize(array('listing_action' => $str));
@@ -362,19 +327,8 @@ class Salesorder extends Admin_Controller
       $this->layout->view('frontend/sales/customer_relation');
     }
 
-    public function add_edit_customer($edit_id='',$tab='')
+    public function add_edit_customer($tab='',$edit_id='')
     {
-      if($edit_id!='')
-      {       
-        $this->data['edit_data'] = $this->customer_model->select("customer",array("id" => $edit_id));
-        $this->data['edit_data1'] = $this->customer_model->select("address",array("id"=> $this->data['edit_data']['address_id']));
-        $this->data['edit_data2'] = $this->customer_model->select("customer_contact",array("customer_id" => $edit_id));
-        $this->data['edit_data3'] = $this->customer_model->select("customer_location",array("customer_id" => $edit_id));
-      }
-      else
-      {
-        $this->data['edit_data'] = array("edit_id"=>"");
-      }
       if($tab=="tab1primary")
       {
         $this->form_validation->set_rules('name','Customer Name','trim|required');
@@ -426,54 +380,22 @@ class Salesorder extends Admin_Controller
             $ins1['phone'] = $form['zipcode'];
             $ins1['created_id'] = get_current_user_id();
             $ins1['updated_id'] = get_current_user_id();
-            if(!$edit_id)
-            {
-              $ins1['created_date'] = date("Y-m-d H:i:s");
-              $a_id = $this->admin_model->insert($ins1,"address");
-            }
-            else
-            {
-              $a_id = $form['address_id'];
-              $ins1['updated_id'] = get_current_user_id();
-              $ins1['updated_date'] = date("Y-m-d H:i:s");
-              $up = $this->admin_model->update(array("id"=>$form['address_id']),$ins1,"address");
-            }
-
+            $ins1['created_date'] = date("Y-m-d H:i:s");
+            $a_id = $this->admin_model->insert($ins1,"address");
             /*Customer Table*/
             $ins['business_name'] = $form['name'];
             $ins['web_url'] = $form['website'];
             $ins['ups'] = $form['ups'];
             $ins['credit_type'] = $form['credit_type'];
             $ins['address_id'] = $a_id;
-            if(!$edit_id)
-            {
-              $ins['created_date'] = date("Y-m-d H:i:s");
-              $c_id = $this->admin_model->insert($ins,"customer");
-            }
-            else
-            {
-              $c_id = $edit_id;
-              $ins['updated_date'] = date("Y-m-d H:i:s");
-              $up1 = $this->admin_model->update(array("id"=>$edit_id),$ins,"customer");
-            }
+            $c_id = $this->admin_model->insert($ins,"customer");
             /*Customer Contact Table*/
             $ins2['customer_id'] = $c_id;
             $ins2['name'] = $form['contact_name'];
             $ins2['contact_value'] = $form['contact_value'];
             $ins2['contact_type'] = $form['contact_type'];
             $ins2['email'] = $form['contact_email'];
-            if(!$edit_id)
-            {
-              $ins2['created_id'] = get_current_user_id();
-              $ins2['created_date'] = date("Y-m-d H:i:s");
-              $add = $this->admin_model->insert($ins2,"customer_contact");
-            }
-            else
-            {
-              $ins2['updated_id'] = get_current_user_id();
-              $ins2['updated_date'] = date("Y-m-d H:i:s");
-              $up2 = $this->admin_model->update(array("customer_id"=>$c_id),$ins2,"customer_contact");
-            }
+            $add = $this->admin_model->insert($ins2,"customer_contact");
             /*Customer Location Table*/
             $ins3['customer_id'] = $c_id;
             $ins3['name'] = $form['loc_name'];
@@ -488,16 +410,7 @@ class Salesorder extends Admin_Controller
             $ins3['timezone_id'] = $form['timezone'];
             $ins3['day_of_week'] = $form['weeks'];
             $ins3['definition'] = implode(",",$form['loc_type']);
-            if(!$edit_id)
-            {
-              $ins3['created_date'] = date("Y-m-d H:i:s");
-              $add1 = $this->admin_model->insert($ins3,"customer_location");
-            }
-            else
-            {
-              $ins3['updated_date'] = date("Y-m-d H:i:s");
-              $up3 = $this->admin_model->update(array("customer_id"=>$c_id),$ins3,"customer_location");
-            }
+            $add1 = $this->admin_model->insert($ins3,"customer_location");
           }
         }
         else

@@ -43,7 +43,8 @@
             <button type="button" class="col-md-2 btn btn-block">Existing SO</button>
          </div>
          <div class="col-md-2">   
-            <button type="button" class="col-md-2 btn btn-block">Save SO</button>
+           <!-- <button type="button" class="col-md-2 btn btn-block" >Save SO</button> -->
+           <a href="<?php echo site_url();?>salesorder" class="col-md-2 btn btn-block">Save SO</a>
          </div>
          <div class="col-md-2">   
             <button type="button" class="col-md-2 btn btn-block">Create New SO</button>

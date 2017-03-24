@@ -14,8 +14,9 @@ class Admin extends Admin_Controller
                           array('field' => 'role_id', 'label' => 'Role', 'rules' => 'trim|required'),
                           array('field' => 'menu[]', 'label' => 'Menu', 'rules' => 'trim|required','errors'=>array('required'=>'Please Select atleast one menu')),
                           array('field' => 'rights[]', 'label' => 'Rights', 'rules' => 'trim|required','errors'=>array('required'=>'Please Select atleast one rights')));
-
-	function __construct()
+  
+  
+  function __construct()
   {
   	parent::__construct();
 		if(!is_logged_in())
@@ -23,8 +24,11 @@ class Admin extends Admin_Controller
   	$this->load->model('admin_model');
     $this->load->model('role_model');
     $this->load->model('history_model');
-	  $this->load->library('listing');
-    $rights = get_user_access_rights($this->session->userdata('user_data')['role_id']);
+    $this->load->library('listing');
+    
+   
+    $role_id = $this->session->userdata('user_data');
+    $rights = get_user_access_rights($role_id['role_id']);
     $this->action =  json_decode($rights['access_level']);
   }
 

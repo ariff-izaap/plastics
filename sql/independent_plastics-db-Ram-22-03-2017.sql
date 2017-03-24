@@ -42,7 +42,7 @@ CREATE TABLE `address` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `admin_users` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `callback` (
   `user_to_notify` text NOT NULL COMMENT 'multiple users(salesman)',
   `cb_message` text NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` datetime NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -114,7 +114,7 @@ CREATE TABLE `call_logs` (
   `log_date` datetime NOT NULL,
   `call_log` text NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -174,7 +174,7 @@ CREATE TABLE `category` (
   `description` text NOT NULL,
   `category_thumb` varchar(250) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` datetime NOT NULL,
   `enabled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -199,7 +199,7 @@ CREATE TABLE `contact_type` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -273,7 +273,7 @@ CREATE TABLE `customer` (
   `address_id` int(11) NOT NULL,
   `status` enum('1','0') NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='vendors';
 
 --
@@ -300,7 +300,7 @@ CREATE TABLE `customer_contact` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -334,7 +334,7 @@ CREATE TABLE `customer_location` (
   `end_time` time NOT NULL,
   `day_of_week` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -382,7 +382,7 @@ CREATE TABLE `invoices` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -399,7 +399,7 @@ CREATE TABLE `log` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` datetime NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -525,7 +525,7 @@ CREATE TABLE `min_level` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -620,7 +620,7 @@ CREATE TABLE `product` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -790,7 +790,7 @@ CREATE TABLE `purchase_order` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -836,7 +836,7 @@ CREATE TABLE `purchase_order_item` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -870,7 +870,7 @@ CREATE TABLE `returns` (
   `status` enum('Pending','Accepted','Incoming','Received','Rejected','Partially Accepted') NOT NULL,
   `is_refund` enum('0','1') NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -924,7 +924,7 @@ CREATE TABLE `role_access` (
   `menu_id` varchar(255) NOT NULL,
   `access_level` varchar(255) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -974,7 +974,7 @@ CREATE TABLE `sales_order` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1002,7 +1002,7 @@ CREATE TABLE `sales_order_item` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1058,7 +1058,7 @@ CREATE TABLE `shipment` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1145,7 +1145,7 @@ CREATE TABLE `timezone` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1169,7 +1169,7 @@ CREATE TABLE `vendor_price_list` (
   `product_id` int(11) NOT NULL,
   `sku` varchar(150) NOT NULL,
   `cost` decimal(10,2) NOT NULL,
-  `priority` int(11) NOT NULL COMMENT 'prefered vendor',
+
   `in_stock` enum('No','Yes') NOT NULL,
   `stock_level` int(11) NOT NULL COMMENT 'inventory stock level',
   `enabled` enum('1','0') NOT NULL,
@@ -1180,7 +1180,7 @@ CREATE TABLE `vendor_price_list` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1212,7 +1212,7 @@ CREATE TABLE `warehouse` (
   `email` varchar(255) NOT NULL,
   `status` enum('1','0') NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` datetime NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
