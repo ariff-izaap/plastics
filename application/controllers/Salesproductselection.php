@@ -233,15 +233,15 @@ class Salesproductselection extends Admin_Controller
         $cart_id  = $this->input->post("id");
         $quantity = $this->input->post('quantity');
         
-        $update_cart = array(   "rowid" => $cart_id,
+        $update_cart = array(  "rowid" => $cart_id,
                                 "qty" => $quantity
                              );
+        $result      = $this->cart->update($update_cart);
         
-        $result   = $this->cart->update($update_cart);
         $output['message']       = "Item updated successfully";
         $output['status']        = "success";   
-        
-        $this->data['cartitems'] = $this->cart->contents(); 
+        $this->data['cartitems'] = $this->cart->contents();
+         
         $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
      
         $this->_ajax_output($output, TRUE);

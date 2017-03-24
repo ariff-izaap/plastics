@@ -18,9 +18,10 @@ class Salesorder extends Admin_Controller
 	
 	 public function index()
      { 
-        
-        $this->data['cartitems'] = $this->cart->contents();           
-        $this->data['customer'] = $this->purchase_model->get_vendors();
+        $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
+        $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
+        $this->data['cartitems']     = $this->cart->contents();           
+        $this->data['customer']      = $this->purchase_model->get_vendors();
         $this->layout->view("frontend/sales/checkout");		
      }
     
@@ -290,6 +291,94 @@ class Salesorder extends Admin_Controller
         $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
         $this->layout->view('frontend/sales/callback');
     }
+    
+    public function checkout()
+    {
+        try
+        {
+          if($this->input->post('edit_id'))            
+            $edit_id = $this->input->post('edit_id');
+            
+          $this->form_validation->set_rules('ship_first_name','Shipping Firstname','trim|required');
+          $this->form_validation->set_rules('ship_last_name','Shipping Lastname','trim|required');
+          $this->form_validation->set_rules('ship_mobile','Mobile','trim|required');
+          $this->form_validation->set_rules('ship_address1','Address 1','trim|required');
+          $this->form_validation->set_rules('ship_city','City','trim|required');
+          $this->form_validation->set_rules('ship_state','State','trim|required');
+          $this->form_validation->set_rules('ship_zipcode','Zipcode','trim|required');
+          $this->form_validation->set_rules('type','Type','trim|required');
+          $this->form_validation->set_rules('shipping_type','Shipping Type','trim|required');
+          $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
+          $this->form_validation->set_error_delimiters('', '');
+          
+          if($this->form_validation->run()){
+              $ins_data = array();
+              $ins_data['sku']                    = $this->input->post('sku');
+              $ins_data['name']                   = $this->input->post('name');
+              $ins_data['quantity']               = $this->input->post('quantity');
+              $ins_data['available_qty']          = $this->input->post('quantity');  
+              $ins_data['category_id']            = $this->input->post('category_id');
+              $ins_data['color_id']               = $this->input->post('color_id');
+              $ins_data['form_id']                = $this->input->post('form_id');
+              
+              
+              if($edit_id){
+                $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
+                $ins_data['updated_id']   = get_current_user_id();    
+                $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
+                $msg  = 'Product updated successfully';
+              }
+              else
+              {   
+
+                $ins_data['created_date'] = date('Y-m-d H:i:s'); 
+                $ins_data['updated_date'] = date('Y-m-d H:i:s');
+                $ins_data['created_id']   = get_current_user_id();  
+                $new_id  = $this->salesorder_model->insert($ins_data);             
+                $msg     = 'Product added successfully';
+                $edit_id =  $new_id;
+              }
+              
+              $this->session->set_flashdata('success_msg',$msg,TRUE);
+              $status  = 'success';
+          }    
+          else
+          {
+            $edit_data = array();
+            $edit_data['id']                    = (!empty($edit_id))?$edit_id:'';
+            $edit_data['sku']                   = '';
+            $edit_data['name']                  = '';
+            $edit_data['color_id']              = '';
+            $edit_data['form_id']               = '';
+            $edit_data['package_id']            = ''; 
+          }
+        }
+        catch (Exception $e)
+        {
+            $this->data['status']   = 'error';
+            $this->data['message']  = $e->getMessage();
+        }
+
+        if($edit_id)
+           $edit_data = $this->inventory_model->get_where(array("id" => $edit_id))->row_array();
+            
+
+        $this->data['editdata']      = $edit_data;
+        $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
+        $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
+        $this->data['cartitems']     = $this->cart->contents();           
+        $this->data['customer']      = $this->purchase_model->get_vendors();
+        
+        if($this->input->is_ajax_request()){
+          $output  = $this->load->view('frontend/sales/checkout',$this->data,true);
+          return    $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id), TRUE);
+        }
+        else
+        {
+          $this->layout->view('frontend/sales/checkout');
+        } 
+    }
+    /* End by Punitha */
 
     /* By Ram */
 

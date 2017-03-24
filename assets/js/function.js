@@ -1086,7 +1086,7 @@ function sales_update_cart(cart_id='')
     success:function(data)
     {
       var status = data.status;
-      var output = data.output;      
+     // var output = data.output;      
     
       if(status == 'success'){
         $("#product_shipping_lists").html(data.viewlist);
@@ -1094,6 +1094,11 @@ function sales_update_cart(cart_id='')
       }
     }  
   }); 
+}
+
+function create_so()
+{
+    
 }
 /***End To Punitha **/
 
