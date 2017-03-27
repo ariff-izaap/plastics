@@ -6,7 +6,9 @@
     <td>Form</td>
     <td>Color</td>
     <td>Type</td>
-    <td>Equivalent</td>
+    <!--
+<td>Equivalent</td>
+-->
     <td>Quantity</td>
     <td>Wholesale Price</td>
     <td>Package</td>
@@ -26,7 +28,9 @@
             <td><?php echo $cvalue['form']; ?></td>
             <td><?php echo $cvalue['color']; ?></td>
             <td><?php echo $cvalue['type']; ?></td>
-            <td><?php echo $cvalue['equivalent']; ?></td>
+           <!--
+ <td><?php //echo $cvalue['equivalent']; ?></td>
+-->
             <td><?php echo $cvalue['qty']; ?></td>
             <td><?php echo $cvalue['price']; ?></td>
             <td><?php echo $cvalue['package']; ?></td>

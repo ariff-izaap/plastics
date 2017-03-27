@@ -298,22 +298,36 @@ class Salesorder extends Admin_Controller
         {
           if($this->input->post('edit_id'))            
             $edit_id = $this->input->post('edit_id');
-            
+           
+          $this->form_validation->set_rules('customer_id','Please select Customer','trim|required');  
+          
+          $this->form_validation->set_rules('business_name','Business Name','trim|required');
+          $this->form_validation->set_rules('first_name','Billing Firstname','trim|required');
+          $this->form_validation->set_rules('last_name','Billing Lastname','trim|required');
+          $this->form_validation->set_rules('email','Billing Email','trim|required');
+          $this->form_validation->set_rules('mobile','Billing Phonenumber','trim|required');
+          $this->form_validation->set_rules('address1','Billing Address 1','trim|required');
+          $this->form_validation->set_rules('city','Billing City','trim|required');
+          $this->form_validation->set_rules('state','Billing State','trim|required');
+          $this->form_validation->set_rules('zipcode','Billing Zipcode','trim|required');
+          $this->form_validation->set_rules('ship_first_name','Shipping Firstname','trim|required');
           $this->form_validation->set_rules('ship_first_name','Shipping Firstname','trim|required');
           $this->form_validation->set_rules('ship_last_name','Shipping Lastname','trim|required');
           $this->form_validation->set_rules('ship_mobile','Mobile','trim|required');
-          $this->form_validation->set_rules('ship_address1','Address 1','trim|required');
+          $this->form_validation->set_rules('ship_address1','Shipping Address 1','trim|required');
           $this->form_validation->set_rules('ship_city','City','trim|required');
           $this->form_validation->set_rules('ship_state','State','trim|required');
           $this->form_validation->set_rules('ship_zipcode','Zipcode','trim|required');
           $this->form_validation->set_rules('type','Type','trim|required');
           $this->form_validation->set_rules('shipping_type','Shipping Type','trim|required');
           $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
+          $this->form_validation->set_rules('order_status','Order Status','trim|required');
           $this->form_validation->set_error_delimiters('', '');
           
           if($this->form_validation->run()){
               $ins_data = array();
               $ins_data['customer_id']            = $this->input->post('customer_id');
+              $ins_data['salesman_id']            = get_current_user_id(); 
               $ins_data['shipping_type']          = $this->input->post('shipping_type');
               $ins_data['credit_type']            = $this->input->post('credit_type');  
               $ins_data['so_instructions']        = $this->input->post('so_instructions');
@@ -321,12 +335,15 @@ class Salesorder extends Admin_Controller
               $ins_data['shipping_address_id']    = $this->input->post('shipping_address_id');
               $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
               $ins_data['type']                   = $this->input->post('type');
+              $ins_data['order_status']           = $this->input->post('order_status');
+              $ins_data['total_items']            = $this->cart->total_items();
+              $ins_data['total_amount']           = $this->cart->total();
               
               if($edit_id){
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
-                $msg  = 'Product updated successfully';
+                $msg  = 'Order updated successfully';
               }
               else
               {   
@@ -334,7 +351,7 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
                 $new_id  = $this->salesorder_model->insert($ins_data);             
-                $msg     = 'Product added successfully';
+                $msg     = 'Order created successfully';
                 $edit_id =  $new_id;
               }
               
@@ -359,9 +376,8 @@ class Salesorder extends Admin_Controller
         }
 
         if($edit_id)
-           $edit_data = $this->inventory_model->get_where(array("id" => $edit_id))->row_array();
+           $edit_data = $this->salesorder_model->get_where(array("id" => $edit_id))->row_array();
             
-
         $this->data['editdata']      = $edit_data;
         $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
         $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
@@ -386,10 +402,10 @@ class Salesorder extends Admin_Controller
       $this->layout->add_javascripts(array('listing'));  
       $this->load->library('listing');         
       $this->simple_search_fields = array(                                                
-                                        'a.business_name'         => 'Customer Name',
-                                        'b.email'          => 'Email',
-                                        'c.name'     => 'Location',                                            
-                                    );
+                                            'a.business_name'         => 'Customer Name',
+                                            'b.email'          => 'Email',
+                                            'c.name'     => 'Location',                                            
+                                         );
          
         $this->_narrow_search_conditions = array("start_date");
         

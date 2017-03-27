@@ -9,13 +9,13 @@
 
   <form name="checkout" id="checkout" method="POST" action="<?php echo site_url();?>salesorder/checkout">
       <div class="form-grid col-md-6">
-        <div class="form-group col-md-6 <?php echo (form_error('business_name'))?'error':'';?>" data-error="<?php echo (form_error('business_name'))? form_error('business_name'):'';?>">
+        <div class="form-group col-md-6 <?php echo (form_error('customer_id'))?'error':'';?>" data-error="<?php echo (form_error('customer_id'))? form_error('customer_id'):'';?>">
           <label required>Customer Name</label>
-          <select name="customer_name" id="customer_id" onchange="get_customer_details();" >
+          <select name="customer_id" id="customer_id" onchange="get_customer_details();" >
             <option value="">Select Customer</option>
             <?php if(count($customer)>0){
                 foreach($customer as $ckey=>$cvalue){ ?>
-                  <option value="<?php echo $cvalue['id'];?>"><?php echo $cvalue['business_name']; ?></option>  
+                  <option value="<?php echo $cvalue['id'];?>" <?php echo set_select('customer_id',$cvalue['id'],(($editdata['customer_id'] == $cvalue['id'])?true:false));?>><?php echo $cvalue['business_name']; ?></option>  
                <?php }} ?>
           </select>
         </div>
@@ -24,35 +24,42 @@
        </div>
 </div>  
 <div class="col-md-6">
-     <h2>Cart Items</h2>
-   <div class="form-grid col-md-12">
-     <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
-   </div>
-   <div class="form-group" >
+    
+   <div class="form-group <?php echo (form_error('type'))?'error':'';?>" data-error="<?php echo (form_error('type'))? form_error('type'):'';?>" >
       <label>Type</label>
-      <select name="type" class="form-control">
+      <select name="type" class="form-group" >
         <option value="">Select Type</option>
          <option value="SALE">Sale</option>
          <option value="PURCHASE">Purchase</option>
          <option value="RETURN">Return</option>
       </select>
     </div>
-   <div class="form-group" >
+   <div class="form-group <?php echo (form_error('shipping_type'))?'error':'';?>" data-error="<?php echo (form_error('shipping_type'))? form_error('shipping_type'):'';?>">
       <label>Shipping Type</label>
-      <select name="shipping_type" class="form-control">
+      <select name="shipping_type" class="form-group">
         <option value="">Select Shipping Type</option>
         <?php if(count($shipping_type)>0){ foreach($shipping_type as $skey => $svalue){ ?>
-         <option value="<?php echo $svalue['id']; ?>"><?php echo $svalue['type']; ?></option>
+         <option value="<?php echo $svalue['id']; ?>" <?php echo set_select('shipping_type',$svalue['id'],(($editdata['shipping_type'] == $svalue['id'])?true:false));?>><?php echo $svalue['type']; ?></option>
         <?php }} ?>
       </select>
     </div>
-    <div class="form-group " >
+    <div class="form-group <?php echo (form_error('credit_type'))?'error':'';?>" data-error="<?php echo (form_error('credit_type'))?form_error('credit_type'):'';?>" >
       <label>Credit Type</label>
-      <select name="credit_type" class="form-control">
+      <select name="credit_type" class="form-group">
         <option value="">Select Credit Type</option>
         <?php if(count($credit_type)>0){ foreach($credit_type as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['id']; ?>"><?php echo $cvalue['name']; ?></option>
+         <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('credit_type',$cvalue['id'],(($editdata['credit_type'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
         <?php }} ?>
+      </select>
+    </div>
+    <div class="form-group <?php echo (form_error('order_status'))?'error':'';?>" data-error="<?php echo (form_error('order_status'))? form_error('order_status'):'';?>" >
+      <label>Order Status</label>
+      <select name="order_status" class="form-group" >
+        <option value="">Select Status</option>
+         <option value="NEW">NEW</option>
+         <option value="PROCESSING">PROCESSING</option>
+         <option value="PENDING">PENDING</option>
+         <option value="COMPLETED">COMPLETED</option>
       </select>
     </div>
     <div class="form-group " >
@@ -63,6 +70,10 @@
       <label>BOL Instructions</label>
       <textarea class="form-control" name="bol_instructions"></textarea>
     </div>
+     <h2>Cart Items</h2>
+   <div class="form-grid col-md-12">
+     <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
+   </div>
   </div>
   <div>
     <input type="submit" name="so" class="btn btn-default" value="Create Order" />
