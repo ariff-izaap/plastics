@@ -8,7 +8,9 @@
 </div>
 <?php display_flashmsg($this->session->flashdata()); ?>
 <div class="container">
-  <div class="row">
+  <div class="row ">
+  <div class="panel panel-default panel-bor">
+  <div class="panel-heading" style="display:inline-block;">
     <form name="add_purchase" id="addPurchase" method="post">
       <div class="form-grid">
         <div class="form-group col-md-4 <?php echo (form_error('wname'))?'error':'';?>" data-error="<?php echo (form_error('wname'))? strip_tags(form_error('wname')):'';?>">
@@ -86,5 +88,7 @@
         </div>
       </div>
     </form>
+    </div>
+    </div>
   </div>
 </div>

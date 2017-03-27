@@ -5,8 +5,10 @@
 </div>
 <?php display_flashmsg($this->session->flashdata()); ?>
 
-<div class="container add-user1">
+<div class="container add-user1 access-level">
 	<div class="row">
+    <div class="form-grid col-md-12 panel panel-default panel-bor">
+    <div class="panel-heading formcontrol-box">
 		<form action="" id="AccessLevel" name="AccessLevel" method="post">
 			<div class="form-grid">
 				<div class="form-group <?php echo (form_error('role_id'))?'error':'';?>" data-error="<?php echo (form_error('role_id'))? strip_tags(form_error('role_id')):'';?>">
@@ -83,5 +85,7 @@
 	      </div>
 	    </div>
 	  </form>
+      </div>
+      </div>
 	</div>
 </div>
