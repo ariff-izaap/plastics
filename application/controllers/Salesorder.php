@@ -313,14 +313,14 @@ class Salesorder extends Admin_Controller
           
           if($this->form_validation->run()){
               $ins_data = array();
-              $ins_data['sku']                    = $this->input->post('sku');
-              $ins_data['name']                   = $this->input->post('name');
-              $ins_data['quantity']               = $this->input->post('quantity');
-              $ins_data['available_qty']          = $this->input->post('quantity');  
-              $ins_data['category_id']            = $this->input->post('category_id');
-              $ins_data['color_id']               = $this->input->post('color_id');
-              $ins_data['form_id']                = $this->input->post('form_id');
-              
+              $ins_data['customer_id']            = $this->input->post('customer_id');
+              $ins_data['shipping_type']          = $this->input->post('shipping_type');
+              $ins_data['credit_type']            = $this->input->post('credit_type');  
+              $ins_data['so_instructions']        = $this->input->post('so_instructions');
+              $ins_data['bol_instructions']       = $this->input->post('bol_instructions');
+              $ins_data['shipping_address_id']    = $this->input->post('shipping_address_id');
+              $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
+              $ins_data['type']                   = $this->input->post('type');
               
               if($edit_id){
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
@@ -330,7 +330,6 @@ class Salesorder extends Admin_Controller
               }
               else
               {   
-
                 $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
