@@ -4,7 +4,7 @@
 
 <!-- button tool bar section start here -->
 
-<div class="row">
+
     <div class="tableView">
 
 		<?php echo $search_bar;?>

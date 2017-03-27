@@ -14,6 +14,13 @@
 .panel-heading { padding-top:0px;}
 .form-group input[type="text"] { height:30px;}
 .access-level input[type="checkbox"] {  margin-right: 6px;}
+#product_shipping_lists {padding: 12px 25px;}
+.action-buttons { min-height: 57px;}
+.form-group > label + select {height: 65px;}
+td { padding:4px 6px !important;}
+#advance_search_form .form-group { margin-bottom:0px !important;}
+#advance_search_form .button-sec { margin-bottom:0px;}
+#advance_search_form .btn.btn-sm.active { padding:8px 23px;}
 
 @media (min-width:992px)
 {

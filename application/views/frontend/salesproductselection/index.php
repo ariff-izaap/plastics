@@ -12,19 +12,18 @@
     
     <div id="popOverBox" style="display: block;"></div>
     
-  <h2>Products in Selection</h2>
+  <h2 style="margin-left:24px;">Products in Selection</h2>
   <?php echo $grid; ?>
   
-      <br />
-      <br />
-      <div class="container">
-      <div class="row">
-             <h2>Products in Shipping Order</h2>
+    
+     
+           
             <div class="col-md-12" id="product_shipping_lists">
+              <h2>Products in Shipping Order</h2>
                  <?php $this->load->view("frontend/salesproductselection/cart_items", $this->data); ?>
             </div>
-       </div>
-       </div>
+      
+    
           
       <br />
       <br />
