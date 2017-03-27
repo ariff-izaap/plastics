@@ -5,6 +5,15 @@
 .button-sec { margin-bottom:40px;}
 .breadcrumbs > div, .breadcrumbs > a { display: inline-block; }
 .breadcrumbs > div { width: 60% }
+.clear-btn button {
+    float: left;
+    margin-right: 7px;
+    width: 38%;
+}
+.data-sale { width:100%; display:inline-block; height:300px; overflow:auto;}
+.panel-heading { padding-top:0px;}
+.form-group input[type="text"] { height:30px;}
+
 @media (min-width:992px)
 {
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
@@ -17,7 +26,7 @@
 .time-choose, .use { margin-left:10px; margin-top:4px;}
 .select-box { max-width:322px !important;}
 .call-group { width:100%; display:inline-block;}
-.second-box { min-height:760px;}
+.second-box { min-height:554px;}
 .formcontrol-box .form-control.col-md-8 { width:66.6667% !important;}
 .formcontrol-box .form-control.col-md-9 { width:75% !important;}
 .formcontrol-box .form-group { display: inline-block; width: 100%; margin:10px 0px; margin-bottom:20px;}
@@ -31,7 +40,7 @@
 .call-group2 .form-group:nth-child(1){width:46%; float:left;}
 .call-group2 .form-group:nth-child(2){width:20%; margin: 40px 0 0 10px; float:left;}
 .call-group2 .form-group:nth-child(3){width:25%; margin: 44px 0 0 10px; float:left}
-.prod-sel { min-height:800px;}
+.prod-sel { min-height:670px;}
 .call-group .use { margin-top: 11px;}
 select { width:100%;}
 .cus-name .form-group { width:50% !important;}

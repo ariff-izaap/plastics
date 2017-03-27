@@ -154,12 +154,13 @@
         </div>
         <div class="row button-sec">
             <div class="col-md-8"></div>
-            <div class="col-md-2">
+            <div class="col-md-4 clear-btn">
                 <button type="submit" class="btn btn-block">Who Holding</button>
-            </div>
-            <div class="col-md-2" style="text-align: right;">
-                <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
+                 <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
                 <button type="button" class="btn btn-block" onclick="$.fn.submit_advance_search_form();">Search</button>
+            </div>
+           
+               
               <!--
   <input type="button" id="salesorder_product_search" onclick="sales_product_search();" class="btn btn-block" value="Search" />
 -->

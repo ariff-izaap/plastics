@@ -1,17 +1,20 @@
-<h2>Billing Information</h2>   
+   
     <?php //print_r($customer_ship_data); ?>
       <input type="hidden" name="shipping_address_id" value="<?php echo $customer_data['shipping_id'];  ?>" />
       <input type="hidden" name="billing_address_id" value="<?php echo $customer_data['billing_id'];  ?>" />
-      <div class="form-grid col-md-6">
+      <div class="form-grid col-md-6 panel panel-default panel-bor">
+      	<div class="panel-heading formcontrol-box">
+      <div class="form-grid">
+      <h2>Billing Information</h2>
         <div class="form-group  <?php echo (form_error('business_name'))?'error':'';?>" data-error="<?php echo (form_error('business_name'))? form_error('business_name'):'';?>">
           <label required>Business Name</label>
           <input type="text" name="business_name" class="form-control" id="business_name" value="<?php echo set_value('business_name', $customer_data['business_name']);?>" placeholder="" />
         </div>
-        <div class="form-group col-md-6  <?php echo (form_error('first_name'))?'error':'';?>" data-error="<?php echo (form_error('first_name'))? form_error('first_name'):'';?>">
+        <div class="form-group <?php echo (form_error('first_name'))?'error':'';?>" data-error="<?php echo (form_error('first_name'))? form_error('first_name'):'';?>">
           <label required>first_name</label>
           <input type="text" name="first_name" class="form-control" id="first_name" value="<?php echo set_value('first_name', $customer_data['first_name']);?>" placeholder="" />
         </div>
-        <div class="form-group col-md-6 <?php echo (form_error('last_name'))?'error':'';?>" data-error="<?php echo (form_error('last_name'))? form_error('last_name'):'';?>">
+        <div class="form-group <?php echo (form_error('last_name'))?'error':'';?>" data-error="<?php echo (form_error('last_name'))? form_error('last_name'):'';?>">
           <label required>last_name</label>
           <input type="text" name="last_name" class="form-control" id="last_name" value="<?php echo set_value('last_name', $customer_data['last_name']);?>" placeholder="" />
         </div>
@@ -48,15 +51,20 @@
           <input type="text" name="zipcode" class="form-control" id="zipcode" value="<?php echo set_value('zipcode', $customer_data['zipcode']);?>" placeholder="" />
         </div>
       </div>  
-       <h2>Shipping Information</h2>
+      </div> 
+      </div>
+      
+      <div class="form-grid col-md-6 panel panel-default panel-bor">
+      	<div class="panel-heading formcontrol-box">
        
-       <div class="form-grid col-md-6">
+       <div class="form-grid">
+       <h2>Shipping Information</h2>
         <?php $ship_first_name = explode(" ",$customer_data['loc_name']); ?>
-        <div class="form-group col-md-6  <?php echo (form_error('ship_first_name'))?'error':'';?>" data-error="<?php echo (form_error('ship_first_name'))? form_error('ship_first_name'):'';?>">
+        <div class="form-group <?php echo (form_error('ship_first_name'))?'error':'';?>" data-error="<?php echo (form_error('ship_first_name'))? form_error('ship_first_name'):'';?>">
           <label required>Firstname</label>
           <input type="text" name="ship_first_name" class="form-control" id="ship_first_name" value="<?php echo set_value('ship_first_name', $ship_first_name[0]);?>" placeholder="" />
         </div>
-        <div class="form-group col-md-6 <?php echo (form_error('ship_last_name'))?'error':'';?>" data-error="<?php echo (form_error('ship_last_name'))? form_error('ship_last_name'):'';?>">
+        <div class="form-group <?php echo (form_error('ship_last_name'))?'error':'';?>" data-error="<?php echo (form_error('ship_last_name'))? form_error('ship_last_name'):'';?>">
           <label required>Lastname</label>
           <input type="text" name="ship_last_name" class="form-control" id="ship_last_name" value="<?php echo set_value('ship_last_name', $ship_first_name[1]);?>" placeholder="" />
         </div>
@@ -85,4 +93,5 @@
           <input type="text" name="ship_zipcode" class="form-control" id="ship_zipcode" value="<?php echo set_value('ship_zipcode', $customer_data['zipcode']);?>" placeholder="" />
         </div>
     </div> 
-    
+    </div>
+    </div>

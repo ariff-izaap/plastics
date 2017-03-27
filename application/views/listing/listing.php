@@ -22,6 +22,7 @@
 
 <div id="data_table">	
 	<?php $uri = $this->uri->segment(2);$uri1 = $this->uri->segment(1);?>
+    <div class="data-sale">
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
 		<thead>
 			<tr>
@@ -154,6 +155,7 @@
 			<?php endif;?>
 		</tbody>
 	</table>
+    </div>
 </div>
 
 <div class="pagination text-right pull-right" id="pagination">
