@@ -62,7 +62,7 @@
          <option value="COMPLETED">COMPLETED</option>
       </select>
     </div>
-    <div class="form-group " >
+    <div class="form-group" >
       <label>SO Instructions</label>
       <textarea name="so_instructions" class="form-control"></textarea>
     </div>
@@ -75,40 +75,14 @@
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
   </div>
+  <div class="form-group">
+   <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
+  </div>
+  <div class="form-group">
+  </div>
   <div>
     <input type="submit" name="so" class="btn btn-default" value="Create Order" />
   </div>  
   </form> 
   
-  <div id="updat_cart" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form name="sales_update_to_cart" id="sales_update_to_cart">
-      <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
-      <div class="modal-body">
-      <input type="hidden" name="cart_id" id="cart_id" value="" />
-       <div class="row"> 
-        <div class="form-group col-md-4">
-            <label>Quantity</label>
-            <input type="text" name="quantity" id="quantity"/>
-        </div>
-       </div>
-     </div>  
-     <div class="row">
-        <div class="form-group col-md-4">
-            <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-block" id="cancel" data-pid=""  value="Cancel" />
-        </div>
-        <div class="form-group col-md-4">  
-            <input type="button" name="up_cart" onclick="sales_update_cart('');" data-dismiss="modal"  id="confirm" class="btn btn-block" value="Update" />
-        </div>
-     </div>
-     </form>
-      
-    </div>
-  </div>
-</div>
+ 

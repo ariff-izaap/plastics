@@ -43,9 +43,6 @@ $(function(){
 	    format: 'YYYY-MM-DD',
 	  }
 	});
-
-
-    
   
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
     $(this).val(picker.startDate.format('YYYY-MM-DD'));
@@ -1068,16 +1065,20 @@ function get_customer_details()
 function sales_update_cart(cart_id='')
 {
     //e.preventDefault();
-    
+     var qty  = $("#quantity").val();
+     
+  //if(qty == ''){ 
+   
     $('#updat_cart').modal();
     $("#updat_cart").show();
-    
+ // }
+ // else
+ // {  
     if(cart_id!='')
       cart_id = $("#cart_id").val(cart_id);
   
-   cart_id = $("#cart_id").val();
-   var qty  = $("#quantity").val();   
-    
+   cart_id  = $("#cart_id").val();
+   
    $.ajax({
     type:"POST",
     url:base_url+'salesproductselection/update_cart',
@@ -1087,13 +1088,13 @@ function sales_update_cart(cart_id='')
     {
       var status = data.status;
      // var output = data.output;      
-    
       if(status == 'success'){
         $("#product_shipping_lists").html(data.viewlist);
         $(window).scrollTop($('#product_shipping_lists').offset().top);
       }
     }  
   }); 
+// } 
 }
 
 function create_so()

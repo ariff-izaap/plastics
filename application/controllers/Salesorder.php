@@ -324,6 +324,8 @@ class Salesorder extends Admin_Controller
           $this->form_validation->set_rules('order_status','Order Status','trim|required');
           $this->form_validation->set_error_delimiters('', '');
           
+          $total = $this->cart->total();
+          
           if($this->form_validation->run()){
               $ins_data = array();
               $ins_data['customer_id']            = $this->input->post('customer_id');
@@ -337,7 +339,7 @@ class Salesorder extends Admin_Controller
               $ins_data['type']                   = $this->input->post('type');
               $ins_data['order_status']           = $this->input->post('order_status');
               $ins_data['total_items']            = $this->cart->total_items();
-              $ins_data['total_amount']           = $this->cart->total();
+              $ins_data['total_amount']           = $total;
               
               if($edit_id){
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
@@ -350,7 +352,7 @@ class Salesorder extends Admin_Controller
                 $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
-                $new_id  = $this->salesorder_model->insert($ins_data);             
+                $new_id  = $this->salesorder_model->insert($ins_data,"sales_order");             
                 $msg     = 'Order created successfully';
                 $edit_id =  $new_id;
               }
@@ -376,13 +378,14 @@ class Salesorder extends Admin_Controller
         }
 
         if($edit_id)
-           $edit_data = $this->salesorder_model->get_where(array("id" => $edit_id))->row_array();
+           $edit_data = $this->salesorder_model->get_where(array("id" => $edit_id),"*","sales_order")->row_array();
             
         $this->data['editdata']      = $edit_data;
         $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
         $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
         $this->data['cartitems']     = $this->cart->contents();           
         $this->data['customer']      = $this->purchase_model->get_vendors();
+        $this->data['total']         = $total;
         
         if($this->input->is_ajax_request()){
           $output  = $this->load->view('frontend/sales/checkout',$this->data,true);

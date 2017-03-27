@@ -194,8 +194,7 @@ abstract class App_model extends CI_Model
         $this->_prepare_from();
         $this->_prepare_where($criteria);
         
-        if ($this->_debug)
-        {
+        if($this->_debug){
         	$res = $this->db->get();
         	log_message('debug', $this->db->last_query());
         	return $res->result_array();
