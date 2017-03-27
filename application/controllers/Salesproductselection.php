@@ -199,6 +199,7 @@ class Salesproductselection extends Admin_Controller
                                     'type'         => $result['item_type'],
                                     'row'          => $result['row'],
                                     'equivalent'   => $result['equivalent'],
+                                    'vendor_id'    => $result['vendor_id'],
                                );
                                
      $row_id                  = $this->cart->insert($cart_data);
@@ -255,7 +256,7 @@ class Salesproductselection extends Admin_Controller
          $this->data['custome_data'] = '';
          if(count($customer)>0){
             $this->data['customer_data'] = $customer;
-            $output['status']           = "success";
+            $output['status']            = "success";
          }
          else
          {

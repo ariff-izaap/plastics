@@ -16,13 +16,43 @@ class Salesorder extends Admin_Controller
       $this->load->library('cart');    
 	} 
 	
-	 public function index()
+     public function index()
      { 
-        $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
-        $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
-        $this->data['cartitems']     = $this->cart->contents();           
-        $this->data['customer']      = $this->purchase_model->get_vendors();
-        $this->layout->view("frontend/sales/checkout");		
+        
+        $this->layout->add_javascripts(array('listing'));  
+
+        $this->load->library('listing');         
+           
+        $this->simple_search_fields = array();
+         
+        $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
+        
+        $str = '';
+ 
+        $this->listing->initialize(array('listing_action' => $str));
+
+        $listing = $this->listing->get_listings('salesorder_model', 'listing');
+
+        if($this->input->is_ajax_request())
+            $this->_ajax_output(array('listing' => $listing), TRUE);
+        
+        $this->data['bulk_actions']         = array('' => 'select', 'delete' => 'Delete');
+        $this->data['simple_search_fields'] = $this->simple_search_fields;
+        $this->data['search_conditions']    = $this->session->userdata($this->namespace.'_search_conditions');
+        $this->data['per_page']             = $this->listing->_get_per_page();
+        $this->data['per_page_options']     = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
+        
+        $this->data['search_bar']           = $this->load->view('frontend/sales/search_bar', $this->data, TRUE);        
+        $this->data['listing']              = $listing;
+        $this->data['salestype']            = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
+        $this->data['grid']                 = $this->load->view('listing/view', $this->data, TRUE);
+        $this->data['cartitems']            = $this->cart->contents();
+        $this->data['products']             = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
+        $this->data['colors']               = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
+        $this->data['forms']                = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
+        $this->data['packages']             = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
+          
+        $this->layout->view('frontend/sales/index');		
      }
     
     public function add( $edit_id ='')
@@ -118,119 +148,6 @@ class Salesorder extends Admin_Controller
     $this->_ajax_output($output, TRUE);
   }
 
-    public function productselection() 
-    {
-        try
-        {
-          
-              $this->form_validation->set_rules('product_id','Product Name','trim|required');
-              $this->form_validation->set_error_delimiters('', '');
-              
-               if($this->form_validation->run()){
-                    $product_id      = $_POST['product_id']; 
-                    $form_id         = $_POST['form_id'];
-                    $packaging       = $_POST['packaging'];
-                    $customer_no     = $_POST['customer_number'];
-                    $customer_na     = $_POST['customer_name'];
-                    $color_id        = $_POST['color_id'];
-                    $notes           = $_POST['notes'];
-                    $prod_on_the_way = $_POST['include_product_on_the_way'];
-                    $od_bt_not_shiped= $_POST['ordered_but_not_shipped'];
-                    $in_warehouse    = $_POST['in_warehouse'];
-                    $type            = $_POST['type'];
-                    $equivalent      = $_POST['equivalent'];
-                    $quantity        = $_POST['quantity'];
-                    $quan_uses       = $_POST['quantity_uses'];
-                    $quan_uses_chk   = $_POST['quantity_uses_check'];
-                    $row             = $_POST['row'];
-                    $row_check       = $_POST['row_uses_check'];
-                    $units           = $_POST['units'];
-                    $unts_uses_chk   = $_POST['units_uses_check'];
-                    $wholesale       = $_POST['wholesale'];
-                    $reference       = $_POST['reference'];
-                    $internal_lot_no = $_POST['internal_lot_no'];
-                    $vendor_lot_no   = $_POST['vendor_lot_no'];
-                  
-                   
-                    $where = '';
-                
-                    if(!empty($product_id)){
-                        $where .= "p.name like '%".$product_id."%'";
-                    }
-                   // if(!empty($form_id)){
-            //            $where .= " or form_id like '%".$form_id."%'";
-            //        }
-            //        
-            //        if(!empty($packaging)){
-            //            $where .= " or package_id like '%".$packaging."%'";
-            //        }
-            //        if(!empty($color_id)){
-            //            $where .= " or color_id like '%".$color_id."%'";
-            //        }
-            //        if(!empty($notes)){
-            //            $where .= " or notes like '%".$notes."%'";
-            //        }
-            //        if(!empty($row)){
-            //            $where .= " or row like '%".$row."%'";
-            //        }
-            //        if(!empty($quantity)){
-            //            $where .= " or quantity='".$quantity."'";
-            //        }
-            //        if(!empty($equivalent)){
-            //            $where .= " or equivalent='".$equivalent."'";
-            //        }
-            //        if(!empty($units)){
-            //            $where .= " or units like '%".$units."%'";
-            //        }
-            //        if(!empty($type)){
-            //            $where .= " or item_type like '%".$type."%'";
-            //        }
-            //        if(!empty($internal_lot_no)){
-            //            $where .= " or internal_lot_no='".$internal_lot_no."'";
-            //        }
-            //        if(!empty($vendor_lot_no)){
-            //            $where .= " or vendor_lot_no='".$vendor_lot_no."'";
-            //        }
-            //        
-                      $this->data['product_data'] = $this->db->query("select p.*,pf.name as formname,pc.name as colorname,pa.name as packagename from product p 
-                                                                       inner join product_form pf on pf.id=p.form_id
-                                                                       inner join product_color pc on pc.id=p.color_id
-                                                                       inner join product_packaging pa on pa.id=p.package_id
-                                                                       where $where ")->result_array();
-                      $this->session->set_flashdata('success_msg',$msg,TRUE);
-                      $status  = 'success';
-                  }    
-                  else
-                  {
-                    $edit_data = array();
-                    $edit_data['product_id']  = '';
-                    $status = 'error';
-                  }
-            }
-            catch (Exception $e)
-            {
-                $this->data['status']   = $status;
-                $this->data['message']  = $e->getMessage();
-            }
-
-         
-          $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
-          $this->data['colors']              = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
-          $this->data['forms']               = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
-          $this->data['packages']            = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
-          $this->data['salestype']           = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
-        
-        if($this->input->is_ajax_request()){
-           $output = ''; 
-          $output  = $this->load->view('frontend/sales/productselection',$this->data,true);
-          return    $this->_ajax_output(array('status' => $status ,'output' => $output), TRUE);
-        }
-        else
-        {
-          $this->layout->view('frontend/sales/productselection');
-        } 
-    }
-    
     public function shippingorder()
     {
       $this->data['products']            = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
@@ -322,6 +239,7 @@ class Salesorder extends Admin_Controller
           $this->form_validation->set_rules('shipping_type','Shipping Type','trim|required');
           $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
           $this->form_validation->set_rules('order_status','Order Status','trim|required');
+          $this->form_validation->set_rules('carrier','Carrier','trim|required');
           $this->form_validation->set_error_delimiters('', '');
           
           $total = $this->cart->total();
@@ -345,18 +263,64 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
-                $msg  = 'Order updated successfully';
+                $msg  = 'Sales Order updated successfully';
+                log_history("sales_order",$edit_id,'Sales Order',"update");
               }
               else
               {   
                 $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
-                $new_id  = $this->salesorder_model->insert($ins_data,"sales_order");             
-                $msg     = 'Order created successfully';
+                $so_new_id  = $this->salesorder_model->insert($ins_data,"sales_order");    
+                
+                //add shipment data
+                $ship_id       = $this->input->post('shipping_type');
+                $get_ship_data = $this->salesorder_model->get_where(array("id" => $ship_id),"*","shipping_type");
+                
+                $ship_data = array();
+                $ship_data['so_id']         =  $so_new_id;
+                $ship_data['shipping_type'] = $get_ship_data['type'];
+                $ship_data['order_status']  = $this->input->post('order_status');
+                $ship_data['created_date']  =  date('Y-m-d H:i:s'); 
+                $ship_data['updated_date']  =  date('Y-m-d H:i:s');
+                $ship_data['created_id']    = get_current_user_id();  
+                $ship_new_id  = $this->salesorder_model->insert($ins_data,"shipment");
+                
+                //items added to sales order item table
+                $sale_items = $this->cart->contents();
+                $sale_item  = array();
+                foreach($sale_items as $skey => $svalue){
+                   $get_vendor_data = $this->salesorder_model->get_where(array("product_id" => $svalue['id']),"*","vendor_price_list");
+                   
+                   //create auto po 
+                   if($get_vendor_data['stock_level']==0){
+                     $form['so_id']              = $so_new_id; 
+                     $form['ship_type_id']       = $ship_id;
+                     $form['carrier_id']         = $this->input->post('carrier');
+                     $form['ordered_address_id'] = $this->input->post('shipping_address_id');
+                     $form['credit_type_id']     = $this->input->post('credit_type');
+                     
+                     $product = array();
+                     $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
+                     create_auto_po($product,$form);
+                   }
+                   
+                   
+                   $sale_item['product_id']   = $svalue['id'];
+                   $sale_item['qty']          = $svalue['qty'];
+                   $sale_item['item_status']  = "NEW";
+                   $sale_item['unit_price']   = $svalue['price'];
+                   $sale_item['so_id']        = $so_new_id;  
+                   $sale_item['vendor_id']    = $get_vendor_data['vendor_id'];
+                   $sale_item['shipment_id']  = $ship_new_id;
+                   $sale_item['created_date'] =  date('Y-m-d H:i:s'); 
+                   $sale_item['updated_date'] =  date('Y-m-d H:i:s');
+                   $sale_item['created_id']   = get_current_user_id();
+                }     
+                $msg     = 'Sales Order created successfully';
                 $edit_id =  $new_id;
+                log_history("sales_order",$edit_id,'Sales Order',"insert");
               }
-              
               $this->session->set_flashdata('success_msg',$msg,TRUE);
               $status  = 'success';
           }    
@@ -385,6 +349,7 @@ class Salesorder extends Admin_Controller
         $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
         $this->data['cartitems']     = $this->cart->contents();           
         $this->data['customer']      = $this->purchase_model->get_vendors();
+        $this->data['carrier']       = $this->salesorder_model->get_carriers();
         $this->data['total']         = $total;
         
         if($this->input->is_ajax_request()){

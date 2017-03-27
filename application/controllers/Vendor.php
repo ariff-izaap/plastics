@@ -90,6 +90,8 @@ class Vendor extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                     //$ins_data['updated_id']   = get_current_user_id();    
                     $this->vendor_model->update(array("id" => $edit_id),$ins_data);
+                    
+                    log_history("customer",$edit_id,'Customer',"update");
 
                     $msg  = 'Vendor updated successfully';
                 }
@@ -99,8 +101,10 @@ class Vendor extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
                    // $ins_data['created_id']   = get_current_user_id();  
 
-                    $this->vendor_model->insert($ins_data);
-
+                    $new_id = $this->vendor_model->insert($ins_data);
+                    
+                    log_history("customer",$new_id,'Customer',"insert");
+                    
                     $msg = 'Vendor added successfully';
                 }
 

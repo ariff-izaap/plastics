@@ -146,6 +146,7 @@ class Inventory extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->inventory_model->update(array("id" => $edit_id),$ins_data);
+                log_history("product",$edit_id,'Inventory',"update");
                 $msg  = 'Product updated successfully';
               }
               else
@@ -157,6 +158,7 @@ class Inventory extends Admin_Controller
                 $new_id  = $this->inventory_model->insert($ins_data);             
                 $msg     = 'Product added successfully';
                 $edit_id =  $new_id;
+                log_history("product",$edit_id,'Inventory',"insert");
               }
               
               $this->session->set_flashdata('success_msg',$msg,TRUE);

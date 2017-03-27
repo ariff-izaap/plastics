@@ -52,6 +52,16 @@
         <?php }} ?>
       </select>
     </div>
+    <div class="form-group <?php echo (form_error('carrier'))?'error':'';?>" data-error="<?php echo (form_error('carrier'))?form_error('carrier'):'';?>" >
+      <label>Carrier</label>
+      <select name="carrier" class="form-group">
+        <option value="">Select Carrier</option>
+        <?php if(count($carrier)>0){ foreach($carrier as $ckey => $cvalue){ ?>
+         <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('carrier',$cvalue['id'],(($editdata['carrier'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
+        <?php }} ?>
+      </select>
+    </div>
+    
     <div class="form-group <?php echo (form_error('order_status'))?'error':'';?>" data-error="<?php echo (form_error('order_status'))? form_error('order_status'):'';?>" >
       <label>Order Status</label>
       <select name="order_status" class="form-group" >

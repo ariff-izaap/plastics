@@ -345,3 +345,17 @@ $config['salesproductselection_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 ); 
+
+
+$config['salesorder_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'frontend/sales/filter',
+	"base_url"	=> 	'/sales/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(  
+                        'id'=>array('name'=>'Product No', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),                       
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);

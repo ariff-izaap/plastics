@@ -11,11 +11,11 @@
           <input type="text" name="business_name" class="form-control" id="business_name" value="<?php echo set_value('business_name', $customer_data['business_name']);?>" placeholder="" />
         </div>
         <div class="form-group <?php echo (form_error('first_name'))?'error':'';?>" data-error="<?php echo (form_error('first_name'))? form_error('first_name'):'';?>">
-          <label required>first_name</label>
+          <label required>Firstname</label>
           <input type="text" name="first_name" class="form-control" id="first_name" value="<?php echo set_value('first_name', $customer_data['first_name']);?>" placeholder="" />
         </div>
         <div class="form-group <?php echo (form_error('last_name'))?'error':'';?>" data-error="<?php echo (form_error('last_name'))? form_error('last_name'):'';?>">
-          <label required>last_name</label>
+          <label required>Lastname</label>
           <input type="text" name="last_name" class="form-control" id="last_name" value="<?php echo set_value('last_name', $customer_data['last_name']);?>" placeholder="" />
         </div>
         <div class="form-group <?php echo (form_error('email'))?'error':'';?>" data-error="<?php echo (form_error('email'))? form_error('email'):'';?>">

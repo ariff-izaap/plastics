@@ -83,12 +83,14 @@ class Category extends Admin_Controller
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');  
                     $this->category_model->update(array("id" => $edit_id),$ins_data);
                     $msg  = 'Category updated successfully';
+                    log_history("category",$edit_id,'Category',"update");
                 }
                 else
                 {    
                     $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                     $ins_data['updated_date'] = date('Y-m-d H:i:s');
-                    $ins = $this->category_model->insert($ins_data);                  
+                    $ins = $this->category_model->insert($ins_data);  
+                    log_history("category",$ins,'Category',"insert");                
                     $msg = 'Category added successfully';
                 }
                 $this->session->set_flashdata('success_msg',$msg,TRUE);

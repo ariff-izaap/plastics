@@ -4,25 +4,34 @@ require_once('App_model.php');
 
 class Salesorder_model extends App_model
 {
-  protected $table = "sales_order";
-  
+ 
   function __construct()
   {
     parent::__construct();
+    
+    $this->_table = "sales_order";
   }
   
-   function listing()
-   {  
-	
-   }
-	//public function get_where($where='',$fields='*',$table='',$order_by='')
-//	{
-//		$this->db->where($where);
-//		$this->db->from('admin_users');
-//		$q = $this->db->get()->row_array();
-//		return $q;
-//	} 
+  function listing()
+  {  
+       $this->_fields = "*";
+        
+          
+        foreach ($this->criteria as $key => $value) 
+        {
+            if( !is_array($value) && strcmp($value, '') === 0 )
+                continue;
 
+            switch ($key)
+            {
+                case 'id':
+                    $this->db->like($key, $value);
+                break;
+            }
+        }
+        return parent::listing();
+    }
+	
   public function get_vendors($where='')
   {
     if($where)
@@ -37,6 +46,13 @@ class Salesorder_model extends App_model
     $this->db->group_by("b.id");
     $q = $this->db->get();
     return $q->row_array();
+  }
+  
+  public function get_carriers()
+  {
+    $this->db->select("*");
+    $this->db->from("carrier");
+    return $this->db->get()->result_array();
   }   
 }
 ?>
