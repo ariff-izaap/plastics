@@ -597,13 +597,13 @@ function log_history($table='',$id='',$cat='',$action='')
   $get_name = $CI->admin_model->select($table,array("id"=>$id));
   $data['action_id'] = $id;
   if($cat=="user")
-    $data['action']="<strong>".$get_name[0]['first_name']." (".$get_name[0]['email'].") </strong> $cat has been ".$action;
+    $data['action']="<strong>".$get_name['first_name']." (".$get_name['email'].") </strong> $cat has been ".$action;
   else if($cat=="purchase")
-    $data['action']="<strong>#".$get_name[0]['id']."</strong> purchase order has been ".$action;
+    $data['action']="<strong>#".$get_name['id']."</strong> purchase order has been ".$action;
   else if($cat=="warning")
-    $data['action']="<strong>#".$get_name[0]['warning_name']."</strong> $cat has been ".$action;
+    $data['action']="<strong>#".$get_name['warning_name']."</strong> $cat has been ".$action;
   else
-    $data['action']="<strong>".$get_name[0]['name']."</strong> $cat has been ".$action;
+    $data['action']="<strong>".$get_name['name']."</strong> $cat has been ".$action;
 
   $data['created_id']   = get_current_user_id();
   $data['created_date'] = date("Y-m-d H:i:s");
@@ -713,6 +713,15 @@ function get_product_price($id)
   return $q['wholesale_price'];
 }
 
+
+
+function get_product_name($id)
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select name,sku from product where id=$id")->row_array();
+  return $q;
+}
+
 function get_forms()
 {
   $CI = get_instance();
@@ -757,11 +766,24 @@ function create_auto_po($product,$form)
   $CI->load->model('purchase_model');
   if(is_array($product))
   {
-    echo "<pre>";
-    print_r($product);
-    print_r($form);
+    // echo "<pre>";
+    // print_r($product);
+    // print_r($form);
     foreach ($product as $vendor_id => $ploop)
     {
+
+       /*Start Ordered Address Info*/
+      $ship = $CI->purchase_model->select(array("id"=>$form['location_id']),"customer_location");
+      $address['name'] = $ship['name'];
+      $address['address1'] = $ship['address_1'];
+      $address['address2'] = $ship['address_2'];
+      $address['city'] = $ship['city'];
+      $address['state'] = $ship['state'];
+      $address['country'] = $ship['country'];
+      $address['zipcode'] = $ship['zipcode'];
+      $address_id = $CI->purchase_model->insert($address,"ordered_address");
+      /*End Ordered Address Info*/
+
       $tot='';
       $ins['vendor_id'] = $vendor_id;
       $ins['order_status'] = "NEW";
@@ -775,11 +797,12 @@ function create_auto_po($product,$form)
       $ins['updated_id']          = get_current_user_id();
       $ins['updated_date']        = date("Y-m-d H:i:s");
       $ins['so_id']               = $form['so_id'];
-      $ins['warehouse_id']        = 0;
+      $ins['ordered_address_id']  = $address_id;
       $ins['ship_type_id']        = $form['ship_type_id'];
       $ins['carrier_id']          = $form['carrier_id'];
-      $ins['credit_type_id']      = 0;
-      // $po_id = $CI->purchase_model->insert($ins,"purchase_order");
+      $ins['credit_type_id']      = $form['credit_type_id'];
+
+      $po_id = $CI->purchase_model->insert($ins,"purchase_order");
       foreach ($ploop as $key => $pvalue)
       {
         $ins1['po_id']               = $po_id;
@@ -791,11 +814,11 @@ function create_auto_po($product,$form)
         $ins1['created_date']        = date("Y-m-d H:i:s");
         $ins1['updated_id']          = get_current_user_id();
         $ins1['updated_date']        = date("Y-m-d H:i:s");
-        // $add = $CI->purchase_model->insert($ins1,"purchase_order_item");
+        $add = $CI->purchase_model->insert($ins1,"purchase_order_item");
         $tot[] = $pvalue['unit_price'] * $pvalue['quantity'];
       }
       $up['total_amount'] = array_sum($tot);
-      // $po_id = $CI->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
+      $po_id = $CI->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
     }
      $output = array("status"=>"success","message"=>"PO Created successfully.");
   }
@@ -805,5 +828,7 @@ function create_auto_po($product,$form)
   }
   return $CI->_ajax_output($output,TRUE);
 }
+
+
 
 ?>

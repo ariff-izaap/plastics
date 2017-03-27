@@ -74,6 +74,7 @@ class Admin extends Admin_Controller
 
 	public function add_edit_user($edit_id='')
 	{
+
     if(!$this->action->create==1)
     {
       $this->session->set_flashdata("error_msg","Don't have rights to create new user",TRUE);
@@ -128,6 +129,7 @@ class Admin extends Admin_Controller
 
   public function add_edit_dropdowns($edit_id='')
   {
+
     $this->form_validation->set_rules("table_value","Table Type Value","required");
     $this->form_validation->set_rules("table_type","Table Type","required");
     $this->form_validation->set_rules("status","Active","required");
@@ -156,10 +158,11 @@ class Admin extends Admin_Controller
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $add = $this->admin_model->insert($ins,$this->get_table($form['table_type']));
         $log = log_history($this->get_table($form['table_type']),$add,"dropdown","insert");
+        $this->session->set_flashdata("success_msg","Dropdown Value Added Successfully",TRUE);
       }
       else
       {
-        if(!$this->action->update==1)
+        if(!$this->action->edit==1)
           {
             $this->session->set_flashdata("error_msg","Don't have rights to update dropdowns.",TRUE);
             redirect("admin/add_edit_dropdowns");
@@ -168,8 +171,8 @@ class Admin extends Admin_Controller
         $up['status'] = $form['status'];
         $up = $this->admin_model->update(array("id"=>$edit_id),$up,$this->get_table($form['table_type']));
         $log = log_history($this->get_table($form['table_type']),$edit_id,"dropdown","update");
+        $this->session->set_flashdata("success_msg","Dropdown Value updated Successfully",TRUE);
       }
-      $this->session->set_flashdata("success_msg","Dropdown Value Added Successfully",TRUE);
       redirect("admin/general_dropdowns");
     }
   }
@@ -309,6 +312,14 @@ class Admin extends Admin_Controller
     $id = $this->input->post('id');
     $this->data['access'] = $this->admin_model->select("role_access",array("role_id"=>$id));
     $this->load->view('admin/ajax_access_level',$this->data);
+  }
+
+  public function get_dropdown_value()
+  {
+    $val = $this->input->post('val');
+    $type = $this->input->post('type');
+    $dropdown = $this->admin_model->select($this->get_table($type),array("id"=>$val));
+    $this->_ajax_output(array("status"=>"success","output"=>$dropdown),TRUE);    
   }
 
   function get_table($val)

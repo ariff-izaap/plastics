@@ -78,7 +78,7 @@ class Purchase extends Admin_Controller
     $this->data['per_page'] = $this->listing->_get_per_page();
     $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
     $this->data['vendors'] = $this->purchase_model->get_vendors();
-    // $this->data['search_bar'] = $this->load->view('frontend/Purchase/purchase_search_bar', $this->data, TRUE);
+    $this->data['search_bar'] = $this->load->view('frontend/Purchase/purchase_search_bar', $this->data, TRUE);
     $this->data['listing'] = $listing;
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);    
   	$this->layout->view('frontend/Purchase/index');
@@ -204,10 +204,14 @@ class Purchase extends Admin_Controller
   public function add_cart($product_id,$po_id,$qty,$vendor_id)
   {
     $c = false;
-    $ins['po_id']         = $po_id;
+   // $ins['id']          = $product_id;
+    $ins['qty']         = $qty;
+  //  $ins['price']       = get_product_price($product_id);
+    $ins['name']        = get_product_name($product_id)['name'];
     $ins['product_id']    = $product_id;
+    $ins['po_id']    = $po_id;
     $ins['item_status']   = "New";
-    $ins['qty']           = $qty;
+    //$ins['qty']           = $qty;
     $ins['created_id']    = get_current_user_id();
     $ins['updated_id']    = get_current_user_id();
     $ins['created_date']  = date("Y-m-d H:i:s");
@@ -315,14 +319,7 @@ class Purchase extends Admin_Controller
     if($this->form_validation->run())
     {
       $form = $this->input->post();
-      $up['warehouse_id'] = $form['warehouse'];
-      $up['ship_type_id'] = $form['ship_type'];
-      $up['carrier_id'] = $form['carrier'];
-      $up['credit_type_id'] = $form['credit_type'];
-      $up['total_amount'] = $form['total'];
-      $up['status']              = "COMPLETED";
       /*Start Warehouse Shipping Info*/
-
       $house['name'] = $form['wname'];
       $house['address1'] = $form['address1'];
       $house['address2'] = $form['address2'];
@@ -331,10 +328,15 @@ class Purchase extends Admin_Controller
       $house['country'] = $form['country'];
       $house['phone'] = $form['phone'];
       $house['email'] = $form['email'];
-      $this->purchase_model->update(array("id"=>$form['warehouse']),$house,"warehouse");
-      
       /*End Warehouse Shipping Info*/
-
+      $this->purchase_model->update(array("id"=>$form['warehouse']),$house,"warehouse");
+      $address_id = $this->purchase_model->insert($house,"ordered_address");
+      $up['ordered_address_id'] = $address_id;
+      $up['ship_type_id'] = $form['ship_type'];
+      $up['carrier_id'] = $form['carrier'];
+      $up['credit_type_id'] = $form['credit_type'];
+      $up['total_amount'] = $form['total'];
+      $up['status']              = "COMPLETED";
       $up['po_message'] = $form['po_message'];
       $up['note'] = $form['po_notes'];
       $up['updated_id'] = get_current_user_id();
@@ -476,10 +478,10 @@ class Purchase extends Admin_Controller
 
   public function create_auto_po($form,$product)
   {   
-    $product = array("2"=>array("1"=>array("unit_price"=>"1","quantity"=>"2"),
-                      "23"=>array("unit_price"=>"59","quantity"=>"2")),
-                      "3"=>array("19"=>array("unit_price"=>"99","quantity"=>"2")));
-    $form = array("so_id"=>"1","pickup_date"=>"2017-03-04","delivery_date"=>"2017-03-25","release_to_sold"=>"Yes","paid"=>"NOT PAID","status"=>"INCOMPLETE","ship_type_id"=>"1","carrier_id"=>"1");
+    $product = array("2"=>array("1"=>array("unit_price"=>"19","quantity"=>"2"),
+                                "17"=>array("unit_price"=>"59","quantity"=>"2")),
+                      "3"=>array("18"=>array("unit_price"=>"99","quantity"=>"2")));
+    $form = array("so_id"=>"1","pickup_date"=>"2017-03-04","delivery_date"=>"2017-03-25","release_to_sold"=>"Yes","paid"=>"NOT PAID","status"=>"INCOMPLETE","ship_type_id"=>"1","carrier_id"=>"1","location_id"=>"1","credit_type_id"=>"1");
     $a = create_auto_po($product,$form);
     print_r($a);
   }

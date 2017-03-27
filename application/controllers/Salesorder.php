@@ -412,7 +412,7 @@ class Salesorder extends Admin_Controller
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete_customer/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
+        $str = '<a href="'.site_url('salesorder/add_edit_customer/{id}').'"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete_customer/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  
         $this->listing->initialize(array('listing_action' => $str));
@@ -434,120 +434,94 @@ class Salesorder extends Admin_Controller
       $this->layout->view('frontend/sales/customer_relation');
     }
 
-    public function add_edit_customer($tab='',$edit_id='')
+    public function add_edit_customer($edit_id='')
     {
-      if($tab=="tab1primary")
+      if(isset($_POST['name']))
       {
-        $this->form_validation->set_rules('name','Customer Name','trim|required');
-        $this->form_validation->set_rules('bill_name','Bill To Name','trim|required');
-        $this->form_validation->set_rules('address_1','Address 1','trim|required');
-        $this->form_validation->set_rules('city','City','trim|required');
-        $this->form_validation->set_rules('state','State','trim|required');
-        $this->form_validation->set_rules('country','Country','trim|required');
-        $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
-        $this->form_validation->set_rules('zipcode','Zipcode','trim|required');       
-      }
-      else if($tab=="tab2primary")
-      {
-        $this->form_validation->set_rules('contact_name','Contact Name','trim|required');
-        $this->form_validation->set_rules('contact_value','Contact Value','trim|required');
-        $this->form_validation->set_rules('contact_type','Contact Type','trim|required');
-        $this->form_validation->set_rules('contact_email','Contact Email','trim|required|valid_email');
-      }
-      else if($tab=="tab3primary")
-      {
-        $this->form_validation->set_rules('loc_name','Location Name','trim|required');
-        $this->form_validation->set_rules('loc_address_1','Address 1','trim|required');
-        $this->form_validation->set_rules('loc_city','City','trim|required');
-        $this->form_validation->set_rules('loc_state','State','trim|required');
-        $this->form_validation->set_rules('loc_country','Country','trim|required');
-        $this->form_validation->set_rules('loc_zipcode','Zipcode','trim|required');
-        $this->form_validation->set_rules('start_time','Start Time','trim|required');
-        $this->form_validation->set_rules('end_time','End Time','trim|required');
-        $this->form_validation->set_rules('timezone','Timezone','trim|required');
-        $this->form_validation->set_rules('weeks','Days of Week','trim|required');
-        //$this->form_validation->set_rules('loc_type','Location Type','trim|required');
-      }
-      try
-      {
-        if($this->form_validation->run())
-        {
-          $status = 'success';
-          $form = $this->input->post();
-          /*Customer Address Table*/
-          if($tab=="tab3primary")
-          {
-            $ins1['name'] = $form['bill_name'];
-            $ins1['address1'] = $form['address_1'];
-            $ins1['address2'] = $form['address_2'];
-            $ins1['city'] = $form['city'];
-            $ins1['state'] = $form['state'];
-            $ins1['country'] = $form['country'];
-            $ins1['zipcode'] = $form['zipcode'];
-            $ins1['phone'] = $form['zipcode'];
-            $ins1['created_id'] = get_current_user_id();
-            $ins1['updated_id'] = get_current_user_id();
-            $ins1['created_date'] = date("Y-m-d H:i:s");
-            $a_id = $this->admin_model->insert($ins1,"address");
-            /*Customer Table*/
-            $ins['business_name'] = $form['name'];
-            $ins['web_url'] = $form['website'];
-            $ins['ups'] = $form['ups'];
-            $ins['credit_type'] = $form['credit_type'];
-            $ins['address_id'] = $a_id;
-            $c_id = $this->admin_model->insert($ins,"customer");
-            /*Customer Contact Table*/
-            $ins2['customer_id'] = $c_id;
-            $ins2['name'] = $form['contact_name'];
-            $ins2['contact_value'] = $form['contact_value'];
-            $ins2['contact_type'] = $form['contact_type'];
-            $ins2['email'] = $form['contact_email'];
-            $add = $this->admin_model->insert($ins2,"customer_contact");
-            /*Customer Location Table*/
-            $ins3['customer_id'] = $c_id;
-            $ins3['name'] = $form['loc_name'];
-            $ins3['address_1'] = $form['loc_address_1'];
-            $ins3['address_2'] = $form['loc_address_2'];
-            $ins3['city'] = $form['loc_city'];
-            $ins3['state'] = $form['loc_state'];
-            $ins3['country'] = $form['loc_country'];
-            $ins3['zipcode'] = $form['loc_zipcode'];
-            $ins3['start_time'] = date("H:i:s",strtotime($form['start_time']));
-            $ins3['end_time'] = date("H:i:s",strtotime($form['end_time']));
-            $ins3['timezone_id'] = $form['timezone'];
-            $ins3['day_of_week'] = $form['weeks'];
-            $ins3['definition'] = implode(",",$form['loc_type']);
-            $add1 = $this->admin_model->insert($ins3,"customer_location");
-          }
-        }
+        $status = 'success';
+        $form = $this->input->post();
+        /*Customer Address Table*/
+        // echo "<pre>"; print_r($form);exit;        
+        $ins1['name'] = $form['bill_name'];
+        $ins1['address1'] = $form['address_1'];
+        $ins1['address2'] = $form['address_2'];
+        $ins1['city'] = $form['city'];
+        $ins1['state'] = $form['state'];
+        $ins1['country'] = $form['country'];
+        $ins1['zipcode'] = $form['zipcode'];
+        $ins1['phone'] = $form['zipcode'];
+        $ins1['created_id'] = get_current_user_id();
+        $ins1['updated_id'] = get_current_user_id();
+        $ins1['created_date'] = date("Y-m-d H:i:s");
+        if($edit_id)
+          $up1 = $this->admin_model->update(array("id"=>$form['address_id']),$ins1,"address");
         else
-        {
-          $status = 'error';
+          $a_id = $this->admin_model->insert($ins1,"address");
+        /*Customer Table*/
+        $ins['business_name'] = $form['name'];
+        $ins['web_url'] = $form['website'];
+        $ins['ups'] = $form['ups'];
+        $ins['credit_type'] = $form['credit_type'];
+        $ins['address_id'] = isset($edit_id) ? $form['address_id'] : $a_id;
+        if($edit_id)
+          $up2 = $this->admin_model->update(array("id"=>$form['edit_id']),$ins,"customer");
+        else
+          $c_id = $this->admin_model->insert($ins,"customer");
+        /*Customer Contact Table*/
+        $ins2['customer_id'] = isset($edit_id)? $edit_id : $c_id;
+        $ins2['name'] = $form['contact_name'];
+        $ins2['contact_value'] = $form['contact_value'];
+        $ins2['contact_type'] = $form['contact_type'];
+        $ins2['email'] = $form['contact_email'];
+        if($edit_id)
+          $up3 = $this->admin_model->update(array("customer_id"=>$form['edit_id']),$ins2,"customer_contact");
+        else
+          $add = $this->admin_model->insert($ins2,"customer_contact");
+        /*Customer Location Table*/
+        for ($i=0; $i<count($form['loc_name']);$i++)
+        {            
+          $ins3['customer_id'] = isset($edit_id)? $edit_id : $c_id;
+          $ins3['name'] = $form['loc_name'][$i];
+          $ins3['address_1'] = $form['loc_address_1'][$i];
+          $ins3['address_2'] = $form['loc_address_2'][$i];
+          $ins3['city'] = $form['loc_city'][$i];
+          $ins3['state'] = $form['loc_state'][$i];
+          $ins3['country'] = $form['loc_country'][$i];
+          $ins3['zipcode'] = $form['loc_zipcode'][$i];
+          $ins3['start_time'] = date("H:i:s",strtotime($form['start_time'][$i]));
+          $ins3['end_time'] = date("H:i:s",strtotime($form['end_time'][$i]));
+          $ins3['timezone_id'] = $form['timezone'][$i];
+          $ins3['day_of_week'] = $form['weeks'][$i];
+          $ins3['definition'] = implode(",",$form['loc_type'][$i]);
+          if($edit_id)
+            $up4 = $this->admin_model->update(array("id"=>$form['location_id'][$i]),$ins3,"customer_location");
+          else
+            $add1 = $this->admin_model->insert($ins3,"customer_location");
         }
+        if($edit_id)
+          $this->session->set_flashdata("success_msg","Customer Updated Successfully.",TRUE);
+        else
+          $this->session->set_flashdata("success_msg","Customer Added Successfully.",TRUE);
+        redirect("salesorder/customer_relation");
       }
-      catch (Exception $e)
+      if($edit_id!='')
       {
-          $this->data['status']   = 'error';
-          $this->data['message']  = $e->getMessage();
+        $this->data['edit_data'] = $this->admin_model->select("customer",array("id"=>$edit_id));
+        $this->data['edit_data1'] = $this->admin_model->select("address",array("id"=>$this->data['edit_data']['address_id']));
+        $this->data['edit_data2'] = $this->admin_model->select("customer_contact",array("customer_id"=>$edit_id));
+        $this->data['edit_data3'] = $this->admin_model->select("customer_location",array("customer_id"=>$edit_id));
       }
-
-      if($this->input->is_ajax_request())
-      {
-        $output  = $this->load->view('frontend/sales/add_customer_relation',$this->data,true);
-        return    $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id,"msg"=>$ins1), TRUE);
-      }
-      else
-      {
-        $this->layout->view('frontend/sales/add_customer_relation');
-      }      
+     $this->layout->view('frontend/sales/add_customer_relation');
     }
 
     public function add_new_address()
     {
-        $output  =  $this->load->view('frontend/sales/ajax_new_address',$this->data,true);
-        return $this->_ajax_output(array('status' => 'success' ,'output' => $output), TRUE);
+      $this->data['row'] = $this->input->post('len') + 1;
+      $output  =  $this->load->view('frontend/sales/ajax_new_address',$this->data,true);
+      return $this->_ajax_output(array('status' => 'success' ,'output' => $output), TRUE);
     }
 
     /*End by Ram*/
 }
 ?>
+

@@ -15,10 +15,14 @@ class Purchase_model extends App_model
   function listing()
   {
 	  $this->_fields = "c.*,t.business_name,f.city";
+	  // $this->db->select($this->_fields);
     $this->db->from('purchase_order c');
     $this->db->join("customer t","c.vendor_id=t.id");
-    $this->db->join("warehouse f","c.warehouse_id=f.id or c.warehouse_id=0");
+    $this->db->join("ordered_address f","c.ordered_address_id=f.id");
     $this->db->group_by('c.id');
+    // $this->db->get();
+    // echo $this->db->last_query();
+    // exit;
     foreach ($this->criteria as $key => $value)
     {
       if( !is_array($value) && strcmp($value, '') === 0 )
@@ -45,7 +49,7 @@ class Purchase_model extends App_model
             $this->db->where( 'c.pickup_date <=', date( 'Y-m-d', strtotime( $splitdate[1] ) )  );
         break;
       }
-    }        
+    }
     return parent::listing();
   }
   public function get_vendors($where='')
@@ -114,7 +118,7 @@ class Purchase_model extends App_model
 		$this->db->join("shipping_type c","a.ship_type_id=c.id");
 		$this->db->join("carrier d","a.carrier_id=d.id");
 		$this->db->join("credit_type e","a.credit_type_id=e.id");
-		$this->db->join("warehouse f","a.warehouse_id=f.id");
+		$this->db->join("ordered_address f","a.ordered_address_id=f.id");
 		$this->db->join("country g","f.state=g.id");
 		$this->db->join("state h","f.country=h.id");
 		$q = $this->db->get();

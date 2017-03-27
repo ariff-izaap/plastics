@@ -32,14 +32,14 @@
         </select>
       </div>
       <div class="clearfix"></div>
-      <div class="form-group col-md-4 " data-error="">
+      <div class="form-group col-md-4 padding-zero " data-error="">
       <select class="select2_sample2" name="table_value_list">
         <option value=""></option>
       </select>
       </div>
       <div class="clearfix"></div>
       <div class="form-group padding-zero col-md-4 <?php echo (form_error('table_value'))?'error':'';?>" data-error="<?php echo (form_error('table_value'))? strip_tags(form_error('table_value')):'';?>">
-        <label>&nbsp;</label>
+        <label>Value</label>
         <input type="text" name="table_value" class="form-control">
       </div>
       <div class="clearfix"></div>

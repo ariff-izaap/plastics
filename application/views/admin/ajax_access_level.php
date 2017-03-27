@@ -1,6 +1,6 @@
 <?php
-	$menu = json_decode($access[0]['menu_id']);
-	$rights = json_decode($access[0]['access_level']);
+	$menu = json_decode($access['menu_id']);
+	$rights = json_decode($access['access_level']);
 ?>
  <div class="form-group <?php echo (form_error('menu[]'))?'error':'';?>" data-error="<?php echo (form_error('menu[]'))? strip_tags(form_error('menu[]')):'';?>">
   	<label required="" class="col-md-2">Menu</label>

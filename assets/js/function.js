@@ -48,9 +48,7 @@ $(function(){
     $(this).val(picker.startDate.format('YYYY-MM-DD'));
   });
 
-  $('.singletime').on('apply.datetimepicker', function(ev, picker) {
-    $(this).val(picker.startDate.format('hh:mm:ss'));
-  });
+  
 
 	init_daterangepicker();
 
@@ -85,8 +83,28 @@ $(function(){
   });
 
   $("select[name='table_value_list']").change(function(){
-    $("input[name='table_value']").val($(this).find("option:selected").text());
-    $("form#dropdowns input[name='edit_id']").val($(this).val());
+    val = $(this).find("option:selected").val();
+    type = $("select[name='table_type']").find("option:selected").val();
+    
+    $.ajax({
+      type:"POST",
+      url:base_url+'admin/get_dropdown_value',
+      data:{val:val,type:type},
+      dataType:'json',
+      success:function(data)
+      {
+        $("form#dropdowns input[name='edit_id']").val(data.output.id);
+        $("form#dropdowns input[name='table_value']").val(data.output.name);
+        $("form#dropdowns input[name='status'][value="+ data.output.status+"]").prop('checked',true);
+        console.log(data);
+      },
+      error:function(err)
+      {
+        alert("error");
+        console.log(err);
+      }
+
+    });
   });
 
    $('.warning_select-2').select2({
@@ -123,7 +141,7 @@ $(function(){
 
   $(".add-new-dropdown").click(function(){
     $("form#dropdowns,form#minLevel")[0].reset();
-     //$(".warning_select-2").empty();
+     $(".select2_sample2").empty();
   });
 
 
@@ -1222,7 +1240,7 @@ function get_purchase_order(id,ele)
     data:{id:id},
     success:function(data)
     {
-      //console.log(data);
+      console.log(data);
       $("#ViewPurchaseOrder .modal-ajax").html(data);
     }
   });
@@ -1245,6 +1263,8 @@ $(".role_id").change(function(){
   });
 });
 
+
+
 function customer_relation()
 {
   var tab = $('.nav-tabs > .active').find('a').attr("href").replace("#","");
@@ -1257,6 +1277,7 @@ function customer_relation()
     dataType:'json',
     success:function(data)
     {
+      
       console.log(data);
       if(data.status=="success")
       {
@@ -1267,7 +1288,7 @@ function customer_relation()
          {
            $('.nav-tabs li:nth-child(3)').find('a').trigger('click');          
          }
-         else if(tab=="tab3primary")
+         else if(tab=="tab4primary")
          {
            location.href = base_url+"salesorder/customer_relation/";
          }
@@ -1280,48 +1301,78 @@ function customer_relation()
         else if(tab=="tab3primary")
           $('.nav-tabs li:nth-child(3)').find('a').trigger('click');
       }
+      init_timepicker();
     }
   });
 
 }
+init_timepicker();
+
+
+function init_timepicker()
+{
+  $('.singletime').timepicker({showCloseButton: true,closeButtonText: 'Done',showPeriod: true});
+}
+
+
 
  $('.btnPrevious').click(function(){
   $('.nav-tabs > .active').prev('li').find('a').trigger('click');
 });
 
 // $('.singletime').wickedpicker({twentyFour: true, title:'Pick Time',beforeShow:''});
-function init_timepicker()
-{
-  $('.singletime').timepicker({showCloseButton: true,closeButtonText: 'Done',showPeriod: true,  amPmText: ['AM', 'PM'],
-    hours:{
-        starts: 00,                // First displayed hour
-        ends: 23                  // Last displayed hour
-    }});
-}
-init_timepicker();
+
 
 function add_address()
 {
+  len = $(".ajax_address .new_address").length;
   $.ajax({
     type:"POST",
     url:base_url+'salesorder/add_new_address',
-    data:'',
+    data:{len:len},
     dataType:'json',
     success:function(data)
     {
-      console.log(data);
+      if(len==0)
+      {
+        html =  "<div class='col-md-2 pull-right'>"+
+                    "<button type='button' class='btn' onclick='remove_address(this);'>Remove</button>"+
+                  "</div>";
+        $("#tab3primary .remove_div").html(html);
+      }
       $(".ajax_address").append(data.output);
-      init_timepicker();
     }
   });
 }
 
-function remove_address(ele)
+function remove_address(ele,id='')
 {
-  $(ele).parent().parent().parent().remove();
+  edit_id = $(".edit_id").val();
+  len = $(".ajax_address .ajax_address").length;
+  alert(edit_id+'---'+id);
+  if(edit_id=='')
+  {
+   if(len==1)
+   {
+    $(ele).parent().parent().parent().remove();
+     // $("#tab3primary .remove_div").remove();
+   }
+  }
+  else
+  {
+
+  }
 }
 
 
+$(".btnPrevious").click(function(){
+  curr_tab = $(".nav-tabs li.active");
+  prev_href = $(curr_tab).prev("li").find("a").attr("data-href");
+  curr_href = $(curr_tab).find("a").attr("data-href");
+  $(curr_tab).removeClass("active").prev("li").addClass("active");
+  $(curr_href).removeClass("active in");
+  $(prev_href).addClass("active in");
+});
 
 
 /*Ram*/
