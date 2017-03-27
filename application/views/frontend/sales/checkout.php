@@ -8,7 +8,7 @@
   <div class="row">
 
   <form name="checkout" id="checkout" method="POST" action="<?php echo site_url();?>salesorder/checkout">
-      <div class="form-grid col-md-6">
+      <div class="form-grid col-md-8">
         <div class="form-group col-md-6 <?php echo (form_error('customer_id'))?'error':'';?>" data-error="<?php echo (form_error('customer_id'))? form_error('customer_id'):'';?>">
           <label required>Customer Name</label>
           <select name="customer_id" id="customer_id" onchange="get_customer_details();" >
@@ -23,7 +23,7 @@
         <?php $this->load->view("frontend/sales/customer_details",$this->data);?>
        </div>
 </div>  
-<div class="col-md-6">
+<div class="col-md-4">
     
    <div class="form-group <?php echo (form_error('type'))?'error':'';?>" data-error="<?php echo (form_error('type'))? form_error('type'):'';?>" >
       <label>Type</label>
@@ -80,11 +80,12 @@
       <label>BOL Instructions</label>
       <textarea class="form-control" name="bol_instructions"></textarea>
     </div>
-     <h2>Cart Items</h2>
+     
+  </div>
+  <h2>Cart Items</h2>
    <div class="form-grid col-md-12">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
-  </div>
   <div class="form-group">
    <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
   </div>
