@@ -787,11 +787,11 @@ function create_auto_po($product,$form)
       $tot='';
       $ins['vendor_id'] = $vendor_id;
       $ins['order_status'] = "NEW";
-      $ins['pickup_date']         = $form['pickup_date'];
-      $ins['estimated_delivery']  = $form['delivery_date'];
-      $ins['release_to_sold']     = $form['release_to_sold'];
-      $ins['is_paid']             = $form['paid'];
-      $up['status']               = $form['status'];
+      $ins['pickup_date']         ='';// $form['pickup_date'];
+      $ins['estimated_delivery']  =''; //$form['delivery_date'];
+      $ins['release_to_sold']     = '';//$form['release_to_sold'];
+      $ins['is_paid']             = 'NOT PAID';//$form['paid'];
+      $up['status']               = 'COMPLETED';
       $ins['created_id']          = get_current_user_id();
       $ins['created_date']        = date("Y-m-d H:i:s");
       $ins['updated_id']          = get_current_user_id();
