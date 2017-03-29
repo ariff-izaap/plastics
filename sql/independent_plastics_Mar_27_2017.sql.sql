@@ -97,7 +97,7 @@ CREATE TABLE `callback` (
   `user_to_notify` text NOT NULL COMMENT 'multiple users(salesman)',
   `cb_message` text NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -174,7 +174,7 @@ CREATE TABLE `category` (
   `description` text NOT NULL,
   `category_thumb` varchar(250) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `enabled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -399,7 +399,7 @@ CREATE TABLE `log` (
   `created_id` int(11) NOT NULL,
   `updated_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1222,7 +1222,7 @@ CREATE TABLE `warehouse` (
   `email` varchar(255) NOT NULL,
   `status` enum('1','0') NOT NULL,
   `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

@@ -4,10 +4,11 @@
         <a href="<?php echo $this->previous_url;?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
     </div>
   </div>
-
+<?php //print_r($editdata); ?>
   <div class="row">
 
   <form name="checkout" id="checkout" method="POST" action="<?php echo site_url();?>salesorder/checkout">
+    <input type="hidden" name="edit_id" id="edit_id" value="<?php echo (isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:""; ?>" />
       <div class="form-grid col-md-8">
         <div class="form-group col-md-6 <?php echo (form_error('customer_id'))?'error':'';?>" data-error="<?php echo (form_error('customer_id'))? form_error('customer_id'):'';?>">
           <label required>Customer Name</label>
@@ -29,9 +30,10 @@
       <label>Type</label>
       <select name="type" class="form-group" >
         <option value="">Select Type</option>
-         <option value="SALE">Sale</option>
-         <option value="PURCHASE">Purchase</option>
-         <option value="RETURN">Return</option>
+         <?php if(count($saletype)>0){
+                foreach($saletype as $tkey=>$tvalue){ ?>
+                  <option value="<?php echo $tvalue['name'];?>" <?php echo set_select('type',$tvalue['name'],(($editdata['type'] == $tvalue['name'])?true:false));?>><?php echo $tvalue['name']; ?></option>  
+         <?php }} ?>
       </select>
     </div>
    <div class="form-group <?php echo (form_error('shipping_type'))?'error':'';?>" data-error="<?php echo (form_error('shipping_type'))? form_error('shipping_type'):'';?>">
@@ -66,34 +68,64 @@
       <label>Order Status</label>
       <select name="order_status" class="form-group" >
         <option value="">Select Status</option>
-         <option value="NEW">NEW</option>
-         <option value="PROCESSING">PROCESSING</option>
-         <option value="PENDING">PENDING</option>
-         <option value="COMPLETED">COMPLETED</option>
+         <option value="NEW" <?php echo set_select('order_status',"NEW",(($editdata['order_status'] == "NEW")?true:false));?>>NEW</option>
+         <option value="PROCESSING" <?php echo set_select('order_status',"PROCESSING",(($editdata['order_status'] == "PROCESSING")?true:false));?>>PROCESSING</option>
+         <option value="PENDING" <?php echo set_select('order_status',"PENDING",(($editdata['order_status'] == "PENDING")?true:false));?>>PENDING</option>
+         <option value="COMPLETED" <?php echo set_select('order_status',"COMPLETED",(($editdata['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
       </select>
     </div>
     <div class="form-group" >
       <label>SO Instructions</label>
-      <textarea name="so_instructions" class="form-control"></textarea>
+      <textarea name="so_instructions" class="form-control"><?php echo $editdata['so_instructions']; ?></textarea>
     </div>
     <div class="form-group " >
       <label>BOL Instructions</label>
-      <textarea class="form-control" name="bol_instructions"></textarea>
+      <textarea class="form-control" name="bol_instructions"><?php echo $editdata['bol_instructions']; ?></textarea>
     </div>
      
   </div>
-  <h2>Cart Items</h2>
-   <div class="form-grid col-md-12">
+  <div class="form-group">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
   <div class="form-group">
-   <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
+    <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
   </div>
   <div class="form-group">
   </div>
   <div>
-    <input type="submit" name="so" class="btn btn-default" value="Create Order" />
+    <input type="submit" name="so" class="btn btn-default" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>  
   </form> 
   
- 
+ <div id="updat_cart" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form name="sales_update_to_cart" id="sales_update_to_cart">
+      <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
+      <div class="modal-body">
+      <input type="hidden" name="cart_id" id="cart_id" value="" />
+       <div class="row"> 
+        <div class="form-group col-md-4">
+            <label>Quantity</label>
+            <input type="text" name="quantity" id="quantity"/>
+        </div>
+       </div>
+     </div>  
+     <div class="row">
+        <div class="form-group col-md-4">
+            <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-block" id="cancel" data-pid=""  value="Cancel" />
+        </div>
+        <div class="form-group col-md-4">  
+            <input type="button" name="up_cart" onclick="sales_update_cart('');" data-dismiss="modal"  id="confirm" class="btn btn-block" value="Update" />
+        </div>
+     </div>
+     </form>
+      
+    </div>
+  </div>
+</div>

@@ -820,13 +820,15 @@ function create_auto_po($product,$form)
       $up['total_amount'] = array_sum($tot);
       $po_id = $CI->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
     }
-     $output = array("status"=>"success","message"=>"PO Created successfully.");
+    $status = "success";
+     //$output = array("status"=>"success","message"=>"PO Created successfully.");
   }
   else
   {
-    $output = array("status"=>"error","message"=>"Wrong Input Parameter");
+    $status = "error";
+    //$output = array("status"=>"error","message"=>"Wrong Input Parameter");
   }
-  return $CI->_ajax_output($output,TRUE);
+   return $status;
 }
 
 

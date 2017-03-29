@@ -19,7 +19,6 @@
               <label class="col-md-4">Salesman</label>
               <select class="form-control col-md-8" name="packaging" id="packaging" >
                    <?php foreach($salesman as $pack):
-                     
                    ?>
                     <option value="<?php echo $pack['id'];?>" > <?php echo $pack['name'];?> </option>
                   <?php endforeach;?>

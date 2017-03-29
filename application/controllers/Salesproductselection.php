@@ -202,6 +202,8 @@ class Salesproductselection extends Admin_Controller
                                     'vendor_id'    => $result['vendor_id'],
                                );
                                
+    // print_r($cart_data);
+                                    
      $row_id                  = $this->cart->insert($cart_data);
     
      $this->data['cartitems'] = $this->cart->contents(); 
@@ -260,7 +262,8 @@ class Salesproductselection extends Admin_Controller
          }
          else
          {
-           $output['status']        = "error"; 
+           $this->data['customer_data']['status']  = "new";  
+           $output['status']                       = "error"; 
          }
           
          $output['customer_view']= $this->load->view("frontend/sales/customer_details",$this->data,true);

@@ -14,20 +14,14 @@
     
   <h2 style="margin-left:24px;">Products in Selection</h2>
   <?php echo $grid; ?>
-  
-    
-     
-           
-            <div class="col-md-12" id="product_shipping_lists">
-              <h2>Products in Shipping Order</h2>
-                 <?php $this->load->view("frontend/salesproductselection/cart_items", $this->data); ?>
-            </div>
+    <div class="col-md-12" id="product_shipping_lists">
+       <h2>Products in Shipping Order</h2>
+         <?php $this->load->view("frontend/salesproductselection/cart_items", $this->data); ?>
+    </div>
       
-    
-          
       <br />
       <br />
-       <div class="container button-sec">     
+   <div class="container button-sec">     
        <div class="row">
           <div class="col-md-2">
             <button type="button" class="col-md-2 btn btn-block" onclick="product_add_to_shipment()">Add Product to SO</button>
@@ -49,7 +43,7 @@
             <button type="button" class="col-md-2 btn btn-block">Create New SO</button>
          </div>
        </div>
-       </div>
+   </div>
   
   <div id="product_ship" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -58,7 +52,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-       
       </div>
       <form name="sales_add_to_cart" id="sales_add_to_cart">
       <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>

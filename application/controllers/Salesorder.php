@@ -27,7 +27,8 @@ class Salesorder extends Admin_Controller
          
         $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
         
-        $str = '';
+        $str = '<a href="'.site_url('salesorder/checkout/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
  
         $this->listing->initialize(array('listing_action' => $str));
 
@@ -123,8 +124,7 @@ class Salesorder extends Admin_Controller
     public function delete($del_id)
     {
         $access_data = $this->salesorder_model->get_where(array("id"=>$del_id),'id')->row_array();
-       
-        $output=array();
+        $output      = array();
 
         if(count($access_data) > 0){
             $this->salesorder_model->delete(array("id"=>$del_id));
@@ -160,7 +160,7 @@ class Salesorder extends Admin_Controller
     
     public function search()
     {
-        $this->data['users']  = $this->db->query("select * from customer where 1=1")->result_array();
+        $this->data['users']   = $this->db->query("select * from customer where 1=1")->result_array();
         $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
         $this->layout->view('frontend/sales/search');
     }
@@ -180,9 +180,10 @@ class Salesorder extends Admin_Controller
         }
         catch(Exception $e)
         {
-            
+            $this->data['status']   = 'error';
+            $this->data['message']  = $e->getMessage();
         }
-        $this->data['users']  = $this->db->query("select * from customer where 1=1")->result_array();
+        $this->data['users']   = $this->db->query("select * from customer where 1=1")->result_array();
         $this->data['credit']  = $this->db->query("select * from credit_type where 1=1")->result_array();
         $this->layout->view('frontend/sales/calllog');
     }
@@ -197,7 +198,7 @@ class Salesorder extends Admin_Controller
                 $ins_data['next_callback_date'] = $_POST['date_time'];
                 $ins_data['created_date']       = date("Y-m-d H:i:s");
                 $ins_data['cb_message']         = $_POST['callback_message'];
-            }
+             }
         }
         catch(Exception $e)
         {
@@ -209,7 +210,7 @@ class Salesorder extends Admin_Controller
         $this->layout->view('frontend/sales/callback');
     }
     
-    public function checkout()
+    public function checkout($edit_id ='')
     {
         try
         {
@@ -217,7 +218,6 @@ class Salesorder extends Admin_Controller
             $edit_id = $this->input->post('edit_id');
            
           $this->form_validation->set_rules('customer_id','Please select Customer','trim|required');  
-          
           $this->form_validation->set_rules('business_name','Business Name','trim|required');
           $this->form_validation->set_rules('first_name','Billing Firstname','trim|required');
           $this->form_validation->set_rules('last_name','Billing Lastname','trim|required');
@@ -227,7 +227,6 @@ class Salesorder extends Admin_Controller
           $this->form_validation->set_rules('city','Billing City','trim|required');
           $this->form_validation->set_rules('state','Billing State','trim|required');
           $this->form_validation->set_rules('zipcode','Billing Zipcode','trim|required');
-          $this->form_validation->set_rules('ship_first_name','Shipping Firstname','trim|required');
           $this->form_validation->set_rules('ship_first_name','Shipping Firstname','trim|required');
           $this->form_validation->set_rules('ship_last_name','Shipping Lastname','trim|required');
           $this->form_validation->set_rules('ship_mobile','Mobile','trim|required');
@@ -275,7 +274,7 @@ class Salesorder extends Admin_Controller
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
-                $get_ship_data = $this->salesorder_model->get_where(array("id" => $ship_id),"*","shipping_type");
+                $get_ship_data = $this->salesorder_model->get_where(array("id" => $ship_id),"*","shipping_type")->row_array();
                 
                 $ship_data = array();
                 $ship_data['so_id']         =  $so_new_id;
@@ -284,55 +283,73 @@ class Salesorder extends Admin_Controller
                 $ship_data['created_date']  =  date('Y-m-d H:i:s'); 
                 $ship_data['updated_date']  =  date('Y-m-d H:i:s');
                 $ship_data['created_id']    = get_current_user_id();  
-                $ship_new_id  = $this->salesorder_model->insert($ins_data,"shipment");
+                $ship_new_id  = $this->salesorder_model->insert($ship_data,"shipment");
                 
                 //items added to sales order item table
                 $sale_items = $this->cart->contents();
                 $sale_item  = array();
                 foreach($sale_items as $skey => $svalue){
-                   $get_vendor_data = $this->salesorder_model->get_where(array("product_id" => $svalue['id']),"*","vendor_price_list");
+                   $get_vendor_data = $this->salesorder_model->get_where(array("product_id" => $svalue['id']),"*","vendor_price_list")->row_array();
                    
                    //create auto po 
                    if($get_vendor_data['stock_level']==0){
                      $form['so_id']              = $so_new_id; 
                      $form['ship_type_id']       = $ship_id;
                      $form['carrier_id']         = $this->input->post('carrier');
-                     $form['ordered_address_id'] = $this->input->post('shipping_address_id');
+                     $form['location_id']        = $this->input->post('shipping_address_id');
                      $form['credit_type_id']     = $this->input->post('credit_type');
                      
                      $product = array();
                      $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
-                     create_auto_po($product,$form);
+                     $po_create = create_auto_po($product,$form);
+                     
                    }
-                   
                    
                    $sale_item['product_id']   = $svalue['id'];
                    $sale_item['qty']          = $svalue['qty'];
                    $sale_item['item_status']  = "NEW";
                    $sale_item['unit_price']   = $svalue['price'];
                    $sale_item['so_id']        = $so_new_id;  
-                   $sale_item['vendor_id']    = $get_vendor_data['vendor_id'];
+                   $sale_item['vendor_id']    = (isset($get_vendor_data['vendor_id']) && !empty($get_vendor_data['vendor_id']))?$get_vendor_data['vendor_id']:0;
                    $sale_item['shipment_id']  = $ship_new_id;
-                   $sale_item['created_date'] =  date('Y-m-d H:i:s'); 
-                   $sale_item['updated_date'] =  date('Y-m-d H:i:s');
+                   $sale_item['created_date'] = date('Y-m-d H:i:s'); 
+                   $sale_item['updated_date'] = date('Y-m-d H:i:s');
                    $sale_item['created_id']   = get_current_user_id();
+                   $sale_order_item_id        = $this->salesorder_model->insert($sale_item,"sales_order_item");
                 }     
                 $msg     = 'Sales Order created successfully';
-                $edit_id =  $new_id;
+                $edit_id =  $so_new_id;
                 log_history("sales_order",$edit_id,'Sales Order',"insert");
               }
               $this->session->set_flashdata('success_msg',$msg,TRUE);
               $status  = 'success';
+              
+              redirect("salesorder");
           }    
           else
           {
             $edit_data = array();
             $edit_data['id']                    = (!empty($edit_id))?$edit_id:'';
-            $edit_data['sku']                   = '';
-            $edit_data['name']                  = '';
-            $edit_data['color_id']              = '';
-            $edit_data['form_id']               = '';
-            $edit_data['package_id']            = ''; 
+            $edit_data['customer_id']           = '';
+            $edit_data['carrier']               = '';
+            $edit_data['shipping_type']         = '';
+            $edit_data['order_status']          = '';
+            $edit_data['type']                  = '';
+            $edit_data['credit_type']           = '';
+            $edit_data['so_instructions']       = '';
+            $edit_data['bol_instructions']      = '';
+            $customer                           = array("business_name" => "","first_name" => "", "last_name" => "","email" => "","web_url" => "","mobile" => "","address1" => "", 
+                                                        "address2" => "", "city" => "", "state" => "", "zipcode"=> "",
+                                                        "ship_first_name" => "","ship_last_name" => "",
+                                                        "ship_mobile" => "",
+                                                        "ship_address1" => "",
+                                                        "ship_city" => "",
+                                                        "ship_state" => "",
+                                                        "ship_zipcode" => ""
+                                                        );
+            $cartitems                          =  $this->cart->contents();      
+            $edit_data['btn']                   = "Create Order";
+            $saletype                           = 'create';                   
           }
         }
         catch (Exception $e)
@@ -341,15 +358,22 @@ class Salesorder extends Admin_Controller
             $this->data['message']  = $e->getMessage();
         }
 
-        if($edit_id)
-           $edit_data = $this->salesorder_model->get_where(array("id" => $edit_id),"*","sales_order")->row_array();
-            
+        if($edit_id){
+           $edit_data         = $this->salesorder_model->get_where(array("id" => $edit_id),"*","sales_order")->row_array();
+           $customer          = $this->salesorder_model->get_vendors(array("a.id" => $edit_data['customer_id']));
+           $cartitems         = $this->salesorder_model->get_sales_items($edit_data['id']);
+           $saletype          = 'update';     
+           $edit_data['btn']  = "Update Order";   
+        }     
         $this->data['editdata']      = $edit_data;
+        $this->data['customer_data'] = $customer;
+        $this->data['saletype']      = $this->db->query("select * from sale_type where status=1")->result_array();
         $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
         $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
-        $this->data['cartitems']     = $this->cart->contents();           
+        $this->data['cartitems']     = $cartitems;           
         $this->data['customer']      = $this->purchase_model->get_vendors();
         $this->data['carrier']       = $this->salesorder_model->get_carriers();
+        $this->data['stype']         = $saletype;
         $this->data['total']         = $total;
         
         if($this->input->is_ajax_request()){

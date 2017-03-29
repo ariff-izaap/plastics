@@ -38,7 +38,7 @@ $(function(){
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
 	  showDropdowns: true,
-    sautoUpdateInput: false,
+      sautoUpdateInput: false,
 	  locale: {
 	    format: 'YYYY-MM-DD',
 	  }
@@ -607,8 +607,6 @@ function modal_close(pid='')
 
 function sales_prod_add_to_cart()
 {
-    
-  
     var fdata  = $("#sales_add_to_cart").serialize();
     var qty    = $("#quantity_available").val();
    var ord_qty = $("#quantity_to_order").val();
@@ -1072,10 +1070,10 @@ function get_customer_details()
     {
       var status = data.status;
       //alert(status);
-      if(status == 'success'){
+      //if(status == 'success'){
         $("#customer_details_view").html(data.customer_view);
         $(window).scrollTop($('#customer_details_view').offset().top);
-      }
+     // }
     } 
   });
 }
