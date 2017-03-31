@@ -5,11 +5,7 @@
 .button-sec { margin-bottom:40px;}
 .breadcrumbs > div, .breadcrumbs > a { display: inline-block; }
 .breadcrumbs > div { width: 60% }
-.clear-btn button {
-    float: left;
-    margin-right: 7px;
-    width: 38%;
-}
+.clear-btn button { float: left; margin-right: 7px; width: 38%;}
 .data-sale { width:100%; display:inline-block; height:300px; overflow:auto;}
 .panel-heading { padding-top:0px;}
 .form-group input[type="text"] { height:30px;}
@@ -21,7 +17,79 @@ td { padding:4px 6px !important;}
 #advance_search_form .form-group { margin-bottom:0px !important;}
 #advance_search_form .button-sec { margin-bottom:0px;}
 #advance_search_form .btn.btn-sm.active { padding:8px 23px;}
+.box_highilite div {background: #033c86; margin-top: 10px; min-height: 55px;border-radius:4px;}
+.span4 {  width: 370px;}
+.m_top_5 { margin-top: 5px !important;}
+.box_highilite h3 { color: hsl(0, 0%, 100%); font: bold 14px arial; padding-left: 10px; position: relative;}
+.box_highilite h3 span { background: hsl(231.4, 7%, 60.8%) none repeat scroll 0 0; line-height: 18px; min-height: 55px; position: absolute;right: 0;
+ text-align: center;top: -10px;}
+.box_highilite div span {
+    display: inline-block;
+    min-width: 85px;
+    text-transform: uppercase;
+	border-radius:4px;
+}
+.box_highilite h3 {
+    color: hsl(0, 0%, 100%);
+    font: bold 14px arial;
+	margin: 10px 0;
+}
+.topsec_info {
+    background: hsla(0, 0%, 0%, 0) linear-gradient(to bottom, hsl(0, 0%, 100%) 22%, hsl(0, 0%, 96%) 100%) repeat scroll 0 0;
+    border: 3px solid hsl(0, 0%, 85%);
+    border-radius: 8px;
+	margin-bottom: 40px;
+}
+.span_half { margin-bottom:40px;}
+.span2 {
+    width: 140px;
+}
 
+.box_highilite [class*="span"] {
+    float: left;
+  
+    min-height: 1px;
+}
+.ps_sec_blue {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.span4 {
+    width: 370px;
+}
+.box_highilite { margin-bottom:40px;}
+#relatedlinks {
+    width: 270px;
+}
+#grid-headers > th, .greenbg_title th { text-align:center; vertical-align:middle;}
+.related
+{
+	 background: #fafafa;
+    line-height: 34px;
+    padding: 0px 14px;
+	
+}
+.related ul ul {
+    margin-left: 24px;
+}
+.related ul ul {
+    margin-left: 24px;
+}
+.related ul li {
+    border-bottom: 1px solid #cccccc;
+}
+.related ul li ul li {
+    border-bottom: none;
+}
+.related h2 {
+    background: #033c86 none repeat scroll 0 0;
+    color: #ffffff;
+    padding: 5px 11px;
+}
+.related {
+    width: 22%;
+}
+.topsec_info table td { text-align:center;}
 @media (min-width:992px)
 {
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

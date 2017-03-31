@@ -87,6 +87,8 @@
    <div class="form-group" id="cartItems">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
+   
+   
   
   <div class="form-group">
   </div>
@@ -94,6 +96,335 @@
     <input type="submit" name="so" class="btn btn-default" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>  
   </form> 
+  
+  
+  <!-- view design-->
+  <div class="container topsec_info m_top_5">
+	<div class="row">
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>Sales Order</td>
+    <td>Order Total</td>
+    <td>Order Status</td>
+    <td>Sales Channel</td>
+    <td>Order Date</td>
+    <td>Email ID</td>
+  </tr>
+  <tr>
+    <td>#151697</td>
+    <td>$199.98</td>
+    <td>ACCEPTED</td>
+    <td>test channel</td>
+    <td>2015-08-24 19:18:19</td>
+    <td>test@gmail.com</td>
+  </tr>
+</table>	
+	</div>
+</div>
+  
+  <!-- end -->
+  
+  <!-- start-->
+  <div class="container m_top_5">
+	
+	<div class="row box_highilite">
+		<div class="span4">
+			<h3>Paid <br> Status <span><br>YES</span></h3>
+		</div>
+		<div class="span4 ps_sec_blue">
+			<h3>Next <br>Due Date <span><br> 24 Aug  <br> 15</span></h3>
+		</div>
+		<div class="span4 nd_sec_yellow">
+			<h3>Payment <br> Term <span><br>Advance</span></h3>
+		</div>
+		<!--<div class="span3 pt_sec_grey">
+			<h3>Payment <br /> Method <span><br />authorize</span></h3>
+		</div>-->
+	</div>	
+</div>
+
+
+<!-- end-->
+
+
+
+
+<div class="container">
+	<div class="row">
+		<!-- leftpanel menu section start here -->
+		<div class="col-md-3 related">
+        <h2 class="row">Related Links</h2>
+      <ul>
+      <li><a href="#"> Back to Purchase Order list</a>
+       <li><a href="#"> Sales Order
+       <ul>
+        <li><a href="#"> SO#151697</a>
+        
+       
+       </ul>
+       
+       </a>
+        <li><a href="#"> Shipment</a>
+        <ul>
+        <li><a href="#"> SO#151697</a>
+        
+       
+       </ul>
+        
+        </li>
+         <li><a href="#"> Back to Purchase Order list</a></li>
+      
+      </ul>
+					</div>
+
+		<!-- right panel content section start here -->
+		<div class="col-md-9 pull-right m_top_30">
+
+			<!-- Shipping and Billing Information goes here.... -->
+			<div class="row-fluid">
+
+				<div class="col-md-6 span_half">
+					<div class="row">
+						<table class="table table-bordered">
+							<thead class="greenbg_title txt_13">
+								<tr>
+									<th width="10%">Billing Information</th>
+								</tr>
+							</thead>
+							<tbody class="white_bg">
+								<tr>
+									<td id="shipping_address" style="height: 120px;">
+										<address><strong>Steve Mccourt</strong> <br>244 19 Ave NW <br>Calgary AB T2M 0Y2 <br>CA <br><abbr title="Phone">P:</abbr> 4034633096</address>									</td>									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-md-6 span_half pull-right m_left_10">
+					<div class="row">
+						<table class="table table-bordered">
+							<thead class="greenbg_title txt_13">
+								<tr>
+									<th width="10%">Shipping Information 
+										 
+											<a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_ship_addr('form',271816,151697,this)" data-original-title="" title="">Edit</a> 
+																			</th>
+								</tr>
+							</thead>
+							<tbody class="white_bg">
+								<tr>
+									<td id="billing_address">
+										<address><strong>Steve Mccourt</strong> <br>244 19 Ave NW <br>Calgary AB T2M 0Y2 <br>CA <br><abbr title="Phone">P:</abbr> 4034633096</address>									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+						<!-- Order Details goes here.... -->
+				<div class="row oreder-details">
+		<h2 class="pull-left">Order Details</h2> 
+
+		<div class="pull-right m_top_15">
+
+<div class="btn-group">
+				
+			<a class="btn btn-primary" onclick="issue_return_auth(151697, this)" href="javascript:;" data-original-title="" title="">Issue Return
+			Auth</a></div>
+			
+			<div class="btn-group">
+				
+			<a class="btn btn-primary" onclick="issue_direct_refund(151697, this)" href="javascript:;" data-original-title="" title="">Issue Refund</a></div>
+
+			<div class="btn-group">
+				
+			<a class="btn btn-primary" onclick="issue_refund_on_order(151697, this)" href="javascript:;" data-original-title="" title="">Issue Direct Refund</a></div>
+	</div>
+
+	</div>
+	
+
+			
+	<form method="post" id="so_form">
+
+	
+	
+	<div class="row m_bot_5">
+		<table class="table table-bordered m_bot_10">
+			<tbody class="light_green_bg green">
+				<tr>
+					<td align="left" width="33%">Vendor: <span class="black">DIOMEDICS					</span>
+					</td>
+					<td class="text-center" width="33%">Standard 2-6 days					</td>
+					<td class="text-right" width="33%">Shipment status: NEW					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table class="table table-bordered table-striped">
+			<thead class="greenbg_title">
+				<tr>
+					<th></th>
+					<th>Product</th>
+					<th>SKU</th>
+					<th>QTY</th>
+					<th>Unit Price</th>
+					<th>Total</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody class="white_bg">
+												<tr>
+					<td><input name="op_select[]" value="190590" type="checkbox">
+					</td>
+					<td><a href="http://admin.healiohealth.com/product/view/2026" data-original-title="" title="">Infrared Light Therapy Polychromatic LED Therapy Device Model 900 </a>					</td>
+					<td>DIO-D900					</td>
+					<td>1					</td>
+					<td>$169.50					</td>
+					<td>$169.50					</td>
+					<td>NEW					</td>
+				</tr>
+							</tbody>
+		</table>
+	</div>
+	
+	
+	<div class="row m_bot_30">
+		<div class="span4 pull-right">
+			<table class="price_box pull-right  ash_gradiant_bg" width="100%">
+
+				<tbody><tr>
+					<td class="text-right" width="50%">Purchases:</td>
+					<td width="1%">&nbsp;</td>
+										<td class="green" width="49%">$169.50					</td>
+				</tr>
+				<tr>
+					<td class="text-right">Shipping:</td>
+					<td>&nbsp;</td>
+					<td class="green">$22.00					</td>
+				</tr>
+				<tr>
+					<td class="text-right">Tax:</td>
+					<td>&nbsp;</td>
+					<td class="green">$8.48					</td>
+				</tr>
+				<tr>
+					<td class="text-right">Discount:</td>
+					<td>&nbsp;</td>
+					<td class="green">$0.00					</td>
+				</tr>
+				
+				<tr class="green_solid_bg">
+					<td class="text-right"><b>Total:</b>
+					</td>
+					<td>&nbsp;</td>
+					<td><b>$199.98					</b>
+					</td>
+				</tr>
+
+			</tbody></table>
+					</div>
+	</div>
+	
+	</form>
+		
+
+			<!-- Modal -->
+			<div id="div_make_payment" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<form action="http://admin.healiohealth.com/user/make_payment" method="post">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-original-title="" title="">×</button>
+						<h3 id="myModalLabel">Make Payment</h3>
+					</div>
+
+					<div class="modal-body" style="max-height: 489px; overflow: auto;">
+						
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" onclick="make_payment('process', 107327,151697, this)" class="btn btn-primary" data-original-title="" title="">submit</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true" id="modal_close" data-original-title="" title="">Close</button>
+
+					</div>
+				</form>
+			</div>
+			
+				
+
+			
+						<div class="row-fluid">
+				<div class="span12">
+					<div class="row">
+						<h2>Payment History</h2>	
+									
+					</div>
+					<div class="row" id="payments_list">
+					<table class="table table-striped table-bordered">
+
+						<thead class="graydarkbg_title nowrap">
+							<tr id="grid-headers">
+				                <th>DATE</th>
+				                <th>Order Id</th>
+				                <th>Opening Balance</th>
+				                <th>Paid</th>
+				                <th>Closing Balance</th>
+				                <th>Message</th>
+							</tr>
+						</thead>
+						<tbody>
+												<tr>
+			                <td>2015-08-24 19:18:20</td>
+			                <td>#151697</td>
+			                <td>$199.98</td>
+			                <td>$0.00</td>
+			                <td>$199.98</td>
+			                <td> Customer account is debited by $199.98 .</td>
+			             </tr>
+												<tr>
+			                <td>2015-08-24 19:18:20</td>
+			                <td>#151697</td>
+			                <td>$199.98</td>
+			                <td>$199.98</td>
+			                <td>$0.00</td>
+			                <td> Customer account is credited by $199.98</td>
+			             </tr>
+												</tbody>
+					</table>
+					</div>
+				</div>
+				
+			</div>
+						
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="row">
+						<h2>Notes</h2>						
+					</div>
+					<div class="row" id="notes_list">
+						<div class="row-fluid notes_sec" id="notes_list">
+	No notes found.
+</div>
+
+             	
+
+					</div>
+				</div>
+				<div class="span12 pull-right m_left_10">					
+					<div class="row loghistory_sec" id="logs_list"></div>
+				</div>
+			</div>
+
+			
+
+		</div>
+
+	</div>
+	</div>
+  
   
  <div id="updat_cart" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -123,7 +454,7 @@
         </div>
      </div>
      </form>
-      
+     
     </div>
   </div>
 </div>
