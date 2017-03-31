@@ -13,23 +13,20 @@
             </div>
             <div class="form-group">
               <label class="col-md-4">Amount</label>
-              <input type="text" name="amount" class="form-control col-md-8" id="amount" value="" placeholder="" />
+              <input type="text" name="total_amount" class="form-control col-md-8" id="total_amount" value="" placeholder="" />
             </div>
             <div class="form-group" >
               <label class="col-md-4">Salesman</label>
               <select class="form-control col-md-8" name="packaging" id="packaging" >
-                   <?php foreach($salesman as $pack):
-                   ?>
-                    <option value="<?php echo $pack['id'];?>" > <?php echo $pack['name'];?> </option>
+                   <?php foreach($salesman as $pack): ?>
+                    <option value="<?php echo $pack['id'];?>"> <?php echo $pack['name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
              <div class="form-group" >
               <label class="col-md-4">Customer Location</label>
               <select class="form-control col-md-8" name="customer_location" id="customer_location" multiple="multiple">
-                   <?php foreach($custlocation as $clr):
-                      
-                   ?>
+                   <?php foreach($custlocation as $clr): ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
                   <?php endforeach;?>
               </select>
@@ -49,10 +46,9 @@
             </div>
             <div class="form-group col-md-2" >
               <label>State</label>
-              <select class="form-control" name="state" id="state" multiple="multiple">
-                   <?php foreach($state as $clr):
-                      
-                   ?>
+              <select class="form-control" name="state" id="state" >
+                   <?php $state = get_state();
+                     foreach($state as $clr): ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
                   <?php endforeach;?>
               </select>
@@ -76,21 +72,19 @@
             
             <div class="form-group" >
               <label class="col-md-4">Terms</label>
-              <select class="form-control col-md-8" name="notes[]" id="notes" multiple="multiple">
-                   <?php foreach($terms as $addr):
-                      $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
-                   ?>
-                    <option value="<?php echo $addr['id'];?>" <?php echo $sel;?> > <?php echo $addr['address1'];?> </option>
+              <select class="form-control" name="credit_type" id="credit_type" >
+                   <?php  $terms = get_credit_type();
+                       foreach($terms as $addr): ?>
+                    <option value="<?php echo $addr['id'];?>" > <?php echo $addr['name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
             <div class="form-group" >
               <label class="col-md-4">Payment By</label>
-              <select class="form-control col-md-8" name="notes[]" id="notes" >
-                   <?php foreach($paymentby as $addr):
-                      $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
-                   ?>
-                    <option value="<?php echo $addr['id'];?>" <?php echo $sel;?> > <?php echo $addr['address1'];?> </option>
+              <select class="form-control" name="payment_by" id="payment_by" >
+                   <?php $terms = get_credit_type();
+                     foreach($terms as $addr): ?>
+                    <option value="<?php echo $addr['id'];?>"> <?php echo $addr['name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
@@ -134,13 +128,19 @@
             </div>
             <div class="form-group" >
               <label class="col-md-4">Shipping Instructions :</label>
-              <textarea name="shipping_instructions" id="shipping_instructions" class="form-control col-md-8"></textarea>
+              <textarea name="so_instructions" id="so_instructions" class="form-control col-md-8"></textarea>
             </div>
-           
+            
+          
          </div>
          </div>
+            <div class="col-md-4 clear-btn">
+                 <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
+                <button type="button" class="btn btn-block" onclick="$.fn.submit_advance_search_form();">Search</button>
+            </div>
          </div>
+          
         </div>
-      
+          
         </form>
        

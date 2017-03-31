@@ -250,7 +250,7 @@ class Salesproductselection extends Admin_Controller
       }  
    }
    
-   function get_customer_information()
+   function get_customer_information($so_id = '')
    {
          $cust_id  = $this->input->post("id");
          $customer = $this->salesorder_model->get_vendors(array("a.id" => $cust_id));

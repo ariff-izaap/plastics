@@ -2,7 +2,7 @@
     <?php if(isset($customer_data['status']) && ($customer_data['status'] == 'new')){ ?>
         <div class="form-group" >
           For this customer no address created.
-          <h3><a href="<?php echo site_url();?>salesorder/customer_relation">Create New Address</a></h3>
+          <h3><a href="<?php echo site_url();?>salesorder/add_edit_customer?redirect=<?php echo $this->uri->segment(3);?>">Create New Address</a></h3>
         </div>
     <?php }
     else
@@ -35,7 +35,7 @@
         </div>
         <div class="form-group <?php echo (form_error('mobile'))?'error':'';?>" data-error="<?php echo (form_error('mobile'))? form_error('mobile'):'';?>">
           <label required>Mobile</label>
-          <input type="text" name="mobile" class="form-control" id="mobile" value="<?php echo set_value('mobile', $customer_data['mobile']);?>" placeholder="" />
+          <input type="text" name="mobile" class="form-control" id="mobile" value="<?php echo set_value('mobile', $customer_data['phone']);?>" placeholder="" />
         </div>
         <div class="form-group  <?php echo (form_error('address1'))?'error':'';?>" data-error="<?php echo (form_error('address1'))? form_error('address1'):'';?>">
           <label required>Address 1</label>

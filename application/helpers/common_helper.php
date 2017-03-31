@@ -668,6 +668,14 @@ function get_credit_type()
   $q = $CI->db->query("select * from credit_type where status=1")->result_array();
   return $q;
 }
+
+function get_sale_type()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from sale_type where status=1")->result_array();
+  return $q;
+}
+
 function get_address()
 {
   $CI = get_instance();
@@ -828,7 +836,7 @@ function create_auto_po($product,$form)
     $status = "error";
     //$output = array("status"=>"error","message"=>"Wrong Input Parameter");
   }
-   return $status;
+   return $po_id;
 }
 
 

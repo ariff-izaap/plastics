@@ -10,8 +10,8 @@ class Salesorder extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-    $this->load->model(array('salesorder_model','purchase_model'));
-    $this->load->model('admin_model');
+      $this->load->model(array('salesorder_model','purchase_model'));
+      $this->load->model('admin_model');
 	  $this->load->library('listing');
       $this->load->library('cart');    
 	} 
@@ -25,7 +25,7 @@ class Salesorder extends Admin_Controller
            
         $this->simple_search_fields = array();
          
-        $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
+        $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","payment_by","credit_type","total_amount","bol_instructions","so_instructions");
         
         $str = '<a href="'.site_url('salesorder/checkout/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
                 <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
@@ -42,17 +42,11 @@ class Salesorder extends Admin_Controller
         $this->data['search_conditions']    = $this->session->userdata($this->namespace.'_search_conditions');
         $this->data['per_page']             = $this->listing->_get_per_page();
         $this->data['per_page_options']     = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-        
         $this->data['search_bar']           = $this->load->view('frontend/sales/search_bar', $this->data, TRUE);        
         $this->data['listing']              = $listing;
-        $this->data['salestype']            = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
         $this->data['grid']                 = $this->load->view('listing/view', $this->data, TRUE);
-        $this->data['cartitems']            = $this->cart->contents();
-        $this->data['products']             = $this->salesorder_model->get_where(array(),"*","product")->result_array();  
-        $this->data['colors']               = $this->salesorder_model->get_where(array(),"*","product_color")->result_array();
-        $this->data['forms']                = $this->salesorder_model->get_where(array(),"*","product_form")->result_array();
-        $this->data['packages']             = $this->salesorder_model->get_where(array(),"*","product_packaging")->result_array();
-          
+        
+        
         $this->layout->view('frontend/sales/index');		
      }
     
@@ -262,8 +256,40 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
-                $msg  = 'Sales Order updated successfully';
                 log_history("sales_order",$edit_id,'Sales Order',"update");
+                
+                //update customer billling & shipping address
+                $customer_addr = array();
+                $customer_addr['first_name'] = $this->input->post('first_name');
+                $customer_addr['last_name']  = $this->input->post('last_name');
+                $customer_addr['address1']   = $this->input->post('address1');
+                $customer_addr['address2']   = $this->input->post('address2');
+                $customer_addr['city']       = $this->input->post('city');
+                $customer_addr['state']      = $this->input->post('state');
+                $customer_addr['zipcode']    = $this->input->post('zipcode');
+                $customer_addr['phone']      = $this->input->post('mobile');
+                $customer_addr['updated_date']= date('Y-m-d H:i:s'); 
+                $customer_addr['updated_id']  = get_current_user_id();
+                $this->salesorder_model->update(array("id" => $ins_data['billing_address_id']),$customer_addr,"address");
+                log_history("address",$ins_data['billing_address_id'],'Customer Billing Address',"update");
+                 
+                 
+                $customer_ship_addr = array();
+                $customer_ship_addr['first_name']  = $this->input->post('ship_first_name');
+                $customer_ship_addr['last_name']   = $this->input->post('ship_last_name');
+                $customer_ship_addr['address1']    = $this->input->post('ship_address1');
+                $customer_ship_addr['address2']    = $this->input->post('ship_address2');
+                $customer_ship_addr['city']        = $this->input->post('ship_city');
+                $customer_ship_addr['state']       = $this->input->post('ship_state');
+                $customer_ship_addr['zipcode']     = $this->input->post('ship_zipcode');
+                $customer_ship_addr['phone']       = $this->input->post('ship_mobile');
+                $customer_ship_addr['updated_date']= date('Y-m-d H:i:s'); 
+                $customer_ship_addr['updated_id']  = get_current_user_id();
+                $this->salesorder_model->update(array("id" => $ins_data['shipping_address_id']),$customer_ship_addr,"customer_location");
+                log_history("customer_location",$ins_data['shipping_address_id'],'Customer Shipping Address',"update");
+                
+                $msg  = 'Sales Order updated successfully';
+                
               }
               else
               {   
@@ -271,19 +297,21 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
                 $so_new_id  = $this->salesorder_model->insert($ins_data,"sales_order");    
+                log_history("sales_order",$edit_id,'Sales Order',"insert");
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
                 $get_ship_data = $this->salesorder_model->get_where(array("id" => $ship_id),"*","shipping_type")->row_array();
                 
                 $ship_data = array();
-                $ship_data['so_id']         =  $so_new_id;
+                $ship_data['so_id']         = $so_new_id;
                 $ship_data['shipping_type'] = $get_ship_data['type'];
                 $ship_data['order_status']  = $this->input->post('order_status');
-                $ship_data['created_date']  =  date('Y-m-d H:i:s'); 
-                $ship_data['updated_date']  =  date('Y-m-d H:i:s');
+                $ship_data['created_date']  = date('Y-m-d H:i:s'); 
+                $ship_data['updated_date']  = date('Y-m-d H:i:s');
                 $ship_data['created_id']    = get_current_user_id();  
                 $ship_new_id  = $this->salesorder_model->insert($ship_data,"shipment");
+                log_history("shipment",$ship_new_id,'Create Shipment',"insert");
                 
                 //items added to sales order item table
                 $sale_items = $this->cart->contents();
@@ -301,8 +329,8 @@ class Salesorder extends Admin_Controller
                      
                      $product = array();
                      $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
-                     $po_create = create_auto_po($product,$form);
-                     
+                     $po_create_id = create_auto_po($product,$form);
+                     log_history("purchase_order",$po_create_id,'Create Auto PO',"insert");
                    }
                    
                    $sale_item['product_id']   = $svalue['id'];
@@ -316,10 +344,12 @@ class Salesorder extends Admin_Controller
                    $sale_item['updated_date'] = date('Y-m-d H:i:s');
                    $sale_item['created_id']   = get_current_user_id();
                    $sale_order_item_id        = $this->salesorder_model->insert($sale_item,"sales_order_item");
+                   
+                   log_history("sales_order_item",$sale_order_item_id,'Sales Order Item',"insert");
                 }     
                 $msg     = 'Sales Order created successfully';
                 $edit_id =  $so_new_id;
-                log_history("sales_order",$edit_id,'Sales Order',"insert");
+                
               }
               $this->session->set_flashdata('success_msg',$msg,TRUE);
               $status  = 'success';
@@ -338,14 +368,24 @@ class Salesorder extends Admin_Controller
             $edit_data['credit_type']           = '';
             $edit_data['so_instructions']       = '';
             $edit_data['bol_instructions']      = '';
-            $customer                           = array("business_name" => "","first_name" => "", "last_name" => "","email" => "","web_url" => "","mobile" => "","address1" => "", 
-                                                        "address2" => "", "city" => "", "state" => "", "zipcode"=> "",
-                                                        "ship_first_name" => "","ship_last_name" => "",
-                                                        "ship_mobile" => "",
-                                                        "ship_address1" => "",
-                                                        "ship_city" => "",
-                                                        "ship_state" => "",
-                                                        "ship_zipcode" => ""
+            $customer                           = array(    "business_name" => "",
+                                                            "first_name" => "", 
+                                                            "last_name" => "",
+                                                            "email" => "",
+                                                            "web_url" => "",
+                                                            "phone" => "",
+                                                            "address1" => "", 
+                                                            "address2" => "", 
+                                                            "city" => "", 
+                                                            "state" => "",
+                                                            "zipcode"=> "",
+                                                            "ship_first_name" => "",
+                                                            "ship_last_name" => "",
+                                                            "ship_mobile" => "",
+                                                            "ship_address1" => "",
+                                                            "ship_city" => "",
+                                                            "ship_state" => "",
+                                                            "ship_zipcode" => ""
                                                         );
             $cartitems                          =  $this->cart->contents();      
             $edit_data['btn']                   = "Create Order";
@@ -364,15 +404,17 @@ class Salesorder extends Admin_Controller
            $cartitems         = $this->salesorder_model->get_sales_items($edit_data['id']);
            $saletype          = 'update';     
            $edit_data['btn']  = "Update Order";   
-        }     
+           $total             = $edit_data['total_amount'];
+        }    
+         
         $this->data['editdata']      = $edit_data;
         $this->data['customer_data'] = $customer;
-        $this->data['saletype']      = $this->db->query("select * from sale_type where status=1")->result_array();
-        $this->data['shipping_type'] = $this->db->query("select * from shipping_type where 1=1")->result_array();
-        $this->data['credit_type']   = $this->db->query("select * from credit_type where 1=1")->result_array();
+        $this->data['saletype']      = get_sale_type();
+        $this->data['shipping_type'] = get_shipping_type();
+        $this->data['credit_type']   = get_credit_type();
         $this->data['cartitems']     = $cartitems;           
         $this->data['customer']      = $this->purchase_model->get_vendors();
-        $this->data['carrier']       = $this->salesorder_model->get_carriers();
+        $this->data['carrier']       = get_carrier();
         $this->data['stype']         = $saletype;
         $this->data['total']         = $total;
         
@@ -385,6 +427,30 @@ class Salesorder extends Admin_Controller
           $this->layout->view('frontend/sales/checkout');
         } 
     }
+    public function update_salesorder_quantity()
+    {
+        
+        $st_id    = $this->input->post("id");
+        $so_id    = $this->input->post("so_id");
+        $quantity = $this->input->post('quantity');
+        
+        $this->db->query("update sales_order_item set qty='".$quantity."' where id='".$st_id."'");
+        
+        $st_data   = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
+        $total_amt = $st_data['qty']*$st_data['unit_price'];
+        
+        $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
+        
+        $this->data['cartitems'] = $this->salesorder_model->get_sales_items($so_id);
+        $this->data['total']     = $total_amt;
+        
+        $output['message']       = "Item updated successfully";
+        $output['status']        = "success";
+        $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);   
+        $this->_ajax_output($output, TRUE);
+       
+    }
+    
     /* End by Punitha */
 
     /* By Ram */
@@ -420,7 +486,7 @@ class Salesorder extends Admin_Controller
         $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
         $this->data['listing']    = $listing;
         $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
-      $this->layout->view('frontend/sales/customer_relation');
+        $this->layout->view('frontend/sales/customer_relation');
     }
 
     public function add_edit_customer($edit_id='')
@@ -491,7 +557,16 @@ class Salesorder extends Admin_Controller
           $this->session->set_flashdata("success_msg","Customer Updated Successfully.",TRUE);
         else
           $this->session->set_flashdata("success_msg","Customer Added Successfully.",TRUE);
-        redirect("salesorder/customer_relation");
+       
+        if(isset($_GET['redirect'])){
+            $so_id = $_GET['redirect'];
+            redirect("salesorder/checkout/$so_id");
+        }
+        else
+        {
+          redirect("salesorder/customer_relation");    
+        }   
+        
       }
       if($edit_id!='')
       {

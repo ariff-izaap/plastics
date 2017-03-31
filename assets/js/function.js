@@ -1,3 +1,4 @@
+
 $(function(){
     
     //product selection
@@ -1057,13 +1058,13 @@ function delete_cart(cart_id)
   });
 }
 
-function get_customer_details()
+function get_customer_details(so_id)
 {
     var cus_id = $("#customer_id").val();
     
     $.ajax({
     type:"POST",
-    url:base_url+'salesproductselection/get_customer_information',
+    url:base_url+'salesproductselection/get_customer_information/'+so_id,
     data:{id:cus_id},
     dataType:"json",
     success:function(data)
@@ -1111,6 +1112,27 @@ function sales_update_cart(cart_id='')
     }  
   }); 
 // } 
+}
+
+function sales_order_update_quantity(sale_item_id,so_id)
+{
+    var qty  = $("#update_qty").val();
+  
+   
+   $.ajax({
+    type:"POST",
+    url:base_url+'salesorder/update_salesorder_quantity',
+    data:{id:sale_item_id,so_id:so_id,quantity:qty},
+    dataType:"json",
+    success:function(data)
+    {
+      var status = data.status;   
+      if(status == 'success'){
+        $("#cartItems").html(data.viewlist);
+        $(window).scrollTop($('#cartItems').offset().top);
+      }
+    }  
+  });
 }
 
 function create_so()

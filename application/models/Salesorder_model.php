@@ -14,14 +14,13 @@ class Salesorder_model extends App_model
   
   function listing()
   {  
-       $this->_fields = "s.id as id,p.name,p.sku,p.created_date,p.quantity,p.row,p.form_id,p.units,p.received_in_warehouse,p.wholesale_price,p.available_qty,p.internal_lot_no,p.vendor_lot_no,pk.name as package_name,c.name as color_name,f.name as form_name";
+       $this->_fields = "s.id as id,p.name,p.sku,i.qty as quantity,p.row,p.form_id,p.units,s.total_amount as wholesale_price,s.credit_type,s.credit_type as payment_by,pk.name as package_name,c.name as color_name,f.name as form_name,s.so_instructions,s.bol_instructions";
         $this->db->from('sales_order s');
         $this->db->join("sales_order_item i","i.so_id=s.id");
         $this->db->join("product p","p.id=i.product_id");
         $this->db->join("product_color c","c.id=p.color_id");
         $this->db->join("product_form f","f.id=p.form_id");
         $this->db->join("product_packaging pk","pk.id=p.package_id");
-        
         $this->db->group_by('p.id');
           
         foreach ($this->criteria as $key => $value) 
@@ -49,20 +48,20 @@ class Salesorder_model extends App_model
                 case 'package_id':
                     $this->db->like("p.package_id", $value);
                 break;
-                case 'type':
-                    $this->db->like("p.item_type", $value);
+                case 'payment_by':
+                    $this->db->like("s.credit_type", $value);
                 break;
-                case 'equivalent':
-                    $this->db->like("p.equivalent", $value);
+                case 'credit_type':
+                    $this->db->like("s.credit_type", $value);
                 break;
-                case 'internal_lot_no':
-                    $this->db->like("p.internal_lot_no", $value);
+                case 'total_amount':
+                    $this->db->like("s.total_amount", $value);
                 break;
-                case 'vendor_lot_no':
-                    $this->db->like("p.vendor_lot_no", $value);
+                case 'so_instructions':
+                    $this->db->like("s.so_instructions", $value);
                 break;
-                case 'received_in_warehouse':
-                    $this->db->like("p.vendor_lot_no", $value);
+                case 'bol_instructions':
+                    $this->db->like("s.bol_instructions", $value);
                 break;
             }
         }
@@ -96,7 +95,7 @@ class Salesorder_model extends App_model
   
   public function get_sales_items($so_id)
   {
-        $this->db->select("s.id as id,p.name,pk.name as package,c.name as color,f.name as form,i.qty,i.unit_price as price,p.row");
+        $this->db->select("s.id as id,i.id as sot_id,p.name,pk.name as package,c.name as color,f.name as form,i.qty,i.unit_price as price,p.row");
         $this->db->from('sales_order s');
         $this->db->join("sales_order_item i","i.so_id=s.id");
         $this->db->join("product p","p.id=i.product_id");

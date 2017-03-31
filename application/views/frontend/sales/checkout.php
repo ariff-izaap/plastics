@@ -12,7 +12,7 @@
       <div class="form-grid col-md-8">
         <div class="form-group col-md-6 <?php echo (form_error('customer_id'))?'error':'';?>" data-error="<?php echo (form_error('customer_id'))? form_error('customer_id'):'';?>">
           <label required>Customer Name</label>
-          <select name="customer_id" id="customer_id" onchange="get_customer_details();" >
+          <select name="customer_id" id="customer_id" onchange="get_customer_details(<?php echo $this->uri->segment(3);?>);" >
             <option value="">Select Customer</option>
             <?php if(count($customer)>0){
                 foreach($customer as $ckey=>$cvalue){ ?>
@@ -84,12 +84,10 @@
     </div>
      
   </div>
-  <div class="form-group">
+   <div class="form-group" id="cartItems">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
-  <div class="form-group">
-    <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
-  </div>
+  
   <div class="form-group">
   </div>
   <div>
