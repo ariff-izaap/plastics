@@ -25,7 +25,7 @@ class Salesorder extends Admin_Controller
            
         $this->simple_search_fields = array();
          
-        $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","payment_by","credit_type","total_amount","bol_instructions","so_instructions");
+        $this->_narrow_search_conditions = array("shipping_order","business_name","salesman_id","customer_location","city","state","zipcode","payment_by","credit_type","total_amount","bol_instructions","so_instructions");
         
         $str = '<a href="'.site_url('salesorder/checkout/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
                 <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
@@ -45,8 +45,6 @@ class Salesorder extends Admin_Controller
         $this->data['search_bar']           = $this->load->view('frontend/sales/search_bar', $this->data, TRUE);        
         $this->data['listing']              = $listing;
         $this->data['grid']                 = $this->load->view('listing/view', $this->data, TRUE);
-        
-        
         $this->layout->view('frontend/sales/index');		
      }
     

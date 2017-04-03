@@ -9,7 +9,7 @@
             </div>
             <div class="form-group" >
               <label class="col-md-4">Customer Name</label>
-              <input type="text" name="customer_name" class="form-control col-md-8" id="customer_name" value="" placeholder="" />
+              <input type="text" name="business_name" class="form-control col-md-8" id="business_name" value="" placeholder="" />
             </div>
             <div class="form-group">
               <label class="col-md-4">Amount</label>
@@ -17,9 +17,11 @@
             </div>
             <div class="form-group" >
               <label class="col-md-4">Salesman</label>
-              <select class="form-control col-md-8" name="packaging" id="packaging" >
-                   <?php foreach($salesman as $pack): ?>
-                    <option value="<?php echo $pack['id'];?>"> <?php echo $pack['name'];?> </option>
+              <select class="form-control col-md-8" name="salesman_id" id="salesman_id" >
+                   <option>Select</option>
+                   <?php $salesman = get_salesman();
+                         foreach($salesman as $pack): ?>
+                    <option value="<?php echo $pack['id'];?>"> <?php echo $pack['first_name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
@@ -42,7 +44,7 @@
              <div class="form-group clearfix postal">
             <div class="form-group col-md-2 city" >
               <label>City</label>
-              <input type="text" name="address_2" class="form-control" id="address_2" value="" placeholder="" />
+              <input type="text" name="city" class="form-control" id="city" value="" placeholder="" />
             </div>
             <div class="form-group col-md-2" >
               <label>State</label>

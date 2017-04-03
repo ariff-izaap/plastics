@@ -759,12 +759,26 @@ function get_product_notes()
   return $q;
 }
 
+function get_salesman()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from admin_users u inner join role r on r.id=u.role_id where r.name='Sales'")->result_array();
+  return $q;
+}
+
+function get_customer_location()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from customer_location l inner join customer c on c.id=l.customer_id where 1=1")->result_array();
+  return $q;
+}
+
+
 
 function copyFile($file,$rand,$po_id)
 {
    echo $file_to_go = str_replace("assets/uploads/purchase/tmp/".$rand."/","assets/uploads/purchase/".$po_id."/",$file);
    copy($file, $file_to_go);
-
 }
 
 
@@ -772,11 +786,8 @@ function create_auto_po($product,$form)
 {
   $CI = get_instance();
   $CI->load->model('purchase_model');
-  if(is_array($product))
-  {
-    // echo "<pre>";
-    // print_r($product);
-    // print_r($form);
+  if(is_array($product)) {
+    
     foreach ($product as $vendor_id => $ploop)
     {
 
