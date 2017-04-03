@@ -379,6 +379,62 @@ function init_checkbox(selval)
 	$(".checkbox").checkboxradio({ icon: false });
 }
 
+
+function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
+{
+	action_type = action_type?action_type:'form';
+	
+	if(!before_ajax(elm, 'Loading....'))
+		return false;
+	
+	data = {};
+	if(action_type == 'process')
+		data = $("#div_add_new_price form").serialize();
+	
+	ship_addr_id = parseInt(ship_addr_id);
+	
+	$.ajax( {
+        url:base_url+'salesorder/change_ship_address/'+ship_addr_id+'/'+sales_order_id,
+        type: "POST",
+        data: data,
+        dataType:"json",
+        success : function(rdata){
+        	
+        	if(!after_ajax(elm, rdata))
+        		return false;
+        	
+        	if(rdata.status == 'warning')
+        	{
+        		$("#div_add_new_price .modal-body").html(rdata.content);
+            	$("#div_add_new_price").css('width', '800px').modal({});
+            	$('select').not(".boot_select_false").selectpicker();
+        	}
+        	else if(rdata.status == 'success' && action_type == 'process')
+        	{
+        		$("#div_add_new_price").modal('hide');
+        		        		
+        		bootbox.alert(rdata.message, function(){
+        			if(ship_addr_id)
+        			location.href = base_url+'salesorder/view/'+sales_order_id;
+        		});
+        	} 
+        	else
+        	{
+        		bootbox.alert(rdata.message);
+        	}
+        	
+        	//$("#vpl_count").html(rdata.vpl_count);
+        	//$("#oos_count").html(rdata.oos_count);
+    		//$("#vpl_id").html(rdata.vpl_id);
+    		
+        },
+        error : function(rdata) {
+         after_ajax(elm, rdata);
+        }
+	});    
+}
+
+
 function numbersonly(e) 
 {
   var unicode=e.charCode? e.charCode : e.keyCode

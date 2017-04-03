@@ -27,8 +27,8 @@ class Salesorder extends Admin_Controller
          
         $this->_narrow_search_conditions = array("shipping_order","business_name","salesman_id","customer_location","city","state","zipcode","payment_by","credit_type","total_amount","bol_instructions","so_instructions");
         
-        $str = '<a href="'.site_url('salesorder/checkout/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
-                <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'salesorder/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+        $str = '<a href="'.site_url('salesorder/view/{id}').'" class="table-action"><i class="fa fa-eye"></i></a>
+                ';
  
         $this->listing->initialize(array('listing_action' => $str));
 
@@ -256,35 +256,35 @@ class Salesorder extends Admin_Controller
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
                 log_history("sales_order",$edit_id,'Sales Order',"update");
                 
-                //update customer billling & shipping address
-                $customer_addr = array();
-                $customer_addr['first_name'] = $this->input->post('first_name');
-                $customer_addr['last_name']  = $this->input->post('last_name');
-                $customer_addr['address1']   = $this->input->post('address1');
-                $customer_addr['address2']   = $this->input->post('address2');
-                $customer_addr['city']       = $this->input->post('city');
-                $customer_addr['state']      = $this->input->post('state');
-                $customer_addr['zipcode']    = $this->input->post('zipcode');
-                $customer_addr['phone']      = $this->input->post('mobile');
-                $customer_addr['updated_date']= date('Y-m-d H:i:s'); 
-                $customer_addr['updated_id']  = get_current_user_id();
-                $this->salesorder_model->update(array("id" => $ins_data['billing_address_id']),$customer_addr,"address");
-                log_history("address",$ins_data['billing_address_id'],'Customer Billing Address',"update");
-                 
-                 
-                $customer_ship_addr = array();
-                $customer_ship_addr['first_name']  = $this->input->post('ship_first_name');
-                $customer_ship_addr['last_name']   = $this->input->post('ship_last_name');
-                $customer_ship_addr['address1']    = $this->input->post('ship_address1');
-                $customer_ship_addr['address2']    = $this->input->post('ship_address2');
-                $customer_ship_addr['city']        = $this->input->post('ship_city');
-                $customer_ship_addr['state']       = $this->input->post('ship_state');
-                $customer_ship_addr['zipcode']     = $this->input->post('ship_zipcode');
-                $customer_ship_addr['phone']       = $this->input->post('ship_mobile');
-                $customer_ship_addr['updated_date']= date('Y-m-d H:i:s'); 
-                $customer_ship_addr['updated_id']  = get_current_user_id();
-                $this->salesorder_model->update(array("id" => $ins_data['shipping_address_id']),$customer_ship_addr,"customer_location");
-                log_history("customer_location",$ins_data['shipping_address_id'],'Customer Shipping Address',"update");
+                ////update customer billling & shipping address
+//                $customer_addr = array();
+//                $customer_addr['first_name'] = $this->input->post('first_name');
+//                $customer_addr['last_name']  = $this->input->post('last_name');
+//                $customer_addr['address1']   = $this->input->post('address1');
+//                $customer_addr['address2']   = $this->input->post('address2');
+//                $customer_addr['city']       = $this->input->post('city');
+//                $customer_addr['state']      = $this->input->post('state');
+//                $customer_addr['zipcode']    = $this->input->post('zipcode');
+//                $customer_addr['phone']      = $this->input->post('mobile');
+//                $customer_addr['updated_date']= date('Y-m-d H:i:s'); 
+//                $customer_addr['updated_id']  = get_current_user_id();
+//                $this->salesorder_model->update(array("id" => $ins_data['billing_address_id']),$customer_addr,"address");
+//                log_history("address",$ins_data['billing_address_id'],'Customer Billing Address',"update");
+//                 
+//                 
+//                $customer_ship_addr = array();
+//                $customer_ship_addr['first_name']  = $this->input->post('ship_first_name');
+//                $customer_ship_addr['last_name']   = $this->input->post('ship_last_name');
+//                $customer_ship_addr['address1']    = $this->input->post('ship_address1');
+//                $customer_ship_addr['address2']    = $this->input->post('ship_address2');
+//                $customer_ship_addr['city']        = $this->input->post('ship_city');
+//                $customer_ship_addr['state']       = $this->input->post('ship_state');
+//                $customer_ship_addr['zipcode']     = $this->input->post('ship_zipcode');
+//                $customer_ship_addr['phone']       = $this->input->post('ship_mobile');
+//                $customer_ship_addr['updated_date']= date('Y-m-d H:i:s'); 
+//                $customer_ship_addr['updated_id']  = get_current_user_id();
+//                $this->salesorder_model->update(array("id" => $ins_data['shipping_address_id']),$customer_ship_addr,"customer_location");
+//                log_history("customer_location",$ins_data['shipping_address_id'],'Customer Shipping Address',"update");
                 
                 $msg  = 'Sales Order updated successfully';
                 
@@ -425,6 +425,181 @@ class Salesorder extends Admin_Controller
           $this->layout->view('frontend/sales/checkout');
         } 
     }
+    
+     function view($so_id = null)
+    {
+    	if(is_null($so_id) || !(int)$so_id)
+    		redirect('sales_orders');
+    	
+    	include('common_controller.php');
+    	
+    	$obj = new common_controller();
+    	$data = $obj->get_view_data('so', $so_id);
+
+    	if($data === false)
+    		redirect('sales_orders');
+    	
+    	$this->data += $data;
+    	
+    	$this->data['content'] = $this->load->view('frontend/sales/_partials/view_content', $this->data, TRUE);
+    	
+    	$this->layout->view('frontend/sales/view', $this->data);
+    	
+    }
+    
+    function _get_products_details($so_id)
+    {
+    	$this->load->model('shipment_model');
+    	
+    	//check if the current SO is having Shipment(s) 
+    	$result_set = $this->shipment_model->get_where(array('so_id' => $so_id));
+  
+    	//if no shipment found, fetch only products vendor-wise products
+    	if(!$result_set->num_rows())
+    	{
+    		$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);
+    		return $products;
+    	}
+    	
+    	//fetch product details
+    	$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);
+      
+    	$vendors = array();
+    	//if no records found, return empty array
+    	if (count($products) == 0)
+    		return $vendors;
+    
+    	//sort the products by vendor
+    	foreach ($products as $id => $product)
+    		$vendors[(int)$product['vendor_id']][] = $product;
+    	
+    	return $vendors;
+    }
+    
+    function change_ship_address($ship_addr_id = null,$so_id = 0)
+    {
+    
+       // $this->load->helper(array('countries'));
+      //  $this->load->helper(array('order'));
+        $this->load->model('address_model');
+
+        try
+        {
+            //check if edit-access is TRUE
+           // $this->check_access('edit_access');
+             
+            //get vendor_id
+            $ship_addr_id = (!is_null($ship_addr_id) && (int)$ship_addr_id)?$ship_addr_id:0;
+            
+            if(!$ship_addr_id)
+                throw new Exception("Please Create shipping address details.");
+                
+            if(!$so_id)
+                throw new Exception("Sales Order is invalid.");
+            
+            $this->data['ship_addr_id'] = $ship_addr_id;            
+                    
+            //default values
+            $output = array('status' => 'warning', 'message' => '');
+            
+            //default form values
+            $price_list_info = array();
+             
+            if( $this->data['ship_addr_id'] )
+            {
+                $tmp = get_address_by_contact_id($this->data['ship_addr_id'], 'data');
+                $price_list_info = array_merge($price_list_info, $tmp);
+                $price_list_info['ship_addr_id'] = $ship_addr_id; 
+            }
+                   
+            //set validation rules
+            $this->form_validation->set_rules($this->get_validation_rules('ship_addr'));
+            
+            //Need to work on this
+            
+            if ($this->form_validation->run() == TRUE)
+            {
+                
+            
+                $data = array();
+                $data['ship_addr_id']       = $this->data['ship_addr_id'];
+                $data['name']               = $price_list_info['name']; 
+                $data['first_name']         = $this->input->post('first_name');
+                $data['last_name']          = $this->input->post('last_name');
+                $data['company']            = $this->input->post('company');
+                $data['email']              = $price_list_info['email'];
+                $data['address1']           = $this->input->post('address1');
+                $data['address2']           = $this->input->post('address2');
+                $data['city']               = $this->input->post('city');
+                $data['state']              = $this->input->post('state');
+                $data['zip']                = $this->input->post('zip');
+                $data['phone']              = $this->input->post('phone');
+                $data['country']            = $this->input->post('country');
+                $data['created_id']         = $this->admin['id'];
+                $data['updated_id']         = $this->admin['id'];
+                $data['created_time']       = date('Y-m-d H:i:s', local_to_gmt());
+                $data['updated_time']       = date('Y-m-d H:i:s', local_to_gmt());
+                $data['type']               = 'S';
+                
+                //get so details
+                $so_details = $this->salesorder_model->get_where( array( 'id' => $so_id) )->row_array();
+                
+                $data['user_id']            = $so_details['customer_id'];
+                   
+                                   
+                if($this->data['ship_addr_id']){
+                    list($contact, $ship_add) = $this->address_model->create_or_update_address($data);
+                    $this->salesorder_model->update( array('id' => $so_details['id']), array("shipping_address_id"=>$contact));
+                    $price_list_info['shipping_address_id'] = $contact;
+
+                    log_history('sales_order','Shipping Address has been modified.',$so_details['id']);
+
+                }
+                       
+                $output['status']       = 'success';
+                $output['message']      = 'Shipping Address has been updated successfully!';
+            } 
+           
+            $this->data['price_list_info'] = $price_list_info; 
+            
+            $output['content'] = $this->load->view('frontend/sales/_partials/shipping_address', $this->data, TRUE);
+            
+        }
+        catch(Exception $e)
+        {
+            $output = array('status' => 'error', 'message' => $e->getMessage());
+        }
+        
+        if($this->input->is_ajax_request())
+            $this->_ajax_output($output, TRUE);
+         
+        return $output;
+     
+  }
+    
+    function get_validation_rules($type, $key = null)
+  {
+     
+    $rules = array();
+    if(strcmp($type, 'ship_addr') === 0)
+    {
+        $rules['ship_addr']['first_name']  = array('field' => 'first_name',  'rules' => 'trim|required');
+        $rules['ship_addr']['last_name']                  = array('field' => 'last_name', 'rules' => 'trim|required');
+        $rules['ship_addr']['address1']                 = array('field' => 'address1', 'rules' => 'trim|required');
+        $rules['ship_addr']['address2']             = array('field' => 'address2', 'rules' => 'trim');
+        $rules['ship_addr']['city']             = array('field' => 'city', 'rules' => 'trim|required');
+        $rules['ship_addr']['state']          = array('field' => 'state', 'rules' => 'trim|required');
+        $rules['ship_addr']['zip']            = array('field' => 'zip', 'rules' => 'trim|required');
+        $rules['ship_addr']['phone']              = array('field' => 'phone', 'rules' => 'trim|required');
+    }
+     
+    if(!is_null($key) && isset($rules[$type][$key]))
+        return $rules[$type][$key];
+     
+    return $rules[$type];
+     
+    }
+    
     public function update_salesorder_quantity()
     {
         

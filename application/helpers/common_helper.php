@@ -102,6 +102,89 @@ function get_roles()
   return $roles;
 }
 
+function get_address_by_contact_id($cid = 0, $output_type = 'both', $address_tag = TRUE)
+{
+	if(!$cid)
+		return FALSE;
+
+	$CI = & get_instance();
+
+	$CI->load->model('address_model');
+	$address = $CI->address_model->get_address_by_contact_id($cid);
+
+	if(!count($address))
+		return FALSE;
+	
+	if(strcmp($output_type, 'data') === 0)
+		return $address;
+	
+	$address_format = format_address($address, $address_tag);
+	
+	if(strcmp($output_type, 'html') === 0)
+		return $address_format;
+
+	return array('data' => $address, 'html' => $address_format);
+
+}
+
+function format_address($address = array(), $address_tag = TRUE)
+{
+	if(!count($address))
+		return FALSE;
+
+	$address_format = ($address_tag)?"<address>":"<p>";
+	$address_format .= "<strong>{$address['first_name']} {$address['last_name']}</strong> <br />";
+	if(strcmp(trim($address['company']),'') !== 0)
+		$address_format .= "{$address['company']}<br />";
+	$address_format .= "{$address['address1']} <br />";
+	if(strcmp($address['address2'],'') !== 0)
+		$address_format .= "{$address['address2']} <br />";
+	$address_format .= "{$address['city']} {$address['state']} {$address['zip']} <br />";
+	$address_format .= "{$address['country']} <br />";
+	if(strcmp($address['phone'],'') !== 0)
+		$address_format .= "<abbr title='Phone'>P:</abbr> {$address['phone']}";
+	$address_format .= ($address_tag)?"</address>":"</p>";
+
+	return $address_format;
+
+}
+
+function get_countries( $html = false, $elm_name='country', $elm_id='country', $sel = '',$empty = FALSE )
+{
+
+      $CI = & get_instance();
+      $results = $CI->db->order_by('name', 'ASC')->get('country')->result_array();
+
+      if(!count($results))
+            return FALSE;
+
+      if($html)
+      {
+            $countries = "<select name='$elm_name' id='$elm_id'>";
+            if($empty) {
+                $countries .= "<option value=''>All</option>";
+            }
+            foreach ($results as $row)
+            {
+                  $selected = ( strcmp($sel, $row['code']) === 0 )? 'selected':'';
+                  $countries .= "<option value='{$row['code']}' $selected>{$row['name']}</option>";
+            }
+            $countries .= '</select>';
+            return $countries;
+      }
+
+      $countries = array();
+      if($empty) {
+        $countries[''] = "ALL";
+      }
+      foreach ($results as $row){
+            $countries[$row['code']] = $row['name'];
+      }
+      return $countries;
+    
+}
+
+
 function display_flashmsg($flash)
 {
 

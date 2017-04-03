@@ -106,5 +106,79 @@ class Salesorder_model extends App_model
         $this->db->join("product_packaging pk","pk.id=p.package_id");
         return $this->db->get()->result_array();
   }
+  
+  function get_product_details_by_sales_order($so_id, $order_details_only = FALSE)
+    {
+    	$so_ids = is_array($so_id)?$so_id:array($so_id);
+    	
+    	$fields = ' so.id as so_id,
+    				soi.id as so_item_id,
+    				soi.product_id,
+    				soi.item_status,
+    				soi.unit_price,
+    				soi.vendor_id,
+    				product.sku,
+    				product.retail_price,
+    				product.name as product_name,
+    				address.country,
+    				';
+    	if($order_details_only)
+    	{
+    		$fields .= 'sum(soi.quantity) as quantity';
+    	}
+    	else 
+    	{
+    		$fields .= 'soi.qty,
+    					vendor.business_name as vendor_name,
+    					vendor.credit_type as vendor_type,
+    					vendor.id as vendor_id,
+    					shipment.ship_company,
+    					shipment.order_status as shipment_status,
+    					vpl.id as vpl_id,
+    					vpl.cost,
+    					vpl.sku as vendor_sku
+    					';
+    	}
+    	
+    	
+    	$this->db->select($fields, FALSE);
+    	$this->db->from('sales_order so');
+    	$this->db->join('sales_order_item soi', 'soi.so_id=so.id');
+    	$this->db->join('product', 'product.id=soi.product_id');
+        $this->db->join('customer vendor', 'vendor.id=soi.vendor_id');
+    	$this->db->join('customer_location contact', 'contact.id=so.shipping_address_id');
+    	$this->db->join('address', 'vendor.address_id=address.id');
+    	
+        
+    	if(!$order_details_only){
+    	
+    		$this->db->join('vendor_price_list vpl', 'vpl.vendor_id=soi.vendor_id');
+    		$this->db->join('shipment', 'shipment.so_id=soi.so_id AND shipment.id=soi.shipment_id', 'left');
+    	}
+    	
+    	$this->db->where_in('so.id', $so_ids);
+    	
+    	if($order_details_only)
+    		$this->db->group_by('soi.product_id');
+            
+    	$this->db->group_by('soi.product_id');
+    	return $this->db->get()->result_array();
+    }
+    
+   function get_related_records($so_id = 0, $vendor = null)
+    {
+    	$this->db->select('so.id as sales_order_id, group_concat(po.id) as purchase_order_id, group_concat(shipment.id) as shipment_id, returns.id as return_id');
+    	$this->db->from('sales_order so');
+    	$this->db->join('shipment', 'so.id=shipment.so_id', 'left');
+    	$this->db->join('returns', 'returns.so_id=so.id', 'left');
+    	$this->db->join('purchase_order po', 'po.so_id=shipment.so_id', 'left');
+    	$this->db->where('so.id', $so_id);
+    	if(!is_null($vendor))
+    	{
+    		$this->db->where('shipment.vendor_id', $vendor);
+    	}
+    	return $this->db->get()->row_array();
+    	
+    } 
 }
 ?>
