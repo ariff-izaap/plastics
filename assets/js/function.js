@@ -31,11 +31,6 @@ $(function(){
     
   //$('a,button').tooltip();
 
-    $("#sales_order_search").submit(function(){
-        
-        
-    });
-
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
 	  showDropdowns: true,
@@ -394,7 +389,7 @@ function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
 	ship_addr_id = parseInt(ship_addr_id);
 	
 	$.ajax( {
-        url:base_url+'salesorder/change_ship_address/'+ship_addr_id+'/'+sales_order_id,
+        url:base_url+'salesorder/change_ship_address/'+ship_addr_id+'/'+sales_order_id+'/'+action_type,
         type: "POST",
         data: data,
         dataType:"json",
@@ -403,11 +398,10 @@ function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
         	if(!after_ajax(elm, rdata))
         		return false;
         	
-        	if(rdata.status == 'warning')
-        	{
+        	if(rdata.status == 'warning'){
         		$("#div_add_new_price .modal-body").html(rdata.content);
-            	$("#div_add_new_price").css('width', '800px').modal({});
-            	$('select').not(".boot_select_false").selectpicker();
+            	$("#div_add_new_price").css('width', '800px').addClass("show").removeClass('hide');
+                $("#div_add_new_price").modal();
         	}
         	else if(rdata.status == 'success' && action_type == 'process')
         	{
@@ -421,18 +415,63 @@ function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
         	else
         	{
         		bootbox.alert(rdata.message);
-        	}
-        	
-        	//$("#vpl_count").html(rdata.vpl_count);
-        	//$("#oos_count").html(rdata.oos_count);
-    		//$("#vpl_id").html(rdata.vpl_id);
-    		
+        	}	
         },
         error : function(rdata) {
          after_ajax(elm, rdata);
         }
 	});    
 }
+
+
+function change_billing_addr(action_type, bill_addr_id, sales_order_id, elm)
+{
+	action_type = action_type?action_type:'form';
+	
+	if(!before_ajax(elm, 'Loading....'))
+		return false;
+	
+	data = {};
+	if(action_type == 'process')
+		data = $("#div_addr_billing form").serialize();
+	
+	bill_addr_id = parseInt(bill_addr_id);
+	
+	$.ajax( {
+        url:base_url+'salesorder/change_billing_address/'+bill_addr_id+'/'+sales_order_id+'/'+action_type,
+        type: "POST",
+        data: data,
+        dataType:"json",
+        success : function(rdata){
+        	
+        	if(!after_ajax(elm, rdata))
+        		return false;
+        	
+        	if(rdata.status == 'warning'){
+        		$("#div_addr_billing .modal-body").html(rdata.content);
+            	$("#div_addr_billing").css('width', '800px').addClass("show").removeClass('hide');
+                $("#div_addr_billing").modal();
+        	}
+        	else if(rdata.status == 'success' && action_type == 'process')
+        	{
+        		$("#div_addr_billing").modal('hide');
+        		        		
+        		bootbox.alert(rdata.message, function(){
+        			if(ship_addr_id)
+        			location.href = base_url+'salesorder/view/'+sales_order_id;
+        		});
+        	} 
+        	else
+        	{
+        		bootbox.alert(rdata.message);
+        	}	
+        },
+        error : function(rdata) {
+         after_ajax(elm, rdata);
+        }
+	});    
+}
+
 
 
 function numbersonly(e) 

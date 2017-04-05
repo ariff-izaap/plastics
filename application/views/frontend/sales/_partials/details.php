@@ -55,18 +55,7 @@
     			href="javascript:;" data-original-title="" title="">Issue Return
     			Auth</a>
             </div>
-			
-			<div class="btn-group">
-				
-			<a class="btn btn-primary"
-			onclick="issue_direct_refund(<?php echo $so_id;?>, this)"
-			href="javascript:;" data-original-title="" title="">Issue Refund</a></div>
-
-			<div class="btn-group">
-				
-			<a class="btn btn-primary"
-			onclick="issue_refund_on_order(<?php echo $so_id;?>, this)"
-			href="javascript:;" data-original-title="" title="">Issue Direct Refund</a></div>
+		
 	  </div>
 
 	</div>

@@ -476,18 +476,14 @@ class Salesorder extends Admin_Controller
     	return $vendors;
     }
     
-    function change_ship_address($ship_addr_id = null,$so_id = 0)
+    function change_ship_address($ship_addr_id = null,$so_id = 0, $action)
     {
     
-       // $this->load->helper(array('countries'));
-      //  $this->load->helper(array('order'));
         $this->load->model('address_model');
 
         try
-        {
-            //check if edit-access is TRUE
-           // $this->check_access('edit_access');
-             
+        { 
+           
             //get vendor_id
             $ship_addr_id = (!is_null($ship_addr_id) && (int)$ship_addr_id)?$ship_addr_id:0;
             
@@ -505,65 +501,125 @@ class Salesorder extends Admin_Controller
             //default form values
             $price_list_info = array();
              
-            if( $this->data['ship_addr_id'] )
-            {
+            if($this->data['ship_addr_id']){
                 $tmp = get_address_by_contact_id($this->data['ship_addr_id'], 'data');
                 $price_list_info = array_merge($price_list_info, $tmp);
                 $price_list_info['ship_addr_id'] = $ship_addr_id; 
             }
-                   
-            //set validation rules
-            $this->form_validation->set_rules($this->get_validation_rules('ship_addr'));
+            
+            if($action == 'process'){       
+                //set validation rules
+                $this->form_validation->set_rules($this->get_validation_rules('ship_addr'));
+            }
             
             //Need to work on this
-            
-            if ($this->form_validation->run() == TRUE)
-            {
-                
-            
+            if($this->form_validation->run() == TRUE){
                 $data = array();
-                $data['ship_addr_id']       = $this->data['ship_addr_id'];
                 $data['name']               = $price_list_info['name']; 
-                $data['first_name']         = $this->input->post('first_name');
-                $data['last_name']          = $this->input->post('last_name');
-                $data['company']            = $this->input->post('company');
-                $data['email']              = $price_list_info['email'];
-                $data['address1']           = $this->input->post('address1');
-                $data['address2']           = $this->input->post('address2');
+                $data['address_1']          = $this->input->post('address1');
+                $data['address_2']          = $this->input->post('address2');
+                $data['phone']              = $this->input->post('phone');
                 $data['city']               = $this->input->post('city');
                 $data['state']              = $this->input->post('state');
-                $data['zip']                = $this->input->post('zip');
-                $data['phone']              = $this->input->post('phone');
+                $data['zipcode']            = $this->input->post('zip');
                 $data['country']            = $this->input->post('country');
-                $data['created_id']         = $this->admin['id'];
-                $data['updated_id']         = $this->admin['id'];
-                $data['created_time']       = date('Y-m-d H:i:s', local_to_gmt());
-                $data['updated_time']       = date('Y-m-d H:i:s', local_to_gmt());
-                $data['type']               = 'S';
-                
+                $data['created_date']       = date('Y-m-d H:i:s', local_to_gmt());
+                $data['updated_date']       = date('Y-m-d H:i:s', local_to_gmt());
+               
                 //get so details
-                $so_details = $this->salesorder_model->get_where( array( 'id' => $so_id) )->row_array();
+                $so_details = $this->salesorder_model->get_where(array('id' => $so_id))->row_array();
                 
-                $data['user_id']            = $so_details['customer_id'];
-                   
-                                   
+                $data['customer_id']        = $so_details['customer_id'];
+                                
                 if($this->data['ship_addr_id']){
-                    list($contact, $ship_add) = $this->address_model->create_or_update_address($data);
-                    $this->salesorder_model->update( array('id' => $so_details['id']), array("shipping_address_id"=>$contact));
-                    $price_list_info['shipping_address_id'] = $contact;
-
+                    $this->address_model->update(array("id" => $this->data['ship_addr_id']),$data,"customer_location");
+                    $this->salesorder_model->update( array('id' => $so_details['id']), array("shipping_address_id" => $this->data['ship_addr_id']));
+                    $price_list_info['shipping_address_id'] = $this->data['ship_addr_id'];
+                    
                     log_history('sales_order','Shipping Address has been modified.',$so_details['id']);
-
-                }
-                       
+                }                       
                 $output['status']       = 'success';
                 $output['message']      = 'Shipping Address has been updated successfully!';
             } 
-           
             $this->data['price_list_info'] = $price_list_info; 
-            
             $output['content'] = $this->load->view('frontend/sales/_partials/shipping_address', $this->data, TRUE);
+        }
+        catch(Exception $e)
+        {
+            $output = array('status' => 'error', 'message' => $e->getMessage());
+        }
+        
+        if($this->input->is_ajax_request())
+            $this->_ajax_output($output, TRUE);
+         
+        return $output;
+     
+  }
+  
+   function change_billing_address($bill_addr_id = null,$so_id = 0, $action)
+    {
+    
+        $this->load->model('address_model');
+
+        try
+        { 
+           
+            //get vendor_id
+            $bill_addr_id = (!is_null($bill_addr_id) && (int)$bill_addr_id)?$bill_addr_id:0;
             
+            if(!$bill_addr_id)
+                throw new Exception("Please Create billing address details.");
+                
+            if(!$so_id)
+                throw new Exception("Sales Order is invalid.");
+            
+            $this->data['bill_addr_id'] = $bill_addr_id;            
+                    
+            //default values
+            $output = array('status' => 'warning', 'message' => '');
+            
+            //default form values
+            $price_list_info = array();
+             
+            if($this->data['bill_addr_id']){
+                $tmp = get_customer_billing_address($this->data['bill_addr_id'], 'data');
+                $price_list_info = array_merge($price_list_info, $tmp);
+                $price_list_info['bill_addr_id'] = $bill_addr_id; 
+            }
+            
+            if($action == 'process'){       
+                //set validation rules
+                $this->form_validation->set_rules($this->get_validation_rules('bill_addr'));
+            }
+            
+            //Need to work on this
+            if($this->form_validation->run() == TRUE){
+                $data = array();
+                $data['first_name']         = $this->input->post('first_name');
+                $data['last_name']          = $this->input->post('last_name');
+                $data['company']            = $this->input->post('company');  
+                $data['address1']           = $this->input->post('address1');
+                $data['address2']           = $this->input->post('address2');
+                $data['phone']              = $this->input->post('phone');
+                $data['city']               = $this->input->post('city');
+                $data['state']              = $this->input->post('state');
+                $data['zipcode']            = $this->input->post('zip');
+                $data['country']            = $this->input->post('country');
+                $data['created_date']       = date('Y-m-d H:i:s', local_to_gmt());
+                $data['updated_date']       = date('Y-m-d H:i:s', local_to_gmt());
+                             
+                if($this->data['bill_addr_id']){
+                    $this->address_model->update(array("id" => $this->data['bill_addr_id']),$data,"address");
+                    $this->salesorder_model->update( array('id' => $so_details['id']), array("billing_address_id" => $this->data['bill_addr_id']));
+                    $price_list_info['billing_address_id'] = $this->data['bill_addr_id'];
+                    
+                    log_history('sales_order','Billing Address has been modified.',$so_details['id']);
+                }                       
+                $output['status']       = 'success';
+                $output['message']      = 'Billing Address has been updated successfully!';
+            } 
+            $this->data['price_list_info'] = $price_list_info; 
+            $output['content'] = $this->load->view('frontend/sales/_partials/billing_address', $this->data, TRUE);
         }
         catch(Exception $e)
         {
@@ -583,15 +639,28 @@ class Salesorder extends Admin_Controller
     $rules = array();
     if(strcmp($type, 'ship_addr') === 0)
     {
-        $rules['ship_addr']['first_name']  = array('field' => 'first_name',  'rules' => 'trim|required');
-        $rules['ship_addr']['last_name']                  = array('field' => 'last_name', 'rules' => 'trim|required');
-        $rules['ship_addr']['address1']                 = array('field' => 'address1', 'rules' => 'trim|required');
-        $rules['ship_addr']['address2']             = array('field' => 'address2', 'rules' => 'trim');
-        $rules['ship_addr']['city']             = array('field' => 'city', 'rules' => 'trim|required');
-        $rules['ship_addr']['state']          = array('field' => 'state', 'rules' => 'trim|required');
-        $rules['ship_addr']['zip']            = array('field' => 'zip', 'rules' => 'trim|required');
-        $rules['ship_addr']['phone']              = array('field' => 'phone', 'rules' => 'trim|required');
+        $rules['ship_addr']['name']        = array('field' => 'name',  'rules' => 'trim|required');
+      //  $rules['ship_addr']['last_name']   = array('field' => 'last_name', 'rules' => 'trim|required');
+        $rules['ship_addr']['address1']    = array('field' => 'address1', 'rules' => 'trim|required');
+        $rules['ship_addr']['address2']    = array('field' => 'address2', 'rules' => 'trim');
+        $rules['ship_addr']['city']        = array('field' => 'city', 'rules' => 'trim|required');
+        $rules['ship_addr']['state']       = array('field' => 'state', 'rules' => 'trim|required');
+        $rules['ship_addr']['zip']         = array('field' => 'zip', 'rules' => 'trim|required');
+        $rules['ship_addr']['phone']       = array('field' => 'phone', 'rules' => 'trim|required');
     }
+    
+      if(strcmp($type, 'bill_addr') === 0)
+    {
+        $rules['bill_addr']['first_name']  = array('field' => 'first_name',  'rules' => 'trim|required');
+        $rules['bill_addr']['last_name']   = array('field' => 'last_name', 'rules' => 'trim|required');
+        $rules['bill_addr']['company']     = array('field' => 'company', 'rules' => 'trim|required');
+        $rules['bill_addr']['address1']    = array('field' => 'address1', 'rules' => 'trim|required');
+        $rules['bill_addr']['address2']    = array('field' => 'address2', 'rules' => 'trim');
+        $rules['bill_addr']['city']        = array('field' => 'city', 'rules' => 'trim|required');
+        $rules['bill_addr']['state']       = array('field' => 'state', 'rules' => 'trim|required');
+        $rules['bill_addr']['zip']         = array('field' => 'zip', 'rules' => 'trim|required');
+        $rules['bill_addr']['phone']       = array('field' => 'phone', 'rules' => 'trim|required');
+    } 
      
     if(!is_null($key) && isset($rules[$type][$key]))
         return $rules[$type][$key];

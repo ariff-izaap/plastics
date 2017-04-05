@@ -118,6 +118,31 @@ function get_address_by_contact_id($cid = 0, $output_type = 'both', $address_tag
 	if(strcmp($output_type, 'data') === 0)
 		return $address;
 	
+	$address_format = format_shipping_address($address, $address_tag);
+	
+	if(strcmp($output_type, 'html') === 0)
+		return $address_format;
+
+	return array('data' => $address, 'html' => $address_format);
+
+}
+
+function get_customer_billing_address($cid = 0, $output_type = 'both', $address_tag = TRUE)
+{
+    if(!$cid)
+		return FALSE;
+
+	$CI = & get_instance();
+
+	$CI->load->model('address_model');
+	$address = $CI->address_model->get_customer_billing_address($cid);
+
+	if(!count($address))
+		return FALSE;
+	
+	if(strcmp($output_type, 'data') === 0)
+		return $address;
+	
 	$address_format = format_address($address, $address_tag);
 	
 	if(strcmp($output_type, 'html') === 0)
@@ -140,6 +165,28 @@ function format_address($address = array(), $address_tag = TRUE)
 	if(strcmp($address['address2'],'') !== 0)
 		$address_format .= "{$address['address2']} <br />";
 	$address_format .= "{$address['city']} {$address['state']} {$address['zip']} <br />";
+	$address_format .= "{$address['country']} <br />";
+	if(strcmp($address['phone'],'') !== 0)
+		$address_format .= "<abbr title='Phone'>P:</abbr> {$address['phone']}";
+	$address_format .= ($address_tag)?"</address>":"</p>";
+
+	return $address_format;
+
+}
+
+function format_shipping_address($address = array(), $address_tag = TRUE)
+{
+	if(!count($address))
+		return FALSE;
+
+	$address_format = ($address_tag)?"<address>":"<p>";
+	$address_format .= "<strong>{$address['name']}</strong> <br />";
+	if(strcmp(trim($address['company']),'') !== 0)
+		$address_format .= "{$address['company']}<br />";
+	$address_format .= "{$address['address_1']} <br />";
+	if(strcmp($address['address2'],'') !== 0)
+		$address_format .= "{$address['address_2']} <br />";
+	$address_format .= "{$address['city']} {$address['state']} {$address['zipcode']} <br />";
 	$address_format .= "{$address['country']} <br />";
 	if(strcmp($address['phone'],'') !== 0)
 		$address_format .= "<abbr title='Phone'>P:</abbr> {$address['phone']}";
@@ -700,6 +747,8 @@ function get_state()
    $q = $CI->db->query("select * from state where status=1")->result_array();
    return $q;
 }
+
+
 
 
 function get_timezone()

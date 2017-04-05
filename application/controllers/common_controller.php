@@ -89,7 +89,6 @@ class Common_controller
 			}
 			
 			$data['order'] = $order;
-			
 			//$data['manual_process'] = $this->CI->load->view('frontend/sales_orders/_partials/manual_process', $data, TRUE);
 		}
 
@@ -98,11 +97,9 @@ class Common_controller
 	//	$data['reconcile_charges'] = $this->CI->sales_order_prices_model->get_total_charge_by_so($so_id);
 		
 		//order total
-		$data['order_total'] = ($data['so_details']['total_amount']);
-
+		$data['order_total']   = ($data['so_details']['total_amount']);
 		$data['order_details'] = $this->CI->load->view('frontend/sales/_partials/details', $data, TRUE);
-		 
-		$data['bulk_actions'] = array('' => 'select', 'issue_ra' => 'Issue RA for selected items', 'refund' => 'Refund selected items');
+		$data['bulk_actions']  = array('' => 'select', 'issue_ra' => 'Issue RA for selected items', 'refund' => 'Refund selected items');
 		 
 		//get attachments
 		//$data['attachments'] = $this->CI->salesorder_model->get_where(array('so_id' => $so_id), '*', 'sales_order_attachments')->result_array();
@@ -121,9 +118,8 @@ class Common_controller
 		//check if this orders is involved with vendor that order type is 'web', to show alert message.
 	//	$data['vendor_alert'] = $this->get_alert('vendor_type', array('so_id' => $so_id));
         
-        
         //get shipping country
-        $shipping_address = get_address_by_contact_id( $data['so_details']['shipping_address_id'], 'data' );
+        $shipping_address         = get_address_by_contact_id( $data['so_details']['shipping_address_id'], 'data' );
 	  	$data['shipment_country'] = $shipping_address['country'];
 
 		return $data;

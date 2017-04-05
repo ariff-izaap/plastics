@@ -16,12 +16,13 @@
 							<thead class="greenbg_title txt_13">
 								<tr>
 									<th width="10%">Billing Information</th>
+                                    <a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
 								</tr>
 							</thead>
 							<tbody class="white_bg">
 								<tr>
 									<td id="shipping_address">
-										<?php echo get_address_by_contact_id($so_details['billing_address_id'], 'html');?>
+										<?php echo get_customer_billing_address($so_details['billing_address_id'], 'html');?>
 									</td>									
 								</tr>
 							</tbody>

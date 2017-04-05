@@ -1,11 +1,10 @@
 
 <!-- Modal -->
-<div id="div_add_new_price" class="modal hide fade" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<form action="<?php echo site_url('sales_orders/change_ship_addr/')."/".$so_details['shipping_address_id'];?>" method="post">
+<!--
+<div id="div_add_new_price" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<form action="<?php //echo site_url('salesorder/change_ship_address/')."/".$so_details['shipping_address_id'];?>" method="post">
 		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">&times;</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3 id="myModalLabel">Change Shipping Address</h3>
 		</div>
 
@@ -14,12 +13,52 @@
 		</div>
 
 		<div class="modal-footer">
-			<button type="button" onclick="change_ship_addr('process', <?php echo $so_details['shipping_address_id']; ?>, <?php echo $so_details['id']; ?>, this)" class="btn btn-primary" >submit</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true"
-				id="modal_close">Close</button>
+			<button type="button" onclick="change_ship_addr('process', <?php //echo $so_details['shipping_address_id']; ?>, <?php //echo $so_details['id']; ?>, this)" class="btn btn-primary" >submit</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true" id="modal_close">Close</button>
 
 		</div>
 	</form>
+</div>
+-->
+
+<!-- Shipping Address Modal -->
+<div id="div_add_new_price" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form action="<?php echo site_url('salesorder/change_ship_address/')."/".$so_details['shipping_address_id'];?>" method="post">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3 id="myModalLabel">Change Shipping Address</h3>
+		</div>
+      <div class="modal-body">
+      
+      </div>
+      <div class="modal-footer">
+			<button type="button" onclick="change_ship_addr('process', <?php echo $so_details['shipping_address_id']; ?>, <?php echo $so_details['id']; ?>, this)" class="btn btn-primary" >submit</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true" id="modal_close">Close</button>
+		</div>
+    </div>
+  </form>
+</div>
+
+<!-- Billing Address Modal -->
+<div id="div_addr_billing" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form action="<?php echo site_url('salesorder/change_billing_address/')."/".$so_details['billing_address_id'];?>" method="post">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3 id="myModalLabel">Change Billing Address</h3>
+		</div>
+      <div class="modal-body">
+      
+      </div>
+      <div class="modal-footer">
+			<button type="button" onclick="change_billing_addr('process', <?php echo $so_details['billing_address_id']; ?>, <?php echo $so_details['id']; ?>, this)" class="btn btn-primary" >submit</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true" id="modal_close">Close</button>
+		</div>
+    </div>
+  </form>
 </div>
 
 
