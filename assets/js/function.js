@@ -1174,46 +1174,58 @@ function get_customer_details(so_id)
   });
 }
 
-function sales_update_cart(cart_id='')
+function sales_update_cart(action_type,sales_order_id, elm)
 {
-    //e.preventDefault();
-     var qty  = $("#quantity").val();
-     
-  //if(qty == ''){ 
-   
-    $('#updat_cart').modal();
-    $("#updat_cart").show();
- // }
- // else
- // {  
-    if(cart_id!='')
-      cart_id = $("#cart_id").val(cart_id);
-  
-   cart_id  = $("#cart_id").val();
-   
-   $.ajax({
-    type:"POST",
-    url:base_url+'salesproductselection/update_cart',
-    data:{id:cart_id,quantity:qty},
-    dataType:"json",
-    success:function(data)
-    {
-      var status = data.status;
-     // var output = data.output;      
-      if(status == 'success'){
-        $("#product_shipping_lists").html(data.viewlist);
-        $(window).scrollTop($('#product_shipping_lists').offset().top);
-      }
-    }  
-  }); 
-// } 
+    action_type = action_type?action_type:'form';
+	
+	if(!before_ajax(elm, 'Loading....'))
+		return false;
+	
+	data = {};
+	if(action_type == 'process')
+		data = $("#sales_update_to_cart form").serialize();
+	
+	$.ajax({
+        url:base_url+'salesorder/update_salesorder_quantity/'+'/'+action_type+'/'+sales_order_id,
+        type:"POST",
+        data:data,
+        dataType:"json",
+        success : function(rdata){
+        	
+        	if(!after_ajax(elm, rdata))
+        		return false;
+        	
+        	if(rdata.status == 'warning'){
+        		$("#updat_cart .modal-body").html(rdata.content);
+            	$("#updat_cart").css('width', '800px').addClass("show").removeClass('hide');
+                $("#updat_cart").modal();
+        	}
+        	else if(rdata.status == 'success' && action_type == 'process')
+        	{
+        		$("#div_addr_billing").modal('hide');
+        		        		
+        		bootbox.alert(rdata.message, function(){
+        			if(sales_order_id)
+        			location.href = base_url+'salesorder/view/'+sales_order_id;
+        		});
+        	} 
+        	else
+        	{
+        		bootbox.alert(rdata.message);
+        	}	
+        },
+        error : function(rdata) {
+         after_ajax(elm, rdata);
+        }
+	}); 
+    
+ 
 }
 
 function sales_order_update_quantity(sale_item_id,so_id)
 {
     var qty  = $("#update_qty").val();
-  
-   
+    
    $.ajax({
     type:"POST",
     url:base_url+'salesorder/update_salesorder_quantity',

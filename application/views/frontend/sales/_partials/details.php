@@ -3,6 +3,7 @@
 		<h2>Order Details</h2>
 	</div>
 	<div class="row m_bot_5">
+        <a class="pull-right underline" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)">Edit</a>
 		<table class="table table-bordered table-striped">
 			<thead class="greenbg_title">
 				<tr>
@@ -15,17 +16,6 @@
 			</thead>
 			<tbody class="white_bg">
 				<?php foreach ($order as $pid=>$row): ?>
-				<?php 
-				if($row['sales_channel_id'] == 7 || $row['sales_channel_id'] == 8)
-				{
-					$where = array('product_id' => $pid, 'amazon_sku' => $row['api_sku']);
-					$details = get_product_details($where, $row['sales_channel_id']);
-					if($details !== FALSE)
-					{
-						$row['product_name'] = $details['pro_name'];
-					}
-				}
-				?>
 				<tr>
 					<td><?php echo displayData($row['product_name'], 'product_name_link', array('id'=>$pid));?>
 					</td>
@@ -52,7 +42,7 @@
 				
     			<a class="btn btn-primary"
     			onclick="issue_return_auth(<?php echo $so_id;?>, this)"
-    			href="javascript:;" data-original-title="" title="">Issue Return
+    			href="javascript:;" data-original-title="" title=""> Return
     			Auth</a>
             </div>
 		
@@ -69,6 +59,7 @@
 	<?php $details = current($order_detail);?>
 
 	<div class="row m_bot_5">
+       <a class="pull-right underline" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)">Edit</a>
 		<table class="table table-bordered m_bot_10">
 			<tbody class="light_green_bg green">
 				<tr>

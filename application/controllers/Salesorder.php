@@ -669,29 +669,46 @@ class Salesorder extends Admin_Controller
      
     }
     
-    public function update_salesorder_quantity()
+    public function update_salesorder_quantity($action,$so_id)
     {
-        
-        $st_id    = $this->input->post("id");
-        $so_id    = $this->input->post("so_id");
-        $quantity = $this->input->post('quantity');
-        
-        $this->db->query("update sales_order_item set qty='".$quantity."' where id='".$st_id."'");
-        
-        $st_data   = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
-        $total_amt = $st_data['qty']*$st_data['unit_price'];
-        
-        $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
-        
-        $this->data['cartitems'] = $this->salesorder_model->get_sales_items($so_id);
-        $this->data['total']     = $total_amt;
-        
-        $output['message']       = "Item updated successfully";
-        $output['status']        = "success";
-        $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);   
+        try
+        { 
+           if($action == 'process'){
+            $st_id    = $this->input->post("id");
+            $so_id    = $this->input->post("so_id");
+            $quantity = $this->input->post('quantity');
+            
+            $this->db->query("update sales_order_item set qty='".$quantity."' where id='".$st_id."'");
+            
+            $st_data   = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
+            $total_amt = $st_data['qty']*$st_data['unit_price'];
+            
+            $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
+            
+            
+            
+            
+            $output['message']       = "Item updated successfully";
+            $output['status']        = "success";
+          }
+          else
+          { 
+            $this->data['cartitems'] = $this->salesorder_model->get_sales_items($so_id);
+            $this->data['total']     = $total_amt;
+            $output['status']        = "warning";
+            $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
+          }   
+        }
+        catch(Exception $e)
+        {
+            $output = array('status' => 'error', 'message' => $e->getMessage());
+        } 
+          
         $this->_ajax_output($output, TRUE);
        
     }
+    
+    
     
     /* End by Punitha */
 
