@@ -125,12 +125,9 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <form name="sales_update_to_cart" id="sales_update_to_cart">
-      <div class="modal-body">
-      
-     </div>  
-   
+          <div class="modal-body">
+          </div>  
      </form>
-     
     </div>
   </div>
 </div>

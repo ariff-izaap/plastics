@@ -1183,7 +1183,7 @@ function sales_update_cart(action_type,sales_order_id, elm)
 	
 	data = {};
 	if(action_type == 'process')
-		data = $("#sales_update_to_cart form").serialize();
+		data = $("#sales_update_to_cart").serialize();
 	
 	$.ajax({
         url:base_url+'salesorder/update_salesorder_quantity/'+'/'+action_type+'/'+sales_order_id,
@@ -1242,10 +1242,112 @@ function sales_order_update_quantity(sale_item_id,so_id)
   });
 }
 
-function create_so()
+function show_logs(key, val)
 {
-    
+	$.ajax( {
+        url:base_url+current_controller+'/get_logs/'+key+'/'+val,
+        type: "POST",
+        data: {},
+        dataType:"json",
+        success : function(rdata){
+        	var obj = $("#logs_list");
+        	obj.html(rdata.listing);	
+        	//obj.focus();
+            scroll_to("logs_list");
+            
+        	$('#logs_table').fixedHeaderTable({	autoShow: false, altClass: 'odd', height:'550px'});
+        	$('#logs_table').fixedHeaderTable('show', 1000);
+        },
+        error : function(data) {
+         alert('error');
+        }
+	});
+	
 }
+
+
+function add_note(type, id)
+{
+	var html = ' <div id="div_notes" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> '+
+	      			'<form id="note_form" method="post"> '+
+						'<div class="modal-header"> '+
+        					'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> '+
+        					'<h3 id="myModalLabel">Add Note</h3> '+
+						'</div> '+		      
+						'<div class="modal-body" style="height:60%;overflow:auto"> '+
+             '<input type="hidden" name="line" id="line" value="'+type+'">'+
+							'<input type="hidden" name="action_id" id="action_id" value="'+id+'">'+
+							'<textarea id="note-body" name="message" class="ckeditor"></textarea>'+	
+						'</div>'+
+						'<div class="modal-footer">'+
+							'<a href="javascript:;" class="btn btn-primary" onclick="save_notes(this);">submit</a>'+
+							'<button class="btn" data-dismiss="modal" aria-hidden="true" id="modal_close">Close</button>'+
+						'</div>'+
+					'</form>'+
+				'</div>';
+	
+	if(!$("#div_notes").length)
+	{
+		$('body').append(html);
+		//enable_notes_editor();
+	}
+	
+	$("#div_notes").css({width:'800px'}).modal('show');
+}
+
+function save_notes(elm)
+{
+	if(!before_ajax(elm, 'saving....'))
+		return false;
+	
+	$("#note-body").val(editor.getData());
+	
+	$.ajax( {
+        url:base_url+'notes/save',
+        type: "POST",
+        data: $("#note_form").serialize(),
+        dataType:"json",
+        success : function(rdata){
+        	after_ajax(elm, rdata);
+        	if(rdata.status == 'error')
+    			alert(rdata.message);
+    		else
+    		{
+    			//if successfully added, show it in lit-view
+    			show_notes(rdata.key, rdata.val);
+    			alert('successfully added.');
+    			$("#div_notes #modal_close").trigger('click');          
+          scroll_to("notes_list");
+          editor.setData('');
+    		}
+        },
+        error : function(data) {
+         after_ajax(elm);
+        }
+	});
+	
+}
+
+function show_notes(key, val)
+{
+	$.ajax( {
+        url:base_url+current_controller+'/get_notes/'+key+'/'+val,
+        type: "POST",
+        data: {},
+        dataType:"json",
+        success : function(rdata){
+        	var obj = $("#notes_list");
+        	obj.html(rdata.listing);	
+        	obj.focus();
+        },
+        error : function(data) {
+         alert('error');
+        }
+	});
+	
+}
+
+
 /***End To Punitha **/
 
 

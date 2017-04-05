@@ -674,20 +674,20 @@ class Salesorder extends Admin_Controller
         try
         { 
            if($action == 'process'){
-            $st_id    = $this->input->post("id");
-            $so_id    = $this->input->post("so_id");
-            $quantity = $this->input->post('quantity');
             
-            $this->db->query("update sales_order_item set qty='".$quantity."' where id='".$st_id."'");
+            $sales_order_item_id = $this->input->post("sales_order_item_id[]");
+            $quantity            = $this->input->post('update_qty[]');
             
-            $st_data   = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
-            $total_amt = $st_data['qty']*$st_data['unit_price'];
+            $i = 0;
+            foreach($sales_order_item_id as $st_id){
+                $this->db->query("update sales_order_item set qty='".$quantity[$i]."' where id='".$st_id."'");
+                $st_data    = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
+                $total_amt += $st_data['qty']*$st_data['unit_price'];
+                $i++;
+            }
+            log_history('sales_order','Quantity has been modified.',$so_id);
             
             $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
-            
-            
-            
-            
             $output['message']       = "Item updated successfully";
             $output['status']        = "success";
           }
@@ -695,6 +695,7 @@ class Salesorder extends Admin_Controller
           { 
             $this->data['cartitems'] = $this->salesorder_model->get_sales_items($so_id);
             $this->data['total']     = $total_amt;
+            $this->data['so_id']     = $so_id;
             $output['status']        = "warning";
             $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
           }   
@@ -708,7 +709,26 @@ class Salesorder extends Admin_Controller
        
     }
     
-    
+    public function get_logs($so_id, $value )
+    {
+        
+    	if(!$so_id)
+    		return false;
+       
+    	$this->load->library('Listing');
+    	$this->load->model('log_model');
+    	
+    	//prepare conditions
+    	
+    	$this->data['list']  = $this->log_model->get_logs(array("action_id" => $value));
+    	$listing = $this->load->view('listing/logs_listings', $this->data, TRUE);
+    	 
+    	
+    	if($this->input->is_ajax_request())
+    		$this->_ajax_output(array('listing' => $listing), TRUE);
+    	
+    	return $listing;
+    }
     
     /* End by Punitha */
 
@@ -843,7 +863,8 @@ class Salesorder extends Admin_Controller
       $output  =  $this->load->view('frontend/sales/ajax_new_address',$this->data,true);
       return $this->_ajax_output(array('status' => 'success' ,'output' => $output), TRUE);
     }
-
+    
+    
     /*End by Ram*/
 }
 ?>

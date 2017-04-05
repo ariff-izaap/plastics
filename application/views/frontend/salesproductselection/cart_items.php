@@ -18,8 +18,7 @@
   
    <?php 
        if(count($cartitems)>0) { 
-         foreach($cartitems as $cvalue) {
-            
+         foreach($cartitems as $cvalue) {   
      ?>
         <tr>
             <td><input type="radio" name="sales_order_create" id="sales_order_create" /></td>
@@ -38,11 +37,8 @@
             <td><button type="button" name="delete_cart" onclick="delete_cart('<?php echo $cvalue['rowid']; ?>');" class="btn btn-default">Delete</button>
             </td>
         </tr>
- <?php } ?>
-
- <?php 
-    } 
-      else { ?>
+ <?php }} 
+    else { ?>
    <tr>
     <td colspan="11"><?php echo "No Products Found!"; ?></td>
    </tr>
