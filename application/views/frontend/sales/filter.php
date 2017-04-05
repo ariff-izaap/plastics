@@ -2,7 +2,7 @@
   <div class="container ship-order">
   <div class="row">
       <div class="form-grid col-md-6 panel panel-default panel-bor">
-      <div class="panel-heading formcontrol-box">
+      <div class="panel-heading formcontrol-box ship-box">
             <div class="form-group" >
               <label class="col-md-4">Shipping Order</label>
               <input type="text" name="shipping_order" class="form-control col-md-8" id="shipping_order" value="" placeholder="" />
@@ -42,11 +42,11 @@
               <input type="text" name="address_2" class="form-control col-md-8" id="address_2" value="" placeholder="" />
             </div>
              <div class="form-group clearfix postal">
-            <div class="form-group col-md-2 city" >
+            <div class="form-group col-md-2 shapping-add city" >
               <label>City</label>
               <input type="text" name="city" class="form-control" id="city" value="" placeholder="" />
             </div>
-            <div class="form-group col-md-2" >
+            <div class="form-group col-md-2 shapping-add" >
               <label>State</label>
               <select class="form-control" name="state" id="state" >
                    <?php $state = get_state();
@@ -55,7 +55,7 @@
                   <?php endforeach;?>
               </select>
             </div>
-            <div class="form-group col-md-2 zip" >
+            <div class="form-group col-md-2 shapping-add zip" >
               <label>Zipcode</label>
               <input type="text" name="zipcode" class="form-control" id="zipcode" />
             </div>
@@ -74,7 +74,7 @@
             
             <div class="form-group" >
               <label class="col-md-4">Terms</label>
-              <select class="form-control" name="credit_type" id="credit_type" >
+              <select class="form-control col-md-8" name="credit_type" id="credit_type" >
                    <?php  $terms = get_credit_type();
                        foreach($terms as $addr): ?>
                     <option value="<?php echo $addr['id'];?>" > <?php echo $addr['name'];?> </option>
@@ -83,7 +83,7 @@
             </div>
             <div class="form-group" >
               <label class="col-md-4">Payment By</label>
-              <select class="form-control" name="payment_by" id="payment_by" >
+              <select class="form-control col-md-8" name="payment_by" id="payment_by" >
                    <?php $terms = get_credit_type();
                      foreach($terms as $addr): ?>
                     <option value="<?php echo $addr['id'];?>"> <?php echo $addr['name'];?> </option>
@@ -136,9 +136,9 @@
           
          </div>
          </div>
-            <div class="col-md-4 clear-btn">
-                 <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
-                <button type="button" class="btn btn-block" onclick="$.fn.submit_advance_search_form();">Search</button>
+            <div class="col-md-12 clear-btn text-r">
+                 <a href="javascript:void(0)" class="btn btn-sm active cl-bt" onclick="$.fn.clear_advance_search();">Clear</a>
+                <button type="button" class="btn btn-block search-bt" onclick="$.fn.submit_advance_search_form();">Search</button>
             </div>
          </div>
           

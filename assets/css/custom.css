@@ -12,7 +12,7 @@
 .access-level input[type="checkbox"] {  margin-right: 6px;}
 #product_shipping_lists {padding: 12px 25px;}
 .action-buttons { min-height: 57px;}
-.form-group > label + select {height: 65px;}
+.form-group > label + select {height: 32px;}
 td { padding:4px 6px !important;}
 #advance_search_form .form-group { margin-bottom:0px !important;}
 #advance_search_form .button-sec { margin-bottom:0px;}
@@ -90,8 +90,14 @@ td { padding:4px 6px !important;}
     width: 22%;
 }
 .topsec_info table td { text-align:center;}
-@media (min-width:992px)
-{
+
+.ship-order textarea.form-control {height: 40px !important;}
+.ship-order .panel { margin-bottom: 0;}
+.product-sel .search-bt{margin-right: 7px; float: none; width: 100%; max-width: 160px;  display: inline-block;}
+.text-r{text-align:right;}
+.product-sel .cl-bt{display: inline-block; float: right;}
+
+@media (min-width:992px){
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
 .city {width:250px;}
 .zip{ width:184px;}
@@ -105,12 +111,12 @@ td { padding:4px 6px !important;}
 .second-box { min-height:554px;}
 .formcontrol-box .form-control.col-md-8 { width:66.6667% !important;}
 .formcontrol-box .form-control.col-md-9 { width:75% !important;}
-.formcontrol-box .form-group { display: inline-block; width: 100%; margin:10px 0px; margin-bottom:20px;}
+.formcontrol-box .form-group { display: inline-block; width: 100%; margin:4px 0px; margin-bottom:20px;}
 .postal .form-group {float: left; width: 33.338%;}
 .postal {padding-left: 33%;}
 .active-css { padding-left:33%;}
 .call-log { height:120px;}
-.ship-box { min-height: 726px;}
+.ship-box { min-height:395px;}
 .call-group1 .form-group:nth-child(1){width:60%; float:left;}
 .call-group1 .form-group:nth-child(2){width:30%; margin: 55px 0 0 18px;}
 .call-group2 .form-group:nth-child(1){width:46%; float:left;}
@@ -135,6 +141,8 @@ form .error::after { right:0px !important;}
 .add-user .form-group { width:25%; float:left;}
 .add-user1 { max-width:800px;}
 .action-buttons { padding:10px 35px !important;}
+.postal .form-group.shapping-add {width: 31.338%;}
+
 }
 
 
