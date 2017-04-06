@@ -1268,31 +1268,25 @@ function show_logs(key, val)
 
 function add_note(type, id)
 {
-	var html = ' <div id="div_notes" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> '+
-	      			'<form id="note_form" method="post"> '+
+	var hl = '<form id="note_form" method="post"> '+
 						'<div class="modal-header"> '+
-        					'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> '+
+        					'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> '+
         					'<h3 id="myModalLabel">Add Note</h3> '+
 						'</div> '+		      
 						'<div class="modal-body" style="height:60%;overflow:auto"> '+
-             '<input type="hidden" name="line" id="line" value="'+type+'">'+
+                            '<input type="hidden" name="line" id="line" value="'+type+'">'+
 							'<input type="hidden" name="action_id" id="action_id" value="'+id+'">'+
-							'<textarea id="note-body" name="message" class="ckeditor"></textarea>'+	
+							'<textarea id="note-body" name="message" class="form-group"></textarea>'+	
 						'</div>'+
 						'<div class="modal-footer">'+
 							'<a href="javascript:;" class="btn btn-primary" onclick="save_notes(this);">submit</a>'+
 							'<button class="btn" data-dismiss="modal" aria-hidden="true" id="modal_close">Close</button>'+
 						'</div>'+
-					'</form>'+
-				'</div>';
+					'</form>';
 	
-	if(!$("#div_notes").length)
-	{
-		$('body').append(html);
-		//enable_notes_editor();
-	}
-	
-	$("#div_notes").css({width:'800px'}).modal('show');
+     $("#div_add_note .modal-body").html(hl);
+	$("#div_add_note").css({width:'800px'}).addClass("show").removeClass('hide');
+    $("#div_add_note").modal();
 }
 
 function save_notes(elm)
@@ -1300,10 +1294,10 @@ function save_notes(elm)
 	if(!before_ajax(elm, 'saving....'))
 		return false;
 	
-	$("#note-body").val(editor.getData());
+	$("#note-body").val();
 	
 	$.ajax( {
-        url:base_url+'notes/save',
+        url:base_url+'note/save',
         type: "POST",
         data: $("#note_form").serialize(),
         dataType:"json",
@@ -1316,9 +1310,9 @@ function save_notes(elm)
     			//if successfully added, show it in lit-view
     			show_notes(rdata.key, rdata.val);
     			alert('successfully added.');
-    			$("#div_notes #modal_close").trigger('click');          
-          scroll_to("notes_list");
-          editor.setData('');
+    			$("#div_add_note #modal_close").trigger('click');          
+                scroll_to("notes_list");
+                     
     		}
         },
         error : function(data) {
@@ -1331,7 +1325,7 @@ function save_notes(elm)
 function show_notes(key, val)
 {
 	$.ajax( {
-        url:base_url+current_controller+'/get_notes/'+key+'/'+val,
+        url:base_url+current_controller+'/get_notes/'+val,
         type: "POST",
         data: {},
         dataType:"json",

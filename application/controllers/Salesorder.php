@@ -717,11 +717,28 @@ class Salesorder extends Admin_Controller
        
     	$this->load->library('Listing');
     	$this->load->model('log_model');
-    	
-    	//prepare conditions
-    	
+
     	$this->data['list']  = $this->log_model->get_logs(array("action_id" => $value));
     	$listing = $this->load->view('listing/logs_listings', $this->data, TRUE);
+    	 
+    	
+    	if($this->input->is_ajax_request())
+    		$this->_ajax_output(array('listing' => $listing), TRUE);
+    	
+    	return $listing;
+    }
+    
+    public function get_notes($so_id)
+    {
+        
+    	if(!$so_id)
+    		return false;
+       
+    	$this->load->library('Listing');
+    	$this->load->model('note_model');
+    	
+    	$this->data['list']  = $this->note_model->get_notes(array("sales_order_id" => $value));
+    	$listing = $this->load->view('listing/note_listings', $this->data, TRUE);
     	 
     	
     	if($this->input->is_ajax_request())

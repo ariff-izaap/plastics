@@ -207,6 +207,16 @@
 					<div class="row">
 						<h2>Notes</h2>						
 					</div>
+                    <div id="div_add_note" class="modal fade" role="dialog" aria-hidden="true">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-body">
+                          
+                          </div>
+                          
+                        </div>
+                    </div>
+                    
 					<div class="row" id="notes_list">
 						<?php echo $notes;?>
 					</div>

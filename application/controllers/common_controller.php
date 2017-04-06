@@ -615,18 +615,18 @@ class Common_controller
 			
 			if((int)$row['sales_order_id'])
 			{
-				$links .= " <li><a href='javascript:;' onclick='add_note(\"sales_order\", {$row['sales_order_id']})'><i class='icon-chevron-right-small'></i> Add Note</a></li>
+				$links .= " <li><a href='javascript:void(0);' onclick='add_note(\"sales_order\", {$row['sales_order_id']})'><i class='icon-chevron-right-small'></i> Add Note</a></li>
 							<li><a href='javascript:;' onclick='show_logs(\"sales_order_id\", {$row['sales_order_id']})'><i class='icon-chevron-right-small'></i> Show Log History</a></li>
 							";
 			}
 			else
 			{
 				
-				$links .= " <li><a href='javascript:;' onclick='add_note(\"{$args['cur_page']}\", {$args['cur_page_id']})'><i class='icon-chevron-right-small'></i> Add Note</a></li>";
+				$links .= " <li><a  onclick='add_note(\"{$args['cur_page']}\", {$args['cur_page_id']})'><i class='icon-chevron-right-small'></i> Add Note</a></li>";
 				
 				$args['cur_page'] .= '_id';
 
-				$links .= "<li><a href='javascript:;' onclick='show_logs(\"{$args['cur_page']}\", {$args['cur_page_id']})'><i class='icon-chevron-right-small'></i> Show Log History</a></li>
+				$links .= "<li><a href='javascript:void(0);' onclick='show_logs(\"{$args['cur_page']}\", {$args['cur_page_id']})'><i class='icon-chevron-right-small'></i> Show Log History</a></li>
 							";
 			}
 		}
