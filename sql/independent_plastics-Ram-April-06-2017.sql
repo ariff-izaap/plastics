@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2017 at 08:45 AM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Generation Time: Apr 06, 2017 at 01:32 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -371,11 +371,11 @@ CREATE TABLE `customer_location` (
 --
 
 INSERT INTO `customer_location` (`id`, `customer_id`, `name`, `address_1`, `address_2`, `phone`, `city`, `state`, `country`, `zipcode`, `definition`, `timezone_id`, `start_time`, `end_time`, `day_of_week`, `created_date`, `updated_date`) VALUES
-(1, 1, 'Houston Locations', '1601 Purdue Drive', 'Suite Apt', 6565, 'Fayetteville', 1, 1, '2565', '1', 3, '01:00:00', '01:00:00', 2, '2017-04-04 12:38:49', '2017-04-04 07:08:49'),
-(2, 3, 'Houston Locations', '1601 Purdue Drive', 'Suite Apt', 0, 'Fayetteville', 1, 1, '28304-3674', '1,2', 1, '01:00:00', '01:00:00', 1, '0000-00-00 00:00:00', '2017-03-23 03:05:26'),
-(22, 5, 'Houston Locationsadsad', '1601 Purdue Drive', '', 0, 'Fayetteville', 1, 2, '28304', '2', 3, '01:00:00', '01:00:00', 2, '0000-00-00 00:00:00', '2017-03-27 10:31:10'),
-(23, 5, 'Houston Location', '1601 Purdue Drive', '', 0, 'Fayetteville', 1, 2, '28304', '1,2', 3, '01:00:00', '01:00:00', 2, '0000-00-00 00:00:00', '2017-03-27 10:31:10'),
-(24, 0, 'vadapalani', 'eewrds', 'Tesd', 0, 'chennai', 2, 2, '32005', '1', 1, '01:00:00', '01:00:00', 1, '0000-00-00 00:00:00', '2017-03-29 10:44:36');
+(1, 1, 'Houston Locations', '1601 Purdue Drive', 'Suite Apt', '6565', 'Fayetteville', 1, 1, '2565', '1', 3, '01:00:00', '01:00:00', 2, '2017-04-04 12:38:49', '2017-04-04 07:08:49'),
+(2, 3, 'Houston Locations', '1601 Purdue Drive', 'Suite Apt', '0', 'Fayetteville', 1, 1, '28304-3674', '1,2', 1, '01:00:00', '01:00:00', 1, '0000-00-00 00:00:00', '2017-03-23 03:05:26'),
+(22, 5, 'Houston Locationsadsad', '1601 Purdue Drive', '', '0', 'Fayetteville', 1, 2, '28304', '2', 3, '01:00:00', '01:00:00', 2, '0000-00-00 00:00:00', '2017-03-27 10:31:10'),
+(23, 5, 'Houston Location', '1601 Purdue Drive', '', '0', 'Fayetteville', 1, 2, '28304', '1,2', 3, '01:00:00', '01:00:00', 2, '0000-00-00 00:00:00', '2017-03-27 10:31:10'),
+(24, 0, 'vadapalani', 'eewrds', 'Tesd', '0', 'chennai', 2, 2, '32005', '1', 1, '01:00:00', '01:00:00', 1, '0000-00-00 00:00:00', '2017-03-29 10:44:36');
 
 -- --------------------------------------------------------
 
@@ -399,7 +399,7 @@ CREATE TABLE `email_template` (
 
 CREATE TABLE `invoices` (
   `id` int(11) NOT NULL,
-  `invoice_no` varchar(255)   NOT NULL,
+  `invoice_no` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `shipment_id` int(11) NOT NULL,
   `location_id` int(11) NOT NULL,
@@ -421,8 +421,11 @@ CREATE TABLE `invoices` (
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
-
+--
+-- Table structure for table `invoice_items`
+--
 
 CREATE TABLE `invoice_items` (
   `id` int(11) NOT NULL,
@@ -435,6 +438,7 @@ CREATE TABLE `invoice_items` (
   `created_date` datetime NOT NULL,
   `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -1138,13 +1142,13 @@ CREATE TABLE `sales_order` (
 -- Dumping data for table `sales_order`
 --
 
-INSERT INTO `sales_order` (`id`, `customer_id`, `salesman_id`, `location_id`, `contact_id`, `order_status`, `total_amount`, `total_discount`, `total_shipping`, `total_tax`, `total_items`, `shipping_type`, `credit_type`, `cod_fee`, `carrier_id`, `type`, `total_weight`, `bol_instructions`, `so_instructions`, `so_printed`, `bol_printed`, `received_inventory`, `return_type`, `inventory_person`, `shipping_address_id`, `billing_address_id`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
-(11, 1, 1, 0, 0, 'NEW', 32724, 0, 0, 0, 6, 1, 1, 0, 0, 'SALE', '0.00', 'asdfd', 'TEst', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 0, '2017-03-28 14:38:21', '2017-03-28 09:08:21'),
-(12, 1, 1, 0, 0, 'NEW', 32724, 0, 0, 0, 6, 1, 1, 0, 0, 'SALE', '0.00', 'TEst', 'Test', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 0, '2017-03-28 14:40:41', '2017-03-28 09:10:41'),
-(13, 1, 1, 0, 0, 'NEW', 32724, 0, 0, 0, 6, 1, 1, 0, 0, 'SALE', '0.00', 'TEst', 'Test', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 0, '2017-03-28 14:42:28', '2017-03-28 09:12:28'),
-(14, 1, 2, 0, 0, 'NEW', 54540, 0, 0, 0, 6, 1, 2, 0, 0, 'SALE', '0.00', 'TEst', 'Test', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 1, '2017-03-28 14:53:42', '2017-03-28 10:56:31'),
-(15, 1, 1, 0, 0, 'NEW', 10908, 0, 0, 0, 2, 1, 2, 0, 0, 'SALE', '0.00', '', '', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 0, 0, 1, 0, '2017-04-05 07:21:21', '2017-04-05 01:51:21'),
-(16, 1, 1, 0, 0, 'NEW', 10908, 0, 0, 0, 2, 1, 5, 0, 0, 'SALE', '0.00', '', '', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 0, 0, 1, 0, '2017-04-05 07:27:54', '2017-04-05 01:57:54');
+INSERT INTO `sales_order` (`id`, `customer_id`, `location_id`, `salesman_id`, `contact_id`, `order_status`, `total_amount`, `total_discount`, `total_shipping`, `total_tax`, `total_items`, `shipping_type`, `credit_type`, `cod_fee`, `carrier_id`, `type`, `total_weight`, `bol_instructions`, `so_instructions`, `so_printed`, `bol_printed`, `received_inventory`, `return_type`, `inventory_person`, `shipping_address_id`, `billing_address_id`, `created_id`, `updated_id`, `created_date`, `updated_date`) VALUES
+(11, 1, 0, 1, 0, 'NEW', 32724, 0, 0, 0, 6, 1, 1, 0, 0, 'SALE', '0.00', 'asdfd', 'TEst', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 0, '2017-03-28 14:38:21', '2017-03-28 09:08:21'),
+(12, 1, 0, 1, 0, 'NEW', 32724, 0, 0, 0, 6, 1, 1, 0, 0, 'SALE', '0.00', 'TEst', 'Test', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 0, '2017-03-28 14:40:41', '2017-03-28 09:10:41'),
+(13, 1, 0, 1, 0, 'NEW', 32724, 0, 0, 0, 6, 1, 1, 0, 0, 'SALE', '0.00', 'TEst', 'Test', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 0, '2017-03-28 14:42:28', '2017-03-28 09:12:28'),
+(14, 1, 0, 2, 0, 'NEW', 54540, 0, 0, 0, 6, 1, 2, 0, 0, 'SALE', '0.00', 'TEst', 'Test', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 1, 1, 1, 1, '2017-03-28 14:53:42', '2017-03-28 10:56:31'),
+(15, 1, 0, 1, 0, 'NEW', 10908, 0, 0, 0, 2, 1, 2, 0, 0, 'SALE', '0.00', '', '', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 0, 0, 1, 0, '2017-04-05 07:21:21', '2017-04-05 01:51:21'),
+(16, 1, 0, 1, 0, 'NEW', 10908, 0, 0, 0, 2, 1, 5, 0, 0, 'SALE', '0.00', '', '', 'Yes', 'Yes', 'Yes', 'RETURN', 0, 0, 0, 1, 0, '2017-04-05 07:27:54', '2017-04-05 01:57:54');
 
 -- --------------------------------------------------------
 
