@@ -96,8 +96,16 @@ td { padding:4px 6px !important;}
 .product-sel .search-bt{margin-right: 7px; float: none; width: 100%; max-width: 160px;  display: inline-block;}
 .text-r{text-align:right;}
 .product-sel .cl-bt{display: inline-block; float: right;}
+.product-sel .form-group.address-sec {width: 100% !important;}
+.product-sel .form-group.address-sec label{ width:21%;}
+.product-sel .formcontrol-box .address-sec .form-control.col-md-8 {width: 76% !important;}
+ .formcontrol-box.ship-box .postal { width: 77% !important; float: left; !important;}
+ .product-sel .formcontrol-box.ship-box .active-css { padding-left: 0; float: left;
+    width: 18% !important; margin-top: 37px !important;}
+.product-sel .formcontrol-box.ship-box .postal .form-group { width: 30%;}
 
 @media (min-width:992px){
+.product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
 .city {width:250px;}
 .zip{ width:184px;}
@@ -109,14 +117,18 @@ td { padding:4px 6px !important;}
 .select-box { max-width:322px !important;}
 .call-group { width:100%; display:inline-block;}
 .second-box { min-height:554px;}
-.formcontrol-box .form-control.col-md-8 { width:66.6667% !important;}
+.formcontrol-box .form-control.col-md-8 { width:52.6667% !important;}
 .formcontrol-box .form-control.col-md-9 { width:75% !important;}
-.formcontrol-box .form-group { display: inline-block; width: 100%; margin:4px 0px; margin-bottom:20px;}
+.product-sel .formcontrol-box.ship-box .form-group {display: inline-block; width: 48%; margin: 4px 8px 0 0;}
+.formcontrol-box .form-group { display: inline-block; width: 100%; margin: 10px 0px 20px;}
+.formcontrol-box.ship-box label {line-height: normal; font-size: 14px; width: 44%; }
 .postal .form-group {float: left; width: 33.338%;}
+.ship-box .postal
 .postal {padding-left: 33%;}
+.ship-box .postal{padding-left:0;}
 .active-css { padding-left:33%;}
 .call-log { height:120px;}
-.ship-box { min-height:395px;}
+.ship-box { min-height:265px;}
 .call-group1 .form-group:nth-child(1){width:60%; float:left;}
 .call-group1 .form-group:nth-child(2){width:30%; margin: 55px 0 0 18px;}
 .call-group2 .form-group:nth-child(1){width:46%; float:left;}

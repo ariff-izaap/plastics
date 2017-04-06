@@ -37,7 +37,7 @@
               <label class="col-md-4">Address</label>
               <input type="text" name="address" class="form-control col-md-8" id="address" value="" placeholder="" />
             </div>
-            <div class="form-group" >
+            <div class="form-group address-sec" >
               <label class="col-md-4">Address 2</label>
               <input type="text" name="address_2" class="form-control col-md-8" id="address_2" value="" placeholder="" />
             </div>
