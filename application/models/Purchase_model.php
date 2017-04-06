@@ -65,6 +65,12 @@ class Purchase_model extends App_model
     $q = $this->db->get();
     return $q->result_array();
   }
+  public function get_customers()
+  {
+  	$this->db->where("status",1);
+  	$q = $this->db->get("customer");
+  	return $q->result_array();
+  }
 	public function get_max_id()
 	{
 		$this->db->select("COALESCE(MAX(id),0) + 1 as po_id");

@@ -40,11 +40,26 @@ $(function(){
 	  }
 	});
   
+
+  $('.datetime').daterangepicker({
+    singleDatePicker: true,
+      timePicker: true,
+    showDropdowns: true,
+      sautoUpdateInput: false,
+    locale: {
+      format: 'YYYY-MM-DD HH:mm',
+    }
+  });
+  
+
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
     $(this).val(picker.startDate.format('YYYY-MM-DD'));
   });
 
   
+    $('.datetime').on('apply.daterangepicker', function(ev, picker) {
+    $(this).val(picker.startDate.format('YYYY-MM-DD HH:mm'));
+  });
 
 	init_daterangepicker();
 

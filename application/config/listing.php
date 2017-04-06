@@ -294,6 +294,24 @@ $config['accounting_shipping_orders'] = array(
 ); 
 
 
+$config['accounting_invoices'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'accounting/filter',
+	"base_url"	=> 	'/accounting/invoices/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'name'=>array('name'=>'Customer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),	
+						'invoice_date'=>array('name'=>'Invoice Date', 'data_type' => 'datetime', 'sortable' => FALSE, 'default_view'=>1),
+						'due_date'=>array('name'=>'Due Date', 'data_type' => 'datetime', 'sortable' => FALSE, 'default_view'=>1),
+						'amount'=>array('name'=>'Amount', 'data_type' => 'money', 'sortable' => FALSE, 'default_view'=>1)),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+); 
+
+
+
+
 $config['vendor_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',

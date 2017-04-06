@@ -26,7 +26,7 @@
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
 		<thead>
 			<tr>
-			<?php if($uri1 != "accounting" && $uri1 != "history" && $uri != "add_product"){?>
+			<?php if($uri1 != "history" && $uri != "add_product"){?>
 				<th> # </th>
 				<?php }?>
 				<?php  $cols = 0; 
@@ -62,7 +62,7 @@
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase' && $uri1!='salesproductselection'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices') && $uri != 'add_edit_purchase' && $uri1!='salesproductselection'){ ?>
 
 					<th>Action</th>
 
@@ -77,7 +77,7 @@
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        	if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 != 'purchase' && $uri != 'add_product')
+        	if($uri1 != 'history' && $uri1 != 'purchase' && $uri != 'add_product')
         	{ 	
         		?>
 						<td>
@@ -118,7 +118,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && $uri1 != 'accounting' && $uri != 'add_edit_purchase' && $uri != 'add_product' && $uri1 != 'salesproductselection'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && ($uri1 != 'accounting' || $uri == 'invoices') && $uri != 'add_edit_purchase' && $uri != 'add_product' && $uri1 != 'salesproductselection'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"
@@ -157,7 +157,19 @@
 	</table>
     </div>
 </div>
-
+<?php 
+if($uri1 == "accounting" && $uri != "invoices")
+{
+	?>
+		<div class="row">
+			<div class="col-md-2 pull-right">
+				<button type="submit" class="btn" capsOn>Create Invoice</button>
+			</div>
+		</div>
+		<br>
+	<?php
+}
+?>
 <div class="pagination text-right pull-right" id="pagination">
 	<?php echo $pagination;?>
 </div>

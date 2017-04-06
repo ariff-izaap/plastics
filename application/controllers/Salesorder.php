@@ -247,10 +247,12 @@ class Salesorder extends Admin_Controller
               $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
               $ins_data['type']                   = $this->input->post('type');
               $ins_data['order_status']           = $this->input->post('order_status');
+              $ins_data['carrier_id']             = $this->input->post('carrier');
               $ins_data['total_items']            = $this->cart->total_items();
               $ins_data['total_amount']           = $total;
               
-              if($edit_id){
+              if($edit_id)
+              {
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
@@ -294,8 +296,8 @@ class Salesorder extends Admin_Controller
                 $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
-                $so_new_id  = $this->salesorder_model->insert($ins_data,"sales_order");    
-                log_history("sales_order",$edit_id,'Sales Order',"insert");
+                $so_new_id  = $this->salesorder_model->insert($ins_data,"sales_order");
+                log_history("sales_order",$so_new_id,'Sales Order',"insert");
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
@@ -306,6 +308,7 @@ class Salesorder extends Admin_Controller
                 $ship_data['shipping_type'] = $get_ship_data['type'];
                 $ship_data['order_status']  = $this->input->post('order_status');
                 $ship_data['created_date']  = date('Y-m-d H:i:s'); 
+                $ship_data['ship_date']  = date('Y-m-d H:i:s');
                 $ship_data['updated_date']  = date('Y-m-d H:i:s');
                 $ship_data['created_id']    = get_current_user_id();  
                 $ship_new_id  = $this->salesorder_model->insert($ship_data,"shipment");
@@ -328,7 +331,7 @@ class Salesorder extends Admin_Controller
                      $product = array();
                      $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
                      $po_create_id = create_auto_po($product,$form);
-                     log_history("purchase_order",$po_create_id,'Create Auto PO',"insert");
+                     log_history("purchase_order",'','Create Auto PO',"insert");
                    }
                    
                    $sale_item['product_id']   = $svalue['id'];
@@ -411,7 +414,7 @@ class Salesorder extends Admin_Controller
         $this->data['shipping_type'] = get_shipping_type();
         $this->data['credit_type']   = get_credit_type();
         $this->data['cartitems']     = $cartitems;           
-        $this->data['customer']      = $this->purchase_model->get_vendors();
+        $this->data['customer']      = $this->purchase_model->get_customers();
         $this->data['carrier']       = get_carrier();
         $this->data['stype']         = $saletype;
         $this->data['total']         = $total;

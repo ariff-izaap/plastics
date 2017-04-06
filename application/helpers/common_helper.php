@@ -921,7 +921,8 @@ function create_auto_po($product,$form)
 {
   $CI = get_instance();
   $CI->load->model('purchase_model');
-  if(is_array($product)) {
+  if(is_array($product))
+  {
     
     foreach ($product as $vendor_id => $ploop)
     {
@@ -985,6 +986,43 @@ function create_auto_po($product,$form)
    return $po_id;
 }
 
-
+function create_auto_invoice($form)
+{
+  $CI = get_instance();
+  $CI->load->model('accounting_model');
+  $ins['invoice_no']= rand();
+  $so_id = $form['so_id'];
+  $ins['salesman_id'] = $form['salesman_id'];
+  $ins['location_id'] = $form['shipping_id'];
+  $ins['shipment_id'] = $form['shipment_id'];
+  $ins['billing_id'] = $form['billing_id'];
+  $ins['ship_date'] = $form['ship_date'];
+  $ins['customer_id'] = $form['customer_id'];
+  $ins['invoice_date'] = date("Y-m-d H:i:s");
+  $ins['due_date'] = date("Y-m-d H:i:s");
+  $ins['credit_type'] = $form['credit_type'];
+  $ins['amount'] = str_replace(array("$",","),"",$form['amount']);
+  $ins['prepaid_cod'] = str_replace(array("$",","),"",$form['cod_fee']);
+  $ins['fright_amt'] = str_replace(array("$",","),"",$form['freight']);
+  $ins['additional_amt'] = str_replace(array("$",","),"",$form['add_amt']);
+  $ins['total_amt'] = str_replace(array("$",","),"",$form['total_amount']);
+  $ins['created_id'] = get_current_user_id();
+  $ins['updated_id'] = get_current_user_id();
+  $ins['created_date'] = date("Y-m-d H:i:s");
+  $ins['updated_date'] = date("Y-m-d H:i:s");
+  $inv_id = $CI->accounting_model->insert($ins,"invoices");
+  $so = $CI->accounting_model->get_ordered_items(array("so_id"=>$so_id[$i]),"sales_order_item");
+  foreach ($so as $key => $value)
+  {
+    $ins1['invoice_id'] = $inv_id;
+    $ins1['so_id'] = $so_id;
+    $ins1['product_id'] = $value['product_id'];
+    $ins1['quantity'] = $value['qty'];
+    $ins1['unit_price'] = $value['unit_price'];
+    $ins1['total_amt'] = $value['unit_price'] * $value['qty'];
+    $CI->accounting_model->insert($ins1,"invoice_items");
+  }
+  return $inv_id;
+}
 
 ?>

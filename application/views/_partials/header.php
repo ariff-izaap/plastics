@@ -169,15 +169,10 @@
             </li>
             <?php }?>
             <?php if($menu->reports==1){?>
-            <li class="dropdown">
-              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <li>
+              <a href="<?=site_url('reports');?>">
                 <i class="fa fa-pie-chart fa-fw"></i>
-                  Reports
-                  <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="javascript:void(0);">Sales Reports</a></li>
-              </ul>
+                  Reports</a>
             </li>
             <?php }?>
             <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >

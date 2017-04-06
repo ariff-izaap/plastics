@@ -101,14 +101,14 @@
 }
 
 
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+a.ui-state-active, .ui-widget-content a.ui-state-active, .ui-widget-header a.ui-state-active {
     border: 1px solid #064ba8;
     background: #fff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
     font-weight: bold;
     color: #064ba8;
 }
 
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover {
+a.ui-state-hover, .ui-widget-content a.ui-state-hover, .ui-widget-header a.ui-state-hover {
     border: 1px solid #064ba8;
     background: #fff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
     font-weight: bold;
