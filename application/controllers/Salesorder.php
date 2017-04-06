@@ -247,12 +247,10 @@ class Salesorder extends Admin_Controller
               $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
               $ins_data['type']                   = $this->input->post('type');
               $ins_data['order_status']           = $this->input->post('order_status');
-              $ins_data['carrier_id']             = $this->input->post('carrier');
               $ins_data['total_items']            = $this->cart->total_items();
               $ins_data['total_amount']           = $total;
               
-              if($edit_id)
-              {
+              if($edit_id){
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
@@ -296,8 +294,9 @@ class Salesorder extends Admin_Controller
                 $ins_data['created_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
-                $so_new_id  = $this->salesorder_model->insert($ins_data,"sales_order");
+                $so_new_id                = $this->salesorder_model->insert($ins_data,"sales_order");    
                 log_history("sales_order",$so_new_id,'Sales Order',"insert");
+                
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
@@ -308,10 +307,9 @@ class Salesorder extends Admin_Controller
                 $ship_data['shipping_type'] = $get_ship_data['type'];
                 $ship_data['order_status']  = $this->input->post('order_status');
                 $ship_data['created_date']  = date('Y-m-d H:i:s'); 
-                $ship_data['ship_date']  = date('Y-m-d H:i:s');
                 $ship_data['updated_date']  = date('Y-m-d H:i:s');
                 $ship_data['created_id']    = get_current_user_id();  
-                $ship_new_id  = $this->salesorder_model->insert($ship_data,"shipment");
+                $ship_new_id                = $this->salesorder_model->insert($ship_data,"shipment");
                 log_history("shipment",$ship_new_id,'Create Shipment',"insert");
                 
                 //items added to sales order item table
@@ -331,7 +329,7 @@ class Salesorder extends Admin_Controller
                      $product = array();
                      $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
                      $po_create_id = create_auto_po($product,$form);
-                     log_history("purchase_order",'','Create Auto PO',"insert");
+                     log_history("purchase_order",$po_create_id,'Create Auto PO',"insert");
                    }
                    
                    $sale_item['product_id']   = $svalue['id'];
@@ -347,7 +345,22 @@ class Salesorder extends Admin_Controller
                    $sale_order_item_id        = $this->salesorder_model->insert($sale_item,"sales_order_item");
                    
                    log_history("sales_order_item",$sale_order_item_id,'Sales Order Item',"insert");
-                }     
+                }
+                
+                $this->data['so_id']       = $so_new_id;
+                $order_status              = $this->salesorder_model->get_where(array("id" => $so_new_id),"customer_id,order_status","sales_order")->row_array();
+                $this->data['order_status']= $order_status['order_status'];
+                $this->data['od_items']    = $this->salesorder_model->get_sales_items($so_new_id);
+                $this->data['billing']     = $this->salesorder_model->get_where(array("id" => $this->input->post('billing_address_id')),"*","address")->row_array();
+                $this->data['shipping']    = $this->salesorder_model->get_where(array("id" => $this->input->post('shipping_address_id')),"*","contact_location")->row_array();
+                $email_template            = $this->load->view("frontend/email/sales",$this->data,true);
+                $cus_data                  = $this->salesorder_model->get_where(array("id" => $order_status['customer_id']),"email","customer_contact")->row_array();
+                
+                $sub   = "Order #".$so_new_id." Generated Successfully";  
+                $cu_usr= get_user_data();
+                $email = new Email();
+                $email->send($cus_data['email'], $cu_usr['email'],$sub,$email_template,array());
+                  
                 $msg     = 'Sales Order created successfully';
                 $edit_id =  $so_new_id;
                 
@@ -414,7 +427,7 @@ class Salesorder extends Admin_Controller
         $this->data['shipping_type'] = get_shipping_type();
         $this->data['credit_type']   = get_credit_type();
         $this->data['cartitems']     = $cartitems;           
-        $this->data['customer']      = $this->purchase_model->get_customers();
+        $this->data['customer']      = $this->purchase_model->get_vendors();
         $this->data['carrier']       = get_carrier();
         $this->data['stype']         = $saletype;
         $this->data['total']         = $total;
@@ -477,6 +490,22 @@ class Salesorder extends Admin_Controller
     		$vendors[(int)$product['vendor_id']][] = $product;
     	
     	return $vendors;
+    }
+    
+    function invoice($so_id) 
+    {
+         $so_data                = $this->salesorder_model->get_where(array("id" => $so_id),"salesman_id,shipping_address_id as shipping_id,billing_address_id as billing_id,customer_id,cod_fee,total_amount,credit_type","sales_order")->row_array();
+         $ship_data              = $this->salesorder_model->get_where(array("so_id" => $so_id),"id,ship_date","shipment")->row_array();
+         $so_data['shipment_id'] = $ship_data['id'];
+         $so_data['ship_date']   = $ship_data['ship_date'];
+         
+         //create invoice
+         $inv_id = create_auto_invoice($so_data);
+         
+         if(empty($inv_id))
+            $this->session->set_flashdata('success_msg',"Doesn't create invoice",TRUE);
+         else
+            $this->session->set_flashdata('error_msg',"Invoice created successfully",TRUE);   
     }
     
     function change_ship_address($ship_addr_id = null,$so_id = 0, $action)

@@ -23,19 +23,30 @@ class Email extends Admin_Controller
         $this->email->initialize($config);
 	} 
 	
-	 public function send($to,$from,$subject,$message,$attachment)
+	 public function send($to,$from,$subject,$message,$attachment = array())
   	 {
         try
         {
             $this->email->clear();
             
-            $this->email->from("$from", 'Your Name');
+            $this->email->from("$from", 'Independent Plastics');
             $this->email->to("$to");
             $this->email->subject("$subject");
             $this->email->message("$message");
             
-            $this->email->send();
-
+            if(Count($attachment) > 0){
+                foreach($attachment as $attach)
+                {
+                    $this->email->attach($attach);
+                }    
+            }
+            
+            if($this->email->send()) 
+             $this->session->set_flashdata("email_sent","Email sent successfully."); 
+             else 
+             $this->session->set_flashdata("email_sent","Error in sending Email."); 
+             
+             $this->load->view('email_form');
         }
         catch(Exception $e)
         {

@@ -97,13 +97,14 @@ class Salesorder_model extends App_model
   
   public function get_sales_items($so_id)
   {
-        $this->db->select("s.id as id,i.id as sot_id,p.name,pk.name as package,c.name as color,f.name as form,i.qty,i.unit_price as price,p.row");
+        $this->db->select("s.id as id,i.id as sot_id,p.name,pk.name as package,c.name as color,f.name as form,i.qty,i.unit_price as price,p.row,s.order_status");
         $this->db->from('sales_order s');
         $this->db->join("sales_order_item i","i.so_id=s.id");
         $this->db->join("product p","p.id=i.product_id");
         $this->db->join("product_color c","c.id=p.color_id");
         $this->db->join("product_form f","f.id=p.form_id");
         $this->db->join("product_packaging pk","pk.id=p.package_id");
+        $this->db->where(array("i.so_id" => $so_id));
         return $this->db->get()->result_array();
   }
   
