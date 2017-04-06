@@ -300,8 +300,11 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             $data = '<a href="'.$data.'">'.$data.'</a>';
             break;
         case 'colorize':
-          $data = "<h2 style='font-size:14px;' class='label label-danger'>".$data."</h2>";
-        break; 
+          $data = "<h2 style='font-size:14px;' class='label label-danger'>".$data."</h2>"; 
+        break;
+        case 'product_name_link':
+          $data = '<a href="'.site_url('inventory/add/').$row['id'].'">'.$data.'</a>'; 
+        break;  
     }    
     return $wrap_tag_open.$data.$wrap_tag_close;
 }

@@ -13,6 +13,7 @@ class Note_model extends App_model
     $this->db->select("*");
     $this->db->from($this->_table);
     $this->db->where($where);
+    $this->db->order_by("id","desc");
     return $this->db->get()->result_array();
   }
 }
