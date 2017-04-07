@@ -1,10 +1,10 @@
 
 <div class="row-fluid">
 	<table class="table table-bordered">
-		<tbody class="white_bg">
+		<tbody class="gray-bg">
 			<tr>
 				<td>
-					<div class="col-md-6">
+					<div class="col-md-12 popup-address">
 						<dl class="dl-horizontal text-left">
                         
                            <div class="form-group">

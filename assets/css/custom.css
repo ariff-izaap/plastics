@@ -15,10 +15,7 @@
 
 /*.form-group > label + select {height: 65px;}*/
 
-/*.form-group > label + select {height: 65px;}*/
-
 .form-group > label + select {height: 32px;}
-
 td { padding:4px 6px !important;}
 #advance_search_form .form-group { margin-bottom:0px !important;}
 #advance_search_form .button-sec { margin-bottom:0px;}
@@ -114,18 +111,40 @@ td { padding:4px 6px !important;}
 
 /* Sales order view section */
 .sales-order-view-section .topsec_info{margin-top:20px; margin-bottom:20px;}
-.sales-order-view-section .box_highilite h3 span{min-height: 50px;}
+.sales-order-view-section .box_highilite h3 span{min-height: 51px;}
 .sales-order-view-section .box_highilite h3 { margin: 17px 0 3px 0;}
 .sales-order-view-section .box_highilite h3 span{top: -17px;}
 .sales-order-view-section #relatedlinks{padding: 9px; border: 1px solid #ddd; margin-right: 25px;}
 .sales-order-view-section .bill-info { width: 36.22%; margin-right: 25px;}
+.sales-order-view-section .box_highilite h3 span{background: #ed9b06; border-radius: 0 !important;}
 .sales-order-view-section .ship-info {width: 36.222%;}
 .sales-order-view-section .bill-info, .sales-order-view-section .ship-info{ margin-bottom: 0 !important;}
 .sales-order-view-section .sales-oder-details { float: left; width: 72%; margin-left: 14px;}
 .sales-order-view-section .bill-info address, .sales-order-view-section .ship-info address{ min-height: 174px; margin-bottom:10px;}
 .sales-order-view-section .bill-info .span_half, .sales-order-view-section .ship-info .span_half{margin-bottom:10px;}
 .sales-order-view-section .sales-notes, .sales-order-view-section .log-histry { float: right; width: 76%;}
+.sales-order-view-section .create-invoice { text-align: right; margin: 8px 0;}
+.sales-order-view-section .box_highilite {margin-bottom: 0;}
+.clr-orange{color:orange; font-weight: bold;}
 /* Sales order view section */
+
+/* popup section */
+.modal-dialog.popup-box { max-width:700px; margin: 30px auto; width: 100%}
+.popup-box  .modal-content{ width: 700px; overflow-x: auto;}
+.modal-dialog.popup-box form td {font-size: 14px; }
+.modal-dialog.popup-box form td {  font-size: 14px;}
+.modal-header .close { margin-top: -2px;}
+.modal-header button.close {  background: red; opacity: inherit; color: #fff; border: 0; -webkit-appearance: none; padding: 0px 8px; line-height: normal;}
+.modal-dialog.popup-box .form-group {margin-bottom: 10px;}
+.sales-order-view-section .modal { margin: 0 auto; width: 100% !important; max-width: 700px;  overflow-y: inherit; overflow-x: inherit;}
+ .sales-order-view-section .popup-address .form-group { width: 30.333%; vertical-align: top; display: inline-block; margin-bottom: 13px; margin-right: 14px;}  
+ .sales-order-view-section .popup-address .form-group label { font-size: 15px;} 
+ .error_text {color: red; font-size: 14px;}
+ .gray-bg{ background:#e7e7e7;}
+
+/* popup section */
+
+
 #updat_cart { width:100% !important;}
 
 @media (min-width:992px){

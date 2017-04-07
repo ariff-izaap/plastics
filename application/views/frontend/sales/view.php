@@ -101,14 +101,15 @@
 		<div class="span4 nd_sec_yellow">
 			<h3>Payment Term <?php echo $payment_term_name;?></h3>
 		</div>
-        
-        <br />
-		<a href="<?php echo site_url("salesorder/invoice/").$so_id; ?>" class="btn btn-default">Create Invoice</a>
-		
+   
+	
+  
 		<!--<div class="span3 pt_sec_grey">
 			<h3>Payment <br /> Method <span><br />authorize</span></h3>
 		</div>-->
 	</div>	
+    <div class="create-invoice">
+    <a href="<?php echo site_url("salesorder/invoice/").$so_id; ?>" class="btn btn-default">Create Invoice</a></div>
 </div>
 
 
@@ -122,7 +123,7 @@
   
   
  <div id="updat_cart" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog popup-box">
     
     <!-- Modal content-->
     <div class="modal-content">

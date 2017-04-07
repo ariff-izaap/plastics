@@ -58,7 +58,7 @@
 			</tbody>
 		</table>
 
-		<h2 class="pull-left">Order Details</h2> <a class="pull-left underline" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)" style="margin:7px 0px 0 36px;">Edit</a>
+		<h2 class="pull-left">Order Details</h2> <a class="pull-left underline clr-orange" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)" style="margin:7px 0px 0 36px;">Edit</a>
 
 		<div class="pull-right m_top_15">
 
