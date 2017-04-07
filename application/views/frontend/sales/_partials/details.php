@@ -43,7 +43,7 @@
 	<?php $details = current($order_detail);?>
 
 	<div class="row m_bot_5">
-       <a class="pull-right underline" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)">Edit</a>
+       
 		<table class="table table-bordered m_bot_10">
 			<tbody class="light_green_bg green">
 				<tr>
@@ -58,7 +58,7 @@
 			</tbody>
 		</table>
 
-		<h2 class="pull-left">Order Details</h2> 
+		<h2 class="pull-left">Order Details</h2> <a class="pull-left underline" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)" style="margin:7px 0px 0 36px;">Edit</a>
 
 		<div class="pull-right m_top_15">
 

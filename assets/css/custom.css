@@ -126,7 +126,7 @@ td { padding:4px 6px !important;}
 .sales-order-view-section .bill-info .span_half, .sales-order-view-section .ship-info .span_half{margin-bottom:10px;}
 .sales-order-view-section .sales-notes, .sales-order-view-section .log-histry { float: right; width: 76%;}
 /* Sales order view section */
-
+#updat_cart { width:100% !important;}
 
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
