@@ -5,18 +5,21 @@
 		</div>
 
 		<!-- right panel content section start here -->
-		<div class="span9 pull-right m_top_30">
-
 			<!-- Shipping and Billing Information goes here.... -->
 			<div class="row-fluid">
 
-				<div class="col-md-6 span_half" >
+				<div class="col-md-4 span_half bill-info" >
 					<div class="row">
 						<table class="table table-bordered">
 							<thead class="greenbg_title txt_13">
 								<tr>
-									<th width="10%">Billing Information</th>
-                                    <a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
+									<th width="10%">Billing Information
+
+<a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
+
+
+									</th>
+                                    
 								</tr>
 							</thead>
 							<tbody class="white_bg">
@@ -30,7 +33,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-6 span_half pull-right m_left_10"	>
+				<div class="col-md-4 span_half pull-right m_left_10 ship-info" >
 					<div class="row">
 						<table class="table table-bordered">
 							<thead class="greenbg_title txt_13">
@@ -101,10 +104,12 @@
 		        
 		      </div>
 		      </form>
+	<?php endif;?>
+		      <?php echo $order_details;?>
 		    </div>
-			<?php endif;?>
+		
 			<!-- Order Details goes here.... -->
-			<?php echo $order_details;?>
+			
 
 			<!-- Modal -->
 			<div id="div_make_payment" class="modal hide fade" role="dialog"
@@ -203,7 +208,7 @@
 			<?php endif;?>
 			
 			<div class="row-fluid">
-				<div class="span12">
+				<div class="col-sm-8 sales-notes m_left_10">
 					<div class="row">
 						<h2>Notes</h2>						
 					</div>
@@ -221,7 +226,7 @@
 						<?php echo $notes;?>
 					</div>
 				</div>
-				<div class="span12 pull-right m_left_10">					
+				<div class="col-sm-8 log-histry m_left_10">					
 					<div class="row loghistory_sec" id="logs_list"></div>
 				</div>
 			</div>

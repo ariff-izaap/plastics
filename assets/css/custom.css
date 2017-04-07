@@ -110,6 +110,24 @@ td { padding:4px 6px !important;}
     width: 18% !important; margin-top: 37px !important;}
 .product-sel .formcontrol-box.ship-box .postal .form-group { width: 30%;}
 
+
+
+/* Sales order view section */
+.sales-order-view-section .topsec_info{margin-top:20px; margin-bottom:20px;}
+.sales-order-view-section .box_highilite h3 span{min-height: 50px;}
+.sales-order-view-section .box_highilite h3 { margin: 17px 0 3px 0;}
+.sales-order-view-section .box_highilite h3 span{top: -17px;}
+.sales-order-view-section #relatedlinks{padding: 9px; border: 1px solid #ddd; margin-right: 25px;}
+.sales-order-view-section .bill-info { width: 36.22%; margin-right: 25px;}
+.sales-order-view-section .ship-info {width: 36.222%;}
+.sales-order-view-section .bill-info, .sales-order-view-section .ship-info{ margin-bottom: 0 !important;}
+.sales-order-view-section .sales-oder-details { float: left; width: 72%; margin-left: 14px;}
+.sales-order-view-section .bill-info address, .sales-order-view-section .ship-info address{ min-height: 174px; margin-bottom:10px;}
+.sales-order-view-section .bill-info .span_half, .sales-order-view-section .ship-info .span_half{margin-bottom:10px;}
+.sales-order-view-section .sales-notes, .sales-order-view-section .log-histry { float: right; width: 76%;}
+/* Sales order view section */
+
+
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

@@ -21,8 +21,9 @@
 </div>
 -->
 
+<div class="sales-order-view-section">
 <!-- Shipping Address Modal -->
-<div id="div_add_new_price" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="div_add_new_price" class="modal fade " role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <form action="<?php echo site_url('salesorder/change_ship_address/')."/".$so_details['shipping_address_id'];?>" method="post">
     <!-- Modal content-->
     <div class="modal-content">
@@ -62,10 +63,8 @@
 </div>
 
 
-
-
 <!-- view design-->
-  <div class="container topsec_info m_top_5">
+  <div class="container topsec_info ">
 	<div class="row">
     
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -94,13 +93,13 @@
 	
 	<div class="row box_highilite">
 		<div class="span4">
-			<h3>Paid <br> Status <span><br><?php echo ($so_details['paid_status']=='Y')?'YES':'NO';?></span></h3>
+			<h3>Paid  Status <span><br><?php echo ($so_details['paid_status']=='Y')?'YES':'NO';?></span></h3>
 		</div>
 		<div class="span4 ps_sec_blue">
-			<h3>Next <br>Due Date <?php echo ($next_due_date!=0) ? '<span><br /> '.date('d M',strtotime($next_due_date)).'  <br /> '.date('y',strtotime($next_due_date)).'</span>':'<span><br /> - </span>'?></h3>
+			<h3>Next Due Date <?php echo ($next_due_date!=0) ? '<span><br /> '.date('d M',strtotime($next_due_date)).'  <br /> '.date('y',strtotime($next_due_date)).'</span>':'<span><br /> - </span>'?></h3>
 		</div>
 		<div class="span4 nd_sec_yellow">
-			<h3>Payment <br> Term <?php echo $payment_term_name;?></h3>
+			<h3>Payment Term <?php echo $payment_term_name;?></h3>
 		</div>
         
         <br />
@@ -136,4 +135,5 @@
      </form>
     </div>
   </div>
+</div>
 </div>

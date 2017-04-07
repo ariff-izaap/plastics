@@ -34,25 +34,9 @@
 	</div>
 <?php else:?>
 	<div class="row oreder-details">
-		<h2 class="pull-left">Order Details</h2> 
-
-		<div class="pull-right m_top_15">
-
-           <div class="btn-group">
-				
-    			<a class="btn btn-primary"
-    			onclick="issue_return_auth(<?php echo $so_id;?>, this)"
-    			href="javascript:;" data-original-title="" title=""> Return
-    			Auth</a>
-            </div>
 		
-	  </div>
-
-	</div>
-	
-
-			
-	<form method="post" id="so_form">
+      <div class="sales-oder-details">
+	  <form method="post" id="so_form">
 
 	<?php  foreach ($product_details as $vid => $order_detail):?>
 
@@ -74,6 +58,21 @@
 			</tbody>
 		</table>
 
+		<h2 class="pull-left">Order Details</h2> 
+
+		<div class="pull-right m_top_15">
+
+           <div class="btn-group">
+				
+    			<a class="btn btn-primary"
+    			onclick="issue_return_auth(<?php echo $so_id;?>, this)"
+    			href="javascript:;" data-original-title="" title=""> Return
+    			Auth</a>
+            </div>
+		
+	  </div>
+
+    
 		<table class="table table-bordered table-striped">
 			<thead class="greenbg_title">
 				<tr>
@@ -114,7 +113,8 @@
 	<?php endforeach;?>
 
 	<div class="row m_bot_30">
-		<div class="span4 pull-right">
+		<div class="col-md-5 pull-right">
+
 			<table width="100%" class="price_box pull-right  ash_gradiant_bg">
 
 				<tr>
@@ -153,6 +153,7 @@
 				</tr>
 
 			</table>
+
 			<?php if($so_details['payment_type']=="net"):?>
 				<button type="button" class="btn m_top_10" onclick="addElement()">Add Extra Charges</button> 
 			<?php endif;?>
@@ -160,6 +161,13 @@
 	</div>
 	
 	</form>
+	</div>
+
+	</div>
+	
+
+			
+	
 	<?php if($so_details['payment_type']=="net"):?>
 	<div class="row m_bot_30" id="div_charges" style="display:none;">
 		<table id="pricelist" class="table table-bordered">
