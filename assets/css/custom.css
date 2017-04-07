@@ -17,7 +17,7 @@
 
 /*.form-group > label + select {height: 65px;}*/
 
-/*.form-group > label + select {height: 32px;}*/
+.form-group > label + select {height: 32px;}
 
 td { padding:4px 6px !important;}
 #advance_search_form .form-group { margin-bottom:0px !important;}
