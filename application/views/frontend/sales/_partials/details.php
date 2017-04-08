@@ -167,40 +167,6 @@
 	
 
 			
-	
-	<?php if($so_details['payment_type']=="net"):?>
-	<div class="row m_bot_30" id="div_charges" style="display:none;">
-		<table id="pricelist" class="table table-bordered">
-			<thead class="greenbg_title">
-				<th>Charge Type</th>
-				<th>Description</th>
-				<th>Amount</th>
-				<th>&nbsp;</th>
-			</thead>
-			<tbody class="white_bg">
-				
-			</tbody>
-			<tfoot>
-				<th colspan="4" align="center">
-					<button type="button" class="btn-small" onclick="save_reconciled_salesorder_charges(<?php echo $so_id;?>, <?php echo $so_details['customer_id'];?>, this)" style="margin-left:400px;">Save</button>
-				</th>
-			</tfoot>
-		</table>
-		
-	</div>
 
-	<!-- Modal-->
-	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" class="modal hide fade" id="div_so_reconcile_charges">
-	      <div class="modal-header">
-		        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" data-original-title="" title="">×</button>
-		        <h3 id="myModalLabel">Reconcile Charges</h3>
-		  </div>
-	      <div class="modal-body">
-		      <form method="post" id="edit_so_reconcile_charges">
-			      	      
-		      </form>
-	      </div>
-    </div>
-	<?php endif;?>
 	
 <?php endif;?>

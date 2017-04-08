@@ -23,7 +23,19 @@ class Shipment extends Admin_Controller
             if(!$ship_id)
                 throw new Exception("Invalid Shipment Id");
             
-            $this->data['ship_data'] = $this->shipment_model->get_where(array("id"=>$ship_id),'*')->row_array();
+            $ship_data = $this->shipment_model->get_where(array("id"=>$ship_id),'*')->row_array();
+            
+            if($_POST){
+                $ins_data = array();
+                $ins_data['ship_company']        = $this->input->post('carrier');
+                $ins_data['order_status']        = $this->input->post('status');
+                
+                $this->shipment_model->update(array("id" => $ship_id), $ins_data);
+               // echo $this->db->last_query(); exit;
+                redirect("salesorder/view/".$ship_data['so_id']);
+            }
+            
+            $this->data['ship_data'] = $ship_data;
             $this->data['carrier']   = get_carrier();
             $this->data['status']    = array(array("name" => "NEW"),array("name" => "PENDING"),array("name" => "HOLD"),array("name" => "COMPLETED"),array("name" => "CANCELED"));
             $this->layout->view("frontend/shipment/view", $this->data);         

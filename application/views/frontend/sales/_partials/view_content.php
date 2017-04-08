@@ -218,10 +218,8 @@
                           <div class="modal-body">
                           
                           </div>
-                          
                         </div>
                     </div>
-                    
 					<div class="row" id="notes_list">
 						<?php echo $notes;?>
 					</div>
@@ -230,10 +228,5 @@
 					<div class="row loghistory_sec" id="logs_list"></div>
 				</div>
 			</div>
-
-			
-
 		</div>
-
-	</div>
-	
+	</div>	

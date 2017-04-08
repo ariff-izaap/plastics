@@ -17,7 +17,7 @@
       <select name="status" class="form-group">
         <option value="">Select Status</option>
         <?php if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('status',$cvalue['id'],(($ship_data['order_status'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
+         <option value="<?php echo $cvalue['name']; ?>" <?php echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
         <?php }} ?>
       </select>
     </div>
@@ -26,7 +26,7 @@
       <select name="status" class="form-group">
         <option value="">Select Status</option>
         <?php if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('status',$cvalue['id'],(($ship_data['order_status'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
+         <option value="<?php echo $cvalue['name']; ?>" <?php echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
         <?php }} ?>
       </select>
     </div>
@@ -35,7 +35,7 @@
       <select name="status" class="form-group">
         <option value="">Select Status</option>
         <?php if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('status',$cvalue['id'],(($ship_data['order_status'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
+         <option value="<?php echo $cvalue['name']; ?>" <?php echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
         <?php }} ?>
       </select>
     </div>

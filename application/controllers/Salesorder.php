@@ -506,6 +506,8 @@ class Salesorder extends Admin_Controller
             $this->session->set_flashdata('success_msg',"Doesn't create invoice",TRUE);
          else
             $this->session->set_flashdata('error_msg',"Invoice created successfully",TRUE);   
+            
+         redirect("salesorder/view/".$so_id);   
     }
     
     function change_ship_address($ship_addr_id = null,$so_id = 0, $action)
