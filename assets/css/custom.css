@@ -165,6 +165,10 @@ td { padding:4px 6px !important;}
 .search-form form > div:first-of-type > div:last-child > div:nth-child(-n+4):not(:nth-child(2)) { width: 49%; display: inline-block; }
 .search-form form > div:first-of-type > div:last-child > div:first-of-type > label { width: 16%; }
 .search-form form > div:first-of-type > div:last-child > div:first-of-type > input { width: 76% !important; }
+.search-form .formcontrol-box .form-group { margin: 0px 0px 20px; !important; }
+.search-form form > div:first-of-type > div:first-of-type > div { margin-top: 0px; }
+.search-form .panel-heading { padding-top: 10px !important; }
+.search-form .panel-bor .panel-heading { margin-bottom: 17px !important; }
 
 /* search form */
 
