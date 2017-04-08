@@ -1,3 +1,4 @@
+body { font-size: 16px;}
 .panel-bor { border:none; box-shadow:none;}
 .panel-bor .panel-heading { background: hsl(0, 0%, 99%) none repeat scroll 0 0 !important;  border: 0 none;border-radius: 4px;box-shadow: 1px 1px 5px hsl(0, 0%, 91%);margin-bottom: 25px;}
 .formcontrol-box label.col-md-4 { padding-left:0px !important; text-align:left;}
@@ -107,11 +108,9 @@ td { padding:4px 6px !important;}
     width: 18% !important; margin-top: 37px !important;}
 .product-sel .formcontrol-box.ship-box .postal .form-group { width: 30%;}
 
-
-
 /* Sales order view section */
 .sales-order-view-section .topsec_info{margin-top:20px; margin-bottom:20px;}
-.sales-order-view-section .box_highilite h3 span{min-height: 51px;}
+.sales-order-view-section .box_highilite h3 span{min-height: 53px;}
 .sales-order-view-section .box_highilite h3 { margin: 17px 0 3px 0;}
 .sales-order-view-section .box_highilite h3 span{top: -17px;}
 .sales-order-view-section #relatedlinks{padding: 9px; border: 1px solid #ddd; margin-right: 25px;}
@@ -126,6 +125,8 @@ td { padding:4px 6px !important;}
 .sales-order-view-section .create-invoice { text-align: right; margin: 8px 0;}
 .sales-order-view-section .box_highilite {margin-bottom: 0;}
 .clr-orange{color:orange; font-weight: bold;}
+.sales-order-view-section .box_highilite div {background: #f0f1f3; min-height: 55px; border-radius: 4px; border: 1px solid #ddd;}
+.sales-order-view-section .box_highilite div h3{color:#064ba8;}
 /* Sales order view section */
 
 /* popup section */
@@ -147,10 +148,8 @@ td { padding:4px 6px !important;}
 .shipmend-sec .form-group { display: inline-block; width: 34.333%;}
 .shipmend-sec .form-group select, .shipmend-sec .form-group input[type="text"], .shipmend-sec .form-group textarea { width: 100%;}
 
-
-/* popup section */
-
-
+.box_highilite div
+/* popup section */ 
 #updat_cart { width:100% !important;}
 
 @media (min-width:992px){
