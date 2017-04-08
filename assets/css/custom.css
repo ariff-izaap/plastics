@@ -160,6 +160,11 @@ td { padding:4px 6px !important;}
 .search-form form > div:first-of-type > div:first-of-type > div > label { width: 42%; padding-right: 4px; }
 .search-form form > div:first-of-type > div:nth-child(2) > div ~ div { width: 49%; display: inline-block; }
 .search-form form > div:first-of-type > div:nth-child(2) > div ~ div label { width: 42%; padding-right: 4px; }
+.search-form form > div:first-of-type > div:nth-child(2) > div:first-of-type label { width: 21%; }
+.search-form form > div:first-of-type > div:nth-child(2) > div:first-of-type input { width: 75% !important; }
+.search-form form > div:first-of-type > div:last-child > div:nth-child(-n+4):not(:nth-child(2)) { width: 49%; display: inline-block; }
+.search-form form > div:first-of-type > div:last-child > div:first-of-type > label { width: 16%; }
+.search-form form > div:first-of-type > div:last-child > div:first-of-type > input { width: 76% !important; }
 
 /* search form */
 
