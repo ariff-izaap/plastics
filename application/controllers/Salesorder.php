@@ -255,37 +255,6 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
                 log_history("sales_order",$edit_id,'Sales Order',"update");
-                
-                ////update customer billling & shipping address
-//                $customer_addr = array();
-//                $customer_addr['first_name'] = $this->input->post('first_name');
-//                $customer_addr['last_name']  = $this->input->post('last_name');
-//                $customer_addr['address1']   = $this->input->post('address1');
-//                $customer_addr['address2']   = $this->input->post('address2');
-//                $customer_addr['city']       = $this->input->post('city');
-//                $customer_addr['state']      = $this->input->post('state');
-//                $customer_addr['zipcode']    = $this->input->post('zipcode');
-//                $customer_addr['phone']      = $this->input->post('mobile');
-//                $customer_addr['updated_date']= date('Y-m-d H:i:s'); 
-//                $customer_addr['updated_id']  = get_current_user_id();
-//                $this->salesorder_model->update(array("id" => $ins_data['billing_address_id']),$customer_addr,"address");
-//                log_history("address",$ins_data['billing_address_id'],'Customer Billing Address',"update");
-//                 
-//                 
-//                $customer_ship_addr = array();
-//                $customer_ship_addr['first_name']  = $this->input->post('ship_first_name');
-//                $customer_ship_addr['last_name']   = $this->input->post('ship_last_name');
-//                $customer_ship_addr['address1']    = $this->input->post('ship_address1');
-//                $customer_ship_addr['address2']    = $this->input->post('ship_address2');
-//                $customer_ship_addr['city']        = $this->input->post('ship_city');
-//                $customer_ship_addr['state']       = $this->input->post('ship_state');
-//                $customer_ship_addr['zipcode']     = $this->input->post('ship_zipcode');
-//                $customer_ship_addr['phone']       = $this->input->post('ship_mobile');
-//                $customer_ship_addr['updated_date']= date('Y-m-d H:i:s'); 
-//                $customer_ship_addr['updated_id']  = get_current_user_id();
-//                $this->salesorder_model->update(array("id" => $ins_data['shipping_address_id']),$customer_ship_addr,"customer_location");
-//                log_history("customer_location",$ins_data['shipping_address_id'],'Customer Shipping Address',"update");
-                
                 $msg  = 'Sales Order updated successfully';
                 
               }

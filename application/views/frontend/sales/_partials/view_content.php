@@ -14,12 +14,8 @@
 							<thead class="greenbg_title txt_13">
 								<tr>
 									<th width="10%">Billing Information
-
-<a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
-
-
+                                        <a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
 									</th>
-                                    
 								</tr>
 							</thead>
 							<tbody class="white_bg">
