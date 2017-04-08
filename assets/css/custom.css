@@ -154,9 +154,9 @@ td { padding:4px 6px !important;}
 
 
 /* search form */
-.search-form form > div:first-of-type > div:first-of-type > div { width: 49%; float: left; display: inline-block; margin-top: 15px;}
+.search-form form > div:first-of-type > div:first-of-type > div { width: 49%; display: inline-block; margin-top: 15px;}
 .search-form form label { font-size: 14px; }
-.formcontrol-box .form-group { margin: 0px 0px 20px; }
+.search-form form .form-group { margin-bottom: 0; }
 .search-form form > div:first-of-type > div:first-of-type > div > label { width: 42%; padding-right: 4px; }
 .search-form form > div:first-of-type > div:nth-child(2) > div ~ div { width: 49%; display: inline-block; }
 .search-form form > div:first-of-type > div:nth-child(2) > div ~ div label { width: 42%; padding-right: 4px; }
