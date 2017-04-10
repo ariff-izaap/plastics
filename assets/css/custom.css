@@ -224,11 +224,34 @@ td { padding:4px 6px !important;}
 
 .second-box h2 { margin-bottom: -19px; }
 
-.third-box > div:first-of-type > .call > label { float: left; }
+.third-box > div:nth-child(-n + 2) > .call > label { float: left; }
 
-.third-box > div:first-of-type > .call > input, .third-box > div:first-of-type > .call > label  { width:40% !important; display: inline-block; }
+.third-box > div:nth-child(-n + 2) > .call > input, .third-box > div:nth-child(-n + 2) > .call > label  { width:50% !important; display: inline-block; }
 
-.third-box > div:first-of-type > .time > label { display: none; }
+.third-box > div:nth-child(-n + 2) > .time > label { display: none; } 
+
+.panel-heading.third-box div { width: auto!important; }
+
+.third-box input[type="text"] { width: 110px !important; min-width: 110px; }
+
+.third-box > div:nth-child(-n + 2) { margin-top: 10px; }
+
+.third-box > div:nth-child(-n + 2) > .time-choose { margin-top: 0 !important; }
+
+.third-box > div:nth-child(-n + 2) > .time-choose select.form-control { height: 31px !important; }
+
+.third-box > div:nth-child(-n + 2) > .use { margin-top: 4px !important; }
+
+.third-box > div:last-child label, .fourth-box > div label{ width: 22.9% !important; float: left; }
+
+.third-box > div:last-child label, .third-box > div:last-child select, .fourth-box > div label, .fourth-box > div select { display: inline-block; }
+
+.third-box > div:last-child select, .fourth-box > div select  { width: 58.6%; }
+
+.panel-heading.fourth-box { padding-top: 10px !important; }
+
+.search-hedalign { margin-bottom: -13px;}
+
 
 /* search form */
 

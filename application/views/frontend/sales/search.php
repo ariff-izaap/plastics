@@ -107,21 +107,21 @@
       <div class="form-grid col-md-6 panel panel-default panel-bor">
       <div class="panel-heading third-box">
       <div class="call-group">
-        <div class="form-group call">
-          <label>Last Call Search</label>
-          <input type="text"  name="customer_number" class="form-control" id="customer_number"  />
+        <div class="form-group call ">
+          <label class="">Last Call Search</label>
+          <input type="text"  name="customer_number" class="form-control " id="customer_number"  />
         </div>
-        <div class="form-group time">
-          <label>&nbsp;</label>
+        <div class="form-group time ">
+         <!-- <label>&nbsp;</label> -->
           <input type="text" class="form-control"  name="time" id="time"  />
         </div>
-        <div class="form-group time-choose">
+        <div class="form-group time-choose ">
             <select class="form-control">
             <option value="volvo"> < </option>
             <option value="saab"> > </option>
             </select> 
         </div>
-        <div class="form-group use">
+        <div class="form-group use ">
           <input type="checkbox"  name="customer_number" id="customer_number"  />
           <label>Use ?</label>
         </div>
@@ -132,25 +132,25 @@
           <input type="text" name="customer_name" class="form-control" id="customer_name" value=""/>
         </div>
         <div class="form-group time">
-          <label>&nbsp;</label>
+          <!-- <label>&nbsp;</label> -->
           <input type="text"  name="time" class="form-control" id="time"  />
         </div>
         <div class="form-group time-choose">
-            <br />
+           <!-- <br /> --> 
             <select class="form-control">
             <option value="volvo"> < </option>
             <option value="saab"> > </option>
             </select> 
         </div>
         <div class="form-group use">
-        <br />
+         <!-- <br /> --> 
           <input type="checkbox"  name="customer_number" id="customer_number"  />
           <label>Use ?</label>
         </div>
         </div>
         
-        <div class="form-group" >
-          <label>Call Person</label>
+        <div class="form-group third-lastf" >
+          <label col-md-3>Call Person</label>
           <select name="call_person" multiple="multiple" class="form-control select-box">
            <?php if(count($users)>0) {
                      foreach($users as $ukey => $uvalue){  
@@ -161,9 +161,9 @@
           </select>
         </div>
         </div>
-        <div class="panel-heading">
+        <div class="panel-heading fourth-box">
         <div class="form-group " >
-          <label>Credit</label>
+          <label class="col-md-3">Credit</label>
           <select name="call_person" multiple="multiple"  class="form-control select-box">
           <option value="none">None</option>
            <?php if(count($credit)>0) {
@@ -177,7 +177,7 @@
         </div>
         
         <div class="panel-heading">
-        <h2>Location</h2>
+        <h2 class="search-hedalign">Location</h2>
         <div class="row">
         <div class="form-group col-md-3" >
           <label>Start Time</label>
@@ -204,14 +204,14 @@
           </select>
         </div>
         </div>
-        <div class="formcontrol-box">
-        <div class="form-group">
-          <label class="col-md-4">Address</label>
-          <input type="text" name="loc_address" class="form-control col-md-8" id="loc_address" />
+        <div class="formcontrol-box search-f1">
+        <div class="form-group col-md-6">
+          <label class="col-md-3">Address</label>
+          <input type="text" name="loc_address" class="form-control" id="loc_address" />
         </div>
-        <div class="form-group">
-          <label class="col-md-4">Address 2</label>
-          <input type="text" name="loc_address2" class="form-control col-md-8" id="loc_address2" />
+        <div class="form-group col-md-6">
+          <label class="col-md-3">Address 2</label>
+          <input type="text" name="loc_address2" class="form-control" id="loc_address2" />
         </div>
         </div>
         <div class="row">
