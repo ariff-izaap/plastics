@@ -128,6 +128,7 @@ class Purchase_model extends App_model
 		$this->db->join("country g","f.state=g.id");
 		$this->db->join("state h","f.country=h.id");
 		$q = $this->db->get();
+		// echo $this->db->last_query();exit;
 		return $q->row_array();
 	}
 

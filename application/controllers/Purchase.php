@@ -461,6 +461,7 @@ class Purchase extends Admin_Controller
     $data['po'] = "";
     $id = $this->input->post('id');
     $data['po'] = $this->purchase_model->get_purchased_order($id);
+    // print_r($data['po']);exit;
     $data['products'] = $this->purchase_model->get_purchased_products($id);
     $this->load->view('frontend/purchase/ajax_purchase_order',$data);
   }
