@@ -35,14 +35,14 @@ class Invoice_model extends App_model
   }
   public function get_invoices($inv_id='')
   { 
-    $this->db->select("a.*,b.business_name,c.name credit_type,d.name as carrier,e.name,e.address_1,e.address_2,e.city,e.zipcode,f.name as state,g.name as country,h.first_name as salesman,j.product_id,j.quantity,j.unit_price,a.id as item_id,k.name as b_name,k.address1 as b_address1,k.address2 as b_address2,k.city as b_city,k.state as b_state,k.country as b_country,k.zipcode as b_zipcode");
+    $this->db->select("a.*,b.business_name,c.name credit_type,d.name as carrier,e.name,e.address_1,e.address_2,e.city,e.zipcode,e.state as state,e.country as country,h.first_name as salesman,j.product_id,j.quantity,j.unit_price,a.id as item_id,k.name as b_name,k.address1 as b_address1,k.address2 as b_address2,k.city as b_city,k.state as b_state,k.country as b_country,k.zipcode as b_zipcode");
     $this->db->from("invoices a");
     $this->db->join("customer b","a.customer_id=b.id");
     $this->db->join("credit_type c","a.credit_type=c.id");
     $this->db->join("carrier d","a.shipment_id=d.id");
     $this->db->join("customer_location e","a.location_id=e.id");
-    $this->db->join("state f","e.state=f.id");
-    $this->db->join("country g","e.country=g.id");
+    // $this->db->join("state f","e.state=f.id");
+    // $this->db->join("country g","e.country=g.id");
     $this->db->join("admin_users h","a.salesman_id=h.id");
     $this->db->join("invoice_items j","j.invoice_id=a.id");
     $this->db->join("address k","a.billing_id=k.id");

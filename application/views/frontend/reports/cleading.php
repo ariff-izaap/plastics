@@ -13,7 +13,8 @@
 				<div class="col-md-5">
 					<label class="col-md-2"><b>Filters:</b></label>
 					<p class="col-md-10">
-						SO Date is between <?=date('m-d-Y',strtotime($date['start_date']));?>,<?=date('m-d-Y',strtotime($date['end_date']));?><br>
+						SO Date is between <?=date('m-d-Y',strtotime($date['start_date']));?>,<?=date('m-d-Y',strtotime($date['end_date']));?>
+						<br>
 						SO Total Price is more than 0<br>
 						SO Salesman is like TED
 					</p>
@@ -33,13 +34,12 @@
 					<?php
 					if($cleading)
 					{
-						
 						$price=[];$wprice=[];$items=[];
 						foreach ($cleading as $key => $value)
 						{
-							$price[] = $value['price'];
+							$price[]  = $value['price'];
 							$wprice[] = $value['w_price'];
-							$items[] = $value['total_items'];
+							$items[]  = $value['total_items'];
 							?>
 							<tr>
 								<td><?=$value['business_name'];?></td>

@@ -26,7 +26,7 @@
     }
   }
   $amount = array_sum($total_amount) + array_sum($cod_fee) + array_sum($freight);
-  // echo "<pre>";print_r($so_id);echo "</pre>";
+  // echo "<pre>";print_r($so_details);echo "</pre>";
 ?>
 <form action="" method="post" class="InvoiceForm" name="InvoiceForm">
   <input type="hidden" name="customer_id" value="<?=$so_details[0]['c_id'];?>">
@@ -34,6 +34,7 @@
   <input type="hidden" name="shipping_id" value="<?=$so_details[0]['shipping_address_id'];?>">
   <input type="hidden" name="billing_id" value="<?=$so_details[0]['billing_address_id'];?>">
   <input type="hidden" name="shipment_id" value="<?=$so_details[0]['carrier_id'];?>">
+  <input type="hidden" name="po_id" value="<?=$so_details[0]['po_id'];?>">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">

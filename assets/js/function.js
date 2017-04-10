@@ -1586,20 +1586,17 @@ function add_address()
 function remove_address(ele,id='')
 {
   edit_id = $(".edit_id").val();
-  len = $(".ajax_address .ajax_address").length;
-  alert(edit_id+'---'+id);
-  if(edit_id=='')
-  {
-   if(len==1)
+  len = $(".ajax_address .new_address").length;
+  len1 = $(".edit_address").length;
+  
+   if((len + len1) > 1 )
    {
     $(ele).parent().parent().parent().remove();
      // $("#tab3primary .remove_div").remove();
    }
-  }
-  else
-  {
-
-  }
+   else
+    alert("Cannot able to remove");
+  
 }
 
 

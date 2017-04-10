@@ -28,9 +28,7 @@ class Accounting extends Admin_Controller
   {
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
-    $this->simple_search_fields = array(                                                
-                                'b.business_name' => 'Name',
-                                'c.ship_date'       => 'Ship Date');
+    $this->simple_search_fields = array('b.business_name' => 'Name','c.ship_date' => 'Ship Date');
     $this->_narrow_search_conditions = array("start_date");    
     $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
             <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
@@ -59,6 +57,7 @@ class Accounting extends Admin_Controller
       $ins['salesman_id'] = $form['salesman_id'];
       $ins['location_id'] = $form['shipping_id'];
       $ins['shipment_id'] = $form['shipment_id'];
+      $ins['po_id'] = $form['po_id'];
       $ins['billing_id'] = $form['billing_id'];
       $ins['ship_date'] = str_replace("\r\n",",",$form['ship_date']);
       $ins['customer_id'] = $form['customer_id'];
@@ -121,9 +120,7 @@ class Accounting extends Admin_Controller
   {
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
-    $this->simple_search_fields = array(                                                
-                                'b.business_name' => 'Name',
-                                'c.ship_date'       => 'Ship Date');
+    $this->simple_search_fields = array('b.business_name' => 'Name','c.ship_date' => 'Ship Date');
     $this->_narrow_search_conditions = array("start_date");    
     $str = '<a target="_blank" href="'.site_url('accounting/print_invoice/{id}').'" class="table-action"><i class="fa fa-print"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));

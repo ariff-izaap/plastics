@@ -321,14 +321,14 @@ class Salesorder extends Admin_Controller
                 $this->data['order_status']= $order_status['order_status'];
                 $this->data['od_items']    = $this->salesorder_model->get_sales_items($so_new_id);
                 $this->data['billing']     = $this->salesorder_model->get_where(array("id" => $this->input->post('billing_address_id')),"*","address")->row_array();
-                $this->data['shipping']    = $this->salesorder_model->get_where(array("id" => $this->input->post('shipping_address_id')),"*","contact_location")->row_array();
+                $this->data['shipping']    = $this->salesorder_model->get_where(array("id" => $this->input->post('shipping_address_id')),"*","customer_location")->row_array();
                 $email_template            = $this->load->view("frontend/email/sales",$this->data,true);
                 $cus_data                  = $this->salesorder_model->get_where(array("id" => $order_status['customer_id']),"email","customer_contact")->row_array();
                 
                 $sub   = "Order #".$so_new_id." Generated Successfully";  
                 $cu_usr= get_user_data();
-                $email = new Email();
-                $email->send($cus_data['email'], $cu_usr['email'],$sub,$email_template,array());
+                // $email = new Email();
+                // $email->send($cus_data['email'], $cu_usr['email'],$sub,$email_template,array());
                   
                 $msg     = 'Sales Order created successfully';
                 $edit_id =  $so_new_id;
@@ -816,25 +816,31 @@ class Salesorder extends Admin_Controller
         $ins['web_url'] = $form['website'];
         $ins['ups'] = $form['ups'];
         $ins['credit_type'] = $form['credit_type'];
-        $ins['address_id'] = isset($edit_id) ? $form['address_id'] : $a_id;
+        $ins['address_id'] = (isset($edit_id) && $edit_id!=0) ? $form['address_id'] : $a_id;
         if($edit_id)
           $up2 = $this->admin_model->update(array("id"=>$form['edit_id']),$ins,"customer");
         else
           $c_id = $this->admin_model->insert($ins,"customer");
         /*Customer Contact Table*/
-        $ins2['customer_id'] = isset($edit_id)? $edit_id : $c_id;
+        $ins2['customer_id'] = (isset($edit_id) && $edit_id!=0) ? $edit_id : $c_id;
         $ins2['name'] = $form['contact_name'];
         $ins2['contact_value'] = $form['contact_value'];
         $ins2['contact_type'] = $form['contact_type'];
         $ins2['email'] = $form['contact_email'];
+        $ins2['created_id'] = get_current_user_id();
+        $ins2['updated_id'] = get_current_user_id();
+        $ins2['created_date'] = date("Y-m-d H:i:s");
         if($edit_id)
+        {
+          $ins2['updated_date'] = date("Y-m-d H:i:s");
           $up3 = $this->admin_model->update(array("customer_id"=>$form['edit_id']),$ins2,"customer_contact");
+        }
         else
           $add = $this->admin_model->insert($ins2,"customer_contact");
         /*Customer Location Table*/
         for ($i=0; $i<count($form['loc_name']);$i++)
         {            
-          $ins3['customer_id'] = isset($edit_id)? $edit_id : $c_id;
+          $ins3['customer_id'] = (isset($edit_id) && $edit_id!=0) ? $edit_id : $c_id;
           $ins3['name'] = $form['loc_name'][$i];
           $ins3['address_1'] = $form['loc_address_1'][$i];
           $ins3['address_2'] = $form['loc_address_2'][$i];
@@ -872,7 +878,9 @@ class Salesorder extends Admin_Controller
         $this->data['edit_data'] = $this->admin_model->select("customer",array("id"=>$edit_id));
         $this->data['edit_data1'] = $this->admin_model->select("address",array("id"=>$this->data['edit_data']['address_id']));
         $this->data['edit_data2'] = $this->admin_model->select("customer_contact",array("customer_id"=>$edit_id));
-        $this->data['edit_data3'] = $this->admin_model->select("customer_location",array("customer_id"=>$edit_id));
+        $this->data['edit_data3'] = $this->admin_model->get_results("customer_location",array("customer_id"=>$edit_id));
+        // echo "<pre>";print_r($this->data['edit_data3']);
+        // exit;
       }
      $this->layout->view('frontend/sales/add_customer_relation');
     }

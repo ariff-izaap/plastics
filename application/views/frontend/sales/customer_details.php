@@ -63,7 +63,7 @@
       
       <div class="form-grid col-md-6 panel panel-default panel-bor">
       	<div class="panel-heading formcontrol-box">
-       
+       <input type="hidden" name="shipping_address_id" class="form-control" id="shipping_address_id" value="<?php echo set_value('shipping_address_id', $customer_data['id']);?>" placeholder="" />
        <div class="form-grid">
        <h2>Shipping Information</h2>
         <?php $ship_first_name = explode(" ",$customer_data['loc_name']); ?>

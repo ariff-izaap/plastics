@@ -43,17 +43,17 @@ class Accounting_model extends App_model
   {
     if($where)
       $this->db->where("a.id IN($where)");
-    $this->db->select("b.*,b.id as so_id,a.ship_date,c.business_name as cname,d.address_1,d.address_2,d.city,e.name as state_name,f.name as country_name,d.zipcode,g.first_name,g.last_name,c.id as c_id");
+    $this->db->select("GROUP_CONCAT(h.id) as po_id,b.*,b.id as so_id,a.ship_date,c.business_name as cname,d.address_1,d.address_2,d.city,d.state as state_name,d.country as country_name,d.zipcode,g.first_name,g.last_name,c.id as c_id");
     $this->db->from("shipment a");
     $this->db->join("sales_order b","a.so_id=b.id");
     $this->db->join("customer c","b.customer_id=c.id");
     $this->db->join("customer_location d","b.shipping_address_id=d.id");
-    $this->db->join("state e","d.state=e.id");
-    $this->db->join("country f","d.country=f.id");
+    //$this->db->join("state e","d.state=e.id");
     $this->db->join("admin_users g","b.salesman_id=g.id");
+    $this->db->join("purchase_order h","a.so_id=h.so_id");
     $q = $this->db->get();
 
-    // echo $this->db->last_query();exit;
+   // echo $this->db->last_query();exit;
     return $q->result_array();
   }
 

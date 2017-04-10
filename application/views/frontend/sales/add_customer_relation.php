@@ -69,7 +69,7 @@
 		          							foreach (get_state() as $key => $value)
 		          							{
 		          								?>
-		          									<option <?=set_select('state',$value['id'],(($edit_data1['state']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+		          									<option <?=set_select('state',$value['name'],(($edit_data1['state']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
 		          								<?php
 		          							}
 		          						}
@@ -88,7 +88,7 @@
 		          							foreach (get_country() as $key => $value)
 		          							{
 		          								?>
-		          									<option <?=set_select('country',$value['id'],(($edit_data1['country']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+		          									<option <?=set_select('country',$value['name'],(($edit_data1['country']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
 		          								<?php
 		          							}
 		          						}
@@ -165,7 +165,20 @@
 		          			<div class="clearfix"></div><br>
 		          			<div class="form-group <?php echo (form_error('contact_type'))?'error':'';?>" data-error="<?php echo (form_error('contact_type'))? strip_tags(form_error('contact_type')):'';?>">
 		          				<label required="">Type of Contact</label>
-		          				<input type="text" class="form-control" name="contact_type" value="<?=set_value('contact_type',$edit_data2['contact_type']);?>">
+		          				<select name="contact_type" class="form-control">
+			          						<option value="">--Select--</option>
+			          						<?php
+			          						if(get_contact_type())
+			          						{
+			          							foreach (get_contact_type() as $key => $value)
+			          							{
+			          								?>
+			          									<option <?=set_select('contact_type',$value['id'],(($edit_data2['contact_type']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			          								<?php
+			          							}
+			          						}
+			          						?>
+			          					</select>
 		          			</div>
 		          			<div class="form-group <?php echo (form_error('contact_email'))?'error':'';?>" data-error="<?php echo (form_error('contact_email'))? strip_tags(form_error('contact_email')):'';?>">
 		          				<label required="">Contact Email</label>
@@ -227,7 +240,7 @@
 			          							foreach (get_state() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_state[]',$value['id'],(($edit_data3['state']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_state[]',$value['name'],(($edit_data3['state']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}
@@ -246,7 +259,7 @@
 			          							foreach (get_country() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_country[]',$value['id'],(($edit_data3['country']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_country[]',$value['name'],(($edit_data3['country']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}
@@ -330,7 +343,7 @@
 			          	{
 			          	?>	
 			          		<input type="hidden" name="location_id[]" value="<?=$row['id'];?>">
-			          		<div class="row">
+			          		<div class="row edit_address">
 			          		<div class="row remove_div">
 			          			<div class="col-md-2 pull-right">
 			          				<button type='button' class='btn' onclick='remove_address(this,<?=$row['id'];?>);'>Remove</button>
@@ -371,7 +384,7 @@
 			          							foreach (get_state() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_state[]',$value['id'],(($row['state']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_state[]',$value['name'],(($row['state']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}
@@ -390,7 +403,7 @@
 			          							foreach (get_country() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_country[]',$value['id'],(($row['country']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_country[]',$value['name'],(($row['country']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}

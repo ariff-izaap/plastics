@@ -769,6 +769,14 @@ function get_weeks_operate()
    return $q;
 }
 
+function get_contact_type()
+{
+   $CI = get_instance();
+   $q = $CI->db->query("select * from contact_type where status=1")->result_array();
+   return $q;
+}
+
+
 
 function get_country()
 {
@@ -940,10 +948,10 @@ function create_auto_po($product,$form)
       /*End Ordered Address Info*/
 
       $tot='';
-      $ins['vendor_id'] = $vendor_id;
-      $ins['order_status'] = "NEW";
-      $ins['pickup_date']         ='';// $form['pickup_date'];
-      $ins['estimated_delivery']  =''; //$form['delivery_date'];
+      $ins['vendor_id']           = $vendor_id;
+      $ins['order_status']        = "NEW";
+      $ins['pickup_date']         = '';// $form['pickup_date'];
+      $ins['estimated_delivery']  = ''; //$form['delivery_date'];
       $ins['release_to_sold']     = '';//$form['release_to_sold'];
       $ins['is_paid']             = 'NOT PAID';//$form['paid'];
       $up['status']               = 'COMPLETED';
@@ -973,7 +981,7 @@ function create_auto_po($product,$form)
         $tot[] = $pvalue['unit_price'] * $pvalue['quantity'];
       }
       $up['total_amount'] = array_sum($tot);
-      $po_id = $CI->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
+      $update = $CI->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
     }
     $status = "success";
      //$output = array("status"=>"success","message"=>"PO Created successfully.");

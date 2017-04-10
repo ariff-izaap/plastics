@@ -52,8 +52,16 @@ class Admin_model extends App_model
       return $q->result_array();
     else
       return $q->row_array();
-
   }
+
+  public function get_results($table='',$where='')
+  {
+    if($where)
+      $this->db->where($where);
+    $q =  $this->db->get($table);
+    return $q->result_array();
+  }
+
   public function update($where,$data,$table=NULL)
   {
     $this->db->where($where);
