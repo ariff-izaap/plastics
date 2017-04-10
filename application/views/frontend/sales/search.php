@@ -12,12 +12,12 @@
   <form name="inventorycolor" method="POSt">
       <div class="form-grid col-md-6 panel panel-default panel-bor">
       <div class="panel-heading formcontrol-box">
-        <div class="form-group"  >
-          <label class="col-md-4">Customer Number</label>
+        <div class="form-group col-md-6">
+          <label class="col-md-3">Customer Number</label>
           <input type="text"  name="customer_number" class="form-control col-md-8" id="customer_number"  />
         </div>
-        <div class="form-group " >
-          <label class="col-md-4">Customer Name</label>
+        <div class="form-group col-md-6">
+          <label class="col-md-3">Customer Name</label>
           <input type="text" name="customer_name" class="form-control col-md-8" id="customer_name" value=""/>
         </div>
         </div>
