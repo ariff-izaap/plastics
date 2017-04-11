@@ -6,74 +6,54 @@
     </div>
   </div>
   
-  
-  
   <form name="inventorycolor" method="post" class="call-back">
-    <div class="container">
+    <div class="container custom-callback">
 
   <div class="row">
-      <div class="form-grid col-md-4 panel panel-default panel-bor">
+    <div class="form-grid panel panel-default panel-bor callback-box1">
       <div class="panel-heading formcontrol-box">
+      <div class="col-md-4">
         <div class="form-group"  >
-           <label>Call Time</label>
-          <select name="call_time" multiple="multiple" class="form-control">
+           <label class="col-md-4">Call Time</label>
+          <select name="call_time" multiple="multiple" class="form-control col-md-8">
             <option></option>
           </select>
         </div>
         
-        </div>
-        
-        
-        
-    
-      
-        
       </div>
-      <div class="form-grid col-md-4 panel panel-default panel-bor">
-      
-        
-        <div class="panel-heading formcontrol-box">
-        
-        <div class="form-group" >
-         <label>Date and Time</label>
-          <input type="text" name="date_time" class="form-control" id="date_time" value=""/>
+      <div class="col-md-4">
+        <div class="form-group">
+         <label class="col-md-4">Date and Time</label>
+          <input type="text" name="date_time" class="form-control col-md-8" id="date_time" value=""/>
         </div>
-         <div class="form-group" >
-         
+         <div class="form-group callback-chckbx">
           <input type="checkbox" name="date_time" id="date_time" value=""/>
           <label>Repeat Same Day Every Year</label>
-        </div>
-        </div>
-        
-    
-      
-        
+        </div> 
       </div>
-      <div class="form-grid col-md-4 panel panel-default panel-bor">
-       <div class="panel-heading formcontrol-box">
+      <div class="col-md-4">
             <div class="form-group" >
-          <label>Salesman to Notify</label>
-          <select name="salesman_to_notify" multiple="multiple" class="form-control">
+          <label class="col-md-4">Salesman to Notify</label>
+          <select name="salesman_to_notify" multiple="multiple" class="form-control col-md-8">
             <option></option>
           </select>
         </div>
-        </div>
       
       </div>
-      
+      </div>
+      </div>
          </div>
          <div class="row">
-          <div class="form-grid col-md-12 panel panel-default panel-bor">
+          <div class="form-grid panel panel-default panel-bor callback-box2">
        <div class="panel-heading formcontrol-box">
       <div class="form-group" >
-          <label>Call Back Message</label>
-          <textarea name="callback_message" id="callback_message" class="form-control"></textarea>
+          <label class="col-md-2">Call Back Message</label>
+          <textarea name="callback_message" id="callback_message" class="form-control col-md-10"></textarea>
         </div>
         </div>
         </div>
         </div>
      </div>
-     
    
      <div class="container">
      <div class="row">    

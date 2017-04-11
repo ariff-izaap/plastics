@@ -264,6 +264,97 @@ td { padding:4px 6px !important;}
 
 .search-btn-algn { margin-bottom: 39px; }
 
+.custom-form-log > div .form-group.col-md-4 { width: 33.33333% !important; }
+
+.custom-form-log .panel-heading.formcontrol-box { height: 48px; }
+
+/* common panel heading magin */
+
+.form-group label { font-size: 14px !important; }
+
+.custom-product-selctn select[multiple], .custom-product-selctn select[size], .search-form select[multiple], .search-form select[size] { }
+
+
+/* common panel heading magin ends */
+
+.custom-form-log > .panel-heading { margin-bottom: 0px; }
+
+.custom-form-log1.form-grid.panel.panel-default.panel-bor { margin-bottom: -1PX; } 
+
+.custom-form-log1 > .panel-heading { margin-bottom: 0px !important; }
+
+.custom-form-log1 textarea { width: 89.6% !important; height: 47px; }
+
+.custom-form-log1 label { width: 9%; }
+
+.custom-form-log1 .form-group { margin-bottom: 0px !important }
+
+.custom-form-log2 { margin-top: 21px; }
+
+.custom-callback .callback-box1 >.panel-heading.formcontrol-box { height: 74px;  margin-bottom: 14px!important; }
+
+.callback-box1 > div > div:last-of-type > div label { padding: 0; }
+
+.callback-box1 > div > div > div > select, .callback-box1 > div > div > div:first-of-type input { min-width: 231px; }
+
+.callback-chckbx { padding-left: 33%; margin: 0 !important; }
+
+.callback-box1 > div > div > div:first-of-type { margin-bottom: 0 !important; }
+
+.callback-box2 .form-group > textarea { width: 86.7%; height: 39px; }
+
+.callback-box2 .form-group > label { width: 11.8%; }
+
+.callback-box2 .form-group { margin-bottom: -6px !important; }
+
+/* product selection */
+
+.custom-product-selctn .form-grid .form-group > label { width: 50%; }
+
+.custom-product-selctn .form-grid .form-group > input, .custom-product-selctn .form-grid .form-group > select { width: 50%; }
+
+.p-s-checbx input { width: 10% !important; }
+
+.p-s-checbx { font-size: 11px; padding-left: 42%; }
+
+.s-p-quantity > div:nth-child(2) { margin-top: 8px !important; }
+
+.s-p-quantity > div { padding: 0; }
+
+.s-p-quantity > div:last-child { margin-top: 0 !important; }
+
+.s-p-quantity > div:last-child  > input { width: 20%!important; }
+
+.s-p-quantity > div:last-child label { width: 40px !important;  padding: 0; }
+
+.s-p-quantity > div:first-child label { width: 63% !important; }
+
+.s-p-quantity > div:first-child input { width: 37%!important;}
+
+.s-p-quantity > div:last-child { margin-top: 13px !important; }
+
+.s-p-quantity1 > div > label { padding: 0; }
+
+.s-p-quantity1 > div:last-child { margin-top: 13px !important; margin-left: 0 !important; padding-left: 0; }
+
+.s-p-quantity1 > div { width: 50% !important; }
+
+.s-p-quantity1 > div:last-child input { width: 15% !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* search form */
 

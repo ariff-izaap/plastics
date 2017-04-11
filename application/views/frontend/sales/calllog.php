@@ -11,44 +11,33 @@
     <div class="container">
 
   <div class="row">
-      <div class="form-grid col-md-6 panel panel-default panel-bor">
+      <div class="form-grid panel panel-default panel-bor custom-form-log">
+
       <div class="panel-heading formcontrol-box">
-        <div class="form-group"  >
+        <div class="form-group col-md-4">
           <label class="col-md-3">Call Time</label>
           <select name="call_time" multiple="multiple" class="col-md-9">
             <option></option>
           </select>
-        </div>
-        
-        </div>
-        
-        <div class="panel-heading formcontrol-box">
-        
-        <div class="form-group" >
+        </div>        
+              
+        <div class="form-group col-md-4" >
           <label class="col-md-3">Call Time</label>
           <input type="text" name="call_time" class="form-control col-md-9" id="call_time" value=""/>
         </div>
-        </div>
-        
-    
-      
-        
-      </div>
-      <div class="form-grid col-md-6 panel panel-default panel-bor">
-       <div class="panel-heading formcontrol-box">
-            <div class="form-group" >
+
+        <div class="form-group col-md-4" >
           <label class="col-md-3">Call Type</label>
           <select name="call_type" multiple="multiple" class="col-md-9">
             <option></option>
           </select>
         </div>
-        </div>
-      
-      </div>
-      
-         </div>
-         <div class="row">
-          <div class="form-grid col-md-12 panel panel-default panel-bor">
+    </div>
+    </div>
+     </div>
+
+      <div class="row">
+          <div class="form-grid panel panel-default panel-bor custom-form-log1">
        <div class="panel-heading formcontrol-box">
       <div class="form-group" >
           <label class="col-md-1">Call Log</label>
@@ -57,10 +46,9 @@
         </div>
         </div>
         </div>
-     </div>
       </form>
     
-     <div class="container calllog-control">
+     <div class="container calllog-control custom-form-log2">
      <div class="row">    
         <div class="form-group col-md-2">
           <input type="reset" class="btn btn-block" name="reset" value="Clear Form" />
