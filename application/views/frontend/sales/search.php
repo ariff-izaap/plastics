@@ -176,7 +176,7 @@
         </div>
         </div>
         
-        <div class="panel-heading">
+        <div class="panel-heading fifth-box">
         <h2 class="search-hedalign">Location</h2>
         <div class="row">
         <div class="form-group col-md-3" >
@@ -241,9 +241,9 @@
         </div>
       </div>  
     
-     <div class="container sales-cntrl-btn">
+     <div class="container sales-cntrl-btn search-btn-algn">
      <div class="row">   
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-2 col-md-offset-4">
           <input type="reset" class="btn btn-block" name="reset" value="Clear Form" />
         </div> 
         <div class="form-group col-md-2">

@@ -252,6 +252,18 @@ td { padding:4px 6px !important;}
 
 .search-hedalign { margin-bottom: -13px;}
 
+.fifth-box .search-f1 > div:first-child label { width: 23%; }
+
+.fifth-box .search-f1 > div:first-child input { width: 76%; }
+
+.fifth-box .search-f1 > div:last-child { padding-right: 0px; padding-left: 16px; }
+
+.fifth-box .search-f1 > div:last-child label { width: 28%; }
+
+.fifth-box .search-f1 > div:last-child input { width: 72%; }
+
+.search-btn-algn { margin-bottom: 39px; }
+
 
 /* search form */
 
