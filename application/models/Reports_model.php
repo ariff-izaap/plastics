@@ -59,9 +59,38 @@ class Reports_model extends App_model
     $this->db->join("product d","c.product_id=d.id");    
     $this->db->group_by("a.customer_id");
     $q = $this->db->get();
-    // echo $this->db->last_query();echo exit;
     return $q->result_array();
   }
-
+  
+  function get_shipping_order($st_date, $ed_date)
+  {
+    $this->db->select("a.id,c.business_name,sp.ship_date,a.total_amount,sum(st.qty) as quantity,u.first_name");
+    $this->db->from("shipment sp");
+    $this->db->join("customer c","a.customer_id=c.id");
+    $this->db->join("admin_users u","u.id=a.salesman_id");
+    $this->db->join("sales_order_item st","st.so_id=a.id");
+    $this->db->join("product p","p.id=st.product_id");
+    $this->db->where('sp.ship_date >=', $st_date);
+    $this->db->where('sp.ship_date <=', $ed_date);
+    return $this->db->get('sales_order a')->result_array();
+  }
+  
+  function get_warehouse_inventory($st_date, $ed_date)
+  {
+    $this->db->select("p.name,sum(p.quantity) as qty,");
+    $this->db->from("warehouse w");
+    $this->db->join("product p","w.id=p.warehouse_id");
+    $result = $this->db->get()->result_array();
+    foreach($result as $rkey => $rvalue)
+    {
+      //Comp
+      $result[$rkey]['Comp_count']    = $this->db->query("select count(p.form_id) from product p join product_form f on f.id=p.form_id where f.name='Comp' and p.name='".$rvalue['name']."'");   
+      $result[$rkey]['Powder_count']  = $this->db->query("select count(p.form_id) from product p join product_form f on f.id=p.form_id where f.name='Powder' and p.name='".$rvalue['name']."'"); 
+      $result[$rkey]['Parts_count']   = $this->db->query("select count(p.form_id) from product p join product_form f on f.id=p.form_id where f.name='Parts' and p.name='".$rvalue['name']."'"); 
+      $result[$rkey]['Regrind_count'] = $this->db->query("select count(p.form_id) from product p join product_form f on f.id=p.form_id where f.name='Regrind' and p.name='".$rvalue['name']."'"); 
+    }
+    
+    return $result;
+  }
 }
 ?>

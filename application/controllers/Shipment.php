@@ -29,6 +29,7 @@ class Shipment extends Admin_Controller
                 $ins_data = array();
                 $ins_data['ship_company']        = $this->input->post('carrier');
                 $ins_data['order_status']        = $this->input->post('status');
+                $ins_data['ship_date']           = date("Y-m-d H:i:s");
                 
                 $this->shipment_model->update(array("id" => $ship_id), $ins_data);
                // echo $this->db->last_query(); exit;

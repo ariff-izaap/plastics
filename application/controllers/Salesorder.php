@@ -266,7 +266,6 @@ class Salesorder extends Admin_Controller
                 $so_new_id                = $this->salesorder_model->insert($ins_data,"sales_order");    
                 log_history("sales_order",$so_new_id,'Sales Order',"insert");
                 
-                
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
                 $get_ship_data = $this->salesorder_model->get_where(array("id" => $ship_id),"*","shipping_type")->row_array();

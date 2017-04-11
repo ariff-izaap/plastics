@@ -19,17 +19,31 @@ class Reports extends Admin_Controller
   {
     $this->layout->view('frontend/reports/index');
   }
+  
+  
   public function report_print()
   {
-    $form = $this->input->post();
+    $form       = $this->input->post();
     $start_date = date("Y-m-d",strtotime($form['start_date']));
-    $end_date = date("Y-m-d",strtotime($form['end_date']));
+    $end_date   = date("Y-m-d",strtotime($form['end_date']));
+    
     $this->data['date'] = array("start_date"=>$start_date,"end_date"=>$end_date);
-    if(in_array('cleading',$form['report']))
-    {
+    
+    if(in_array('cleading',$form['report'])){
       $this->data['cleading'] = $this->reports_model->get_cleading($start_date,$end_date);
       $this->load->view('frontend/reports/cleading',$this->data); 
     }
+    if(in_array("invchk",$form['report'])){
+        $this->data['shipping_order'] = $this->reports_model->get_shipping_order($start_date,$end_date);
+        $this->load->view('frontend/reports/sales_order',$this->data); 
+    }
+    if(in_array("incostt",$form['report'])){
+        $this->data['shipping_order'] = $this->reports_model->get_warehouse_inventory($start_date,$end_date);
+        $this->load->view('frontend/reports/inventory_all_warehouse',$this->data); 
+    }
+    
   }
+  
+  
 }
 ?>

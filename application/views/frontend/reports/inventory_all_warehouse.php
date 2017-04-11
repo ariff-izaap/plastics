@@ -4,19 +4,15 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label><strong>Request : LEADING</strong></label>
-				<p><strong>LEADING CUSTOMERS BY SALES VOLUME</strong></p>
-				<p><strong>Leading Sales</strong></p>
+				<label><strong>Request : INVCHK</strong></label>
+				<p><strong>Invoice Register</strong></p>
 				<div class="col-md-3">
 					<p><b>Page 1</b></p>
 				</div>
 				<div class="col-md-5">
 					<label class="col-md-2"><b>Filters:</b></label>
 					<p class="col-md-10">
-						SO Date is between <?=date('m-d-Y',strtotime($date['start_date']));?>,<?=date('m-d-Y',strtotime($date['end_date']));?>
-						<br>
-						SO Total Price is more than 0<br>
-						SO Salesman is like TED
+						SO Shipdate is between <?=date('m-d-Y',strtotime($date['start_date']));?>,<?=date('m-d-Y',strtotime($date['end_date']));?>
 					</p>
 				</div>
 			</div>
@@ -26,29 +22,30 @@
 		<div class="row">
 			<table class="table">
 				<thead>
-					<th width="40%">Customer</th>
-					<th width="20%">Salesman</th><th>Sum of Total Price</th><th>Sum of Total Cost</th>
-					<th>Sum of Quantity Shipped</th>
+					<th width="40%">Shipdate</th>
+					<th width="20%">SO ID</th>
+                    <th>Customer</th>
+                    <th>Quantity Shipped</th>
+					<th>Total Price</th>
+                    <th>Salesman</th>
 				</thead>
 				<tbody>
 					<?php
-					if($cleading)
+					if($shipping_order)
 					{
-						$price=[];
-                        $wprice=[];
-                        $items=[];
-						foreach ($cleading as $key => $value)
+						
+						foreach ($shipping_order as $skey => $svalue)
 						{
-							$price[]  = $value['price'];
-							$wprice[] = $value['w_price'];
-							$items[]  = $value['total_items'];
+							$total_price += $svalue['total_amount'];
+                            $quantity    += $svalue['quantity'];
 							?>
 							<tr>
-								<td><?=$value['business_name'];?></td>
-								<td><?=$value['business_name'];?></td>
-								<td class="text-center">$<?=number_format($value['price'],2);?></td>
-								<td class="text-center">$<?=number_format($value['w_price'],2);?></td>
-								<td class="text-center"><?=$value['total_items'];?></td>
+                                <td><?=$svalue['ship_date'];?></td>
+                                <td><?=$svalue['id'];?></td>
+								<td><?=$svalue['business_name'];?></td>
+								<td class="text-center"><?=$svalue['quantity'];?></td>
+								<td class="text-center"><?=$svalue['total_amount'];?></td>
+								<td class="text-center"><?=$svalue['first_name'];?></td>
 							</tr>
 							<?php
 						}
@@ -58,9 +55,8 @@
 				<tfoot>
 					<tr>
 						<td colspan="2"><b>Totals</b></td>
-						<td class="text-center">$<?=number_format(array_sum($price),2);?></td>
-						<td class="text-center">$<?=number_format(array_sum($wprice),2);?></td>
-						<td class="text-center"><?=array_sum($items);?></td>
+						<td class="text-center">$<?=$total_price;?></td>
+						<td class="text-center">$<?=$quantity;?></td>
 					</tr>
 				</tfoot>			
 			</table>
@@ -80,7 +76,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<p><b><?=count($cleading);?> Groups Selected</b></p>
+				<p><b><?=count($shipping_order);?> Records Selected</b></p>
 			</div>
 		</div>
 	</footer>
