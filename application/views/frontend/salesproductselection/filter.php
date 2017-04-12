@@ -41,7 +41,7 @@
         </div>
 
 
-        <div class="form-grid col-md-3 panel panel-default panel-bor">
+        <div class="form-grid col-md-3 panel panel-default panel-bor s-p-box2">
          <div class="panel-heading formcontrol-box prod-sel">
             <div class="form-group" >
               <label class="col-md-6">Customer Number</label>
@@ -85,7 +85,7 @@
         </div>
 
 
-        <div class="form-grid col-md-3 panel panel-default panel-bor">
+        <div class="form-grid col-md-3 panel panel-default panel-bor s-p-box3">
          <div class="panel-heading formcontrol-box">
             <div class="form-group" >
               <label class="col-md-6">Type</label>
@@ -131,34 +131,34 @@
          </div>
 
 
-         <div class="form-grid col-md-3 panel panel-default panel-bor">
+         <div class="form-grid col-md-3 panel panel-default panel-bor s-p-box4">
          <div class="panel-heading formcontrol-box">
             <div class="call-group1">
-            <div class="form-group" >
-               <label>Units</label>
-              <input type="text" name="units" class="form-control" id="units" value="" />
+            <div class="form-group col-md-6" >
+               <label class="col-md-6">Units</label>
+              <input type="text" name="units" class="form-control col-md-6" id="units" value="" />
             </div>
-             <div class="form-group" >
+             <div class="form-group col-md-6" >
               
-              <input type="checkbox" name="units_uses_check" class="" id="units_uses_check" value="" />
-              <label>Uses ?</label>
+              <input type="checkbox" name="units_uses_check" class="col-md-2" id="units_uses_check" value="" />
+              <label class="col-md-10">Uses ?</label>
             </div>
             </div>
             <div class="form-group" >
-              <label>Wholesale</label>
-              <input type="text" name="wholesale" class="form-control" id="wholesale" value="" />
+              <label class="col-md-6">Wholesale</label>
+              <input type="text" name="wholesale" class="form-control col-md-6" id="wholesale" value="" />
             </div>
             <div class="form-group" >
-              <label>Reference</label>
-              <input type="text" name="reference" class="form-control" id="reference" value="" />
+              <label class="col-md-6">Reference</label>
+              <input type="text" name="reference" class="form-control col-md-6" id="reference" value="" />
             </div>
             <div class="form-group" >
-              <label>Internal Lot #:</label>
-              <input type="text" name="internal_lot_no" class="form-control" id="internal_lot_no" value="" />
+              <label class="col-md-6">Internal Lot #:</label>
+              <input type="text" name="internal_lot_no" class="form-control col-md-6" id="internal_lot_no" value="" />
             </div>
             <div class="form-group" >
-              <label>Vendor Lot #:</label>
-              <input type="text" name="vendor_lot_no" class="form-control" id="vendor_lot_no" value="" />
+              <label class="col-md-6">Vendor Lot #:</label>
+              <input type="text" name="vendor_lot_no" class="form-control col-md-6" id="vendor_lot_no" value="" />
             </div>
            </div>
          </div>

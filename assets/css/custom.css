@@ -315,7 +315,7 @@ td { padding:4px 6px !important;}
 
 .p-s-checbx input { width: 10% !important; }
 
-.p-s-checbx { font-size: 11px; padding-left: 42%; }
+.p-s-checbx { font-size: 11px; padding-left: 42%; margin: 0 !important; }
 
 .s-p-quantity > div:nth-child(2) { margin-top: 8px !important; }
 
@@ -341,8 +341,25 @@ td { padding:4px 6px !important;}
 
 .s-p-quantity1 > div:last-child input { width: 15% !important; }
 
+.s-p-box3 > div { height: 183px; }
 
+.s-p-quantity > div:first-child { width: 51% !important; }
 
+.s-p-quantity > div:nth-child(2) { width: 10% !important; }
+
+.s-p-box4 > div > div:first-child div:last-of-type { margin: 13px 0 0 0; padding: 0; }
+
+.s-p-box4 > div > div:first-child div { width: 50% !important; padding: 0 !important; }
+
+.s-p-box4 > div > div:first-child div:last-of-type input { width: 24px; margin-left: 10px; }
+
+.s-p-box4 > div > div:first-child div:last-of-type label { width: 68%; padding-left: 0; }
+
+.s-p-quantity > div:nth-child(2) select { height: 31px; }
+
+.custom-product-selctn .prod-sel { min-height: auto; }
+
+.s-p-box2 > div > div:nth-child(-n + 2) > label { padding-right: 0 !important; }
 
 
 
