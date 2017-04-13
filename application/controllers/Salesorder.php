@@ -410,7 +410,7 @@ class Salesorder extends Admin_Controller
         } 
     }
     
-     function view($so_id = null)
+    function view($so_id = null)
     {
     	if(is_null($so_id) || !(int)$so_id)
     		redirect('sales_orders');
@@ -439,8 +439,7 @@ class Salesorder extends Admin_Controller
     	$result_set = $this->shipment_model->get_where(array('so_id' => $so_id));
   
     	//if no shipment found, fetch only products vendor-wise products
-    	if(!$result_set->num_rows())
-    	{
+    	if(!$result_set->num_rows()){
     		$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);
     		return $products;
     	}
@@ -485,7 +484,6 @@ class Salesorder extends Admin_Controller
 
         try
         { 
-           
             //get vendor_id
             $ship_addr_id = (!is_null($ship_addr_id) && (int)$ship_addr_id)?$ship_addr_id:0;
             
@@ -565,7 +563,6 @@ class Salesorder extends Admin_Controller
 
         try
         { 
-           
             //get vendor_id
             $bill_addr_id = (!is_null($bill_addr_id) && (int)$bill_addr_id)?$bill_addr_id:0;
             
@@ -635,12 +632,11 @@ class Salesorder extends Admin_Controller
      
   }
     
-    function get_validation_rules($type, $key = null)
+  function get_validation_rules($type, $key = null)
   {
      
     $rules = array();
-    if(strcmp($type, 'ship_addr') === 0)
-    {
+    if(strcmp($type, 'ship_addr') === 0){
         $rules['ship_addr']['name']        = array('field' => 'name',  'rules' => 'trim|required');
       //  $rules['ship_addr']['last_name']   = array('field' => 'last_name', 'rules' => 'trim|required');
         $rules['ship_addr']['address1']    = array('field' => 'address1', 'rules' => 'trim|required');
@@ -651,8 +647,7 @@ class Salesorder extends Admin_Controller
         $rules['ship_addr']['phone']       = array('field' => 'phone', 'rules' => 'trim|required');
     }
     
-      if(strcmp($type, 'bill_addr') === 0)
-    {
+      if(strcmp($type, 'bill_addr') === 0){
         $rules['bill_addr']['first_name']  = array('field' => 'first_name',  'rules' => 'trim|required');
         $rules['bill_addr']['last_name']   = array('field' => 'last_name', 'rules' => 'trim|required');
         $rules['bill_addr']['company']     = array('field' => 'company', 'rules' => 'trim|required');

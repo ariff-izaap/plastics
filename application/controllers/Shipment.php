@@ -29,10 +29,11 @@ class Shipment extends Admin_Controller
                 $ins_data = array();
                 $ins_data['ship_company']        = $this->input->post('carrier');
                 $ins_data['order_status']        = $this->input->post('status');
+                $tot_items                       = $this->db->query("select count(*) as cnt from sales_order_item where so_id='".$ship_data['so_id']."'")->row_array();
+                $ins_data['total_items']         = (isset($tot_items['cnt']) && !empty($tot_items['cnt']))?$tot_items['cnt']:"";
                 $ins_data['ship_date']           = date("Y-m-d H:i:s");
                 
                 $this->shipment_model->update(array("id" => $ship_id), $ins_data);
-               // echo $this->db->last_query(); exit;
                 redirect("salesorder/view/".$ship_data['so_id']);
             }
             

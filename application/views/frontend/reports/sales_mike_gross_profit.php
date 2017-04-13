@@ -46,7 +46,6 @@
 						{
 							$total_price         += $svalue['total_amount'];
                             $quantity_shipped    += $svalue['total_items'];
-                            $freight_ct          += $svalue['flat_rate'];
 							?>
 							<tr>
                                 <td class="text-center"><?=$svalue['ship_date'];?></td>
@@ -70,11 +69,9 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="5"><b>Totals</b></td>
-						<td class="text-center">$<?=$quantity_shipped;?></td>
-                        <td colspan="2"></td>
+						<td colspan="2"><b>Totals</b></td>
 						<td class="text-center">$<?=$total_price;?></td>
-                        <td class="text-center"><?=$freight_ct?></td>
+						<td class="text-center">$<?=$quantity;?></td>
 					</tr>
 				</tfoot>			
 			</table>

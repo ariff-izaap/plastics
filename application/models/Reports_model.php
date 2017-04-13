@@ -103,7 +103,7 @@ class Reports_model extends App_model
   
   function sales_gross_profit($st_date, $ed_date)
   {
-    $this->db->select("a.id,c.business_name,sp.ship_date,a.total_amount,u.first_name,p.name as pname,p.item_type as type");
+    $this->db->select("a.id,sp.id as shipid,sp.total_items,c.business_name,sp.ship_date,a.total_amount,sp.total_items,u.first_name,p.name as pname,p.item_type as type,sp.shipping_type,sp.ship_company");
     $this->db->from("shipment sp");
     $this->db->join("customer c","a.customer_id=c.id");
     $this->db->join("admin_users u","u.id=a.salesman_id");
@@ -113,6 +113,17 @@ class Reports_model extends App_model
     $this->db->where('sp.ship_date <=', $ed_date);
     $this->db->where("sp.order_status","COMPLETED");
     $result = $this->db->get('sales_order a')->result_array();
+    
+    foreach($result as $rkey => $rvalue){
+        $flat_rate = $this->db->query("select sh.flat_rate from shipping_type sh join shipment s on s.shipping_type=sh.type where sh.id='".$rvalue['shipid']."'")->row_array();
+        $shipcompy = $this->db->query("select c.name from shipment sh join carrier c on c.id=sh.ship_company where sh.id='".$rvalue['shipid']."'")->row_array();
+        
+        //adding shipping service & flat rate
+        $result[$rkey]['ship_company'] = $shipcompy;
+        $result[$rkey]['flat_rate']    = $flat_rate;
+    }
+    
+    return $result;
   }
   
   

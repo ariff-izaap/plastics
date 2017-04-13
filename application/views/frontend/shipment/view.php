@@ -21,24 +21,26 @@
         <?php }} ?>
       </select>
     </div>
-     <div class="form-group ">
+     <!--
+<div class="form-group ">
       <label>Status</label>
       <select name="status" class="form-group">
         <option value="">Select Status</option>
-        <?php if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['name']; ?>" <?php echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
-        <?php }} ?>
+        <?php //if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
+         <option value="<?php //echo $cvalue['name']; ?>" <?php //echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php //echo $cvalue['name']; ?></option>
+        <?php //}} ?>
       </select>
     </div>
  <div class="form-group ">
       <label>Status</label>
       <select name="status" class="form-group">
         <option value="">Select Status</option>
-        <?php if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['name']; ?>" <?php echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
-        <?php }} ?>
+        <?php //if(count($status)>0){ foreach($status as $ckey => $cvalue){ ?>
+         <option value="<?php //echo $cvalue['name']; ?>" <?php //echo set_select('status',$cvalue['name'],(($ship_data['order_status'] == $cvalue['name'])?true:false));?> ><?php //echo $cvalue['name']; ?></option>
+        <?php //}} ?>
       </select>
     </div>
+-->
 
     <div class="form-group">
         <input type="submit" name="update_shp_type" class="btn btn-default" value="SAVE" />

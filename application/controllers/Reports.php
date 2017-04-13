@@ -49,6 +49,12 @@ class Reports extends Admin_Controller
         $this->data['so_order'] = $so_order;
         $this->load->view('frontend/reports/sales_gross_profit',$this->data); 
     }
+    if(in_array("mike1",$form['report'])){
+        $so_order               = $this->reports_model->sales_gross_profit($start_date,$end_date);
+        $this->data['so_order'] = $so_order;
+        $this->load->view('frontend/reports/sales_mike_gross_profit',$this->data); 
+    }
+    
   }
   
   
