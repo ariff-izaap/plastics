@@ -37,11 +37,18 @@ class Reports extends Admin_Controller
         $this->data['shipping_order'] = $this->reports_model->get_shipping_order($start_date,$end_date);
         $this->load->view('frontend/reports/sales_order',$this->data); 
     }
-    if(in_array("incostt",$form['report'])){
-        $this->data['shipping_order'] = $this->reports_model->get_warehouse_inventory($start_date,$end_date);
+    
+    if(in_array("incott",$form['report'])){
+        $shipping_order               = $this->reports_model->get_warehouse_inventory($start_date,$end_date);
+        $this->data['shipping_order'] = $shipping_order;
         $this->load->view('frontend/reports/inventory_all_warehouse',$this->data); 
     }
     
+    if(in_array("sales18d",$form['report'])){
+        $so_order               = $this->reports_model->sales_gross_profit($start_date,$end_date);
+        $this->data['so_order'] = $so_order;
+        $this->load->view('frontend/reports/sales_gross_profit',$this->data); 
+    }
   }
   
   

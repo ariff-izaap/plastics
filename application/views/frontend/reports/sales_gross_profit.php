@@ -4,18 +4,18 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<label><strong>Request : INCOTT</strong></label>
-				<p><strong>SUMMARY OF COST of inventory in all warehouse</strong></p>
-                <div class="col-md-3">
-                    <p>Cross-Tab Sum of Inventory Total Cost for<br />Product by Form</p>
-                </div>
+				<label><strong>Request : SALES18D</strong></label>
+				<p><strong>Invoice Register</strong> Gross Profit Report</p>
 				<div class="col-md-3">
 					<p><b>Page 1</b></p>
 				</div>
 				<div class="col-md-5">
 					<label class="col-md-2"><b>Filters:</b></label>
 					<p class="col-md-10">
-						Inventor Date Is On or Before  <?=date('m-d-Y',strtotime($date['start_date']));?>
+						SO Shipdate is between <?=date('m-d-Y',strtotime($date['start_date']));?>,<?=date('m-d-Y',strtotime($date['end_date']));?>
+					</p>
+                    <p class="col-md-10">
+						SO Salesman is Exactly like 
 					</p>
 				</div>
 			</div>
@@ -25,30 +25,37 @@
 		<div class="row">
 			<table class="table">
 				<thead>
-					<th width="40%">PRODUCT</th>
-					<th width="20%">SUM</th>
-                    <th>COMP</th>
-                    <th>PARTS</th>
-					<th>POWDER</th>
-                    <th>REGRIND</th>
+					<th width="40%">Shipdate</th>
+					<th width="20%">SO ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Type</th>
+                    <th>Quantity Shipped</th>
+                    <th>Freight Company</th>
+                    <th>Salesman</th>
+					<th>Total Cost</th>
+                    <th>Freight Out Amt</th>
+                    <th>Total Price</th>
+                    <th>Freight Paid By</th>
+                    <th>Date</th>
 				</thead>
 				<tbody>
 					<?php
-					if($shipping_order){
-						foreach ($shipping_order as $skey => $svalue){
-						   $total_qty += $svalue['qty'];
-                           $total_prt += $svalue['Parts_count'];
-                           $total_cmp += $svalue['Comp_count'];
-                           $total_pow += $svalue['Powder_count'];
-                           $total_reg += $svalue['Regrind_count'];
+					if($so_order)
+					{
+						
+						foreach ($so_order as $skey => $svalue)
+						{
+							$total_price += $svalue['total_amount'];
+                            $quantity    += $svalue['quantity'];
 							?>
 							<tr>
-                                <td><?=$svalue['name'];?></td>
-                                <td><?=$svalue['qty'];?></td>
-								<td><?=$svalue['Comp_count'];?></td>
-								<td class="text-center"><?=$svalue['Parts_count'];?></td>
-								<td class="text-center"><?=$svalue['Powder_count'];?></td>
-								<td class="text-center"><?=$svalue['Regrind_count'];?></td>
+                                <td><?=$svalue['ship_date'];?></td>
+                                <td><?=$svalue['id'];?></td>
+								<td><?=$svalue['business_name'];?></td>
+								<td class="text-center"><?=$svalue['quantity'];?></td>
+								<td class="text-center"><?=$svalue['total_amount'];?></td>
+								<td class="text-center"><?=$svalue['first_name'];?></td>
 							</tr>
 							<?php
 						}
@@ -57,18 +64,26 @@
 				</tbody>
 				<tfoot>
 					<tr>
-                        <td class="text-center">Sum</td>
-                        <td class="text-center"><?=$total_qty;?></td>
-                        <td class="text-center"><?=$total_prt;?></td>
-						<td class="text-center"><?=$total_cmp;?></td>
-						<td class="text-center"><?=$total_pow;?></td>
-						<td class="text-center"><?=$total_reg;?></td>
+						<td colspan="2"><b>Totals</b></td>
+						<td class="text-center">$<?=$total_price;?></td>
+						<td class="text-center">$<?=$quantity;?></td>
 					</tr>
 				</tfoot>			
 			</table>
 		</div>
 	<footer>
-		
+		<div class="row">
+			<table class="table">
+				<tfoot>
+					<tr>
+						<td width="60%"><b>Grand Totals</b></td>
+						<td width="12%" class="text-center">$<?=number_format(array_sum($price),2);?></td>
+						<td width="12%" class="text-center">$<?=number_format(array_sum($wprice),2);?></td>
+						<td class="text-center"><?=array_sum($items);?></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<p><b><?=count($shipping_order);?> Records Selected</b></p>
