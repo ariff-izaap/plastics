@@ -66,7 +66,7 @@
 <div class="purchase-loader">
   <img src="<?=base_url();?>assets/img/rolling.gif">
 </div>
-<div class="container">
+<div class="container custom-add-purchase">
   <div class="row">
     <form name="add_purchase" id="addPurchase" method="post">
       <input type="hidden" name="rand" class="rand" value="<?=isset($_POST['rand']) ? $_POST['rand'] : $po_id;?>">
@@ -128,7 +128,9 @@
               $data = array("vendor_name"=>"");
           ?>
         </div>
-        <div class="form-grid col-md-6 panel panel-default panel-bor">
+
+
+        <div class="form-grid col-md-4 panel panel-default panel-bor a-d-box1">
           <div class="panel-heading formcontrol-box">      
             <div class="form-group <?php echo (form_error('vendor_name'))?'error':'';?>" data-error="<?php echo (form_error('vendor_name'))? strip_tags(form_error('vendor_name')):'';?>">
               <label required="" class="col-md-4">Vendor Name</label>
@@ -169,11 +171,18 @@
               ?>
             </select>
               </div>
+
+
+               </div>
+        </div> 
+
+
+        <div class="form-grid col-md-4 panel panel-default panel-bor a-d-box2">
+          <div class="panel-heading formcontrol-box"> 
               <div class="form-group <?php echo (form_error('zipcode'))?'error':'';?>" data-error="<?php echo (form_error('zipcode'))? strip_tags(form_error('zipcode')):'';?>">
                 <label required="" class="col-md-4">Zipcode</label>
                 <input type="text" name="zipcode" class="form-control col-md-8" id="zipcode" value="<?=$data[0]['zipcode']?>" placeholder="Zipcode" maxlength="6">
-              </div>
-                  
+              </div>                  
             <div class="form-group clearfix postal cus-name">
               <div class="form-group col-md-6 fname1 <?php echo (form_error('firstname'))?'error':'';?>" data-error="<?php echo (form_error('firstname'))? strip_tags(form_error('firstname')):'';?>">
               <label required="">First Name</label>
@@ -197,9 +206,13 @@
               <input type="text" name="website" class="form-control col-md-8" id="website" value="<?=$data[0]['web_url'];?>"
                 placeholder="Website e.g. http://www.example.com">
             </div>
+
+
           </div>
-        </div>      
-        <div class="form-grid col-md-6 panel panel-default panel-bor">
+        </div> 
+
+
+        <div class="form-grid col-md-4 panel panel-default panel-bor a-d-box3">
           <div class="panel-heading formcontrol-box">
             <div class="form-group">
               <label class="col-md-4">Salesman</label>
@@ -227,6 +240,8 @@
             </div>
           </div>
         </div> 
+
+
         <div class="clearfix"></div>
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
         <div class="form-group col-md-2">

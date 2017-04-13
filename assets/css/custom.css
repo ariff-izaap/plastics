@@ -174,7 +174,7 @@ td { padding:4px 6px !important;}
 .search-form form > div:first-of-type > div:last-child > div:nth-last-child(2) label { width: 16%; } */
 .search-form form label { font-size: 14px; }
 
-.search-f1 { width: 100%; min-height: 54px; }
+.search-f1 { width: 100%; min-height: 36px; }
 
 .search-f1 .form-group.col-md-6 { width: 50%; display: inline-block; padding-left: 0; }
 
@@ -182,7 +182,7 @@ td { padding:4px 6px !important;}
 
 .search-f1 .col-md-6 input { width: 49%; }
 
-.search-form form .form-group { margin-bottom: 0; }
+.search-form form .form-group { margin: 0 !important; }
 
 .one-row-label { width: 23.5%; }
 
@@ -191,6 +191,10 @@ td { padding:4px 6px !important;}
 .search-f2 { min-height: 87px; }
 
 .search-form .panel-bor .panel-heading { margin-bottom: 17px !important; }
+
+.search-form form input { margin-bottom: 5px !important; }
+
+body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 
 .search-f3 { width: 50% !important; }
 
@@ -270,7 +274,7 @@ td { padding:4px 6px !important;}
 
 /* common panel heading magin */
 
-.form-group label { font-size: 14px !important; }
+.form-group label { font-size: 14px !important; margin-bottom: 5px !important; }
 
 .custom-product-selctn select[multiple], .custom-product-selctn select[size], .search-form select[multiple], .search-form select[size] { }
 
@@ -313,11 +317,13 @@ td { padding:4px 6px !important;}
 
 .custom-product-selctn .form-grid .form-group > input, .custom-product-selctn .form-grid .form-group > select { width: 50%; }
 
+.custom-product-selctn .form-group { margin: 0 !important; }
+
 .p-s-checbx input { width: 10% !important; }
 
 .p-s-checbx { font-size: 11px; padding-left: 42%; margin: 0 !important; }
 
-.s-p-quantity > div:nth-child(2) { margin-top: 8px !important; }
+/* .s-p-quantity > div:nth-child(2) { margin-top: 8px !important; } */
 
 .s-p-quantity > div { padding: 0; }
 
@@ -331,11 +337,11 @@ td { padding:4px 6px !important;}
 
 .s-p-quantity > div:first-child input { width: 37%!important;}
 
-.s-p-quantity > div:last-child { margin-top: 13px !important; }
+.s-p-quantity > div:last-child { margin-top: 6px !important; margin-left: 13px !important; }
 
 .s-p-quantity1 > div > label { padding: 0; }
 
-.s-p-quantity1 > div:last-child { margin-top: 13px !important; margin-left: 0 !important; padding-left: 0; }
+.s-p-quantity1 > div:last-child { margin-top: 6px !important; margin-left: 0 !important; padding-left: 0; }
 
 .s-p-quantity1 > div { width: 50% !important; }
 
@@ -343,9 +349,11 @@ td { padding:4px 6px !important;}
 
 .s-p-box3 > div { height: 183px; }
 
+.s-p-box3 > div > div > input { margin-bottom: 5px !important; }
+
 .s-p-quantity > div:first-child { width: 51% !important; }
 
-.s-p-quantity > div:nth-child(2) { width: 10% !important; }
+.s-p-quantity > div:nth-child(2) { width: 10% !important; margin-left: 10px !important; }
 
 .s-p-box4 > div > div:first-child div:last-of-type { margin: 13px 0 0 0; padding: 0; }
 
@@ -360,6 +368,12 @@ td { padding:4px 6px !important;}
 .custom-product-selctn .prod-sel { min-height: auto; }
 
 .s-p-box2 > div > div:nth-child(-n + 2) > label { padding-right: 0 !important; }
+
+/* add purchase page */
+
+.a-d-box1 > div div, .a-d-box2 > div div, .a-d-box3 > div div { margin: 0 !important; }
+
+.a-d-box3 {  margin-bottom: 0; }
 
 
 
