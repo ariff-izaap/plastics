@@ -244,7 +244,7 @@
 
         <div class="clearfix"></div>
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-2 col-md-offset-10">
           <button type="submit" class="btn btn-block">Save</button>
         </div>
       </div>

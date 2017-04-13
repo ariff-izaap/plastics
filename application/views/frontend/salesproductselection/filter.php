@@ -1,7 +1,7 @@
 <form name="advance_search_form" id="advance_search_form" method="POST" class="product-sel">
   <div class="container custom-product-selctn">
   <div class="row">
-      <div class="form-grid col-md-3 panel panel-default panel-bor">
+      <div class="form-grid col-md-3 panel panel-default panel-bor s-p-box1">
        <div class="panel-heading formcontrol-box prod-sel">
             <div class="form-group" >
               <label class="col-md-6">Shipping Order</label>
@@ -37,16 +37,17 @@
                   <?php endforeach;?>
               </select>
             </div>
+            <div class="form-group" >
+              <label class="col-md-6">Customer Number</label>
+              <input type="text" name="customer_number" class="form-control col-md-6" id="customer_number" value="" placeholder="" />
+            </div>
           </div> 
         </div>
 
 
         <div class="form-grid col-md-3 panel panel-default panel-bor s-p-box2">
          <div class="panel-heading formcontrol-box prod-sel">
-            <div class="form-group" >
-              <label class="col-md-6">Customer Number</label>
-              <input type="text" name="customer_number" class="form-control col-md-6" id="customer_number" value="" placeholder="" />
-            </div>
+            
             <div class="form-group" >
               <label class="col-md-6">Customer Name</label>
               <input type="text" name="customer_name" class="form-control col-md-6" id="customer_name" value="" placeholder="" />
