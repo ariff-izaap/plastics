@@ -4,9 +4,8 @@
         <a href="<?php echo $this->previous_url;?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
     </div>
   </div>
-<?php //print_r($editdata); ?>
+  
   <div class="row">
-
   <form name="checkout" id="checkout" method="POST" action="<?php echo site_url();?>salesorder/checkout">
     <input type="hidden" name="edit_id" id="edit_id" value="<?php echo (isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:""; ?>" />
       <div class="form-grid col-md-8">

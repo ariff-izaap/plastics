@@ -22,9 +22,7 @@ class Salesorder extends Admin_Controller
         $this->layout->add_javascripts(array('listing'));  
 
         $this->load->library('listing');         
-           
-        $this->simple_search_fields = array();
-         
+        $this->simple_search_fields      = array();
         $this->_narrow_search_conditions = array("shipping_order","business_name","salesman_id","customer_location","city","state","zipcode","payment_by","credit_type","total_amount","bol_instructions","so_instructions");
         
         $str = '<a href="'.site_url('salesorder/view/{id}').'" class="table-action"><i class="fa fa-eye"></i></a>
@@ -50,6 +48,7 @@ class Salesorder extends Admin_Controller
     
     public function add( $edit_id ='')
     {
+        $this->layout->add_javascripts(array('salesorder'));
         try
         {
             if($this->input->post('edit_id'))            
@@ -57,10 +56,9 @@ class Salesorder extends Admin_Controller
 
             $this->form_validation->set_rules('business_name','Business Name','trim|required');
             $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
-           
             $this->form_validation->set_error_delimiters('', '');
                 
-            if ($this->form_validation->run()){
+            if($this->form_validation->run()){
                 $ins_data = array();
                 $ins_data['business_name']          = $this->input->post('business_name');
                 $ins_data['credit_type']            = $this->input->post('credit_type');
@@ -131,14 +129,14 @@ class Salesorder extends Admin_Controller
         $this->_ajax_output($output, TRUE);    
     }
     
-  public function delete_customer($del_id)
-  {  
-    $output['message'] ="Record deleted successfuly.";
-    $output['status']  = "success";
-    $log = log_history("customer",$del_id,"customer","delete");
-    $this->admin_model->delete(array("id"=>$del_id),"customer");
-    $this->_ajax_output($output, TRUE);
-  }
+    public function delete_customer($del_id)
+    {  
+        $output['message'] ="Record deleted successfuly.";
+        $output['status']  = "success";
+        $log = log_history("customer",$del_id,"customer","delete");
+        $this->admin_model->delete(array("id"=>$del_id),"customer");
+        $this->_ajax_output($output, TRUE);
+    }
 
     public function shippingorder()
     {
@@ -204,6 +202,8 @@ class Salesorder extends Admin_Controller
     
     public function checkout($edit_id ='')
     {
+        $this->layout->add_javascripts(array('checkout'));
+        
         try
         {
           if($this->input->post('edit_id'))            

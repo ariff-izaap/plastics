@@ -11,7 +11,7 @@ $config['layout']['default']['js_dir']      = 'assets/js/';
 $config['layout']['default']['css_dir']     = 'assets/css/';
 $config['layout']['default']['img_dir']     = 'assets/images/';
 $config['layout']['default']['javascripts'] = array(
-  'build/global.min','bootbox.min','moment',"jquery.mockjax","bootstrap-editable",'daterangepicker','select2.min','jquery.ui.timepicker','inventory','jquery.validate.min','validation','function');
+  'build/global.min','bootbox.min','moment',"jquery.mockjax","bootstrap-editable",'daterangepicker','select2.min','jquery.ui.timepicker','jquery.validate.min','validation','function');
  
 $config['layout']['default']['stylesheets'] = array('bootstrap.min','style','daterangepicker',"select2.min","bootstrap-editable", "custom",'jquery.ui.timepicker');
 

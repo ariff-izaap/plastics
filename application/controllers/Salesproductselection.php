@@ -24,7 +24,7 @@ class Salesproductselection extends Admin_Controller
 	
 	 public function index()
      {         
-        $this->layout->add_javascripts(array('listing'));  
+        $this->layout->add_javascripts(array('listing','salesorder'));  
 
         $this->load->library('listing');         
            
@@ -60,9 +60,9 @@ class Salesproductselection extends Admin_Controller
     {
         $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
         $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
+        
         try
         {
-           
           $this->form_validation->set_error_delimiters('', '');
           if($this->form_validation->run()){
 

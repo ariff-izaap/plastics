@@ -51,17 +51,14 @@ class Inventory extends Admin_Controller
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
         
-        $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
+        $this->data['bulk_actions']         = array('' => 'select', 'delete' => 'Delete');
         $this->data['simple_search_fields'] = $this->simple_search_fields;
-        $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
-        $this->data['per_page'] = $this->listing->_get_per_page();
-        $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-        
-        $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
-        
-        $this->data['listing'] = $listing;
-        
-        $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+        $this->data['search_conditions']    = $this->session->userdata($this->namespace.'_search_conditions');
+        $this->data['per_page']             = $this->listing->_get_per_page();
+        $this->data['per_page_options']     = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
+        $this->data['search_bar']           = $this->load->view('listing/search_bar', $this->data, TRUE);        
+        $this->data['listing']              = $listing;
+        $this->data['grid']                 = $this->load->view('listing/view', $this->data, TRUE);
         
         $this->layout->view("frontend/inventory/index");
 	
@@ -69,7 +66,7 @@ class Inventory extends Admin_Controller
     
     public function add( $edit_id ='')
     {
-        $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
+        $this->layout->add_javascripts(array('fileinput.min','fileinput','inventory','product'));
         $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
         try
         {

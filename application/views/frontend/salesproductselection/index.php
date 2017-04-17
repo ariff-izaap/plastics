@@ -51,7 +51,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" onclick="modal_close();">&times;</button>
       </div>
       <form name="sales_add_to_cart" id="sales_add_to_cart">
       <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
@@ -78,11 +78,11 @@
        <div class="row"> 
         <div class="form-group col-md-4">
             <label>Quantity Available</label>
-            <input type="text" name="quantity_available" id="quantity_available"/>
+            <input type="text" readonly="readonly" name="quantity_available" id="quantity_available"/>
         </div>
         <div class="form-group col-md-4">
             <label>Quantity to Order</label>
-            <input type="text" name="quantity_to_order" id="quantity_to_order"/>
+            <input type="text" name="quantity_to_order" id="quantity_to_order" value="0"/>
         </div>
         <div class="form-group col-md-4">
             <label>Price</label>
