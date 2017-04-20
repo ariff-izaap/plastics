@@ -25,16 +25,18 @@
 </div>  
 <div class="col-md-4">
     
-   <div class="form-group <?php echo (form_error('type'))?'error':'';?>" data-error="<?php echo (form_error('type'))? form_error('type'):'';?>" >
+   <!--
+<div class="form-group <?php //echo (form_error('type'))?'error':'';?>" data-error="<?php //echo (form_error('type'))? form_error('type'):'';?>" >
       <label>Type</label>
       <select name="type" class="form-group" >
         <option value="">Select Type</option>
-         <?php if(count($saletype)>0){
-                foreach($saletype as $tkey=>$tvalue){ ?>
-                  <option value="<?php echo $tvalue['name'];?>" <?php echo set_select('type',$tvalue['name'],(($editdata['type'] == $tvalue['name'])?true:false));?>><?php echo $tvalue['name']; ?></option>  
-         <?php }} ?>
+         <?php //if(count($saletype)>0){
+               // foreach($saletype as $tkey=>$tvalue){ ?>
+                  <option value="<?php //echo $tvalue['name'];?>" <?php //echo set_select('type',$tvalue['name'],(($editdata['type'] == $tvalue['name'])?true:false));?>><?php //echo $tvalue['name']; ?></option>  
+         <?php //}} ?>
       </select>
     </div>
+-->
    <div class="form-group <?php echo (form_error('shipping_type'))?'error':'';?>" data-error="<?php echo (form_error('shipping_type'))? form_error('shipping_type'):'';?>">
       <label>Shipping Type</label>
       <select name="shipping_type" class="form-group">
@@ -53,15 +55,17 @@
         <?php }} ?>
       </select>
     </div>
-    <div class="form-group <?php echo (form_error('carrier'))?'error':'';?>" data-error="<?php echo (form_error('carrier'))?form_error('carrier'):'';?>" >
+    <!--
+<div class="form-group <?php //echo (form_error('carrier'))?'error':'';?>" data-error="<?php// echo (form_error('carrier'))?form_error('carrier'):'';?>" >
       <label>Carrier</label>
       <select name="carrier" class="form-group">
         <option value="">Select Carrier</option>
-        <?php if(count($carrier)>0){ foreach($carrier as $ckey => $cvalue){ ?>
-         <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('carrier',$cvalue['id'],(($editdata['carrier'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
-        <?php }} ?>
+        <?php //if(count($carrier)>0){ foreach($carrier as $ckey => $cvalue){ ?>
+         <option value="<?php echo $cvalue['id']; ?>" <?php //echo set_select('carrier',$cvalue['id'],(($editdata['carrier'] == $cvalue['id'])?true:false));?> ><?php //echo $cvalue['name']; ?></option>
+        <?php //}} ?>
       </select>
     </div>
+-->
     
     <div class="form-group <?php echo (form_error('order_status'))?'error':'';?>" data-error="<?php echo (form_error('order_status'))? form_error('order_status'):'';?>" >
       <label>Order Status</label>

@@ -226,11 +226,11 @@ class Salesorder extends Admin_Controller
           $this->form_validation->set_rules('ship_city','City','trim|required');
           $this->form_validation->set_rules('ship_state','State','trim|required');
           $this->form_validation->set_rules('ship_zipcode','Zipcode','trim|required');
-          $this->form_validation->set_rules('type','Type','trim|required');
+         // $this->form_validation->set_rules('type','Type','trim|required');
           $this->form_validation->set_rules('shipping_type','Shipping Type','trim|required');
-          $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
+         // $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
           $this->form_validation->set_rules('order_status','Order Status','trim|required');
-          $this->form_validation->set_rules('carrier','Carrier','trim|required');
+         // $this->form_validation->set_rules('carrier','Carrier','trim|required');
           $this->form_validation->set_error_delimiters('', '');
           
           $total = $this->cart->total();
@@ -245,7 +245,7 @@ class Salesorder extends Admin_Controller
               $ins_data['bol_instructions']       = $this->input->post('bol_instructions');
               $ins_data['shipping_address_id']    = $this->input->post('shipping_address_id');
               $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
-              $ins_data['type']                   = $this->input->post('type');
+             // $ins_data['type']                   = $this->input->post('type');
               $ins_data['order_status']           = $this->input->post('order_status');
               $ins_data['total_items']            = $this->cart->total_items();
               $ins_data['total_amount']           = $total;

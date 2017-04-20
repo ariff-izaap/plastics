@@ -321,11 +321,7 @@ function sales_prod_add_to_cart()
    var ord_qty = parseInt($("#quantity_to_order").val());
    var pid     = $("#product_id").val();
     
-     if(!$("input[name='product_from']").is(':checked')) {
-         alert('Please select any one option if product form warehouse or vendor');
-         return false;
-     }
-     else if(ord_qty == ''){
+     if(ord_qty == ''){
         alert("Quantity should not be empty");
         $("#quantity_to_order").val('');
         $("#quantity_to_order").focus();

@@ -169,7 +169,9 @@
         <div class="row button-sec">
             <div class="col-md-8"></div>
             <div class="col-md-4 clear-btn">
-                <button type="submit" class="btn btn-block">Who Holding</button>
+                <!--
+<button type="submit" class="btn btn-block">Who Holding</button>
+-->
                  <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
                 <button type="button" class="btn btn-block" onclick="$.fn.submit_advance_search_form();">Search</button>
             </div>
