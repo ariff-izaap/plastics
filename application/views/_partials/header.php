@@ -72,9 +72,11 @@
                   <span class="caret"></span>
                 </a> 
                 <ul class="dropdown-menu">
-                <li><a href="<?php echo site_url();?>salesorder/search">Search</a></li>
+               <!--
+ <li><a href="<?php echo site_url();?>salesorder/search">Search</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/calllog">Call Log</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/callback">Call Back</a></li>
+-->
                 <li><a href="<?php echo site_url();?>salesproductselection">Product Selection</a></li>
                 <li><a href="<?php echo site_url();?>salesorder">Shipping Order</a></li>
                 <li><a href="<?php echo site_url();?>salesorder/customer_relation">Customer Relationship</a></li>
@@ -175,12 +177,14 @@
                   Reports</a>
             </li>
             <?php }?>
-            <li <?php echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
+           <!--
+ <li <?php //echo ($curr_ctlr == 'timesheet')?'class="active"':'';?> >
               <a href="<?=site_url('timesheet');?>">
                 <i class="fa fa-search fa-fw"></i>
                   Search
               </a>
             </li>
+-->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>

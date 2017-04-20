@@ -13,12 +13,12 @@
     <td>Wholesale Price</td>
     <td>Package</td>
     <td>Row</td> 
-    <!--
-<td colspan="2">Action</td>
--->
+    <td colspan="2">Action</td>
   </tr>
   
    <?php $uri = $this->uri->segment(1);
+         $uri = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
+         
        if(count($cartitems)>0) { 
          foreach($cartitems as $cvalue) {   
      ?>
@@ -33,13 +33,11 @@
  <td><?php //echo $cvalue['equivalent']; ?></td>
 -->
             <td>
-               <?php  echo $cvalue['qty']; ?></td>
+               <?php echo $qaty = ($uri!='salesproductselection')?'<input type="text" name="update_qty[]" id="update_qty" value="'.$cvalue['qty'].'" />':$cvalue['qty']; ?></td>
             <td><?php echo $cvalue['price']; ?></td>
             <td><?php echo $cvalue['package']; ?></td>
             <td><?php echo $cvalue['row']; ?></td>
-            <!--
-<td><button type="button" name="delete_cart" onclick="delete_cart('<?php echo $cvalue['rowid']; ?>');" class="btn btn-default">Delete</button>
--->
+            <td><button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>');" class="btn btn-default">Delete</button>
             </td>
         </tr>
  <?php }} 
@@ -50,14 +48,16 @@
   <?php } ?>
 </table>
 <?php 
-    if($uri != 'salesproductselection') { ?>
-  <div class="form-group">
-    <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
+    if($uri == 'view') { ?>
+  <!--
+<div class="form-group">
+    <label>Total Amount<?php //echo (!empty($total))?": ".$total:""; ?></label>
   </div>
- <!--
+ 
+-->
 <div class="form-group col-md-8">
   <button type="button" name="update_cart" onclick="sales_update_cart('process',<?php echo $so_id;?>,this)" class="btn btn-default">Update</button>
   <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-default" id="cancel"  value="Cancel" />
  </div>
--->
+
 <?php } ?>

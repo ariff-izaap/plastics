@@ -181,5 +181,7 @@ class Salesorder_model extends App_model
     	return $this->db->get()->row_array();
     	
     } 
+    
+    
 }
 ?>

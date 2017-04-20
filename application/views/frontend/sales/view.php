@@ -78,9 +78,9 @@
   <tr>
     <td><span style="color:#555555">#<?php echo $so_id;?></span></td>
     <td><?php echo displayData($order_total, 'money');?></td>
-    <td><?php echo $so_details['order_status'];?></td>
-    <td><?php echo displayData($so_details['created_time'], 'datetime');?></td>
-    <td><?php echo displayData($user_details['email'], 'mailto');?></td>
+    <td><?php //echo $so_details['order_status'];?>ACCEPTED</td>
+    <td><?php echo displayData($so_details['created_date'], 'datetime');?></td>
+    <td><?php echo $user_details['email'];?></td>
   </tr>
 </table>	
 	</div>

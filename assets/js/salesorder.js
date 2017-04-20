@@ -167,6 +167,7 @@ function sales_update_cart(action_type,sales_order_id, elm)
  
 }
 
+
 function sales_order_update_quantity(sale_item_id,so_id)
 {
     var qty  = $("#update_qty").val();
@@ -361,6 +362,28 @@ function sales_prod_add_to_cart()
               }
           });
     }  
+}
+
+function delete_cartt(cart_id)
+{ 
+    
+    
+  $.ajax({
+    type:"POST",
+    url:base_url+'salesproductselection/delete_cart',
+    data:{id:cart_id},
+    dataType:"json",
+    success:function(data)
+    {
+      var status = data.status;
+      var output = data.output;      
+      
+      if(status == 'success'){
+        $("#product_shipping_lists").html(data.viewlist);
+        $(window).scrollTop($('#product_shipping_lists').offset().top);
+      }
+    } 
+  });
 }
 
 /** End to Punitha */

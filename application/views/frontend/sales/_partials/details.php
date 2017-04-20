@@ -44,19 +44,21 @@
 
 	<div class="row m_bot_5">
        
-		<table class="table table-bordered m_bot_10">
+		<!--
+<table class="table table-bordered m_bot_10">
 			<tbody class="light_green_bg green">
 				<tr>
-					<td width="33%" align="left">Vendor: <span class="black"><?php echo $details['vendor_name'];?>
+					<td width="33%" align="left">Vendor: <span class="black"><?php //echo $details['vendor_name'];?>
 					</span>
 					</td>
-					<td width="33%" class="text-center"><?php echo $details['shipment_method'];?>
+					<td width="33%" class="text-center"><?php //echo $details['shipment_method'];?>
 					</td>
-					<td width="33%" class="text-right">Shipment status: <?php echo $details['shipment_status'];?>
+					<td width="33%" class="text-right">Shipment status: <?php //echo $details['shipment_status'];?>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+-->
 
 		<h2 class="pull-left">Order Details</h2> <a class="pull-left underline clr-orange" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)" style="margin:7px 0px 0 36px;">Edit</a>
 

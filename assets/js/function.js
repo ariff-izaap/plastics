@@ -850,25 +850,7 @@ function save_form(action,div_id,save_type,elm,call_back_fn,popup){
 
 //delete cart
 
-function delete_cart(cart_id)
-{ 
-  $.ajax({
-    type:"POST",
-    url:base_url+'salesproductselection/delete_cart',
-    data:{id:cart_id},
-    dataType:"json",
-    success:function(data)
-    {
-      var status = data.status;
-      var output = data.output;      
-      
-      if(status == 'success'){
-        $("#product_shipping_lists").html(res.viewlist);
-        $(window).scrollTop($('#product_shipping_lists').offset().top);
-      }
-    } 
-  });
-}
+
 
 /***End To Punitha **/
 

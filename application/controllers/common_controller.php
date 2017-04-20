@@ -57,10 +57,14 @@ class Common_controller
 		
 		$data['so_details'] = $result_set->row_array();
 
-		//$data['payment_term_name'] = $this->CI->salesorder_model->get_payment_term($data['so_details']['payment_term_id']);
+		$payment_term = $this->CI->salesorder_model->get_where(array('id' => $data['so_details']['credit_type']),"name","credit_type")->row_array();
 		
+        $data['payment_term_name'] = $payment_term['name'];
+        
 		$customer_id = isset($data['so_details']['customer_id'])?$data['so_details']['customer_id']:0;
 		$data['user_details'] = $this->CI->salesorder_model->get_where(array('id' => $customer_id), '*', 'customer')->row_array();
+        $contact = $this->CI->salesorder_model->get_where(array('customer_id' => $customer_id),"email","customer_contact")->row_array();
+        $data['user_details']['email'] = $contact['email'];
 
 		$this->CI->load->model('shipment_model');
 		 
