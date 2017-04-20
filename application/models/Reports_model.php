@@ -52,12 +52,16 @@ class Reports_model extends App_model
 
   public function get_cleading($start_date,$end_date)
   {
-    $this->db->select("SUM(c.qty * d.retail_price) as price,SUM(c.qty * d.wholesale_price) as w_price,b.business_name,a.total_items");
+    $this->db->where("e.ship_date>=",$start_date);
+    $this->db->where("e.ship_date<=",$end_date);
+    $this->db->select("SUM(c.qty * d.retail_price)as price,SUM(c.qty * d.wholesale_price)as w_price,b.business_name,a.total_items");
     $this->db->from("sales_order a");
     $this->db->join("customer b","a.customer_id=b.id");
     $this->db->join("sales_order_item c","a.id=c.so_id");
-    $this->db->join("product d","c.product_id=d.id");    
+    $this->db->join("product d","c.product_id=d.id");
+    $this->db->join("shipment e","e.so_id=a.id");  
     $this->db->group_by("a.customer_id");
+    $this->db->order_by("w_price","desc");
     $q = $this->db->get();
     return $q->result_array();
   }
@@ -127,5 +131,39 @@ class Reports_model extends App_model
   }
   
   
+  public function get_cogfind($start_date,$end_date,$product_id)
+  {
+    $this->db->where("a.ship_date>=",$start_date);
+    $this->db->where("a.ship_date<=",$end_date);
+    $this->db->where("e.product_id=",$product_id);
+    $this->db->select("a.*,c.business_name,d.first_name as salesman_name,e.qty,e.unit_price");
+    $this->db->from("shipment a");
+    $this->db->join("sales_order b","a.so_id=b.id");
+    $this->db->join("customer c","b.customer_id=c.id");
+    $this->db->join("admin_users d","b.salesman_id=d.id");
+    $this->db->join("sales_order_item e","b.id=e.so_id");
+    $this->db->group_by("e.so_id");
+    $q = $this->db->get();
+    // echo $this->db->last_query();exit;
+    return $q->result_array();
+  }
+  public function get_frnka($start_date,$end_date,$customer_id)
+  {
+    $this->db->where("d.ship_date>=",$start_date);
+    $this->db->where("d.ship_date<=",$end_date);
+    $this->db->where("a.customer_id=",$customer_id);
+    $this->db->select("e.sku,e.name,f.name as type,g.name as color,d.ship_date,(b.unit_price * b.qty) as total_cost,b.qty");
+    $this->db->from("sales_order a");
+    $this->db->join("sales_order_item b","a.id=b.so_id");
+    $this->db->join("customer c","a.customer_id=c.id");
+    $this->db->join("shipment d","d.so_id=a.id");
+    $this->db->join("product e","b.product_id=e.id");
+    $this->db->join("product_type f","e.product=f.id");
+    $this->db->join("product_color g","e.color_id=g.id");
+    // $this->db->group_by("b.id");
+    $q = $this->db->get();
+    //echo $this->db->last_query();exit;
+    return $q->result_array();
+  }
 }
 ?>

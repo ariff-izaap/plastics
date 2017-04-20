@@ -5,25 +5,80 @@
 	</div>
 </div>
 <?php display_flashmsg($this->session->flashdata()); ?>
-<form action="<?=site_url('reports/report_print');?>" method="post">
+<form action="<?=site_url('reports/report_print');?>" method="post" >
 	<div class="row">
-	  <div class="col-md-4">
+	  <div class="col-md-3">
 	    <div class="form-group">
-	      <label class="col-md-3"> Start Date :</label>
-	      <div class="col-md-6">
+	      <label class="col-md-4"> Start Date :</label>
+	      <div class="col-md-8">
 	        <input type="text" name="start_date" class="form-control singledate">
 	      </div>
 	    </div>
 	  </div>
-	  <div class="col-md-4">
+	  <div class="col-md-3">
 	    <div class="form-group">
-	      <label class="col-md-3"> End Date :</label>
-	      <div class="col-md-6">
+	      <label class="col-md-4"> End Date :</label>
+	      <div class="col-md-8">
 	        <input type="text" name="end_date" class="form-control singledate">
 	      </div>
 	    </div>
 	  </div>
+	  <div class="col-md-4">
+	    <div class="form-group">
+	      <label class="col-md-3"> Customer :</label>
+	      <div class="col-md-9">
+	        <select name="customer" class="select2_sample2" data-placeholder="--Select Customer--">
+	        	<option value="">--Select Customer--</option>
+	        	<?php
+	        	if(get_all_vendors())
+	        	{
+	        		foreach (get_all_vendors() as $key => $value)
+	        		{
+	        			?>
+	        				<option value="<?=$value['id'];?>"><?=$value['business_name'];?></option>
+	        			<?php
+	        		}
+	        	}
+	        	?>
+	        </select>
+	        <?php 
+						if(form_error('customer'))
+						{
+						 echo "<div id='output'>".form_error('customer')."</div>";
+						}
+						?>
+	      </div>
+	    </div>
+	  </div><br><br>
+	   <div class="col-md-4">
+	    <div class="form-group">
+	      <label class="col-md-3"> Inventory :</label>
+	      <div class="col-md-9">
+	        <select name="inventory" class="select2_sample2" data-placeholder="--Select Inventory--">
+	        	<option value="">--Select Inventory--</option>
+	        	<?php
+	        	if(get_products())
+	        	{
+	        		foreach (get_products() as $key => $value)
+	        		{
+	        			?>
+	        				<option value="<?=$value['id'];?>"><?=$value['name'] ." - ".$value['id'];?></option>
+	        			<?php
+	        		}
+	        	}
+	        	?>
+	        </select>
+	        <?php 
+						if(form_error('inventory'))
+						{
+						 echo "<div id='output'>".form_error('inventory')."</div>";
+						}
+						?>
+	      </div>
+	    </div>
+	  </div>
 	</div>
+	<div class="clearfix"></div><br>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-bordered table-hover">
@@ -89,12 +144,23 @@
 					</tr>
 				</tbody>
 			</table>
+			<?php 
+			if(form_error('report[]'))
+			{
+				?>
+					<div id="output">
+						<?=form_error('report[]');?>
+					</div><br>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3 pull-right">
-			<button class="btn" type="button">View</button>
-			<button type="submit" class="btn">Print</button>
+			<button name="view" class="btn" type="submit">View</button>
+			<button type="submit" name="print" class="btn">Print</button>
 		</div>
 	</div>
 </form>
+<br>
