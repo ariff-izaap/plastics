@@ -10,7 +10,7 @@
   <div class="col-md-12">
     <a href="#modalCart" data-toggle="modal" class="btn pull-right">
       <i class="fa fa-shopping-cart"></i>&nbsp;
-      View Cart (<?=count($products);?>)
+      View Cart (<span class="view_cart_count"><?=count($products);?></span>)
     </a>
   </div>
 </div>

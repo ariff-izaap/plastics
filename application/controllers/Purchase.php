@@ -234,14 +234,29 @@ class Purchase extends Admin_Controller
         $up['qty'] = $chk_product['qty'] + $qty;
         $up['updated_date'] = date("Y-m-d H:i:s");
         $update = $this->purchase_model->update(array("product_id"=>$product_id,"po_id"=>$po_id),$up,"purchase_order_item");
-         $this->_ajax_output(array('status'=>'success','message' => "Product Added Successfully"), TRUE);
+
+        $products = $this->purchase_model->get_purchased_products($po_id);
+        $this->data['products']  = $products;
+        $output['status'] = "success";
+        $output['message'] = "Product Added Successfully.";
+        $output['content'] = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
+        $output['count'] = count($products);
+
+        $this->_ajax_output($output, TRUE);
       }
       else
       {
         if($get_vendor['vendor_id']==$vendor_id || $get_vendor['vendor_id']=='')
         {
           $add = $this->purchase_model->insert($ins,"purchase_order_item");
-          $this->_ajax_output(array('status'=>'success','message' => "Product Added Successfully"), TRUE);
+          $products = $this->purchase_model->get_purchased_products($po_id);
+          $this->data['products']  = $products;
+          $output['status'] = "success";
+          $output['message'] = "Product Added Successfully.";
+          $output['content'] = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
+          $output['count'] = count($products);
+
+          $this->_ajax_output($output, TRUE);
         }
         else
           $this->_ajax_output(array('status'=>'success','message' => "Product Added with same vendor only."), TRUE);
@@ -266,7 +281,9 @@ class Purchase extends Admin_Controller
     </div>
     </div>';  
     // if($this->input->is_ajax())
-    $this->_ajax_output(array('content' => $content),TRUE);
+   
+      $this->_ajax_output(array('content' => $content),TRUE);
+   
   }
 
   public function update_cart()
@@ -288,7 +305,7 @@ class Purchase extends Admin_Controller
     }
 
     $this->data['products'] = $this->purchase_model->get_purchased_products($po_id);
-    $output['content']    = $this->load->view('/frontend/Purchase/view_cart', $this->data, TRUE);
+    $output['content']    = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);
     $this->_ajax_output($output, TRUE);
   }
 
@@ -306,7 +323,7 @@ class Purchase extends Admin_Controller
     
     $products = $this->purchase_model->get_purchased_products($po_id);
     $this->data['products']  = $products;
-    $output['content']       = $this->load->view('/frontend/Purchase/view_cart', $this->data, TRUE);    
+    $output['content']       = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
     $output['count'] = count($products);
     $this->_ajax_output($output, TRUE);  
   }
