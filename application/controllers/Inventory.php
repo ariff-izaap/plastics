@@ -40,7 +40,7 @@ class Inventory extends Admin_Controller
          
         $this->_narrow_search_conditions = array("p.name");
         
-        $str = '<a href="'.site_url('inventory/add/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+        $str = '<a href="javascript:void(0);" onclick="inventory_sub(\'1\',\'{id}\')" class="table-action"><i class="fa fa-edit edit"></i></a>
                 <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'inventory/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  

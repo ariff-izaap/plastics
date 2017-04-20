@@ -1,6 +1,4 @@
-<?php $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
-     $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
-      ?>
+
   <div id="inventory_add_section">
    <div class="row">
       <div class="breadcrumbs">
@@ -261,7 +259,7 @@
                                 </div>
                                 </div>
                                 <div class="form-group col-md-2 col-md-offset-8">   
-                                  <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub('submit');">Submit</button>
+                                  <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub('submit','');">Submit</button>
                                 </div>
                                 <div class="form-group col-md-2">   
                                    <input type="reset" name="reset" value="Reset" class="btn btn-block active text-center" />

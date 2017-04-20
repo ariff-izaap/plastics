@@ -429,8 +429,7 @@ class Salesorder extends Admin_Controller
     	
     	$this->data['content'] = $this->load->view('frontend/sales/_partials/view_content', $this->data, TRUE);
     	
-    	$this->layout->view('frontend/sales/view', $this->data);
-    	
+    	$this->layout->view('frontend/sales/view', $this->data);	
     }
     
     function _get_products_details($so_id)

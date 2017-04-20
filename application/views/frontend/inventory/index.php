@@ -10,7 +10,7 @@
 <button type="button" class="btn" onclick="inventory_sub();">Create Inventory</button>
 -->
         
-<a class="btn active" onclick="inventory_sub('create');" >Create Inventory</a>
+<a class="btn active" onclick="inventory_sub('create','');" >Create Inventory</a>
 
     </div>
   </div>

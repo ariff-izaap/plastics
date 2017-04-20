@@ -230,7 +230,7 @@ function add_note(type, id)
 					'</form>';
 	
     $("#div_add_note .modal-body").html(hl);
-	$("#div_add_note").css({width:'800px'}).removeClass('hide');
+	$("#div_add_note").css({width:'800px',display:"block !important"}).removeClass('hide');
     $("#div_add_note").modal({
          backdrop:"static"
     });

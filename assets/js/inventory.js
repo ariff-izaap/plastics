@@ -1,5 +1,5 @@
-$(function(){
-    //alert(namespace);
+function tabsection(){
+    
     if(namespace == 'inventory_index'){
         
         $('#ProductTabs a').click(function (e) {
@@ -27,16 +27,24 @@ $(function(){
     if(namespace=='upload_inventory_index'){
         $("#upload_variations li a:first").trigger('click'); 
     }
-});
+}
 
 
-function inventory_sub(ty='')
+function open_tab(tab)
+{
+    $("#").trigger("click");
+}
+
+function inventory_sub(ty='',edit_id)
 {    
-    
-    
-    var edit_id = '';
+    if(edit_id!=''){
+         edit_id = edit_id;
+    }
+    else
+    {
         edit_id = (ty=='create')?"":$("#inventory_sub_form #edit_id").val();
-       
+    }
+      
       if($("#form_type"))  
          $("#form_type").val(ty);
         
@@ -56,7 +64,10 @@ function inventory_sub(ty='')
                 backdrop:"static"
             });
              $("#inventory_form").show(); 
-             init_product_uploads();    
+             $("#ProductTabs a:first").trigger("click");
+             
+             init_product_uploads();   
+             tabsection(); 
           }
     });    
 }
