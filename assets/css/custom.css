@@ -1,4 +1,4 @@
-body { font-size: 16px;}
+body { font-size: 16px; padding-right:0 !important;}
 .panel-bor { border:none; box-shadow:none;}
 .panel-bor .panel-heading { background: hsl(0, 0%, 99%) none repeat scroll 0 0 !important;  border: 0 none;border-radius: 4px;box-shadow: 1px 1px 5px hsl(0, 0%, 91%);margin-bottom: 25px;}
 .formcontrol-box label.col-md-4 { padding-left:0px !important; text-align:left;}
@@ -68,8 +68,8 @@ td { padding:4px 6px !important;}
 #grid-headers > th, .greenbg_title th { text-align:center; vertical-align:middle;}
 .related
 {
-	 background: #fafafa;
-    line-height: 34px;
+	 background: #5d8ecf;
+    line-height: 28px;
     padding: 0px 14px;
 	
 }
@@ -110,22 +110,27 @@ td { padding:4px 6px !important;}
 
 /* Sales order view section */
 .sales-order-view-section .topsec_info{margin-top:20px; margin-bottom:20px;}
-.sales-order-view-section .box_highilite h3 span{min-height: 53px;}
-.sales-order-view-section .box_highilite h3 { margin: 17px 0 3px 0;}
-.sales-order-view-section .box_highilite h3 span{top: -17px;}
+.sales-order-view-section .box_highilite h3 span{min-height: 37px; line-height: 13px; top: -11px;}
+.sales-order-view-section .box_highilite h3 { margin: 10px 0 3px 0;  padding: 0;}
 .sales-order-view-section #relatedlinks{padding: 9px; border: 1px solid #ddd; margin-right: 25px;}
 .sales-order-view-section .bill-info { width: 36.22%; margin-right: 25px;}
 .sales-order-view-section .box_highilite h3 span{background: #ed9b06; border-radius: 0 !important;}
 .sales-order-view-section .ship-info {width: 36.222%;}
 .sales-order-view-section .bill-info, .sales-order-view-section .ship-info{ margin-bottom: 0 !important;}
-.sales-order-view-section .sales-oder-details { float: left; width: 70.666%; margin-left: 14px;}
+.sales-order-view-section .sales-oder-details { float: right; width: 70.666%; margin-right: 27px;}
 .sales-order-view-section .bill-info address, .sales-order-view-section .ship-info address{ min-height: 174px; margin-bottom:10px;}
 .sales-order-view-section .bill-info .span_half, .sales-order-view-section .ship-info .span_half{margin-bottom:10px;}
 .sales-order-view-section .sales-notes, .sales-order-view-section .log-histry { float: right; width: 76%;}
 .sales-order-view-section .create-invoice { text-align: right; margin: 8px 0;}
 .sales-order-view-section .box_highilite {margin-bottom: 0;}
 .clr-orange{color:orange; font-weight: bold;}
-.sales-order-view-section .box_highilite div {background: #f0f1f3; min-height: 55px; border-radius: 4px; border: 1px solid #ddd;}
+.sales-order-view-section .box_highilite div {
+    background: #f0f1f3;
+    min-height: 37px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 0 0 0px 10px;
+}
 .sales-order-view-section .box_highilite div h3{color:#064ba8;}
 .sales_update-cart-sec{max-width: 800px; width: 100% !important; margin: 0 auto;}
 
@@ -407,7 +412,7 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 #inventory_form .modal-content .container { width:100%;}
 #inventory_form .panel-body {height: 1450px;    overflow: auto;}
 .sales-order-view-section .nav > li > a{padding: 0px 15px;}
-.sales-order-view-section .header.greenbg_title { color: #000;}
+.sales-order-view-section .header.greenbg_title {  border-top: 0;color: #fff; margin-bottom: 12px; line-height: 32px; font-size: 16px; font-weight: bold;}
 #myModal {z-index: 22222;}
 .top-lisiting-search .input-group .form-control {z-index:inherit !important;}
 #inventory_form .modal-dialog { max-width: 900px !important;  width: 100%;}
@@ -416,6 +421,10 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 #form_vendor_add .form-group { display: inline-block;  width: 34%; vertical-align: top;  margin-bottom: 8px;  margin-right: 10px;}
 #form_vendor_add label { width: 15%;}
 #form_vendor_add .form-group select, #form_vendor_add .form-group input { width: 100% !important;}
+.sales-order-view-section .nav a { color: #dcebff;  padding: 4px 6px !important; display: block;}
+.sales-order-view-section .nav a:hover { color: #033e8a; background: #fff;}
+.sales-order-view-section .nav li { border-bottom: 0;  border-top: 1px solid #b0cef466;}
+.sales-order-view-section .related ul ul{margin-left: 0;}
 
 
 /* search form */
