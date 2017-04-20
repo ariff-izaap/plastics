@@ -418,6 +418,7 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 #form_vendor_add .form-group select, #form_vendor_add .form-group input { width: 100% !important;}
 
 
+
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
