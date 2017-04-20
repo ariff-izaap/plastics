@@ -38,6 +38,8 @@ function get_user_data()
   }
 }
 
+
+
 function get_vendor_by_id($id='')
 {
   $CI = get_instance();
@@ -706,25 +708,25 @@ function is_valid_user($user_id = 0)
     return $result->num_rows()?TRUE:FALSE;
 }
 
-function log_history($table='',$id='',$cat='',$action='')
+function log_history($table='',$id='',$cat='',$action='',$value='')
 {
   $CI = get_instance();
   switch ($action)
   {
     case 'insert':
-      $data['line'] = ucwords($cat)." Insertion";
+     // $data['line'] = ucwords($cat)." Insertion";
       $action = "inserted";
     break;
     case 'update':
-      $data['line'] = ucwords($cat)." Updation";
+      //$data['line'] = ucwords($cat)." Updation";
       $action = "updated";
     break;
     case 'delete':
-      $data['line'] = ucwords($cat)." Deletion";
+     // $data['line'] = ucwords($cat)." Deletion";
       $action = "deleted";
     break;
   }
-  
+  $data['line'] = $cat;
   $CI->load->model('history_model');
   $CI->load->model('admin_model');
   $get_name = $CI->admin_model->select($table,array("id"=>$id));
@@ -734,7 +736,13 @@ function log_history($table='',$id='',$cat='',$action='')
   else if($cat=="purchase")
     $data['action']="<strong>#".$get_name['id']."</strong> purchase order has been ".$action;
   else if($cat=="warning")
-    $data['action']="<strong>#".$get_name['warning_name']."</strong> $cat has been ".$action;
+    $data['action']="<strong>".$get_name['warning_name']."</strong> $cat has been ".$action;
+   else if($cat=="invoices")
+    $data['action']="<strong>#".$get_name['invoice_no']."</strong> $cat has been ".$action;
+  else if($cat=="invoice")
+    $data['action']="<strong>#".$get_name['invoice_no']."</strong> $cat has been ".$action." to <b>".$value."</b>";
+  else if($cat=="invoice_comments")
+    $data['action']="<b>".$value."</b>";
   else
     $data['action']="<strong>".$get_name['name']."</strong> $cat has been ".$action;
 
@@ -829,7 +837,9 @@ function get_address()
 function get_prodcut_type()
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from product_type where status=1")->result_array();
+  if($where)
+    $where = "and id='".$where."'";
+  $q = $CI->db->query("select * from product_type where status=1 $where")->result_array();
   return $q;
 }
 
@@ -876,7 +886,9 @@ function get_product_name($id)
 function get_forms()
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from product_form where status=1")->result_array();
+  if($where)
+    $where = "and id='".$where."'";
+  $q = $CI->db->query("select * from product_form where status=1 $where")->result_array();
   return $q;
 }
 
@@ -887,10 +899,12 @@ function get_packages()
   return $q;
 }
 
-function get_colors()
+function get_colors($where='')
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from product_color where status=1")->result_array();
+  if($where)
+    $where = "and id='".$where."'";
+  $q = $CI->db->query("select * from product_color where status=1 $where")->result_array();
   return $q;
 }
 
@@ -1031,6 +1045,12 @@ function create_auto_invoice($form)
     $CI->accounting_model->insert($ins1,"invoice_items");
   }
   return $inv_id;
+}
+function get_logs($cat='',$id='')
+{
+   $CI = get_instance();
+  $q = $CI->db->query("select a.*,b.first_name as created_name from log a,admin_users b where a.line='".$cat."' and a.action_id='".$id."' and a.created_id=b.id")->result_array();
+  return $q;
 }
 
 ?>

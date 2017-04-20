@@ -163,8 +163,8 @@
                   foreach (get_state() as $key => $value)
                   {
                     ?>
-                      <option <?php if($data[0]['state']==$value['state_code']){?> selected <?php }?>
-                        value="<?=$value['state_code']?>"><?=$value['state_code']?></option>
+                      <option <?php if($data[0]['state']==$value['name']){?> selected <?php }?>
+                        value="<?=$value['name']?>"><?=$value['name']?></option>
                     <?php
                   }
                 }

@@ -118,7 +118,7 @@ class Purchase_model extends App_model
 	public function get_purchased_order($po_id)
 	{
 		$this->db->where("a.id",$po_id);
-		$this->db->select("a.*,a.id as po_id,b.business_name as vendor_name,c.type as ship_type,d.name as carrier,e.name as credit,f.name as wname,f.*,h.name as state_name,g.name as country_name");
+		$this->db->select("a.*,a.id as po_id,b.business_name as vendor_name,c.type as ship_type,d.name as carrier,e.name as credit,f.name as wname,f.*,h.name as state_name,g.name as country_name,j.name as bill_name,j.address1 as b_address1,j.address2 as b_address2,j.city as b_city,j.state as b_state,j.country as b_country,j.zipcode as b_zipcode,j.phone as b_phone");
 		$this->db->from("purchase_order a");
 		$this->db->join("customer b","a.vendor_id=b.id");
 		$this->db->join("shipping_type c","a.ship_type_id=c.id");
@@ -127,6 +127,7 @@ class Purchase_model extends App_model
 		$this->db->join("ordered_address f","a.ordered_address_id=f.id");
 		$this->db->join("country g","f.state=g.id");
 		$this->db->join("state h","f.country=h.id");
+		$this->db->join("address j","j.id=b.address_id");
 		$q = $this->db->get();
 		// echo $this->db->last_query();exit;
 		return $q->row_array();

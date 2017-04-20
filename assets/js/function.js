@@ -375,6 +375,30 @@ function numbersonly(e)
   }
 }
 
+function get_vendor_details(v_url)
+{
+   $(".purchase-loader").show();
+    $.post(base_url+v_url,{},function(data){
+    $(".purchase-loader").hide();
+    console.log(data);
+      $("form#addPurchase #vendor_name").val(data.business_name);
+      $("form#addPurchase #bill_name").val(data.b_name);
+      $("form#addPurchase #address_1").val(data.address1);
+      $("form#addPurchase #address_2").val(data.address2);
+      $("form#addPurchase #city").val(data.city);
+      $("form#addPurchase #state").val(data.state);
+      $("form#addPurchase #zipcode").val(data.zipcode);
+      $("form#addPurchase #firstname").val(data.first_name);
+      $("form#addPurchase #lastname").val(data.last_name);
+      $("form#addPurchase #mobile").val(data.phone);
+      $("form#addPurchase #email").val(data.email);
+      $("form#addPurchase #website").val(data.web_url);
+      $("form#addPurchase #zipcode").val(data.zipcode);
+  },'json');
+}
+
+
+
 //to delete selected record from list.
 function delete_record(del_url,elm){
 
@@ -955,6 +979,7 @@ $(".warehouse_select").change(function(){
       $("form#checkoutForm #email").val(data.email);
       $("form#checkoutForm #state").val(data.state);
       $("form#checkoutForm #country").val(data.country);
+      $("form#checkoutForm #zipcode").val(data.zipcode);
     }
   });
 });
@@ -973,6 +998,40 @@ function get_purchase_order(id,ele)
   });
 }
 
+function getInvoice(id,ele)
+{
+  $.ajax({
+    type:"POST",
+    url:base_url+'accounting/get_invoice',
+    data:{id:id},
+    success:function(data)
+    {
+      console.log(data);
+      $("#ViewInvoice .modal-ajax").html(data);
+    }
+  });
+}
+
+
+  $(".change_invoice_status").click(function(){
+  id = $("select[name='invoice_status']").attr("data-id");
+  val = $("select[name='invoice_status']").val();
+  cmt = $("textarea[name='inv_comments']").val();
+
+  $.ajax({
+    type:"POST",
+    url:base_url+'accounting/change_invoice_status',
+    data:{id:id,val:val,comments:cmt},
+    success:function(data)
+    {
+      data = JSON.parse(data);
+      service_message(data.status,data.message);
+      setTimeout(function(){
+        location.reload();
+      },2000);
+    }
+  });
+});
   
 
 

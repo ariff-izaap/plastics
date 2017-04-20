@@ -16,6 +16,7 @@ class Accounting extends Admin_Controller
 		if(!is_logged_in())
     	redirect('login');
   	$this->load->model('accounting_model');
+    $this->load->model('invoice_model');
 	  $this->load->library('listing');
   }
 
@@ -74,6 +75,7 @@ class Accounting extends Admin_Controller
       $ins['created_date'] = date("Y-m-d H:i:s");
       $ins['updated_date'] = date("Y-m-d H:i:s");
       $inv_id = $this->accounting_model->insert($ins,"invoices");
+      $log = log_history("invoices",$inv_id,"invoice","inserted");
       for ($i=0; $i < count($so_id); $i++)
       { 
         $so = $this->accounting_model->get_ordered_items(array("so_id"=>$so_id[$i]),"sales_order_item");
@@ -122,7 +124,7 @@ class Accounting extends Admin_Controller
     $this->load->library('listing');
     $this->simple_search_fields = array('b.business_name' => 'Name','c.ship_date' => 'Ship Date');
     $this->_narrow_search_conditions = array("start_date");    
-    $str = '<a target="_blank" href="'.site_url('accounting/print_invoice/{id}').'" class="table-action"><i class="fa fa-print"></i></a>';
+    $str = '<a target="_blank" href="'.site_url('accounting/print_invoice/{id}').'" class="table-action"><i class="fa fa-print"></i></a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" onclick="getInvoice(\'{id}\',this);" data-target="#ViewInvoice"><i class="fa fa-edit" ></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('invoice_model', 'listing');
     if($this->input->is_ajax_request())
@@ -142,7 +144,6 @@ class Accounting extends Admin_Controller
   {
     if($inv_id!='')
     {
-      $this->load->model('invoice_model');
       $this->data['invoices'] = $this->invoice_model->get_invoices(array("a.id"=>$inv_id));
       $this->data['id'] = $inv_id;
       $this->load->view('accounting/print_invoice',$this->data);
@@ -152,6 +153,29 @@ class Accounting extends Admin_Controller
       $this->session->set_flashdata("error_msg","Something Error!",TRUE);
       redirect("accounting/invoices");
     }
+  }
+
+  public function get_invoice()
+  {
+    $id = $this->input->post('id');
+    $this->data['invoices'] = $this->invoice_model->get_invoices(array("a.id"=>$id));
+    $this->load->view('accounting/ajax_invoice',$this->data);
+  }
+
+  public function change_invoice_status()
+  {
+    $up = [];
+    $id = $this->input->post('id');
+    $val = $this->input->post('val');
+    $comments = $this->input->post('comments');
+    $up['invoice_status'] = $val;
+    $output['message'] = "Invoice Updated successfuly.";
+    $output['status']  = "success";
+    $this->accounting_model->update(array("id"=>$id),$up,"invoices");   
+    $log1 = log_history("invoices",$id,"invoice","update",$val);
+    if($comments!='')
+      $log2 = log_history("invoices",$id,"invoice_comments","insert",$comments);
+    $this->_ajax_output($output, TRUE);
   }
 }
 ?>

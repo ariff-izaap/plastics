@@ -68,6 +68,7 @@ class Purchase extends Admin_Controller
     $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     if($this->action->view==1)
       $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
+    $str .= '&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href='.site_url('purchase/print_purchase/{id}').'><i class="fa fa-print"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -485,6 +486,13 @@ class Purchase extends Admin_Controller
     $form = array("so_id"=>"1","pickup_date"=>"2017-03-04","delivery_date"=>"2017-03-25","release_to_sold"=>"Yes","paid"=>"NOT PAID","status"=>"INCOMPLETE","ship_type_id"=>"1","carrier_id"=>"1","location_id"=>"1","credit_type_id"=>"1");
     $a = create_auto_po($product,$form);
     print_r($a);
+  }
+
+  public function print_purchase($id='')
+  {
+    $data['po'] = $this->purchase_model->get_purchased_order($id);
+    $data['products'] = $this->purchase_model->get_purchased_products($id);
+    $this->load->view('frontend/purchase/print_purchase',$data);
   }
 
 }

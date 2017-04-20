@@ -9,3 +9,18 @@
 <?php display_flashmsg($this->session->flashdata());?>
 
 <?=$grid;?>
+
+  <div id="ViewInvoice" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-ajax">
+        	
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Close</button>
+        <button class="btn change_invoice_status">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
