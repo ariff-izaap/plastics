@@ -122,7 +122,7 @@
 	</div>
   
   
- <div id="updat_cart" class="modal fade" role="dialog">
+ <div id="updat_cart" class="modal fade sales_update-cart-sec" role="dialog">
   <div class="modal-dialog popup-box">
     
     <!-- Modal content-->
