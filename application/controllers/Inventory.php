@@ -379,7 +379,7 @@ class Inventory extends Admin_Controller
 				$data['product_id'] 	= $product_id;
 				 
 				//product vendor price list  details add
-				$insert_id = $this->product_vendor_model->insert($data);
+				$edit_id = $this->product_vendor_model->insert($data);
 				 
 				$message = "Price list created successfully.";
 				
@@ -414,7 +414,6 @@ class Inventory extends Admin_Controller
 
 			$product_details  = $this->inventory_model->get_where(array("id" => $product_id))->row_array();
 			$edit_data['upc'] = (isset($product_details['upc']))?$product_details['upc']:"";
-
 		}
 
 		$data['product_id'] 	= $product_id;
@@ -426,6 +425,21 @@ class Inventory extends Admin_Controller
 		$ajax_return_data['form_view'] = $output;
 		$this->_ajax_output($ajax_return_data, TRUE);
 	}
+    
+    function get_vendor_price_lists($product_id)
+    {
+        
+        $pricelists  = $this->inventory_model->get_where(array("product_id" => $product_id),'*','vendor_price_list')->result_array();
+        $pricelists  = (!empty($pricelists))?$pricelists:array();
+        
+        $data['editdata']['pricelts'] = $pricelists;
+        
+        if($this->input->is_ajax_request()){
+          $status = 'success';  
+          $output = $this->load->view('/frontend/inventory/vendor/lists',$data,TRUE);
+          return $this->_ajax_output(array('status' => $status ,'output' => $output, 'product_id' => $product_id), TRUE);
+        }
+    }
     
    	function get_price_list_rules($edit_id = 0)
 	{

@@ -88,7 +88,7 @@ function add_vendor_price_lists(action,div_id)
             var status = res.status;
             var output = res.output;                
             if(status == 'success'){
-              location.href = base_url+"inventory/add/"+res.product_id;
+              get_vendor_price_lists(res.product_id,div_id);
             }
             else
             {
@@ -100,6 +100,24 @@ function add_vendor_price_lists(action,div_id)
     });    
 }
 
+function get_vendor_price_lists(product_id,div_id)
+{
+     $.ajax({
+          url:base_url+"inventory/get_vendor_price_lists/"+product_id,
+          type:"POST",
+          data:{},
+          dataType:'json',
+          success:function(res)
+          {
+            var status = res.status;
+            var output = res.output;                
+            if(status == 'success'){
+              $("#"+div_id).fadeOut();  
+              $("#inventory_vendor_lists").html(output);
+            }
+         }
+    });
+}
 
 function check_product_id(event)
 {

@@ -413,10 +413,9 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 #inventory_form .modal-dialog { max-width: 900px !important;  width: 100%;}
 #addVendorForm { max-width: 650px;  overflow-x: inherit;   overflow-y: inherit; margin: auto; width: 100%;}
 #inventory_form .modal-dialog { max-width: 900px !important; width: 100% !important;}
-#form_vendor_add .form-group { display: inline-block;  width: 35%; vertical-align: top;  margin-bottom: 8px;  margin-right: 10px;}
+#form_vendor_add .form-group { display: inline-block;  width: 34%; vertical-align: top;  margin-bottom: 8px;  margin-right: 10px;}
 #form_vendor_add label { width: 15%;}
 #form_vendor_add .form-group select, #form_vendor_add .form-group input { width: 100% !important;}
-
 
 
 /* search form */

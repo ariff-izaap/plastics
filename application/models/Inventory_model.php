@@ -15,7 +15,7 @@ class Inventory_model extends App_model {
      {  
         $this->_fields = "p.id,p.name,p.sku,p.created_date,p.quantity,p.row,p.form_id,p.units,p.received_in_warehouse,p.equivalent,p.wholesale_price,p.available_qty,p.internal_lot_no,p.vendor_lot_no,pk.name as package_name,c.name as color_name,f.name as form_name";
         $this->db->from('product p');
-       // $this->db->join("vendor_price_list vl","vl.product_id=p.id");
+        $this->db->join("vendor_price_list vl","vl.product_id=p.id");
         $this->db->join("product_color c","c.id=p.color_id");
         $this->db->join("product_form f","f.id=p.form_id");
         $this->db->join("product_packaging pk","pk.id=p.package_id");
