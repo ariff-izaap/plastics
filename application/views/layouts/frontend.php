@@ -46,7 +46,8 @@
 			
 			<?php $this->load->view('_partials/footer'); ?>
 			
-            <?php include_javascripts(); ?>	
+            <?php include_javascripts(); ?>
+                
 		</body>
 
 	<?php endif; ?>	
@@ -60,6 +61,7 @@
 				foreach ($this->init_scripts as $file)
 					$this->load->view($file, $this->data);
 			}
-		?>
-
+            
+        ?>   
+ 
 </html>

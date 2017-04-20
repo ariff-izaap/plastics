@@ -1,8 +1,13 @@
+<?php $this->layout->add_javascripts(array('fileinput.min','fileinput','product'));
+     $this->layout->add_stylesheets(array('fileinput.min','fileinput'));
+      ?>
   <div id="inventory_add_section">
    <div class="row">
       <div class="breadcrumbs">
         <?php echo set_breadcrumb(); ?>
-          <a href="<?php echo site_url('inventory');?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
+          <!--
+<a href="<?php //echo site_url('inventory');?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
+-->
       </div>
     </div>
    <div class="container">
@@ -22,6 +27,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active tabcontent" id="tab1primary">
                         <form name="inventory" id="inventory_sub_form" method="POST" enctype="multipart/form-data">
+                           <input type="hidden" name="type" id="form_type" value="" />
                            <div class="form-grid col-md-6 panel panel-default panel-bor">
                            <div class="panel-heading formcontrol-box">
                                 <div class="form-group  <?php echo (form_error('name'))?'error':'';?>" data-error="<?php echo (form_error('name'))? form_error('name'):'';?>">
@@ -255,7 +261,7 @@
                                 </div>
                                 </div>
                                 <div class="form-group col-md-2 col-md-offset-8">   
-                                  <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub();">Submit</button>
+                                  <button type="button" class="btn btn-block" id="inventory_submit" onclick="return inventory_sub('submit');">Submit</button>
                                 </div>
                                 <div class="form-group col-md-2">   
                                    <input type="reset" name="reset" value="Reset" class="btn btn-block active text-center" />
@@ -384,7 +390,42 @@ var prv_img = "<?php echo $prev_img; ?>";
 var page = '';
 var Id = 'product_upload_image';
 var hover_id = '';
+
+$(function(){
+    //alert(namespace);
+    if(namespace == 'inventory_add'){
+        
+        $('#ProductTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    
+      var product_id = $("#edit_id").val();
+      if(product_id==''){
+        if(namespace == 'inventory_add'){
+            $('#ProductTabs a').not(":first").unbind("click");
+            $('#ProductTabs li').not(":first").click(function(){
+                bootbox.alert("Please Enter General Info");
+            });
+        } 
+      }
+      else
+      {
+        //$("#ProductTabs a:first").trigger("click");
+        //$('#ProductTabs a').attr("data-toggle",'tab').trigger('click');
+      }
+        $("#ProductTabs a:first").trigger("click");
+    }
+    
+    if(namespace=='upload_inventory_index'){
+        $("#upload_variations li a:first").trigger('click'); 
+    }
+});
+
 </script>
+
+
+
 
 
 

@@ -6,7 +6,12 @@
       </div>
       <div class="col-md-6 action-buttons text-right">
         <a href="javascript:void(0)" class="btn active" capsOn>Delete</a>
-        <a href="javascript:void(0)" class="btn" onclick="inventory_sub();" capsOn>Create Inventory</a>
+        <!--
+<button type="button" class="btn" onclick="inventory_sub();">Create Inventory</button>
+-->
+        
+<a class="btn active" onclick="inventory_sub('create');" >Create Inventory</a>
+
     </div>
   </div>
 

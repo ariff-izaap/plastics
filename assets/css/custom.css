@@ -401,7 +401,12 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 .a-d-box1 > div, .a-d-box2 > div, .a-d-box3 > div { min-height: 259px !important; margin-bottom: 0 !important; }
 
 
-
+#inventory_form .modal-dialog { width: 1026px !important;}
+#inventory_form .modal-content .container { width:100%;}
+#inventory_form .panel-body {
+    height: 1450px;
+    overflow: auto;
+}
 
 
 
