@@ -1,12 +1,12 @@
 <form  class="form-horizontal ctrl_grp_4" enctype="multipart/form-data" name="form_vendor_add" id="form_vendor_add" action="<?php echo site_url('product/vendor_add');?>" method="POST"> 
 <div class="row-fluid">
   <table class="table table-bordered">
-    <tbody class="white_bg">
+    <tbody class="gray-bg">
       <tr>
         <td>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
 
               <label>Vendor:*</label>
               <div class="form-group" data-error="<?php echo (form_error('vendor_id'))? form_error('vendor_id'):'';?>">
@@ -43,7 +43,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6 text-left">
+            <div class="col-md-12">
               
               <label>Status:</label>
               <div class="form-group" data-error="<?php echo (form_error('vendor_product_name'))? form_error('vendor_product_name'):'';?>">

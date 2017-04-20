@@ -546,3 +546,7 @@ body .btn-block { width: 68% !important; margin: 0 auto 30px auto; }
 	body #simple_search_form > div { width: 100% !important; }
 .right-section > div { float: none; display: block; width: 100%; margin-bottom: 17px; }
 	}
+    
+    #myModal {
+    z-index: 222222222222222;
+}

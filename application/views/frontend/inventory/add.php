@@ -16,8 +16,8 @@
                 <div class="panel-heading">
                     <ul id="ProductTabs" class="nav nav-tabs">
                         <li><a href="#tab1primary" class="tablinks" data-toggle="tab">GENERAL</a></li>
-                        <li><a href="#tab2primary" class="tablinks"  onclick="open_tab('tab2primary');" >IMAGES</a></li>
-                        <li><a href="#tab3primary" class="tablinks"  onclick="open_tab('tab3primary');" >VENDORS</a></li>
+                       <!-- <li><a href="#tab2primary" class="tablinks">IMAGES</a></li> -->
+                        <li><a href="#tab3primary" class="tablinks">VENDORS</a></li>
                     </ul>
                 </div>
                 
@@ -276,7 +276,7 @@
                         </div>
                         <div class="tab-pane fade tabcontent" id="tab2primary">
                             <div class="col-md-12 text-right" style="padding-bottom: 20px;">
-                              <button type="button" class="btn btn-info btn-lg" id="load_image_popup" data-target="#myModal" data-toggle="modal">Upload Images</button>
+                              <button type="button" class="btn btn-info btn-lg" id="load_image_popup"  onclick="load_product_image_popup('#myModal');" >Upload Images</button>
                             </div>     
                          
                               <table class="table table-striped table-hover tableSite table-bordered">
@@ -389,36 +389,7 @@ var page = '';
 var Id = 'product_upload_image';
 var hover_id = '';
 
-$(function(){
-    //alert(namespace);
-    if(namespace == 'inventory_add'){
-        
-        $('#ProductTabs a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-    
-      var product_id = $("#edit_id").val();
-      if(product_id==''){
-        if(namespace == 'inventory_add'){
-            $('#ProductTabs a').not(":first").unbind("click");
-            $('#ProductTabs li').not(":first").click(function(){
-                bootbox.alert("Please Enter General Info");
-            });
-        } 
-      }
-      else
-      {
-        //$("#ProductTabs a:first").trigger("click");
-        //$('#ProductTabs a').attr("data-toggle",'tab').trigger('click');
-      }
-        $("#ProductTabs a:first").trigger("click");
-    }
-    
-    if(namespace=='upload_inventory_index'){
-        $("#upload_variations li a:first").trigger('click'); 
-    }
-});
+
 
 </script>
 

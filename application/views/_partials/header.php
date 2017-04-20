@@ -2,11 +2,10 @@
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" onclick="popup_close('#myModal');">&times;</button>
         <h4 class="modal-title">Upload Image</h4>
       </div>
       <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
@@ -23,7 +22,7 @@
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" onclick="popup_close('#myModal');">Close</button>
       </div>
     </div>
 
@@ -47,9 +46,9 @@
           </a>
         </div>
         <?php 
-          $role = get_user_role();
+          $role   = get_user_role();
           $rights = get_user_access_rights($role);
-          $menu = json_decode($rights['menu_id']);
+          $menu   = json_decode($rights['menu_id']);
           $curr_ctlr =  $this->uri->segment(1, 'index');
           $child_ctlr = $this->uri->segment(2, 'index');
         ?>

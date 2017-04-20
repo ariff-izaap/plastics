@@ -22,6 +22,7 @@ function tabsection(){
         //$('#ProductTabs a').attr("data-toggle",'tab').trigger('click');
       }
         $("#ProductTabs a:first").trigger("click");
+        
     }
     
     if(namespace=='upload_inventory_index'){
@@ -64,10 +65,9 @@ function inventory_sub(ty='',edit_id)
                 backdrop:"static"
             });
              $("#inventory_form").show(); 
-             $("#ProductTabs a:first").trigger("click");
-             
-             init_product_uploads();   
+             $("#ProductTabs a:first").trigger("click"); 
              tabsection(); 
+             init_product_uploads();  
           }
     });    
 }
@@ -86,8 +86,7 @@ function add_vendor_price_lists(action,div_id)
           success:function(res)
           {
             var status = res.status;
-            var output = res.output;
-                
+            var output = res.output;                
             if(status == 'success'){
               location.href = base_url+"inventory/add/"+res.product_id;
             }
@@ -130,68 +129,21 @@ function product_image_delete(del_id,table_name)
     });    
 }
 
+function load_product_image_popup(modal)
+{
+    $(modal).addClass("in").fadeIn();
+    //init_modal();  
+    product_image_upload_settings();  
+}
+
+
+function popup_close(modal)
+{
+    $(modal).fadeOut();
+}
 
 function init_product_uploads()
 {
-    
-
-//product images upload section
-var upld_options = {}; 
-    upld_options.uploadUrl              = base_url+'inventory/do_upload';
-    upld_options.allowedFileExtensions  = ['jpg','jpeg','png','gif'];
-    upld_options.maxFileSize            = 2000; //kb
-    upld_options.showCaption            = false;
-    upld_options.dropZoneEnabled        = false;
-    upld_options.showRemove             = false;
-    
-    var up_folder,divid,field_name;
-    
-    if(prv_img != '')
-        upld_options.initialPreview = [prv_img];
-        
-    if(page == 'social'){
-        up_folder  = 'social_icon';
-        divid      = 'Images';
-    }    
-    else
-    {        up_folder = 'product';
-        divid     = 'file_name';  
-    }
-     
-    upld_options.uploadExtraData = {'upload_folder':up_folder,'types':'gif|jpg|png|jpeg','field':Id}, 
-
-    upld_options.slugCallback = function(filename) {      
-      return filename.replace('(', '_').replace(']', '_');
-    };
-    
-    $("#success_msg").html('');
-    
-    $("#"+Id).fileinput(upld_options);
-
-    $(document).ready(function() {
-         
-        $('#'+Id).on('fileuploaded', function(event, data, previewId, index) {
-            var form = data.form, files = data.files, extra = data.extra,
-            response = data.response, reader = data.reader;
-            var imgtitle    = $("#image_title").val(); 
-            var productid   = $("#edit_id").val();
-            var uploaded_id = response.image_id;
-             $.ajax({
-                      url:base_url+"inventory/update_image_title/",
-                      type:"POST",
-                      data:{"image_title":imgtitle,"product_id":productid,'uploaded_id':uploaded_id},
-                      dataType:'json',
-                      success:function(res){
-                        $("#success_msg").html(res.message).fadeIn(400);
-                        $("#success_msg").fadeOut(600);
-                      }
-                  });
-                  
-            $("#"+divid).val(response.fileuploaded);       
-        });
-    });
-
-
 //product certificate upload section
 
 var upld_certificate_options = {}; 
@@ -224,6 +176,66 @@ var upld_certificate_options = {};
             response = data.response, reader = data.reader;
              
             $("#certification_files").val(response.fileuploaded);       
+        });
+    });
+
+}
+
+function product_image_upload_settings()
+{
+    //product images upload section
+var upld_options = {}; 
+    upld_options.uploadUrl              = base_url+'inventory/do_upload';
+    upld_options.allowedFileExtensions  = ['jpg','jpeg','png','gif'];
+    upld_options.maxFileSize            = 2000; //kb
+    upld_options.showCaption            = false;
+    upld_options.dropZoneEnabled        = false;
+    upld_options.showRemove             = false;
+    
+    var up_folder,divid,field_name;
+    
+    if(prv_img != '')
+        upld_options.initialPreview = [prv_img];
+        
+    if(page == 'social'){
+        up_folder  = 'social_icon';
+        divid      = 'Images';
+    }    
+    else
+    {   up_folder = 'product';
+        divid     = 'file_name';  
+    }
+     
+    upld_options.uploadExtraData = {'upload_folder':up_folder,'types':'gif|jpg|png|jpeg','field':"product_upload_image"}, 
+
+    upld_options.slugCallback = function(filename) {      
+      return filename.replace('(', '_').replace(']', '_');
+    };
+    
+    $("#success_msg").html('');
+    
+    $("#product_upload_image").fileinput(upld_options);
+
+    $(document).ready(function() {
+         
+        $('#product_upload_image').on('fileuploaded', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+            var imgtitle    = $("#image_title").val(); 
+            var productid   = $("#edit_id").val();
+            var uploaded_id = response.image_id;
+             $.ajax({
+                      url:base_url+"inventory/update_image_title/",
+                      type:"POST",
+                      data:{"image_title":imgtitle,"product_id":productid,'uploaded_id':uploaded_id},
+                      dataType:'json',
+                      success:function(res){
+                        $("#success_msg").html(res.message).fadeIn(400);
+                        $("#success_msg").fadeOut(600);
+                      }
+                  });
+                  
+            $("#"+divid).val(response.fileuploaded);       
         });
     });
 
