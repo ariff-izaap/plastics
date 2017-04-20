@@ -544,19 +544,18 @@ class Common_controller
 				
 			}
 			
-			if($row['shipment_id'])
-			{
-				$part1  = '<li><a href="'.site_url("shipment").'"><i class="icon-chevron-right-small"></i> Back to Shipment list</a></li>';
+			if($row['shipment_id']){
+				//$part1  = '<li><a href="'.site_url("shipment").'"><i class="icon-chevron-right-small"></i> Back to Shipment list</a></li>';
 				
-				$shipment_ids = explode(',', $row['shipment_id']);
-				$shipment_ids = array_unique($shipment_ids);
-				$part2 .= '	<li class="submenu">
-								<a href="javascript:;"><i class="icon-chevron-right-small"></i>Shipment </a>
-								<ul>';
-								foreach ($shipment_ids as $id)
-									$part2 .= '<li><a href="'.site_url("shipment/view/{$id}").'">Shipment#'.$id.'</a></li>';
-						$part2.=	'</ul>
-							</li>';
+			//	$shipment_ids = explode(',', $row['shipment_id']);
+			//	$shipment_ids = array_unique($shipment_ids);
+			//	$part2 .= '	<li class="submenu">
+					//			<a href="javascript:;"><i class="icon-chevron-right-small"></i>Shipment </a>
+					//			<ul>';
+					//			foreach ($shipment_ids as $id)
+								//	$part2 .= '<li><a href="'.site_url("shipment/view/{$id}").'">Shipment#'.$id.'</a></li>';
+					//	$part2.=	'</ul>
+					//		</li>';
 
 				
 			}

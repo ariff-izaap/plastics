@@ -229,9 +229,12 @@ function add_note(type, id)
 						'</div>'+
 					'</form>';
 	
-     $("#div_add_note .modal-body").html(hl);
-	$("#div_add_note").css({width:'800px'}).addClass("show").removeClass('hide');
-    $("#div_add_note").modal();
+    $("#div_add_note .modal-body").html(hl);
+	$("#div_add_note").css({width:'800px'}).removeClass('hide');
+    $("#div_add_note").modal({
+         backdrop:"static"
+    });
+    $("#div_add_note").show();
 }
 
 function save_notes(elm)

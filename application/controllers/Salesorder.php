@@ -202,7 +202,7 @@ class Salesorder extends Admin_Controller
     
     public function checkout($edit_id ='')
     {
-        $this->layout->add_javascripts(array('checkout'));
+        $this->layout->add_javascripts(array('salesorder','checkout'));
         
         try
         {
@@ -412,6 +412,8 @@ class Salesorder extends Admin_Controller
     
     function view($so_id = null)
     {
+        $this->layout->add_javascripts(array('salesorder','checkout'));
+        
     	if(is_null($so_id) || !(int)$so_id)
     		redirect('sales_orders');
     	
