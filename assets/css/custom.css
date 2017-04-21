@@ -472,6 +472,16 @@ bottom: -16px !important;
 #product_ship input[type="button"] {
     margin: 0 0 0 12px;
 }
+.ship-btn {
+    margin: 0 30px 18px 0;
+}
+.green_solid_bg {
+    border-bottom: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
+}
+#cartItems .row.m_bot_30 {
+    max-width: 1160px;
+}
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}

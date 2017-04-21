@@ -6,7 +6,9 @@
       $so_id = ($uri == 'salesorder' && $uri2 == 'update_salesorder_quantity')?$this->uri->segment(4):'cartitem';
          
           ?>
-<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php echo $so_id;?>',this)" class="btn btn-default">Update</button>
+          <div class="container">
+<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php echo $so_id;?>',this)" class="btn btn-default pull-right ship-btn">Update</button>
+</div>
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
     <td>Product Number</td>
@@ -66,10 +68,42 @@
    </tr>
   <?php } ?>
 </table>
-
-<div class="form-group">
-    <label>Total Amount<?php echo (!empty($total))?": ".$total:""; ?></label>
+<div class="row m_bot_30">
+    <div class="col-md-5 pull-right">
+        <table class="price_box pull-right  ash_gradiant_bg">
+        <tbody>
+            <tr>
+                <td class="text-right">Purchases:</td>
+                <td>&nbsp;</td>
+                <td class="green">$270.00</td>
+            </tr>
+            <tr>
+                <td class="text-right">Shipping:</td>
+                <td>&nbsp;</td>
+                <td class="green">$0.00</td>
+            </tr>
+            <tr>
+                <td class="text-right">Tax:</td>
+                <td>&nbsp;</td>
+                <td class="green">$0.00</td>
+            </tr>
+            <tr>
+                <td class="text-right">Discount:</td>
+                <td>&nbsp;</td>
+                <td class="green">$0.00</td>
+            </tr>
+            <tr class="green_solid_bg">
+                <td class="text-right"><b>Total Amount:</b></td>
+                <td>&nbsp;</td>
+                <td><b><?php echo (!empty($total))?": ".$total:""; ?></b>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    
+    </div>
 </div>
+
  
 <div>
     
