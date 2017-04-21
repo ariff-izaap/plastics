@@ -425,6 +425,17 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 .sales-order-view-section .nav a:hover { color: #033e8a; background: #fff;}
 .sales-order-view-section .nav li { border-bottom: 0;  border-top: 1px solid #b0cef466;}
 .sales-order-view-section .related ul ul{margin-left: 0;}
+#customer_details_view .panel-heading { min-height: 420px;}
+.billing-name .form-group, .shipping-name .form-group, .ship-details .ship-det {
+    float: left;
+    margin: 12px 5px !important;
+    width: 47% !important;
+}
+.shipping-name .ship-mobile{ width:97% !important;}
+.ship-details .form-group select {
+    margin-bottom: 7px;
+}
+
 
 
 /* search form */

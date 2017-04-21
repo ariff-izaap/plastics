@@ -8,8 +8,8 @@
   <div class="row">
   <form name="checkout" id="checkout" method="POST" action="<?php echo site_url();?>salesorder/checkout">
     <input type="hidden" name="edit_id" id="edit_id" value="<?php echo (isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:""; ?>" />
-      <div class="form-grid col-md-8">
-        <div class="form-group col-md-6 <?php echo (form_error('customer_id'))?'error':'';?>" data-error="<?php echo (form_error('customer_id'))? form_error('customer_id'):'';?>">
+      <div class="form-grid col-md-12">
+        <div class="form-group col-md-4 <?php echo (form_error('customer_id'))?'error':'';?>" data-error="<?php echo (form_error('customer_id'))? form_error('customer_id'):'';?>" style="margin-left:14px;">
           <label required>Customer Name</label>
           <select name="customer_id" id="customer_id" onchange="get_customer_details(<?php echo $this->uri->segment(3);?>);" >
             <option value="">Select Customer</option>
@@ -21,9 +21,8 @@
         </div>
        <div id="customer_details_view" class="col-md-12"> 
         <?php $this->load->view("frontend/sales/customer_details",$this->data);?>
-       </div>
-</div>  
-<div class="col-md-4">
+        <div class="form-grid col-md-4 panel panel-default panel-bor">
+<div class="panel-heading formcontrol-box ship-details">
     
    <!--
 <div class="form-group <?php //echo (form_error('type'))?'error':'';?>" data-error="<?php //echo (form_error('type'))? form_error('type'):'';?>" >
@@ -77,25 +76,32 @@
          <option value="COMPLETED" <?php echo set_select('order_status',"COMPLETED",(($editdata['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
       </select>
     </div>
-    <div class="form-group" >
-      <label>SO Instructions</label>
-      <textarea name="so_instructions" class="form-control"><?php echo $editdata['so_instructions']; ?></textarea>
+    <div class="form-group ship-det" >
+     
+      <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo $editdata['so_instructions']; ?></textarea>
     </div>
-    <div class="form-group " >
-      <label>BOL Instructions</label>
-      <textarea class="form-control" name="bol_instructions"><?php echo $editdata['bol_instructions']; ?></textarea>
+    <div class="form-group ship-det" >
+     
+      <textarea class="form-control" name="bol_instructions" placeholder="BOL Instructions"><?php echo $editdata['bol_instructions']; ?></textarea>
     </div>
      
   </div>
+  </div>
+       </div>
+</div> 
+<div class="container"> 
+<div class="row">
+
    <div class="form-group" id="cartItems">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
-   
-  <div class="form-group">
-  </div>
-  <div>
+   <div style="margin-bottom:20px;">
     <input type="submit" name="so" class="btn btn-default" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
-  </div>  
+  </div>
+   </div>
+  </div> 
+  
+    
   </form> 
   
   
