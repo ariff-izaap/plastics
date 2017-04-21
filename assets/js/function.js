@@ -244,8 +244,10 @@ function add_to_cart(b,a,d,f,v)
         after_ajax(f,data);
         $(e).popover("hide");
         bootbox.alert(data.message,function() {
-               if(data.status=="success")
-                  location.reload();
+           $("#viewCart table tbody").html(data.content);
+           $(".view_cart_count").html(data.count);
+               // if(data.status=="success")
+               //    location.reload();
             });
       },
       error:function(g){
