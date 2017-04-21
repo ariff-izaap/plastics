@@ -9,7 +9,7 @@
     { ?>
       <input type="hidden" name="shipping_address_id" value="<?php echo $customer_data['shipping_id'];  ?>" />
       <input type="hidden" name="billing_address_id" value="<?php echo $customer_data['billing_id'];  ?>" />
-      <div class="form-grid col-md-4 panel panel-default panel-bor">
+      <div class="form-grid col-md-6 panel panel-default panel-bor">
       	<div class="panel-heading formcontrol-box billing-name">
       <div class="form-grid">
       <h2>Billing Information</h2>
@@ -61,7 +61,7 @@
       </div> 
       </div>
       
-      <div class="form-grid col-md-4 panel panel-default panel-bor">
+      <div class="form-grid col-md-6 panel panel-default panel-bor">
       	<div class="panel-heading formcontrol-box shipping-name">
        <input type="hidden" name="shipping_address_id" class="form-control" id="shipping_address_id" value="<?php echo set_value('shipping_address_id', $customer_data['id']);?>" placeholder="" />
        <div class="form-grid">

@@ -21,9 +21,11 @@
                <?php }} ?>
           </select>
         </div>
-       <div id="customer_details_view" class="col-md-12"> 
+       <div id="customer_details_view" class="col-md-8"> 
         <?php $this->load->view("frontend/sales/customer_details",$this->data);?>
-        <div class="form-grid col-md-4 panel panel-default panel-bor">
+        
+       </div>
+       <div class="form-grid col-md-4 panel panel-default panel-bor">
 <div class="panel-heading formcontrol-box ship-details">
     
    <!--
@@ -89,7 +91,9 @@
      
   </div>
   </div>
-       </div>
+       
+       
+       
 </div> 
 
 
