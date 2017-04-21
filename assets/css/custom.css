@@ -425,19 +425,41 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 .sales-order-view-section .nav a:hover { color: #033e8a; background: #fff;}
 .sales-order-view-section .nav li { border-bottom: 0;  border-top: 1px solid #b0cef466;}
 .sales-order-view-section .related ul ul{margin-left: 0;}
-#customer_details_view .panel-heading { min-height: 420px;}
+#customer_details_view .panel-heading { min-height: 520px;}
 .billing-name .form-group, .shipping-name .form-group, .ship-details .ship-det {
     float: left;
     margin: 12px 5px !important;
-    width: 47% !important;
+    width: 46% !important;
 }
 .shipping-name .ship-mobile{ width:97% !important;}
 .ship-details .form-group select {
     margin-bottom: 7px;
 }
+#customer_details_view .error::after {
+	background:none !important;
+ 
+bottom: -16px !important;
+    color: #ff0000 !important;
+    content: attr(data-error);
+  
+    line-height: 14px !important;
+    padding: 0 !important;
+ 
+}
+#customer_details_view .form-group input[type="text"] {
+ 
+    margin-bottom: 16px;
+}
 
-
-
+.tableView {
+    margin: 0 auto;
+    max-width: 1142px;
+}
+#product_shipping_lists table { max-width:1170px; margin:0 auto;}
+#cartItems table, .cart-btn {
+    margin: 0 auto;
+    max-width: 1085px;
+}
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
@@ -531,6 +553,16 @@ form .error::after { right:0px !important;}
 .formcontrol-box select { width: 100% !important; }
 }
 @media ( max-width: 767px ) { 
+body #customer_details_view .panel-heading { min-height:inherit;}
+body .billing-name .form-group, body .shipping-name .form-group, body .ship-details .ship-det {
+    float: inherit;
+
+    width: 100% !important;
+}
+#checkout *
+{
+padding:0 5px 0 2px !important;	
+}
 #call_log{ width: 100%; }
 .formcontrol-box > div > label { padding: 0; }
 .top-lisiting-search > form, .top-lisiting-search > .right-section {  width: 100%; }

@@ -1,10 +1,12 @@
+
+
  <div class="row">
     <div class="breadcrumbs">
       <?php echo set_breadcrumb(); ?>
         <a href="<?php echo $this->previous_url;?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
     </div>
   </div>
-  
+  <div class="container">
   <div class="row">
   <form name="checkout" id="checkout" method="POST" action="<?php echo site_url();?>salesorder/checkout">
     <input type="hidden" name="edit_id" id="edit_id" value="<?php echo (isset($editdata['id']) && !empty($editdata['id']))?$editdata['id']:""; ?>" />
@@ -89,19 +91,18 @@
   </div>
        </div>
 </div> 
-<div class="container"> 
-<div class="row">
+
 
    <div class="form-group" id="cartItems">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
-   <div style="margin-bottom:20px;">
+   <div style="margin-bottom:20px;" class="cart-btn">
     <input type="submit" name="so" class="btn btn-default" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>
-   </div>
-  </div> 
+   
   
     
   </form> 
   
-  
+  </div>
+  </div>
