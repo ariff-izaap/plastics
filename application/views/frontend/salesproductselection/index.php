@@ -12,10 +12,10 @@
     
     <div id="popOverBox" style="display: block;"></div>
     
-  <h2 style="margin-left:24px;">Products in Selection</h2>
+  <h2 style="margin-left:24px;" class="container-title">Products in Selection</h2>
   <?php echo $grid; ?>
     <div class="col-md-12" id="product_shipping_lists">
-       <h2>Products in Shipping Order</h2>
+       <h2 class="container-title">Products in Shipping Order</h2>
          <?php $this->load->view("frontend/salesproductselection/cart_items", $this->data); ?>
     </div>
       

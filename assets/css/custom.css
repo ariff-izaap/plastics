@@ -455,10 +455,22 @@ bottom: -16px !important;
     margin: 0 auto;
     max-width: 1142px;
 }
-#product_shipping_lists table { max-width:1170px; margin:0 auto;}
+#product_shipping_lists table { max-width:1140px; margin:0 auto;}
 #cartItems table, .cart-btn {
     margin: 0 auto;
     max-width: 1085px;
+}
+.clear-btn {
+    margin-bottom: 20px;
+}
+.alert-success {
+
+    margin: 18px auto;
+    max-width: 1140px;
+}
+.container-title { max-width:1140px; margin:0 auto !important;}
+#product_ship input[type="button"] {
+    margin: 0 0 0 12px;
 }
 /* search form */
 @media (min-width:992px){
