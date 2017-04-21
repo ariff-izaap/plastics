@@ -68,6 +68,11 @@
 </div>
 <div class="container custom-add-purchase">
   <div class="row">
+    <div class="col-md-12">
+      <div id="popOverBox" style="display: block;"></div>
+    </div>
+    <div class="clearfix"></div><br>
+
     <form name="add_purchase" id="addPurchase" method="post">
       <input type="hidden" name="rand" class="rand" value="<?=isset($_POST['rand']) ? $_POST['rand'] : $po_id;?>">
       <input type="hidden" name="edit_id" class="edit_id" value="<?=$edit_data['po_id'];?>">
@@ -77,9 +82,29 @@
           <input type="text" name="po_id" class="form-control" id="name" value="<?=$po_id;?>" readonly>
         </div>
         <div class="clearfix"></div>
+        <div class="form-group col-md-4">
+          <label required="">Select Vendor</label>
+          <select name="vendor_id" class="form-control vendor_select">
+            <option value="">--Select--</option>
+            <option value="2">As</option>
+            <?php
+               if($vendor)
+                {
+                  foreach ($vendor as $key => $value)
+                  {
+                    ?>
+                      <option <?=($edit_data['vendor_id']==$value['id']) ? "selected" : "";?>
+                        value="<?=$value['id'];?>"><?=$value['business_name'];?></option>
+                    <?php
+                  }
+                }
+            ?>
+          </select>
+        </div>
+        <div class="clearfix"></div>
         <div class="col-md-12">
-        <h2>Vendor List</h2>
-          <table class="table table-bordered table-hover">
+          <!-- <h2>Vendor List</h2> -->
+          <!-- <table class="table table-bordered table-hover">
             <thead>
               <th>#</th><th>Name</th><th>Contact Name</th><th>Phone</th><th>State</th><th>City</th><th>Salesman</th>
             </thead>
@@ -111,7 +136,7 @@
                 }
               ?>
             </tbody>
-          </table>
+          </table> -->
           <?php
             if(form_error('vendor_id'))
             {
@@ -128,9 +153,7 @@
               $data = array("vendor_name"=>"");
           ?>
         </div>
-
-
-        <div class="form-grid col-md-4 panel panel-default panel-bor a-d-box1">
+        <!-- <div class="form-grid col-md-4 panel panel-default panel-bor a-d-box1">
           <div class="panel-heading formcontrol-box">      
             <div class="form-group <?php echo (form_error('vendor_name'))?'error':'';?>" data-error="<?php echo (form_error('vendor_name'))? strip_tags(form_error('vendor_name')):'';?>">
               <label required="" class="col-md-4">Vendor Name</label>
@@ -220,7 +243,7 @@
             </div>
             <div class="form-group">
               <label class="">Release to be Sold</label>
-              <!-- <input type="checkbox" name="to_sold" class="" id="to_sold" value="Yes"> -->
+              <!-- <input type="checkbox" name="to_sold" class="" id="to_sold" value="Yes">
               <label for="selectAll-0" class="custom-checkbox">&nbsp;</label>
               <input type="checkbox" id='selectAll-0' class= 'checkbox' <?=$edit_data['release_to_sold']=="Yes" ? 'checked':'';?>  name="to_sold" value="Yes">
             </div>
@@ -239,16 +262,87 @@
                 <a href="#UploadModal" data-toggle="modal" class="col-md-3"><i class="fa fa-2x fa-file-zip-o"></i></a>
             </div>
           </div>
-        </div> 
+        </div>  -->
+        
+        <div class="row">
+          <div class="col-md-12">
+            <a href="#modalCart" data-toggle="modal" class="btn pull-right">
+              <i class="fa fa-shopping-cart"></i>&nbsp;
+              View Cart (<span class="view_cart_count"><?=count($this->cart->contents());?></span>)
+            </a>
+          </div>
+        </div>
 
+        <div class="row">
+          <?=$grid;?>
+        </div>
 
         <div class="clearfix"></div>
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
         <div class="form-group col-md-2 col-md-offset-10">
-          <button type="submit" class="btn btn-block">Save</button>
+          <button type="submit" name="save_product" class="btn btn-block">Save</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
+<div id="modalCart" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Your Cart</h4>
+      </div>
+      <div class="modal-body">
+        <form id="viewCart" method="post">
+          <input type="hidden" name="po_id" value="<?=$form_product['po_id'];?>">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <th>Product Name</th><th>SKU</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Action</th>
+            </thead>
+            <tbody>
+              <?php
+              if($this->cart->contents())
+              {
+                foreach ($this->cart->contents() as $key => $value)
+                {
+                  ?>
+                    <tr>
+                      <td><?=$value['name'];?></td>
+                      <td><?=$value['sku'];?></td>
+                      <td>
+                      <input type="hidden" name="rowid[]" value="<?=$value['rowid'];?>">
+                        <input type="number" value="<?=$value['qty'];?>" name="qty[<?=$value['rowid'];?>]" 
+                          class="form-control" max="10" min="1">
+                      </td>
+                      <td><?=displayData($value['price'],'money');?></td>
+                      <td><?=displayData($value['price'] * $value['qty'] ,'money');?></td>
+                      <td>
+                        <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn">
+                          <i class="fa fa-remove"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <?php
+                }
+              }
+              ?>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-2 pull-right">
+          <a href="javascript:void(0);" data-po-id="<?=$form_product['po_id'];?>" class="btn checkout-btn pull-right">Checkout</a>
+        </div>
+        <div class="col-md-2 pull-right">
+          <a href="javascript:void(0);" onclick="update_cart(this);" class="btn pull-right">Update Cart</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -37,7 +37,7 @@ $config['admin_user_setup'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
-
+/*
 $config['purchase_add_edit_purchase'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
@@ -52,7 +52,7 @@ $config['purchase_add_edit_purchase'] = array(
 						'state'=>array('name'=>'State', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
-);
+);*/
 
 
 $config['purchase_index'] = array(
@@ -111,11 +111,11 @@ $config['salesorder_customer_relation'] = array(
 
 
 
-$config['purchase_add_product'] = array(
+$config['purchase_add_edit_purchase'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'frontend/purchase/filter',
-	"base_url"	=> 	'/purchase/add_product/',
+	"base_url"	=> 	'/purchase/add_edit_purchase/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 						'pid'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),

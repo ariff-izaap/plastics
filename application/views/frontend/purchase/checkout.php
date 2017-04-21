@@ -116,6 +116,7 @@
 	      	?>
 	      </select>
 	    </div>
+
 	    <div class="form-group col-md-4 <?php echo (form_error('carrier'))?'error':'';?>" data-error="<?php echo (form_error('carrier'))? strip_tags(form_error('carrier')):'';?>">
 	      <label required="">Ship Service</label>
 	      <select name="carrier" class="form-control">
@@ -162,21 +163,21 @@
 					</thead>
 					<tbody>				
 						<?php
-							if($products)
+							if($this->cart->contents())
 							{
 								$total = [];
-								foreach ($products as $key => $value)
+								foreach ($this->cart->contents() as $key => $value)
 								{
-									$total[] = $value['unit_price'] * $value['qty'];
+									$total[] = $value['price'] * $value['qty'];
 									?>
 									<tr>
-										<td><?=$value['p_name'];?></td>
-										<td><?=$value['sku'];?></td>
+										<td><?=$value['name'];?></td>
+										<td><?=$value['id'];?></td>
 										<td><?=$value['qty'];?></td>
-										<td><?=displayData($value['unit_price'],'money');?></td>
-										<td><?=displayData($value['unit_price'] * $value['qty'],'money');?></td>
+										<td><?=displayData($value['price'],'money');?></td>
+										<td><?=displayData($value['price'] * $value['qty'],'money');?></td>
 										<td>
-											<a href="#" onclick="remove_cart(<?=$value['rowid'];?>,this);" class="btn">X</a>
+											<a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this);" class="btn">X</a>
 										</td>
 									</tr>
 									<?php
@@ -191,6 +192,16 @@
 						<h3>Total : <strong><?=displayData(array_sum($total),'money');?></strong></h3>
 					</div>
 				</div>
+		</div>
+		<div class="col-md-3">
+			<div class="form-group <?php echo (form_error('pickup_date'))?'error':'';?>" data-error="<?php echo (form_error('pickup_date'))? strip_tags(form_error('pickup_date')):'';?>">
+        <label required="">Date for Pickup</label>
+        <input type="text" name="pickup_date" class="form-control singledate" id="pickup_date" value="<?=$edit_data['pickup_date'];?>"  placeholder="Pickup Date">
+      </div>
+      <div class="form-group <?php echo (form_error('delivery_date'))?'error':'';?>" data-error="<?php echo (form_error('delivery_date'))? strip_tags(form_error('delivery_date')):'';?>">
+        <label required="">Estimated Date for Delivery to Customer/Warehouse</label>
+        <input type="text" name="delivery_date" class="form-control singledate" id="delivery_date" value="<?=$edit_data['estimated_delivery'];?>"  placeholder="Delviery Date">
+      </div>      
 		</div>
 	</div>
 	<div class="row">

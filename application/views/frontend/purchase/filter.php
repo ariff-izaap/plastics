@@ -3,11 +3,12 @@
 ?>
 
 <form id="advance_search_form" class="advance_search_form" method="POST">
+  <input type="hidden" name="vendor" class="vendor_input">
   <div class="col-md-12">
     <div class="filter-column">
       <div class="filter-row col-md-3 form-group">
         <label>Product</label>
-        <select name="product[]" multiple class="form-control">
+        <select name="product[]" multiple class="select2_sample2 form-control">
           <?php
             if(get_products())
             {
@@ -23,7 +24,7 @@
       </div>
       <div class="filter-row col-md-3 form-group">
         <label>Form</label>
-        <select name="form[]" multiple class="form-control">
+        <select name="form[]" multiple class="select2_sample2 form-control">
           <?php
             if(get_forms())
             {
@@ -39,7 +40,7 @@
       </div>
       <div class="filter-row col-md-3 form-group">
         <label>Color</label>
-        <select name="color[]" multiple class="form-control">
+        <select name="color[]" multiple class="select2_sample2 form-control">
           <?php
             if(get_colors())
             {
@@ -58,7 +59,7 @@
     <div class="filter-column">
       <div class="filter-row form-group col-md-3">
         <label>Packaging</label>
-        <select name="package[]" multiple class="form-control">
+        <select name="package[]" multiple class="select2_sample2 form-control">
           <?php
             if(get_packages())
             {
@@ -74,7 +75,7 @@
       </div>
        <div class="filter-row form-group col-md-3">
         <label>Notes</label>
-        <select name="note[]" multiple class="form-control">
+        <select name="note[]" multiple class=" select2_sample2 form-control">
           <?php
             if(get_product_notes())
             {
@@ -97,7 +98,15 @@
   <div class="col-sm-2">
     <div class="text-center m_top">
       <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
-      <button type="button" class="btn btn-sm" onclick="$.fn.submit_advance_search_form();">Search</button>
+      <button type="button" class="btn btn-sm purchase_order_search" onclick="$.fn.submit_advance_search_form();">Search</button>
     </div>
   </div>
 </form>
+
+<script type="text/javascript">
+  $('.select2_sample2').select2({
+      placeholder: "Select Value",
+      allowClear: true
+  });
+
+</script>

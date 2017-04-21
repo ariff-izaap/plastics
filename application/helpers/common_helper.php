@@ -852,10 +852,12 @@ function get_products()
 }
 
 
-function get_operator()
+function get_operator($where='')
 {
+  if($where)
+    $where = $where;
   $CI = get_instance();
-  $q = $CI->db->query("select * from operator_selection")->result_array();
+  $q = $CI->db->query("select * from operator_selection $where")->result_array();
   return $q;
 }
 

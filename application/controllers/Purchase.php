@@ -32,7 +32,9 @@ class Purchase extends Admin_Controller
      array('field' => 'country', 'label' => 'Country', 'rules' => 'trim|required'),
      array('field' => 'phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric'),
      array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[5]'),
-     array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'));
+     array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+     array('field' => 'pickup_date', 'label' => 'Pickup Date', 'rules' => 'trim|required'),
+     array('field' => 'delivery_date', 'label' => 'Delivery Date', 'rules' => 'trim|required'),);
 
    protected $_minlevel_validation_rules = array(
      array('field' => 'name', 'label' => 'Warning Name', 'rules' => 'trim|required'),
@@ -50,6 +52,7 @@ class Purchase extends Admin_Controller
     	redirect('login');
   	$this->load->model('purchase_model');
     $this->load->model('admin_model');
+    $this->load->library('cart');
 	  $this->load->library('listing');
      $userdata = $this->session->userdata('user_data'); 
     $rights = get_user_access_rights($userdata['role_id']);
@@ -63,7 +66,7 @@ class Purchase extends Admin_Controller
     $this->simple_search_fields = array();
     $this->_narrow_search_conditions = array("vendor_id","so_id","date_range");
     if($this->action->edit==1)
-      $str .='<a href="'.site_url('purchase/add_edit_purchase/{id}').'"><i class="fa fa-edit"></i></a>';
+      // $str .='<a href="'.site_url('purchase/add_edit_purchase/{id}').'"><i class="fa fa-edit"></i></a>';
     if($this->action->delete==1)
     $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     if($this->action->view==1)
@@ -85,22 +88,74 @@ class Purchase extends Admin_Controller
   	$this->layout->view('frontend/Purchase/index');
   }
 
-  public function add_edit_purchase($edit_id='')
+   public function add_edit_purchase($edit_id='')
   {
-    if(!$this->action->create==1)
+    if($edit_id)
+    {
+      $this->data['po_id'] = $edit_id;
+      $this->data['edit_data'] = $this->purchase_model->get_purchased_order($edit_id);
+      $_SESSION['edit_data'] = $this->data['edit_data'];
+      $items = $this->purchase_model->get_purchased_products($edit_id);
+      // echo "<pre>";print_r($items);exit;
+      foreach ($items as $value)
+      {
+        $data = array("id"=>$value['id'],"sku"=>$value['sku'],"qty"=>$value['qty'],"name"=>$value['name'],"price"=>$value['unit_price']);
+        // if(!$value['id'])
+          $this->cart->insert($data);
+      }
+    }
+    else
+      $this->data['po_id'] = $this->purchase_model->get_max_id()['po_id'];
+    $this->layout->add_javascripts(array('listing'));
+    $this->load->library('listing');
+    $this->simple_search_fields = array(
+                                'a.name' => 'Product Name',
+                                'b.name' => 'Form Name',
+                                'c.name' => 'Color',
+                                'd.name' => 'Product Type',
+                                'e.name' => 'Package');
+    $this->_narrow_search_conditions = array("vendor","product","form","color","type","package","note");
+    // $str = '<a href="'.site_url('admin/add_edit_user/{id}').'" class="table-action"><i class="fa fa-edit edit"></i></a>
+    //         <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'admin/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    // $this->listing->initialize(array('listing_action' => $str));
+    $this->data['vendor'] = $this->purchase_model->get_vendors();
+    $listing = $this->listing->get_listings('product_model', 'listing');
+    if($this->input->is_ajax_request())
+      $this->_ajax_output(array('listing' => $listing), TRUE);
+    $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
+    $this->data['simple_search_fields'] = $this->simple_search_fields;
+    $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
+    $this->data['per_page'] = $this->listing->_get_per_page();
+    $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
+    $this->data['search_bar'] = $this->load->view('frontend/purchase/search_bar', $this->data, TRUE);
+    $this->data['listing'] = $listing;
+    $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+    if(isset($_POST['save_product']))
+    {
+      if(count($this->cart->contents()) > 0)
+      {
+        $_SESSION['po_id'] = $_POST['po_id'];
+        $_SESSION['first_vendor'] = $_POST['vendor_id'];
+        redirect("purchase/checkout/$edit_id");
+      }
+      else
+      {
+        $this->session->set_flashdata("error_msg","Your Cart is empty.",TRUE);
+        redirect("purchase/add_edit_purchase");
+      }
+    }
+    /*if(!$this->action->create==1)
     {
       $this->session->set_flashdata("error_msg","Don't have rights to create purchase order.",TRUE);
       redirect('purchase');
     }
-    $this->data['vendor'] = $this->purchase_model->get_vendors();
     $this->form_validation->set_rules($this->_purchase_validation_rules);
     if($edit_id)
     {
       $this->data['edit_data'] = $this->purchase_model->get_purchased_order($edit_id);
-  	  $this->data['po_id'] = $edit_id;
+      $this->data['po_id'] = $edit_id;
     }
     else
-      $this->data['po_id'] = $this->purchase_model->get_max_id()['po_id'];
     if($this->form_validation->run())
     {
       $form = $this->input->post();
@@ -126,7 +181,7 @@ class Purchase extends Admin_Controller
         }
       }
 
-      /*Update Vendor Details*/
+      /*Update Vendor Details*
       $up['first_name'] = $form['firstname'];
       $up['last_name'] = $form['lastname'];
       $up['phone'] = $form['mobile'];
@@ -152,8 +207,8 @@ class Purchase extends Admin_Controller
       }
       $this->session->set_userdata('form_purchase',$form);
       redirect("purchase/add_product");
-  	}
-    $this->layout->view('frontend/Purchase/add_purchase');
+    }*/
+    $this->layout->view('frontend/purchase/add_purchase');
   }
 
   public function delete($del_id)
@@ -189,12 +244,12 @@ class Purchase extends Admin_Controller
     $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
     $this->data['per_page'] = $this->listing->_get_per_page();
     $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-    $this->data['search_bar'] = $this->load->view('frontend/Purchase/search_bar', $this->data, TRUE);
+    $this->data['search_bar'] = $this->load->view('frontend/purchase/search_bar', $this->data, TRUE);
     $this->data['listing'] = $listing;
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
     $this->data['form_product'] = $form;
     $this->data['products'] = $this->purchase_model->get_purchased_products($form['po_id']);
-    $this->layout->view('frontend/Purchase/add_product');
+    $this->layout->view('frontend/purchase/add_product');
   }
   
   public function get_vendor_details($id)
@@ -204,10 +259,58 @@ class Purchase extends Admin_Controller
   }
   public function add_cart($product_id,$po_id,$qty,$vendor_id)
   {
-    $c = false;
+    if($_SESSION['first_vendor']==$vendor_id || $_SESSION['first_vendor']=='')
+    {
+      $product_details = $this->purchase_model->select(array("id"=>$product_id),"product");
+      $chk_warning = $this->purchase_model->select(array("product"=>$product_id,"form"=>$product_details['form_id'],"color"=>$product_details['color_id'],"packaging"=>$product_details['package_id']),"min_level");
+      if($chk_warning)
+        {
+          $dropdown = get_operator( "where id=".$chk_warning['dropdown']);
+          $exp = $qty." ".$dropdown[0]['operator']." ".$chk_warning['quantity'];
+          $c = eval(" return ($exp);");
+        }
+        if(!$c)
+        {
+          $data = array(
+            'id'      => $product_id,
+            'sku'      => get_product_name($product_id)['sku'],
+            'qty'     => $qty,
+            'price'   => get_product_price($product_id),
+            'name'    => get_product_name($product_id)['name'],
+          );
+          $this->cart->insert($data);
+          $_SESSION['first_vendor'] = $vendor_id;
+          $this->data['products'] = $this->cart->contents();
+          $output['status'] = "success";
+          $output['message'] = "Product Added Successfully.";
+          $output['content'] = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
+          $output['count'] = count($this->cart->contents());
+        }
+         else
+        {
+          $this->_ajax_output(array('status'=>'warning','name'=>$chk_warning['warning_name'],'message' => $chk_warning['message']), TRUE);
+        }
+    }
+    else
+    {
+      $output['status'] = "success";
+      $output['message'] = "Product must add with same vendor only.";
+      $output['content'] = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
+    }
+
+    $this->_ajax_output($output, TRUE);
+   /* $c = false;
    // $ins['id']          = $product_id;
     $ins['qty']         = $qty;
   //  $ins['price']       = get_product_price($product_id);
+    $product_details = $this->purchase_model->select(array("id"=>$product_id),"product");
+    $chk_warning = $this->purchase_model->select(array("product"=>$product_id,"form"=>$product_details['form_id'],"color"=>$product_details['color_id'],"packaging"=>$product_details['package_id']),"min_level");
+    if($chk_warning)
+    {
+      $dropdown = get_operator( "where id=".$chk_warning['dropdown']);
+      $exp = $qty." ".$dropdown[0]['operator']." ".$chk_warning['quantity'];
+      $c = eval(" return ($exp);");
+    }
     $ins['name']        = get_product_name($product_id)['name'];
     $ins['product_id']    = $product_id;
     $ins['po_id']    = $po_id;
@@ -219,14 +322,6 @@ class Purchase extends Admin_Controller
     $ins['unit_price']    = get_product_price($product_id);
     $chk_product = $this->purchase_model->select(array("product_id"=>$product_id,"po_id"=>$po_id),"purchase_order_item");
     $get_vendor = $this->purchase_model->select(array("id"=>$po_id),"purchase_order");
-    $product_details = $this->purchase_model->select(array("id"=>$product_id),"product");
-    $chk_warning = $this->purchase_model->select(array("product"=>$product_id,"form"=>$product_details['form_id'],"color"=>$product_details['color_id'],"packaging"=>$product_details['package_id']),"min_level");
-    if($chk_warning)
-    {
-      $dropdown = get_operator( "where id=".$chk_warning['dropdown']);
-      $exp = $qty." ".$dropdown[0]['operator']." ".$chk_warning['quantity'];
-      $c = eval(" return ($exp);");
-    }
     if(!$c)
     {
       if($chk_product)
@@ -259,13 +354,13 @@ class Purchase extends Admin_Controller
           $this->_ajax_output($output, TRUE);
         }
         else
-          $this->_ajax_output(array('status'=>'success','message' => "Product Added with same vendor only."), TRUE);
+          $this->_ajax_output(array('status'=>'success','message' => "Product must add with same vendor only."), TRUE);
       }
     }
     else
     {
       $this->_ajax_output(array('status'=>'warning','name'=>$chk_warning['warning_name'],'message' => $chk_warning['message']), TRUE);
-    }
+    }*/
      //$this->_ajax_output(array('message' => $chk_warning,"valid"=>$c,"condition"=>$exp), TRUE);
   }
 
@@ -290,12 +385,16 @@ class Purchase extends Admin_Controller
   {     
     try
     {
-      $qty_array  = $this->input->post('qty');
-      $po_id  = $this->input->post('po_id');
-      foreach($qty_array as $k => $v)
+      $rowid  = $this->input->post('rowid');
+      $qty  = $this->input->post('qty');
+       foreach($rowid as $v)
       {
-        $data = array('qty' => $v);
-        $this->purchase_model->update(array("id"=>$k),$data,"purchase_order_item");
+        $data = array(
+        'rowid' => $v,
+        'qty'   => $qty[$v]);
+         //$data = array('qty' => $v);
+         //$this->purchase_model->update(array("id"=>$k),$data,"purchase_order_item");
+        $this->cart->update($data);
       }
       $output = array('status' => 'success', 'message' => 'Cart updated successfully!.');
     }
@@ -304,7 +403,7 @@ class Purchase extends Admin_Controller
       $output = array('status' => 'failed', 'message' => $e->getMessage());
     }
 
-    $this->data['products'] = $this->purchase_model->get_purchased_products($po_id);
+    $this->data['products'] =  $this->cart->contents();
     $output['content']    = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);
     $this->_ajax_output($output, TRUE);
   }
@@ -313,7 +412,7 @@ class Purchase extends Admin_Controller
   {  
     try
     {
-      $this->purchase_model->delete(array("id"=>$row_id),"purchase_order_item");     
+      $this->cart->remove($row_id);     
       $output = array('status' => 'success', 'message' => 'Item removed successfully.');
     }
     catch(Exception $e)
@@ -321,19 +420,22 @@ class Purchase extends Admin_Controller
       $output = array('status' => 'failed', 'message' => $e->getMessage());
     }
     
-    $products = $this->purchase_model->get_purchased_products($po_id);
+    $products = $this->cart->contents();
     $this->data['products']  = $products;
     $output['content']       = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
-    $output['count'] = count($products);
+    $output['count'] = count($this->cart->contents());
     $this->_ajax_output($output, TRUE);  
   }
 
   public function checkout($po_id='')
   {
+    echo "<pre>";print_r($this->cart->contents());exit;
+    $po_id = $_SESSION['po_id'];
     $this->data['po_id'] = $po_id;
     $this->data['edit_data'] = $this->purchase_model->get_purchased_order($po_id);
     $this->data['products'] = $this->purchase_model->get_purchased_products($po_id);
     $this->form_validation->set_rules($this->_checkout_validation_rules);
+    $this->data['edit_data'] = $_SESSION['edit_data'];
     if($this->form_validation->run())
     {
       $form = $this->input->post();
@@ -346,25 +448,50 @@ class Purchase extends Admin_Controller
       $house['country'] = $form['country'];
       $house['phone'] = $form['phone'];
       $house['email'] = $form['email'];
+      $vendor_id = $_SESSION['first_vendor'];
       /*End Warehouse Shipping Info*/
       $this->purchase_model->update(array("id"=>$form['warehouse']),$house,"warehouse");
       $address_id = $this->purchase_model->insert($house,"ordered_address");
       $up['ordered_address_id'] = $address_id;
+      $up['id'] = $po_id;
       $up['ship_type_id'] = $form['ship_type'];
       $up['carrier_id'] = $form['carrier'];
       $up['credit_type_id'] = $form['credit_type'];
+      $up['pickup_date'] = $form['pickup_date'];
+      $up['estimated_delivery'] = $form['delivery_date'];
       $up['total_amount'] = $form['total'];
       $up['status']              = "COMPLETED";
       $up['po_message'] = $form['po_message'];
+      $up['vendor_id'] = $vendor_id;
       $up['note'] = $form['po_notes'];
       $up['updated_id'] = get_current_user_id();
       $up['updated_date'] = date("Y-m-d H:i:s");
-      $this->purchase_model->update(array("id"=>$form['po_id']),$up,"purchase_order");
-      $log = log_history("purchase_order",$form['po_id'],"purchase","insert");
+      if($po_id)
+          $up_id = $this->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
+      else
+        $ins_id = $this->purchase_model->insert($up,"purchase_order");
+      foreach ($this->cart->contents() as $value)
+      {
+        $ins['po_id'] =$po_id;
+        $ins['product_id'] =$value['id'];
+        $ins['code'] =$value['sku'];
+        $ins['name'] =$value['name'];
+        $ins['unit_price'] =$value['price'];
+        $ins['qty'] =$value['qty'];
+        $ins['created_id'] = get_current_user_id();
+        $ins['updated_id'] = get_current_user_id();
+        $ins['created_date'] = date("Y-m-d H:i:s");
+        $this->purchase_model->delete(array("po_id"=>$po_id),"purchase_order_item");
+        $ins_id = $this->purchase_model->insert($ins,"purchase_order_item");
+      }
+      $this->cart->destroy();
+      unset($_SESSION['first_vendor']);
+      unset($_SESSION['po_id']);
+      $log = log_history("purchase_order",$po_id,"purchase","insert");
       $this->session->set_flashdata("success_msg","Purchase Order Created Successfully",TRUE);
       redirect('purchase');
     }
-    $this->layout->view('frontend/Purchase/checkout');
+    $this->layout->view('frontend/purchase/checkout');
   }
 
   public function min_level()
@@ -469,9 +596,9 @@ class Purchase extends Admin_Controller
   }
   public function get_cart_count()
   {
-    $po_id = $this->input->post('po_id');
-    $count = $this->purchase_model->select(array("po_id"=>$po_id),"purchase_order_item");
-    $this->_ajax_output(array("count"=>count($count)),TRUE);
+    // $po_id = $this->input->post('po_id');
+    // $count = $this->purchase_model->select(array("po_id"=>$po_id),"purchase_order_item");
+    $this->_ajax_output(array("count"=>count($this->cart->contents())),TRUE);
   }
 
   public function get_purchase_order()

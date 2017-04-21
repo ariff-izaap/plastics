@@ -188,6 +188,12 @@ $(function(){
 
 function add_to_cart(b,a,d,f,v)
 {
+  if($(".vendor_select").val()=='')
+  {
+    bootbox.alert("Please Select Vendor");
+    return false;
+  }
+
   b=b?b:0;
   d=d?d:"form";
   var e="#"+$(f).attr("id");
@@ -295,15 +301,14 @@ function remove_cart(a,b)
     success:function(c){
       console.log(c);
       after_ajax(b,c);
+      $("#viewCart table tbody").html(c.content);
+      bootbox.alert(c.message);
       if(c.count=="0")
       {
         bootbox.alert("Your cart is empty.",function(){
-          location.href=base_url+"purchase/add_product";  
+          location.href = base_url+"purchase/add_edit_purchase";
         });
-        
       }
-      $("#viewCart table tbody").html(c.content);
-      bootbox.alert(c.message);
     },
     error:function(c){
       after_ajax(b,c);
@@ -1139,6 +1144,13 @@ $(".btnPrevious").click(function(){
   $(curr_tab).removeClass("active").prev("li").addClass("active");
   $(curr_href).removeClass("active in");
   $(prev_href).addClass("active in");
+});
+
+
+$(".vendor_select").change(function(){
+  val = $(this).val();
+  $(".vendor_input").val(val);
+  $(".purchase_order_search").trigger("click");
 });
 
 

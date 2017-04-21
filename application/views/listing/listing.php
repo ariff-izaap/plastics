@@ -39,6 +39,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 		<thead>
 			<tr>
 			<?php if($uri1 != "history" && $uri != "add_product" && $uri1 != 'salesproductselection'){?>
+
 				<th> # </th>
 				<?php }?>
 				<?php  $cols = 0; 
@@ -74,7 +75,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices') && $uri != 'add_edit_purchase' ){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices')  && $uri1!='salesproductselection'){ ?>
 
 					<th>Action</th>
 
@@ -107,7 +108,7 @@ if($uri1 == "accounting" && $uri != "invoices")
             </td>
            	<?php 
           }
-          else if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 == 'purchase' && $uri != 'add_product' )
+          else if($uri1 != 'accounting' && $uri1 != 'history' && $uri1 == 'purchase' && $uri != 'add_edit_purchase' )
         	{ 	
         		?>
 						<td>
@@ -146,11 +147,12 @@ if($uri1 == "accounting" && $uri != "invoices")
 					<?php endif;?>
 				</td>
 				<?php } 
-				if($uri == "add_product")
+				if($uri == "add_edit_purchase")
 				{
+					// echo "<pre>";print_r($item);
 					?>
 						<td>
-							<button type="button" id="opt_<?=$item['id'];?>" class="btn btn-small" onclick="add_to_cart(<?=$item['id'];?>,<?=get_current_user_id();?>, 'form',this,<?=$item['vendor_id'];?>)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title=""> Add to Cart
+							<button type="button" id="opt_<?=$item['id'];?>" class="btn btn-small" onclick="add_to_cart(<?=$item['id'];?>,<?=$item['po_id'];?>, 'form',this,<?=$item['vendor_id'];?>)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title=""> Add to Cart
 					</button>
 						</td>
 					<?php
