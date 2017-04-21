@@ -1,3 +1,4 @@
+<div id="order_item_view">
 <?php if($shipment_count == 0):?>
 	<div class="row">
 		<h2>Order Details</h2>
@@ -170,3 +171,4 @@
 
 	
 <?php endif;?>
+</div>

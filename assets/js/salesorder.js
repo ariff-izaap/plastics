@@ -158,6 +158,10 @@ function sales_update_cart(action_type,sales_order_id, elm)
                         		
         		bootbox.alert(rdata.message);
                 
+                if(sales_order_id)
+                  location.href = base_url+"salesorder/view/"+sales_order_id; 
+                //get_sales_items(sales_order_id);
+                
         	} 
         	else
         	{
@@ -173,6 +177,21 @@ function sales_update_cart(action_type,sales_order_id, elm)
  
 }
 
+function get_sales_items(sales_order_id)
+{
+    	$.ajax( {
+        url:base_url+'salesorder/_get_products_details/'+sales_order_id,
+        type: "POST",
+        data: {},
+        dataType:"json",
+        success : function(rdata){
+        	$("#order_item_view").html(rdata.content);
+        },
+        error : function(data) {
+         alert('error');
+        }
+	});
+}
 
 function sales_order_update_quantity(sale_item_id,so_id)
 {

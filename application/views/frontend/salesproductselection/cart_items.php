@@ -1,6 +1,12 @@
 <input type="hidden" id="form_access" name="form_access" />
 <input  type="hidden" id="item_type" name="item_type" />
-<button type="button" name="update_cart" onclick="sales_update_cart('form','cartitem',this)" class="btn btn-default">Update</button>
+<?php echo $uri = $this->uri->segment(1);
+       echo $uri2 = $this->uri->segment(2);
+      
+      $so_id = ($uri == 'salesorder' && $uri2 == 'update_salesorder_quantity')?$this->uri->segment(4):'cartitem';
+         
+          ?>
+<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php echo $so_id;?>',this)" class="btn btn-default">Update</button>
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
     <td>Product Number</td>
@@ -19,8 +25,7 @@
     <td colspan="2">Action</td>
   </tr>
   
-   <?php $uri = $this->uri->segment(1);
-         $uri2 = $this->uri->segment(2);
+   <?php 
          $uri = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
         
        if(count($cartitems)>0) { 
