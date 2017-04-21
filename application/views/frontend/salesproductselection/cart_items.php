@@ -8,13 +8,14 @@
     <td>Form</td>
     <td>Color</td>
     <td>Type</td>
+    <td>Package</td>
+    <td>Row</td>
     <!--
 <td>Equivalent</td>
 -->
     <td>Quantity</td>
     <td>Wholesale Price</td>
-    <td>Package</td>
-    <td>Row</td> 
+     
     <td colspan="2">Action</td>
   </tr>
   
@@ -39,14 +40,15 @@
             <td><?php echo $cvalue['form']; ?></td>
             <td><?php echo $cvalue['color']; ?></td>
             <td><?php echo $cvalue['type']; ?></td>
+            <td><?php echo $cvalue['package']; ?></td>
+            <td><?php echo $cvalue['row']; ?></td>
            <!--
  <td><?php //echo $cvalue['equivalent']; ?></td>
 -->
             <td> <?php if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
             <input type="text" name="update_qty[]" id="update_qty" value="<?php echo $cvalue['qty']; ?>" /><?php } else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo $cvalue['price']; ?></td>
-            <td><?php echo $cvalue['package']; ?></td>
-            <td><?php echo $cvalue['row']; ?></td>
+            
             <td>
                <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>');" class="btn btn-default"><i class="fa fa-trash-o trash"></i></button>
                
