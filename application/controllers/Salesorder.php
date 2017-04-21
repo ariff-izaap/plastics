@@ -229,7 +229,7 @@ class Salesorder extends Admin_Controller
          // $this->form_validation->set_rules('type','Type','trim|required');
           $this->form_validation->set_rules('shipping_type','Shipping Type','trim|required');
          // $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
-          $this->form_validation->set_rules('order_status','Order Status','trim|required');
+         // $this->form_validation->set_rules('order_status','Order Status','trim|required');
          // $this->form_validation->set_rules('carrier','Carrier','trim|required');
           $this->form_validation->set_error_delimiters('', '');
           
@@ -246,7 +246,7 @@ class Salesorder extends Admin_Controller
               $ins_data['shipping_address_id']    = $this->input->post('shipping_address_id');
               $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
              // $ins_data['type']                   = $this->input->post('type');
-              $ins_data['order_status']           = $this->input->post('order_status');
+              $ins_data['order_status']           = "NEW";
               $ins_data['total_items']            = $this->cart->total_items();
               $ins_data['total_amount']           = $total;
               
@@ -336,7 +336,7 @@ class Salesorder extends Admin_Controller
               $this->session->set_flashdata('success_msg',$msg,TRUE);
               $status  = 'success';
               
-              redirect("salesorder");
+              redirect("salesorder/view/".$edit_id);
           }    
           else
           {
@@ -423,13 +423,17 @@ class Salesorder extends Admin_Controller
     	$data = $obj->get_view_data('so', $so_id);
 
     	if($data === false)
-    		redirect('sales_orders');
+    		redirect('salesorders');
     	
     	$this->data += $data;
     	
     	$this->data['content'] = $this->load->view('frontend/sales/_partials/view_content', $this->data, TRUE);
-    	
-    	$this->layout->view('frontend/sales/view', $this->data);	
+        //$output['content']     = $this->load->view('frontend/sales/view', $this->data, true);	
+//    	
+//        if($this->input->is_ajax_request())
+//            $this->_ajax_output($output, TRUE);
+//        else    
+    	   $this->layout->view('frontend/sales/view', $this->data);	
     }
     
     function _get_products_details($so_id)
@@ -537,7 +541,7 @@ class Salesorder extends Admin_Controller
                     $this->salesorder_model->update( array('id' => $so_details['id']), array("shipping_address_id" => $this->data['ship_addr_id']));
                     $price_list_info['shipping_address_id'] = $this->data['ship_addr_id'];
                     
-                    log_history('sales_order','Shipping Address has been modified.',$so_details['id']);
+                    log_history('sales_order',$so_details['id'],'Shipping Address','update');
                 }                       
                 $output['status']       = 'success';
                 $output['message']      = 'Shipping Address has been updated successfully!';
@@ -613,7 +617,7 @@ class Salesorder extends Admin_Controller
                     $this->salesorder_model->update( array('id' => $so_details['id']), array("billing_address_id" => $this->data['bill_addr_id']));
                     $price_list_info['billing_address_id'] = $this->data['bill_addr_id'];
                     
-                   // log_history('sales_order','Billing Address has been modified.',$so_details['id']);
+                    log_history('sales_order',$so_details['id'],'Billing Address','update');
                 }                       
                 $output['status']       = 'success';
                 $output['message']      = 'Billing Address has been updated successfully!';
@@ -671,30 +675,70 @@ class Salesorder extends Admin_Controller
     {
         try
         { 
+            $this->load->library("cart");
+            
            if($action == 'process'){
             
-            $sales_order_item_id = $this->input->post("sales_order_item_id[]");
-            $quantity            = $this->input->post('update_qty[]');
+            $so_id      = (!empty($so_id))?$so_id:0;
+            $itemtype   = $this->input->post("item_type");
+            $cart_id    = $this->input->post("cart_id[]");
+            $quantity   = $this->input->post('update_qty[]');
             
-            $i = 0;
-            foreach($sales_order_item_id as $st_id){
-                $this->db->query("update sales_order_item set qty='".$quantity[$i]."' where id='".$st_id."'");
-                $st_data    = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
-                $total_amt += $st_data['qty']*$st_data['unit_price'];
-                $i++;
+            if($itemtype == 'cart'){
+                
+                if(!empty($quantity)){
+                    $j = 0;
+                    foreach($cart_id as $ct_id){
+                        $update_cart = array(  "rowid" => $ct_id,
+                                                "qty" => $quantity[$j]
+                                             );
+                        $this->cart->update($update_cart);
+                        $j++;
+                     }
+                     
+                       
+                     $this->data['cartitems'] = $this->cart->contents();
+                     $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
+                     
+                   }
+             }       
+            else
+            {
+                $sales_order_item_id = $this->input->post("sales_order_item_id[]");
+                
+                $i = 0;
+                foreach($sales_order_item_id as $st_id){
+                    $this->db->query("update sales_order_item set qty='".$quantity[$i]."' where id='".$st_id."'");
+                    $st_data    = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
+                    $total_amt += $st_data['qty']*$st_data['unit_price'];
+                    $i++;
+                    log_history('sales_order',$st_id,'Quantity','update');
+                }
+                $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
             }
-            log_history('sales_order','Quantity has been modified.',$so_id);
             
-            $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
+            
             $output['message']       = "Item updated successfully";
             $output['status']        = "success";
           }
           else
           { 
-            $this->data['cartitems'] = $this->salesorder_model->get_sales_items($so_id);
+            if($so_id == 'cartitem'){
+                $cartitems = $this->cart->contents();
+                $itemtype  = 'cart';
+            }
+            else
+            {
+                $cartitems = $this->salesorder_model->get_sales_items($so_id);
+                $itemtype  = 'sales';
+            }
+            
+            $this->data['cartitems'] = $cartitems;
             $this->data['total']     = $total_amt;
             $this->data['so_id']     = $so_id;
+            $this->data['itemtype']  = $itemtype;
             $output['status']        = "warning";
+            $output['itemtype']      = $itemtype;
             $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
           }   
         }

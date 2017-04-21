@@ -73,6 +73,7 @@
     <td>Order Total</td>
     <td>Order Status</td>
     <td>Order Date</td>
+    <td>Customer Name</td>
     <td>Email ID</td>
   </tr>
   <tr>
@@ -80,6 +81,7 @@
     <td><?php echo displayData($order_total, 'money');?></td>
     <td><?php //echo $so_details['order_status'];?>ACCEPTED</td>
     <td><?php echo displayData($so_details['created_date'], 'datetime');?></td>
+    <td><?php echo $user_details['customer_name'];?></td>
     <td><?php echo $user_details['email'];?></td>
   </tr>
 </table>	
@@ -122,19 +124,5 @@
 	</div>
   
   
- <div id="updat_cart" class="modal fade sales_update-cart-sec" role="dialog">
-  <div class="modal-dialog popup-box">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form name="sales_update_to_cart" id="sales_update_to_cart">
-          <div class="modal-body">
-          </div>  
-     </form>
-    </div>
-  </div>
-</div>
+ 
 </div>

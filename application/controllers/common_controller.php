@@ -63,8 +63,9 @@ class Common_controller
         
 		$customer_id = isset($data['so_details']['customer_id'])?$data['so_details']['customer_id']:0;
 		$data['user_details'] = $this->CI->salesorder_model->get_where(array('id' => $customer_id), '*', 'customer')->row_array();
-        $contact = $this->CI->salesorder_model->get_where(array('customer_id' => $customer_id),"email","customer_contact")->row_array();
-        $data['user_details']['email'] = $contact['email'];
+        $contact = $this->CI->salesorder_model->get_where(array('customer_id' => $customer_id),"name,email","customer_contact")->row_array();
+        $data['user_details']['email']          = $contact['email'];
+        $data['user_details']['customer_name']  = $contact['name'];
 
 		$this->CI->load->model('shipment_model');
 		 

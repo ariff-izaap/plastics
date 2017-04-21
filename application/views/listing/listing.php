@@ -38,7 +38,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
 		<thead>
 			<tr>
-			<?php if($uri1 != "history" && $uri != "add_product"){?>
+			<?php if($uri1 != "history" && $uri != "add_product" && $uri1 != 'salesproductselection'){?>
 				<th> # </th>
 				<?php }?>
 				<?php  $cols = 0; 
@@ -74,7 +74,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices') && $uri != 'add_edit_purchase' && $uri1!='salesproductselection'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices') && $uri != 'add_edit_purchase' ){ ?>
 
 					<th>Action</th>
 
@@ -89,13 +89,15 @@ if($uri1 == "accounting" && $uri != "invoices")
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        	if($uri1 != 'history' && $uri1 != 'purchase' && $uri != 'add_product')
+        	if($uri1 != 'history' && $uri1 != 'purchase' && $uri != 'add_product' && $uri1 != "salesproductselection")
         	{ 	
         		?>
 						<td>
           		<?php 
-                    $clk = ($uri1 == "salesproductselection")?'onclick="product_add_to_shipment('.$item['id'].')"':"";
-                    $data_attributes = ($uri1 == "salesproductselection")?'data-qty="'.$item['quantity'].'" data-price="'.$item['wholesale_price'].'"':"";
+                    $clk            = '';
+                    $data_attributes= '';
+                    //$clk = ($uri1 == "salesproductselection")?'onclick="product_add_to_shipment('.$item['id'].')"':"";
+                   // $data_attributes = ($uri1 == "salesproductselection")?'data-qty="'.$item['quantity'].'" data-price="'.$item['wholesale_price'].'"':"";
                     
           			if((isset($item['id']) && !empty($item['id']))){ 
 						echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';
@@ -130,7 +132,7 @@ if($uri1 == "accounting" && $uri != "invoices")
                 
 				<?php endforeach;?>
 
-	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && ($uri1 != 'accounting' || $uri == 'invoices') && $uri != 'add_edit_purchase' && $uri != 'add_product' && $uri1 != 'salesproductselection'){ ?>
+	          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri1	!= 'history' && ($uri1 != 'accounting' || $uri == 'invoices') && $uri != 'add_edit_purchase' && $uri != 'add_product'){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"

@@ -66,10 +66,7 @@
 
            <div class="btn-group">
 				
-    			<a class="btn btn-primary"
-    			onclick="issue_return_auth(<?php echo $so_id;?>, this)"
-    			href="javascript:;" data-original-title="" title=""> Return
-    			Auth</a>
+    			<a class="btn btn-primary" onclick="issue_return_auth(<?php echo $so_id;?>, this)" href="javascript:;" data-original-title="" title=""> Return </a>
             </div>
 		
 	  </div>
@@ -78,7 +75,6 @@
 		<table class="table table-bordered table-striped">
 			<thead class="greenbg_title">
 				<tr>
-					<th></th>
 					<th>Product</th>
 					<th>SKU</th>
 					<th>QTY</th>
@@ -91,9 +87,11 @@
 				<?php  foreach ($order_detail as $row):?>
 				
 				<tr>
-					<td><input name="op_select[]" type="checkbox"
-						value="<?php echo $row['so_item_id']?>">
+					<!--
+<td><input name="op_select[]" type="checkbox"
+						value="<?php //echo $row['so_item_id']?>">
 					</td>
+-->
 					<td><?php echo displayData($row['product_name'], 'product_name_link', array('id'=>$row['product_id']));?>
 					</td>
 					<td><?php echo $row['sku'];?>

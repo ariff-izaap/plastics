@@ -66,18 +66,18 @@
         <?php //}} ?>
       </select>
     </div>
--->
+
     
-    <div class="form-group <?php echo (form_error('order_status'))?'error':'';?>" data-error="<?php echo (form_error('order_status'))? form_error('order_status'):'';?>" >
+    <div class="form-group <?php //echo (form_error('order_status'))?'error':'';?>" data-error="<?php //echo (form_error('order_status'))? form_error('order_status'):'';?>" >
       <label>Order Status</label>
       <select name="order_status" class="form-group" >
         <option value="">Select Status</option>
-         <option value="NEW" <?php echo set_select('order_status',"NEW",(($editdata['order_status'] == "NEW")?true:false));?>>NEW</option>
-         <option value="PROCESSING" <?php echo set_select('order_status',"PROCESSING",(($editdata['order_status'] == "PROCESSING")?true:false));?>>PROCESSING</option>
-         <option value="PENDING" <?php echo set_select('order_status',"PENDING",(($editdata['order_status'] == "PENDING")?true:false));?>>PENDING</option>
-         <option value="COMPLETED" <?php echo set_select('order_status',"COMPLETED",(($editdata['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
+         <option value="NEW" <?php //echo set_select('order_status',"NEW",(($editdata['order_status'] == "NEW")?true:false));?>>NEW</option>
+         <option value="PROCESSING" <?php //echo set_select('order_status',"PROCESSING",(($editdata['order_status'] == "PROCESSING")?true:false));?>>PROCESSING</option>
+         <option value="PENDING" <?php //echo set_select('order_status',"PENDING",(($editdata['order_status'] == "PENDING")?true:false));?>>PENDING</option>
+         <option value="COMPLETED" <?php //echo set_select('order_status',"COMPLETED",(($editdata['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
       </select>
-    </div>
+    </div> -->
     <div class="form-group ship-det" >
      
       <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo $editdata['so_instructions']; ?></textarea>

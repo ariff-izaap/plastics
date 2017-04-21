@@ -14,7 +14,7 @@
 			<?php foreach ($list as $item) : ?>
 		<tr class="txt_11">
 			<td><?php echo $item['action'];?></td>
-			<td><?php echo displayData($item['created_time'], 'datetime');?></td>
+			<td><?php echo displayData($item['created_date'], 'datetime');?></td>
 			<td><?php echo strcmp(trim($item['admin_user']), '') === 0?'Independent Plastics':$item['admin_user'];?></td>
 		</tr>		
 			<?php endforeach; ?>

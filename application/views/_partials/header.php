@@ -29,6 +29,22 @@
   </div>
 </div>  
 
+<div id="updat_cart" class="modal fade sales_update-cart-sec" role="dialog">
+  <div class="modal-dialog popup-box">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form name="sales_update_to_cart" id="sales_update_to_cart">
+          <div class="modal-body">
+          </div>  
+     </form>
+    </div>
+  </div>
+</div>
+
 <section class="container-fluid">
   <div class="row top-nav">
     <nav class="navbar navbar-default">

@@ -410,7 +410,7 @@ body .search-form form .third-box > div div { margin: 0 10px 0 0 !important; }
 
 #inventory_form .modal-dialog { width: 1026px !important;}
 #inventory_form .modal-content .container { width:100%;}
-#inventory_form .panel-body {height: 1450px;    overflow: auto;}
+#inventory_form .panel-body {height: 450px;    overflow: auto;}
 .sales-order-view-section .nav > li > a{padding: 0px 15px;}
 .sales-order-view-section .header.greenbg_title {  border-top: 0;color: #fff; margin-bottom: 12px; line-height: 32px; font-size: 16px; font-weight: bold;}
 #myModal {z-index: 22222;}
