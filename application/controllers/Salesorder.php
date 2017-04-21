@@ -613,7 +613,7 @@ class Salesorder extends Admin_Controller
                     $this->salesorder_model->update( array('id' => $so_details['id']), array("billing_address_id" => $this->data['bill_addr_id']));
                     $price_list_info['billing_address_id'] = $this->data['bill_addr_id'];
                     
-                    log_history('sales_order','Billing Address has been modified.',$so_details['id']);
+                   // log_history('sales_order','Billing Address has been modified.',$so_details['id']);
                 }                       
                 $output['status']       = 'success';
                 $output['message']      = 'Billing Address has been updated successfully!';
