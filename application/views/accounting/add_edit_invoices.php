@@ -35,6 +35,7 @@
   <input type="hidden" name="billing_id" value="<?=$so_details[0]['billing_address_id'];?>">
   <input type="hidden" name="shipment_id" value="<?=$so_details[0]['carrier_id'];?>">
   <input type="hidden" name="po_id" value="<?=$so_details[0]['po_id'];?>">
+  <div class="container">
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -192,6 +193,7 @@
       </div>
       <div class="clearfix"></div><br>
     </div>
+  </div>
   </div>
 
   <div class="row">
