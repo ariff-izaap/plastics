@@ -1,21 +1,23 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal">&times;</button>
   <h4 class="modal-title"><strong>PO - #<?=$po['po_id'];?></strong></h4>
-  <div class="pull-left"><a class="btn" href="#LogHistory">Show Log</a></div>
 </div>
-<div class="modal-body" style="max-height: 450px;overflow: auto;">
+<div class="modal-body purchase-order-view-section" style="max-height: 450px;overflow: auto;">
   <div class="blue-mat"></div>
-	<div class="row">
-		<div class="col-md-4">
-			<label>PO Status : <strong><?=displayData($po['order_status'],'colorize');?></strong></label>
-		</div>
-		<div class="col-md-4">
-			<label>Total : <strong><?=displayData($po['total_amount'],'money');?></strong></label>
-		</div>
-		<div class="col-md-4">
-			<label>Paid Status : <strong><?=$po['is_paid'];?></strong></label>
-		</div>
-	</div><br>
+  <div class="row box_highilite">
+    <div class="col-md-12" style="background: none">
+      <div class="col-md-4 span-border">
+        <h3>PO  Status <span><br><?=$po['order_status'];?></span></h3>
+      </div>
+      <div class="col-md-4 span-border ps_sec_blue">
+        <h3>Total <span><br> <?=displayData($po['total_amount'],'money');?> </span></h3>
+      </div>
+      <div class="col-md-3 span-border nd_sec_yellow">
+        <h3>Paid Status <span><br> <?=$po['is_paid'];?> </span></h3>
+      </div>
+    </div>
+  </div>
+	<br>
 	<div class="row">
 		<div class="col-md-12">            
     	<div class="row">
@@ -43,52 +45,62 @@
       		</div>
       	</div>
     	</div><br>
-    	<div class="row">
+      <div class="row">
+        <div class="col-md-2 pull-right">
+          <button class="btn change_order_status" data-id="<?=$po['po_id'];?>">Save Changes</button>
+        </div>
       	<div class="col-md-4">
       		<label>Shipment Type : <strong><?=$po['ship_type'];?></strong></label>
       	</div>
-      	<div class="col-md-4">
+      	<div class="col-md-3">
       		<label>Shipment Service : <strong><?=$po['carrier'];?></strong></label>
       	</div>
-      	<div class="col-md-4">
+      	<div class="col-md-3">
       		<label>Payment Term : <strong><?=$po['credit'];?></strong></label>
       	</div>
-      </div>
-      <div class="row">
-      	<div class="col-md-12">
-      		<label><strong>Notes : </strong></label>
-      		<br><?=$po['note'];?>
-      	</div>
-      </div>
-      <div class="row">
-      	<div class="col-md-12">
-      		<label><strong>PO Message :</strong> </label>
-      		<br><?=$po['po_message'];?>
-      	</div>
-      </div>
-      <div class="row">
-      	<div class="col-md-2 pull-right">
-      		<button class="btn change_order_status" data-id="<?=$po['po_id'];?>">Save Changes</button>
-      	</div>
-      </div>            
+      </div><br> 
     	<div class="row">
     		<div class="col-md-6">
-    			<h4>Billing Information</h4>
-    			<p><strong><?=$po['bill_name'];?></strong><br>
-    			<?=$po['b_address1'].", ".$po['b_address2'];?>
-    			<?=$po['b_city'].",<br>".$po['b_state'];?>
-    			<?=$po['b_country']." - ".$po['b_zipcode'];?><br>
-    			Phone : <?=$po['b_phone'];?><br>
-    			Email : <?=$po['email'];?></p>
+          <table class="table table-bordered">
+            <thead class="greenbg_title txt_13">
+              <tr>
+                <th width="10%">Billing Information</th>
+              </tr>
+            </thead>
+            <tbody class="white_bg">
+              <tr>
+                <td id="shipping_address" data-title="Billing Information Edit">
+                  <address><strong><?=$po['bill_name'];?></strong> <br><?=$po['b_address1'];?><br><?=$po['b_address2'];?>
+                    <br><?=$po['b_city'].",<br>".$po['b_state'];?><br>
+                    <?=$po['b_country']." - ".$po['b_zipcode'];?><br>
+                    <abbr title="Phone">P:</abbr> <?=$po['b_phone'];?><br>
+                    <abbr title="Email">E:</abbr> <?=$po['email'];?>
+                  </address>
+                </td>                 
+              </tr>
+            </tbody>
+          </table>
     		</div>
     		<div class="col-md-6">
-    			<h4>Shipping Information</h4>
-    			<p><strong><?=$po['wname'];?></strong><br>
-    			<?=$po['address1'].", ".$po['address2'];?>
-    			<?=$po['city'].", ".$po['state_name'];?>
-    			<?=$po['country_name']." - ".$po['zipcode'];?><br>
-    			Phone : <?=$po['phone'];?><br>
-    			Email : <?=$po['email'];?></p>
+          <table class="table table-bordered">
+              <thead class="greenbg_title txt_13">
+                <tr>
+                  <th width="10%">Shipping Information</th>
+                </tr>
+              </thead>
+              <tbody class="white_bg">
+                <tr>
+                  <td id="shipping_address" data-title="Billing Information Edit">
+                    <address><strong><?=$po['wname'];?></strong> <br><?=$po['address1'];?><br><?=$po['address2'];?>
+                      <br><?=$po['city'].",<br>".$po['state_name'];?><br>
+                      <?=$po['country_name']." - ".$po['zipcode'];?><br>
+                      <abbr title="Phone">P:</abbr> <?=$po['phone'];?><br>
+                      <abbr title="Email">E:</abbr> <?=$po['email'];?>
+                    </address>
+                  </td>                 
+                </tr>
+              </tbody>
+          </table>
     		</div>
     	</div>
       <div class="row">
@@ -136,6 +148,18 @@
       	  </table>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label><strong>Notes : </strong></label>
+          <br><?=$po['note'];?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label><strong>PO Message :</strong> </label>
+          <br><?=$po['po_message'];?>
+        </div>
+      </div>
       <div class="row" id="LogHistory">
         <div class="col-md-12">
           <h3>Log History</h3>
@@ -149,9 +173,11 @@
               foreach ($logs as $key => $value)
               {
                 ?>
-                  <td><?=$value['action'];?></td>
-                  <td><?=displayData($value['created_date'],'datetime');?></td>
-                  <td><?=$value['created_name'];?></td>
+                  <tr>
+                    <td><?=$value['action'];?></td>
+                    <td><?=displayData($value['created_date'],'datetime');?></td>
+                    <td><?=$value['created_name'];?></td>
+                  </tr>
                 <?php
               }
             ?>

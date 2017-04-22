@@ -97,11 +97,12 @@ class Purchase extends Admin_Controller
       $_SESSION['edit_data'] = $this->data['edit_data'];
       $items = $this->purchase_model->get_purchased_products($edit_id);
       // echo "<pre>";print_r($items);exit;
+      $this->cart->destroy();
       foreach ($items as $value)
       {
         $data = array("id"=>$value['id'],"sku"=>$value['sku'],"qty"=>$value['qty'],"name"=>$value['name'],"price"=>$value['unit_price']);
         // if(!$value['id'])
-          $this->cart->insert($data);
+        $this->cart->insert($data);
       }
     }
     else
@@ -372,7 +373,7 @@ class Purchase extends Admin_Controller
     <input type="hidden" name="pid" id="pid" value="'.$product_id.'" class="input-small" />
     <input type="hidden" name="vid" id="vid" value="'.$po_id.'" class="input-small" />
     <input type="hidden" name="elm_id" id="elm_id" value="'.$elm_id.'" class="input-small" />
-    <a class="btn" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this,'.$vendor_id.')">submit</a>
+    <a class="btn" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this,'.$vendor_id.')">Add</a>
     </div>
     </div>';  
     // if($this->input->is_ajax())
@@ -382,7 +383,7 @@ class Purchase extends Admin_Controller
   }
 
   public function update_cart()
-  {     
+  {    
     try
     {
       $rowid  = $this->input->post('rowid');
@@ -403,7 +404,8 @@ class Purchase extends Admin_Controller
       $output = array('status' => 'failed', 'message' => $e->getMessage());
     }
 
-    $this->data['products'] =  $this->cart->contents();
+    $this->data['products'] = $this->cart->contents();
+    $output['cart'] = $this->cart->contents();
     $output['content']    = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);
     $this->_ajax_output($output, TRUE);
   }
@@ -439,6 +441,7 @@ class Purchase extends Admin_Controller
     if($this->form_validation->run())
     {
       $form = $this->input->post();
+      $rand = $form['rand'];
       /*Start Warehouse Shipping Info*/
       $house['name'] = $form['wname'];
       $house['address1'] = $form['address1'];
@@ -461,18 +464,28 @@ class Purchase extends Admin_Controller
       $up['estimated_delivery'] = $form['delivery_date'];
       $up['total_amount'] = $form['total'];
       $up['status']              = "COMPLETED";
+      $up['is_paid']              = "NOT PAID";
       $up['po_message'] = $form['po_message'];
       $up['vendor_id'] = $vendor_id;
       $up['note'] = $form['po_notes'];
       $up['updated_id'] = get_current_user_id();
       $up['updated_date'] = date("Y-m-d H:i:s");
-      if($po_id)
-          $up_id = $this->purchase_model->update(array("id"=>$po_id),$up,"purchase_order");
-      else
-        $ins_id = $this->purchase_model->insert($up,"purchase_order");
+      $ins_id = $this->purchase_model->insert($up,"purchase_order");
+      /*Documents Attach File*/
+      if(is_dir("assets/uploads/purchase/tmp/".$form['rand']))
+        {
+          if($form['rand'])
+          {
+            $files = glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*");
+            mkdir("assets/uploads/purchase/".$ins_id,0777,true);
+            $a = array_map("copyFile",$files,array('rand'=>$form['rand']),array('po_id'=>$ins_id));
+            array_map('unlink', glob("assets/uploads/purchase/tmp/".$form['rand']."/*.*"));
+            rmdir("assets/uploads/purchase/tmp/".$form['rand']."");
+          }
+        }
       foreach ($this->cart->contents() as $value)
       {
-        $ins['po_id'] =$po_id;
+        $ins['po_id'] =$ins_id;
         $ins['product_id'] =$value['id'];
         $ins['code'] =$value['sku'];
         $ins['name'] =$value['name'];
@@ -481,13 +494,13 @@ class Purchase extends Admin_Controller
         $ins['created_id'] = get_current_user_id();
         $ins['updated_id'] = get_current_user_id();
         $ins['created_date'] = date("Y-m-d H:i:s");
-        $this->purchase_model->delete(array("po_id"=>$po_id),"purchase_order_item");
+        // $this->purchase_model->delete(array("po_id"=>$ins_id),"purchase_order_item");
         $ins_id = $this->purchase_model->insert($ins,"purchase_order_item");
       }
       $this->cart->destroy();
       unset($_SESSION['first_vendor']);
       unset($_SESSION['po_id']);
-      $log = log_history("purchase_order",$po_id,"purchase","insert");
+      $log = log_history("purchase_order",$ins_id,"purchase","insert");
       $this->session->set_flashdata("success_msg","Purchase Order Created Successfully",TRUE);
       redirect('purchase');
     }
@@ -566,10 +579,7 @@ class Purchase extends Admin_Controller
     {
       mkdir("assets/uploads/purchase/tmp/".$rand, 0777, true);
     }
-    if($edit_id=='')
-      $config['upload_path']   = "assets/uploads/purchase/tmp/".$rand;
-    else
-      $config['upload_path']   = "assets/uploads/purchase/".$rand;
+    $config['upload_path']   = "./assets/uploads/purchase/tmp/".$rand;
     $config['allowed_types'] = 'doc|docx|pdf|xls|xlsx';
   
     $this->load->library('upload', $config);
@@ -585,14 +595,9 @@ class Purchase extends Admin_Controller
   {
     $rand = $this->input->post('rand');
     $name = $this->input->post('name');
-    $edit_id = $this->input->post('edit_id');
-    if($edit_id)
-      $file = "assets/uploads/purchase/".$rand."/".$name;
-    else
-      $file = "assets/uploads/purchase/tmp/".$rand."/".$name;
+    $file = "./assets/uploads/purchase/tmp/".$rand."/".$name;
     unlink($file);
-
-    $this->_ajax_output(array('status'=>'success','message'=>"Removed Successfully"), TRUE);
+    $this->_ajax_output(array('status'=>'success','message'=>"Removed Successfully",'vale'=>$_POST), TRUE);
   }
   public function get_cart_count()
   {
@@ -650,6 +655,13 @@ class Purchase extends Admin_Controller
     $data['products'] = $this->purchase_model->get_purchased_products($id);
     $this->load->view('frontend/purchase/print_purchase',$data);
   }
-
+  public function view($po_id='')
+  {
+    if($po_id!='')
+    {
+      $this->session->set_flashdata("error_msg","Something went wrong",TRUE);
+      redirect("purchase");
+    }
+  }
 }
 ?>

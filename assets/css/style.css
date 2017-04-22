@@ -2950,6 +2950,7 @@ button.close {
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+  width: 170px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
   /* line 27, ../../../../../lib/gems/2.1.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_popovers.scss */
@@ -3057,6 +3058,8 @@ button.close {
     border-left-color: #fff;
     bottom: -10px; }
 
+.popover .popover-content #div_add_to_cart .menu_action input{float: left;width: 70px;margin-right: 5px;}
+.popover button.close{background: rgb(154, 0, 0);opacity: 1;margin-top: -5px;    padding: 0px 5px 0px 5px;color: #fff;}
 /* line 7, ../../../../../lib/gems/2.1.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_carousel.scss */
 .carousel {
   position: relative; }

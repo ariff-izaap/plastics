@@ -74,7 +74,7 @@
     <div class="clearfix"></div><br>
 
     <form name="add_purchase" id="addPurchase" method="post">
-      <input type="hidden" name="rand" class="rand" value="<?=isset($_POST['rand']) ? $_POST['rand'] : $po_id;?>">
+      
       <input type="hidden" name="edit_id" class="edit_id" value="<?=$edit_data['po_id'];?>">
       <div class="form-grid">
         <div class="form-group col-md-4">
@@ -264,22 +264,20 @@
         </div>  -->
         
         <div class="row">
-          <div class="col-md-12">
-            <a href="#modalCart" data-toggle="modal" class="btn pull-right">
+          <div class="col-md-2  pull-right">
+            <a href="#modalCart" data-toggle="modal" class="btn">
               <i class="fa fa-shopping-cart"></i>&nbsp;
               View Cart (<span class="view_cart_count"><?=count($this->cart->contents());?></span>)
             </a>
           </div>
-        </div>
-
+        </div><br>
         <div class="row">
           <?=$grid;?>
         </div>
-
         <div class="clearfix"></div>
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
         <div class="form-group col-md-2 col-md-offset-10">
-          <button type="submit" name="save_product" class="btn btn-block">Save</button>
+          <button type="submit" name="save_product" class="btn btn-block">Checkout</button>
         </div>
       </div>
     </form>
@@ -288,7 +286,6 @@
 
 <div id="modalCart" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -319,9 +316,9 @@
                       </td>
                       <td><?=displayData($value['price'],'money');?></td>
                       <td><?=displayData($value['price'] * $value['qty'] ,'money');?></td>
-                      <td>
-                        <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn">
-                          <i class="fa fa-remove"></i>
+                      <td class="text-center">
+                        <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn btn-danger">
+                          <i class="fa fa-trash"></i>
                         </a>
                       </td>
                     </tr>

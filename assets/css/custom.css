@@ -108,33 +108,97 @@ td { padding:4px 6px !important;}
     width: 18% !important; margin-top: 37px !important;}
 .product-sel .formcontrol-box.ship-box .postal .form-group { width: 30%;}
 
-/* Sales order view section */
-.sales-order-view-section .topsec_info{margin-top:20px; margin-bottom:20px;}
-.sales-order-view-section .box_highilite h3 span{min-height: 37px; line-height: 13px; top: -11px;}
-.sales-order-view-section .box_highilite h3 { margin: 10px 0 3px 0;  padding: 0;}
-.sales-order-view-section #relatedlinks{padding: 9px; border: 1px solid #ddd; margin-right: 25px;}
-.sales-order-view-section .bill-info { width: 36.22%; margin-right: 25px;}
-.sales-order-view-section .box_highilite h3 span{background: #ed9b06; border-radius: 0 !important;}
-.sales-order-view-section .ship-info {width: 36.222%;}
-.sales-order-view-section .bill-info, .sales-order-view-section .ship-info{ margin-bottom: 0 !important;}
-.sales-order-view-section .sales-oder-details { float: right; width: 70.666%; margin-right: 27px;}
-.sales-order-view-section .bill-info address, .sales-order-view-section .ship-info address{ min-height: 174px; margin-bottom:10px;}
-.sales-order-view-section .bill-info .span_half, .sales-order-view-section .ship-info .span_half{margin-bottom:10px;}
-.sales-order-view-section .sales-notes, .sales-order-view-section .log-histry { float: right; width: 76%;}
-.sales-order-view-section .create-invoice { text-align: right; margin: 8px 0;}
-.sales-order-view-section .box_highilite {margin-bottom: 0;}
+/* Sales order and Purchase Order view section */
+.sales-order-view-section .topsec_info,
+.purchase-order-view-section .topsec_info
+{
+    margin-top:20px; margin-bottom:20px;
+}
+.sales-order-view-section .box_highilite h3 span,
+.purchase-order-view-section .box_highilite h3 span
+{
+    min-height: 37px; line-height: 13px; top: -11px;
+}
+.sales-order-view-section .box_highilite h3,
+.purchase-order-view-section .box_highilite h3
+{ 
+    margin: 10px 0 3px 0;  padding: 0;
+}
+.sales-order-view-section #relatedlinks,
+.purchase-order-view-section #relatedlinks
+{
+    padding: 9px; border: 1px solid #ddd; margin-right: 25px;
+}
+.sales-order-view-section .bill-info,
+.purchase-order-view-section .bill-info
+ {
+  width: 36.22%; margin-right: 25px;
+}
+.sales-order-view-section .box_highilite h3 span,
+.purchase-order-view-section .box_highilite h3 span
+{
+    background: #ed9b06; border-radius: 0 !important;
+}
+.sales-order-view-section .ship-info,
+.purchase-order-view-section .ship-info
+{
+    width: 36.222%;
+}
+.sales-order-view-section .bill-info, .sales-order-view-section .ship-info,
+.purchase-order-view-section .bill-info, .purchase-order-view-section .ship-info
+{ 
+    margin-bottom: 0 !important;
+}
+.sales-order-view-section .sales-oder-details,
+.purchase-order-view-section .sales-oder-details
+{
+    float: right; width: 70.666%; margin-right: 27px;
+}
+.sales-order-view-section .bill-info address, .sales-order-view-section .ship-info address,
+.purchase-order-view-section .bill-info address, .purchase-order-view-section .ship-info address
+{ 
+    min-height: 174px; margin-bottom:10px;
+}
+.sales-order-view-section .bill-info .span_half, .sales-order-view-section .ship-info .span_half,
+.purchase-order-view-section .bill-info .span_half,.purchase-order-view-section .ship-info .span_half
+{
+    margin-bottom:10px;
+}
+.sales-order-view-section .sales-notes, .sales-order-view-section .log-histry ,
+.purchase-order-view-section .sales-notes,.purchase-order-view-section .log-histry
+{ 
+    float: right; width: 76%;
+}
+.sales-order-view-section .create-invoice,
+.purchase-order-view-section .create-invoice
+{ 
+    text-align: right; margin: 8px 0;
+}
+.sales-order-view-section .box_highilite,
+.purchase-order-view-section .box_highilite
+{
+    margin-bottom: 0;
+}
 .clr-orange{color:orange; font-weight: bold;}
-.sales-order-view-section .box_highilite div {
+.sales-order-view-section .box_highilite div{
     background: #f0f1f3;
     min-height: 37px;
     border-radius: 4px;
     border: 1px solid #ddd;
     padding: 0 0 0px 10px;
 }
-.sales-order-view-section .box_highilite div h3{color:#064ba8;}
+.purchase-order-view-section .box_highilite .span-border
+{
+    background: #f0f1f3;
+    min-height: 37px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 0 0 0px 10px;
+}
+.sales-order-view-section .box_highilite div h3,.purchase-order-view-section .box_highilite div h3{color:#064ba8;}
 .sales_update-cart-sec{max-width: 800px; width: 100% !important; margin: 0 auto;}
 
-/* Sales order view section */
+/* Sales order and Purchase Order view section */
 
 /* popup section */
 .modal-dialog.popup-box { max-width:700px; margin: 30px auto; width: 100%}
@@ -142,7 +206,7 @@ td { padding:4px 6px !important;}
 .modal-dialog.popup-box form td {font-size: 14px; }
 .modal-dialog.popup-box form td {  font-size: 14px;}
 .modal-header .close { margin-top: -2px;}
-.modal-header button.close {  background: red; opacity: inherit; color: #fff; border: 0; -webkit-appearance: none; padding: 0px 8px; line-height: normal;}
+.modal-header button.close {  background: #bb0000; opacity: inherit; color: #fff; border: 0; -webkit-appearance: none; padding: 0px 8px; line-height: normal;}
 .modal-dialog.popup-box .form-group {margin-bottom: 10px;}
 .sales-order-view-section .modal { margin: 0 auto; width: 100% !important; max-width: 700px; top: 20%; bottom: auto;  overflow-y: inherit; overflow-x: inherit;}
  .sales-order-view-section .popup-address .form-group { width: 30.333%; vertical-align: top; display: inline-block; margin-bottom: 13px; margin-right: 14px;}  

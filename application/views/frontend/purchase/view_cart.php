@@ -14,9 +14,9 @@ if($products)
         </td>
         <td><?=displayData($value['price'],'money');?></td>
         <td><?=displayData($value['price'] * $value['qty'] ,'money');?></td>
-        <td>
-           <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn">
-            <i class="fa fa-remove"></i>
+        <td class="text-center">
+           <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn btn-danger">
+            <i class="fa fa-trash"></i>
           </a>
         </td>
       </tr>

@@ -188,11 +188,11 @@ $(function(){
 
 function add_to_cart(b,a,d,f,v)
 {
-  if($(".vendor_select").val()=='')
-  {
-    bootbox.alert("Please Select Vendor");
-    return false;
-  }
+  // if($(".vendor_select").val()=='')
+  // {
+  //   bootbox.alert("Please Select Vendor");
+  //   return false;
+  // }
 
   b=b?b:0;
   d=d?d:"form";
@@ -278,7 +278,7 @@ function update_cart(a)
     success:function(b){
       console.log(b);
       after_ajax(a,b);
-      $("form#viewCart table tbody").html(b.content);
+      $("form#viewCart table tbody,div#viewCart table tbody").html(b.content);
       bootbox.alert(b.message)
     },
     error:function(b){
@@ -877,6 +877,7 @@ $("#UploadModal").on("click",".cancel-file",function(){
     data:{rand:rand,name:name,edit_id:edit_id},
     success:function(data)
     {
+      console.log(data);
       data = JSON.parse(data);
       $("#row_"+id).remove();
       $(".upload-msg").html("<div style="+style+">"+data.message+"</div>");
@@ -952,25 +953,35 @@ $(".checkout-btn").click(function(){
 
 
 $(".warehouse_select").change(function(){
+  $(".purchase-loader").show();
   val = $(this).val();
-  $.ajax({
-    type:"POST",
-    url:base_url+'warehouse/get_warehouse_details',
-    data:{val:val},
-    success:function(data)
-    {
-      data = JSON.parse(data);
-      $("form#checkoutForm #wname").val(data.name);
-      $("form#checkoutForm #address1").val(data.address1);
-      $("form#checkoutForm #address2").val(data.address2);
-      $("form#checkoutForm #city").val(data.city);
-      $("form#checkoutForm #phone").val(data.phone);
-      $("form#checkoutForm #email").val(data.email);
-      $("form#checkoutForm #state").val(data.state);
-      $("form#checkoutForm #country").val(data.country);
-      $("form#checkoutForm #zipcode").val(data.zipcode);
-    }
-  });
+  if(val!='')
+  {
+    $.ajax({
+      type:"POST",
+      url:base_url+'warehouse/get_warehouse_details',
+      data:{val:val},
+      success:function(data)
+      {
+        $(".purchase-loader").hide();
+        data = JSON.parse(data);
+        $("form#checkoutForm #wname").val(data.name);
+        $("form#checkoutForm #address1").val(data.address1);
+        $("form#checkoutForm #address2").val(data.address2);
+        $("form#checkoutForm #city").val(data.city);
+        $("form#checkoutForm #phone").val(data.phone);
+        $("form#checkoutForm #email").val(data.email);
+        $("form#checkoutForm #state").val(data.state);
+        $("form#checkoutForm #country").val(data.country);
+        $("form#checkoutForm #zipcode").val(data.zipcode);
+      }
+    });
+  }
+  else
+  {
+    $(".purchase-loader").hide();
+    $("form#checkoutForm")[0].reset();
+  }
 });
 
 function get_purchase_order(id,ele)
