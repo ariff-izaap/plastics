@@ -87,7 +87,7 @@
                                   </select>
                                 </div>
                                 <br />
-                                <div class="form-group  <?php echo (form_error('product'))?'error':'';?>" data-error="<?php echo (form_error('product'))? form_error('product'):'';?>">
+                                <div class="form-group  <?php //echo (form_error('product'))?'error':'';?>" data-error="<?php //echo (form_error('product'))? form_error('product'):'';?>">
                                   <label class="col-md-4">Product:</label>
                                    <select name="product" class="form-control col-md-8" >
                                     <option value="">--Select--</option>
@@ -133,22 +133,22 @@
                                 </div>
                                 <br />
                                 
-                                <div class="form-group  <?php echo (form_error('quantity'))?'error':'';?>" data-error="<?php echo (form_error('quantity'))? form_error('quantity'):'';?>">
+                                <div class="form-group" data-error="<?php echo (form_error('quantity'))? form_error('quantity'):'';?>">
                                   <label class="col-md-4">Quantity</label>
                                   <input type="text" name="quantity" class="form-control col-md-8" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
                                 </div>
                             
-                                <div class="form-group  <?php echo (form_error('retail_price'))?'error':'';?>" data-error="<?php echo (form_error('retail_price'))? form_error('retail_price'):'';?>">
+                                <div class="form-group" >
                                   <label required class="col-md-4">Retail Price</label>
                                   <input type="text" name="retail_price" class="form-control col-md-8" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
                                 </div>
                                 
-                                <div class="form-group  <?php echo (form_error('wholesale_price'))?'error':'';?>" data-error="<?php echo (form_error('wholesale_price'))? form_error('wholesale_price'):'';?>">
+                                <div class="form-group " >
                                   <label required class="col-md-4">Wholesale Price</label>
                                   <input type="text" name="wholesale_price" class="form-control col-md-8" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
                                 </div>
                                 
-                                <div class="form-group <?php echo (form_error('ref_no'))?'error':'';?>" data-error="<?php echo (form_error('ref_no'))? form_error('ref_no'):'';?>">
+                                <div class="form-group " >
                                   <label required class="col-md-4">Ref No</label> 	
                                   <input type="text" name="ref_no" class="form-control col-md-8" id="ref_no" value="<?php echo set_value('ref_no', $editdata['ref_no']);?>" placeholder="Ref No" />
                                 </div>
@@ -160,11 +160,11 @@
                                 </div>
 -->
                         
-                                <div class="form-group  <?php echo (form_error('internal_lot_no'))?'error':'';?>" data-error="<?php echo (form_error('internal_lot_no'))? form_error('internal_lot_no'):'';?>">
+                                <div class="form-group  " >
                                   <label class="col-md-4">Internal Lot Number</label>
                                   <input type="text" name="internal_lot_no" class="form-control col-md-8" id="internal_lot_no" value="<?php echo set_value('internal_lot_no', $editdata['internal_lot_no']);?>" placeholder="Internal lot No" />
                                 </div>
-                                <div class="form-group  <?php echo (form_error('vendor_lot_no'))?'error':'';?>" data-error="<?php echo (form_error('vendor_lot_no'))? form_error('vendor_lot_no'):'';?>">
+                                <div class="form-group  " >
                                   <label class="col-md-4">Vendor Lot Number</label>
                                   <input type="text" name="vendor_lot_no" class="form-control col-md-8" id="vendor_lot_no" value="<?php echo set_value('vendor_lot_no', $editdata['vendor_lot_no']);?>" placeholder="Vendor lot No" />
                                 </div>

@@ -9,7 +9,7 @@
             </div>
             <div class="form-group" >
               <label class="col-md-6">Product</label>
-              <select class="form-control col-md-6" name="name" id="name" multiple="multiple" >
+              <select class="form-control col-md-6" name="name" id="name"  >
                    <?php $products = get_products(); 
                   
                          foreach($products as $prod): ?>
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
               <label class="col-md-6">Form</label>
-              <select class="form-control productform col-md-6" name="form_id" id="form_id" multiple="multiple">
+              <select class="form-control productform col-md-6" name="form_id" id="form_id" >
                    <?php $forms = get_forms(); 
                      foreach($forms as $form): ?>
                     <option value="<?php echo $form['id'];?>"  > <?php echo $form['name'];?> </option>
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group" >
               <label class="col-md-6">Packaging</label>
-              <select class="form-control productpackage col-md-6" name="package_id" id="package_id" multiple="multiple">
+              <select class="form-control productpackage col-md-6" name="package_id" id="package_id" >
                    <?php $packages = get_packages(); 
                        foreach($packages as $pack):
                      
@@ -54,7 +54,7 @@
             </div>
              <div class="form-group" >
               <label class="col-md-6">Color</label>
-              <select class="form-control productcolor col-md-6" name="color_id" id="color_id" multiple="multiple">
+              <select class="form-control productcolor col-md-6" name="color_id" id="color_id" >
                    <?php $colors = get_colors();
                     foreach($colors as $clr):
                       
@@ -65,7 +65,7 @@
             </div>
             <div class="form-group" >
               <label class="col-md-6">Notes</label>
-              <select class="form-control productnotes col-md-6" name="notes" id="notes" multiple="multiple">
+              <select class="form-control productnotes col-md-6" name="notes" id="notes" >
                    <?php foreach($address as $addr):
                       $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
                    ?>

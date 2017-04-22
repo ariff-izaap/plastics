@@ -110,8 +110,10 @@
 			<h3>Payment <br /> Method <span><br />authorize</span></h3>
 		</div>-->
 	</div>	
-    <div class="create-invoice">
-    <a href="<?php echo site_url("salesorder/invoice/").$so_id; ?>" class="btn btn-default">Create Invoice</a></div>
+   <!--
+ <div class="create-invoice">
+    <a href="<?php //echo site_url("salesorder/invoice/").$so_id; ?>" class="btn btn-default">Create Invoice</a></div>
+-->
 </div>
 
 

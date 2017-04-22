@@ -78,7 +78,7 @@ class Inventory extends Admin_Controller
           $this->form_validation->set_rules('name','Product Name','trim|required');
           $this->form_validation->set_rules('sku','Sku','trim|required');
           $this->form_validation->set_rules('quantity','Quantity','trim|required');
-          $this->form_validation->set_rules('product','Product Type','trim|required');
+        //  $this->form_validation->set_rules('product','Product Type','trim|required');
           $this->form_validation->set_rules('color_id','Color','trim|required');
           $this->form_validation->set_rules('form_id','Form','trim|required');
           $this->form_validation->set_rules('package_id','Package','trim|required');

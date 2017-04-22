@@ -1,13 +1,13 @@
 <input type="hidden" id="form_access" name="form_access" />
 <input  type="hidden" id="item_type" name="item_type" />
-<?php echo $uri = $this->uri->segment(1);
-       echo $uri2 = $this->uri->segment(2);
+<?php  $uri = $this->uri->segment(1);
+       $uri2 = $this->uri->segment(2);
       
       $so_id = ($uri == 'salesorder' && $uri2 == 'update_salesorder_quantity')?$this->uri->segment(4):'cartitem';
          
           ?>
           <div class="container">
-<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php echo $so_id;?>',this)" class="btn btn-default pull-right ship-btn">Update</button>
+<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php echo $so_id;?>',this)" class="btn btn-default ">Update</button>
 </div>
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
@@ -29,7 +29,7 @@
   
    <?php 
          $uri = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
-        
+        $total = '';
        if(count($cartitems)>0) { 
          foreach($cartitems as $ckey => $cvalue) {   
             $total += $cvalue['qty'] * $cvalue['price'];
@@ -61,23 +61,29 @@
                
             </td>
         </tr>
- <?php }} 
+ <?php }?>
+ <tr class="green_solid_bg" >
+                <td class="text-right" colspan="8"><b>Total Amount:</b></td>
+                
+                <td><b><?php echo (!empty($total))?": ".$total:""; ?></b>
+                <td>&nbsp;</td>
+            </td>
+            </tr>
+ <?php }
     else { ?>
    <tr>
     <td colspan="11"><?php echo "No Products Found!"; ?></td>
    </tr>
   <?php } ?>
+  
 </table>
 <div class="row m_bot_30">
     <div class="col-md-5 pull-right">
         <table class="price_box pull-right  ash_gradiant_bg">
         <tbody>
-            <tr>
-                <td class="text-right">Purchases:</td>
-                <td>&nbsp;</td>
-                <td class="green">$270.00</td>
-            </tr>
-            <tr>
+            
+           <!--
+ <tr>
                 <td class="text-right">Shipping:</td>
                 <td>&nbsp;</td>
                 <td class="green">$0.00</td>
@@ -92,12 +98,8 @@
                 <td>&nbsp;</td>
                 <td class="green">$0.00</td>
             </tr>
-            <tr class="green_solid_bg">
-                <td class="text-right"><b>Total Amount:</b></td>
-                <td>&nbsp;</td>
-                <td><b><?php echo (!empty($total))?": ".$total:""; ?></b>
-            </td>
-            </tr>
+-->        
+            
         </tbody>
         </table>
     

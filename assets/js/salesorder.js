@@ -177,9 +177,32 @@ function sales_update_cart(action_type,sales_order_id, elm)
  
 }
 
+
+function update_sales_status(so_id)
+{
+    
+   
+    var carrier = $("#carrier").val();
+    var ordstat = $("#order_status").val();
+    var fdata = {carrier:carrier,order_status:ordstat};
+    
+    $.ajax({
+        url:base_url+'salesorder/update_ord_status/'+so_id,
+        type: "POST",
+        data: fdata,
+        dataType:"json",
+        success : function(rdata){
+        	bootbox.alert(rdata.message);
+        },
+        error : function(data) {
+         alert('error');
+        }
+	});
+}
+
 function get_sales_items(sales_order_id)
 {
-    	$.ajax( {
+    	$.ajax({
         url:base_url+'salesorder/_get_products_details/'+sales_order_id,
         type: "POST",
         data: {},

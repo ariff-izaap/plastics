@@ -156,7 +156,8 @@ $config['inventory_index'] = array(
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),					
-						'quantity'=>array('name'=>'Quantity', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),					
+						'quantity'=>array('name'=>'Quantity', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),	
+                        'available_qty'=>array('name'=>'Available Quantity', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),					
 						'sku'=> array('name'=>'SKU', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
                         'package_name' => array('name'=>'Package Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
                         'color_name' => array('name'=>'Color', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),

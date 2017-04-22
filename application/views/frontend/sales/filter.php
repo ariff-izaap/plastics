@@ -27,7 +27,7 @@
             </div>
              <div class="form-group" >
               <label class="col-md-4">Customer Location</label>
-              <select class="form-control col-md-8" name="customer_location" id="customer_location" multiple="multiple">
+              <select class="form-control col-md-8" name="customer_location" id="customer_location" >
                    <?php foreach($custlocation as $clr): ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
                   <?php endforeach;?>

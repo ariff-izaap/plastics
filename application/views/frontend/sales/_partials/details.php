@@ -60,15 +60,44 @@
 			</tbody>
 		</table>
 -->
+        <form name="update_status" id="update_sales_ord_status">
+        <div>
+            <div class="form-group"  >
+              <label>Carrier</label>
+              <select name="carrier" id="carrier" class="form-group">
+                <option value="">Select Carrier</option>
+                <?php if(count($carrier)>0){ foreach($carrier as $ckey => $cvalue){ ?>
+                 <option value="<?php echo $cvalue['id']; ?>" <?php echo set_select('carrier',$cvalue['id'],(($so_details['carrier'] == $cvalue['id'])?true:false));?> ><?php echo $cvalue['name']; ?></option>
+                <?php }} ?>
+              </select>
+            </div>
 
+    
+    <div class="form-group"  >
+      <label>Order Status</label>
+      <select name="order_status" id="order_status" class="form-group" >
+        <option value="">Select Status</option>
+         <option value="NEW" <?php echo set_select('order_status',"NEW",(($so_details['order_status'] == "NEW")?true:false));?>>NEW</option>
+         <option value="PROCESSING" <?php echo set_select('order_status',"PROCESSING",(($so_details['order_status'] == "PROCESSING")?true:false));?>>PROCESSING</option>
+         <option value="PENDING" <?php echo set_select('order_status',"PENDING",(($so_details['order_status'] == "PENDING")?true:false));?>>PENDING</option>
+         <option value="COMPLETED" <?php echo set_select('order_status',"COMPLETED",(($so_details['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
+      </select>
+    </div>
+    <div >
+     <button type="button" class="btn btn-default" name="save_status" onclick="update_sales_status(<?php echo $so_id;?>, this);">SAVE</button>
+    </div>
+   </form> 
+        </div>   
 		<h2 class="pull-left">Order Details</h2> <a class="pull-left underline clr-orange" href="javascript:void(0);" onclick="sales_update_cart('form',<?php echo $so_id;?>,this)" style="margin:7px 0px 0 36px;">Edit</a>
 
 		<div class="pull-right m_top_15">
 
-           <div class="btn-group">
+          <!--
+ <div class="btn-group">
 				
-    			<a class="btn btn-primary" onclick="issue_return_auth(<?php echo $so_id;?>, this)" href="javascript:;" data-original-title="" title=""> Return </a>
+    			<a class="btn btn-primary" onclick="issue_return_auth(<?php //echo $so_id;?>, this)" href="javascript:;" data-original-title="" title=""> Return </a>
             </div>
+-->
 		
 	  </div>
 

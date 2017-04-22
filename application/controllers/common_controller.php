@@ -56,7 +56,7 @@ class Common_controller
 		$data['so_id'] = $so_id;
 		
 		$data['so_details'] = $result_set->row_array();
-
+        
 		$payment_term = $this->CI->salesorder_model->get_where(array('id' => $data['so_details']['credit_type']),"name","credit_type")->row_array();
 		
         $data['payment_term_name'] = $payment_term['name'];
@@ -74,9 +74,14 @@ class Common_controller
 		
 		$data['shipment_count'] = $result_set->num_rows();
 		
+        $shipment_company = $this->CI->shipment_model->get_where(array("so_id" => $so_id))->row_array();
+        
+        $data['so_details']['carrier'] = $shipment_company['ship_company'];
         //print_r($data['product_details']); exit;
 
 		$data['product_details'] = $this->CI->_get_products_details($so_id);
+        
+        $data['carrier'] = $this->CI->db->query("select * from carrier where 1=1")->result_array();
 
 		if($data['shipment_count'] == 0)
 		{

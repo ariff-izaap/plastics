@@ -273,7 +273,7 @@ class Salesorder extends Admin_Controller
                 $ship_data = array();
                 $ship_data['so_id']         = $so_new_id;
                 $ship_data['shipping_type'] = $get_ship_data['type'];
-                $ship_data['order_status']  = $this->input->post('order_status');
+                $ship_data['order_status']  = "NEW";
                 $ship_data['created_date']  = date('Y-m-d H:i:s'); 
                 $ship_data['updated_date']  = date('Y-m-d H:i:s');
                 $ship_data['created_id']    = get_current_user_id();  
@@ -296,6 +296,7 @@ class Salesorder extends Admin_Controller
                      
                      $product = array();
                      $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
+                     
                      $po_create_id = create_auto_po($product,$form);
                      log_history("purchase_order",$po_create_id,'Create Auto PO',"insert");
                    }
@@ -313,11 +314,17 @@ class Salesorder extends Admin_Controller
                    $sale_order_item_id        = $this->salesorder_model->insert($sale_item,"sales_order_item");
                    
                    log_history("sales_order_item",$sale_order_item_id,'Sales Order Item',"insert");
+                   
+                   $product_data = $this->salesorder_model->get_where(array("id" => $svalue['id']), "quantity","product")->row_array();
+                   
+                   $up_qty = array();
+                   $up_qty['available_qty'] = $product_data['quantity']-$svalue['qty'];
+                   $this->salesorder_model->update(array("id" => $svalue['id']),$up_qty,"product");
                 }
                 
                 $this->data['so_id']       = $so_new_id;
                 $order_status              = $this->salesorder_model->get_where(array("id" => $so_new_id),"customer_id,order_status","sales_order")->row_array();
-                $this->data['order_status']= $order_status['order_status'];
+                $this->data['order_status']= (!empty($order_status['order_status']))?$order_status['order_status']:"NEW";
                 $this->data['od_items']    = $this->salesorder_model->get_sales_items($so_new_id);
                 $this->data['billing']     = $this->salesorder_model->get_where(array("id" => $this->input->post('billing_address_id')),"*","address")->row_array();
                 $this->data['shipping']    = $this->salesorder_model->get_where(array("id" => $this->input->post('shipping_address_id')),"*","customer_location")->row_array();
@@ -414,9 +421,9 @@ class Salesorder extends Admin_Controller
     {
         $this->layout->add_javascripts(array('salesorder','checkout'));
         
-    	if(is_null($so_id) || !(int)$so_id)
-    		redirect('sales_orders');
-    	
+    	//if(is_null($so_id) || !(int)$so_id)
+//    		redirect('sales_orders');
+//    	
     	include('common_controller.php');
     	
     	$obj = new common_controller();
@@ -777,6 +784,30 @@ class Salesorder extends Admin_Controller
           
         $this->_ajax_output($output, TRUE);
        
+    }
+    
+    function update_ord_status($so_id)
+    {
+        try
+        {
+            if(!$so_id)
+    		    return false;
+                
+            $carrier    = $this->input->post("carrier");
+            $status     = $this->input->post("order_status");
+            
+            $ins_data['order_status'] = $status;
+            
+            $this->salesorder_model->update(array("id" => $so_id),$ins_data);
+            $this->salesorder_model->update(array("so_id" => $so_id),array("ship_company" => $carrier),"shipment"); 
+            $output['status'] = 'success';
+            $output['so_id']  = $so_id;     
+        }
+        catch(Exception $e)
+        {
+            $output = array('status' => 'error', 'message' => $e->getMessage());
+        }
+        $this->_ajax_output($output, TRUE);
     }
     
     public function get_logs($so_id, $value )
