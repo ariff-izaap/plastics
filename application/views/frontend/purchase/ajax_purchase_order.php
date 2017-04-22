@@ -173,10 +173,11 @@ $(".change_order_status").click(function(){
   	data:{id:id,val:val},
   	success:function(data)
   	{
+      console.log(data);
   		data = JSON.parse(data);
   		service_message(data.status,data.message);
       setTimeout(function(){
-        location.reload();
+        // location.reload();
       },2000);
   	}
   });

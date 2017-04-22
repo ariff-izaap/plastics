@@ -429,7 +429,7 @@ class Purchase extends Admin_Controller
 
   public function checkout($po_id='')
   {
-    echo "<pre>";print_r($this->cart->contents());exit;
+    // echo "<pre>";print_r($this->cart->contents());exit;
     $po_id = $_SESSION['po_id'];
     $this->data['po_id'] = $po_id;
     $this->data['edit_data'] = $this->purchase_model->get_purchased_order($po_id);
@@ -619,6 +619,18 @@ class Purchase extends Admin_Controller
     $output['message'] = "Order Updated successfuly.";
     $output['status']  = "success";
     $this->purchase_model->update(array("id"=>$id),$up,"purchase_order");   
+    if($val=='ACCEPTED' || $val=='SHIPPED')
+    {
+      $items = $this->purchase_model->select_multiple(array("po_id"=>$id),"purchase_order_item");
+      foreach ($items as  $value)
+      {
+        $product = $this->purchase_model->select(array("id"=>$value['product_id']),"product");
+        $avail_qty = $product['available_qty'];
+        $curr_qty = $value['qty'];
+        $up1['available_qty'] = $avail_qty + $curr_qty;
+        $this->purchase_model->update(array("id"=>$value['product_id']),$up1,"product");
+      }
+    }
     $this->_ajax_output($output, TRUE);
   }
 

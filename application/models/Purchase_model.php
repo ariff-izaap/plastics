@@ -99,6 +99,13 @@ class Purchase_model extends App_model
 			return $q->row_array();
 	}
 
+	public function select_multiple($where,$table=NULL)
+	{
+		$this->db->where($where);
+		$q = $this->db->get($table);
+		return $q->result_array();
+	}
+
 	public function delete($where,$table=NULL)
 	{
 		$this->db->where($where);

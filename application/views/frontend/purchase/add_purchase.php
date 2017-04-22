@@ -86,7 +86,6 @@
           <label required="">Select Vendor</label>
           <select name="vendor_id" class="form-control vendor_select">
             <option value="">--Select--</option>
-            <option value="2">As</option>
             <?php
                if($vendor)
                 {

@@ -235,10 +235,8 @@
 		$.fn.clear_advance_search = function(){
 			listing_form_data = {};
 			listing_form_data.clear_advance_search = 'yes';
-
-			if(current_controller == 'timesheet'){
-				$('.empcheckbox').attr('checked', false);
-				timesheet_checkbox_data = [];
+			if(current_controller == 'purchase'){
+				$('form#advance_search_form select').selectpicker('deselectAll');
 			}		
 
 			$.fn.display_grid(base_url+'/'+current_controller+'/'+current_method, 'data_table');

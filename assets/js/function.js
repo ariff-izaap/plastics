@@ -273,12 +273,12 @@ function update_cart(a)
   $.ajax({
     url:base_url+"purchase/update_cart/",
     type:"POST",
-    data:$("#viewCart").serialize(),
+    data:$("form#viewCart").serialize(),
     dataType:"json",
     success:function(b){
       console.log(b);
       after_ajax(a,b);
-      $("#viewCart table tbody").html(b.content);
+      $("form#viewCart table tbody").html(b.content);
       bootbox.alert(b.message)
     },
     error:function(b){

@@ -8,7 +8,8 @@
     <div class="filter-column">
       <div class="filter-row col-md-3 form-group">
         <label>Product</label>
-        <select name="product[]" multiple class="select2_sample2 form-control">
+        <select name="product[]" multiple data-selected-text-format="count" class="select2_sample2 form-control" data-size="5"
+          data-actions-box="true">
           <?php
             if(get_products())
             {
@@ -24,7 +25,7 @@
       </div>
       <div class="filter-row col-md-3 form-group">
         <label>Form</label>
-        <select name="form[]" multiple class="select2_sample2 form-control">
+        <select name="form[]" multiple data-selected-text-format="count" class="select2_sample2 form-control" data-actions-box="true" data-size="5">
           <?php
             if(get_forms())
             {
@@ -40,7 +41,7 @@
       </div>
       <div class="filter-row col-md-3 form-group">
         <label>Color</label>
-        <select name="color[]" multiple class="select2_sample2 form-control">
+        <select name="color[]" multiple data-selected-text-format="count" class="select2_sample2 form-control" data-actions-box="true" data-size="5">
           <?php
             if(get_colors())
             {
@@ -59,7 +60,8 @@
     <div class="filter-column">
       <div class="filter-row form-group col-md-3">
         <label>Packaging</label>
-        <select name="package[]" multiple class="select2_sample2 form-control">
+        <select name="package[]" multiple data-selected-text-format="count" class="select2_sample2 form-control" 
+            data-actions-box="true" data-size="5">
           <?php
             if(get_packages())
             {
@@ -75,7 +77,7 @@
       </div>
        <div class="filter-row form-group col-md-3">
         <label>Notes</label>
-        <select name="note[]" multiple class=" select2_sample2 form-control">
+        <select name="note[]" multiple data-selected-text-format="count" class=" select2_sample2 form-control" data-actions-box="true" data-size="5">
           <?php
             if(get_product_notes())
             {
@@ -104,9 +106,10 @@
 </form>
 
 <script type="text/javascript">
-  $('.select2_sample2').select2({
-      placeholder: "Select Value",
-      allowClear: true
-  });
+  // $('.select2_sample2').select2({
+  //     placeholder: "Select Value",
+  //     allowClear: true
+  // });
+  $('.select2_sample2').selectpicker();
 
 </script>
