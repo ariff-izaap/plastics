@@ -485,6 +485,8 @@ bottom: -16px !important;
 }
 .account-invoice .form-group { width:50% !important; float:left;}
 .account-invoice { min-height:400px !important;}
+.advance_search_form * { padding-left:0px;}
+.advance_search_form button { padding-left:12px;}
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
