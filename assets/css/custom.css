@@ -483,7 +483,8 @@ bottom: -16px !important;
 #cartItems .row.m_bot_30 {
     max-width: 1160px;
 }
-
+.account-invoice .form-group { width:50% !important; float:left;}
+.account-invoice { min-height:400px !important;}
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
