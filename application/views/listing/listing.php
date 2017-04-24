@@ -152,7 +152,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 					// echo "<pre>";print_r($item);
 					?>
 						<td>
-							<button type="button" id="opt_<?=$item['id'];?>" class="btn-default" onclick="add_to_cart(<?=$item['id'];?>,<?=$item['po_id'];?>, 'form',this,<?=$item['vendor_id'];?>)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title="">+ Add to Cart
+							<button type="button" id="opt_<?=$item['id'];?>" class="btn btn-info" onclick="add_to_cart(<?=$item['id'];?>,<?=$item['po_id'];?>, 'form',this,<?=$item['vendor_id'];?>)" data-placement="top" data-toggle="tooltip" data-original-title="Add to cart" title=""><i class="fa fa-plus"></i> Add to Cart
 					</button>
 						</td>
 					<?php

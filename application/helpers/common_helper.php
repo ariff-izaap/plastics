@@ -744,6 +744,10 @@ function log_history($table='',$id='',$cat='',$action='',$value='')
     $data['action']="<strong>#".$get_name['invoice_no']."</strong> $cat has been ".$action." to <b>".$value."</b>";
   else if($cat=="invoice_comments")
     $data['action']="<b>".$value."</b>";
+  else if($cat=="purchase_status")
+    $data['action']="Purchase Order Status has been changed to <b>".$value."</b>";
+  else if($cat=="purchase_qty")
+    $data['action']="Received Quantity <b>".$value."</b>";
   else
     $data['action']="<strong>".$get_name['name']."</strong> $cat has been ".$action;
 
@@ -832,6 +836,13 @@ function get_address()
 {
   $CI = get_instance();
   $q = $CI->db->query("select * from address")->result_array();
+  return $q;
+}
+
+function get_products_by_vendor($id='')
+{
+   $CI = get_instance();
+  $q = $CI->db->query("select a.*,b.vendor_id from product a,vendor_price_list b where b.product_id=a.id and b.vendor_id='".$id."'")->result_array();
   return $q;
 }
 
@@ -1052,7 +1063,7 @@ function create_auto_invoice($form)
 function get_logs($cat='',$id='')
 {
    $CI = get_instance();
-  $q = $CI->db->query("select a.*,b.first_name as created_name from log a,admin_users b where a.line='".$cat."' and a.action_id='".$id."' and a.created_id=b.id")->result_array();
+   $q = $CI->db->query("select a.*,b.first_name as created_name from log a,admin_users b where a.line like '%".$cat."%' and a.action_id='".$id."' and a.created_id=b.id order by a.created_date desc")->result_array();
   return $q;
 }
 

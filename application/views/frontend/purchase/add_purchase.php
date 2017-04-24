@@ -3,7 +3,7 @@
       <div class="col-md-6 breadcrumbs-span">
         <?php echo set_breadcrumb(); ?>
       </div>
-    <a href="<?=site_url('purchase');?>" class="btn pull-right">Back</a>
+    <a href="<?=site_url('purchase');?>" class="btn btn-danger pull-right">Back</a>
   </div>
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
@@ -265,7 +265,7 @@
         
         <div class="row">
           <div class="col-md-2  pull-right">
-            <a href="#modalCart" data-toggle="modal" class="btn">
+            <a href="#modalCart" data-toggle="modal" class="btn btn-success">
               <i class="fa fa-shopping-cart"></i>&nbsp;
               View Cart (<span class="view_cart_count"><?=count($this->cart->contents());?></span>)
             </a>
@@ -276,8 +276,8 @@
         </div>
         <div class="clearfix"></div>
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
-        <div class="form-group col-md-2 col-md-offset-10">
-          <button type="submit" name="save_product" class="btn btn-block">Checkout</button>
+        <div class="form-group col-md-2 col-md-offset-10 pull-right">
+          <button type="submit" name="save_product" class="btn btn-primary">Checkout</button>
         </div>
       </div>
     </form>
@@ -332,10 +332,10 @@
       </div>
       <div class="modal-footer">
         <div class="col-md-2 pull-right">
-          <a href="javascript:void(0);" data-po-id="<?=$form_product['po_id'];?>" class="btn checkout-btn pull-right">Checkout</a>
+          <a href="javascript:void(0);" data-po-id="<?=$form_product['po_id'];?>" class="btn btn-info checkout-btn pull-right">Checkout</a>
         </div>
         <div class="col-md-2 pull-right">
-          <a href="javascript:void(0);" onclick="update_cart(this);" class="btn pull-right">Update Cart</a>
+          <a href="javascript:void(0);" onclick="update_cart(this);" class="btn btn-primary pull-right">Update Cart</a>
         </div>
       </div>
     </div>

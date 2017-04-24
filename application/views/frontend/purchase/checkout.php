@@ -10,8 +10,8 @@
 <div class="purchase-loader">
   <img src="<?=base_url();?>assets/img/rolling.gif">
 </div>
-
-<form action="" name="checkoutForm" id="checkoutForm"  method="post">
+<div class="container">
+	<form action="" name="checkoutForm" id="checkoutForm"  method="post">
 	<input type="hidden" name="rand" class="rand" value="<?=$_POST['rand'];?>">
 	<div class="row">
 		<div class="col-md-12 title">
@@ -241,7 +241,8 @@
 	    </div>
 		</div>
 	</div>
-</form>
+	</form>
+</div>
 
 <div id="modalCart" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">

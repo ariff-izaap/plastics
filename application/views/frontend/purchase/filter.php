@@ -100,7 +100,7 @@
   <div class="col-sm-2">
     <div class="text-center m_top">
       <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
-      <button type="button" class="btn btn-sm purchase_order_search" onclick="$.fn.submit_advance_search_form();">Search</button>
+      <button type="button" class="btn btn-primary purchase_order_search" onclick="$.fn.submit_advance_search_form();">Search</button>
     </div>
   </div>
 </form>

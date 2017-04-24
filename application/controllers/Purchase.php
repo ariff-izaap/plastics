@@ -373,7 +373,7 @@ class Purchase extends Admin_Controller
     <input type="hidden" name="pid" id="pid" value="'.$product_id.'" class="input-small" />
     <input type="hidden" name="vid" id="vid" value="'.$po_id.'" class="input-small" />
     <input type="hidden" name="elm_id" id="elm_id" value="'.$elm_id.'" class="input-small" />
-    <a class="btn" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this,'.$vendor_id.')">Add</a>
+    <a class="btn btn-warning" href="javascript:;"  title="" onclick="add_to_cart('.$product_id.','.$po_id.', \'process\', this,'.$vendor_id.')">Add</a>
     </div>
     </div>';  
     // if($this->input->is_ajax())
@@ -485,7 +485,7 @@ class Purchase extends Admin_Controller
         }
       foreach ($this->cart->contents() as $value)
       {
-        $ins['po_id'] =$ins_id;
+        $ins['po_id'] = $ins_id;
         $ins['product_id'] =$value['id'];
         $ins['code'] =$value['sku'];
         $ins['name'] =$value['name'];
@@ -502,7 +502,7 @@ class Purchase extends Admin_Controller
       unset($_SESSION['po_id']);
       $log = log_history("purchase_order",$ins_id,"purchase","insert");
       $this->session->set_flashdata("success_msg","Purchase Order Created Successfully",TRUE);
-      redirect('purchase');
+      redirect('purchase/view/'.$ins_id);
     }
     $this->layout->view('frontend/purchase/checkout');
   }
@@ -624,18 +624,19 @@ class Purchase extends Admin_Controller
     $output['message'] = "Order Updated successfuly.";
     $output['status']  = "success";
     $this->purchase_model->update(array("id"=>$id),$up,"purchase_order");   
-    if($val=='ACCEPTED' || $val=='SHIPPED')
-    {
-      $items = $this->purchase_model->select_multiple(array("po_id"=>$id),"purchase_order_item");
-      foreach ($items as  $value)
-      {
-        $product = $this->purchase_model->select(array("id"=>$value['product_id']),"product");
-        $avail_qty = $product['available_qty'];
-        $curr_qty = $value['qty'];
-        $up1['available_qty'] = $avail_qty + $curr_qty;
-        $this->purchase_model->update(array("id"=>$value['product_id']),$up1,"product");
-      }
-    }
+    // if($val=='ACCEPTED' || $val=='SHIPPED')
+    // {
+    //   $items = $this->purchase_model->select_multiple(array("po_id"=>$id),"purchase_order_item");
+    //   foreach ($items as  $value)
+    //   {
+    //     $product = $this->purchase_model->select(array("id"=>$value['product_id']),"product");
+    //     $avail_qty = $product['available_qty'];
+    //     $curr_qty = $value['qty'];
+    //     $up1['available_qty'] = $avail_qty + $curr_qty;
+    //     $this->purchase_model->update(array("id"=>$value['product_id']),$up1,"product");
+    //   }
+    $log = log_history("purchase_order",$id,"purchase_status","update",$val);
+    // }
     $this->_ajax_output($output, TRUE);
   }
 
@@ -657,11 +658,75 @@ class Purchase extends Admin_Controller
   }
   public function view($po_id='')
   {
-    if($po_id!='')
+    if($po_id=='')
     {
       $this->session->set_flashdata("error_msg","Something went wrong",TRUE);
       redirect("purchase");
     }
+    $this->data['po'] = $this->purchase_model->get_purchased_order($po_id);
+    $this->data['products'] = $this->purchase_model->get_purchased_products($po_id);
+    $this->layout->view('frontend/purchase/view');
+  }
+  public function purchase_modal_save()
+  {
+    $id = $_POST['row'];
+    foreach ($id as $key => $value)
+    { 
+      $get = $this->purchase_model->select(array("id"=>$key),"purchase_order_item");
+      $qty = $get['qty'];
+      $qty_received = $get['qty_received'];
+      $new_qty = $value + $qty_received;
+      $up['qty_received'] = $new_qty;
+      $up = $this->purchase_model->update(array("id"=>$key),$up,"purchase_order_item");
+      $log = log_history("purchase_order",$get['po_id'],"purchase_qty","update",$value);
+    }
+    $output['status'] = "success";
+    $output['message'] = "Quantity has been updated";
+    $this->_ajax_output($output,TRUE);
+  }
+
+  public function product_modal_ajax()
+  {
+    $this->data['po_id'] = $_POST['po_id'];
+    $this->data['products'] = get_products_by_vendor($_POST['vendor_id']);
+    $this->load->view('frontend/purchase/product_modal_ajax',$this->data);
+  }
+  public function add_product_modal_ajax()
+  {
+    $form = $this->input->post();
+    $ins['po_id'] = $form['po_id'];
+    $ins['product_id'] = $form['product_id'];
+    $ins['qty'] = $form['qty'];
+    $ins['unit_price'] = get_product_price($ins['product_id']);
+    $ins['name'] = get_product_name($ins['product_id'])['name'];
+    $ins['code'] = get_product_name($ins['product_id'])['sku'];
+    $ins['item_status'] = "NEW";
+    $ins['created_id'] = get_current_user_id();
+    $ins['updated_id'] = get_current_user_id();
+    $ins['created_date'] = date("Y-m-d H:i:s");
+    $ins['updated_date'] = date("Y-m-d H:i:s");
+    $chk = $this->purchase_model->select(array("product_id"=>$form['product_id'],"po_id"=>$form['po_id']),"purchase_order_item");
+    if($chk)
+    {
+      $old_qty = $chk['qty'];
+      $up['qty'] = $old_qty + $form['qty'];
+      $up['updated_id'] = get_current_user_id();
+      $up['updated_date'] = date("Y-m-d H:i:s");
+      $update = $this->purchase_model->update(array("product_id"=>$form['product_id'],"po_id"=>$form['po_id']),$up,"purchase_order_item");
+    }
+    else
+      $add_id = $this->purchase_model->insert($ins,"purchase_order_item");
+    $output['status'] = "success";
+    $output['message'] = "Product Added Successfully.";
+    $this->_ajax_output($output,TRUE);
+  }
+  public function remove_product()
+  {
+    $id = $this->input->post('id');
+    $del = $this->purchase_model->delete(array("id"=>$id),"purchase_order_item");
+    $output['status'] = "success";
+    $output['message'] = "Product removed Successfully.";
+    $this->_ajax_output($output,TRUE);
   }
 }
 ?>

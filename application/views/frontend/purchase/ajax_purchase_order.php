@@ -24,13 +24,12 @@
       	<div class="col-md-3">
       		<label>Vendor : <strong><?=$po['vendor_name'];?></strong></label>
       	</div>
-      	<div class="col-md-5">
+      	<div class="col-md-4">
       		<label>Ordered Date : <strong><?=displayData($po['created_date'],'datetime');?></strong></label>
       	</div>
-      	<div class="col-md-4">
-      		<label class="col-md-5">Status :</label>
-      		<div class="col-md-7">
-      			<select class="form-control order_status">
+      	<div class="col-md-5">
+      		<label class="pull-left">Status :&nbsp;&nbsp;&nbsp;</label>
+    			<select class="form-control order_status pull-left" style="width: 50%;">
       				<option value="NEW" <?php if($po['order_status']=='NEW'){?> selected <?php }?>>NEW</option>
       				<option value="PROCESSING" <?php if($po['order_status']=='PROCESSING'){?>selected <?php }?>>PROCESSING</option>
       				<option value="PENDING" <?php if($po['order_status']=='PENDING'){?> selected <?php }?>>PENDING</option>
@@ -42,12 +41,11 @@
       				<option value="IGNORED" <?php if($po['order_status']=='IGNORED'){?> selected <?php }?>>IGNORED</option>
       				<option value="RECEIVED" <?php if($po['order_status']=='RECEIVED'){?> selected <?php }?>>RECEIVED</option>
       			</select>
-      		</div>
+          <button class="btn change_order_status btn-primary pull-right" data-id="<?=$po['po_id'];?>">Update Status</button>
       	</div>
     	</div><br>
       <div class="row">
         <div class="col-md-2 pull-right">
-          <button class="btn change_order_status" data-id="<?=$po['po_id'];?>">Save Changes</button>
         </div>
       	<div class="col-md-4">
       		<label>Shipment Type : <strong><?=$po['ship_type'];?></strong></label>
@@ -106,46 +104,81 @@
       <div class="row">
         <div class="col-md-12">
           <h3>Product information</h3>
-      	  <table class="table table-hover table-bordered">
-      		<thead>
-      			<th>Product Name</th><th>SKU</th><th>Quantity</th><th>Unit Price</th><th>Total</th>
-      		</thead>
-      		<tbody>
-      			<?php
-      			if($products)
-      			{
-      				$tot = [];
-      				foreach ($products as $key => $value)
-      				{
-      					$tot[] = $value['qty'] * $value['unit_price'];
-      					?>
-      						<tr>
-      							<td><?=$value['p_name'];?></td>
-      							<td><?=$value['sku'];?></td>
-      							<td><?=$value['qty'];?></td>
-      							<td><?=displayData($value['unit_price'],'money');?></td>
-      							<td><?=displayData($value['unit_price'] * $value['qty'],'money');?></td>
-      						</tr>
-      					<?php
-      				}
-      			}
-      			?>
-      		</tbody>
-      		<tfoot>
-      			<tr>
-      				<td colspan="4" class="text-right"><strong>Sub Total</strong></td>
-      				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
-      			</tr>
-      			<tr>
-      				<td colspan="4" class="text-right"><strong>Shipping Charge</strong></td>
-      				<td colspan="1">0.00</td>
-      			</tr>
-      			<tr>
-      				<td colspan="4" class="text-right"><strong>Total</strong></td>
-      				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
-      			</tr>
-      		</tfoot>
-      	  </table>
+          <?php
+          if($po['order_status']=="NEW" || $po['order_status']=="PENDING" || $po['order_status']=="PROCESSING"){
+            ?>
+              <div class="col-md-2 pull-right">
+                <a href="#" data-target="#ProductModal" data-toggle="modal"
+                  class="btn btn-warning pull-right product_modal_ajax" data-vendor-id="<?=$po['vendor_id'];?>" data-po-id="<?=$po['po_id'];?>">Add Product</a>
+              </div><br><br>
+            <?php
+            }
+          ?>
+          <form id="OrderedProduct" action="" method="post">
+        	  <table class="table table-hover table-bordered">
+          		<thead>
+                <?php if($po['order_status']=="NEW" || $po['order_status']=="PENDING" || $po['order_status']=="PROCESSING"){?>
+          			<th>Action</th>
+                <?php }?>
+                <th>Product Name</th><th>SKU</th><th>Quantity</th><th width="20%">Received Quantity</th><th>Unit Price</th><th>Total</th>
+          		</thead>
+          		<tbody>
+          			<?php
+          			if($products)
+          			{
+                  $colspan = "5";
+          				$tot = [];
+          				foreach ($products as $key => $value)
+          				{
+          					$tot[] = $value['qty'] * $value['unit_price'];
+          					?>
+          						<tr>
+                        <?php if($po['order_status']=="NEW" || $po['order_status']=="PENDING" || $po['order_status']=="PROCESSING"){
+                            $colspan = "6";
+                          ?>
+                            <td><a href="#" class="btn btn-danger" onclick="remove_product(<?=$value['id'];?>,<?=$value['po_id'];?>)"><i class="fa fa-remove"></i></a></td>
+                            <?php }?>
+          							<td><?=$value['p_name'];?></td>
+          							<td><?=$value['sku'];?></td>
+          							<td><?=$value['qty'];?></td>
+                        <td>
+                        <?php
+                          if($value['qty']==$value['qty_received'])
+                          {
+                            echo $value['qty_received'];
+                          }
+                          else
+                          {
+                            ?>
+                            <input type="number" min="<?=$value['qty_received'];?>" max="<?=$value['qty'];?>" class="form-control qty-ip" name="row[<?=$value['rowid'];?>]" value="<?=$value['qty_received'];?>">
+                            <?php
+                          }
+                          ?>
+                        </td>
+          							<td><?=displayData($value['unit_price'],'money');?></td>
+          							<td><?=displayData($value['unit_price'] * $value['qty'],'money');?></td>
+          						</tr>
+          					<?php
+          				}
+          			}
+          			?>
+          		</tbody>
+          		<tfoot>
+          			<tr>
+          				<td colspan="<?=$colspan;?>" class="text-right"><strong>Sub Total</strong></td>
+          				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
+          			</tr>
+          			<tr>
+          				<td colspan="<?=$colspan;?>" class="text-right"><strong>Shipping Charge</strong></td>
+          				<td colspan="1">0.00</td>
+          			</tr>
+          			<tr>
+          				<td colspan="<?=$colspan;?>" class="text-right"><strong>Total</strong></td>
+          				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
+          			</tr>
+          		</tfoot>
+        	  </table>
+          </form>
         </div>
       </div>
       <div class="row">
@@ -188,24 +221,65 @@
     </div>
 	</div>
 </div>
+
 <script type="text/javascript">
-	
-$(".change_order_status").click(function(){
-  id = $(this).attr("data-id");
-  val = $(".order_status").val();
-  $.ajax({
-  	type:"POST",
-  	url:base_url+'purchase/change_order_status',
-  	data:{id:id,val:val},
-  	success:function(data)
-  	{
+  $(".change_order_status").click(function(){
+    id = $(this).attr("data-id");
+    val = $(".order_status").val();
+    $.ajax({
+    	type:"POST",
+    	url:base_url+'purchase/change_order_status',
+    	data:{id:id,val:val},
+    	success:function(data)
+    	{
+        console.log(data);
+    		data = JSON.parse(data);
+    		service_message(data.status,data.message);
+        setTimeout(function(){
+          // location.reload();
+        },2000);
+    	}
+    });
+  });
+  $(".qty-ip").keypress(function (evt) {
+    evt.preventDefault();
+  });
+  $(".product_modal_ajax").click(function(){
+    vendor_id = $(this).attr("data-vendor-id");
+    po_id = $(this).attr("data-po-id");
+    $.ajax({
+    type:"POST",
+    url:base_url+'purchase/product_modal_ajax',
+    data:{vendor_id:vendor_id,po_id:po_id},
+    success:function(data)
+    {
       console.log(data);
-  		data = JSON.parse(data);
-  		service_message(data.status,data.message);
-      setTimeout(function(){
-        // location.reload();
-      },2000);
-  	}
+      $(".product-modal-ajax").html(data);
+    }
   });
 });
+
+  function remove_product(id,po_id)
+  {
+  con = confirm("Are you sure want to remove this product?");
+  if(con)
+  {
+    $.ajax({
+      type:"POST",
+      url:base_url+'purchase/remove_product',
+      data:{id:id},
+      dataType:'json',
+      success:function(data)
+      {
+        console.log(data);
+        if(data.status=="success")
+          bootbox.alert(data.message);
+
+        get_purchase_order(po_id);
+      }
+    });
+  }
+  }
+
+
 </script>

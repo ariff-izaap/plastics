@@ -1038,7 +1038,7 @@ $(".warehouse_select").change(function(){
   }
 });
 
-function get_purchase_order(id,ele)
+function get_purchase_order(id,ele='')
 {
   $.ajax({
     type:"POST",
@@ -1218,5 +1218,30 @@ $(".vendor_select").change(function(){
   $(".purchase_order_search").trigger("click");
 });
 
+
+$(".qty-ip").keypress(function (evt) {
+  evt.preventDefault();
+});
+
+$(".purchase_modal_save").click(function(){
+  form = $("form#OrderedProduct").serialize();
+  $.ajax({
+    type:"POST",
+    data:form,
+    url:base_url+'purchase/purchase_modal_save',
+    dataType:'json',
+    success:function(data)
+    {
+      if(data.status=="success")
+        bootbox.alert(data.message);
+      console.log(data);
+    }
+  });
+});
+
+$(".done-product-modal").click(function(){
+  po_id= $(this).attr("data-po-id");
+  get_purchase_order(po_id);
+});
 
 /*Ram*/
