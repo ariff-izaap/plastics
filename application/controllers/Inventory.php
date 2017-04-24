@@ -93,10 +93,19 @@ class Inventory extends Admin_Controller
           $this->form_validation->set_rules('category_id','Color','trim|required');
           $this->form_validation->set_rules('row','Row','trim|required');
           $this->form_validation->set_rules('units','Units','trim|required');
-          $this->form_validation->set_rules('weight','Weight','trim|required');
+          $this->form_validation->set_rules('retail_price','Retail Price','trim|required');
+          $this->form_validation->set_rules('wholesale_price','Wholesale Price','trim|required');
+         // $this->form_validation->set_rules('weight','Weight','trim|required');
           
           $this->form_validation->set_error_delimiters('', '');
           if($this->form_validation->run()){
+            
+              $received_at_customer   = $this->input->post('received_at_customer');
+              $received_at_warehouse  = $this->input->post('received_in_warehouse');
+              $intransit_to_customer  = $this->input->post('intransit_to_customer');
+              $intransit_to_warehouse = $this->input->post('intransit_to_warehouse');
+              $in_stock               = $this->input->post('in_stock');
+              
               $ins_data = array();
               $ins_data['sku']                               = $this->input->post('sku');
               $ins_data['name']                              = $this->input->post('name');
@@ -111,8 +120,8 @@ class Inventory extends Admin_Controller
               $ins_data['ref_no']                            = $this->input->post('ref_no');
               $ins_data['internal_lot_no']                   = $this->input->post('internal_lot_no');
               $ins_data['vendor_lot_no']                     = $this->input->post('vendor_lot_no');
-              $ins_data['received_at_customer']              = $this->input->post('received_at_customer');
-              $ins_data['received_in_warehouse']             = $this->input->post('received_in_warehouse');
+              $ins_data['received_at_customer']              = (!empty($received_at_customer))?$received_at_customer:"No";
+              $ins_data['received_in_warehouse']             = (!empty($received_at_warehouse))?$received_at_warehouse:"No";
               $ins_data['purchase_order_number']             = $this->input->post('purchase_order_number');
               $ins_data['weight']                            = $this->input->post('weight');
               $ins_data['row']                               = $this->input->post('row');
@@ -120,11 +129,11 @@ class Inventory extends Admin_Controller
               $ins_data['product']                           = $this->input->post('product');
               $ins_data['units']                             = $this->input->post('units');
               $ins_data['item_type']                         = $this->input->post('item_type');
-              $ins_data['in_stock']                          = $this->input->post('in_stock');
+              $ins_data['in_stock']                          = (!empty($in_stock))?$in_stock:0;
               $ins_data['equivalent']                        = $this->input->post('equivalent');
               $ins_data['warehouse_id']                      = $this->input->post('warehouse_id');
-              $ins_data['intransit_to_warehouse']            = $this->input->post('intransit_to_warehouse');
-              $ins_data['intransit_to_customer']             = $this->input->post('intransit_to_customer');
+              $ins_data['intransit_to_warehouse']            = (!empty($intransit_to_warehouse))?$intransit_to_warehouse:"No";
+              $ins_data['intransit_to_customer']             = (!empty($intransit_to_customer))?$intransit_to_customer:"No";
               $ins_data['purchase_transportation_identifier']= $this->input->post('purchase_transportation_identifier');
               $ins_data['sales_transportation_identifier']   = $this->input->post('sales_transportation_identifier');
               $ins_data['certification_files']               = (isset($_POST['certification_files']))?$_POST['certification_files']:''; 

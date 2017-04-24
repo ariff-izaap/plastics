@@ -17,7 +17,8 @@
             <td><?php echo $evalue['in_stock']; ?></td>
             <td><?php echo $evalue['shipping_cost']; ?></td>
             <td><?php echo $evalue['shipping_service']; ?></td>
-            <td><i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id']; ?>','vendor_price_list');"></i></td>
+            <td><i class="fa fa-edit" onclick="product_image_delete('<?php echo $evalue['id']; ?>','vendor_price_list');"></i>
+                <i class="fa fa-trash-o trash" onclick="product_image_delete('<?php echo $evalue['id']; ?>','vendor_price_list');"></i></td>
         </tr>
  <?php }} 
       else { ?>

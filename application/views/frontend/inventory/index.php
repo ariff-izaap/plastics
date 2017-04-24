@@ -28,6 +28,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" onclick="modal_close();">&times;</button>
+         <h3 id="myModalLabel"></h3>
       </div>
       
       <div class="modal-body">

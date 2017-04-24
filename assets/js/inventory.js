@@ -64,6 +64,7 @@ function inventory_sub(ty='',edit_id)
                 bootbox.alert(res.message);
             }
             $("#inventory_form .modal-body").html(output);
+            $("#inventory_form").find("#myModalLabel").html('Add Product');
             $("#inventory_form").modal({
                 backdrop:"static"
             });
