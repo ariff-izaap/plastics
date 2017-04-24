@@ -10550,7 +10550,7 @@ form .error {
     -webkit-border-bottom-right-radius: 3px;
     border-bottom-right-radius: 3px;
     position: absolute;
-   left: 102px;
+   right: 0;
     bottom: -22px; }
 /* line 532, ../sass/_common.scss */
 form [required]:after {
