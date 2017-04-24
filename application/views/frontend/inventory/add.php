@@ -86,7 +86,7 @@
                                       <?php endforeach;?>
                                   </select>
                                 </div>
-                                <br />
+                             
                                 <div class="form-group  <?php //echo (form_error('product'))?'error':'';?>" data-error="<?php //echo (form_error('product'))? form_error('product'):'';?>">
                                   <label class="col-md-4">Product:</label>
                                    <select name="product" class="form-control col-md-8" >
@@ -106,47 +106,56 @@
                                   </select>
                                   <!-- <input type="text" name="product" class="form-control" id="product" value="<?php echo set_value('product', $editdata['product']);?>" placeholder="Product" /> -->
                                 </div>
-                                <br />
+                               
                                 <div class="form-group  <?php //echo (form_error('notes'))?'error':'';?>" data-error="<?php //echo (form_error('notes'))? form_error('notes'):'';?>">
                                   <label required class="col-md-4">Notes:</label>
                                   <textarea name="notes" class="form-control col-md-8" id="notes"><?php echo set_value('notes', $editdata['notes']); ?> </textarea>
                                 </div>
-                                <br />
+                              
                                 <div class="form-group  <?php //echo (form_error('item_type'))?'error':'';?>" data-error="<?php //echo (form_error('item_type'))? form_error('item_type'):'';?>">
                                   <label required class="col-md-4">Type:</label>
                                    <textarea name="item_type" class="form-control col-md-8" id="type"><?php echo set_value('item_type', $editdata['item_type']); ?> </textarea> 
                                 </div>
-                                <br />
+                              
                                 <div class="form-group  <?php //echo (form_error('equivalent'))?'error':'';?>" data-error="<?php //echo (form_error('equivalent'))? form_error('equivalent'):'';?>">
                                   <label required class="col-md-4">Equivalent:</label>
                                   <textarea name="equivalent" class="form-control col-md-8" id="equivalent"><?php echo set_value('equivalent', $editdata['equivalent']); ?> </textarea>
                                 </div>
-                                <br />
-                                <div class="form-group  <?php echo (form_error('row'))?'error':'';?>" data-error="<?php echo (form_error('row'))? form_error('row'):'';?>">
+                                  <div class="form-group  <?php echo (form_error('row'))?'error':'';?>" data-error="<?php echo (form_error('row'))? form_error('row'):'';?>">
                                   <label class="col-md-4">Row</label>
                                   <input type="text" name="row" class="form-control col-md-8" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
                                 </div>
-                                <br />
+                               
                                 <div class="form-group  <?php echo (form_error('units'))?'error':'';?>" data-error="<?php echo (form_error('units'))? form_error('units'):'';?>">
                                   <label class="col-md-4">Units:</label>
                                   <input type="text" name="units" class="form-control col-md-8" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
                                 </div>
-                                <br />
+                               
                                 
                                 <div class="form-group" data-error="<?php echo (form_error('quantity'))? form_error('quantity'):'';?>">
                                   <label class="col-md-4">Quantity</label>
                                   <input type="text" name="quantity" class="form-control col-md-8" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
                                 </div>
-                            
                                 <div class="form-group" >
                                   <label required class="col-md-4">Retail Price</label>
                                   <input type="text" name="retail_price" class="form-control col-md-8" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
                                 </div>
-                                
                                 <div class="form-group " >
                                   <label required class="col-md-4">Wholesale Price</label>
                                   <input type="text" name="wholesale_price" class="form-control col-md-8" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
                                 </div>
+                             
+                                </div>
+                                </div>
+                                
+                                <div class="form-grid col-md-6 panel panel-default panel-bor">
+                                <div class="panel-heading formcontrol-box">
+                                 
+                              
+                            
+                                
+                                
+                                
                                 
                                 <div class="form-group " >
                                   <label required class="col-md-4">Ref No</label> 	
@@ -168,11 +177,6 @@
                                   <label class="col-md-4">Vendor Lot Number</label>
                                   <input type="text" name="vendor_lot_no" class="form-control col-md-8" id="vendor_lot_no" value="<?php echo set_value('vendor_lot_no', $editdata['vendor_lot_no']);?>" placeholder="Vendor lot No" />
                                 </div>
-                                </div>
-                                </div>
-                                
-                                <div class="form-grid col-md-6 panel panel-default panel-bor">
-                                <div class="panel-heading formcontrol-box">
                                 <label class="">Certificate Documents:</label>
                                 <div class="form-group">
                     				<input id="certificate_file_name" name="certificate_file_name" class="file" type="file" />
