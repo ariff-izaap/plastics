@@ -27,19 +27,19 @@
                         <form name="inventory" id="inventory_sub_form" method="POST" enctype="multipart/form-data">
                            <input type="hidden" name="type" id="form_type" value="" />
                            <div class="form-grid col-md-6 panel panel-default panel-bor">
-                           <div class="panel-heading formcontrol-box">
+                           <div class="panel-heading formcontrol-box inventry-add">
                                 <div class="form-group  <?php echo (form_error('name'))?'error':'';?>" data-error="<?php echo (form_error('name'))? form_error('name'):'';?>">
-                                  <label required class="col-md-4">Inventory Name</label>
-                                  <input type="text" name="name" class="form-control col-md-8" id="name" value="<?php echo set_value('name', $editdata['name']);?>" placeholder="Product Name" />
+                                  <label required>Inventory Name</label>
+                                  <input type="text" name="name" class="form-control" id="name" value="<?php echo set_value('name', $editdata['name']);?>" placeholder="Product Name" />
                                 </div>
                         
                                 <div class="form-group <?php echo (form_error('sku'))?'error':'';?>" data-error="<?php echo (form_error('sku'))? form_error('sku'):'';?>">
-                                  <label required class="col-md-4">SKU</label>
-                                  <input type="text" name="sku" class="form-control col-md-8" id="sku" value="<?php echo set_value('sku', $editdata['sku']);?>" placeholder="Sku">
+                                  <label required>SKU</label>
+                                  <input type="text" name="sku" class="form-control" id="sku" value="<?php echo set_value('sku', $editdata['sku']);?>" placeholder="Sku">
                                 </div>
                                 <div class="form-group <?php echo (form_error('category_id'))?'error':'';?>" data-error="<?php echo (form_error('category_id'))? form_error('category_id'):'';?>">
-                              <label required class="col-md-4">Categories</label>
-                              <select class="form-control col-md-8" name="category_id" id="category_id">
+                              <label required>Categories</label>
+                              <select class="form-control" name="category_id" id="category_id">
                                 <option value="">---Select---</option>
                                     <?php foreach($categories as $category):
                                       $sel = ($category['id'] == set_value('category_id', $editdata['category_id']))?'selected':'';
@@ -49,8 +49,8 @@
                               </select>
                             </div>
                                 <div class="form-group <?php echo (form_error('color_id'))?'error':'';?>" data-error="<?php echo (form_error('color_id'))? form_error('color_id'):'';?>">
-                                  <label required class="col-md-4">Inventory Colors</label>
-                                  <select class="form-control col-md-8" name="color_id" id="color_id">
+                                  <label required>Inventory Colors</label>
+                                  <select class="form-control" name="color_id" id="color_id">
                                     <option value="">---Select---</option>
                                       <?php foreach($colors as $type):
                         
@@ -62,8 +62,8 @@
                                 </div>
                                 
                                 <div class="form-group <?php echo (form_error('form_id'))?'error':'';?>" data-error="<?php echo (form_error('form_id'))? form_error('form_id'):'';?>">
-                                  <label required class="col-md-4">Inventory Forms</label>
-                                  <select class="form-control col-md-8" name="form_id" id="form_id">
+                                  <label required>Inventory Forms</label>
+                                  <select class="form-control" name="form_id" id="form_id">
                                     <option value="">---Select---</option>
                                       <?php foreach($forms as $type):
                         
@@ -75,8 +75,8 @@
                                 </div>
                                 
                                 <div class="form-group <?php echo (form_error('package_id'))?'error':'';?>" data-error="<?php echo (form_error('package_id'))? form_error('package_id'):'';?>">
-                                  <label required class="col-md-4">Inventory Packages</label>
-                                  <select class="form-control col-md-8" name="package_id" id="package_id">
+                                  <label required>Inventory Packages</label>
+                                  <select class="form-control" name="package_id" id="package_id">
                                     <option value="">---Select---</option>
                                       <?php foreach($packages as $type):
                         
@@ -88,8 +88,8 @@
                                 </div>
                              
                                 <div class="form-group  <?php //echo (form_error('product'))?'error':'';?>" data-error="<?php //echo (form_error('product'))? form_error('product'):'';?>">
-                                  <label class="col-md-4">Product:</label>
-                                   <select name="product" class="form-control col-md-8" >
+                                  <label>Product:</label>
+                                   <select name="product" class="form-control" >
                                     <option value="">--Select--</option>
                                     <?php
                                     if(get_prodcut_type())
@@ -108,52 +108,54 @@
                                 </div>
                                
                                 <div class="form-group  <?php //echo (form_error('notes'))?'error':'';?>" data-error="<?php //echo (form_error('notes'))? form_error('notes'):'';?>">
-                                  <label class="col-md-4">Notes:</label>
-                                  <textarea name="notes" class="form-control col-md-8" id="notes"><?php echo set_value('notes', $editdata['notes']); ?> </textarea>
+                                  <label>Notes:</label>
+                                  <textarea name="notes" class="form-control" id="notes" style="height:33px;"><?php echo set_value('notes', $editdata['notes']); ?> </textarea>
                                 </div>
                               
                                 <div class="form-group  <?php //echo (form_error('item_type'))?'error':'';?>" data-error="<?php //echo (form_error('item_type'))? form_error('item_type'):'';?>">
-                                  <label class="col-md-4">Type:</label>
-                                   <textarea name="item_type" class="form-control col-md-8" id="type"><?php echo set_value('item_type', $editdata['item_type']); ?> </textarea> 
+                                  <label>Type:</label>
+                                   <textarea name="item_type" class="form-control" id="type"><?php echo set_value('item_type', $editdata['item_type']); ?> </textarea> 
                                 </div>
                               
                                 <div class="form-group  <?php //echo (form_error('equivalent'))?'error':'';?>" data-error="<?php //echo (form_error('equivalent'))? form_error('equivalent'):'';?>">
-                                  <label class="col-md-4">Equivalent:</label>
-                                  <textarea name="equivalent" class="form-control col-md-8" id="equivalent"><?php echo set_value('equivalent', $editdata['equivalent']); ?> </textarea>
+                                  <label>Equivalent:</label>
+                                  <textarea name="equivalent" class="form-control" id="equivalent"><?php echo set_value('equivalent', $editdata['equivalent']); ?> </textarea>
                                 </div>
                                   <div class="form-group  <?php echo (form_error('row'))?'error':'';?>" data-error="<?php echo (form_error('row'))? form_error('row'):'';?>">
-                                  <label class="col-md-4" required>Row</label>
-                                  <input type="text" name="row" class="form-control col-md-8" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
+                                  <label required>Row</label>
+                                  <input type="text" name="row" class="form-control" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
                                 </div>
                                
                                 <div class="form-group  <?php echo (form_error('units'))?'error':'';?>" data-error="<?php echo (form_error('units'))? form_error('units'):'';?>">
-                                  <label class="col-md-4" required>Units:</label>
-                                  <input type="text" name="units" class="form-control col-md-8" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
+                                  <label required>Units:</label>
+                                  <input type="text" name="units" class="form-control" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
                                 </div>
                                
                                 
                                 <div class="form-group" data-error="<?php echo (form_error('quantity'))? form_error('quantity'):'';?>">
-                                  <label required class="col-md-4">Quantity</label>
-                                  <input type="text" name="quantity" class="form-control col-md-8" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
+                                  <label required>Quantity</label>
+                                  <input type="text" name="quantity" class="form-control" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
                                 </div>
                                 <div class="form-group" >
-                                  <label required class="col-md-4">Retail Price</label>
-                                  <input type="text" name="retail_price" class="form-control col-md-8" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
+                                  <label required>Retail Price</label>
+                                  <input type="text" name="retail_price" class="form-control" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
                                 </div>
-                                <div class="form-group " >
-                                  <label required class="col-md-4">Wholesale Price</label>
-                                  <input type="text" name="wholesale_price" class="form-control col-md-8" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
-                                </div>
+                                
                              
                                 </div>
                                 </div>
                                 
                                 <div class="form-grid col-md-6 panel panel-default panel-bor">
                                 <div class="panel-heading formcontrol-box">
+                                <div class="inventry-add">
+                                <div class="form-group " >
+                                  <label required>Wholesale Price</label>
+                                  <input type="text" name="wholesale_price" class="form-control" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
+                                </div>
             
                                 <div class="form-group " >
-                                  <label  class="col-md-4">Ref No</label> 	
-                                  <input type="text" name="ref_no" class="form-control col-md-8" id="ref_no" value="<?php echo set_value('ref_no', $editdata['ref_no']);?>" placeholder="Ref No" />
+                                  <label>Ref No</label> 	
+                                  <input type="text" name="ref_no" class="form-control" id="ref_no" value="<?php echo set_value('ref_no', $editdata['ref_no']);?>" placeholder="Ref No" />
                                 </div>
                                 
                                 <!--
@@ -164,13 +166,15 @@
 -->
                         
                                 <div class="form-group  " >
-                                  <label class="col-md-4">Internal Lot Number</label>
-                                  <input type="text" name="internal_lot_no" class="form-control col-md-8" id="internal_lot_no" value="<?php echo set_value('internal_lot_no', $editdata['internal_lot_no']);?>" placeholder="Internal lot No" />
+                                  <label>Internal Lot Number</label>
+                                  <input type="text" name="internal_lot_no" class="form-control" id="internal_lot_no" value="<?php echo set_value('internal_lot_no', $editdata['internal_lot_no']);?>" placeholder="Internal lot No" />
                                 </div>
                                 <div class="form-group  " >
-                                  <label class="col-md-4">Vendor Lot Number</label>
-                                  <input type="text" name="vendor_lot_no" class="form-control col-md-8" id="vendor_lot_no" value="<?php echo set_value('vendor_lot_no', $editdata['vendor_lot_no']);?>" placeholder="Vendor lot No" />
+                                  <label>Vendor Lot Number</label>
+                                  <input type="text" name="vendor_lot_no" class="form-control" id="vendor_lot_no" value="<?php echo set_value('vendor_lot_no', $editdata['vendor_lot_no']);?>" placeholder="Vendor lot No" />
                                 </div>
+                                </div>
+                                
                                 <label class="">Certificate Documents:</label>
                                 <div class="form-group">
                     				<input id="certificate_file_name" name="certificate_file_name" class="file" type="file" />
@@ -182,23 +186,25 @@
                     				<span class="vstar" ><?php echo form_error('certification_files', '<span class="">', '</span>'); ?></span>
                     			</div>
                                 
+                                <div class="inventry-add">
+                                
                                 <div class="form-group  <?php echo (form_error('purchase_order_number'))?'error':'';?>" data-error="<?php echo (form_error('purchase_order_number'))? form_error('purchase_order_number'):'';?>">
-                                  <label class="col-md-4">Purchase Order Number</label>
-                                  <input type="text" name="purchase_order_number" class="form-control col-md-8" id="purchase_order_number" value="<?php echo set_value('purchase_order_number', $editdata['purchase_order_number']);?>" placeholder="Purchase Order Number" />
+                                  <label>Purchase Order Number</label>
+                                  <input type="text" name="purchase_order_number" class="form-control" id="purchase_order_number" value="<?php echo set_value('purchase_order_number', $editdata['purchase_order_number']);?>" placeholder="Purchase Order Number" />
                                 </div>
                                 
                                 <div class="form-group  <?php echo (form_error('purchase_transportation_identifier'))?'error':'';?>" data-error="<?php echo (form_error('purchase_transportation_identifier'))? form_error('purchase_transportation_identifier'):'';?>">
-                                  <label class="col-md-4">Purchase Transportation Identifier</label>
-                                  <input type="text" name="purchase_transportation_identifier" class="form-control col-md-8" id="purchase_transportation_identifier" value="<?php echo set_value('purchase_transportation_identifier', $editdata['purchase_transportation_identifier']);?>" placeholder="Purchase Transportation Identifier" />
+                                  <label>Purchase Transportation Identifier</label>
+                                  <input type="text" name="purchase_transportation_identifier" class="form-control" id="purchase_transportation_identifier" value="<?php echo set_value('purchase_transportation_identifier', $editdata['purchase_transportation_identifier']);?>" placeholder="Purchase Transportation Identifier" />
                                 </div>
                                 
                                 <div class="form-group  <?php echo (form_error('sales_transportation_identifier'))?'error':'';?>" data-error="<?php echo (form_error('sales_transportation_identifier'))? form_error('sales_transportation_identifier'):'';?>">
-                                  <label class="col-md-4">Sale Transportation Identifier(s)</label>
-                                  <input type="text" name="sales_transportation_identifier" class="form-control col-md-8" id="sales_transportation_identifier" value="<?php echo set_value('sales_transportation_identifier', $editdata['sales_transportation_identifier']);?>" placeholder="Sales Transportation Identifier" />
+                                  <label>Sale Transportation Identifier(s)</label>
+                                  <input type="text" name="sales_transportation_identifier" class="form-control" id="sales_transportation_identifier" value="<?php echo set_value('sales_transportation_identifier', $editdata['sales_transportation_identifier']);?>" placeholder="Sales Transportation Identifier" />
                                 </div>
                                 <div class="form-group <?php echo (form_error('warehouse_id'))?'error':'';?>" data-error="<?php echo (form_error('warehouse_id'))? form_error('warehouse_id'):'';?>">
-                                  <label required class="col-md-4">Warehouse</label>
-                                  <select class="form-control col-md-8" name="warehouse_id" id="warehouse_id">
+                                  <label required>Warehouse</label>
+                                  <select class="form-control" name="warehouse_id" id="warehouse_id">
                                     <option value="">---Select---</option>
                                       <?php foreach($warehouse as $type):
                                           $sel = ($type['id'] == set_value('warehouse_id', $editdata['warehouse_id']))?'selected':'';
@@ -207,6 +213,7 @@
                                       <?php endforeach;?>
                                   </select>
                                 </div>
+                               
                                 
                                 <div class="form-group <?php //echo (form_error('intransit_to_warehouse'))?'error':'';?>" data-error="<?php //echo (form_error('intransit_to_warehouse'))? form_error('intransit_to_warehouse'):'';?>">
                                   <label>In Transit To Warehouse</label>
@@ -256,6 +263,7 @@
                         
                                 </div>
                                 </div>
+                                 </div>
                                 <div class="form-group col-md-2 col-md-offset-8">   
                                   <button type="button" class="btn btn-success" id="inventory_submit" onclick="return inventory_sub('submit','');">Submit</button>
                                 </div>
@@ -342,8 +350,7 @@
 	    </div>
     </div>
  </div>
-<br /> 
-<br />
+
  
 <?php 
       //$img_url  = site_url()."assets/images/product/".$editdata['file_name'];
