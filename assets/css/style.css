@@ -10257,14 +10257,7 @@ h3 {
 
 /* line 205, ../sass/_common.scss */
 .btn {
-  background-color: #064ba8;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 16px;
-  padding: 5px 15px;
-  border: 2px solid transparent; }
+   }
   /* line 213, ../sass/_common.scss */
   .btn:focus, .btn:hover, .btn.active {
     background-color: rgba(6, 75, 168, 0.1);
