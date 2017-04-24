@@ -82,10 +82,10 @@ class Purchase extends Admin_Controller
     $this->data['per_page'] = $this->listing->_get_per_page();
     $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
     $this->data['vendors'] = $this->purchase_model->get_vendors();
-    $this->data['search_bar'] = $this->load->view('frontend/Purchase/purchase_search_bar', $this->data, TRUE);
+    $this->data['search_bar'] = $this->load->view('frontend/purchase/purchase_search_bar', $this->data, TRUE);
     $this->data['listing'] = $listing;
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);    
-  	$this->layout->view('frontend/Purchase/index');
+  	$this->layout->view('frontend/purchase/index');
   }
 
    public function add_edit_purchase($edit_id='')
@@ -553,7 +553,7 @@ class Purchase extends Admin_Controller
     }
    $this->data['data'] = $this->input->post();
     // $this->data['data'] = array("edit_id"=>"","form"=>"","packaging"=>"","color"=>"","name"=>"","message"=>"","product"=>"","quantity"=>"","dropdown"=>"");
-    $this->layout->view('frontend/Purchase/min_level');
+    $this->layout->view('frontend/purchase/min_level');
   }
   public function get_min_level()
   {
