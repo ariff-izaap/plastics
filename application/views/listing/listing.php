@@ -32,7 +32,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 	</div>
 <?php endif;?>
 
-<div id="data_table">	
+<div id="data_table" >	
 	
     <div class="data-sale">
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
@@ -177,3 +177,4 @@ if($uri1 == "accounting" && $uri != "invoices")
 <div class="pagination text-right pull-right" id="pagination">
 	<?php echo $pagination;?>
 </div>
+

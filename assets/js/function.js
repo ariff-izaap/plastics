@@ -434,9 +434,63 @@ function delete_record(del_url,elm){
 }
 
 
+function DeleteCheckedRow(e,cls,url)
+{ 
+  var rec_count = $(document).find('.'+cls+':checked').length, ids = '';
+    
+  if(rec_count <= 0 ) {
+    alert("Please check atleast 1 record to delete!"); return false;
+  }
+   
+  var conf = confirm("Are you sure want to delete "+ rec_count + " Record(s)?");
+  
+  if(!conf) return false;
+  
+     $(document).find("."+cls+":checked").each(function(){ 
+        ids += (ids)?','+$(this).val():$(this).val();
+     });
+  
+   url = base_url+url;
+   before_ajax(e);
+   $.ajax({
+          type: "POST",
+          url: url,
+          data: {id:ids},
+          success: function(res){ 
+            alert(rec_count+' record(s) deleted successfully');
+             after_ajax(e);
+            get_listings_section();
+          },
+          error: function(e) {
+            	//called when there is an error
+            	console.log(e.message);
+                after_ajax(e);
+          }
+    });
+}
+
+
+function get_listings_section()
+{
+    $.ajax({
+          type: "POST",
+          url: base_url+current_controller+"/"+current_method,
+          data: {},
+          dataType: "json",
+          success: function(res){ 
+            
+            $("#datareplace").html(res.output);
+           
+          },
+          error: function(e) {
+         	console.log(e.message);
+          }
+    });
+}
+
+
 function create_timesheet(elm)
 {
-	
 	var hour = $("#working_hours").val();
 	
 	if(!hour){

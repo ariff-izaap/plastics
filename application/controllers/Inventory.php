@@ -48,8 +48,8 @@ class Inventory extends Admin_Controller
 
         $listing = $this->listing->get_listings('inventory_model', 'listing');
 
-        if($this->input->is_ajax_request())
-            $this->_ajax_output(array('listing' => $listing), TRUE);
+       // if($this->input->is_ajax_request())
+       //     $this->_ajax_output(array('listing' => $listing), TRUE);
         
         $this->data['bulk_actions']         = array('' => 'select', 'delete' => 'Delete');
         $this->data['simple_search_fields'] = $this->simple_search_fields;
@@ -60,7 +60,15 @@ class Inventory extends Admin_Controller
         $this->data['listing']              = $listing;
         $this->data['grid']                 = $this->load->view('listing/view', $this->data, TRUE);
         
-        $this->layout->view("frontend/inventory/index");
+        if($this->input->is_ajax_request()){
+          $status  = 'success';  
+          $output  = $this->load->view("frontend/inventory/index",$this->data,true);
+          return $this->_ajax_output(array('status' => $status ,'output' => $output), TRUE);
+        } 
+        else
+        {
+            $this->layout->view("frontend/inventory/index");
+        }
 	
     }
     
@@ -205,11 +213,7 @@ class Inventory extends Admin_Controller
         if($this->input->is_ajax_request()){
           $output  = $this->load->view('frontend/inventory/add',$this->data,true);
           return $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id), TRUE);
-        }
-        //else
-//        {
-//          $this->layout->view('frontend/inventory/add');
-//        }    
+        }  
     }
     
     public function delete($del_id)
@@ -219,6 +223,27 @@ class Inventory extends Admin_Controller
 
         if(count($access_data) > 0){
             $this->inventory_model->delete(array("id"=>$del_id));
+            $output['message'] = "Record deleted successfuly.";
+            $output['status']  = "success";
+        }
+        else
+        {
+           $output['message'] = "This record not matched by Inventory.";
+           $output['status']  = "error";
+        }
+        $this->_ajax_output($output, TRUE);   
+    }
+    
+     public function delete_all()
+    {
+        
+        $ids = $this->input->post('id');
+        
+        $access_data = $this->db->query("delete from product where id in (".$ids.")");
+        $output      =  array();
+
+        if(count($access_data) > 0){
+            
             $output['message'] = "Record deleted successfuly.";
             $output['status']  = "success";
         }
