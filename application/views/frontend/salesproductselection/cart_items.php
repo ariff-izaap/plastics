@@ -110,6 +110,6 @@
 <div>
     
   <?php if($uri2=='view') {?>  
-    <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-default" id="cancel"  value="Cancel" />
+    <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-danger" id="cancel"  value="Cancel" />
   <?php } ?>  
 </div>

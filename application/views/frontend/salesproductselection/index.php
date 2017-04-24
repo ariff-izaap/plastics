@@ -97,11 +97,11 @@ Warehouse <input type="radio" name="product_from" value="warehouse" />
        </div>
      </div>  
      <div class="row">
-        <div class="form-group col-md-4">
-            <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-block" id="cancel" data-pid=""  value="Cancel" />
+        <div class="form-group col-md-3">
+            <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-danger" id="cancel" data-pid=""  value="Cancel" />
         </div>
-        <div class="form-group col-md-4">  
-            <input type="button" name="confirm" onclick="sales_prod_add_to_cart();" data-dismiss="modal"  id="confirm" class="btn btn-block" value="Confirm" />
+        <div class="form-group col-md-3">  
+            <input type="button" name="confirm" onclick="sales_prod_add_to_cart();" data-dismiss="modal"  id="confirm" class="btn btn-success" value="Confirm" />
         </div>
      </div>
      </form>

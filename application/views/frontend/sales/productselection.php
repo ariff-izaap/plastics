@@ -182,13 +182,13 @@
        </div>
      </div>  
      <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             
-            <input type="button" name="cancel" data-dismiss="modal" class="btn btn-block" id="cancel" value="Cancel" />
+            <input type="button" name="cancel" data-dismiss="modal" class="btn btn-danger" id="cancel" value="Cancel" />
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             
-            <input type="button" name="confirm" id="confirm" class="btn btn-block" value="Confirm"/>
+            <input type="button" name="confirm" id="confirm" class="btn btn-success" value="Confirm"/>
         </div>
      </div>
       <!--
