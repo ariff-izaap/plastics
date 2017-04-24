@@ -32,7 +32,7 @@ class Salesproductselection extends Admin_Controller
          
         $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
         
-        $str = '<button type="button" id="addcart{id}" name="add_to_cart" onclick="product_add_to_shipment({id})" data-price="{wholesale_price}" data-qty="{quantity}" class="btn-default">+ Add To Cart</button>';
+        $str = '<button type="button" id="addcart{id}" name="add_to_cart" onclick="product_add_to_shipment({id})" data-price="{wholesale_price}" data-qty="{quantity}" class="btn btn-info"><i class="fa fa-plus"></i> Add To Cart</button>';
  
         $this->listing->initialize(array('listing_action' => $str));
 
