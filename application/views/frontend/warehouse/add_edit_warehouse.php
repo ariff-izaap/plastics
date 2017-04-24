@@ -84,7 +84,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="form-group col-md-4">
-          <input type="submit" name="name" class="btn " id="name" value="Submit">
+          <input type="submit" name="name" class="btn btn-success" id="name" value="Submit">
         </div>
       </div>
     </form>
