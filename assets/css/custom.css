@@ -551,6 +551,22 @@ bottom: -16px !important;
 .account-invoice { min-height:400px !important;}
 .advance_search_form * { padding-left:0px;}
 .advance_search_form button { padding-left:12px;}
+body button
+{
+ background: #6d7077 !important;
+    box-shadow: 3px 3px 3px #aea4b9 !important;	
+	 font-size: 14px !important;
+    padding: 3px 10px !important;
+	    border-radius: 4px !important;
+		color:#fff !important;
+}
+#inventory_form .modal-body { padding-top:0px !important;}
+#inventory_form .modal-header {
+    border: medium none;
+    position: absolute;
+    right: 0;
+    top: 2px;
+}
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
