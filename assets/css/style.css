@@ -10537,9 +10537,9 @@ form .error {
   /* line 515, ../sass/_common.scss */
   form .error:after {
     content: attr(data-error);
-    color: #fff;
-    background-color: #f93c60;
-    float: right;
+    color: #f93c60;
+   
+   
     padding: 0 15px;
     font-size: 0.8em;
     font-weight: normal;
@@ -10550,8 +10550,8 @@ form .error {
     -webkit-border-bottom-right-radius: 3px;
     border-bottom-right-radius: 3px;
     position: absolute;
-    right: 15px;
-    bottom: -24px; }
+   left: 102px;
+    bottom: -22px; }
 /* line 532, ../sass/_common.scss */
 form [required]:after {
   content: "*";
