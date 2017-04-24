@@ -1,4 +1,4 @@
-  <div id="datareplace">   
+  
   <div class="row blue-mat">
       <div class="breadcrumbs col-md-6">
         <?php echo set_breadcrumb(); ?>
@@ -20,9 +20,9 @@
   
     
   <?php echo $grid;?>
-  </div>
+  
    <div id="inventory_form" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+   <div class="modal-dialog">
     
     <!-- Modal content-->
     <div class="modal-content">

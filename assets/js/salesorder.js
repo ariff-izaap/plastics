@@ -362,13 +362,6 @@ function product_add_to_shipment(prod_id)
       //  }
 }
 
-function modal_close(pid='')
-{
-     var pid = $("#cancel").attr("data-pid");
-     $("#"+pid).find("label").removeClass("ui-checkboxradio-checked ui-state-active");
-     $("#selectAll-"+pid).removeAttr("checked");
-     $("#product_ship").hide();
-}
 
 function sales_prod_add_to_cart()
 {

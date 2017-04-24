@@ -137,7 +137,7 @@
 		};
 						
 		$.fn.display_grid = function( url, data_tbl ) {
-			
+		
 			if(data_tbl == 'notes_table')
 				opts =  grids.notes_table;
 			else if(data_tbl == 'logs_table')

@@ -1,17 +1,17 @@
 
   <div id="inventory_add_section">
-   <div class="row">
-      <div class="breadcrumbs">
-        <?php echo set_breadcrumb(); ?>
-          <!--
-<a href="<?php //echo site_url('inventory');?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
--->
+   
+<div class="row">
+ <div></div>
+      <!--
+<div class="breadcrumbs">
+        <?php //echo set_breadcrumb(); ?>
       </div>
-    </div>
-   <div class="container">
-    <div class="row">
-    
-        <div class="col-md-12">
+-->
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
             <div class="panel with-nav-tabs panel-primary">
                 <div class="panel-heading">
                     <ul id="ProductTabs" class="nav nav-tabs">

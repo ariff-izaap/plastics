@@ -48,8 +48,8 @@ class Inventory extends Admin_Controller
 
         $listing = $this->listing->get_listings('inventory_model', 'listing');
 
-       // if($this->input->is_ajax_request())
-       //     $this->_ajax_output(array('listing' => $listing), TRUE);
+        if($this->input->is_ajax_request())
+            $this->_ajax_output(array('listing' => $listing), TRUE);
         
         $this->data['bulk_actions']         = array('' => 'select', 'delete' => 'Delete');
         $this->data['simple_search_fields'] = $this->simple_search_fields;
@@ -60,15 +60,15 @@ class Inventory extends Admin_Controller
         $this->data['listing']              = $listing;
         $this->data['grid']                 = $this->load->view('listing/view', $this->data, TRUE);
         
-        if($this->input->is_ajax_request()){
-          $status  = 'success';  
-          $output  = $this->load->view("frontend/inventory/index",$this->data,true);
-          return $this->_ajax_output(array('status' => $status ,'output' => $output), TRUE);
-        } 
-        else
-        {
+        //if($this->input->is_ajax_request()){
+//          $status  = 'success';  
+//          $output  = $this->load->view("frontend/inventory/index",$this->data,true);
+//          return $this->_ajax_output(array('status' => $status ,'output' => $output), TRUE);
+//        } 
+//        else
+//        {
             $this->layout->view("frontend/inventory/index");
-        }
+      //  }
 	
     }
     
@@ -193,7 +193,7 @@ class Inventory extends Admin_Controller
         catch (Exception $e)
         {
             $this->data['status']   = 'error';
-            $this->data['message']  = $e->getMessage();
+            $msg  = $e->getMessage();
         }
 
         if($edit_id){
@@ -212,7 +212,7 @@ class Inventory extends Admin_Controller
         
         if($this->input->is_ajax_request()){
           $output  = $this->load->view('frontend/inventory/add',$this->data,true);
-          return $this->_ajax_output(array('status' => $status ,'output' => $output, 'edit_id' => $edit_id), TRUE);
+          return $this->_ajax_output(array('status' => $status,'message' => $msg,'output' => $output, 'edit_id' => $edit_id), TRUE);
         }  
     }
     

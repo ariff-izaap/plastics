@@ -59,7 +59,10 @@ function inventory_sub(ty='',edit_id)
           success:function(res)
           {
             var status = res.status;
-            var output = res.output;  
+            var output = res.output; 
+            if(res.message){ 
+                bootbox.alert(res.message);
+            }
             $("#inventory_form .modal-body").html(output);
             $("#inventory_form").modal({
                 backdrop:"static"
@@ -68,6 +71,7 @@ function inventory_sub(ty='',edit_id)
              $("#ProductTabs a:first").trigger("click"); 
              tabsection(); 
              init_product_uploads();  
+             refresh_grid();
           }
     });    
 }

@@ -456,10 +456,13 @@ function DeleteCheckedRow(e,cls,url)
           type: "POST",
           url: url,
           data: {id:ids},
+          dataType:"json",
           success: function(res){ 
             alert(rec_count+' record(s) deleted successfully');
-             after_ajax(e);
-            get_listings_section();
+            after_ajax(e);
+            if(res.status == 'success'){
+                refresh_grid();
+            }
           },
           error: function(e) {
             	//called when there is an error
@@ -470,24 +473,14 @@ function DeleteCheckedRow(e,cls,url)
 }
 
 
-function get_listings_section()
+function modal_close(pid='')
 {
-    $.ajax({
-          type: "POST",
-          url: base_url+current_controller+"/"+current_method,
-          data: {},
-          dataType: "json",
-          success: function(res){ 
-            
-            $("#datareplace").html(res.output);
-           
-          },
-          error: function(e) {
-         	console.log(e.message);
-          }
-    });
+     var pid = $("#cancel").attr("data-pid");
+     $("#"+pid).find("label").removeClass("ui-checkboxradio-checked ui-state-active");
+     $("#selectAll-"+pid).removeAttr("checked");
+     $("#product_ship").hide();
+     refresh_grid();
 }
-
 
 function create_timesheet(elm)
 {
@@ -558,7 +551,7 @@ function export_timesheet(type){
 /* refresh grid after ajax submitting form */
 function refresh_grid(data_tbl){
      
-     data_tbl =(data_tbl)?data_tbl:"data_table";
+     data_tbl     =  (data_tbl)?data_tbl:"data_table";
      var cur_page = $("#base_url").val()+$("#cur_page").val();
      $.fn.init_progress_bar();
      $.fn.display_grid(cur_page,data_tbl);
