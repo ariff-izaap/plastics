@@ -137,8 +137,8 @@
          </div>
          </div>
             <div class="col-md-12 clear-btn text-r">
-                 <a href="javascript:void(0)" class="btn btn-sm active cl-bt" onclick="$.fn.clear_advance_search();">Clear</a>
-                <button type="button" class="btn btn-block search-bt" onclick="$.fn.submit_advance_search_form();">Search</button>
+                 <a href="javascript:void(0)" class="btn btn-sm active cl-bt" onclick="$.fn.clear_advance_search();" style="float:right;">Clear</a>
+                <button type="button" class="btn btn-success succ" onclick="$.fn.submit_advance_search_form();" style="float:right;">Search</button>
             </div>
          </div>
           

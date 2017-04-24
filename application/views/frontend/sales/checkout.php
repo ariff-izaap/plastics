@@ -101,7 +101,7 @@
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
    <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
-    <input type="submit" name="so" class="btn btn-default" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
+    <input type="submit" name="so" class="btn btn-block" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>
    
   

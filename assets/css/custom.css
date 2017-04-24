@@ -553,13 +553,15 @@ bottom: -16px !important;
 .advance_search_form button { padding-left:12px;}
 
 /*#inventory_form .modal-body { padding-top:0px !important;}*/
-#inventory_form .modal-header {
+#inventory_form .modal-header .close {
     border: medium none;
     position: absolute;
     right: 0;
     top: 2px;
 	z-index:99999 !important;
 }
+#inventory_form .modal-header #myModalLabel { padding-bottom:0px !important;}
+#inventory_form .modal-header { padding-bottom:0px; border-bottom:none;}
 .btn-success
 {
 	
@@ -582,6 +584,7 @@ background:rgba(0, 0, 0, 0) linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%)
 }
 .fa-trash-o { color:#F00 !important;}
 #confirm, #cancel { width:100%;}
+.succ { width:13% !important;}
 /* search form */
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
