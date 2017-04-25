@@ -4,7 +4,7 @@
 				<?php echo set_breadcrumb(); ?>
 			</div>
 			<?php if($this->action->create==1){?>
-				<a href="<?=site_url('purchase/add_edit_purchase');?>" class="btn btn-info pull-right">Create Purchase Order</a>
+				<a href="<?=site_url('purchase/add');?>" class="btn btn-info pull-right">Create Purchase Order</a>
 			<?php }?>
 	</div>
 </div>
