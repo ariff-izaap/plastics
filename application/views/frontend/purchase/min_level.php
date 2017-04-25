@@ -148,15 +148,11 @@
           </div>
         </div>
         <div class="clearfix"></div>
-        <div class="form-group col-md-2">
-        	<button type="button" class="btn btn-block del-minlevel">Delete Warning</button>
-        </div>
-        <div class="form-group col-md-2">
-        	<button type="button" class="btn btn-block add-new-dropdown">Add New</button>
-        </div>
-        <div class="form-group col-md-2">
-        	<button type="submit" class="btn btn-block">Save</button>
-        </div>
+        
+        	<button type="button" class="btn btn-danger del-minlevel">Delete Warning</button>
+        	<button type="button" class="btn btn-primary add-new-dropdown">Add New</button>
+        	<button type="submit" class="btn btn-info">Save</button>
+        
       </div>
     </form>
   </div>

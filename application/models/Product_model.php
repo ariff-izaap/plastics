@@ -12,7 +12,7 @@ class Product_model extends App_model
   
   function listing()
   {
-	  $this->_fields = "a.*,a.id as pid,b.name as form_name,c.name as color_name,d.name as product_type,e.name as package_name,f.vendor_id,(select max(id)+1 from purchase_order) as po_id";
+	  $this->_fields = "a.*,a.id as pid,b.name as form_name,c.name as color_name,d.name as product_type,e.name as package_name,f.vendor_id,(select COALESCE(MAX(id),0) + 1  from purchase_order) as po_id";
     $this->db->from('product a');
     $this->db->join("product_form b","a.form_id=b.id");
     $this->db->join("product_color c","a.color_id=c.id");

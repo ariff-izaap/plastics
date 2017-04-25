@@ -68,7 +68,7 @@ class Purchase extends Admin_Controller
     if($this->action->edit==1)
       // $str .='<a href="'.site_url('purchase/add_edit_purchase/{id}').'"><i class="fa fa-edit"></i></a>';
     if($this->action->delete==1)
-    $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
+    // $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     if($this->action->view==1)
       $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.site_url('purchase/view/{id}').'"><i class="fa fa-eye"></i></a>';
       $str .= '&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href='.site_url('purchase/print_purchase/{id}').'><i class="fa fa-print"></i></a>';
