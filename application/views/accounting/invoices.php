@@ -18,8 +18,8 @@
         	
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">Close</button>
-        <button class="btn change_invoice_status">Save Changes</button>
+        <button class="btn btn-sm active" data-dismiss="modal">Close</button>
+        <button class="btn btn-success change_invoice_status">Save Changes</button>
       </div>
     </div>
   </div>

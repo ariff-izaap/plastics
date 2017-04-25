@@ -200,9 +200,9 @@
   </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4 pull-right">
-      <button type="submit" name="save_invoice" class="btn" >Save Invoice</button>
+  <div class="container">
+    <div class="pull-right">
+      <button type="submit" name="save_invoice" class="btn btn-success" >Save Invoice</button>
       <!-- <button type="button" class="btn" >Print Invoice</button> -->
     </div>
   </div>
