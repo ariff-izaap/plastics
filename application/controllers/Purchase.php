@@ -136,7 +136,7 @@ class Purchase extends Admin_Controller
       if(count($this->cart->contents()) > 0)
       {
         $_SESSION['po_id'] = $_POST['po_id'];
-        $_SESSION['first_vendor'] = $_POST['vendor_id'];
+        // $_SESSION['first_vendor'] = $_POST['vendor_id'];
         redirect("purchase/checkout/$edit_id");
       }
       else

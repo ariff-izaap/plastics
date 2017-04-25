@@ -13,6 +13,7 @@
 <div class="container">
 	<form action="" name="checkoutForm" id="checkoutForm"  method="post">
 	<input type="hidden" name="rand" class="rand" value="<?=$_POST['rand'];?>">
+	<input type="hidden" name="vendor_id" value="<?=$_SESSION['first_vendor'];?>">
 	<div class="row">
 		<div class="col-md-12 title">
 			<h2 class="title"> Shipping Information</h2>
@@ -241,8 +242,8 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="form-group col-md-12">
-	      <button type="submit" class="btn btn-primary">Order Now</button>
+			<div class="form-group col-md-7 col-md-offset-5">
+	      <button type="submit" class="btn btn-lg btn-primary">Create Order Now</button>
 	    </div>
 		</div>
 	</div>
