@@ -628,7 +628,27 @@ background-color: #e6e6e6;
 .sales-pagi .btn-block { display: inline; width: auto; margin:0px;}
 .type-number label { padding:0px;}
 .type-number1{ padding:0px;}
-.type-mobile { height:inherit !important;}
+.type-mobile { height:38px !important;}
+.contact-info { background:#fafafa; margin-left:20px; padding-top:10px;}
+.edit_address {
+    background: #fafafa none repeat scroll 0 0;
+    margin-bottom: 20px;
+    margin-left: 2% !important;
+    padding-top: 20px;
+    width: 95% !important;
+}
+.new_address {
+    background: #fafafa none repeat scroll 0 0;
+    margin-bottom: 20px;
+    margin-left: 2% !important;
+    padding-top: 20px;
+    width: 95% !important;
+}
+.remove-btn { float:right; margin-right: 16px;}
+.add-address{
+    float: right;
+    margin-right: 33px !important;
+}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

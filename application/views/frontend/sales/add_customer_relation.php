@@ -145,7 +145,7 @@
 	          	</div>
 		          <div class="tab-pane fade" id="tab2primary">
 		          	<div class="row">
-		          		<div class="col-md-6">
+		          		<div class="col-md-6 contact-info">
 		          			<div class="form-group <?php echo (form_error('contact_name'))?'error':'';?>" data-error="<?php echo (form_error('contact_name'))? strip_tags(form_error('contact_name')):'';?>">
 		          				<label required="">Contact Name</label>
 		          				<input type="text" class="form-control" name="contact_name" value="<?=set_value('contact_name',$edit_data2['name']);?>">
@@ -198,7 +198,7 @@
 		          <div class="tab-pane fade" id="tab3primary">
 		          	<div class="row">
 		          		<div class="col-md-2 pull-right">
-		          			<button type="button" class="btn" onclick="add_address();">Add Address</button>
+		          			<button type="button" class="btn btn-block add-address" onclick="add_address();">Add Address</button>
 		          		</div>
 		          	</div><br>
 		          	<?php
@@ -348,7 +348,7 @@
 			          		<div class="row edit_address">
 			          		<div class="row remove_div">
 			          			<div class="col-md-2 pull-right">
-			          				<button type='button' class='btn' onclick='remove_address(this,<?=$row['id'];?>);'>Remove</button>
+			          				<button type='button' class='btn btn-danger remove-btn btn-block' onclick='remove_address(this,<?=$row['id'];?>);'>Remove</button>
 			          			</div>
 			          		</div>
 			          		<div class="col-md-3">
@@ -492,8 +492,8 @@
 		          	</div>
 		          	<div class="row">
 		          		<div class="col-md-2 pull-right">
-		          			<button type="submit" class="btn" name="submit">Save</button>
-		          			<button type="button" class="btn btnPrevious">Previous</button>
+		          			<button type="submit" class="btn btn-success access-level" name="submit"><i class="fa fa fa-life-saver"></i>Save</button>
+		          			<button type="button" class="btn btnPrevious btn-block access-level" style="display:inline; width:auto; height:34px;"><i class="fa fa-plus"></i>Previous</button>
 		          		</div>
 		          	</div>
 		          </div>	        
