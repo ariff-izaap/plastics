@@ -27,7 +27,7 @@
 	      
       </div>
      	<div class="modal-footer">
-     	<button class="btn btn-primary purchase_modal_save">Save Changes</button>
+     	<button class="btn btn-primary purchase_modal_save access-level"><i class="fa fa fa-life-saver"></i>Save Changes</button>
      		<button class="btn btn-danger" data-dismiss="modal">Close</button>
     	</div>
     </div>

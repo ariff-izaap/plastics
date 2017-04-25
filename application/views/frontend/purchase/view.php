@@ -158,7 +158,7 @@
 			</div><br>
 			<div class="row">
 				<div class="col-md-7 col-md-offset-5">
-					<button class="btn btn-success">Save Changes</button>
+					<button class="btn btn-success access-level"><i class="fa fa fa-life-saver"></i>Save Changes</button>
 				</div>
 			</div>
 		</form>

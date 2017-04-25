@@ -202,7 +202,7 @@
 
   <div class="container">
     <div class="pull-right">
-      <button type="submit" name="save_invoice" class="btn btn-success" >Save Invoice</button>
+      <button type="submit" name="save_invoice" class="btn btn-success access-level" ><i class="fa fa fa-life-saver"></i>Save Invoice</button>
       <!-- <button type="button" class="btn" >Print Invoice</button> -->
     </div>
   </div>

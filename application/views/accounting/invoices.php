@@ -19,7 +19,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-sm active" data-dismiss="modal">Close</button>
-        <button class="btn btn-success change_invoice_status">Save Changes</button>
+        <button class="btn btn-success change_invoice_status access-level"><i class="fa fa fa-life-saver"></i>Save Changes</button>
       </div>
     </div>
   </div>

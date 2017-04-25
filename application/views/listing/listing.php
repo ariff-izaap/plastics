@@ -11,7 +11,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 	?>
 		<div class="row">
 			<div class="col-md-2 pull-right">
-				<button type="submit" class="btn" capsOn>Create Invoice</button>
+				<button type="submit" class="btn btn-default access-level" capsOn><i class="fa fa-plus"></i>Create Invoice</button>
 			</div>
 		</div>
 	<?php
