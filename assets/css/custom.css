@@ -618,6 +618,9 @@ background-color: #e6e6e6;
 .clear-btn i { margin-right:4px;}
 .role i, .save i, .access-level i { margin-right:4px;}
 .warehouse { width:12%;}
+.bg-color, .bg-color1 { background:#fcfcfc;}
+.bg-color {  margin-right: 2%;
+    width: 39%;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

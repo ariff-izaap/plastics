@@ -17,7 +17,7 @@
 		<div class="col-md-12 title">
 			<h2 class="title"> Shipping Information</h2>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-5 bg-color">
 			<div class="form-group col-md-6 <?php echo (form_error('warehouse'))?'error':'';?>" data-error="<?php echo (form_error('warehouse'))? strip_tags(form_error('warehouse')):'';?>">
 	      <label required="">Ship To</label>
 	      <select name="warehouse" class="form-control warehouse_select">
@@ -103,7 +103,7 @@
 	      <input type="text" class="form-control" name="email" id="email" value="<?=$edit_data['email'];?>">
 	    </div>
 	  </div>
-	  <div class="col-md-7">
+	  <div class="col-md-7 bg-color1">
 	    <div class="form-group col-md-4 <?php echo (form_error('ship_type'))?'error':'';?>" data-error="<?php echo (form_error('ship_type'))? strip_tags(form_error('ship_type')):'';?>">
 	      <label required="">Ship Method</label>
 	      <select name="ship_type" class="form-control">
