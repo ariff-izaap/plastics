@@ -306,7 +306,7 @@ function remove_cart(a,b)
       if(c.count=="0")
       {
         bootbox.alert("Your cart is empty.",function(){
-          location.href = base_url+"purchase/add_edit_purchase";
+          location.href = base_url+"purchase/add";
         });
       }
     },
@@ -1216,8 +1216,8 @@ $(".qty-ip").keypress(function (evt) {
   evt.preventDefault();
 });
 
-$(".purchase_modal_save").click(function(){
-  form = $("form#OrderedProduct").serialize();
+$(".save-recevived-qty").click(function(){
+  form = $("form#ReceivedQtyForm").serialize();
   $.ajax({
     type:"POST",
     data:form,
@@ -1226,15 +1226,44 @@ $(".purchase_modal_save").click(function(){
     success:function(data)
     {
       if(data.status=="success")
-        bootbox.alert(data.message);
+        bootbox.alert(data.message,function(){
+          location.reload();          
+        });
       console.log(data);
     }
   });
 });
 
-$(".done-product-modal").click(function(){
-  po_id= $(this).attr("data-po-id");
-  get_purchase_order(po_id);
+
+$(".show_log_btn").click(function(){
+  if($("#ShowLog").hasClass("hide"))
+    $(this).text("Hide Log History");
+  else
+    $(this).text("Show Log History");
+  $("#ShowLog").toggleClass("hide");
+});
+
+
+$(".add-product-modal").click(function(){
+
+  form = $("#ModalAddProductForm").serialize();
+  $.ajax({
+    type:"POST",
+    url:base_url+'purchase/add_product_modal_ajax',
+    data:form,
+    dataType:'json',
+    success:function(data)
+    {
+      console.log(data);
+      if(data.status=="success")
+      {
+        bootbox.alert(data.message,function(){
+          location.reload();
+        });
+      }
+    }
+  });
+
 });
 
 /*Ram*/

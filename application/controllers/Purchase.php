@@ -70,8 +70,8 @@ class Purchase extends Admin_Controller
     if($this->action->delete==1)
     $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'purchase/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>';
     if($this->action->view==1)
-      $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"  onclick="get_purchase_order(\'{id}\',this);" data-target="#ViewPurchaseOrder"><i class="fa fa-eye"></i></a>';
-    $str .= '&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href='.site_url('purchase/print_purchase/{id}').'><i class="fa fa-print"></i></a>';
+      $str .='&nbsp;&nbsp;&nbsp;&nbsp;<a href="'.site_url('purchase/view/{id}').'"><i class="fa fa-eye"></i></a>';
+      $str .= '&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href='.site_url('purchase/print_purchase/{id}').'><i class="fa fa-print"></i></a>';
     $this->listing->initialize(array('listing_action' => $str));
     $listing = $this->listing->get_listings('purchase_model', 'listing');
     if($this->input->is_ajax_request())
@@ -88,7 +88,7 @@ class Purchase extends Admin_Controller
   	$this->layout->view('frontend/purchase/index');
   }
 
-   public function add_edit_purchase($edit_id='')
+   public function add($edit_id='')
   {
     if($edit_id)
     {
@@ -142,7 +142,7 @@ class Purchase extends Admin_Controller
       else
       {
         $this->session->set_flashdata("error_msg","Your Cart is empty.",TRUE);
-        redirect("purchase/add_edit_purchase");
+        redirect("purchase/add");
       }
     }
     /*if(!$this->action->create==1)
@@ -216,7 +216,7 @@ class Purchase extends Admin_Controller
   {
     $output['message'] = "Record deleted successfuly.";
     $output['status']  = "success";
-    $log = log_history("purchase_order",$del_id,"purchase","delete");
+    $log = log_history($del_id,"purchase","<b>#".$del_id." purchase order has been deleted.");
     $this->purchase_model->delete(array("id"=>$del_id),"purchase_order");
     $this->purchase_model->delete(array("po_id"=>$del_id),"purchase_order_item");
     $this->_ajax_output($output, TRUE);
@@ -421,7 +421,10 @@ class Purchase extends Admin_Controller
     {
       $output = array('status' => 'failed', 'message' => $e->getMessage());
     }
-    
+    if(count($this->cart->contents()) <= 0)
+    {
+      unset($_SESSION['first_vendor']);
+    }
     $products = $this->cart->contents();
     $this->data['products']  = $products;
     $output['content']       = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);    
@@ -468,7 +471,9 @@ class Purchase extends Admin_Controller
       $up['po_message'] = $form['po_message'];
       $up['vendor_id'] = $vendor_id;
       $up['note'] = $form['po_notes'];
+      $up['created_id'] = get_current_user_id();
       $up['updated_id'] = get_current_user_id();
+      $up['created_date'] = date("Y-m-d H:i:s");
       $up['updated_date'] = date("Y-m-d H:i:s");
       $ins_id = $this->purchase_model->insert($up,"purchase_order");
       /*Documents Attach File*/
@@ -495,12 +500,12 @@ class Purchase extends Admin_Controller
         $ins['updated_id'] = get_current_user_id();
         $ins['created_date'] = date("Y-m-d H:i:s");
         // $this->purchase_model->delete(array("po_id"=>$ins_id),"purchase_order_item");
-        $ins_id = $this->purchase_model->insert($ins,"purchase_order_item");
+        $ins_id1 = $this->purchase_model->insert($ins,"purchase_order_item");
       }
       $this->cart->destroy();
       unset($_SESSION['first_vendor']);
       unset($_SESSION['po_id']);
-      $log = log_history("purchase_order",$ins_id,"purchase","insert");
+      $log = log_history($ins_id,"purchase_order","#".$ins_id." Purchase Order has been created.");
       $this->session->set_flashdata("success_msg","Purchase Order Created Successfully",TRUE);
       redirect('purchase/view/'.$ins_id);
     }
@@ -535,7 +540,7 @@ class Purchase extends Admin_Controller
         $ins['updated_id'] = get_current_user_id();
         $ins['updated_date'] = date("Y-m-d H:i:s");
         $update =  $this->purchase_model->update(array("id"=>$form['edit_id']),$ins,"min_level");
-        $log = log_history("min_level",$form['edit_id'],"warning","update");
+        $log = log_history($form['edit_id'],"warning",$form['name']." warning has been updated");
         $this->session->set_flashdata("success_msg","Warning Updated Successfully",TRUE);
       }
       else
@@ -546,7 +551,7 @@ class Purchase extends Admin_Controller
           redirect('purchase/min_level');
         }
         $add =  $this->purchase_model->insert($ins,"min_level");
-        $log = log_history("min_level",$add,"warning","insert");
+        $log = log_history($add,"warning",$form['name']." warning has been created");
         $this->session->set_flashdata("success_msg","Warning Created Successfully",TRUE);
       }
       redirect('purchase/min_level');
@@ -564,8 +569,9 @@ class Purchase extends Admin_Controller
   public function del_min_level()
   {
     $id = trim($this->input->post("id"));
+    $val = $this->purchase_model->select(array("id"=>$id),"min_level");
     $this->purchase_model->delete(array("id"=>$id),"min_level");
-    $log = log_history("min_level",$id,"warning","delete");
+    $log = log_history($id,"warning","<b>".$val['warning_name']."</b> warning has been deleted.");
     $this->session->set_flashdata("success_msg","Warning deleted successfully",TRUE);
   }
   public function do_upload()
@@ -617,27 +623,17 @@ class Purchase extends Admin_Controller
   }
    public function change_order_status()
   {
-    $up = [];
-    $id = $this->input->post('id');
-    $val = $this->input->post('val');
-    $up['order_status'] = $val;
+    $form = $this->input->post();
+    $up['carrier_id'] = $form['shipment_service'];
+    $up['ship_type_id'] = $form['delivery'];
+    $up['credit_type_id'] = $form['payment_term'];
+    $up['order_status'] = $form['po_status'];
+    $up['release_to_sold'] = $form['release_to_sold'];
     $output['message'] = "Order Updated successfuly.";
     $output['status']  = "success";
-    $this->purchase_model->update(array("id"=>$id),$up,"purchase_order");   
-    // if($val=='ACCEPTED' || $val=='SHIPPED')
-    // {
-    //   $items = $this->purchase_model->select_multiple(array("po_id"=>$id),"purchase_order_item");
-    //   foreach ($items as  $value)
-    //   {
-    //     $product = $this->purchase_model->select(array("id"=>$value['product_id']),"product");
-    //     $avail_qty = $product['available_qty'];
-    //     $curr_qty = $value['qty'];
-    //     $up1['available_qty'] = $avail_qty + $curr_qty;
-    //     $this->purchase_model->update(array("id"=>$value['product_id']),$up1,"product");
-    //   }
-    $log = log_history("purchase_order",$id,"purchase_status","update",$val);
-    // }
-    $this->_ajax_output($output, TRUE);
+    $this->purchase_model->update(array("id"=>$form['po_id']),$up,"purchase_order");      
+    $log = log_history($form['po_id'],"purchase_order","<b>#".$form['po_id']."</b> purchase order has been updated.");
+    redirect("purchase/view/".$form['po_id']);
   }
 
   public function create_auto_po($form,$product)
@@ -670,18 +666,25 @@ class Purchase extends Admin_Controller
   public function purchase_modal_save()
   {
     $id = $_POST['row'];
+    $product = $_POST['product'];
     foreach ($id as $key => $value)
-    { 
-      $get = $this->purchase_model->select(array("id"=>$key),"purchase_order_item");
-      $qty = $get['qty'];
-      $qty_received = $get['qty_received'];
-      $new_qty = $value + $qty_received;
-      $up['qty_received'] = $new_qty;
-      $up = $this->purchase_model->update(array("id"=>$key),$up,"purchase_order_item");
-      $log = log_history("purchase_order",$get['po_id'],"purchase_qty","update",$value);
+    {
+      if($value!='0')
+      {
+        $get = $this->purchase_model->select(array("id"=>$key),"purchase_order_item");
+        $qty = $get['qty'];
+        $qty_received = $get['qty_received'];
+        // $new_qty = $value + $qty_received;
+        $up['qty_received'] = $value;
+        if($value <= $qty && $qty_received!=$value)
+        {
+          $up = $this->purchase_model->update(array("id"=>$key),$up,"purchase_order_item");
+          $log = log_history($get['po_id'],"purchase_order","Quantity #<b>".$value."</b> received for ".get_product_name($product[$key])['name']);
+        }
+      }
     }
     $output['status'] = "success";
-    $output['message'] = "Quantity has been updated";
+    $output['message'] = "Received Quantity has been updated";
     $this->_ajax_output($output,TRUE);
   }
 
@@ -712,10 +715,21 @@ class Purchase extends Admin_Controller
       $up['qty'] = $old_qty + $form['qty'];
       $up['updated_id'] = get_current_user_id();
       $up['updated_date'] = date("Y-m-d H:i:s");
-      $update = $this->purchase_model->update(array("product_id"=>$form['product_id'],"po_id"=>$form['po_id']),$up,"purchase_order_item");
+     $update = $this->purchase_model->update(array("product_id"=>$form['product_id'],"po_id"=>$form['po_id']),$up,"purchase_order_item");
+     $log = log_history($form['po_id'],"purchase_order","Quantity #<b>".$ins['qty']."</b> updated for ".get_product_name($form['product_id'])['name']);
     }
     else
-      $add_id = $this->purchase_model->insert($ins,"purchase_order_item");
+    {
+     $add_id = $this->purchase_model->insert($ins,"purchase_order_item");
+     $log = log_history($form['po_id'],"purchase_order","Product <b>".get_product_name($form['product_id'])['name']."</b> added with quantity #<b>".$ins['qty']."</b>");
+    }
+    $po = $this->purchase_model->select_multiple(array("po_id"=>$form['po_id']),"purchase_order_item");
+    foreach ($po as $value)
+    {
+      $tot[] = $value['unit_price'] * $value['qty'];
+    }
+    $up['total_amount'] = array_sum($tot);
+    $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up,"purchase_order");
     $output['status'] = "success";
     $output['message'] = "Product Added Successfully.";
     $this->_ajax_output($output,TRUE);

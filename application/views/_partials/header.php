@@ -107,7 +107,7 @@
                   <span class="caret"></span>
               </a>
                <ul class="dropdown-menu">
-                  <li><a href="<?php echo site_url('purchase/add_edit_purchase');?>">Create Purchase Order</a></li>
+                  <li><a href="<?php echo site_url('purchase/add');?>">Create Purchase Order</a></li>
                   <li><a href="<?php echo site_url('purchase');?>">Purchase Order</a></li>
                   <li><a href="<?php echo site_url('purchase/min_level');?>">Min Level</a></li>
                 </ul>

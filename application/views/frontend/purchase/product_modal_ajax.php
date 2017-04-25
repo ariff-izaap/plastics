@@ -21,7 +21,7 @@
 							<td>
 								<input type="number" max="100" min="1" class="product_id_<?=$value['id'];?>" name="qty" value="1">
 							</td>
-							<td><a href="#" class="btn add_product_modal" onclick="add_to_order(<?=$value['id'];?>,<?=$po_id;?>,<?=$value['vendor_id'];?>);">Add to Order</a></td>
+							<td><a href="#" class="btn btn-info add_product_modal" onclick="add_to_order(<?=$value['id'];?>,<?=$po_id;?>,<?=$value['vendor_id'];?>);">Add to Order</a></td>
 						</tr>
 					<?php
 				}

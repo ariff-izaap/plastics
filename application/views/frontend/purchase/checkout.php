@@ -3,7 +3,7 @@
 			<div class="col-md-6 breadcrumbs-span">
 				<?php echo set_breadcrumb(); ?>
 			</div>
-		<a href="<?=site_url('purchase/add_product');?>" class="btn pull-right">Back</a>
+		<a href="<?=site_url('purchase/add');?>" class="btn btn-danger pull-right">Back</a>
 	</div>
 </div>
 <?php display_flashmsg($this->session->flashdata());?>
@@ -17,7 +17,7 @@
 		<div class="col-md-12 title">
 			<h2 class="title"> Shipping Information</h2>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-5">
 			<div class="form-group col-md-6 <?php echo (form_error('warehouse'))?'error':'';?>" data-error="<?php echo (form_error('warehouse'))? strip_tags(form_error('warehouse')):'';?>">
 	      <label required="">Ship To</label>
 	      <select name="warehouse" class="form-control warehouse_select">
@@ -103,7 +103,7 @@
 	      <input type="text" class="form-control" name="email" id="email" value="<?=$edit_data['email'];?>">
 	    </div>
 	  </div>
-	  <div class="col-md-6">
+	  <div class="col-md-7">
 	    <div class="form-group col-md-4 <?php echo (form_error('ship_type'))?'error':'';?>" data-error="<?php echo (form_error('ship_type'))? strip_tags(form_error('ship_type')):'';?>">
 	      <label required="">Ship Method</label>
 	      <select name="ship_type" class="form-control">
@@ -178,66 +178,71 @@
 	        <a href="#UploadModal" data-toggle="modal" class="col-md-3"><i class="fa fa-2x fa-file-zip-o"></i></a>
 	      </div>      
 			</div>
-			<div class="col-md-12" id="viewCart">
-				<h2>Review Order</h2>
-				<a href="#modalCart" data-toggle="modal" class="btn pull-right">Edit Cart</a><br><br>
-				<table class="table table-bordered table-hover">
-					<thead>
-						<th>Product Name</th><th>SKU</th><th>Quantity</th><th>Unit Price</th><th>Total</th><th>Action</th>
-					</thead>
-					<tbody>				
-						<?php
-							if($this->cart->contents())
-							{
-								$total = [];
-								foreach ($this->cart->contents() as $key => $value)
-								{
-									$total[] = $value['price'] * $value['qty'];
-									?>
-									<tr>
-										<td><?=$value['name'];?></td>
-										<td><?=$value['id'];?></td>
-										<td><?=$value['qty'];?></td>
-										<td><?=displayData($value['price'],'money');?></td>
-										<td><?=displayData($value['price'] * $value['qty'],'money');?></td>
-										<td>
-											<a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this);" class="btn">X</a>
-										</td>
-									</tr>
-									<?php
-								}
-							}
-						?>
-					</tbody>
-				</table>
-				<input type="hidden" name="total" value="<?=array_sum($total);?>">
-				<div class="row">
-					<div class="col-md-4 pull-right">
-						<h3>Total : <strong><?=displayData(array_sum($total),'money');?></strong></h3>
-					</div>
-				</div>
+			<div class="col-md-12">
+				<div class="form-group">
+		      <label>PO Message</label>
+		      <textarea class="form-control" name="po_message" rows="4"><?=$edit_data['po_message'];?></textarea>
+		    </div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+		      <label>PO Notes</label>
+		      <textarea class="form-control" name="po_notes" rows="4"><?=$edit_data['note'];?></textarea>
+		    </div>
 			</div>
 		</div>
 		<input type="hidden" name="po_id" id="po_id" value="<?=$po_id;?>">		
 	</div>
 	<div class="row">
-		<div class="col-md-6">
-			<div class="form-group">
-	      <label>PO Message</label>
-	      <textarea class="form-control" name="po_message" rows="4"><?=$edit_data['po_message'];?></textarea>
-	    </div>
+		<div class="col-md-12" id="viewCart">
+			<h2>Review Order</h2>
+			<a href="#modalCart" data-toggle="modal" class="btn btn-warning pull-right">Edit Cart</a><br><br>
+			<table class="table table-bordered table-hover">
+				<thead>
+					<th>Product Name</th><th>SKU</th><th>Quantity</th><th>Unit Price</th><th>Total</th><th>Action</th>
+				</thead>
+				<tbody>				
+					<?php
+						if($this->cart->contents())
+						{
+							$total = [];
+							foreach ($this->cart->contents() as $key => $value)
+							{
+								$total[] = $value['price'] * $value['qty'];
+								?>
+								<tr>
+									<td><?=$value['name'];?></td>
+									<td><?=$value['id'];?></td>
+									<td><?=$value['qty'];?></td>
+									<td><?=displayData($value['price'],'money');?></td>
+									<td><?=displayData($value['price'] * $value['qty'],'money');?></td>
+									<td>
+										<a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this);" class="btn btn-danger">
+											<i class="fa fa-trash"></i>
+										</a>
+									</td>
+								</tr>
+								<?php
+							}
+						}
+					?>
+				</tbody>
+			</table>
+			<input type="hidden" name="total" value="<?=$this->cart->total();?>">
+			<div class="row">
+				<div class="col-md-4 pull-right">
+					<h3>Total : <strong><?=displayData($this->cart->total(),'money');?></strong></h3>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-6">
-			<div class="form-group">
-	      <label>PO Notes</label>
-	      <textarea class="form-control" name="po_notes" rows="4"><?=$edit_data['note'];?></textarea>
-	    </div>
-		</div>
+	</div>
+	<div class="row">
+		
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group col-md-12">
-	      <button type="submit" class="btn">Order Now</button>
+	      <button type="submit" class="btn btn-primary">Order Now</button>
 	    </div>
 		</div>
 	</div>
@@ -278,8 +283,8 @@
                       <td><?=displayData($value['price'],'money');?></td>
                       <td><?=displayData($value['price'] * $value['qty'] ,'money');?></td>
                       <td>
-                        <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn">
-                          <i class="fa fa-remove"></i>
+                        <a href="javascript:void(0);" onclick="remove_cart('<?=$value['rowid'];?>',this)" class="btn btn-danger">
+                          <i class="fa fa-trash"></i>
                         </a>
                       </td>
                     </tr>
@@ -293,7 +298,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-md-2 pull-right">
-          <a href="javascript:void(0);" onclick="update_cart(this);" class="btn pull-right">Update Cart</a>
+          <a href="javascript:void(0);" onclick="update_cart(this);" class="btn btn-primary pull-right">Update Cart</a>
         </div>
       </div>
     </div>
@@ -341,7 +346,7 @@
             </div>
             <div class="clearfix"></div><br>
             <div class="col-md-3">
-              <button type="button" class="btn upload-doc"><i class="fa fa-upload"></i> Upload</button>
+              <button type="button" class="btn btn-info upload-doc"><i class="fa fa-upload"></i> Upload</button>
             </div>
             <div class="clearfix"></div><br>
             <div class="col-md-12 upload-msg">
@@ -351,7 +356,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

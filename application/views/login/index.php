@@ -33,7 +33,7 @@
             <label for="forGot" class="custom-checkbox">Remember me!</label>
             <input type="checkbox" name="forGot" id="forGot">
           </div>
-          <button class="btn login" type="submit">Login</button>
+          <button class="btn btn-primary login" type="submit">Login</button>
         </form>
         <div>  </div>
       </div>

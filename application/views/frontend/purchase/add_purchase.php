@@ -81,9 +81,9 @@
           <label required="">Purchase Order #</label>
           <input type="text" name="po_id" class="form-control" id="name" value="<?=$po_id;?>" readonly>
         </div>
-        <div class="clearfix"></div>
+        
         <div class="form-group col-md-4">
-          <label required="">Select Vendor</label>
+          <label>Select Vendor</label>
           <select name="vendor_id" class="form-control vendor_select">
             <option value="">--Select--</option>
             <?php

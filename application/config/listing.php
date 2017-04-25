@@ -111,11 +111,11 @@ $config['salesorder_customer_relation'] = array(
 
 
 
-$config['purchase_add_edit_purchase'] = array(
+$config['purchase_add'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'frontend/purchase/filter',
-	"base_url"	=> 	'/purchase/add_edit_purchase/',
+	"base_url"	=> 	'/purchase/add/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 						'pid'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),

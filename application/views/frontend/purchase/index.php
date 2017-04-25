@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn done-product-modal"  data-dismiss="modal">Done</button>
+        <button class="btn done-product-modal btn-primary"  data-dismiss="modal">Done</button>
       </div>
     </div>
   </div>
