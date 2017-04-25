@@ -173,7 +173,7 @@
 <button type="submit" class="btn btn-block">Who Holding</button>
 -->
                  <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();" style="float:right;">Clear</a>
-                <button type="button" class="btn btn-success" onclick="$.fn.submit_advance_search_form();" style="float:right;">Search</button>
+                <button type="button" class="btn btn-success" onclick="$.fn.submit_advance_search_form();" style="float:right;"><i class="fa fa-search"></i>Search</button>
             </div>
            
                

@@ -23,26 +23,26 @@
       
       <br />
       <br />
-   <div class="container button-sec">     
+   <div class="container button-sec sales-btn-sec">     
        <div class="row">
           <div class="col-md-2">
-            <button type="button" class="col-md-2 btn btn-block" onclick="product_add_to_shipment()">Add Product to SO</button>
+            <button type="button" class="col-md-2 btn btn-block" onclick="product_add_to_shipment()"><i class="fa fa-plus"></i>Add Product to SO</button>
           </div>
           <div class="col-md-2">  
-            <button type="button" class="col-md-2 btn btn-block">Edit Product On SO</button>
+            <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
          </div>
          <div class="col-md-2">   
-            <button type="button" class="col-md-2 btn btn-block">Delete Product From SO</button>
+            <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-trash-o trash" style="color:#000 !important; font-weight:bold;"></i>Delete Product From SO</button>
          </div>
          <div class="col-md-2">   
-            <button type="button" class="col-md-2 btn btn-block">Existing SO</button>
+            <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-sticky-note-o"></i>Existing SO</button>
          </div>
          <div class="col-md-2">   
            <!-- <button type="button" class="col-md-2 btn btn-block" >Save SO</button> -->
-           <a href="<?php echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block">Save SO</a>
+           <a href="<?php echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block"><i class="fa fa fa-life-saver"></i>Save SO</a>
          </div>
          <div class="col-md-2">   
-            <button type="button" class="col-md-2 btn btn-block">Create New SO</button>
+            <a type="button" class="col-md-2 btn btn-block"> + Create New SO</a>
          </div>
        </div>
    </div>

@@ -612,6 +612,10 @@ background-color: #e6e6e6;
 .save .trash { color:#fff !important;}
 .role { width:20%; float:right;}
 /* search form */
+.sales-btn-sec i {
+    margin-right: 4px;
+}
+.clear-btn i { margin-right:4px;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
