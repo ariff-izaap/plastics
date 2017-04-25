@@ -79,8 +79,8 @@
       
       </div>
       </div>
-         <div class="form-group col-md-2">
-        <button type="submit" class="btn btn-success">Save</button>
+         <div class="form-group col-md-2 access-level">
+        <button type="submit" class="btn btn-success"><i class="fa fa fa-life-saver"></i>Save</button>
       </div>
   </form>
 </div>

@@ -80,8 +80,8 @@
 					</div>
 		    </div>
 	      <div class="clearfix"></div><br>
-	      <div class="form-group">
-	      	<button class="btn btn-success" type="submit">Save</button>
+	      <div class="form-group access-level">
+	      	<button class="btn btn-success" type="submit"><i class="fa fa fa-life-saver"></i>Save</button>
 	      </div>
 	    </div>
 	  </form>
