@@ -33,8 +33,9 @@
 		          				<input type="text" class="form-control" name="name" value="<?=set_value('name',$edit_data['business_name']);?>">
 		          			</div>
 		          		</div>
-		          		<div class="col-md-12">
-		          			<h3>Billing Information</h3>
+                      <div class="sales-bill">  <h3>Billing Information</h3></div>
+		          		<div class="col-md-12 sales-bg">
+		          			
 		          			<div class="col-md-3">
 		          				<div class="form-group <?php echo (form_error('bill_name'))?'error':'';?>" data-error="<?php echo (form_error('bill_name'))? strip_tags(form_error('bill_name')):'';?>">
 		          					<label required="">Bill To Name</label>
@@ -138,7 +139,7 @@
 	  	        	</div>
 	    	      	<div class="row">
 	          		<div class="col-md-1 pull-right">
-	          	 		<button type="submit" class="btn btnNext">Next</button>
+	          	 		<button type="submit" class="btn btnNext btn-block next-btn">Next<span class="glyphicon glyphicon-menu-right"></span></button>
 	          	 	</div>
 	      	    	</div>
 	          	</div>
@@ -149,17 +150,17 @@
 		          				<label required="">Contact Name</label>
 		          				<input type="text" class="form-control" name="contact_name" value="<?=set_value('contact_name',$edit_data2['name']);?>">
 		          			</div>
-		          			<div class="form-group">
+		          			<div class="form-group type-number">
 		          				<label required="" class="col-md-12">Type of Number</label>
-		          				<div class="col-md-4">
+		          				<div class="col-md-4 type-number1">
 		          					<select class="form-control ">
 		          						<option value="1">Mobile</option>
 		          						<option value="3">Fax</option>
 		          					</select>
 		          				</div>
-		          				<div class="col-md-6 <?php echo (form_error('contact_value'))?'error':'';?>" data-error="<?php echo (form_error('contact_value'))? strip_tags(form_error('contact_value')):'';?>">
-		          					<label class="col-md-1"></label>
-		          					<input type="text" class="form-control" name="contact_value" value="<?=set_value('contact_value',
+		          				<div class="col-md-8 <?php echo (form_error('contact_value'))?'error':'';?>" data-error="<?php echo (form_error('contact_value'))? strip_tags(form_error('contact_value')):'';?>" style="padding-right:0px !important;">
+		          					
+		          					<input type="text" class="form-control type-mobile" name="contact_value" value="<?=set_value('contact_value',
 		          					$edit_data2['contact_value']);?>">
 		          				</div>
 		          			</div>
@@ -188,9 +189,9 @@
 		          		</div>
 	  	        	</div>
 		          	<div class="row">
-		          		<div class="col-md-2 pull-right">
-		        				<button type="submit" class="btn">Next</button>
-		        				<button type="button" class="btn btnPrevious">Previous</button>
+		          		<div class="col-md-2 pull-right sales-pagi">
+		        				<button type="submit" class="btn btn-block">Next<span class="glyphicon glyphicon-menu-right"></button>
+		        				<button type="button" class="btn btnPrevious btn-block"><span class="glyphicon glyphicon-menu-left">Previous</button>
 		          		</div>
 		          	</div>
 		          </div>

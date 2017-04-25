@@ -620,8 +620,15 @@ background-color: #e6e6e6;
 .warehouse { width:12%;}
 .bg-color, .bg-color1 { background:#fcfcfc; box-shadow: 1px 1px 5px #e8e8e8; margin-bottom: 20px;padding-top: 16px;}
 .bg-color {  margin-right: 2%;width: 39%;}
-.bg-color1 textarea { height: 77px;
-}
+.bg-color1 textarea { height: 77px;}
+.sales-bg { background:#fcfcfc;}
+.sales-bill{ display: inline-block; margin-left: 28px; width: 100%;}
+.sales-bg { margin: 0 26px 20px;width: 95%; padding: 16px 0;}
+.next-btn { margin:0 0 0 -15px;}
+.sales-pagi .btn-block { display: inline; width: auto; margin:0px;}
+.type-number label { padding:0px;}
+.type-number1{ padding:0px;}
+.type-mobile { height:inherit !important;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

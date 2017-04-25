@@ -10496,11 +10496,13 @@ a {
     .pagination li.active {
       z-index: 2;
       color: #fff;
-      background-color: #064ba8;
+      background-color: #cacaca;
       
       padding: 1px 5px;
       margin-left: -1px;
-      line-height: 1.428571429; }
+      line-height: 1.428571429; 
+	  
+	  }
     /* line 473, ../sass/_common.scss */
     .pagination li a {
       position: relative;
@@ -10514,11 +10516,9 @@ a {
       /* line 484, ../sass/_common.scss */
       .pagination li a:hover, .pagination li a.active {
         z-index: 2;
-        color: #fff;
-        background-color: #064ba8;
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        border-radius: 50%; }
+        color: #fff !important;
+        background-color: #cacaca !important;
+        }
 
 /* line 502, ../sass/_common.scss */
 form .error {
