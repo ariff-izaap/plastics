@@ -31,8 +31,8 @@
         
     </div>
     </div>
-     <div class="form-group col-md-2">
-        <button type="submit" class="btn btn-block">Save</button>
+     <div class="form-group col-md-2 save">
+        <button type="submit" class="btn btn-success">Save</button>
       </div> 
   </form>
 </div>

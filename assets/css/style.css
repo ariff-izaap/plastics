@@ -11996,8 +11996,8 @@ hr {
 
 form#CustomerRelation label.error
 {
-  color: #fff;
-  background-color: #f93c60;
+  color:#f93c60;
+
   float: right;
   padding: 0 15px;
   font-size: 0.8em;
@@ -12009,7 +12009,7 @@ form#CustomerRelation label.error
   -webkit-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
   position: absolute;
-  right: 15px;
+  right: 0px;
 }
 
 form#CustomerRelation  input.form-control.error,form#CustomerRelation  select.form-control.error {

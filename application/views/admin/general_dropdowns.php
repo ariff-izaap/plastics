@@ -52,15 +52,15 @@
       <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="">        
      
     </div>
-    </div>
- <div class="form-group col-md-4">
-        <button type="button" class="btn btn-block del-dropdown">Delete</button>
+    </div> 
+ <div class="form-group col-md-4 save">
+        <button type="button" class="btn btn-danger del-dropdown"><i class="fa fa-trash-o trash"></i>Delete</button>
       </div>
-      <div class="form-group col-md-4">
-        <button type="button" class="btn btn-block add-new-dropdown">Add New</button>
+      <div class="form-group col-md-4 save">
+        <button type="button" class="btn btn-info add-new-dropdown"><i class="fa fa-plus"></i>Add New</button>
       </div>
-      <div class="form-group col-md-4">
-        <button type="submit" class="btn btn-block">Save</button>
+      <div class="form-group col-md-4 save">
+        <button type="submit" class="btn btn-success"><i class="fa fa fa-life-saver"></i>Save</button>
       </div>
 </div>
   </form>

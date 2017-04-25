@@ -81,7 +81,7 @@
 		    </div>
 	      <div class="clearfix"></div><br>
 	      <div class="form-group">
-	      	<button class="btn" type="submit">Save</button>
+	      	<button class="btn btn-success" type="submit">Save</button>
 	      </div>
 	    </div>
 	  </form>
