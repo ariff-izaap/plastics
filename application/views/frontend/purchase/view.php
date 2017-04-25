@@ -12,12 +12,13 @@
 ?>
 <div class="row">
  	<div class="col-md-2 pull-right">
- 		<a href='<?=site_url("purchase/print_purchase/$po_id");?>' target="_blank" class="btn btn-success">Print</a>
+ 		
  	</div>
 </div>
 <div class="sales-order-view-section">
 	<div class="container topsec_info ">
 		<div class="row">
+		<div class="col-md-11">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td>Purchase Order</td>
@@ -30,23 +31,16 @@
 					<td><b><?php echo displayData($po['total_amount'], 'money');?></b></td>
 					<td><?php echo displayData($po['order_status'], 'colorize');?></td>
 					<td><?php echo displayData($po['created_date'], 'datetime');?></td>
+					
 				</tr>
-			</table>	
+			</table>
+		</div>
+		<div class="col-md-1">
+			<a style="margin-top: 15px;" href='<?=site_url("purchase/print_purchase/$po_id");?>' target="_blank" class="btn btn-success pull-right">Print</a>
+		</div>
 		</div>
 	</div>
-	<!-- <div class="container m_top_5">
-		<div class="row box_highilite">
-			<div class="col-md-3 ps_sec_blue">
-				<h3>Shipment Service <span><br><?=$po['carrier'];?></span></h3>
-			</div>
-			<div class="col-md-3 ps_sec_blue">
-				<h3>Payment Term <span><br><?php echo $po['credit'];?></span></h3>
-			</div>
-			<div class="col-md-4">
-				<h3>Delivery : <?=$po['ship_type'];?></h3>
-			</div>			
-		</div>
-	</div> --><br>
+	
 	<div class="container m_top_5" style="border: 1px solid #ccc;border-radius: 5px;padding: 10px;">
 		<form action="<?=site_url('purchase/change_order_status');?>" method="post">
 			<input type="hidden" name="po_id" value="<?=$po['po_id'];?>">
@@ -157,9 +151,8 @@
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-md-7 col-md-offset-5">
-					<button class="btn btn-success access-level"><i class="fa fa fa-life-saver"></i>Save Changes</button>
-				</div>
+				<div class="col-md-6 col-md-offset-6">
+					<button class="btn btn-success">Save</button>
 			</div>
 		</form>
 	</div><br>
@@ -208,62 +201,75 @@
 			<a href="#ProductModal"  data-toggle="modal" class="btn btn-warning pull-right">Add Product</a>
 		</div>
 		<?php }?>
-		<div class="col-md-2 pull-right">
-			<a href="#ReceivedQty" data-toggle="modal" class="btn btn-warning">Edit Received Quantity</a>
+		<div class="col-md-3 pull-right">
+			<a href="javascript:void(0);" class="btn pull-right btn-warning save-recevived-qty">Update Received Quantity</a>
 		</div>
-		<table class="table table-hover table-bordered">
-  		<thead>
-  			<th>Product Name</th><th>SKU</th><th>Ordered Quantity</th><th>Received Quantity</th><th>Unit Price</th><th>Total</th>
-  		</thead>
-  		<tbody>
-  			<?php
-  			if($products)
-  			{
-  				$tot = [];
-  				foreach ($products as $key => $value)
-  				{
-  					$tot[] = $value['qty'] * $value['unit_price'];
-  					?>
-  						<tr>
-  							<td><?=$value['p_name'];?></td>
-  							<td><?=$value['sku'];?></td>
-  							<td><?=$value['qty'];?></td>
-  							<td><?=$value['qty_received'];?></td>
-  							<td><?=displayData($value['unit_price'],'money');?></td>
-  							<td><?=displayData($value['unit_price'] * $value['qty'],'money');?></td>
-  						</tr>
-  					<?php
-  				}
-  			}
-  			?>
-  		</tbody>
-  		<tfoot>
-  			<tr>
-  				<td colspan="5" class="text-right"><strong>Sub Total</strong></td>
-  				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
-  			</tr>
-  			<tr>
-  				<td colspan="5" class="text-right"><strong>Shipping Charge</strong></td>
-  				<td colspan="1">0.00</td>
-  			</tr>
-  			<tr>
-  				<td colspan="5" class="text-right"><strong>Total</strong></td>
-  				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
-  			</tr>
-  		</tfoot>
-	  </table>
+		<form action="" method="post" id="ReceivedQtyForm">
+			<table class="table table-hover table-bordered" id="ViewPageCart">
+	  		<thead>
+	  		 <?php if($po['order_status']=="NEW" || $po['order_status']=="PENDING" || $po['order_status']=="PROCESSING"){?>
+	          			<th>Action</th>
+	                <?php }?>
+	  			<th>Product Name</th><th>SKU</th><th>Ordered Quantity</th><th>Received Quantity</th><th>Unit Price</th><th>Total</th>
+	  		</thead>
+	  		<tbody>
+	  			<?php
+	  			if($products)
+	  			{
+	  				$colspan = "5";
+	  				$tot = [];
+	  				foreach ($products as $key => $value)
+	  				{
+	  					$tot[] = $value['qty'] * $value['unit_price'];
+	  					?>
+	  						<tr>
+	  						 <?php if($po['order_status']=="NEW" || $po['order_status']=="PENDING" || $po['order_status']=="PROCESSING"){
+		                $colspan = "6";
+		              ?>
+		                <td><a href="#" class="btn btn-danger" onclick="remove_product(<?=$value['id'];?>,<?=$value['po_id'];?>)"><i class="fa fa-remove"></i></a></td>
+		                <?php }?>
+	  							<td><?=$value['p_name'];?></td>
+	  							<td><?=$value['sku'];?></td>
+	  							<td><?=$value['qty'];?></td>
+	  							<td>
+	  								<input type="number" class="form-control" min="<?=$value['qty_received'];?>" max="<?=$value['qty'];?>"
+			  									name="row[<?=$value['id'];?>]" value="<?=$value['qty_received'];?>">
+			  						<input type="hidden" name="product[<?=$value['id'];?>]" value="<?=$value['product_id'];?>">
+	  							</td>
+	  							<td><?=displayData($value['unit_price'],'money');?></td>
+	  							<td><?=displayData($value['unit_price'] * $value['qty'],'money');?></td>
+	  						</tr>
+	  					<?php
+	  				}
+	  			}
+	  			?>
+	  		</tbody>
+	  		<tfoot>
+	  			<tr>
+	  				<td colspan="<?=$colspan;?>" class="text-right"><strong>Sub Total</strong></td>
+	  				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
+	  			</tr>
+	  			<tr>
+	  				<td colspan="<?=$colspan;?>" class="text-right"><strong>Shipping Charge</strong></td>
+	  				<td colspan="1">0.00</td>
+	  			</tr>
+	  			<tr>
+	  				<td colspan="<?=$colspan;?>" class="text-right"><strong>Total</strong></td>
+	  				<td colspan="1"><?=displayData(array_sum($tot),'money');?></td>
+	  			</tr>
+	  		</tfoot>
+		  </table>
+		</form>
 	</div>
 	<div class="container m_top_5">
 		<div class="row">
 	    <div class="col-md-12">
-	        <label><strong>Notes : </strong></label>
-	        <br><?=$po['note'];?>
+	        <label><strong>Notes : </strong><?=$po['note'];?></label>
 	    </div>
 	  </div><br>
 	  <div class="row">
 	    <div class="col-md-12">
-	      <label><strong>PO Message :</strong> </label>
-	      <br><?=$po['po_message'];?>
+	      <label><strong>PO Message : </strong><?=$po['po_message'];?></label>
 	    </div>
 	  </div>
 	</div>
@@ -303,9 +309,9 @@
 
 
 
-<div id="ReceivedQty" class="modal fade">
+<!-- <div id="ReceivedQty" class="modal fade">
   <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
+    <!-- Modal content--
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -335,7 +341,7 @@
 			  							<td>
 			  								<input type="number" class="form-control" min="<?=$value['qty_received'];?>" max="<?=$value['qty'];?>"
 			  									name="row[<?=$value['id'];?>]" value="<?=$value['qty_received'];?>">
-			  									<input type="hidden" name="product[<?=$value['id'];?>]" value="<?=$value['product_id'];?>">
+			  								<input type="hidden" name="product[<?=$value['id'];?>]" value="<?=$value['product_id'];?>">
 			  							</td>
 			  						</tr>
 			  					<?php
@@ -360,7 +366,7 @@
     </div>
   </div>
 </div>
-
+ -->
 
 
 <div id="ProductModal" class="modal fade">

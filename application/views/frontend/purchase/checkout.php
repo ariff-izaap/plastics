@@ -195,7 +195,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="viewCart">
-			<h2>Review Order</h2>
+			<h2 class="col-md-8">Review Order</h2>
 			<a href="#modalCart" data-toggle="modal" class="btn btn-warning pull-right">Edit Cart</a><br><br>
 			<table class="table table-bordered table-hover">
 				<thead>
@@ -231,7 +231,7 @@
 			<input type="hidden" name="total" value="<?=$this->cart->total();?>">
 			<div class="row">
 				<div class="col-md-4 pull-right">
-					<h3>Total : <strong><?=displayData($this->cart->total(),'money');?></strong></h3>
+					<h3>Total : <strong><span class="cart_total"><?=displayData($this->cart->total(),'money');?></span></strong></h3>
 				</div>
 			</div>
 		</div>
@@ -307,7 +307,7 @@
 </div>
 
 <div id="UploadModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-sm">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -316,9 +316,8 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <form action="" class="UploadDocForm" method="post" enctype="multipart/form-data">
-          
-            <div class="form-group col-md-6">
+          <form action="" class="UploadDocForm" method="post" enctype="multipart/form-data">          
+            <div class="form-group col-md-12">
               <label class="">Upload Document</label>
               <input type="file" name="po_doc[]" class="form-control po_doc" id="">
               <span class="help-block">Allowed Extension : doc,docx,pdf,xls,xlsx</span>
@@ -344,7 +343,7 @@
               }
               ?>
             </div>
-            <div class="clearfix"></div><br>
+            <div class="clearfix"></div>
             <div class="col-md-3">
               <button type="button" class="btn btn-info upload-doc"><i class="fa fa-upload"></i> Upload</button>
             </div>

@@ -406,6 +406,7 @@ class Purchase extends Admin_Controller
 
     $this->data['products'] = $this->cart->contents();
     $output['cart'] = $this->cart->contents();
+    $output['cart_total'] = displayData($this->cart->total(),'money');
     $output['content']    = $this->load->view('/frontend/purchase/view_cart', $this->data, TRUE);
     $this->_ajax_output($output, TRUE);
   }

@@ -279,6 +279,7 @@ function update_cart(a)
       console.log(b);
       after_ajax(a,b);
       $("form#viewCart table tbody,div#viewCart table tbody").html(b.content);
+      $("span.cart_total").html(b.cart_total);
       bootbox.alert(b.message)
     },
     error:function(b){
@@ -1229,7 +1230,7 @@ $(".save-recevived-qty").click(function(){
         bootbox.alert(data.message,function(){
           location.reload();          
         });
-      console.log(data);
+      // console.log(data);
     }
   });
 });
