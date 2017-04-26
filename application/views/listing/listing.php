@@ -38,7 +38,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 	<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
 		<thead>
 			<tr>
-			<?php if($uri1 != "history" && ($uri != "add" &&  $uri1 != "purchase") && $uri1 != 'salesproductselection'){?>
+			<?php if($uri1 != "history" && ($uri != "add" &&  $uri1 != "purchase") ){?>
 
 				<th> # </th>
 				<?php }?>

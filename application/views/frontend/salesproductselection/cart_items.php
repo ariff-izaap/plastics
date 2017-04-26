@@ -6,9 +6,11 @@
       $so_id = ($uri == 'salesorder' && $uri2 == 'update_salesorder_quantity')?$this->uri->segment(4):'cartitem';
          
           ?>
-          <div class="container">
-<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php echo $so_id;?>',this)" class="btn btn-default ">Update</button>
+          <!--
+<div class="container">
+<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php //echo $so_id;?>',this)" class="btn btn-default ">Update</button>
 </div>
+-->
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
     <td>Product Number</td>
@@ -110,6 +112,8 @@
 <div>
     
   <?php if($uri2=='view') {?>  
-    <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-danger" id="cancel"  value="Cancel" />
+    <!--
+<input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-danger" id="cancel"  value="Cancel" />
+-->
   <?php } ?>  
 </div>

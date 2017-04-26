@@ -10,6 +10,7 @@
             <div class="form-group" >
               <label class="col-md-6">Product</label>
               <select class="form-control col-md-6" name="name" id="name"  >
+                  <option></option>
                    <?php $products = get_products(); 
                   
                          foreach($products as $prod): ?>
@@ -20,6 +21,7 @@
             <div class="form-group">
               <label class="col-md-6">Form</label>
               <select class="form-control productform col-md-6" name="form_id" id="form_id" >
+                   <option></option>
                    <?php $forms = get_forms(); 
                      foreach($forms as $form): ?>
                     <option value="<?php echo $form['id'];?>"  > <?php echo $form['name'];?> </option>
@@ -29,6 +31,7 @@
             <div class="form-group" >
               <label class="col-md-6">Packaging</label>
               <select class="form-control productpackage col-md-6" name="package_id" id="package_id" >
+                  <option></option>
                    <?php $packages = get_packages(); 
                        foreach($packages as $pack):
                      
@@ -55,6 +58,7 @@
              <div class="form-group" >
               <label class="col-md-6">Color</label>
               <select class="form-control productcolor col-md-6" name="color_id" id="color_id" >
+                   <option></option>
                    <?php $colors = get_colors();
                     foreach($colors as $clr):
                       
@@ -66,6 +70,7 @@
             <div class="form-group" >
               <label class="col-md-6">Notes</label>
               <select class="form-control productnotes col-md-6" name="notes" id="notes" >
+                 <option></option>
                    <?php foreach($address as $addr):
                       $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
                    ?>
@@ -106,6 +111,7 @@
 
              <div class="form-group col-md-1">              
              <select class="form-control" name="quantity_uses">
+                 <option></option>
                 <option value="lessthan"> < </option>
                 <option value="greaterthan"> > </option>
             </select>
