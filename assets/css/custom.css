@@ -658,6 +658,11 @@ background-color: #e6e6e6;
     height: 25px !important;
     padding: 0 6px;
 }
+.panels1 input[type="text"], .panels1 select{
+    font-size: 12px;
+    height: 25px !important;
+    padding: 0 6px;
+}
 .panels .form-group { margin-bottom:6px !important;}
 .panels textarea { height:40px !important;}
 .panels1 .form-group label {
@@ -675,6 +680,24 @@ background-color: #e6e6e6;
 .panels1 .form-group {
     margin-bottom: 6px !important;
 }
+.inventry-add1 {
+    float: left;
+    width: 100%;
+}
+.inventry-add1 .form-group {
+    float: left;
+    width: 47%;
+}
+#inventory_sub_form .col-md-offset-8 {
+    margin-bottom: 0;
+}
+.inventry-add1 .form-group {
+    float: left;
+    width: 47% !important;
+}
+.panels, .panels1 { margin-bottom:0px !important;}
+#inventory_form .modal-body { padding:0px !important;}
+#inventory_add_section .panel-primary { margin-bottom:12px !important;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

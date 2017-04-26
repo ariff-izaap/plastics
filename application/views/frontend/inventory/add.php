@@ -26,7 +26,7 @@
                         <div class="tab-pane fade in active tabcontent" id="tab1primary">
                         <form name="inventory" id="inventory_sub_form" method="POST" enctype="multipart/form-data">
                            <input type="hidden" name="type" id="form_type" value="" />
-                           <div class="form-grid col-md-6 panel panel-default panel-bor">
+                           <div class="form-grid col-md-6 panel panel-default panel-bor panels">
                            <div class="panel-heading formcontrol-box inventry-add">
                                 <div class="form-group  <?php echo (form_error('name'))?'error':'';?>" data-error="<?php echo (form_error('name'))? form_error('name'):'';?>">
                                   <label required>Inventory Name</label>
@@ -106,6 +106,15 @@
                                   </select>
                                   <!-- <input type="text" name="product" class="form-control" id="product" value="<?php echo set_value('product', $editdata['product']);?>" placeholder="Product" /> -->
                                 </div>
+                                 <div class="form-group  <?php echo (form_error('row'))?'error':'';?>" data-error="<?php echo (form_error('row'))? form_error('row'):'';?>">
+                                  <label required>Row</label>
+                                  <input type="text" name="row" class="form-control" onkeypress="return numbersonly(event);" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
+                                </div>
+                               
+                                <div class="form-group  <?php echo (form_error('units'))?'error':'';?>" data-error="<?php echo (form_error('units'))? form_error('units'):'';?>">
+                                  <label required>Units:</label>
+                                  <input type="text" name="units" class="form-control" onkeypress="return numbersonly(event);" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
+                                </div>
                                
                                 <div class="form-group  <?php //echo (form_error('notes'))?'error':'';?>" data-error="<?php //echo (form_error('notes'))? form_error('notes'):'';?>">
                                   <label>Notes:</label>
@@ -121,15 +130,7 @@
                                   <label>Equivalent:</label>
                                   <textarea name="equivalent" class="form-control" id="equivalent"><?php echo set_value('equivalent', $editdata['equivalent']); ?> </textarea>
                                 </div>
-                                  <div class="form-group  <?php echo (form_error('row'))?'error':'';?>" data-error="<?php echo (form_error('row'))? form_error('row'):'';?>">
-                                  <label required>Row</label>
-                                  <input type="text" name="row" class="form-control" onkeypress="return numbersonly(event);" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
-                                </div>
-                               
-                                <div class="form-group  <?php echo (form_error('units'))?'error':'';?>" data-error="<?php echo (form_error('units'))? form_error('units'):'';?>">
-                                  <label required>Units:</label>
-                                  <input type="text" name="units" class="form-control" onkeypress="return numbersonly(event);" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
-                                </div>
+                                 
                                
                                 
                                 <div class="form-group" data-error="<?php echo (form_error('quantity'))? form_error('quantity'):'';?>">
@@ -140,14 +141,7 @@
                                   <label required>Retail Price</label>
                                   <input type="text" name="retail_price" class="form-control" onkeypress="return numbersonly(event);" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
                                 </div>
-                                
-                             
-                                </div>
-                                </div>
-                                
-                                <div class="form-grid col-md-6 panel panel-default panel-bor">
-                                <div class="panel-heading formcontrol-box">
-                                <div class="inventry-add">
+                               
                                 <div class="form-group " >
                                   <label required>Wholesale Price</label>
                                   <input type="text" name="wholesale_price" onkeypress="return numbersonly(this);" class="form-control" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
@@ -173,10 +167,17 @@
                                   <label>Vendor Lot Number</label>
                                   <input type="text" name="vendor_lot_no" class="form-control" id="vendor_lot_no" value="<?php echo set_value('vendor_lot_no', $editdata['vendor_lot_no']);?>" placeholder="Vendor lot No" />
                                 </div>
+                                
+                             
+                                </div>
                                 </div>
                                 
+                                <div class="form-grid col-md-6 panel panel-default panel-bor panels1">
+                                <div class="panel-heading formcontrol-box">
+                                
+                                
                                 <label class="">Certificate Documents:</label>
-                                <div class="form-group">
+                                <div class="form-group" style="float:right; width:49% !important;">
                     				<input id="certificate_file_name" name="certificate_file_name" class="file" type="file" />
                                     <input id="certification_files" name="certification_files" type="hidden" value="<?php echo set_value('certification_files',$editdata['certification_files']); ?>" />
                                     <?php if(!empty($editdata['certification_files'])){ $image = BASEPATH_CUSTOM.'assets/uploads/product/certificate/'.$editdata['certification_files']; if(file_exists($image)) { ?>
@@ -188,18 +189,18 @@
                                 
                                 <div class="inventry-add">
                                 
-                                <div class="form-group  <?php echo (form_error('purchase_order_number'))?'error':'';?>" data-error="<?php echo (form_error('purchase_order_number'))? form_error('purchase_order_number'):'';?>">
-                                  <label>Purchase Order Number</label>
+                                <div style="width:30% !important;" class="form-group  <?php echo (form_error('purchase_order_number'))?'error':'';?>" data-error="<?php echo (form_error('purchase_order_number'))? form_error('purchase_order_number'):'';?>">
+                                 <!-- <label>Purchase Order Number</label>-->
                                   <input type="text" name="purchase_order_number" class="form-control" id="purchase_order_number" value="<?php echo set_value('purchase_order_number', $editdata['purchase_order_number']);?>" placeholder="Purchase Order Number" />
                                 </div>
                                 
-                                <div class="form-group  <?php echo (form_error('purchase_transportation_identifier'))?'error':'';?>" data-error="<?php echo (form_error('purchase_transportation_identifier'))? form_error('purchase_transportation_identifier'):'';?>">
-                                  <label>Purchase Transportation Identifier</label>
+                                <div style="width:30% !important;" class="form-group  <?php echo (form_error('purchase_transportation_identifier'))?'error':'';?>" data-error="<?php echo (form_error('purchase_transportation_identifier'))? form_error('purchase_transportation_identifier'):'';?>">
+                                <!--  <label>Purchase Transportation Identifier</label>-->
                                   <input type="text" name="purchase_transportation_identifier" class="form-control" id="purchase_transportation_identifier" value="<?php echo set_value('purchase_transportation_identifier', $editdata['purchase_transportation_identifier']);?>" placeholder="Purchase Transportation Identifier" />
                                 </div>
                                 
-                                <div class="form-group  <?php echo (form_error('sales_transportation_identifier'))?'error':'';?>" data-error="<?php echo (form_error('sales_transportation_identifier'))? form_error('sales_transportation_identifier'):'';?>">
-                                  <label>Sale Transportation Identifier(s)</label>
+                                <div style="width:30% !important;" class="form-group  <?php echo (form_error('sales_transportation_identifier'))?'error':'';?>" data-error="<?php echo (form_error('sales_transportation_identifier'))? form_error('sales_transportation_identifier'):'';?>">
+                                 <!-- <label>Sale Transportation Identifier(s)</label>-->
                                   <input type="text" name="sales_transportation_identifier" class="form-control" id="sales_transportation_identifier" value="<?php echo set_value('sales_transportation_identifier', $editdata['sales_transportation_identifier']);?>" placeholder="Sales Transportation Identifier" />
                                 </div>
                                 <div class="form-group <?php echo (form_error('warehouse_id'))?'error':'';?>" data-error="<?php echo (form_error('warehouse_id'))? form_error('warehouse_id'):'';?>">
@@ -250,6 +251,7 @@
                                   <label>Height</label>
                                   <input type="text" name="height" class="form-control" id="height" value="<?php //echo set_value('height', $editdata['height']);?>" placeholder="Height" />
                                 </div>-->
+                                <div class="inventry-add1">
                                 <div class="form-group  <?php //echo (form_error('weight'))?'error':'';?>" data-error="<?php //echo (form_error('weight'))? form_error('weight'):'';?>">
                                   <label class="col-md-4">Weight</label>
                                   <input type="text" name="weight" class="form-control col-md-8" id="weight" value="<?php echo set_value('weight', $editdata['weight']);?>" placeholder="Weight" />
@@ -259,15 +261,16 @@
                                   <input type="radio" name="in_stock" value="1" <?php echo set_radio('in_stock', '1', ($editdata['in_stock']==1)?TRUE:""); ?> /> Yes
                                   <input type="radio" name="in_stock" value="0" <?php echo set_radio('in_stock', '1', ($editdata['in_stock']==0)?TRUE:""); ?> /> No
                                 </div>
+                                </div>
                                 <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?php echo $editdata['id'];?>">
                         
                                 </div>
                                 </div>
                                  </div>
-                                <div class="form-group col-md-2 col-md-offset-8">   
+                                <div class="form-group col-md-2 col-md-offset-8" style="margin-bottom:0px;">   
                                   <button type="button" class="btn btn-success" id="inventory_submit" onclick="return inventory_sub('submit','');">Submit</button>
                                 </div>
-                                <div class="form-group col-md-2">   
+                                <div class="form-group col-md-2" style="margin-bottom:0px;">   
                                    <input type="reset" name="reset" value="Reset" class="btn btn-block active text-center" />
                                 </div>
                                 <!--
