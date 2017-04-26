@@ -16,13 +16,13 @@
               
               <label>SKU:*</label>
               <div class="form-group" data-error="<?php echo (form_error('sku'))? form_error('sku'):'';?>">
-                <input class="input-medium" name="sku" id="sku" value="<?php echo set_value('sku', $edit_data['sku'])?>" type="text">
+                <input class="input-medium" name="sku" id="sku" value="<?php echo set_value('sku', (!empty($edit_data['sku']))?$edit_data['sku']:$edit_data['product']['sku']);?>" type="text">
                 <?php echo form_error('sku', '<span class="error_text">', '</span>');?>
               </div>
               
               <label>Cost:*</label>
               <div class="form-group" data-error="<?php echo (form_error('cost'))? form_error('cost'):'';?>">
-                <input class="input-medium" name="cost" id="cost" value="<?php echo set_value('cost', $edit_data['cost'])?>" type="text">
+                <input class="input-medium" name="cost" id="cost" value="<?php echo set_value('cost', (!empty($edit_data['cost']))?$edit_data['cost']:$edit_data['product']['retail_price']);?>" type="text">
                 <?php echo form_error('cost', '<span class="error_text">', '</span>');?>
               </div>
               
@@ -75,18 +75,22 @@
                 <?php echo form_error('shipping_service', '<span class="error_text">', '</span>');?>
               </div>
 
-              <label>Dropship Fee:</label>
-              <div class="form-group" data-error="<?php echo (form_error('dropship_fee'))? form_error('dropship_fee'):'';?>">
-                <input class="input-medium" name="dropship_fee" id="dropship_fee" value="<?php echo set_value('dropship_fee', $edit_data['dropship_fee'])?>" type="text">
-                <?php echo form_error('dropship_fee', '<span class="error_text">', '</span>');?>
+             <!--
+ <label>Dropship Fee:</label>
+              <div class="form-group" data-error="<?php //echo (form_error('dropship_fee'))? form_error('dropship_fee'):'';?>">
+                <input class="input-medium" name="dropship_fee" id="dropship_fee" value="<?php //echo set_value('dropship_fee', $edit_data['dropship_fee'])?>" type="text">
+                <?php //echo form_error('dropship_fee', '<span class="error_text">', '</span>');?>
               </div>
+-->
               
-              <label>In Bound</label>
+              <!--
+<label>In Bound</label>
               <div class="form-group" >
-                <input class="input-medium" name="in_bound" id="in_bound" value="<?php echo set_value('in_bound', $edit_data['in_bound'])?>" type="text">
+                <input class="input-medium" name="in_bound" id="in_bound" value="<?php //echo set_value('in_bound', $edit_data['in_bound'])?>" type="text">
                 
               </div>
               
+-->
             </div>
             
             <input  type="hidden" name="edit_id" value="<?php echo $edit_data['id'];?>" /> 

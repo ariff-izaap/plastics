@@ -26,7 +26,7 @@
    <div class="container button-sec sales-btn-sec">     
        <div class="row">
           <div class="col-md-2">
-            <button type="button" class="col-md-2 btn btn-block" onclick="product_add_to_shipment()"><i class="fa fa-plus"></i>Add Product to SO</button>
+            <button type="button" class="col-md-2 btn btn-block" onclick="multiple_product_add_to_cart();"><i class="fa fa-plus"></i>Add Product to SO</button>
           </div>
           <div class="col-md-2">  
             <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
@@ -34,15 +34,19 @@
          <div class="col-md-2">   
             <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-trash-o trash" style="color:#000 !important; font-weight:bold;"></i>Delete Product From SO</button>
          </div>
-         <div class="col-md-2">   
+        <!--
+ <div class="col-md-2">   
             <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-sticky-note-o"></i>Existing SO</button>
          </div>
-         <div class="col-md-2">   
-           <!-- <button type="button" class="col-md-2 btn btn-block" >Save SO</button> -->
-           <a href="<?php echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block"><i class="fa fa fa-life-saver"></i>Save SO</a>
+-->
+         <!--
+<div class="col-md-2">   
+            <button type="button" class="col-md-2 btn btn-block" >Save SO</button>
+           <a href="<?php //echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block"><i class="fa fa fa-life-saver"></i>Save SO</a>
          </div>
+-->
          <div class="col-md-2">   
-            <a type="button" class="col-md-2 btn btn-block"> + Create New SO</a>
+            <a href="<?php echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block"> + Create New SO</a>
          </div>
        </div>
    </div>
@@ -54,6 +58,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" onclick="modal_close();">&times;</button>
+         <h3>Add To Cart</h3>
       </div>
       <form name="sales_add_to_cart" id="sales_add_to_cart">
       <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>

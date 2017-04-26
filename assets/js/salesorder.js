@@ -180,8 +180,6 @@ function sales_update_cart(action_type,sales_order_id, elm)
 
 function update_sales_status(so_id)
 {
-    
-   
     var carrier = $("#carrier").val();
     var ordstat = $("#order_status").val();
     var fdata = {carrier:carrier,order_status:ordstat};
@@ -412,10 +410,15 @@ function sales_prod_add_to_cart()
     }  
 }
 
+function multiple_product_add_to_cart()
+{
+    $(document).find(".checkbox:checked").each(function(){ 
+        ids += (ids)?','+$(this).val():$(this).val();
+     });
+}
+
 function delete_cartt(cart_id)
-{ 
-    
-    
+{   
   $.ajax({
     type:"POST",
     url:base_url+'salesproductselection/delete_cart',
@@ -425,7 +428,6 @@ function delete_cartt(cart_id)
     {
       var status = data.status;
       var output = data.output;      
-      
       if(status == 'success'){
         $("#product_shipping_lists").html(data.viewlist);
         $(window).scrollTop($('#product_shipping_lists').offset().top);

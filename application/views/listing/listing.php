@@ -50,7 +50,8 @@ if($uri1 == "accounting" && $uri != "invoices")
 				<th>
 				<input type="hidden" value="<?php echo $base_url.$cur_page.'/'.$field.'/';?><?php echo Listing::reverse_direction($direction); ?>"> 
 	
-				<a href="<?php echo $base_url.$cur_page.'/'.$field.'/';?><?php echo Listing::reverse_direction($direction); ?>" data-original-title="Click to sort" data-toggle="tooltip" data-placement="top" title="Click to sort">
+				<a href="<?php echo $base_url.$cur_page.'/'.$field.'/';?>
+                   <?php echo Listing::reverse_direction($direction); ?>" data-original-title="Click to sort" data-toggle="tooltip" data-placement="top" title="Click to sort">
 					<?php echo $values['name'];?> 
 				</a>
 				
@@ -75,7 +76,7 @@ if($uri1 == "accounting" && $uri != "invoices")
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices')  && $uri1!='salesproductselection'){ ?>
+				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices')){ ?>
 
 					<th>Action</th>
 
@@ -90,15 +91,15 @@ if($uri1 == "accounting" && $uri != "invoices")
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        	if($uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") && $uri != 'add_product' && $uri1 != "salesproductselection")
+        	if($uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") && $uri != 'add_product')
         	{ 	
         		?>
-						<td>
+			<td>
           		<?php 
                     $clk            = '';
-                    $data_attributes= '';
+                    // $data_attributes= '';
                     //$clk = ($uri1 == "salesproductselection")?'onclick="product_add_to_shipment('.$item['id'].')"':"";
-                   // $data_attributes = ($uri1 == "salesproductselection")?'data-qty="'.$item['quantity'].'" data-price="'.$item['wholesale_price'].'"':"";
+                    $data_attributes = ($uri1 == "salesproductselection")?'data-qty="'.$item['quantity'].'" data-price="'.$item['wholesale_price'].'"':"";
                     
           			if((isset($item['id']) && !empty($item['id']))){ 
 						echo '<label for="selectAll-'.$item['id'].'" class="custom-checkbox">&nbsp;</label>';
@@ -111,7 +112,7 @@ if($uri1 == "accounting" && $uri != "invoices")
           else if($uri1 != 'accounting' && $uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") )
         	{ 	
         		?>
-						<td>
+			<td>
           		<?php 
           			if((isset($item['id']) && !empty($item['id']))){ 
 						echo '<label for="selectAll-'.$item['id'].'" class="custom-radio">&nbsp;</label>';

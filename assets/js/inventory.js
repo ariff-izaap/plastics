@@ -36,7 +36,7 @@ function open_tab(tab)
     $("#").trigger("click");
 }
 
-function inventory_sub(ty='',edit_id)
+function inventory_sub(ty='',edit_id,title)
 {    
     if(edit_id!=''){
          edit_id = edit_id;
@@ -64,7 +64,7 @@ function inventory_sub(ty='',edit_id)
                 bootbox.alert(res.message);
             }
             $("#inventory_form .modal-body").html(output);
-            $("#inventory_form").find("#myModalLabel").html('Add Product');
+            $("#inventory_form").find("#myModalLabel").html(title);
             $("#inventory_form").modal({
                 backdrop:"static"
             });
@@ -77,21 +77,24 @@ function inventory_sub(ty='',edit_id)
     });    
 }
 
-function add_vendor_price_lists(action,div_id)
+function add_vendor_price_lists(action,div_id,type)
 {
-     var fdata   = $("#form_vendor_add").serialize();
-     var edit_id = '';
-         edit_id = $("#form_vendor_add #edit_id").val();
-        
+    //alert(action);
+    // var fdata   = $("#form_vendor_add").serialize();
+    // var edit_id = '';
+        // edit_id = $("#form_vendor_add #edit_id").val();
+     var data = (type == 'add')?$("#form_vendor_add").serialize():"";
       $.ajax({
           url:base_url+action,
           type:"POST",
-          data:fdata,
+          data:data,
           dataType:'json',
           success:function(res)
           {
             var status = res.status;
-            var output = res.output;                
+            var output = res.output;
+             bootbox.alert(res.message);
+                             
             if(status == 'success'){
               get_vendor_price_lists(res.product_id,div_id);
             }
@@ -101,9 +104,10 @@ function add_vendor_price_lists(action,div_id)
                 $("#"+div_id).find(".modal-body").html(res.form_view);
                // init_modal();  
             }
-         }
+          }
       });    
 }
+
 
 function get_vendor_price_lists(product_id,div_id)
 {
@@ -139,7 +143,7 @@ function check_product_id(event)
 }
 
 //product image delete
-function product_image_delete(del_id,table_name)
+function product_image_delete(del_id,table_name,product_id = '')
 {
       $.ajax({
           url:base_url+"inventory/product_image_delete/"+del_id+"/"+table_name,
@@ -147,7 +151,10 @@ function product_image_delete(del_id,table_name)
           data:{},
           dataType:'json',
           success:function(res){
-            service_message(res.status,res.message);
+             bootbox.alert(res.message);
+            if(table_name == 'vendor_price_list'){
+               get_vendor_price_lists(product_id,'addVendorForm'); 
+            }
           }
     });    
 }

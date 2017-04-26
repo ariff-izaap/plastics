@@ -123,22 +123,22 @@
                                 </div>
                                   <div class="form-group  <?php echo (form_error('row'))?'error':'';?>" data-error="<?php echo (form_error('row'))? form_error('row'):'';?>">
                                   <label required>Row</label>
-                                  <input type="text" name="row" class="form-control" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
+                                  <input type="text" name="row" class="form-control" onkeypress="return numbersonly(event);" id="row" value="<?php echo set_value('row', $editdata['row']);?>" placeholder="Row">
                                 </div>
                                
                                 <div class="form-group  <?php echo (form_error('units'))?'error':'';?>" data-error="<?php echo (form_error('units'))? form_error('units'):'';?>">
                                   <label required>Units:</label>
-                                  <input type="text" name="units" class="form-control" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
+                                  <input type="text" name="units" class="form-control" onkeypress="return numbersonly(event);" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
                                 </div>
                                
                                 
                                 <div class="form-group" data-error="<?php echo (form_error('quantity'))? form_error('quantity'):'';?>">
                                   <label required>Quantity</label>
-                                  <input type="text" name="quantity" class="form-control" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
+                                  <input type="text" name="quantity" class="form-control" onkeypress="return numbersonly(event);" id="quantity" value="<?php echo set_value('quantity', $editdata['quantity']);?>" placeholder="Quantity">
                                 </div>
                                 <div class="form-group" >
                                   <label required>Retail Price</label>
-                                  <input type="text" name="retail_price" class="form-control" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
+                                  <input type="text" name="retail_price" class="form-control" onkeypress="return numbersonly(event);" id="retail_price" value="<?php echo set_value('retail_price', $editdata['retail_price']);?>" placeholder="Retail Price" />
                                 </div>
                                 
                              
@@ -150,7 +150,7 @@
                                 <div class="inventry-add">
                                 <div class="form-group " >
                                   <label required>Wholesale Price</label>
-                                  <input type="text" name="wholesale_price" class="form-control" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
+                                  <input type="text" name="wholesale_price" onkeypress="return numbersonly(this);" class="form-control" id="wholesale_price" value="<?php echo set_value('wholesale_price', $editdata['wholesale_price']);?>" placeholder="Wholesale Price" />
                                 </div>
             
                                 <div class="form-group " >
@@ -330,8 +330,8 @@
                                         </div>
                                         <div class="modal-body" style="height:60%;overflow:auto"></div>
                                         <div class="modal-footer">
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                            <button class="btn btn-primary" onclick="add_vendor_price_lists('inventory/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm');">Submit</button>
+                                            <button class="btn" onclick="popup_close('#addVendorForm');">Close</button>
+                                            <button class="btn btn-primary" onclick="add_vendor_price_lists('inventory/vendor_add/<?=$this->uri->segment(3)?>','addVendorForm','add');">Submit</button>
                                         </div>
                                         </div>
                                     </div>

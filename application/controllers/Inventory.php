@@ -40,7 +40,7 @@ class Inventory extends Admin_Controller
          
         $this->_narrow_search_conditions = array("p.name");
         
-        $str = '<a href="javascript:void(0);" onclick="inventory_sub(\'create\',\'{id}\')" class="table-action"><i class="fa fa-edit edit"></i></a>
+        $str = '<a href="javascript:void(0);" onclick="inventory_sub(\'create\',\'{id}\',\'Edit Inventory\')" class="table-action"><i class="fa fa-edit edit"></i></a>
                 <a href="javascript:void(0);" data-original-title="Remove" data-toggle="tooltip" data-placement="top" class="table-action" onclick="delete_record(\'inventory/delete/{id}\',this);"><i class="fa fa-trash-o trash"></i></a>
                 ';
  
@@ -86,16 +86,16 @@ class Inventory extends Admin_Controller
           $this->form_validation->set_rules('name','Product Name','trim|required');
           $this->form_validation->set_rules('sku','Sku','trim|required');
           $this->form_validation->set_rules('quantity','Quantity','trim|required');
-        //  $this->form_validation->set_rules('product','Product Type','trim|required');
+        //$this->form_validation->set_rules('product','Product Type','trim|required');
           $this->form_validation->set_rules('color_id','Color','trim|required');
           $this->form_validation->set_rules('form_id','Form','trim|required');
           $this->form_validation->set_rules('package_id','Package','trim|required');
           $this->form_validation->set_rules('category_id','Color','trim|required');
-          $this->form_validation->set_rules('row','Row','trim|required');
-          $this->form_validation->set_rules('units','Units','trim|required');
+          $this->form_validation->set_rules('row','Row','trim|required|numeric');
+          $this->form_validation->set_rules('units','Units','trim|required|numeric');
           $this->form_validation->set_rules('retail_price','Retail Price','trim|required');
           $this->form_validation->set_rules('wholesale_price','Wholesale Price','trim|required');
-         // $this->form_validation->set_rules('weight','Weight','trim|required');
+         //$this->form_validation->set_rules('weight','Weight','trim|required');
           
           $this->form_validation->set_error_delimiters('', '');
           if($this->form_validation->run()){
@@ -246,13 +246,18 @@ class Inventory extends Admin_Controller
      public function delete_all()
     {
         
-        $ids = $this->input->post('id');
+        $ids            = $this->input->post('id');
         
-        $access_data = $this->db->query("delete from product where id in (".$ids.")");
-        $output      =  array();
+        //check if product id already created purchase order
+        $purchase_order = $this->db->query("select product_id from purchase_order_item where product_id in (".$ids.")")->result_array();
+        $sales_order    = $this->db->query("select product_id from sales_order_item where product_id in (".$ids.")")->result_array();
+        
+        if((count($purchase_order)==0) && (count($sales_order)==0)){
+         $access_data    = $this->db->query("delete from product where id in (".$ids.")");
+        }
+        $output          =  array();
 
         if(count($access_data) > 0){
-            
             $output['message'] = "Record deleted successfuly.";
             $output['status']  = "success";
         }
@@ -381,8 +386,7 @@ class Inventory extends Admin_Controller
 			$product_id = $this->input->post('product_id');
 
 		$vendor_id = $this->input->post('vendor_id');
-
-		$rules = $this->get_price_list_rules($edit_id);
+		$rules     = $this->get_price_list_rules($edit_id);
 
 		$this->form_validation->set_rules($rules);
 
@@ -414,9 +418,7 @@ class Inventory extends Admin_Controller
 				 
 				//product vendor price list  details add
 				$edit_id = $this->product_vendor_model->insert($data);
-				 
 				$message = "Price list created successfully.";
-				
 			}
 			$ajax_return_data['status']     = "success";
 			$ajax_return_data['message']    = $message;
@@ -446,8 +448,8 @@ class Inventory extends Admin_Controller
 			$edit_data['shipping_service']   = '';
             $edit_data['shipping_cost']      = '';
 
-			$product_details  = $this->inventory_model->get_where(array("id" => $product_id))->row_array();
-			$edit_data['upc'] = (isset($product_details['upc']))?$product_details['upc']:"";
+			$product_details      = $this->inventory_model->get_where(array("id" => $product_id))->row_array();
+			$edit_data['product'] = $product_details;
 		}
 
 		$data['product_id'] 	= $product_id;
