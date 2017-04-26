@@ -174,25 +174,26 @@ class Salesproductselection extends Admin_Controller
    public function add_to_cart()
    {
     
-     //post data
-     $available_quantity = $this->input->post("quantity_available");
-     $order_quantity     = $this->input->post("quantity_to_order");
-     $product_id         = $this->input->post("product_id");
-     $type_of_sale       = $this->input->post("type_of_sale");
-     $product_from       = $this->input->post("product_from");
-     $price              = $this->input->post("price");
-     
-     //getting data from db
-     $result             = $this->inventory_model->get_product_details($product_id);
-     $sale_type          = $this->inventory_model->get_where(array("id" => $type_of_sale),'*','sale_type')->row_array();
-     
-     $cart_data          = array(
+     $type               = $this->input->post("type");
+     if($type == 'single'){
+         //post data
+         $available_quantity = $this->input->post("quantity_available");
+         $order_quantity     = $this->input->post("quantity_to_order");
+         $product_id         = $this->input->post("product_id");
+        // $type_of_sale       = $this->input->post("type_of_sale");
+         //$product_from       = $this->input->post("product_from");
+         $price              = $this->input->post("price");
+        // $type               = $this->input->post("type");
+         
+         //getting data from db
+         $result             = $this->inventory_model->get_product_details($product_id);
+         $sale_type          = $this->inventory_model->get_where(array("id" => $type_of_sale),'*','sale_type')->row_array();
+         
+         $cart_data          = array(
                                     'id'           => $product_id,
                                     'qty'          => $order_quantity,
                                     'price'        => $price,
                                     'name'         => $result['name'],
-                                    'sale_type'    => $sale_type['name'],
-                                    'product_from' => $product_from,
                                     'form'         => $result['form_name'],
                                     'color'        => $result['color_name'],
                                     'package'      => $result['package_name'],
@@ -202,10 +203,37 @@ class Salesproductselection extends Admin_Controller
                                     'vendor_id'    => $result['vendor_id'],
                                );
                                
-    // print_r($cart_data);
-                                    
-     $row_id                  = $this->cart->insert($cart_data);
+    }
+    else
+    {
+         $product_ids = $this->input->post("ids");
+         
+         $product_ids = explode(",",$product_ids);
+         
+         $i = 0; $cart_data = array();
+         foreach($product_ids as $pvalue){
+            
+            $result = $this->inventory_model->get_product_details($pvalue);;
+            
+            $cart_data[$i] = array(
+                                    'id'           => $product_id,
+                                    'qty'          => 1,
+                                    'price'        => $result['retail_price'],
+                                    'name'         => $result['name'],
+                                    'form'         => $result['form_name'],
+                                    'color'        => $result['color_name'],
+                                    'package'      => $result['package_name'],
+                                    'type'         => $result['item_type'],
+                                    'row'          => $result['row'],
+                                    'equivalent'   => $result['equivalent'],
+                                    'vendor_id'    => $result['vendor_id'],
+                               );
+                               
+           $i++;                               
+         }
+    } 
     
+     $row_id                  = $this->cart->insert($cart_data);
      $this->data['cartitems'] = $this->cart->contents(); 
      $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
      

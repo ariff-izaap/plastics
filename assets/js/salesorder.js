@@ -393,8 +393,8 @@ function sales_prod_add_to_cart(type)
            });
            fdata = {ids:ids,type:type};
        }
-    
-    if(ord_qty!='' || ids =''){
+    alert(ids);
+    if(ord_qty!='' || ids !=''){
         $.ajax({
               url:base_url+"salesproductselection/add_to_cart",
               type:"POST",
