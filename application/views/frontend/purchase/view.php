@@ -169,7 +169,13 @@
 						<tbody class="white_bg">
 							<tr>
 								<td id="shipping_address" data-title="Billing Information Edit">
-									<address><strong>Ram Bill</strong> <br>Bill Address 1 <br>Bill Address 2 <br>Bill City Arizona  <br>United States of America <br><abbr title="Phone">P:</abbr> 58512</address>									</td>									
+									<address><strong><?=$po['bill_name'];?></strong> <br><?=$po['b_address1'];?><br><?=$po['b_address2'];?>
+                    <br><?=$po['b_city'].",<br>".$po['b_state'];?><br>
+                    <?=$po['b_country']." - ".$po['b_zipcode'];?><br>
+                    <abbr title="Phone">P:</abbr> <?=$po['b_phone'];?><br>
+                    <abbr title="Email">E:</abbr> <?=$po['email'];?>
+                  </address>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -186,7 +192,13 @@
 						<tbody class="white_bg">
 							<tr>
 								<td id="shipping_address" data-title="Billing Information Edit">
-									<address><strong>Ram Bill</strong> <br>Bill Address 1 <br>Bill Address 2 <br>Bill City Arizona  <br>United States of America <br><abbr title="Phone">P:</abbr> 58512</address>									</td>									
+									<address><strong><?=$po['wname'];?></strong> <br><?=$po['address1'];?><br><?=$po['address2'];?>
+                      <br><?=$po['city'].",<br>".$po['state_name'];?><br>
+                      <?=$po['country_name']." - ".$po['zipcode'];?><br>
+                      <abbr title="Phone">P:</abbr> <?=$po['phone'];?><br>
+                      <abbr title="Email">E:</abbr> <?=$po['email'];?>
+                    </address>
+                </td>									
 							</tr>
 						</tbody>
 					</table>

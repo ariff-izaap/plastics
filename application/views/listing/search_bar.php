@@ -17,14 +17,14 @@
       </form>
       <div class="right-section">
       
-<div class="col-sm-3 text-left advanced-search">
-        <!-- <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<!-- <div class="col-sm-3 text-left advanced-search">
+        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Advanced Search<span class="caret"></span>
         </button>
-        <a class="clear-text" href="javascript:void(0);">Clear Filter</a> -->
-      </div>
+        <a class="clear-text" href="javascript:void(0);">Clear Filter</a> 
+      </div>-->
 
-      <div class="col-sm-3 entry-text text-right">
+      <div class="col-sm-3 entry-text pull-left text-left">
         <span class="col-sm-6 show-entry">Show entries:</span>
         <span class="col-sm-6">
           <?php echo form_dropdown('per_page_options', $per_page_options, $per_page, 'class="form-control"');?>

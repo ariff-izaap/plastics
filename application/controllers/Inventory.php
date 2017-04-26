@@ -143,7 +143,7 @@ class Inventory extends Admin_Controller
                 $ins_data['updated_id']   = get_current_user_id();    
                 $msg                      = 'Product updated successfully';
                 $this->inventory_model->update(array("id" => $edit_id),$ins_data);
-                log_history("product",$edit_id,'Inventory',"update"); 
+                log_history($edit_id,'inventory',"Product <b>".$ins_data['name']."</b> has been updated."); 
               }
               else
               {   
@@ -154,7 +154,7 @@ class Inventory extends Admin_Controller
                            
                 $msg                      = 'Product added successfully';
                 $edit_id                  =  $new_id;
-                log_history("product",$edit_id,'Inventory',"insert");
+                log_history($new_id,'inventory',"Product <b>".$ins_data['name']."</b> has been inserted."); 
               }
               $this->session->set_flashdata('success_msg',$msg,TRUE);
               $status  = 'success';

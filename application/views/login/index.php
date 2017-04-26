@@ -11,7 +11,7 @@
             $pass = isset($a->password) ? $a->password : "";
           ?>
               <div class="form-group">
-                <input name="email" type="text" placeholder="Email" value="<?=$uname;?>">
+                <input name="email" type="email" placeholder="Email" value="<?=$uname;?>">
                 <input name="password" type="password" placeholder="Password" value="<?=$pass;?>">
                 
                 <?php if(validation_errors() || $this->session->flashdata('log_fail1')==TRUE):?>

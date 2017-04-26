@@ -53,7 +53,7 @@ class Accounting extends Admin_Controller
     if(isset($_POST['save_invoice']))
     {
       $form = $this->input->post();
-      $ins['invoice_no']= rand();
+      $ins['invoice_no'] = rand();
       $so_id = explode(",",str_replace("\r\n",",",$form['so_id']));
       $ins['salesman_id'] = $form['salesman_id'];
       $ins['location_id'] = $form['shipping_id'];
@@ -74,8 +74,8 @@ class Accounting extends Admin_Controller
       $ins['updated_id'] = get_current_user_id();
       $ins['created_date'] = date("Y-m-d H:i:s");
       $ins['updated_date'] = date("Y-m-d H:i:s");
-      $inv_id = $this->accounting_model->insert($ins,"invoices");
-      $log = log_history("invoices",$inv_id,"invoice","inserted");
+      $inv_id = $this->accounting_model->insert($ins,"Invoice #".$ins['invoice_no']." has been created.");
+      $log = log_history($inv_id,"invoice","inserted");
       for ($i=0; $i < count($so_id); $i++)
       { 
         $so = $this->accounting_model->get_ordered_items(array("so_id"=>$so_id[$i]),"sales_order_item");
@@ -172,9 +172,9 @@ class Accounting extends Admin_Controller
     $output['message'] = "Invoice Updated successfuly.";
     $output['status']  = "success";
     $this->accounting_model->update(array("id"=>$id),$up,"invoices");   
-    $log1 = log_history("invoices",$id,"invoice","update",$val);
+    $log1 = log_history($id,"invoice","Invoice #".$id." has been updated.");
     if($comments!='')
-      $log2 = log_history("invoices",$id,"invoice_comments","insert",$comments);
+      $log2 = log_history($id,"invoice",$comments);
     $this->_ajax_output($output, TRUE);
   }
 }

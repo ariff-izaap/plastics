@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Print Invoice - #<?=$invoices[0]['invoice_no'];?></title>
+	<title>Print PO - #<?=$po['po_id'];?></title>
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/css/bootstrap.min.css"> 
 	<!-- <script type="text/javascript" src="<?=base_url();?>assets/js/bootstrap.min.js"></script> -->
 </head>
@@ -27,7 +27,7 @@
 				</p>
 			</div>
 			<div class="col-md-4 text-right">
-				<p>PO Number : <?=$po['id'];?></p>
+				<p>PO Number : <?=$po['po_id'];?></p>
 				<p>PO Date : <?=date('m-d-Y',strtotime($po['created_date']));?></p>
 			</div>
 		</div>

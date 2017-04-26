@@ -200,7 +200,7 @@ function add_to_cart(b,a,d,f,v)
   var c=$(e).attr("data-original-title");
   if(d=="form")
   {
-    if(!before_ajax(e,"Updating...."))
+    if(!before_ajax(e,"Loading...."))
     {
       return false;
     }
@@ -233,7 +233,7 @@ function add_to_cart(b,a,d,f,v)
   }
   else
   {
-    if(!before_ajax(f,"Updating...."))
+    if(!before_ajax(f,"Loading...."))
     {
       return false;
     }
@@ -266,7 +266,7 @@ function add_to_cart(b,a,d,f,v)
 
 function update_cart(a)
 {
-  if(!before_ajax(a,"Updating...."))
+  if(!before_ajax(a,"Loading...."))
   {
     return false;
   }

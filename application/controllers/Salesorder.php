@@ -133,7 +133,7 @@ class Salesorder extends Admin_Controller
     {  
         $output['message'] ="Record deleted successfuly.";
         $output['status']  = "success";
-        $log = log_history("customer",$del_id,"customer","delete");
+        $log = log_history($del_id,"customer","Customer <b>#".$del_id."</b> has been deleted.");
         $this->admin_model->delete(array("id"=>$del_id),"customer");
         $this->_ajax_output($output, TRUE);
     }
@@ -254,7 +254,7 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
                 $ins_data['updated_id']   = get_current_user_id();    
                 $this->salesorder_model->update(array("id" => $edit_id),$ins_data);
-                log_history("sales_order",$edit_id,'Sales Order',"update");
+                log_history($edit_id,'Sales Order',"Order <b>#".$edit_id."</b> has been updated.");
                 $msg  = 'Sales Order updated successfully';
                 
               }
@@ -264,7 +264,7 @@ class Salesorder extends Admin_Controller
                 $ins_data['updated_date'] = date('Y-m-d H:i:s');
                 $ins_data['created_id']   = get_current_user_id();  
                 $so_new_id                = $this->salesorder_model->insert($ins_data,"sales_order");    
-                log_history("sales_order",$so_new_id,'Sales Order',"insert");
+                log_history($so_new_id,'Sales Order',"Order <b>#".$so_new_id."</b> has been created.");
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
@@ -278,7 +278,7 @@ class Salesorder extends Admin_Controller
                 $ship_data['updated_date']  = date('Y-m-d H:i:s');
                 $ship_data['created_id']    = get_current_user_id();  
                 $ship_new_id                = $this->salesorder_model->insert($ship_data,"shipment");
-                log_history("shipment",$ship_new_id,'Create Shipment',"insert");
+                log_history($ship_new_id,'Create Shipment',"Shipment <b>#".$ship_new_id."</b> has been created.");
                 
                 //items added to sales order item table
                 $sale_items = $this->cart->contents();
@@ -298,7 +298,7 @@ class Salesorder extends Admin_Controller
                      $product[$get_vendor_data['vendor_id']][$svalue['id']] = array("unit_price" => $svalue['price'], "quantity" => $svalue['qty']);
                      
                      $po_create_id = create_auto_po($product,$form);
-                     log_history("purchase_order",$po_create_id,'Create Auto PO',"insert");
+                     log_history($po_create_id,'Create Auto PO',"Auto Purchase Order <b>#".$po_create_id."</b> has been created.");
                    }
                    
                    $sale_item['product_id']   = $svalue['id'];
@@ -313,7 +313,7 @@ class Salesorder extends Admin_Controller
                    $sale_item['created_id']   = get_current_user_id();
                    $sale_order_item_id        = $this->salesorder_model->insert($sale_item,"sales_order_item");
                    
-                   log_history("sales_order_item",$sale_order_item_id,'Sales Order Item',"insert");
+                   log_history($sale_order_item_id,'Sales Order Item',"Sales Order Item <b>#".$sale_order_item_id." has been created.");
                    
                    $product_data = $this->salesorder_model->get_where(array("id" => $svalue['id']), "quantity","product")->row_array();
                    
@@ -576,7 +576,7 @@ class Salesorder extends Admin_Controller
                     $this->salesorder_model->update( array('id' => $so_details['id']), array("shipping_address_id" => $this->data['ship_addr_id']));
                     $price_list_info['shipping_address_id'] = $this->data['ship_addr_id'];
                     
-                    log_history('sales_order',$so_details['id'],'Shipping Address','update');
+                    log_history($so_details['id'],'Shipping Address','Shipping Address <b>#'.$so_details['id'].'</b> has been updated.');
                 }                       
                 $output['status']       = 'success';
                 $output['message']      = 'Shipping Address has been updated successfully!';
@@ -652,7 +652,7 @@ class Salesorder extends Admin_Controller
                     $this->salesorder_model->update( array('id' => $so_details['id']), array("billing_address_id" => $this->data['bill_addr_id']));
                     $price_list_info['billing_address_id'] = $this->data['bill_addr_id'];
                     
-                    log_history('sales_order',$so_details['id'],'Billing Address','update');
+                    log_history($so_details['id'],'Billing Address','Billing Address <b>#'.$so_details['id'].'</b> has been updated.');
                 }                       
                 $output['status']       = 'success';
                 $output['message']      = 'Billing Address has been updated successfully!';
@@ -747,7 +747,7 @@ class Salesorder extends Admin_Controller
                     $st_data    = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
                     $total_amt += $st_data['qty']*$st_data['unit_price'];
                     $i++;
-                    log_history('sales_order',$st_id,'Quantity','update');
+                    log_history($st_id,'Quantity','Quantity <b>#'.$quantity[$i].' has been updated.');
                 }
                 $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
             }
