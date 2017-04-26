@@ -74,8 +74,8 @@ class Accounting extends Admin_Controller
       $ins['updated_id'] = get_current_user_id();
       $ins['created_date'] = date("Y-m-d H:i:s");
       $ins['updated_date'] = date("Y-m-d H:i:s");
-      $inv_id = $this->accounting_model->insert($ins,"Invoice #".$ins['invoice_no']." has been created.");
-      $log = log_history($inv_id,"invoice","inserted");
+      $inv_id = $this->accounting_model->insert($ins,"invoices");
+      $log = log_history($inv_id,"invoice","Invoice <b>#".$ins['invoice_no']."</b> has been created.");
       for ($i=0; $i < count($so_id); $i++)
       { 
         $so = $this->accounting_model->get_ordered_items(array("so_id"=>$so_id[$i]),"sales_order_item");
