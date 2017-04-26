@@ -49,7 +49,7 @@ function inventory_sub(ty='',edit_id)
       if($("#form_type"))  
          $("#form_type").val(ty);
         
-     var fdata   = (ty=='create')?{type:ty}:$("#inventory_sub_form").serialize();
+     var fdata  = (ty=='create')?{type:ty}:$("#inventory_sub_form").serialize();
         
       $.ajax({
           url:base_url+"inventory/add/"+edit_id,
@@ -99,10 +99,10 @@ function add_vendor_price_lists(action,div_id)
             {
                 $("#"+div_id).find("#myModalLabel").html('Add Vendor');
                 $("#"+div_id).find(".modal-body").html(res.form_view);
-                init_modal();  
+               // init_modal();  
             }
          }
-    });    
+      });    
 }
 
 function get_vendor_price_lists(product_id,div_id)
@@ -162,7 +162,14 @@ function load_product_image_popup(modal)
 
 function popup_close(modal)
 {
-    $(modal).fadeOut();
+     
+    $(modal).hide();
+    if(modal == '#inventory_form'){
+        $(".modal-backdrop").removeClass("in");
+        $(".modal-backdrop").remove();
+        refresh_grid();
+    }
+   
 }
 
 function init_product_uploads()
@@ -193,15 +200,12 @@ var upld_certificate_options = {};
     $("#certificate_file_name").fileinput(upld_certificate_options);
 
     $(document).ready(function() {
-         
         $('#certificate_file_name').on('fileuploaded', function(event, data, previewId, index) {
             var form = data.form, files = data.files, extra = data.extra,
             response = data.response, reader = data.reader;
-             
             $("#certification_files").val(response.fileuploaded);       
         });
     });
-
 }
 
 function product_image_upload_settings()

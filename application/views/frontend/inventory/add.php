@@ -325,7 +325,7 @@
                                             <!-- Modal content-->
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                            <button type="button" class="close" onclick="popup_close('#addVendorForm')">x</button>
                                             <h3 id="myModalLabel"></h3>
                                         </div>
                                         <div class="modal-body" style="height:60%;overflow:auto"></div>

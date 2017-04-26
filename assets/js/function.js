@@ -460,7 +460,7 @@ function DeleteCheckedRow(e,cls,url)
           dataType:"json",
           success: function(res){ 
             alert(rec_count+' record(s) deleted successfully');
-            after_ajax(e);
+            //after_ajax(e);
             if(res.status == 'success'){
                 refresh_grid();
             }
@@ -480,7 +480,7 @@ function modal_close(pid='')
      $("#"+pid).find("label").removeClass("ui-checkboxradio-checked ui-state-active");
      $("#selectAll-"+pid).removeAttr("checked");
      $("#product_ship").hide();
-     refresh_grid();
+  //   refresh_grid();
 }
 
 function create_timesheet(elm)
@@ -915,9 +915,9 @@ function save_form(action,div_id,save_type,elm,call_back_fn,popup){
 $("#UploadModal").on("click",".cancel-file",function(){
   //$(".UploadDocForm")[0].reset();
   //$(".upload-doc").html("");
-  rand = $(this).attr("data-rand");
-  name = $(this).attr("data-name");
-  id = $(this).attr("data-id");
+  rand    = $(this).attr("data-rand");
+  name    = $(this).attr("data-name");
+  id      = $(this).attr("data-id");
   edit_id = $(this).attr("data-po-id");
   $.ajax({
      url:base_url+'purchase/del_upload',
@@ -1003,8 +1003,7 @@ $(".checkout-btn").click(function(){
 $(".warehouse_select").change(function(){
   $(".purchase-loader").show();
   val = $(this).val();
-  if(val!='')
-  {
+  if(val!=''){
     $.ajax({
       type:"POST",
       url:base_url+'warehouse/get_warehouse_details',
