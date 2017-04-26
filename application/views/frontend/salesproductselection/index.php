@@ -26,7 +26,7 @@
    <div class="container button-sec sales-btn-sec">     
        <div class="row">
           <div class="col-md-2">
-            <button type="button" class="col-md-2 btn btn-block" onclick="multiple_product_add_to_cart();"><i class="fa fa-plus"></i>Add Product to SO</button>
+            <button type="button" class="col-md-2 btn btn-block" onclick="sales_prod_add_to_cart('multiple');"><i class="fa fa-plus"></i>Add Product to SO</button>
           </div>
           <div class="col-md-2">  
             <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
@@ -64,6 +64,7 @@
       <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
       <div class="modal-body">
        <input type="hidden" name="product_id" id="product_id" />
+       <input type="hidden" name="type" id="type" value="single" />
         <!--
 <div class="form-group">
          <label>Type of Sale</label>
@@ -102,11 +103,13 @@ Warehouse <input type="radio" name="product_from" value="warehouse" />
        </div>
      </div>  
      <div class="row">
-        <div class="form-group col-md-3">
+        <!--
+<div class="form-group col-md-3">
             <input type="button" name="cancel" onclick="modal_close();" data-dismiss="modal" class="btn btn-danger" id="cancel" data-pid=""  value="Cancel" />
         </div>
+-->
         <div class="form-group col-md-3">  
-            <input type="button" name="confirm" onclick="sales_prod_add_to_cart();" data-dismiss="modal"  id="confirm" class="btn btn-success" value="Confirm" />
+            <input type="button" name="confirm" onclick="sales_prod_add_to_cart('single');" data-dismiss="modal"  id="confirm" class="btn btn-success" value="Confirm" />
         </div>
      </div>
      </form>

@@ -361,30 +361,40 @@ function product_add_to_shipment(prod_id)
 }
 
 
-function sales_prod_add_to_cart()
+function sales_prod_add_to_cart(type)
 {
-    var fdata  = $("#sales_add_to_cart").serialize();
-    var qty    = parseInt($("#quantity_available").val());
-   var ord_qty = parseInt($("#quantity_to_order").val());
-   var pid     = $("#product_id").val();
+    var ord_qty ='', qty= '', pid= '', fdata = '', ids ='';
+      if(type == 'single'){
+             fdata   = $("#sales_add_to_cart").serialize();
+             qty     = parseInt($("#quantity_available").val());
+             ord_qty = parseInt($("#quantity_to_order").val());
+             pid     = $("#product_id").val();
+            
+              if(ord_qty == ''){
+                alert("Quantity should not be empty");
+                $("#quantity_to_order").val('');
+                $("#quantity_to_order").focus();
+                $("#selectAll-"+pid).removeAttr("checked");
+                return false;
+             }
+             else if(qty<ord_qty){
+                alert("Quantity should be less than available quantity");
+                $("#quantity_to_order").val('');
+                $("#quantity_to_order").focus();
+                $("#selectAll-"+pid).removeAttr("checked");
+                return false;
+            }
     
-     if(ord_qty == ''){
-        alert("Quantity should not be empty");
-        $("#quantity_to_order").val('');
-        $("#quantity_to_order").focus();
-        $("#selectAll-"+pid).removeAttr("checked");
-        return false;
-     }
-     else if(qty<ord_qty){
-        alert("Quantity should be less than available quantity");
-        $("#quantity_to_order").val('');
-        $("#quantity_to_order").focus();
-        $("#selectAll-"+pid).removeAttr("checked");
-        return false;
-    }
+       }
+       else
+       {
+            $(document).find(".checkbox:checked").each(function(){ 
+                ids += (ids)?','+$(this).val():$(this).val();
+           });
+           fdata = {ids:ids,type:type};
+       }
     
-    
-    if(ord_qty!=''){
+    if(ord_qty!='' || ids =''){
         $.ajax({
               url:base_url+"salesproductselection/add_to_cart",
               type:"POST",
@@ -408,13 +418,6 @@ function sales_prod_add_to_cart()
               }
           });
     }  
-}
-
-function multiple_product_add_to_cart()
-{
-    $(document).find(".checkbox:checked").each(function(){ 
-        ids += (ids)?','+$(this).val():$(this).val();
-     });
 }
 
 function delete_cartt(cart_id)

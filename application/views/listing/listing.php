@@ -6,8 +6,7 @@
 	<input type="hidden" name="namespace" id="namespace" value="<?php echo $namespace;?>" />
 <?php 
 $uri = $this->uri->segment(2);$uri1 = $this->uri->segment(1);
-if($uri1 == "accounting" && $uri != "invoices")
-{
+if($uri1 == "accounting" && $uri != "invoices"){
 	?>
 		<div class="row">
 			<div class="col-md-2 pull-right">
