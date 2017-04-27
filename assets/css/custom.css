@@ -704,6 +704,14 @@ background-color: #e6e6e6;
 .file-preview-thumbnails > div {
     height: auto;
 }
+#inventory_form .modal-body {
+    max-height: 100% !important;
+    overflow: inherit;
+}
+.panels1 .panel-heading {
+    margin-bottom: 0;
+    min-height: 444px;
+}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
