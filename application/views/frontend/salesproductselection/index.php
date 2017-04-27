@@ -34,17 +34,13 @@
          <div class="col-md-2">   
             <button type="button" onclick="delete_cartt('','multiple')" class="btn pull-right btn-danger"><i class="fa fa-trash trash" style="font-weight:bold;"></i>Delete Product From SO</button>
          </div>
-        <!--
- <div class="col-md-2">   
+        <!--<div class="col-md-2">   
             <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-sticky-note-o"></i>Existing SO</button>
          </div>
--->
-         <!--
-<div class="col-md-2">   
+         <div class="col-md-2">   
             <button type="button" class="col-md-2 btn btn-block" >Save SO</button>
            <a href="<?php //echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block"><i class="fa fa fa-life-saver"></i>Save SO</a>
-         </div>
--->
+         </div>-->
          <div class="col-md-2">   
             <a href="<?php echo site_url();?>salesorder/checkout" class="btn btn-info"> <i class="fa fa-life-saver"></i> Create New SO</a>
          </div>
