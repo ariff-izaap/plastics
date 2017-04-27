@@ -728,7 +728,7 @@ background-color: #e6e6e6;
 }
 .ship-col { width:100%; display:inline-block;}
 .related-pro { margin-top:30px;}
-.white-bg { background:#fafafa;}
+.white-bg { background:#fafafa !important;}
 .greenbg_title a {
     color: #000000 !important;
 }

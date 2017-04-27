@@ -35,7 +35,7 @@
       </select>
     </div>
     <div >
-     <button type="button" class="btn btn-default" name="save_status" onclick="update_sales_status(<?php echo $so_id;?>, this);">SAVE</button>
+     <button type="button" class="btn btn-success" name="save_status" onclick="update_sales_status(<?php echo $so_id;?>, this);">SAVE</button>
     </div>
    
         </div>   
