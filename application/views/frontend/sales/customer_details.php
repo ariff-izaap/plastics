@@ -1,10 +1,11 @@
-   
-    <?php if(isset($customer_data['status']) && ($customer_data['status'] == 'new')){ ?>
-        <div class="form-group" >
+<div class="clearfix"></div>   
+    
+	<?php if(isset($customer_data['status']) && ($customer_data['status'] == 'new')){ ?>
+        
+        <div class="form-group customer_valid" >
            For this customer no address so you should create create.
           <h6><a href="<?php echo site_url();?>salesorder/add_edit_customer?redirect=<?php echo $this->uri->segment(3);?>">Create Customer</a></h6>
         </div>
-        
         <div class="clearfix"></div>
     <?php } ?>
    <?php // else

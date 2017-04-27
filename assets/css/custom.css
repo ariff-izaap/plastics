@@ -733,6 +733,10 @@ background-color: #e6e6e6;
     color: #000000 !important;
 }
 .panels .error { font-size:14px !important;}
+.customer_valid {   position: absolute;
+    right: 0;
+    top: -67px;
+    z-index: 99999;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
