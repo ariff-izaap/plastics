@@ -720,6 +720,12 @@ background-color: #e6e6e6;
 }
 .purchase-view { background: #fafafa;padding: 22px 0;}
 .save-btn button{ float:right; margin-right:14px;}
+.ship-col .form-group {
+    float: left;
+    margin-right: 25px !important;
+    width: 42% !important;
+}
+.ship-col { width:100%; display:inline-block;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

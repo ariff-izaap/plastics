@@ -39,7 +39,8 @@
       </select>
     </div>
 -->
-   <div class="form-group <?php echo (form_error('shipping_type'))?'error':'';?>" data-error="<?php echo (form_error('shipping_type'))? form_error('shipping_type'):'';?>">
+
+   <div style="margin-bottom:0px;" class="form-group <?php echo (form_error('shipping_type'))?'error':'';?>" data-error="<?php echo (form_error('shipping_type'))? form_error('shipping_type'):'';?>">
       <label>Shipping Type</label>
       <select name="shipping_type" class="form-group">
         <option value="">Select Shipping Type</option>
@@ -79,9 +80,9 @@
          <option value="COMPLETED" <?php //echo set_select('order_status',"COMPLETED",(($editdata['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
       </select>
     </div> -->
-    
+    <div class="ship-col">
     <div class="form-group" >
-      <label>COD Fee</label>
+     
       <input type="text" name="cod_fee" onkeypress="return numbersonly(event);" id="cod_fee" placeholder="COD Fee"  />
     </div>
     
@@ -95,6 +96,7 @@
     <div class="form-group" >
      
       <input type="text" name="add_amount" id="add_amount" onkeypress="return numbersonly(event);" placeholder="Add Amount" />
+    </div>
     </div>
     
     <div class="form-group" >
