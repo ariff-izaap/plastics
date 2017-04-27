@@ -25,8 +25,8 @@ class Salesorder extends Admin_Controller
         $this->simple_search_fields      = array();
         $this->_narrow_search_conditions = array("shipping_order","business_name","salesman_id","customer_location","city","state","zipcode","payment_by","credit_type","total_amount","bol_instructions","so_instructions");
         
-        $str = '<a href="'.site_url('salesorder/view/{id}').'" class="table-action"><i class="fa fa-eye"></i></a>
-                ';
+        $str = '<a href="'.site_url('salesorder/view/{id}').'" class="table-action"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;';
+        $str .= '<a href="'.site_url('salesorder/print_sales/{id}').'" target="_blank" class="table-action"><i class="fa fa-print"></i></a>';
  
         $this->listing->initialize(array('listing_action' => $str));
 
