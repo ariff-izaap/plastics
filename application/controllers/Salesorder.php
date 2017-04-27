@@ -473,7 +473,7 @@ class Salesorder extends Admin_Controller
     		$vendors[(int)$product['vendor_id']][] = $product;
             
     	 if($this->input->is_ajax_request()){
-    	     $result_set = $this->CI->shipment_model->get_where(array('so_id' => $so_id));
+    	     $result_set     = $this->CI->shipment_model->get_where(array('so_id' => $so_id));
 		     $shipment_count = $result_set->num_rows();
              $this->data['shipment_count'] = $shipment_count;
            
@@ -484,6 +484,7 @@ class Salesorder extends Admin_Controller
     				$order[$row['product_id']]['product_name']  = $row['product_name'];
     				$order[$row['product_id']]['unit_price']    = $row['unit_price'];
     				$order[$row['product_id']]['api_sku'] 		= $row['api_sku'];
+                    $order[$row['product_id']]['soi_id']        = $row['so_item_id'];
     				if(isset($order[$row['product_id']]['qty']))
     					$order[$row['product_id']]['qty'] += $row['qty'];
     				else

@@ -121,6 +121,7 @@ function get_vendor_details(v_url)
 
 function sales_update_cart(action_type,sales_order_id,ftype,elm)
 {
+    
     action_type = action_type?action_type:'form';
 	var atype   =  $("#form_access").val();
     
