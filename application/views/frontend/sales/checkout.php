@@ -1,6 +1,5 @@
 
-
- <div class="row">
+<div class="row">
     <div class="breadcrumbs">
       <?php echo set_breadcrumb(); ?>
         <a href="<?php echo $this->previous_url;?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
@@ -83,46 +82,42 @@
     
     <div class="form-group" >
       <label>COD Fee</label>
-      <input type="text" name="cod_fee" id="cod_fee" placeholder="COD Fee"  />
+      <input type="text" name="cod_fee" onkeypress="return numbersonly(event);" id="cod_fee" placeholder="COD Fee"  />
     </div>
     
     <div class="form-group" >
-      <input type="text" name="freight_fee" id="freight_fee" placeholder="Freight Paid" />
+      <input type="text" name="freight_paid" id="freight_paid" placeholder="Freight Paid" />
     </div>
     
     <div class="form-group" >
-      <input type="text" name="amount" id="amount" placeholder="Amount" />
+      <input type="text" name="amount" id="amount" onkeypress="return numbersonly(event);" placeholder="Amount" />
     </div>
     <div class="form-group" >
      
-      <input type="text" name="add_amount" id="add_amount" placeholder="Add Amount" />
+      <input type="text" name="add_amount" id="add_amount" onkeypress="return numbersonly(event);" placeholder="Add Amount" />
     </div>
     
     <div class="form-group" >
       <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo $editdata['so_instructions']; ?></textarea>
     </div>
-    <div class="form-group" >
-     
+    <div class="form-group">     
       <textarea class="form-control" name="bol_instructions" placeholder="BOL Instructions"><?php echo $editdata['bol_instructions']; ?></textarea>
     </div>
-     
   </div>
   </div>
-       
-       
-       
+      
 </div> 
-
 
    <div class="form-group" id="cartItems">
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
    <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
+    <a href="<?php echo base_url(); ?>/salesproductselection" class="btn btn-block"  >Continue Shopping</a>
+  </div>
+   <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
     <input type="submit" name="so" class="btn btn-block" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>
    
-  
-    
   </form> 
   
   </div>

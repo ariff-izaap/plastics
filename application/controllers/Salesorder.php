@@ -248,6 +248,10 @@ class Salesorder extends Admin_Controller
              // $ins_data['type']                   = $this->input->post('type');
               $ins_data['order_status']           = "NEW";
               $ins_data['total_items']            = $this->cart->total_items();
+              $ins_data['cod_fee']                = $this->input->post('cod_fee');
+              $ins_data['freight_paid']           = $this->input->post('freight_paid');
+              $ins_data['amount']                 = $this->input->post('amount');
+              $ins_data['add_amount']             = $this->input->post('add_amount');
               $ins_data['total_amount']           = $total;
               
               if($edit_id){

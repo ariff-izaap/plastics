@@ -45,21 +45,7 @@
 
 	<div class="row m_bot_5">
        
-		<!--
-<table class="table table-bordered m_bot_10">
-			<tbody class="light_green_bg green">
-				<tr>
-					<td width="33%" align="left">Vendor: <span class="black"><?php //echo $details['vendor_name'];?>
-					</span>
-					</td>
-					<td width="33%" class="text-center"><?php //echo $details['shipment_method'];?>
-					</td>
-					<td width="33%" class="text-right">Shipment status: <?php //echo $details['shipment_status'];?>
-					</td>
-				</tr>
-			</tbody>
-		</table>
--->
+	
         <form name="update_status" id="update_sales_ord_status">
         <div>
             <div class="form-group"  >

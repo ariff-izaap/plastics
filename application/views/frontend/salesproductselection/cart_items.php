@@ -1,4 +1,4 @@
-<form name="sales_update_to_cart" id="sales_update_to_cart">
+
 <input type="hidden" id="form_access" name="form_access" />
 <input  type="hidden" id="item_type" name="item_type" />
 <?php  $uri  = $this->uri->segment(1);
@@ -28,7 +28,6 @@
 -->
     <td>Quantity</td>
     <td>Price</td>
-     
     <td colspan="2">Action</td>
   </tr>
   
@@ -58,7 +57,7 @@
  <td><?php //echo $cvalue['equivalent']; ?></td>
 -->
             <td> <?php //if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
-            <input type="text" name="update_qty[]" id="update_qty" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
+            <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo $cvalue['price']; ?></td>
             
             <td>
@@ -121,4 +120,3 @@
 -->
   <?php } ?>  
 </div>
-</form>
