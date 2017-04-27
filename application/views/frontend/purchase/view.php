@@ -36,7 +36,7 @@
 			</table>
 		</div>
 		<div class="col-md-1">
-			<a style="margin-top: 15px;" href='<?=site_url("purchase/print_purchase/$po_id");?>' target="_blank" class="btn btn-success pull-right">Print</a>
+			<a style="margin-top: 15px;" href='<?=site_url("purchase/print_purchase/$po_id");?>' target="_blank" class="btn btn-success pull-right access-level"><i class="fa fa-print"></i>Print</a>
 		</div>
 		</div>
 	</div>
@@ -152,7 +152,7 @@
 			</div><br>
 			<div class="row">
 				<div class="col-md-6 col-md-offset-6">
-					<button class="btn btn-success">Save</button>
+					<button class="btn btn-success access-level"><i class="fa fa-life-saver"></i>Save</button>
 			</div>
 		</form>
 	</div><br>
@@ -166,7 +166,7 @@
 								<th width="10%">Billing Information</th>
 							</tr>
 						</thead>
-						<tbody class="white_bg">
+						<tbody class="white_bg gray_bg">
 							<tr>
 								<td id="shipping_address" data-title="Billing Information Edit">
 									<address><strong><?=$po['bill_name'];?></strong> <br><?=$po['b_address1'];?><br><?=$po['b_address2'];?>
@@ -189,7 +189,7 @@
 								<th width="10%">Shipping Information</th>
 							</tr>
 						</thead>
-						<tbody class="white_bg">
+						<tbody class="white_bg gray_bg">
 							<tr>
 								<td id="shipping_address" data-title="Billing Information Edit">
 									<address><strong><?=$po['wname'];?></strong> <br><?=$po['address1'];?><br><?=$po['address2'];?>

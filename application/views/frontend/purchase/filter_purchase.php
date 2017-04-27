@@ -27,11 +27,11 @@
         <label>Date Range</label>
         <input type="text" class="form-control date_range" name="date_range" placeholder="From Date">
       </div>
-      <div class="filter-row col-md-3 form-group">
+      <div class="filter-row col-md-3 form-group" style="margin-top:16px;">
          <div class="col-md-8">
           <div class="text-center m_top">
             <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
-            <button type="button" class="btn btn-primary" onclick="$.fn.submit_advance_search_form();">Search</button>
+            <button type="button" class="btn btn-primary access-level" onclick="$.fn.submit_advance_search_form();"><i class="fa fa-search"></i>Search</button>
           </div>
         </div>
       </div>

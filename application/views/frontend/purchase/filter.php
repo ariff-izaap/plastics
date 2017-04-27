@@ -93,10 +93,10 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 filter-search">
       <div class="text-center m_top">
         <a href="javascript:void(0)" class="btn btn-sm active" onclick="$.fn.clear_advance_search();">Clear</a>
-        <button type="button" class="btn btn-primary purchase_order_search" onclick="$.fn.submit_advance_search_form();">Search</button>
+        <button type="button" class="btn btn-primary purchase_order_search access-level" onclick="$.fn.submit_advance_search_form();"><i class="fa fa-search"></i>Search</button>
       </div>
   </div>
   </div>
