@@ -718,6 +718,8 @@ background-color: #e6e6e6;
     background: #cacaca none repeat scroll 0 0;
     color: #064ba8;
 }
+.purchase-view { background: #fafafa;padding: 22px 0;}
+.save-btn button{ float:right; margin-right:14px;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

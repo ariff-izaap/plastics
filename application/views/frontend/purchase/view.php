@@ -42,7 +42,7 @@
 	</div>
 	
 	<div class="container m_top_5" style="border: 1px solid #ccc;border-radius: 5px;padding: 10px;">
-		<form action="<?=site_url('purchase/change_order_status');?>" method="post">
+		<form class="purchase-view" action="<?=site_url('purchase/change_order_status');?>" method="post">
 			<input type="hidden" name="po_id" value="<?=$po['po_id'];?>">
 			<div class="row">
 				<div class="col-md-12">
@@ -151,7 +151,7 @@
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-md-6 col-md-offset-6">
+				<div class="col-md-6 col-md-offset-6 save-btn">
 					<button class="btn btn-success access-level"><i class="fa fa-life-saver"></i>Save</button>
 			</div>
 		</form>
