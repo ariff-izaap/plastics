@@ -207,7 +207,6 @@ class Salesproductselection extends Admin_Controller
     else
     {
          $product_ids = $this->input->post("ids");
-         
          $product_ids = explode(",",$product_ids);
          
          $i = 0; $cart_data = array();
@@ -216,7 +215,7 @@ class Salesproductselection extends Admin_Controller
             $result = $this->inventory_model->get_product_details($pvalue);;
             
             $cart_data[$i] = array(
-                                    'id'           => $product_id,
+                                    'id'           => $pvalue,
                                     'qty'          => 1,
                                     'price'        => $result['retail_price'],
                                     'name'         => $result['name'],
@@ -246,11 +245,23 @@ class Salesproductselection extends Admin_Controller
    public function delete_cart()
    {
         $cart_id  = $this->input->post("id");
-        $result   = $this->cart->remove($cart_id);
+        $type     = $this->input->post("type");
+           if($type == 'single'){
+            $result   = $this->cart->remove($cart_id);
+           } 
+           else
+           {
+            
+            $cart_ids = explode(",",$cart_id);
+             foreach($cart_ids as $crtid){
+               $result   = $this->cart->remove($crtid);  
+             }
+             
+           }
+        
         
         $output['message']       = "Item removed from cart successfully";
         $output['status']        = "success";   
-        
         $this->data['cartitems'] = $this->cart->contents(); 
         $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
      
@@ -268,7 +279,7 @@ class Salesproductselection extends Admin_Controller
         $update_cart = array(  "rowid" => $cart_id,
                                 "qty" => $quantity
                              );
-        $result      = $this->cart->update($update_cart);
+        $result                  = $this->cart->update($update_cart);
         $output['message']       = "Item updated successfully";
         $output['status']        = "success";   
         $this->data['cartitems'] = $this->cart->contents();

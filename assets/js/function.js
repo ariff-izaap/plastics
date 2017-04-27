@@ -488,6 +488,20 @@ function modal_close(pid='')
   //   refresh_grid();
 }
 
+function popup_close(modal)
+{
+     
+    $(modal).hide();
+    if(modal == '#inventory_form'){
+        $(".modal-backdrop").removeClass("in");
+        $(".modal-backdrop").remove();
+        refresh_grid();
+    }
+    $(".modal-backdrop").removeClass("in");
+    $(".modal-backdrop").remove();
+   
+}
+
 function create_timesheet(elm)
 {
 	var hour = $("#working_hours").val();

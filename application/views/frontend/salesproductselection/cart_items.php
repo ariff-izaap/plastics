@@ -1,8 +1,7 @@
 <input type="hidden" id="form_access" name="form_access" />
 <input  type="hidden" id="item_type" name="item_type" />
-<?php  $uri = $this->uri->segment(1);
+<?php  $uri  = $this->uri->segment(1);
        $uri2 = $this->uri->segment(2);
-      
       $so_id = ($uri == 'salesorder' && $uri2 == 'update_salesorder_quantity')?$this->uri->segment(4):'cartitem';
          
           ?>
@@ -13,6 +12,7 @@
 -->
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
+    <td>#</td>
     <td>Product Number</td>
     <td>Product</td>
     <td>Form</td>
@@ -24,14 +24,15 @@
 <td>Equivalent</td>
 -->
     <td>Quantity</td>
-    <td>Wholesale Price</td>
+    <td>Price</td>
      
     <td colspan="2">Action</td>
   </tr>
   
    <?php 
-         $uri = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
+         $uri  = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
         $total = '';
+        
        if(count($cartitems)>0) { 
          foreach($cartitems as $ckey => $cvalue) {   
             $total += $cvalue['qty'] * $cvalue['price'];
@@ -41,10 +42,9 @@
          <?php if($itemtype=='cart'){?>
           <input type="hidden" value="<?php echo $ckey; ?>" name="cart_id[]" />
           <?php } ?>
-           <!--
- <td><input type="radio" name="sales_order_create" id="sales_order_create" /></td>
--->
-            <td><input type="hidden" name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
+         
+            <td><input type="checkbox" name="sales_order_create" class="cart_checkbox" value="<?php echo $ckey; ?>" /></td>
+            <td><input type="hidden"   name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
             <td><?php echo $cvalue['name']; ?></td>
             <td><?php echo $cvalue['form']; ?></td>
             <td><?php echo $cvalue['color']; ?></td>
@@ -59,8 +59,9 @@
             <td><?php echo $cvalue['price']; ?></td>
             
             <td>
-               <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>');" class="btn btn-default"><i class="fa fa-trash-o trash"></i></button>
-               
+               <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>','single');" class="btn btn-default">
+                <i class="fa fa-trash-o trash"></i>
+               </button>
             </td>
         </tr>
  <?php }?>

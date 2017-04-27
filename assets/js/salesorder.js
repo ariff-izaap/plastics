@@ -135,7 +135,7 @@ function sales_update_cart(action_type,sales_order_id, elm)
         
 	
 	$.ajax({
-        url:base_url+'salesorder/update_salesorder_quantity/'+'/'+action_type+'/'+sales_order_id,
+        url:base_url+'salesorder/update_salesorder_quantity'+'/'+action_type+'/'+sales_order_id,
         type:"POST",
         data:data,
         dataType:"json",
@@ -145,6 +145,9 @@ function sales_update_cart(action_type,sales_order_id, elm)
         		$("#updat_cart .modal-body").html(rdata.content);
             	$("#updat_cart").css('width', '800px').addClass("show").removeClass('hide');
                 $("#updat_cart").modal();
+                 $("#updat_cart").modal({
+                    backdrop:"static"
+                 });
                 $("#form_access").val("process");
                 if(rdata.itemtype == 'cart'){
                    $("#item_type").val("cart"); 
@@ -393,7 +396,7 @@ function sales_prod_add_to_cart(type)
            });
            fdata = {ids:ids,type:type};
        }
-    alert(ids);
+    //alert(ids);
     if(ord_qty!='' || ids !=''){
         $.ajax({
               url:base_url+"salesproductselection/add_to_cart",
@@ -420,12 +423,26 @@ function sales_prod_add_to_cart(type)
     }  
 }
 
-function delete_cartt(cart_id)
+function delete_cartt(cart_id='',type='')
 {   
+    var ids = '';
+    if(cart_id == ''){
+        
+        $(document).find(".cart_checkbox:checked").each(function(){ 
+                ids += (ids)?','+$(this).val():$(this).val();
+        });
+        
+        cart_id = ids;
+    }
+    else
+    {
+        cart_id = cart_id;
+    }
+    
   $.ajax({
     type:"POST",
     url:base_url+'salesproductselection/delete_cart',
-    data:{id:cart_id},
+    data:{id:cart_id,type:type},
     dataType:"json",
     success:function(data)
     {
@@ -433,6 +450,7 @@ function delete_cartt(cart_id)
       var output = data.output;      
       if(status == 'success'){
         $("#product_shipping_lists").html(data.viewlist);
+        $("#updat_cart .modal-body").html(data.viewlist);
         $(window).scrollTop($('#product_shipping_lists').offset().top);
       }
     } 

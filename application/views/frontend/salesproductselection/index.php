@@ -29,10 +29,10 @@
             <button type="button" class="col-md-2 btn btn-block" onclick="sales_prod_add_to_cart('multiple');"><i class="fa fa-plus"></i>Add Product to SO</button>
           </div>
           <div class="col-md-2">  
-            <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
+            <button type="button" class="col-md-2 btn btn-block" onclick="sales_update_cart('form','cartitem',this)"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
          </div>
          <div class="col-md-2">   
-            <button type="button" class="col-md-2 btn btn-block"><i class="fa fa-trash-o trash" style="color:#000 !important; font-weight:bold;"></i>Delete Product From SO</button>
+            <button type="button" onclick="delete_cartt('','multiple')" class="col-md-2 btn btn-block"><i class="fa fa-trash-o trash" style="color:#000 !important; font-weight:bold;"></i>Delete Product From SO</button>
          </div>
         <!--
  <div class="col-md-2">   

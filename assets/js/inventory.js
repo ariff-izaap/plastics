@@ -167,17 +167,7 @@ function load_product_image_popup(modal)
 }
 
 
-function popup_close(modal)
-{
-     
-    $(modal).hide();
-    if(modal == '#inventory_form'){
-        $(".modal-backdrop").removeClass("in");
-        $(".modal-backdrop").remove();
-        refresh_grid();
-    }
-   
-}
+
 
 function init_product_uploads()
 {
