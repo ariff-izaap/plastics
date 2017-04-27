@@ -724,6 +724,7 @@ background-color: #e6e6e6;
     float: left;
     margin-right: 25px !important;
     width: 42% !important;
+	margin-bottom:10px !important;
 }
 .ship-col { width:100%; display:inline-block;}
 @media (min-width:992px){

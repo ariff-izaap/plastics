@@ -49,7 +49,7 @@
         <?php }} ?>
       </select>
     </div>
-    <div class="form-group <?php echo (form_error('credit_type'))?'error':'';?>" data-error="<?php echo (form_error('credit_type'))?form_error('credit_type'):'';?>" >
+    <div style="margin-bottom:0px;" class="form-group <?php echo (form_error('credit_type'))?'error':'';?>" data-error="<?php echo (form_error('credit_type'))?form_error('credit_type'):'';?>" >
       <label>Credit Type</label>
       <select name="credit_type" class="form-group">
         <option value="">Select Credit Type</option>
@@ -99,10 +99,10 @@
     </div>
     </div>
     
-    <div class="form-group" >
+    <div class="form-group" style="margin-bottom:10px !important" >
       <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo $editdata['so_instructions']; ?></textarea>
     </div>
-    <div class="form-group">     
+    <div class="form-group" style="margin-bottom:10px !important">     
       <textarea class="form-control" name="bol_instructions" placeholder="BOL Instructions"><?php echo $editdata['bol_instructions']; ?></textarea>
     </div>
   </div>
