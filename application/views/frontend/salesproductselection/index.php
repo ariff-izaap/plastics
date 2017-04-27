@@ -26,13 +26,13 @@
    <div class="container button-sec sales-btn-sec">     
        <div class="row">
           <div class="col-md-2">
-            <button type="button" class="col-md-2 btn btn-block" onclick="sales_prod_add_to_cart('multiple');"><i class="fa fa-plus"></i>Add Product to SO</button>
+            <button type="button" class="btn pull-right btn-primary" onclick="sales_prod_add_to_cart('multiple');"><i class="fa fa-plus"></i>Add Product to SO</button>
           </div>
           <div class="col-md-2">  
-            <button type="button" class="col-md-2 btn btn-block" onclick="sales_update_cart('process','cartitem','cart',this)"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
+            <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('form','cartitem',this)"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
          </div>
          <div class="col-md-2">   
-            <button type="button" onclick="delete_cartt('','multiple')" class="col-md-2 btn btn-block"><i class="fa fa-trash-o trash" style="color:#000 !important; font-weight:bold;"></i>Delete Product From SO</button>
+            <button type="button" onclick="delete_cartt('','multiple')" class="btn pull-right btn-danger"><i class="fa fa-trash trash" style="font-weight:bold;"></i>Delete Product From SO</button>
          </div>
         <!--
  <div class="col-md-2">   
@@ -46,7 +46,7 @@
          </div>
 -->
          <div class="col-md-2">   
-            <a href="<?php echo site_url();?>salesorder/checkout" class="col-md-2 btn btn-block"> + Create New SO</a>
+            <a href="<?php echo site_url();?>salesorder/checkout" class="btn btn-info"> <i class="fa fa-life-saver"></i> Create New SO</a>
          </div>
        </div>
    </div>
