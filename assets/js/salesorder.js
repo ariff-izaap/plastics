@@ -166,8 +166,8 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
         		$("#div_addr_billing").modal('hide');
                 $("#updat_cart").modal('hide');
         		$("#updated_cart_items").html(rdata.content);
-                if(sales_order_id !='cartitem')
-                   location.href = base_url+"salesorder/view/"+sales_order_id; 
+                //if(sales_order_id !='cartitem')
+                  // location.href = base_url+"salesorder/view/"+sales_order_id; 
                 
         	} 
         	else

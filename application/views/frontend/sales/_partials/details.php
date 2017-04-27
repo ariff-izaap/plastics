@@ -6,7 +6,7 @@
 		
       <div class="sales-oder-details">
 	  <form method="post" id="so_form">
-
+	</form>
 	<?php  foreach ($product_details as $vid => $order_detail):?>
 
 	<?php $details = current($order_detail);?>
@@ -40,9 +40,10 @@
    
         </div>   
 		<h2 class="pull-left">Order Details</h2> 
-        <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('process',<?php echo $so_id;?>,this)"><i class="fa fa-edit edit"></i>UPDATE</button>
+        <form name="sales_update_to_cart" id="sales_update_to_cart">
+        <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('process',<?php echo $so_id;?>,'sales',this)"><i class="fa fa-edit edit"></i>UPDATE</button>
 <!--        <button class="pull-left underline clr-orange" onclick="sales_update_cart('process',<?php //echo $so_id;?>,this)"  style="margin:7px 0px 0 36px;">UPDATE</button>-->
-       <form name="sales_update_to_cart" id="sales_update_to_cart">
+       
        <input type="hidden" name="item_type" id="item_type" value="sales" />
        <input type="hidden" name="form_access" id="form_access"  />
 		<table class="table table-bordered table-striped">
@@ -57,10 +58,10 @@
 				</tr>
 			</thead>
 			<tbody class="white_bg">
-				<?php  foreach ($order_detail as $row):?>
+				<?php  foreach ($order_detail as $row): //print_r($row);?>
 				
 				<tr>
-                    <input type="hidden" name="sales_order_item_id[]" value="<?php echo $row['soi_id']; ?>" />
+                    <input type="hidden" name="sales_order_item_id[]" value="<?php echo $row['so_item_id']; ?>" />
 					<td><?php echo displayData($row['product_name'], 'product_name_link', array('id'=>$row['product_id']));?>
 					</td>
 					<td><?php echo $row['sku'];?>
@@ -84,7 +85,7 @@
 
 	
 	
-	</form>
+
 	</div>
 
 	</div>
