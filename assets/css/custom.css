@@ -732,7 +732,7 @@ background-color: #e6e6e6;
 .greenbg_title a {
     color: #000000 !important;
 }
-.panels .error { font-size:14px !important;}
+.panels .error { font-size:12px !important;}
 .customer_valid {   position: absolute;
     right: 0;
     top: -67px;
