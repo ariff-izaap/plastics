@@ -149,7 +149,7 @@
         </div>
         <div class="clearfix"></div>
         
-        	<button type="button" class="btn btn-danger del-minlevel">Delete Warning</button>
+        	<button type="button" class="btn btn-danger del-minlevel access-level"><i class="fa fa-trash"></i>Delete Warning</button>
         	<button type="button" class="btn btn-primary add-new-dropdown">Add New</button>
         	<button type="submit" class="btn btn-info">Save</button>
         
