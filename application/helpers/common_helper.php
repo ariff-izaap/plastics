@@ -771,17 +771,22 @@ function get_warehouse()
   return $q;
 }
 
-function get_shipping_type()
+function get_shipping_type($where='')
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from shipping_type where status=1")->result_array();
+  if($where)
+    $where = "and id='".$where."'";
+  $q = $CI->db->query("select * from shipping_type where status=1 $where")->result_array();
   return $q;
 }
 
-function get_carrier()
+function get_carrier($where='')
 {
   $CI = get_instance();
-  $q = $CI->db->query("select * from carrier where status=1")->result_array();
+  if($where)
+    $where = "and id='".$where."'";
+  $CI = get_instance();
+  $q = $CI->db->query("select * from carrier where status=1 $where")->result_array();
   return $q;
 }
 function get_credit_type()

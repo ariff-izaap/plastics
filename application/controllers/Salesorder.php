@@ -990,7 +990,23 @@ class Salesorder extends Admin_Controller
       return $this->_ajax_output(array('status' => 'success' ,'output' => $output), TRUE);
     }
     
-    
+    public function print_sales($so_id='')
+    {
+      include('common_controller.php');      
+      $obj = new common_controller();
+      $data = $obj->get_view_data('so', $so_id);
+
+      if($data === false)
+        redirect('salesorder');
+      
+      $this->data['so']= $data;
+      if($so_id=='')
+      {
+        $this->session->set_flashdata('success_msg',"Something Error!",TRUE);
+        redirect('salesorder');
+      }
+      $this->load->view('frontend/sales/print',$this->data);
+    }
     /*End by Ram*/
 }
 ?>
