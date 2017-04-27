@@ -728,10 +728,11 @@ background-color: #e6e6e6;
 }
 .ship-col { width:100%; display:inline-block;}
 .related-pro { margin-top:30px;}
-.white-bg { background:#fafafa !important;}
+.white_bg { background:#fafafa !important;}
 .greenbg_title a {
     color: #000000 !important;
 }
+.panels .error { font-size:14px !important;}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

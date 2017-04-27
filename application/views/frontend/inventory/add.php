@@ -115,6 +115,7 @@
                                   <label required>Units:</label>
                                   <input type="text" name="units" class="form-control" onkeypress="return numbersonly(event);" id="units" value="<?php echo set_value('units', $editdata['units']);?>" placeholder="Units" />
                                 </div>
+                                <div class="clearfix"></div>
                                
                                 <div class="form-group  <?php //echo (form_error('notes'))?'error':'';?>" data-error="<?php //echo (form_error('notes'))? form_error('notes'):'';?>">
                                   <label>Notes:</label>
