@@ -28,6 +28,7 @@
              <div class="form-group" >
               <label class="col-md-4">Customer Location</label>
               <select class="form-control col-md-8" name="customer_location" id="customer_location" >
+                    <option>Select</option>
                    <?php foreach($custlocation as $clr): ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
                   <?php endforeach;?>
@@ -49,6 +50,7 @@
             <div class="form-group col-md-2 shapping-add" >
               <label>State</label>
               <select class="form-control" name="state" id="state" >
+                   <option>Select</option>
                    <?php $state = get_state();
                      foreach($state as $clr): ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
@@ -75,6 +77,7 @@
             <div class="form-group" >
               <label class="col-md-4">Terms</label>
               <select class="form-control col-md-8" name="credit_type" id="credit_type" >
+                   <option>Select</option>
                    <?php  $terms = get_credit_type();
                        foreach($terms as $addr): ?>
                     <option value="<?php echo $addr['id'];?>" > <?php echo $addr['name'];?> </option>
@@ -84,6 +87,7 @@
             <div class="form-group" >
               <label class="col-md-4">Payment By</label>
               <select class="form-control col-md-8" name="payment_by" id="payment_by" >
+                  <option>Select</option>
                    <?php $terms = get_credit_type();
                      foreach($terms as $addr): ?>
                     <option value="<?php echo $addr['id'];?>"> <?php echo $addr['name'];?> </option>
@@ -97,6 +101,7 @@
             <div class="form-group" >
               <label class="col-md-4">Freight Fee:</label>
               <select class="form-control col-md-8" name="freight_fee" id="notes" >
+                    <option>Select</option>
                    <?php foreach($freight_fee as $addr):
                       $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
                    ?>
@@ -108,6 +113,7 @@
             <div class="form-group" >
               <label class="col-md-4">Preferred Carrier:</label>
               <select class="form-control col-md-8" name="freight_fee" id="notes" >
+                    <option>Select</option>
                    <?php foreach($pre_carrier as $addr):
                       $sel = ($addr['id'] == set_value('address_id', $editdata['address_id']))?'selected':'';
                    ?>

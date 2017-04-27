@@ -490,15 +490,19 @@ function modal_close(pid='')
 
 function popup_close(modal)
 {
-     
     $(modal).hide();
-    if(modal == '#inventory_form'){
+   if(modal == '#updat_cart'){
+     $(modal).removeClass("show in");
+   } 
+    if(modal == '#inventory_form' || modal == '#updat_cart'){
         $(".modal-backdrop").removeClass("in");
         $(".modal-backdrop").remove();
-        refresh_grid();
+       if(modal != '#updat_cart'){ 
+         refresh_grid();
+       } 
     }
-    $(".modal-backdrop").removeClass("in");
-    $(".modal-backdrop").remove();
+    //$(".modal-backdrop").removeClass("in");
+   // $(".modal-backdrop").remove();
    
 }
 

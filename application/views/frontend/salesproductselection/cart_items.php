@@ -1,3 +1,4 @@
+<form name="sales_update_to_cart" id="sales_update_to_cart">
 <input type="hidden" id="form_access" name="form_access" />
 <input  type="hidden" id="item_type" name="item_type" />
 <?php  $uri  = $this->uri->segment(1);
@@ -5,11 +6,13 @@
       $so_id = ($uri == 'salesorder' && $uri2 == 'update_salesorder_quantity')?$this->uri->segment(4):'cartitem';
          
           ?>
-          <!--
+         
+<!--
 <div class="container">
 <button type="button" name="update_cart" onclick="sales_update_cart('form','<?php //echo $so_id;?>',this)" class="btn btn-default ">Update</button>
 </div>
 -->
+
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
     <td>#</td>
@@ -39,9 +42,9 @@
             
      ?>
         <tr>
-         <?php if($itemtype=='cart'){?>
+         <?php //if($itemtype=='cart'){?>
           <input type="hidden" value="<?php echo $ckey; ?>" name="cart_id[]" />
-          <?php } ?>
+          <?php //} ?>
          
             <td><input type="checkbox" name="sales_order_create" class="cart_checkbox" value="<?php echo $ckey; ?>" /></td>
             <td><input type="hidden"   name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
@@ -54,8 +57,8 @@
            <!--
  <td><?php //echo $cvalue['equivalent']; ?></td>
 -->
-            <td> <?php if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
-            <input type="text" name="update_qty[]" id="update_qty" value="<?php echo $cvalue['qty']; ?>" /><?php } else{ echo $cvalue['qty'];  } ?></td>
+            <td> <?php //if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
+            <input type="text" name="update_qty[]" id="update_qty" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo $cvalue['price']; ?></td>
             
             <td>
@@ -66,7 +69,7 @@
         </tr>
  <?php }?>
  <tr class="green_solid_bg" >
-                <td class="text-right" colspan="8"><b>Total Amount:</b></td>
+                <td class="text-right" colspan="9"><b>Total Amount:</b></td>
                 
                 <td><b><?php echo (!empty($total))?": ".$total:""; ?></b>
                 <td>&nbsp;</td>
@@ -118,3 +121,4 @@
 -->
   <?php } ?>  
 </div>
+</form>

@@ -400,8 +400,8 @@ class Inventory extends Admin_Controller
 			$data['priority'] 			= $this->input->post("priority", TRUE);
 			$data['updated_id'] 		= getAdminUserId();
 			$data['in_stock'] 			= $this->input->post("in_stock", TRUE);
-			$data['in_bound'] 		    = $this->input->post("in_bound", TRUE);
-			$data['dropship_fee'] 		= $this->input->post("dropship_fee", TRUE);
+		//	$data['in_bound'] 		    = $this->input->post("in_bound", TRUE);
+		//	$data['dropship_fee'] 		= $this->input->post("dropship_fee", TRUE);
             $data['shipping_cost'] 	    = $this->input->post("shipping_cost", TRUE);
 			$data['shipping_service'] 	= $this->input->post("shipping_service", TRUE);
    

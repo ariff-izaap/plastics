@@ -430,7 +430,7 @@ class Salesorder extends Admin_Controller
     	$data = $obj->get_view_data('so', $so_id);
 
     	if($data === false)
-    		redirect('salesorders');
+    		redirect('salesorder');
     	
     	$this->data += $data;
     	
@@ -730,12 +730,13 @@ class Salesorder extends Admin_Controller
                         $this->cart->update($update_cart);
                         $j++;
                      }
-                     
-                       
+                     $$this->data['itemtype'] = $itemtype;
                      $this->data['cartitems'] = $this->cart->contents();
                      $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
+                     $output['message']       = "Cart updated successfully";
+                     $output['status']        = "success";
                      
-                   }
+                   } 
              }       
             else
             {
@@ -750,11 +751,10 @@ class Salesorder extends Admin_Controller
                     log_history($st_id,'Quantity','Quantity <b>#'.$quantity[$i].' has been updated.');
                 }
                 $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
+                
+                $output['message']       = "Item updated successfully";
+                $output['status']        = "success";
             }
-            
-            
-            $output['message']       = "Item updated successfully";
-            $output['status']        = "success";
           }
           else
           { 

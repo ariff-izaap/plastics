@@ -16,7 +16,7 @@ class Salesproductselection extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-       $this->load->model(array('inventory_model','salesorder_model','purchase_model'));
+       $this->load->model(array('inventory_model','salesorder_model','purchase_model','salesproduct_model'));
 	   $this->load->library('listing');    
        $this->load->library('cart');
 	} 
@@ -32,11 +32,11 @@ class Salesproductselection extends Admin_Controller
          
         $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
         
-        $str = '<button type="button" id="addcart{id}" name="add_to_cart" onclick="product_add_to_shipment({id})" data-price="{wholesale_price}" data-qty="{quantity}" class="btn btn-info"><i class="fa fa-plus"></i> Add To Cart</button>';
+        $str = '<button type="button" id="addcart{id}" name="add_to_cart" onclick="product_add_to_shipment({id},\'{name}\',\'{sku}\')" data-price="{retail_price}" data-qty="{quantity}" class="btn btn-info"><i class="fa fa-plus"></i> Add To Cart</button>';
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('inventory_model', 'listing');
+        $listing = $this->listing->get_listings('Salesproduct_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
@@ -173,23 +173,33 @@ class Salesproductselection extends Admin_Controller
     
    public function add_to_cart()
    {
-    
-     $type               = $this->input->post("type");
+     
+     $this->load->library('cart');
+     $type      = $this->input->post("type");
+     $cartitems = $this->cart->contents(); 
+     
      if($type == 'single'){
+        
          //post data
          $available_quantity = $this->input->post("quantity_available");
          $order_quantity     = $this->input->post("quantity_to_order");
          $product_id         = $this->input->post("product_id");
-        // $type_of_sale       = $this->input->post("type_of_sale");
-         //$product_from       = $this->input->post("product_from");
          $price              = $this->input->post("price");
-        // $type               = $this->input->post("type");
-         
+     
          //getting data from db
          $result             = $this->inventory_model->get_product_details($product_id);
-         $sale_type          = $this->inventory_model->get_where(array("id" => $type_of_sale),'*','sale_type')->row_array();
-         
-         $cart_data          = array(
+       //  $sale_type          = $this->inventory_model->get_where(array("id" => $type_of_sale),'*','sale_type')->row_array();
+         if(count($cartitems)>0){
+         foreach($cartitems as $ckey => $cvalue){
+            if($cvalue['id'] == $product_id){
+              $cartId       = $cvalue['row_id'];
+              $data['rowid']= $cartId;
+              $data['qty']  = $order_quantity+$cvalue['qty'];
+              $this->cart->update($data);   
+            }
+            else
+            {
+                $cart_data  = array(
                                     'id'           => $product_id,
                                     'qty'          => $order_quantity,
                                     'price'        => $price,
@@ -200,24 +210,20 @@ class Salesproductselection extends Admin_Controller
                                     'type'         => $result['item_type'],
                                     'row'          => $result['row'],
                                     'equivalent'   => $result['equivalent'],
-                                    'vendor_id'    => $result['vendor_id'],
+                                    'vendor_id'    => $result['vendor_id']
                                );
-                               
-    }
-    else
-    {
-         $product_ids = $this->input->post("ids");
-         $product_ids = explode(",",$product_ids);
-         
-         $i = 0; $cart_data = array();
-         foreach($product_ids as $pvalue){
-            
-            $result = $this->inventory_model->get_product_details($pvalue);;
-            
-            $cart_data[$i] = array(
-                                    'id'           => $pvalue,
-                                    'qty'          => 1,
-                                    'price'        => $result['retail_price'],
+                                               
+                $this->cart->insert($cart_data);
+            }
+           }
+           
+         }
+         else
+           { 
+             $cart_data  = array(
+                                    'id'           => $product_id,
+                                    'qty'          => $order_quantity,
+                                    'price'        => $price,
                                     'name'         => $result['name'],
                                     'form'         => $result['form_name'],
                                     'color'        => $result['color_name'],
@@ -225,22 +231,83 @@ class Salesproductselection extends Admin_Controller
                                     'type'         => $result['item_type'],
                                     'row'          => $result['row'],
                                     'equivalent'   => $result['equivalent'],
-                                    'vendor_id'    => $result['vendor_id'],
-                               );
-                               
-           $i++;                               
+                                    'vendor_id'    => $result['vendor_id']
+                               );                      
+                $this->cart->insert($cart_data);
+           }                        
+    }
+    else
+    {
+         $product_ids = $this->input->post("ids");
+         
+         if(strpos($product_ids, ',') == false ){
+            $product_ids = array($product_ids);
          }
-    } 
-    
-     $row_id                  = $this->cart->insert($cart_data);
+         else
+         {
+            $product_ids = explode(",",$product_ids);
+         }
+         
+         foreach($product_ids as $pvalue){
+           
+            $result = $this->inventory_model->get_product_details($pvalue);
+            
+            if(count($cartitems) > 0){
+           foreach($cartitems as $ckey => $cvalue){
+            
+            if($cvalue['id'] == $pvalue){
+              $cartId       = $cvalue['row_id'];
+              $data['rowid']= $cartId;
+              $data['qty']  = $cvalue['qty'] + 1;
+              $this->cart->update($data_mul);   
+            }
+            else
+            {
+                
+                $cdata   = array(       'id'           => $pvalue,
+                                        'qty'          => 1,
+                                        'price'        => $result['retail_price'],
+                                        'name'         => $result['name'],
+                                        'form'         => $result['form_name'],
+                                        'color'        => $result['color_name'],
+                                        'package'      => $result['package_name'],
+                                        'type'         => $result['item_type'],
+                                        'row'          => $result['row'],
+                                        'equivalent'   => $result['equivalent'],
+                                        'vendor_id'    => $result['vendor_id']
+                                   );                                                     
+                $this->cart->insert($cdata);                                       
+           }                                
+          }
+         }
+         else
+         {
+           
+            $cdata   =   array(         'id'           => $pvalue,
+                                        'qty'          => 1,
+                                        'price'        => $result['retail_price'],
+                                        'name'         => $result['name'],
+                                        'form'         => $result['form_name'],
+                                        'color'        => $result['color_name'],
+                                        'package'      => $result['package_name'],
+                                        'type'         => $result['item_type'],
+                                        'row'          => $result['row'],
+                                        'equivalent'   => $result['equivalent'],
+                                        'vendor_id'    => $result['vendor_id']
+                                   );                                                     
+                $this->cart->insert($cdata);   
+         } 
+       }
+     } 
+     //$row_id                  = $this->cart->insert($cart_data);
      $this->data['cartitems'] = $this->cart->contents(); 
      $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
-     
      $output['message']       = "Product added to cart successfully";
      $output['status']        = "success";   
      $this->_ajax_output($output, TRUE);
-   }
+     
    
+  } 
    
    public function delete_cart()
    {

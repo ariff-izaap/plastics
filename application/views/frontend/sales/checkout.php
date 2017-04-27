@@ -80,8 +80,25 @@
          <option value="COMPLETED" <?php //echo set_select('order_status',"COMPLETED",(($editdata['order_status'] == "COMPLETED")?true:false));?>>COMPLETED</option>
       </select>
     </div> -->
+    
+    <div class="form-group" >
+      <label>COD Fee</label>
+      <input type="text" name="cod_fee" id="cod_fee" placeholder="COD Fee"  />
+    </div>
+    
+    <div class="form-group" >
+      <input type="text" name="freight_fee" id="freight_fee" placeholder="Freight Paid" />
+    </div>
+    
+    <div class="form-group" >
+      <input type="text" name="amount" id="amount" placeholder="Amount" />
+    </div>
     <div class="form-group" >
      
+      <input type="text" name="add_amount" id="add_amount" placeholder="Add Amount" />
+    </div>
+    
+    <div class="form-group" >
       <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo $editdata['so_instructions']; ?></textarea>
     </div>
     <div class="form-group" >

@@ -29,7 +29,7 @@
             <button type="button" class="col-md-2 btn btn-block" onclick="sales_prod_add_to_cart('multiple');"><i class="fa fa-plus"></i>Add Product to SO</button>
           </div>
           <div class="col-md-2">  
-            <button type="button" class="col-md-2 btn btn-block" onclick="sales_update_cart('form','cartitem',this)"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
+            <button type="button" class="col-md-2 btn btn-block" onclick="sales_update_cart('process','cartitem','cart',this)"><i class="fa fa-edit edit"></i>Edit Product On SO</button>
          </div>
          <div class="col-md-2">   
             <button type="button" onclick="delete_cartt('','multiple')" class="col-md-2 btn btn-block"><i class="fa fa-trash-o trash" style="color:#000 !important; font-weight:bold;"></i>Delete Product From SO</button>
@@ -61,7 +61,9 @@
          <h3>Add To Cart</h3>
       </div>
       <form name="sales_add_to_cart" id="sales_add_to_cart">
+      
       <span id="success_msg" style="color: red; font-weight:bold;font-size:16px; text-align:center;"></span>
+      
       <div class="modal-body">
        <input type="hidden" name="product_id" id="product_id" />
        <input type="hidden" name="type" id="type" value="single" />
@@ -75,7 +77,7 @@
          </select>
         </div>
 -->
-        <div class="form-group">
+        <div class="form-group" id="prod_details">
          <!--
 Warehouse <input type="radio" name="product_from" value="warehouse" /> 
          Vendor <input type="radio" name="product_from" value="vendor" /> 
@@ -87,6 +89,7 @@ Warehouse <input type="radio" name="product_from" value="warehouse" />
             <?php //echo form_error('file_name', '<span class="help-block">', '</span>'); ?>
         </div>-->
         </div>
+        
        <div class="row"> 
         <div class="form-group col-md-4">
             <label>Quantity Available</label>

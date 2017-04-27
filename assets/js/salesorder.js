@@ -119,11 +119,13 @@ function get_vendor_details(v_url)
   },'json');
 }
 
-function sales_update_cart(action_type,sales_order_id, elm)
+function sales_update_cart(action_type,sales_order_id,ftype,elm)
 {
     action_type = action_type?action_type:'form';
 	var atype   =  $("#form_access").val();
     
+     $("#item_type").val(ftype); 
+     
     action_type = (atype == '')?action_type:atype;
     
 	if(!before_ajax(elm, 'Loading....'))
@@ -141,29 +143,30 @@ function sales_update_cart(action_type,sales_order_id, elm)
         dataType:"json",
         success : function(rdata){
         	after_ajax(elm, rdata);
-        	if(rdata.status == 'warning'){
-        		$("#updat_cart .modal-body").html(rdata.content);
-            	$("#updat_cart").css('width', '800px').addClass("show").removeClass('hide');
-                $("#updat_cart").modal();
-                 $("#updat_cart").modal({
-                    backdrop:"static"
-                 });
-                $("#form_access").val("process");
-                if(rdata.itemtype == 'cart'){
-                   $("#item_type").val("cart"); 
-                }
-        	}
-        	else if(rdata.status == 'success' && action_type == 'process')
+            
+        //	if(rdata.status == 'warning'){
+//        		$("#updat_cart .modal-body").html(rdata.content);
+//            	$("#updat_cart").removeClass('hide');
+//                $("#updat_cart").modal();
+//                 $("#updat_cart").modal({
+//                    backdrop:"static"
+//                 });
+//                $("#form_access").val("process");
+//                if(rdata.itemtype == 'cart'){
+//                   $("#item_type").val("cart"); 
+//                }
+//                $("#product_shipping_lists").html(rdata.content);
+//                
+//        	}
+//        	else 
+            if(rdata.status == 'success' && action_type == 'process')
         	{
+        	   bootbox.alert(rdata.message);
         		$("#div_addr_billing").modal('hide');
                 $("#updat_cart").modal('hide');
         		$("#updated_cart_items").html(rdata.content);
-                        		
-        		bootbox.alert(rdata.message);
-                
-                if(sales_order_id)
-                  location.href = base_url+"salesorder/view/"+sales_order_id; 
-                //get_sales_items(sales_order_id);
+                if(sales_order_id !='cartitem')
+                   location.href = base_url+"salesorder/view/"+sales_order_id; 
                 
         	} 
         	else
@@ -343,7 +346,7 @@ function show_notes(key, val)
 	});	
 }
 
-function product_add_to_shipment(prod_id)
+function product_add_to_shipment(prod_id,prod_name,prod_sku)
 {
    //  if($("#selectAll-"+prod_id).prop('checked') == true){
         //    $("#selectAll-"+prod_id).attr("checked","checked");
@@ -354,7 +357,8 @@ function product_add_to_shipment(prod_id)
             $("#quantity_available").val(qty);
             $("#cancel").attr("data-pid",prod_id); 
             $("#product_id").val(prod_id);
-          
+            var pd = "<p><b>Product Name:</b> "+prod_name+"</p><br /> <p><b>SKU: </b>"+prod_sku+"</p>";
+            $("#prod_details").html(pd);
             $("#product_ship").modal({
                   backdrop: 'static',
                   keyboard: false 
@@ -394,6 +398,11 @@ function sales_prod_add_to_cart(type)
             $(document).find(".checkbox:checked").each(function(){ 
                 ids += (ids)?','+$(this).val():$(this).val();
            });
+           
+           if(ids == ''){
+             bootbox.alert("Please select product to add cart");
+             return false;
+           }
            fdata = {ids:ids,type:type};
        }
     //alert(ids);
@@ -408,6 +417,7 @@ function sales_prod_add_to_cart(type)
                 var status = res.status;
                 var output = res.output;      
                 if(status == 'success'){
+                    bootbox.alert(res.message);
                    $("#product_shipping_lists").html(res.viewlist);
                    var pd_id = $("#cancel").attr("data-pid");
                     modal_close(pd_id);

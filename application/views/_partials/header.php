@@ -35,13 +35,14 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" onclick="popup_close('#updat_cart');">&times;</button>
+        <button type="button" class="close" onclick="popup_close('#updat_cart');" >&times;</button>
       </div>
-      <form name="sales_update_to_cart" id="sales_update_to_cart">
+      
           <div class="modal-body">
           </div>  
-     </form>
+     
     </div>
+
   </div>
 </div>
 
