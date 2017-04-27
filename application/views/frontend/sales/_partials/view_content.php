@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row related-pro">
 		<!-- leftpanel menu section start here -->
 		<div class="col-md-3 related" id="relatedlinks">
 			<?php echo $related_links;?>
