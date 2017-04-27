@@ -1,12 +1,14 @@
    
     <?php if(isset($customer_data['status']) && ($customer_data['status'] == 'new')){ ?>
         <div class="form-group" >
-          For this customer no address created.
-          <h3><a href="<?php echo site_url();?>salesorder/add_edit_customer?redirect=<?php echo $this->uri->segment(3);?>">Create New Address</a></h3>
+           For this customer no address so you should create create.
+          <h6><a href="<?php echo site_url();?>salesorder/add_edit_customer?redirect=<?php echo $this->uri->segment(3);?>">Create Customer</a></h6>
         </div>
-    <?php }
-    else
-    { ?>
+        
+        <div class="clearfix"></div>
+    <?php } ?>
+   <?php // else
+   // { ?>
       <input type="hidden" name="shipping_address_id" value="<?php echo $customer_data['shipping_id'];  ?>" />
       <input type="hidden" name="billing_address_id" value="<?php echo $customer_data['billing_id'];  ?>" />
       <div class="form-grid col-md-6 panel panel-default panel-bor">
@@ -104,4 +106,4 @@
     </div> 
     </div>
     </div>
-   <?php } ?> 
+   <?php //} ?> 

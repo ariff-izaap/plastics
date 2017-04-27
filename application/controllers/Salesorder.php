@@ -750,7 +750,13 @@ class Salesorder extends Admin_Controller
                 $i = 0;
                 foreach($sales_order_item_id as $st_id){
                     $this->db->query("update sales_order_item set qty='".$quantity[$i]."' where id='".$st_id."'");
-                    $st_data    = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
+                    $st_data       = $this->db->query("select * from sales_order_item where id='".$st_id."'")->row_array();
+                    
+                    //update product quantity
+                    $get_product   = $this->db->query("select * from product where id='".$st_data['product_id']."'")->row_array();
+                    $available_qty = $get_product['quantity'] - $quantity[$i];
+                    $update_pqty   = $this->db->query("update product set available_qty='".$available_qty."' where id='".$st_data['product_id']."'");
+                    
                     $total_amt += $st_data['qty']*$st_data['unit_price'];
                     $i++;
                     log_history($st_id,'Quantity','Quantity <b>#'.$quantity[$i].' has been updated.');

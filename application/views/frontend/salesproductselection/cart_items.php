@@ -15,7 +15,9 @@
 
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
+ <?php if($uri2 != 'checkout'){ ?>
     <td>#</td>
+ <?php } ?>   
     <td>Product Number</td>
     <td>Product</td>
     <td>Form</td>
@@ -44,8 +46,9 @@
          <?php //if($itemtype=='cart'){?>
           <input type="hidden" value="<?php echo $ckey; ?>" name="cart_id[]" />
           <?php //} ?>
-         
+         <?php if($uri2 != 'checkout'){ ?>
             <td><input type="checkbox" name="sales_order_create" class="cart_checkbox" value="<?php echo $ckey; ?>" /></td>
+         <?php } ?>   
             <td><input type="hidden"   name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
             <td><?php echo $cvalue['name']; ?></td>
             <td><?php echo $cvalue['form']; ?></td>
