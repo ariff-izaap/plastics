@@ -698,6 +698,12 @@ background-color: #e6e6e6;
 .panels, .panels1 { margin-bottom:0px !important;}
 #inventory_form .modal-body { padding:0px !important;}
 #inventory_add_section .panel-primary { margin-bottom:12px !important;}
+.inventry-add input[type="text"] {
+    width: 100% !important;
+}
+.file-preview-thumbnails > div {
+    height: auto;
+}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
