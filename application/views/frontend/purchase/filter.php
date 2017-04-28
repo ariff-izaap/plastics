@@ -1,7 +1,3 @@
-<?php 
-  //$date_range = array('name' => 'date_range', 'value' => $date_range, 'class' => 'form-control date_range');
-?>
-
 <form id="advance_search_form" class="advance_search_form" method="POST">
   <input type="hidden" name="vendor" class="vendor_input">
   <div class="col-md-12">

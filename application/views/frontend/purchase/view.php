@@ -29,7 +29,7 @@
 				<tr>
 					<td><span style="color:#555555">#<?php echo $po['po_id'];?></span></td>
 					<td><b><?php echo displayData($po['total_amount'], 'money');?></b></td>
-					<td><?php echo displayData($po['order_status'], 'colorize');?></td>
+					<td><?php echo displayData($po['order_status'], 'status');?></td>
 					<td><?php echo displayData($po['created_date'], 'datetime');?></td>
 					
 				</tr>
@@ -238,7 +238,7 @@
 	  						 <?php if($po['order_status']=="NEW" || $po['order_status']=="PENDING" || $po['order_status']=="PROCESSING"){
 		                $colspan = "6";
 		              ?>
-		                <td><a href="#" class="btn btn-danger" onclick="remove_product(<?=$value['id'];?>,<?=$value['po_id'];?>)"><i class="fa fa-remove"></i></a></td>
+		                <td><a href="javascript:void(0);" class="btn btn-danger" onclick="remove_product(<?=$value['id'];?>,<?=$value['po_id'];?>)"><i class="fa fa-remove"></i></a></td>
 		                <?php }?>
 	  							<td><?=$value['p_name'];?></td>
 	  							<td><?=$value['sku'];?></td>

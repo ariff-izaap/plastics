@@ -304,6 +304,27 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
         case 'colorize':
           $data = "<h2 style='font-size:14px;' class='label label-danger'>".$data."</h2>"; 
         break;
+        case 'status':
+           $labels_array = array(
+            'NEW' => 'label-warning',
+             'PENDING' => 'label-warning',
+             'ACCEPTED' => 'label-success',
+             'PROCESSING' => 'label-info',
+             'SHIPPED' => 'label-success',
+             'COMPLETED' => 'label-success',
+             'RECIEVED' => 'label-success',
+             'CANCELLED' => 'label-danger',
+             'IGNORED' => 'label-danger',
+             'HOLD' => 'label-warning',
+             'PARTIALLY PAID' => 'label-danger',
+             );
+           if(isset($labels_array[strtoupper($data)]))
+           {
+            $label = $labels_array[strtoupper($data)];
+            $data = "<span class='label $label'>{$data}</span>";
+           }
+
+           break;
         case 'product_name_link':
          // $data = '<a href="'.site_url('inventory/add/').$row['id'].'">'.$data.'</a>'; 
          $data = $data;

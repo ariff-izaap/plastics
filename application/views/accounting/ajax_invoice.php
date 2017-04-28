@@ -5,7 +5,7 @@
 <div class="modal-body" style="max-height: 450px;overflow: auto;">
 	<div class="row">
 		<div class="col-md-3">
-			<label>Invoice Status : <strong><?=displayData($invoices[0]['invoice_status'],'colorize');?></strong></label>
+			<label>Invoice Status : <strong><?=displayData($invoices[0]['invoice_status'],'status');?></strong></label>
 		</div>
 		<div class="col-md-2">
 			<label>Total : <strong><?=displayData($invoices[0]['total_amt'],'money');?></strong></label>
@@ -92,6 +92,7 @@
 				<div class="form-group">
 					<label>Change Invoice Status : </label>
 					<select class="form-control" data-id="<?=$invoices[0]['id'];?>" name="invoice_status">
+					<option <?=$invoices[0]['invoice_status']=="PENDING"? "selected":"";?> value="PENDING">PENDING</option>
 						<option <?=$invoices[0]['invoice_status']=="COMPLETED"? "selected":"";?> value="COMPLETED">COMPLETED</option>
 						<option <?=$invoices[0]['invoice_status']=="PARTIALLY PAID"? "selected":"";?> value="PARTIALLY PAID">PARTIALLY PAID</option>
 					</select>

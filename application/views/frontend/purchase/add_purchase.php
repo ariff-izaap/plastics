@@ -115,7 +115,9 @@
           <div class="clearfix"></div>
           <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?=$editdata['id'];?>">
           <div class="form-group col-md-2 col-md-offset-10 pull-right">
-            <button type="submit" name="save_product" class="btn pull-right btn-lg btn-block">Checkout</button>
+            <button type="submit" name="save_product" class="btn pull-right btn-lg btn-primary">
+              <i class="fa fa-arrow-right"></i> Checkout
+            </button>
           </div>
       </div>
     </form>

@@ -107,6 +107,7 @@ class Purchase extends Admin_Controller
     }
     else
       $this->data['po_id'] = $this->purchase_model->get_max_id()['po_id'];
+    $this->data['new_data'] = "sadsa";
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
     $this->simple_search_fields = array(
@@ -209,6 +210,7 @@ class Purchase extends Admin_Controller
       $this->session->set_userdata('form_purchase',$form);
       redirect("purchase/add_product");
     }*/
+    
     $this->layout->view('frontend/purchase/add_purchase');
   }
 
@@ -729,8 +731,8 @@ class Purchase extends Admin_Controller
     {
       $tot[] = $value['unit_price'] * $value['qty'];
     }
-    $up['total_amount'] = array_sum($tot);
-    $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up,"purchase_order");
+    $up1['total_amount'] = array_sum($tot);
+    $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up1,"purchase_order");
     $output['status'] = "success";
     $output['message'] = "Product Added Successfully.";
     $this->_ajax_output($output,TRUE);

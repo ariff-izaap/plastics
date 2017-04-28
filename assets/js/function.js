@@ -122,7 +122,7 @@ $(function(){
 
   $(".add-new-dropdown").click(function(){
     $("form#dropdowns,form#minLevel")[0].reset();
-     $(".select2_sample2").empty();
+     $(".select2_sample2").select2('destroy').val("").select2();
   });
 
 
@@ -1288,5 +1288,30 @@ $(".add-product-modal").click(function(){
   });
 
 });
+
+
+function remove_product(id,po_id)
+{
+  con = confirm("Are you sure want to remove this product?");
+  if(con)
+  {
+    $.ajax({
+      type:"POST",
+      url:base_url+'purchase/remove_product',
+      data:{id:id,po_id:po_id},
+      dataType:'json',
+      success:function(data)
+      {
+        console.log(data);
+        if(data.status=="success")
+        {
+          bootbox.alert(data.message,function(){
+            location.reload();
+          });
+        }
+      }
+    });
+  }
+}
 
 /*Ram*/
