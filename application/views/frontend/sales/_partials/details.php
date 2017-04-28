@@ -12,8 +12,6 @@
 	<?php $details = current($order_detail);?>
 
 	<div class="row m_bot_5">
- 
-       
         <div>
             <div class="form-group"  >
               <label>Carrier</label>

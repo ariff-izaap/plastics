@@ -116,10 +116,14 @@
    <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
     <a href="<?php echo base_url(); ?>/salesproductselection" class="btn btn-block"  >Continue Shopping</a>
   </div>
+  <?php if(count($cartitems)>0) {?>
+  <div class="col-md-2">  
+    <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('form','cartitem','cart',this)"><i class="fa fa-edit edit"></i>Edit Cart</button>
+ </div>
    <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
     <input type="submit" name="so" class="btn btn-block" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>
-   
+   <?php } ?>
   </form> 
   
   </div>

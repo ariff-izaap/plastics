@@ -7,11 +7,12 @@
          
           ?>
          
-<!--
+
+<?php if($uri != 'salesproductselection' && $uri2 !='checkout'){ ?>
 <div class="container">
-<button type="button" name="update_cart" onclick="sales_update_cart('form','<?php //echo $so_id;?>',this)" class="btn btn-default ">Update</button>
+<button type="button" name="update_cart" onclick="sales_update_cart('process','<?php echo $so_id;?>','cart',this)" class="btn btn-default ">Update</button>
 </div>
--->
+<?php } ?>
 
 <table class="table table-striped table-hover tableSite table-bordered">
  <tr>
@@ -29,17 +30,21 @@
 <td>Equivalent</td>
 -->
     <td>Quantity</td>
-    <td>Price</td>
-    <td colspan="2">Action</td>
+    <td>Unit Price</td>
+    <td>Total</td>
+    <td>Action</td>
   </tr>
   
    <?php 
          $uri  = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
-        $total = '';
+        $total = ''; $tot = '';
         
        if(count($cartitems)>0) { 
-         foreach($cartitems as $ckey => $cvalue) {   
-            $total += $cvalue['qty'] * $cvalue['price'];
+         foreach($cartitems as $ckey => $cvalue) { 
+           // echo $cvalue['qty']*$cvalue['price'];
+            $tot   = $cvalue['qty']*$cvalue['price'];
+            $total += $cvalue['qty']*$cvalue['price'];
+            
             
      ?>
         <tr>
@@ -55,13 +60,14 @@
             <td><?php echo $cvalue['color']; ?></td>
             <td><?php echo $cvalue['type']; ?></td>
             <td><?php echo $cvalue['package']; ?></td>
-            <td><?php echo $cvalue['row']; ?></td>
+            <td><?php echo $cvalue['qty']*$cvalue['price']; ?></td>
            <!--
  <td><?php //echo $cvalue['equivalent']; ?></td>
 -->
             <td> <?php //if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
             <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo $cvalue['price']; ?></td>
+            <td></td>
             
             <td>
                <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>','single');" class="btn btn-default">
@@ -71,7 +77,7 @@
         </tr>
  <?php }?>
  <tr class="green_solid_bg" >
-                <td class="text-right" colspan="9"><b>Total Amount:</b></td>
+                <td class="text-right" colspan="10"><b>Total Amount:</b></td>
                 
                 <td><b><?php echo (!empty($total))?": ".$total:""; ?></b>
                 <td>&nbsp;</td>

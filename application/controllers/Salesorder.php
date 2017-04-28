@@ -735,7 +735,7 @@ class Salesorder extends Admin_Controller
                         $this->cart->update($update_cart);
                         $j++;
                      }
-                     $$this->data['itemtype'] = $itemtype;
+                     $this->data['itemtype']  = $itemtype;
                      $this->data['cartitems'] = $this->cart->contents();
                      $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
                      $output['message']       = "Cart updated successfully";

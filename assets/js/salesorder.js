@@ -127,7 +127,11 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
     
      $("#item_type").val(ftype); 
      
-    action_type = (atype == '')?action_type:atype;
+   // action_type = (atype == '')?action_type:atype;
+    
+  //  var apd_start = ($("#sales_update_to_cart").length==0)?'<form name="sales_update_to_cart" id="sales_update_to_cart">':'';
+   // var apd_end   = ($("#sales_update_to_cart").length==0)?'</form>':'';
+    
     
 	if(!before_ajax(elm, 'Loading....'))
 		return false;
@@ -145,27 +149,31 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
         success : function(rdata){
         	after_ajax(elm, rdata);
             
-        //	if(rdata.status == 'warning'){
-//        		$("#updat_cart .modal-body").html(rdata.content);
-//            	$("#updat_cart").removeClass('hide');
-//                $("#updat_cart").modal();
-//                 $("#updat_cart").modal({
-//                    backdrop:"static"
-//                 });
-//                $("#form_access").val("process");
-//                if(rdata.itemtype == 'cart'){
-//                   $("#item_type").val("cart"); 
-//                }
-//                $("#product_shipping_lists").html(rdata.content);
-//                
-//        	}
-//        	else 
-            if(rdata.status == 'success' && action_type == 'process')
+        	if(rdata.status == 'warning'){
+        		$("#updat_cart .modal-body").html(rdata.content);
+            	$("#updat_cart").removeClass('hide');
+                $("#updat_cart").modal();
+                 $("#updat_cart").modal({
+                    backdrop:"static"
+                 });
+                $("#form_access").val("process");
+                if(rdata.itemtype == 'cart'){
+                   $("#item_type").val("cart"); 
+                }
+                $("#product_shipping_lists").html(rdata.content);
+                
+        	}
+        	else if(rdata.status == 'success' && action_type == 'process')
         	{
         	   bootbox.alert(rdata.message);
         		$("#div_addr_billing").modal('hide');
                 $("#updat_cart").modal('hide');
         		$("#updated_cart_items").html(rdata.content);
+                $("#product_shipping_lists").html(rdata.content);
+                
+                if($("#cartItems").length!=0){
+                    $("#cartItems").html(rdata.content);
+                } 
                 //if(sales_order_id !='cartitem')
                   // location.href = base_url+"salesorder/view/"+sales_order_id; 
                 
@@ -185,7 +193,7 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
 }
 
 
-function update_sales_status(so_id)
+function update_sales_status(so_id,elm)
 {
     var carrier = $("#carrier").val();
     var ordstat = $("#order_status").val();
@@ -197,7 +205,9 @@ function update_sales_status(so_id)
         data: fdata,
         dataType:"json",
         success : function(rdata){
-        	bootbox.alert(rdata.message);
+            if(rdata.status == 'success'){
+        	   bootbox.alert("Order Status updated successfully");
+            }
         },
         error : function(data) {
          alert('error');
