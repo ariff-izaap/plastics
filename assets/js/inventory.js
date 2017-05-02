@@ -167,8 +167,6 @@ function load_product_image_popup(modal)
 }
 
 
-
-
 function init_product_uploads()
 {
 //product certificate upload section

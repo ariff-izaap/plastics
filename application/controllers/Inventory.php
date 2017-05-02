@@ -29,13 +29,13 @@ class Inventory extends Admin_Controller
         
         $this->load->library('listing');         
         $this->simple_search_fields = array(                                                
-                                    'p.name'         => 'Name',
+                                    'name'         => 'Name',
                                     'p.sku'          => 'Sku',
                                     'p.quantity'     => 'Quantity',
                                     'p.created_date' => 'Created Date',
-                                    'pk.name' => 'Package Name',
-                                    'f.name' => 'Form Name',
-                                    'c.name' => 'Color Name'                                    
+                                    'package_name' => 'Package Name',
+                                    'form_name' => 'Form Name',
+                                    'color_name' => 'Color Name'                                    
         );
          
         $this->_narrow_search_conditions = array("p.name");
@@ -213,11 +213,11 @@ class Inventory extends Admin_Controller
         $this->data['editdata']              = $edit_data;
         $this->data['editdata']['images']    = (!empty($images))?$images:array();
         $this->data['editdata']['pricelts']  = (!empty($pricelists))?$pricelists:array();
-        $this->data['colors']                = $this->inventory_model->get_where(array(),"*","product_color")->result_array();
-        $this->data['forms']                 = $this->inventory_model->get_where(array(),"*","product_form")->result_array();
-        $this->data['packages']              = $this->inventory_model->get_where(array(),"*","product_packaging")->result_array();
-        $this->data['categories']            = $this->inventory_model->get_where(array(),"*","category")->result_array();
-        $this->data['warehouse']             = $this->inventory_model->get_where(array(),"*","warehouse")->result_array();
+        $this->data['colors']                = $this->inventory_model->get_where(array('status' => 1),"*","product_color")->result_array();
+        $this->data['forms']                 = $this->inventory_model->get_where(array('status' => 1),"*","product_form")->result_array();
+        $this->data['packages']              = $this->inventory_model->get_where(array('status' => 1),"*","product_packaging")->result_array();
+        $this->data['categories']            = $this->inventory_model->get_where(array('enabled'=> 1),"*","category")->result_array();
+        $this->data['warehouse']             = $this->inventory_model->get_where(array('status' => 1),"*","warehouse")->result_array();
         
         if($this->input->is_ajax_request()){
           $output  = $this->load->view('frontend/inventory/add',$this->data,true);

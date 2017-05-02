@@ -31,47 +31,23 @@ class Inventory_model extends App_model {
                 case 'name':
                     $this->db->like("p.name", $value);
                 break;
-                case 'sku':
+                case 'p.sku':
                     $this->db->like("p.sku", $value);
                 break;
                 case 'p.created_date':
                     $this->db->like("p.created_date", $value);
                 break;
-                case 'quantity':
+                case 'p.quantity':
                     $this->db->like("p.quantity", $value);
                 break;
-                case 'row':
-                    $this->db->like("p.row", $value);
+                case 'package_name':
+                    $this->db->like("pk.name", $value);
                 break;
-                case 'units':
-                    $this->db->like("p.units", $value);
+                case 'form_name':
+                    $this->db->like("f.name", $value);
                 break;
-                case 'package_id':
-                    $this->db->like("p.package_id", $value);
-                break;
-                case 'color_id':
-                    $this->db->like("p.color_id", $value);
-                break;
-                case 'form_id':
-                    $this->db->like("p.form_id", $value);
-                break;
-                case 'type':
-                    $this->db->like("p.item_type", $value);
-                break;
-                case 'equivalent':
-                    $this->db->like("p.equivalent", $value);
-                break;
-                case 'wholesale':
-                    $this->db->like("p.wholesale_price", $value);
-                break;
-                case 'internal_lot_no':
-                    $this->db->like("p.internal_lot_no", $value);
-                break;
-                case 'vendor_lot_no':
-                    $this->db->like("p.vendor_lot_no", $value);
-                break;
-                case 'received_in_warehouse':
-                    $this->db->like("p.vendor_lot_no", $value);
+                case 'color_name':
+                    $this->db->like("c.name", $value);
                 break;
             }
         }

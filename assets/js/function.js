@@ -465,7 +465,7 @@ function DeleteCheckedRow(e,cls,url)
           dataType:"json",
           success: function(res){ 
             alert(rec_count+' record(s) deleted successfully');
-            //after_ajax(e);
+           
             if(res.status == 'success'){
                 refresh_grid();
             }
@@ -491,9 +491,9 @@ function modal_close(pid='')
 function popup_close(modal)
 {
     $(modal).hide();
-   if(modal == '#updat_cart'){
-     $(modal).removeClass("show in");
-   } 
+    if(modal == '#updat_cart'){
+       $(modal).removeClass("show in");
+    } 
     if(modal == '#inventory_form' || modal == '#updat_cart'){
         $(".modal-backdrop").removeClass("in");
         $(".modal-backdrop").remove();
@@ -503,13 +503,11 @@ function popup_close(modal)
     }
     //$(".modal-backdrop").removeClass("in");
    // $(".modal-backdrop").remove();
-   
 }
 
 function create_timesheet(elm)
 {
 	var hour = $("#working_hours").val();
-	
 	if(!hour){
 		alert('Please enter working hours!');
 		return false;
