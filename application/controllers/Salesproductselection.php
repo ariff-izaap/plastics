@@ -179,7 +179,6 @@ class Salesproductselection extends Admin_Controller
      $cartitems = $this->cart->contents(); 
      
      if($type == 'single'){
-        
          //post data
          $available_quantity = $this->input->post("quantity_available");
          $order_quantity     = $this->input->post("quantity_to_order");
@@ -214,7 +213,7 @@ class Salesproductselection extends Admin_Controller
                                );
                                                
                 $this->cart->insert($cart_data);
-            }
+             }
            }
            
          }

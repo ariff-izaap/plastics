@@ -10,7 +10,7 @@ class Salesorder extends Admin_Controller
         if(!is_logged_in())
             redirect('login');
 			
-      $this->load->model(array('salesorder_model','purchase_model'));
+      $this->load->model(array('salesorder_model','purchase_model','vendor_model'));
       $this->load->model('admin_model');
 	  $this->load->library('listing');
       $this->load->library('cart');    
@@ -341,7 +341,7 @@ class Salesorder extends Admin_Controller
         $this->data['shipping_type'] = get_shipping_type();
         $this->data['credit_type']   = get_credit_type();
         $this->data['cartitems']     = $cartitems;           
-        $this->data['customer']      = $this->purchase_model->get_vendors();
+        $this->data['customer']      = $this->vendor_model->get_customers();
         $this->data['carrier']       = get_carrier();
         $this->data['stype']         = $saletype;
         $this->data['total']         = $total;

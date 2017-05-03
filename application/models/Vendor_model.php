@@ -47,5 +47,18 @@ class Vendor_model extends App_model {
     	return $vendors;
     }
     
+    public function get_customers($where='')
+   {
+    
+    if($where)
+      $this->db->where($where);
+    $this->db->select("a.*,b.state,b.city,b.address1,b.address2,b.zipcode,b.first_name,b.last_name,b.phone,c.name as contact_name,c.contact_value,c.email,b.name as b_name");
+    $this->db->from("customer a");
+    $this->db->join("address b","a.address_id=b.id");
+    $this->db->join("customer_contact c","a.id=c.customer_id");
+    $this->db->group_by("a.id");
+    $q = $this->db->get();
+    return $q->result_array();
+  }
 }
 ?>

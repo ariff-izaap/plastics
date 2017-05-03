@@ -41,8 +41,8 @@
         
        if(count($cartitems)>0) { 
          foreach($cartitems as $ckey => $cvalue) { 
-           // echo $cvalue['qty']*$cvalue['price'];
-            $tot   = $cvalue['qty']*$cvalue['price'];
+           
+            $tot    = $cvalue['qty']*$cvalue['price'];
             $total += $cvalue['qty']*$cvalue['price'];
             
             
@@ -60,14 +60,12 @@
             <td><?php echo $cvalue['color']; ?></td>
             <td><?php echo $cvalue['type']; ?></td>
             <td><?php echo $cvalue['package']; ?></td>
-            <td><?php echo $cvalue['qty']*$cvalue['price']; ?></td>
-           <!--
- <td><?php //echo $cvalue['equivalent']; ?></td>
--->
+            <td><?php echo $cvalue['row']; ?></td>
+           <!--<td><?php //echo $cvalue['equivalent']; ?></td>-->
             <td> <?php //if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
             <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo $cvalue['price']; ?></td>
-            <td></td>
+            <td><?php echo $cvalue['qty']*$cvalue['price']; ?></td>
             
             <td>
                <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>','single');" class="btn btn-default">
