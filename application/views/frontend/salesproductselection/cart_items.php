@@ -9,9 +9,9 @@
          
 
 <?php if($uri != 'salesproductselection' && $uri2 !='checkout'){ ?>
-<div class="container">
-<button type="button" name="update_cart" onclick="sales_update_cart('process','<?php echo $so_id;?>','cart',this)" class="btn btn-default ">Update</button>
-</div>
+
+<button type="button" name="update_cart" onclick="sales_update_cart('process','<?php echo $so_id;?>','cart',this)" class="btn btn-warning sales-warn">Update</button>
+
 <?php } ?>
 
 <table class="table table-striped table-hover tableSite table-bordered">
