@@ -71,6 +71,13 @@ function get_user_role( $user_id='')
 
   return $row['role_id'];
 }
+function get_all_users_by_role($where='')
+{
+  $CI= & get_instance();
+  $CI->load->model('user_model');
+  $row = $CI->user_model->select(array('role_id' => $where),'admin_users');
+  return $row;
+}
 
 function get_user_access_rights($role_id='')
 {

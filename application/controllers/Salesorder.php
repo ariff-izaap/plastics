@@ -358,46 +358,32 @@ class Salesorder extends Admin_Controller
     
     function view($so_id = null)
     {
-        $this->layout->add_javascripts(array('salesorder','checkout'));
-        
-    	//if(is_null($so_id) || !(int)$so_id)
-//    		redirect('sales_orders');
-//    	
+      $this->layout->add_javascripts(array('salesorder','checkout'));
     	include('common_controller.php');
-    	
     	$obj = new common_controller();
     	$data = $obj->get_view_data('so', $so_id);
-
     	if($data === false)
     		redirect('salesorder');
-    	
     	$this->data += $data;
-    	
     	$this->data['content'] = $this->load->view('frontend/sales/_partials/view_content', $this->data, TRUE);
-        //$output['content']     = $this->load->view('frontend/sales/view', $this->data, true);	
-//    	
-//        if($this->input->is_ajax_request())
-//            $this->_ajax_output($output, TRUE);
-//        else    
-    	   $this->layout->view('frontend/sales/view', $this->data);	
+      $this->layout->view('frontend/sales/view', $this->data);
     }
     
     function _get_products_details($so_id)
     {
     	$this->load->model('shipment_model');
     	
-    	//check if the current SO is having Shipment(s) 
+    	//check if the current SO is having Shipment(s)
     	$result_set = $this->shipment_model->get_where(array('so_id' => $so_id));
   
     	//if no shipment found, fetch only products vendor-wise products
-    	if(!$result_set->num_rows()){
+    	if(!$result_set->num_rows())
+      {
     		$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);
-    		return $products;
+        return $products;
     	}
-    	
     	//fetch product details
-    	$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);
-      
+    	$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);      
     	$vendors = array();
     	//if no records found, return empty array
     	if (count($products) == 0)

@@ -54,7 +54,7 @@
       <div class="clearfix"></div>
       <div class="form-group col-md-4">
       	<label required="">User Rights</label>
-      	<select class="form-control" name="role">
+      	<select class="form-control user_role_select" name="role">
       		<?php
       			if($roles)
       			{

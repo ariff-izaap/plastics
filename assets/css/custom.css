@@ -879,3 +879,19 @@ body .btn-block { width: 68% !important; margin: 0 auto 30px auto; }
     #myModal {
     z-index: 222222222222222;
 }
+
+.btn-hoki
+{
+    color: #fff;
+    background-color: #67809F;
+}
+.btn-purple
+{
+    color:#fff;
+    background-color: #6d5b8e;
+}
+.btn-rose
+{
+    color:#fff;
+    background-color: #920392;
+}

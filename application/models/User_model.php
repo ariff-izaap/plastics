@@ -21,6 +21,13 @@ class User_model extends App_model
 		$this->db->from('admin_users');
 		$q = $this->db->get()->row_array();
 		return $q;
-	}    
+	}
+	public function select($where='',$table='')
+	{
+		$this->db->where($where);
+		$this->db->from($table);
+		$q = $this->db->get()->result_array();
+		return $q;
+	}      
 }
 ?>
