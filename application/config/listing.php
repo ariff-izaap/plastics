@@ -376,7 +376,8 @@ $config['salesorder_index'] = array(
                         //'id'=>array('name'=>'Product No', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
 						'id'=>array('name'=>'SO ID', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),	
                         'business_name' => array('name'=>'Customer Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
-                        'total_amount' => array('name'=>'Total Amount', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),                       
+                        'total_amount' => array('name'=>'Total Amount', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),  
+                        'city' => array('name'=>'Location', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),                    
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

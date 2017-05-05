@@ -14,15 +14,15 @@ class Salesorder_model extends App_model
   
   function listing()
   {  
-       $this->_fields = "s.id as id,s.salesman_id,cl.zipcode,cl.city,cl.state,ct.business_name,p.name,p.sku,i.qty as quantity,p.row,p.form_id,p.units,s.total_amount as wholesale_price,s.credit_type,s.credit_type as payment_by,pk.name as package_name,c.name as color_name,f.name as form_name,s.so_instructions,s.bol_instructions";
+       $this->_fields = "s.id as id,s.salesman_id,cl.zipcode,cl.city,cl.state,ct.business_name,s.total_amount,s.credit_type,s.credit_type as payment_by,s.so_instructions,s.bol_instructions";
         $this->db->from('sales_order s');
         $this->db->join("sales_order_item i","i.so_id=s.id");
         $this->db->join("customer ct","ct.id=s.customer_id");
         $this->db->join("customer_location cl","cl.customer_id=ct.id");
-        $this->db->join("product p","p.id=i.product_id");
-        $this->db->join("product_color c","c.id=p.color_id");
-        $this->db->join("product_form f","f.id=p.form_id");
-        $this->db->join("product_packaging pk","pk.id=p.package_id");
+       // $this->db->join("product p","p.id=i.product_id");
+       // $this->db->join("product_color c","c.id=p.color_id");
+      //  $this->db->join("product_form f","f.id=p.form_id");
+      //  $this->db->join("product_packaging pk","pk.id=p.package_id");
         $this->db->group_by('i.so_id');
           
         foreach ($this->criteria as $key => $value) 
