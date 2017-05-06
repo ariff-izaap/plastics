@@ -145,7 +145,7 @@ function get_customer_billing_address($cid = 0, $output_type = 'both', $address_
 
 	$CI->load->model('address_model');
 	$address = $CI->address_model->get_customer_billing_address($cid);
-
+   
 	if(!count($address))
 		return FALSE;
 	

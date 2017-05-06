@@ -370,7 +370,7 @@ $config['salesorder_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'frontend/sales/filter',
-	"base_url"	=> 	'/sales/index/',
+	"base_url"	=> 	'/salesorder/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(  
                         //'id'=>array('name'=>'Product No', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
@@ -378,6 +378,7 @@ $config['salesorder_index'] = array(
                         'business_name' => array('name'=>'Customer Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
                         'total_amount' => array('name'=>'Total Amount', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),  
                         'city' => array('name'=>'Location', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),                    
+                        'creditname' => array('name'=>'Payment By', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

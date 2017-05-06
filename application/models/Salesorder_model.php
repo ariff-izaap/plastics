@@ -14,26 +14,25 @@ class Salesorder_model extends App_model
   
   function listing()
   {  
-       $this->_fields = "s.id as id,s.salesman_id,cl.zipcode,cl.city,cl.state,ct.business_name,s.total_amount,s.credit_type,s.credit_type as payment_by,s.so_instructions,s.bol_instructions";
+        $this->_fields = "s.id as id,s.salesman_id,cl.zipcode,cl.city,cl.state,ct.business_name,s.total_amount,s.credit_type,cy.name as creditname,s.credit_type as payment_by,s.so_instructions,s.bol_instructions";
         $this->db->from('sales_order s');
-        $this->db->join("sales_order_item i","i.so_id=s.id");
         $this->db->join("customer ct","ct.id=s.customer_id");
         $this->db->join("customer_location cl","cl.customer_id=ct.id");
-       // $this->db->join("product p","p.id=i.product_id");
-       // $this->db->join("product_color c","c.id=p.color_id");
-      //  $this->db->join("product_form f","f.id=p.form_id");
-      //  $this->db->join("product_packaging pk","pk.id=p.package_id");
-        $this->db->group_by('i.so_id');
+        $this->db->join("credit_type cy","cy.id=s.credit_type");
+        $this->db->group_by('s.id');
           
         foreach ($this->criteria as $key => $value) 
         {
+            if($value == 'Select')
+               continue;
+               
             if( !is_array($value) && strcmp($value, '') === 0 )
                 continue;
 
             switch ($key)
             {
-                case 'shipping_order':
-                    $this->db->like("s.shipping_order", $value);
+                case 'id':
+                    $this->db->like("s.id", $value);
                 break;
                 case 'business_name':
                     $this->db->like("ct.business_name", $value);

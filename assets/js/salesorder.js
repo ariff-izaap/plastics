@@ -1,6 +1,7 @@
 /** Start to Punitha */
 function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
 {
+    //alert(action_type);
 	action_type = action_type?action_type:'form';
 	
 	if(!before_ajax(elm, 'Loading....'))
@@ -12,25 +13,24 @@ function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
 	
 	ship_addr_id = parseInt(ship_addr_id);
 	
-	$.ajax( {
+	$.ajax({
         url:base_url+'salesorder/change_ship_address/'+ship_addr_id+'/'+sales_order_id+'/'+action_type,
         type: "POST",
         data: data,
         dataType:"json",
         success : function(rdata){
-        	
+            
         	if(!after_ajax(elm, rdata))
         		return false;
         	
         	if(rdata.status == 'warning'){
         		$("#div_add_new_price .modal-body").html(rdata.content);
-            	$("#div_add_new_price").css('width', '800px').addClass("show").removeClass('hide');
+            //	$("#div_add_new_price").css('width', '800px').addClass("show").removeClass('hide');
                 $("#div_add_new_price").modal();
         	}
         	else if(rdata.status == 'success' && action_type == 'process')
         	{
         		$("#div_add_new_price").modal('hide');
-        		        		
         		bootbox.alert(rdata.message, function(){
         			if(ship_addr_id)
         			location.href = base_url+'salesorder/view/'+sales_order_id;
@@ -51,7 +51,8 @@ function change_ship_addr(action_type, ship_addr_id, sales_order_id, elm)
 function change_billing_addr(action_type, bill_addr_id, sales_order_id, elm)
 {
 	action_type = action_type?action_type:'form';
-	
+    //alert(action_type);
+    
 	if(!before_ajax(elm, 'Loading....'))
 		return false;
 	
@@ -61,7 +62,7 @@ function change_billing_addr(action_type, bill_addr_id, sales_order_id, elm)
 	
 	bill_addr_id = parseInt(bill_addr_id);
 	
-	$.ajax( {
+	$.ajax({
         url:base_url+'salesorder/change_billing_address/'+bill_addr_id+'/'+sales_order_id+'/'+action_type,
         type: "POST",
         data: data,
@@ -73,13 +74,12 @@ function change_billing_addr(action_type, bill_addr_id, sales_order_id, elm)
         	
         	if(rdata.status == 'warning'){
         		$("#div_addr_billing .modal-body").html(rdata.content);
-            	$("#div_addr_billing").css('width', '800px').addClass("show").removeClass('hide');
+            //	$("#div_addr_billing").css('width', '800px').addClass("show").removeClass('hide');
                 $("#div_addr_billing").modal();
         	}
         	else if(rdata.status == 'success' && action_type == 'process')
         	{
-        		$("#div_addr_billing").modal('hide');
-        		        		
+        		$("#div_addr_billing").modal('hide');	
         		bootbox.alert(rdata.message, function(){
         			if(ship_addr_id)
         			location.href = base_url+'salesorder/view/'+sales_order_id;

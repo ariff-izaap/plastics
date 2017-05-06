@@ -20,9 +20,12 @@ class Salesproduct_model extends App_model {
         $this->db->join("product_form f","f.id=p.form_id");
         $this->db->join("product_packaging pk","pk.id=p.package_id");
         $this->db->group_by('p.id');
-          
+      // print_r($this->criteria);   
         foreach ($this->criteria as $key => $value) 
         {
+            if($value == 'Select')
+               continue;
+            
             if( !is_array($value) && strcmp($value, '') === 0 )
                 continue;
 
@@ -46,14 +49,14 @@ class Salesproduct_model extends App_model {
                 case 'units':
                     $this->db->like("p.units", $value);
                 break;
-                case 'package_id':
+                case 'package_name':
                     $this->db->like("p.package_id", $value);
                 break;
-                case 'color_id':
-                    $this->db->like("p.color_id", $value);
-                break;
-                case 'form_id':
+                case 'form_name':
                     $this->db->like("p.form_id", $value);
+                break;
+                case 'color_name':
+                    $this->db->like("p.color_id", $value);
                 break;
                 case 'type':
                     $this->db->like("p.item_type", $value);
@@ -61,7 +64,7 @@ class Salesproduct_model extends App_model {
                 case 'equivalent':
                     $this->db->like("p.equivalent", $value);
                 break;
-                case 'wholesale':
+                case 'wholesale_price':
                     $this->db->like("p.wholesale_price", $value);
                 break;
                 case 'internal_lot_no':
@@ -75,6 +78,7 @@ class Salesproduct_model extends App_model {
                 break;
             }
         }
+      //  echo $this->db->last_query();
         return parent::listing();
     }
 	

@@ -198,12 +198,11 @@ function add_to_cart(b,a,d,f,v)
   d=d?d:"form";
   var e="#"+$(f).attr("id");
   var c=$(e).attr("data-original-title");
-  if(d=="form")
-  {
-    if(!before_ajax(e,"Loading...."))
-    {
+  if(d=="form"){
+    if(!before_ajax(e,"Loading....")){
       return false;
     }
+    
     $.ajax({
       url:base_url+"purchase/form_add_to_cart/"+b+"/"+a+"/"+$(f).attr("id")+"/"+v,
       type:"POST",
@@ -494,7 +493,7 @@ function popup_close(modal)
     if(modal == '#updat_cart'){
        $(modal).removeClass("show in");
     } 
-    if(modal == '#inventory_form' || modal == '#updat_cart'){
+    if(modal == '#inventory_form' || modal == '#updat_cart' || modal == '#div_addr_billing' || modal == '#div_add_new_price'){
         $(".modal-backdrop").removeClass("in");
         $(".modal-backdrop").remove();
        if(modal != '#updat_cart'){ 

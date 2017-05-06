@@ -14,13 +14,13 @@
 							<thead class="greenbg_title txt_13">
 								<tr>
 									<th width="10%">Billing Information
-                                        <a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
+                                        <a class="pull-right underline" style="color:orange;" onclick="change_billing_addr('form',<?php echo $so_details['billing_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a>
 									</th>
 								</tr>
 							</thead>
 							<tbody class="white_bg">
 								<tr>
-									<td id="shipping_address">
+									<td id="billing_address">
 										<?php echo get_customer_billing_address($so_details['billing_address_id'], 'html');?>
 									</td>									
 								</tr>
@@ -36,14 +36,14 @@
 								<tr>
 									<th width="10%">Shipping Information 
 										<?php  if(strcmp($so_details['order_status'],"SHIPPED") !== 0) : ?> 
-											<a class="pull-right underline" style="color:orange;" href="javascript:void(0);" onclick="change_ship_addr('form',<?php echo $so_details['shipping_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a> 
+											<a class="pull-right underline" style="color:orange;" onclick="change_ship_addr('form',<?php echo $so_details['shipping_address_id'];?>,<?php echo $so_details['id'];?>,this)">Edit</a> 
 										<?php endif; ?>
 									</th>
 								</tr>
 							</thead>
 							<tbody class="white_bg">
 								<tr>
-									<td id="billing_address">
+									<td id="shipping_address">
 										<?php echo get_address_by_contact_id($so_details['shipping_address_id'], 'html');?>
 									</td>
 								</tr>

@@ -53,17 +53,13 @@ class Common_controller
 			return FALSE;
 		$data = array();
 		 
-		$data['so_id'] = $so_id;
-		
-		$data['so_details'] = $result_set->row_array();
-        
-		$payment_term = $this->CI->salesorder_model->get_where(array('id' => $data['so_details']['credit_type']),"name","credit_type")->row_array();
-		
-        $data['payment_term_name'] = $payment_term['name'];
-        
-		$customer_id = isset($data['so_details']['customer_id'])?$data['so_details']['customer_id']:0;
-		$data['user_details'] = $this->CI->salesorder_model->get_where(array('id' => $customer_id), '*', 'customer')->row_array();
-        $contact = $this->CI->salesorder_model->get_where(array('customer_id' => $customer_id),"name,email","customer_contact")->row_array();
+		$data['so_id']                          = $so_id;
+		$data['so_details']                     = $result_set->row_array();
+		$payment_term                           = $this->CI->salesorder_model->get_where(array('id' => $data['so_details']['credit_type']),"name","credit_type")->row_array();
+        $data['payment_term_name']              = $payment_term['name'];
+		$customer_id                            = isset($data['so_details']['customer_id'])?$data['so_details']['customer_id']:0;
+		$data['user_details']                   = $this->CI->salesorder_model->get_where(array('id' => $customer_id), '*', 'customer')->row_array();
+        $contact                                = $this->CI->salesorder_model->get_where(array('customer_id' => $customer_id),"name,email","customer_contact")->row_array();
         $data['user_details']['email']          = $contact['email'];
         $data['user_details']['customer_name']  = $contact['name'];
 
@@ -101,33 +97,13 @@ class Common_controller
 			$data['order'] = $order;
 			//$data['manual_process'] = $this->CI->load->view('frontend/sales_orders/_partials/manual_process', $data, TRUE);
 		}
-
-		//get reconciled charges
-	//	$this->CI->load->model('sales_order_prices_model');
-	//	$data['reconcile_charges'] = $this->CI->sales_order_prices_model->get_total_charge_by_so($so_id);
-		
+        		
 		//order total
 		$data['order_total']   = ($data['so_details']['total_amount']);
 		$data['order_details'] = $this->CI->load->view('frontend/sales/_partials/details', $data, TRUE);
 		$data['bulk_actions']  = array('' => 'select', 'issue_ra' => 'Issue RA for selected items', 'refund' => 'Refund selected items');
-		 
-		//get attachments
-		//$data['attachments'] = $this->CI->salesorder_model->get_where(array('so_id' => $so_id), '*', 'sales_order_attachments')->result_array();
-		//$general_settings 	 = get_settings($this->CI->sales_channel_id, 'layout');
-		
-		//$data['so_attachment_url'] = isset($general_settings['so_attachment_url'])?$general_settings['so_attachment_url']:'';
-
-	//	$data['notes'] = $this->CI->get_notes('sales_order', $so_id);
-		 
-		//get related links
 		$data['related_links'] = $this->get_related_links($so_id, array('cur_page' => 'sales_order', 'cur_page_id' => $so_id));
-		
-		//get order based alert
-	//	$data['so_alert'] = $this->get_alert('so_type', array('so_id' => $so_id));
-		 
-		//check if this orders is involved with vendor that order type is 'web', to show alert message.
-	//	$data['vendor_alert'] = $this->get_alert('vendor_type', array('so_id' => $so_id));
-        
+	
         //get shipping country
         $shipping_address         = get_address_by_contact_id( $data['so_details']['shipping_address_id'], 'data' );
 	  	$data['shipment_country'] = $shipping_address['country'];

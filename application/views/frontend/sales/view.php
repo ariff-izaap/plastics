@@ -15,9 +15,9 @@
 	    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 id="myModalLabel">Change Shipping Address</h3>
-				</div>
+		<button type="button" class="close" data-dismiss="modal" onclick="popup_close('#div_add_new_price');">&times;</button>
+		<h3 id="myModalLabel">Change Shipping Address</h3>
+      </div>
       <div class="modal-body">
       
       </div>
@@ -30,13 +30,13 @@
 </div>
 
 <!-- Billing Address Modal -->
-<div id="div_addr_billing" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="div_addr_billing" class="modal fade" role="dialog" aria-labelledby="billingModalLabel" aria-hidden="true">
    <form action="<?php echo site_url('salesorder/change_billing_address/')."/".$so_details['billing_address_id'];?>" method="post">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3 id="myModalLabel">Change Billing Address</h3>
+			<button type="button" class="close" data-dismiss="modal" onclick="popup_close('#div_addr_billing');">&times;</button>
+			<h3 id="billingModalLabel">Change Billing Address</h3>
 		</div>
       <div class="modal-body">
       
@@ -88,7 +88,7 @@
 			<h3>Next Due Date <?php echo ($next_due_date!=0) ? '<span><br /> '.date('d M',strtotime($next_due_date)).'  <br /> '.date('y',strtotime($next_due_date)).'</span>':'<span><br /> - </span>'?></h3>
 		</div>
 		<div class="span4 nd_sec_yellow">
-			<h3>Payment Term <?php echo $payment_term_name;?></h3>
+			<h3>Payment Term <span><br><?php echo $payment_term_name;?></span></h3>
 		</div>
    
 	

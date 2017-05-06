@@ -30,13 +30,13 @@ class Salesproductselection extends Admin_Controller
            
         $this->simple_search_fields = array();
          
-        $this->_narrow_search_conditions = array("name","quantity","package_id","form_id","color_id","type","equivalent","row","units","wholesale","internal_lot_no","vendor_lot_no","received_in_warehouse");
+        $this->_narrow_search_conditions = array("name","quantity","package_name","form_name","color_name","type","equivalent","row","units","wholesale_price","internal_lot_no","vendor_lot_no","received_in_warehouse");
         
         $str = '<button type="button" id="addcart{id}" name="add_to_cart" onclick="product_add_to_shipment({id},\'{name}\',\'{sku}\')" data-price="{retail_price}" data-qty="{quantity}" class="btn btn-info"><i class="fa fa-plus"></i> Add To Cart</button>';
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('Salesproduct_model', 'listing');
+        $listing = $this->listing->get_listings('salesproduct_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);

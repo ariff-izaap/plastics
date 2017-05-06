@@ -20,21 +20,21 @@
             </div>
             <div class="form-group">
               <label class="col-md-6">Form</label>
-              <select class="form-control productform col-md-6" name="form_id" id="form_id" >
+              <select class="form-control productform col-md-6" name="form_name" id="form_name" >
                    <option>Select</option>
                    <?php $forms = get_forms(); 
-                     foreach($forms as $form): ?>
+                          foreach($forms as $form): 
+                   ?>
                     <option value="<?php echo $form['id'];?>"  > <?php echo $form['name'];?> </option>
                   <?php endforeach;?>
               </select>
             </div>
             <div class="form-group" >
               <label class="col-md-6">Packaging</label>
-              <select class="form-control productpackage col-md-6" name="package_id" id="package_id" >
+              <select class="form-control productpackage col-md-6" name="package_name" id="package_name" >
                   <option>Select</option>
                    <?php $packages = get_packages(); 
                        foreach($packages as $pack):
-                     
                    ?>
                     <option value="<?php echo $pack['id'];?>" > <?php echo $pack['name'];?> </option>
                   <?php endforeach;?>
@@ -57,11 +57,10 @@
             </div>
              <div class="form-group" >
               <label class="col-md-6">Color</label>
-              <select class="form-control productcolor col-md-6" name="color_id" id="color_id" >
+              <select class="form-control productcolor col-md-6" name="color_name" id="color_name" >
                    <option>Select</option>
                    <?php $colors = get_colors();
-                    foreach($colors as $clr):
-                      
+                    foreach($colors as $clr): 
                    ?>
                     <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
                   <?php endforeach;?>
@@ -153,7 +152,7 @@
             </div>
             <div class="form-group" >
               <label class="col-md-6">Wholesale</label>
-              <input type="text" name="wholesale" class="form-control col-md-6" id="wholesale" value="" />
+              <input type="text" name="wholesale_price" class="form-control col-md-6" id="wholesale_price" value="" />
             </div>
             <div class="form-group" >
               <label class="col-md-6">Reference</label>

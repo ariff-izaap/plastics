@@ -5,7 +5,7 @@
       <div class="panel-heading formcontrol-box ship-box">
             <div class="form-group" >
               <label class="col-md-4">Shipping Order</label>
-              <input type="text" name="shipping_order" class="form-control col-md-8" id="shipping_order" value="" placeholder="" />
+              <input type="text" name="id" class="form-control col-md-8" id="id" value="" placeholder="" />
             </div>
             <div class="form-group" >
               <label class="col-md-4">Customer Name</label>
