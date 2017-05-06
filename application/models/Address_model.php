@@ -12,10 +12,11 @@ class Address_model extends App_model {
    
     function get_address_by_contact_id($contact_id)
 	{
-		$this->db->select('c.*,s.name as state,ct.name as country');
+		$this->db->select('c.*');
 		$this->db->from('customer_location c');
-        $this->db->join("country ct","ct.id=c.country");
-		$this->db->join('state s', 's.id=c.state');
+       // $this->db->join("country ct","ct.id=c.country");
+	//	$this->db->join('state s', 's.id=c.state');
+        $this->db->where('c.id',$contact_id);
 		return $this->db->get()->row_array();
 	}
    

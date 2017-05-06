@@ -10,8 +10,9 @@ class Log_model extends App_model
   
   function get_logs($where)
   {
-    $this->db->select("*");
-    $this->db->from($this->_table);
+    $this->db->select("l.*,a.first_name as admin_user");
+    $this->db->from("log l");
+    $this->db->join("admin_users a","a.id=l.created_id");
     $this->db->where($where);
     return $this->db->get()->result_array();
   }
