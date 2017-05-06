@@ -1,9 +1,10 @@
 <?php
 	if($products)
 	{
+		$tot = [];
 		foreach ($products as $key => $value)
 		{
-		
+			$tot[] = $value['unit_price'] * $value['qty'];
 			?>
 				<tr>
 					<td><?=$value['p_name'];?></td>

@@ -99,7 +99,7 @@
 			<form action="" method="post" id="EditPOProduct">
 				<input type="hidden" name="vendor_id" class="vendor_id" value="<?=$po_details[0]['vendor_id'];?>">
 				<input type="hidden" name="po_id" class="po_id" value="<?=$po_details[0]['po_id'];?>">
-				<table class="table table-hover table-bordered">
+				<table class="table table-hover table-bordered product-cart">
 				<thead>
 					<th>Product Name</th><th>Form</th><th>Color</th><th>Packaging</th><th>Unit Price</th><th>Quantity</th>
 					<th>Total</th>

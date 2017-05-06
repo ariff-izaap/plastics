@@ -84,7 +84,7 @@ class Dashboard extends Admin_Controller
     public function add_po_product($id)
     {
       $this->data['vendor_id'] = $this->input->post('vendor_id');
-      $this->data['so_id'] = $this->input->post('so_id');
+      $this->data['po_id'] = $this->input->post('po_id');
       $output['content'] = $this->load->view('frontend/onepage/add_po_product',$this->data,true);
       // $output['msg'] = $this->data['po_details'];
       $this->_ajax_output($output,TRUE);

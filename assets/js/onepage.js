@@ -78,7 +78,7 @@ $(".add_po_product_cart_btn").click(function(){
 			console.log(data);
 			if(data.status=="success")
 			$(".succ_msg").html('<div class="alert alert-success"><button class="close" data-dismiss="alert">&times;</button>Product added successfully.!</div>');
-			$("#PODetails .modal-body table tbody").html(data.cart);
+			$("#POProcess .modal-body table.product-cart thead").after().html(data.cart);
 		}
 	});
 });
@@ -166,13 +166,11 @@ $(".so_history_btn").click(function(){
 
 
 	$(".update_po_cart").click(function(){
-		rowid = $(this).attr("data-id");
-		rand = $(this).attr("data-row-id");
-		qty = $(".qty_"+rand).val();
+		form = $("form#CartPOForm").serialize();
 		$.ajax({
 			type:"POST",
 			url:base_url+'dashboard/update_po_cart',
-			data:{rowid:rowid,qty:qty},
+			data:form,
 			dataType:'json',
 			success:function(data)
 			{
@@ -181,18 +179,6 @@ $(".so_history_btn").click(function(){
 			}
 		});
 	});
-
-
-$(".back-checkout-po").click(function(){
-	$("#AddNewPO").show();
-	$("#CheckoutPO").modal('close');
-});
-
-
-$(".back-checkout-so").click(function(){
-	$("#AddNewSO").show();
-	$("#CheckoutSO").modal('close');
-});
 
 
 $(".order-so-btn").click(function(){
@@ -217,5 +203,5 @@ $(".order-so-btn").click(function(){
 });
 
 $('a[href^="#"]').click(function (event) {
-	  event.preventDefault ? event.preventDefault() : event.returnValue = false;
-	});
+  event.preventDefault ? event.preventDefault() : event.returnValue = false;
+});
