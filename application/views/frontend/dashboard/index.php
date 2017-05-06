@@ -195,8 +195,8 @@
 				</div>
 				<div class="row">
 					<button class="btn btn-info customer-search-btn">Search</button>
-					<a href="#POHistory" data-toggle="modal" class="btn btn-info po_history_btn">PO History</a>
-					<a href="#SOHistory" data-toggle="modal" class="btn btn-info so_history_btn">SO History</a>
+					<a href="#POProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info po_history_btn">PO History</a>
+					<a href="#SOProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info so_history_btn">SO History</a>
 				</div>
 			</div>
 			<div class="col-md-6" style="">
@@ -437,60 +437,29 @@
 	</div>
 </div>
 
-<div id="POHistory" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+<!-- PO Popups -->
+<div id="POProcess" class="modal fade" role="dialog">
+</div>
+
+<!-- SO Popups -->
+<div id="SOProcess" class="modal fade" role="dialog">
+</div>
+
+<div id="AddSOProduct" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">PO History</h4>
+        <h4 class="modal-title">Add Product</h4>
       </div>
       <div class="modal-body">
         
       </div>
       <div class="modal-footer">
-        <div class="col-md-2 pull-right">
+        <div class="col-md-8 pull-right">
           <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="SOHistory" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">SO History</h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <div class="col-md-2 pull-right">
-          <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="PODetails" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close close_po_details" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">PO - #</h4>
-      </div>
-      <div class="modal-body" style="max-height: 450px;overflow: auto;">
-        
-      </div>
-      <div class="modal-footer">
-        <div class="col-md-2 pull-right">
-          <button data-dismiss="modal" class="btn btn-danger close_po_details pull-right">Close</button>
+          <button class="btn btn-primary add_so_product_cart_btn pull-left">Add</button>
         </div>
       </div>
     </div>
@@ -517,88 +486,14 @@
   </div>
 </div>
 
-<div id="AddPOProduct" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Product</h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <div class="col-md-8 pull-right">
-          <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
-          <button class="btn btn-primary add_po_product_cart_btn pull-left">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="AddSOProduct" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Product</h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <div class="col-md-8 pull-right">
-          <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
-          <button class="btn btn-primary add_so_product_cart_btn pull-left">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="AddNewSO" class="modal fade" role="dialog">
 </div>
 
-<div id="AddNewPO" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Create PO</h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <div class="col-md-3 pull-right">
-          <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
-          <a data-toggle="modal" class="btn btn-warning pull-left checkout-po" href="#CheckoutPO">Checkout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="CheckoutSO" class="modal fade" role="dialog">
+ 
 </div>
 
-<div id="CheckoutPO" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Checkout</h4>
-      </div>
-      <div class="modal-body" style="max-height: 450px;overflow: auto;">
-        
-      </div>
-      <div class="modal-footer">
-        <div class="col-md-3 pull-right">
-          <button data-dismiss="modal" class="btn back-checkout-po btn-danger pull-left">Back</button>
-          <button class="btn btn-primary order-po-btn pull-right">Order Now</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <style type="text/css">
 	.ajax_table table tbody tr:hover{background:#ccc;cursor: pointer;}

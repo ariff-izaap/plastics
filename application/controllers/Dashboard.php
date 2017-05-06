@@ -204,6 +204,8 @@ class Dashboard extends Admin_Controller
       $this->_ajax_output($output,TRUE);
     }
 
+    
+
     public function get_so_history()
     {
       $c_id = $this->input->post('c_id');
@@ -309,6 +311,9 @@ class Dashboard extends Admin_Controller
       $this->data['products'] = $this->onepage_model->get_products_by_vendor($c_id);
       $output['content'] = $this->load->view('frontend/onepage/create_new_po',$this->data,true);
       $output['status'] = "success";
+      $this->data['cart'] = $this->cart->contents();
+      $this->data['total'] = $this->cart->total();
+      $output['cart'] = $this->load->view('frontend/onepage/cart_po_content',$this->data,true);
       $this->_ajax_output($output,true);
     }
 
@@ -340,14 +345,42 @@ class Dashboard extends Admin_Controller
       $output['msg'] = $this->cart->contents();
       $this->_ajax_output($output,TRUE);
     }
+    // public function update_po_cart()
+    // {
+    //   $rowid = $this->input->post('rowid');
+    //   $qty = $this->input->post('qty');
+    //   $data = array(
+    //     'rowid'  => $rowid,
+    //     'qty'    => $qty);
+    //   $this->cart->update($data);
+    //   $this->data['cart'] = $this->cart->contents();
+    //   $this->data['total'] = $this->cart->total();
+    //   $output['cart'] = $this->load->view('frontend/onepage/cart_po_content',$this->data,true);
+    //   $output['status'] = "success";
+    //   $output['msg'] = $this->cart->contents();
+    //   $this->_ajax_output($output,TRUE);
+    // }
     public function update_po_cart()
-    {
-      $rowid = $this->input->post('rowid');
-      $qty = $this->input->post('qty');
-      $data = array(
-        'rowid'  => $rowid,
-        'qty'    => $qty);
-      $this->cart->update($data);
+    {    
+      try
+      {
+        $qty  = $this->input->post('qty');
+         foreach($qty as $key => $v)
+        {
+          $data = array(
+          'rowid' => $key,
+          'qty'   => $v);
+           //$data = array('qty' => $v);
+           //$this->purchase_model->update(array("id"=>$k),$data,"purchase_order_item");
+          $this->cart->update($data);
+        }
+        $output = array('status' => 'success', 'message' => 'Cart updated successfully!.');
+      }
+      catch(Exception $e)
+      {
+        $output = array('status' => 'failed', 'message' => $e->getMessage());
+      }
+
       $this->data['cart'] = $this->cart->contents();
       $this->data['total'] = $this->cart->total();
       $output['cart'] = $this->load->view('frontend/onepage/cart_po_content',$this->data,true);
@@ -401,11 +434,171 @@ class Dashboard extends Admin_Controller
         $ins['updated_id'] = get_current_user_id();
         $ins_id = $this->onepage_model->insert($ins1,"purchase_order_item");
       }
+      $this->data['order_st'] = "created";
       $this->data['po'] = $this->onepage_model->get_po_history($form['vendor_id']);
       $output['content'] = $this->load->view('frontend/onepage/po_history',$this->data,true);
       $output['msg'] = $po_id;
       $this->cart->destroy();
       $this->_ajax_output($output,TRUE);
-    } 
+    }
+
+    public function create_new_so()
+    {
+      $vendor_id = $this->input->post('c_id');
+      $this->data['products'] = $this->onepage_model->get_products_by_vendor($vendor_id);
+      $this->data['vendor_id'] = $vendor_id;
+      $output['content'] = $this->load->view('frontend/onepage/create_new_so',$this->data,true);
+      $output['product'] = $this->data['products'];
+      $output['status'] = "success";
+      $this->data['cart'] = $this->cart->contents();
+      $this->data['total'] = $this->cart->total();
+      $output['cart'] = $this->load->view('frontend/onepage/cart_po_content',$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
+     public function add_so_cart()
+    {
+      $form = $this->input->post();
+      $data = array(
+        'id'      => $form['sku'],
+        'product_id' => $form['p_id'],
+        'qty'     => $form['qty'],
+        'price'   => $form['price'],
+        'name'    => $form['p_name']);
+      $this->cart->insert($data);
+      $this->data['cart'] = $this->cart->contents();
+      $this->data['total'] = $this->cart->total();
+      $output['cart'] = $this->load->view('frontend/onepage/cart_so_content',$this->data,true);
+      $output['status'] = "success";
+      $output['msg'] = $this->cart->contents();
+      $this->_ajax_output($output,TRUE);
+    }
+    public function remove_so_cart()
+    {
+      $rowid = $this->input->post('rowid');
+      $this->cart->remove($rowid);
+      $this->data['cart'] = $this->cart->contents();
+      $this->data['total'] = $this->cart->total();
+      $output['cart'] = $this->load->view('frontend/onepage/cart_so_content',$this->data,true);
+      $output['status'] = "success";
+      $output['msg'] = $this->cart->contents();
+      $this->_ajax_output($output,TRUE);
+    }
+    // public function update_so_cart()
+    // {
+    //   $rowid = $this->input->post('rowid');
+    //   $qty = $this->input->post('qty');
+    //   $data = array(
+    //     'rowid'  => $rowid,
+    //     'qty'    => $qty);
+    //   $this->cart->update($data);
+    //   $this->data['cart'] = $this->cart->contents();
+    //   $this->data['total'] = $this->cart->total();
+    //   $output['cart'] = $this->load->view('frontend/onepage/cart_so_content',$this->data,true);
+    //   $output['status'] = "success";
+    //   $output['msg'] = $this->cart->contents();
+    //   $this->_ajax_output($output,TRUE);
+    // }
+    public function update_so_cart()
+    {    
+      try
+      {
+        $qty  = $this->input->post('qty');
+         foreach($qty as $key => $v)
+        {
+          $data = array(
+          'rowid' => $key,
+          'qty'   => $v);
+           //$data = array('qty' => $v);
+           //$this->purchase_model->update(array("id"=>$k),$data,"purchase_order_item");
+          $this->cart->update($data);
+        }
+        $output = array('status' => 'success', 'message' => 'Cart updated successfully!.');
+      }
+      catch(Exception $e)
+      {
+        $output = array('status' => 'failed', 'message' => $e->getMessage());
+      }
+
+      $this->data['cart'] = $this->cart->contents();
+      $this->data['total'] = $this->cart->total();
+      $output['cart'] = $this->load->view('frontend/onepage/cart_so_content',$this->data,true);
+      $output['status'] = "success";
+      $output['msg'] = $this->cart->contents();
+      $this->_ajax_output($output,TRUE);
+    }
+
+    public function checkout_so()
+    {
+      $vendor_id = $this->input->post('vendor_id');
+      $this->data['vendor_id'] = $vendor_id;
+      $output['status'] = "success";
+      $output['content'] = $this->load->view('frontend/onepage/checkout_so',$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
+
+    public function get_customer_info()
+    {
+      $c_id = $this->input->post('val');
+      $this->data['vendor_id'] = $this->input->post('v_id');
+      $this->data['customer'] = $this->onepage_model->get_customer_info($c_id);
+      $output['status'] = "success";
+      $output['content'] = $this->load->view('frontend/onepage/checkout_so',$this->data,true);
+      $output['msg'] = $this->data['customer'];
+      $this->_ajax_output($output,TRUE);
+    }
+    public function order_so()
+    {
+      $form = $this->input->post();
+      $ins['customer_id'] = $form['vendor_id'];
+      $ins['total_amount'] = $this->cart->total();
+      $ins['order_status'] = "NEW";
+      $ins['shipping_type'] = $form['ship_method'];
+      $ins['carrier_id'] = $form['ship_service'];
+      $ins['credit_type'] = $form['credit_type'];
+      $ins['bol_instructions'] = $form['bol_instructions'];
+      $ins['so_instructions'] = $form['so_instructions'];
+      $ins['billing_address_id'] = $form['billing_id'];
+      $ins['shipping_address_id'] = $form['ship_id'];
+      $ins['updated_date'] = date("Y-m-d H:i:s");
+      $ins['created_date'] = date("Y-m-d H:i:s");
+      $ins['created_id'] = get_current_user_id();
+      $ins['updated_id'] = get_current_user_id();
+      $so_id = $this->onepage_model->insert($ins,"sales_order");
+      foreach ($this->cart->contents() as $key => $value)
+      {
+        $ins1['so_id'] = $so_id;
+        $ins1['product_id'] = $value['product_id'];
+        $ins1['vendor_id'] = $form['vendor_id'];
+        $ins1['item_status'] = "NEW";
+        $ins1['unit_price'] = get_product_price($value['product_id']);
+        $ins1['qty'] = $value['qty'];
+        $ins1['updated_date'] = date("Y-m-d H:i:s");
+        $ins1['created_date'] = date("Y-m-d H:i:s");
+        $ins1['created_id'] = get_current_user_id();
+        $ins1['updated_id'] = get_current_user_id();
+        $ins_id = $this->onepage_model->insert($ins1,"sales_order_item");
+      }
+      $ins2['so_id'] = $so_id;
+      $ins2['shipping_type'] = $form['ship_method'];
+      $ins2['ship_company'] = $form['ship_service'];
+      $ins2['order_status'] = "NEW";
+      $ins2['updated_date'] = date("Y-m-d H:i:s");
+      $ins2['created_date'] = date("Y-m-d H:i:s");
+      $ins2['ship_date'] = date("Y-m-d H:i:s");
+      $ins2['created_id'] = get_current_user_id();
+      $ins2['updated_id'] = get_current_user_id();
+      $ins2['total_items'] = $this->cart->total_items();
+      $shipment_id = $this->onepage_model->insert($ins2,"shipment");
+      $up['shipment_id'] = $shipment_id;
+      $update = $this->onepage_model->update(array("so_id"=>$so_id),$up,"sales_order_item");
+      $this->data['order_st'] = "created";
+      $this->data['so'] = $this->onepage_model->get_so_history($form['vendor_id']);
+      $output['content'] = $this->load->view('frontend/onepage/so_history',$this->data,true);
+      // $output['msg'] = $ins1;
+      $this->cart->destroy();
+      $this->_ajax_output($output,TRUE);
+    }
+
 }
 ?>
+

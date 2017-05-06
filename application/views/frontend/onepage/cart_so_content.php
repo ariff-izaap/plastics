@@ -14,11 +14,11 @@
 						<td><?=$value['id'];?></td>
 						<td><?=displayData($value['price'],'money');?></td>
 						<td>
-							<input type="number" name="qty[<?=$value['rowid'];?>]" max="10" min="1" value="<?=$value['qty'];?>">
+							<input type="number" name="qty[<?=$value['rowid'];?>]" max="10" min="1" value="<?=$value['qty'];?>" class="qty_<?=$rand;?>">
 						</td>
 						<td><?=displayData($value['subtotal'],'money');?></td>
 						<td>
-							<a href="javascript:void(0);" class="btn btn-danger remove_po_cart" data-id="<?=$value['rowid'];?>">
+							<a href="javascript:void(0);" class="btn btn-danger remove_so_cart" data-id="<?=$value['rowid'];?>">
 							<i class="fa fa-remove"></i></a>
 						</td>
 					</tr>
@@ -50,14 +50,14 @@
 	?>
 
 <script type="text/javascript">
-	$(".remove_po_cart").click(function(){
+	$(".remove_so_cart").click(function(){
 		rowid = $(this).attr("data-id");
 		con = confirm("Are you sure want to remove?");
 		if(con)
 		{
 			$.ajax({
 				type:"POST",
-				url:base_url+'dashboard/remove_po_cart',
+				url:base_url+'dashboard/remove_so_cart',
 				data:{rowid:rowid},
 				dataType:'json',
 				success:function(data)
@@ -66,5 +66,21 @@
 				}
 			});
 		}
-	});	
+	});
+
+	$(".update_so_cart").click(function(){
+		rowid = $(this).attr("data-id");
+		rand = $(this).attr("data-row-id");
+		qty = $(".qty_"+rand).val();
+		$.ajax({
+			type:"POST",
+			url:base_url+'dashboard/update_so_cart',
+			data:{rowid:rowid,qty:qty},
+			dataType:'json',
+			success:function(data)
+			{
+				$(".cart-table table").html(data.cart);
+			}
+		});
+	});
 </script>

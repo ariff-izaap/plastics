@@ -142,7 +142,7 @@ $(".po_history_btn").click(function(){
 			success:function(data)
 			{
 				console.log(data);
-				$("#POHistory .modal-body").html(data.content);
+				$("#POProcess").html(data.content);
 			}
 		});
 	});
@@ -156,49 +156,66 @@ $(".so_history_btn").click(function(){
 			success:function(data)
 			{
 				console.log(data);
-				$("#SOHistory .modal-body").html(data.content);
+				$("#SOProcess").html(data.content);
 			}
 		});
 });
 
-$(".checkout-po").click(function(){
-	$("#AddNewPO").hide();
-	 vendor_id = $(".po_vendor_id").val();
+
+
+
+
+	$(".update_po_cart").click(function(){
+		rowid = $(this).attr("data-id");
+		rand = $(this).attr("data-row-id");
+		qty = $(".qty_"+rand).val();
 		$.ajax({
 			type:"POST",
-			url:base_url+'dashboard/checkout_po',
-			data:{vendor_id:vendor_id},
+			url:base_url+'dashboard/update_po_cart',
+			data:{rowid:rowid,qty:qty},
 			dataType:'json',
 			success:function(data)
 			{
 				console.log(data);
-				$("#CheckoutPO .modal-body").html(data.content);
+				$(".cart-table table").html(data.cart);
 			}
 		});
-});
+	});
+
 
 $(".back-checkout-po").click(function(){
 	$("#AddNewPO").show();
 	$("#CheckoutPO").modal('close');
 });
 
-$(".order-po-btn").click(function(){
-		form = $("form#CheckoutPO").serialize();
+
+$(".back-checkout-so").click(function(){
+	$("#AddNewSO").show();
+	$("#CheckoutSO").modal('close');
+});
+
+
+$(".order-so-btn").click(function(){
+		form = $("form#CheckoutSO").serialize();
 		$.ajax({
 			type:"POST",
 			data:form,
-			url:base_url+'dashboard/order_po',
+			url:base_url+'dashboard/order_so',
 			dataType:'json',
 			success:function(data)
 			{
 				console.log(data);
-				$("#CheckoutPO").hide();
-				$("#POHistory").modal('show');
-				succ = '<div class="alert alert-success">'+
-									'<button class="close" data-dismiss="alert">&times;</button>'+
-								  'Purchase Order created successfully.'+
-								'</div>';
-				$("#POHistory .modal-body").html(succ+data.content);
+				// $("#CheckoutSO").hide();
+				// $("#SOHistory").modal('show');
+				// succ = '<div class="alert alert-success">'+
+				// 					'<button class="close" data-dismiss="alert">&times;</button>'+
+				// 				  'Sales Order created successfully.'+
+				// 				'</div>';
+				// $("#SOHistory .modal-body").html(succ+data.content);
 			}
 		});
 });
+
+$('a[href^="#"]').click(function (event) {
+	  event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	});

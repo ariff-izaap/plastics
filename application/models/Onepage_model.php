@@ -144,5 +144,19 @@ class Onepage_model extends App_model
 		$q = $this->db->get();
 		return $q->result_array();
 	}
+
+	public function get_customer_info($id)
+	{
+		$this->db->where('a.id',$id);
+		$this->db->select('a.*,b.id as b_id,b.name as b_name,b.first_name as b_fname,b.last_name as b_lname,b.address1 as b_address1,
+			b.address2 as b_address2,b.city as b_city,b.state as b_state,b.country as b_country,b.zipcode as b_zipcode,c.email as b_email,c.contact_value as b_mobile,d.name as s_name,d.address_1 as s_address1,d.address_2 as s_address2,d.city as s_city,d.state as s_state,d.zipcode as s_zipcode,d.phone as s_phone,d.country as s_country,d.id as s_id');
+		$this->db->from('customer a');
+		$this->db->join('address b','a.address_id=b.id');
+		$this->db->join('customer_contact c','a.id=c.customer_id');
+		$this->db->join('customer_location d','a.id=d.customer_id');
+		$q = $this->db->get();
+		return $q->row_array();
+		// return $this->db->last_query();
+	}
 }
 ?>
