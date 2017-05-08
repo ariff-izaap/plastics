@@ -186,7 +186,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-2">Comments</label>
 								<div class="col-md-10">
-									<input type="text" name="" class="form-control" placeholder="Comments">
+									<input type="text" name="" class="form-control customer_comments" placeholder="Comments">
 								</div>
 							</div>
 						</div>
@@ -197,6 +197,10 @@
 					<button class="btn btn-info customer-search-btn">Search</button>
 					<a href="#POProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info po_history_btn">PO History</a>
 					<a href="#SOProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info so_history_btn">SO History</a>
+					<a href="#CustomerComments" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info 
+					customer_comments">Comments</a>
+					<a href="#LogCall" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info log_call">Log Call</a>
+					<a href="#ViewLog" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info view_log">View Log</a>
 				</div>
 			</div>
 			<div class="col-md-6" style="">
@@ -388,7 +392,7 @@
 				</div><br>
 				<div class="row">
 					<div class="col-md-12 padding-zero">
-						<label class="col-md-2">Ref.</label>
+						<label class="col-md-2">Reference</label>
 						<div class="col-md-10">
 							<input type="text" name="" class="form-control input-sm product_ref" placeholder="Reference">
 						</div>
@@ -444,7 +448,7 @@
 <!-- SO Popups -->
 <div id="SOProcess" class="modal fade" role="dialog">
 </div>
-
+<!-- PO Product Add -->
 <div id="AddPOProduct" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
     <!-- Modal content-->
@@ -465,7 +469,7 @@
     </div>
   </div>
 </div>
-
+<!-- SO Product Add -->
 <div id="AddSOProduct" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
     <!-- Modal content-->
@@ -488,7 +492,16 @@
 </div>
 
 
+<!-- Customer Comments -->
+<div id="CustomerComments" class="modal fade" role="dialog">
+</div>
 
+<!-- Call Log -->
+<div id="LogCall" class="modal fade" role="dialog">
+</div>
+<!-- View Call -->
+<div id="ViewLog" class="modal fade" role="dialog">
+</div>
 
 <style type="text/css">
 	.ajax_table table tbody tr:hover{background:#ccc;cursor: pointer;}

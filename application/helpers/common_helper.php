@@ -824,6 +824,14 @@ function get_credit_type()
   return $q;
 }
 
+function get_call_type()
+{
+  $CI = get_instance();
+  $q = $CI->db->query("select * from call_type where status=1")->result_array();
+  return $q;
+}
+
+
 function get_sale_type()
 {
   $CI = get_instance();

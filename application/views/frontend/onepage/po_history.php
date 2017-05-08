@@ -68,7 +68,7 @@
 
 <script type="text/javascript">
 	$(".view_po").click(function(){
-		$("#POHistory").modal('hide');
+		$("#POProcess .modal-body").html("<div class='text-center'><img src='"+base_url+"/assets/img/default.gif'></div>");
 		po_id = $(this).attr("data-id");
 		$.ajax({
 			type:"POST",

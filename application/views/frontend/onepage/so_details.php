@@ -173,7 +173,8 @@
 			success:function(data)
 			{
 				console.log(data);
-				$("#SOProcess .modal-body table tbody").html(data.cart);
+				$("#SOProcess .modal-body table.product-cart tbody").html(data.cart);
+				$("#SOProcess .modal-body table.product-cart tfoot td.cart-total").html(data.cart_total);
 			}
 		});
 	});

@@ -3,7 +3,7 @@
 	<div class="modal-content">
 	  <div class="modal-header">
 	    <button type="button" class="close close_so_details" data-dismiss="modal">&times;</button>
-	    <h4 class="modal-title">SO - #</h4>
+	    <h4 class="modal-title">PO - #<?=$po['po_id'];?></h4>
 	  </div>
 	  <div class="modal-body" style="max-height: 400px;overflow: auto;">
 	    <div class="row">
@@ -182,7 +182,8 @@
 			success:function(data)
 			{
 				console.log(data);
-				$("#POProcess .modal-body table tbody").html(data.cart);
+				$("#POProcess .modal-body table.product-cart tbody").html(data.cart);
+				$("#POProcess .modal-body table.product-cart tfoot td.cart-total").html(data.cart_total);
 			}
 		});
 	});

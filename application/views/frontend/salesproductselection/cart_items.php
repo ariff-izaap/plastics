@@ -64,12 +64,12 @@
            <!--<td><?php //echo $cvalue['equivalent']; ?></td>-->
             <td> <?php //if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
             <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
-            <td><?php echo $cvalue['price']; ?></td>
-            <td><?php echo $cvalue['qty']*$cvalue['price']; ?></td>
+            <td><?php echo displayData($cvalue['price'],'money'); ?></td>
+            <td><?php echo displayData($cvalue['qty']*$cvalue['price'],'money'); ?></td>
             
             <td>
-               <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>','single');" class="btn btn-default">
-                <i class="fa fa-trash-o trash"></i>
+               <button type="button" name="delete_cart" onclick="delete_cartt('<?php echo $cvalue['rowid']; ?>','single');" class="btn btn-danger">
+                <i class="fa fa-trash"></i>
                </button>
             </td>
         </tr>
@@ -77,8 +77,8 @@
  <tr class="green_solid_bg" >
                 <td class="text-right" colspan="10"><b>Total Amount:</b></td>
                 
-                <td><b><?php echo (!empty($total))?": ".$total:""; ?></b>
-                <td>&nbsp;</td>
+                <td><b><?php echo (!empty($total))?": ".displayData($total,'money'):""; ?></b>
+                
             </td>
             </tr>
  <?php }

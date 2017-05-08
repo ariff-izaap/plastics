@@ -158,5 +158,24 @@ class Onepage_model extends App_model
 		return $q->row_array();
 		// return $this->db->last_query();
 	}
+
+	public function get_comments($id,$table)
+	{
+		$this->db->where($id);
+		$this->db->select('comments');
+		$q = $this->db->get($table);
+		return $q->row_array();
+	}
+
+	public function get_call_log($id)
+	{
+		$this->db->where($id);
+		$this->db->select("a.*,b.first_name as salesman,c.name as call_type");
+		$this->db->from("call_logs a");
+		$this->db->join("admin_users b","b.id=a.user_id");
+		$this->db->join("call_type c","c.id=a.call_type");
+		$q = $this->db->get();
+		return $q->result_array();
+	}
 }
 ?>

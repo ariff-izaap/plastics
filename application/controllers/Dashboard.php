@@ -200,6 +200,7 @@ class Dashboard extends Admin_Controller
       $this->data['products'] = $this->onepage_model->get_po_details($form['po_id']);
       $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up1,"purchase_order");
       $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart_total'] = displayData(array_sum($tot),'money');
       $output['form'] = $form;
       $output['status'] = "success";
       $this->_ajax_output($output,TRUE);
@@ -245,6 +246,7 @@ class Dashboard extends Admin_Controller
       $this->data['products'] = $this->onepage_model->get_so_details($form['so_id']);
       $up_id = $this->purchase_model->update(array("id"=>$form['so_id']),$up1,"sales_order");
       $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart_total'] = displayData(array_sum($tot),'money');
       $output['form'] = $form;
       $output['status'] = "success";
       $this->_ajax_output($output,TRUE);
@@ -600,6 +602,64 @@ class Dashboard extends Admin_Controller
       $this->_ajax_output($output,TRUE);
     }
 
+    public function customer_comments()
+    {
+      $c_id = $this->input->post('c_id');
+      $this->data['comments'] = $this->onepage_model->get_comments(array('id'=>$c_id),"customer");
+      $this->data['status'] = "success";
+      $output['content'] = $this->load->view('frontend/onepage/customer_comments',$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
+
+    public function add_comments()
+    {
+      $c_id = $this->input->post('c_id');
+      $comment = $this->input->post('comment');
+      $get = $this->onepage_model->get_comments(array('id'=>$c_id),"customer");
+      $up['comments'] =$get['comments'].$comment.";";
+      $ins_id = $this->onepage_model->update(array('id'=>$c_id),$up,"customer");
+      $this->data['comments'] = $this->onepage_model->get_comments(array('id'=>$c_id),"customer");
+      $this->data['status'] = "success";
+      $this->data['cmt_st'] = "created";
+      $output['content'] = $this->load->view('frontend/onepage/customer_comments',$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
+
+    public function log_call()
+    {
+      $c_id = $this->input->post('c_id');
+      $this->data['status'] = "success";
+      $this->data['cmt_st'] = "created";
+      $this->data['customer_id'] = $c_id;
+      $output['content'] = $this->load->view('frontend/onepage/call_log',$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
+
+    public function add_call_log()
+    {
+      $form = $this->input->post();
+      $ins['user_id'] = $form['salesman'];
+      $ins['customer_id'] = $form['customer_id'];
+      $ins['call_type'] = $form['call_type'];
+      $ins['call_log'] = $form['comments'];
+      $ins['log_date'] = $form['log_date'];
+      $ins['created_date'] = date('Y-m-d H:i:s');
+      $ins['updated_date'] = date('Y-m-d H:i:s');
+      $ins_id = $this->onepage_model->insert($ins,"call_logs");
+      $output['status'] = "success";
+      $output['form'] = $ins;
+      $this->_ajax_output($output,TRUE);
+    }
+
+    public function view_log()
+    {
+      $c_id = $this->input->post('c_id');
+      $this->data['logs'] = $this->onepage_model->get_call_log(array('customer_id'=>$c_id));
+      $output['content'] = $this->load->view('frontend/onepage/view_log',$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
+
+   
 }
 ?>
 

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="breadcrumbs">
       <?php echo set_breadcrumb(); ?>
-        <a href="<?php echo $this->previous_url;?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
+        <a href="<?php echo $this->previous_url;?>" class="btn btn-sm btn-danger pull-right"><i class="back_icon"></i> Back</a>
     </div>
   </div>
   <div class="container">
@@ -114,14 +114,14 @@
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
    <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
-    <a href="<?php echo base_url(); ?>/salesproductselection" class="btn btn-block"  >Continue Shopping</a>
+    <a href="<?php echo base_url(); ?>/salesproductselection" class="btn btn-info"  >Continue Shopping</a>
   </div>
   <?php if(count($cartitems)>0) {?>
   <div class="col-md-2">  
     <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('form','cartitem','cart',this)"><i class="fa fa-edit edit"></i>Edit Cart</button>
  </div>
    <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
-    <input type="submit" name="so" class="btn btn-block" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
+    <input type="submit" name="so" class="btn btn-primary " value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>
    <?php } ?>
   </form> 
