@@ -129,7 +129,7 @@
 					?>
 					<tfoot>
 						<td colspan="6" class="text-right">Total</td>
-						<td><?=displayData(array_sum($tot),'money');?></td>
+						<td class="cart-total"><?=displayData(array_sum($tot),'money');?></td>
 					</tfoot>
 				</tbody>
 				</table>

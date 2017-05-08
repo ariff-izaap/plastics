@@ -78,7 +78,8 @@ $(".add_po_product_cart_btn").click(function(){
 			console.log(data);
 			if(data.status=="success")
 			$(".succ_msg").html('<div class="alert alert-success"><button class="close" data-dismiss="alert">&times;</button>Product added successfully.!</div>');
-			$("#POProcess .modal-body table.product-cart thead").after().html(data.cart);
+			$("#POProcess .modal-body table.product-cart tbody").html(data.cart);
+			$("#POProcess .modal-body table.product-cart tfoot td.cart-total").html(data.cart_total);
 		}
 	});
 });
@@ -95,7 +96,8 @@ $(".add_so_product_cart_btn").click(function(){
 			console.log(data);
 			if(data.status=="success")
 			$(".succ_msg").html('<div class="alert alert-success"><button class="close" data-dismiss="alert">&times;</button>Product added successfully.!</div>');
-			$("#SODetails .modal-body table tbody").html(data.cart);
+			$("#SOProcess .modal-body table.product-cart tbody").html(data.cart);
+			$("#SOProcess .modal-body table.product-cart tfoot td.cart-total").html(data.cart_total);
 		}
 	});
 });

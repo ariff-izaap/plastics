@@ -135,7 +135,7 @@ class Dashboard extends Admin_Controller
       $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up1,"purchase_order");
 
       $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
-      // $output['content']= $form['quantity'];
+      $output['cart_total'] = displayData(array_sum($tot),'money');
       $output['status'] = "success";
       $output['message'] = "Product Added Successfully.";
       $this->_ajax_output($output,TRUE);
@@ -175,6 +175,7 @@ class Dashboard extends Admin_Controller
       $this->data['products'] = $this->onepage_model->get_so_details($form['so_id']);
       $up_id = $this->purchase_model->update(array("id"=>$form['so_id']),$up1,"sales_order");
       $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart_total'] = displayData(array_sum($tot),'money');
       // $output['content']= $form['quantity'];
       $output['status'] = "success";
       $output['message'] = "Product Added Successfully.";

@@ -99,7 +99,7 @@
 					<form action="" method="post" id="EditSOProduct">
 						<input type="hidden" name="vendor_id" class="vendor_id" value="<?=$so_details[0]['customer_id'];?>">
 						<input type="hidden" name="so_id" class="so_id" value="<?=$so_details[0]['so_id'];?>">
-						<table class="table table-hover table-bordered">
+						<table class="table table-hover table-bordered product-cart">
 						<thead>
 							<th>Product Name</th><th>Form</th><th>Color</th><th>Packaging</th><th>Unit Price</th><th>Quantity</th>
 							<th>Total</th>
@@ -110,6 +110,7 @@
 							{
 								foreach ($so_details as $key => $value)
 								{
+									$tot[] = $value['unit_price'] * $value['qty'];
 									?>
 										<tr>
 											<td><?=$value['p_name'];?></td>
@@ -128,6 +129,10 @@
 							}
 							?>
 						</tbody>
+						<tfoot>
+							<td colspan="6" class="text-right">Total</td>
+							<td class="cart-total"><?=displayData(array_sum($tot),'money');?></td>
+						</tfoot>
 						</table>
 					</form>
 				</div>
