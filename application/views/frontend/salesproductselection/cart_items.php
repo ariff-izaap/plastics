@@ -54,7 +54,7 @@
          <?php if($uri2 != 'checkout'){ ?>
             <td><input type="checkbox" name="sales_order_create" class="cart_checkbox" value="<?php echo $ckey; ?>" /></td>
          <?php } ?>   
-            <td><input type="hidden"   name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
+            <td><input type="hidden"  name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
             <td><?php echo $cvalue['name']; ?></td>
             <td><?php echo $cvalue['form']; ?></td>
             <td><?php echo $cvalue['color']; ?></td>
@@ -62,8 +62,8 @@
             <td><?php echo $cvalue['package']; ?></td>
             <td><?php echo $cvalue['row']; ?></td>
            <!--<td><?php //echo $cvalue['equivalent']; ?></td>-->
-            <td> <?php //if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
-            <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php //} else{ echo $cvalue['qty'];  } ?></td>
+            <td> <?php if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
+            <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php } else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo displayData($cvalue['price'],'money'); ?></td>
             <td><?php echo displayData($cvalue['qty']*$cvalue['price'],'money'); ?></td>
             

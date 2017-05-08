@@ -119,7 +119,7 @@ function get_vendor_details(v_url)
   },'json');
 }
 
-function sales_update_cart(action_type,sales_order_id,ftype,elm)
+function sales_update_cart(action_type,sales_order_id,ftype,elm,enable)
 {
     
     action_type = action_type?action_type:'form';
@@ -142,7 +142,7 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
         
 	
 	$.ajax({
-        url:base_url+'salesorder/update_salesorder_quantity'+'/'+action_type+'/'+sales_order_id,
+        url:base_url+'salesorder/update_salesorder_quantity'+'/'+action_type+'/'+sales_order_id+'/'+enable,
         type:"POST",
         data:data,
         dataType:"json",
@@ -160,8 +160,9 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
                 if(rdata.itemtype == 'cart'){
                    $("#item_type").val("cart"); 
                 }
-                $("#product_shipping_lists").html(rdata.content);
-                
+               // if(enable=='yes'){
+                 $("#product_shipping_lists").html(rdata.content);
+              // } 
         	}
         	else if(rdata.status == 'success' && action_type == 'process')
         	{
@@ -169,6 +170,7 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
         		$("#div_addr_billing").modal('hide');
                 $("#updat_cart").modal('hide');
         		$("#updated_cart_items").html(rdata.content);
+                
                 $("#product_shipping_lists").html(rdata.content);
                 
                 if($("#cartItems").length!=0){
