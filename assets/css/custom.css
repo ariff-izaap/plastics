@@ -750,7 +750,11 @@ background-color: #e6e6e6;
     margin-right: 10px;
     margin-top: 7px;
 }
-	
+.dashboard1 .product-update-btn {
+    margin-right: 10px;
+    margin-top: 7px;
+}
+    
 	
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}

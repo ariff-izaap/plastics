@@ -681,6 +681,29 @@ class Dashboard extends Admin_Controller
       $this->_ajax_output($output,true);
     }
 
+    public function update_product()
+    {
+      $form = $this->input->post();
+      $ins['name'] = $form['name'];
+      $product_id = $form['product_id'];
+      $ins['sku'] = $form['sku'];
+      $ins['quantity'] = $form['qty'];
+      $ins['form_id'] = $form['form'];
+      $ins['color_id'] = $form['color'];
+      $ins['row'] = $form['row'];
+      $ins['product'] = $form['type'];
+      $ins['equivalent'] = $form['equivalent'];
+      $ins['units'] = $form['units'];
+      $ins['package_id'] = $form['package'];
+      $ins['ref_no'] = $form['reference'];
+      $ins['notes'] = $form['notes'];
+      $ins['wholesale_price'] = $form['wholesale'];
+      $ins['retail_price'] = $form['retail'];
+      $up = $this->onepage_model->update(array("id"=>$product_id),$ins,"product");
+      $output['status'] = "success";
+      $output['msg'] = $ins;
+      $this->_ajax_output($output,true);
+    }
    
 }
 ?>

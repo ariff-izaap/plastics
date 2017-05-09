@@ -130,6 +130,13 @@ class Onepage_model extends App_model
 		return $this->db->insert_id();
 	}
 
+	public function update($where,$data,$table)
+	{
+		$this->db->where($where);
+		$this->db->update($table,$data);
+		return $this->db->last_query();
+	}
+
 	public function get_sales_order($id)
 	{
 		$this->db->where('a.id',$id);

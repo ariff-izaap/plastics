@@ -144,6 +144,38 @@ function get_customer_details(id)
 	});
 }
 
+function get_product_details(id)
+{
+	$(".purchase-loader").show();
+	$.ajax({
+		type:"POST",
+		url:base_url+'dashboard/get_product_by_id',
+		data:{id:id},
+		dataType:'json',
+		success:function(data)
+		{
+			$(".purchase-loader").hide();
+			console.log(data);
+			msg = data.message;
+			$(".product_sku").val(msg.sku);
+			$(".product_id").val(msg.product_id);
+			$(".product_name").val(msg.product_name);
+			$(".product_qty").val(msg.quantity);
+			$(".product_form").val(msg.form);
+			$(".product_color").val(msg.color);
+			$(".product_row").val(msg.row);
+			$(".product_type").val(msg.type);
+			$(".product_eq").val(msg.equivalent);
+			$(".product_units").val(msg.units);
+			$(".product_package").val(msg.packaging);
+			$(".product_wholeprice").val(msg.wholesale_price);
+			$(".product_retailprice").val(msg.retail_price);
+			$(".product_ref").val(msg.ref_no);
+			$(".product_notes").val(msg.notes);
+		}
+	});
+}
+
 function update_customer()
 {
 	form = $("form#CustomerForm").serialize();
@@ -157,6 +189,24 @@ function update_customer()
 		{
 			console.log(data);
 			get_customer_details(c_id);
+		}
+	});
+}
+
+
+function update_product()
+{
+	form = $("form#InventoryForm").serialize();
+	product_id = $(".product_id").val();
+	$.ajax({
+		type:"POST",
+		url:base_url+'dashboard/update_product',
+		data:form,
+		dataType:'json',
+		success:function(data)
+		{
+			console.log(data);
+			get_product_details(product_id);
 		}
 	});
 }
