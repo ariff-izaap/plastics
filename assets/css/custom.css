@@ -751,7 +751,7 @@ background-color: #e6e6e6;
     margin-top: 7px;
 }
 .dashboard1 .product-search-btn, .dashboard1 .product-update-btn {
-    margin-bottom: 23px;
+    margin-bottom: 10px;
     margin-right: 10px;
     margin-top: 23px;
 }
@@ -775,7 +775,7 @@ background-color: #e6e6e6;
     margin-bottom: 8px;
 }
 	
-
+.dashboard1 .panel-heading, .dashboard .panel-heading { min-height:425px !important;}
 	
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
