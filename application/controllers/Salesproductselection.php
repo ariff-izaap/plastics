@@ -301,6 +301,7 @@ class Salesproductselection extends Admin_Controller
      } 
      //$row_id                  = $this->cart->insert($cart_data);
      $this->data['cartitems'] = $this->cart->contents(); 
+     $this->data['request']   = 'updated';
      $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
      $output['message']       = "Product added to cart successfully";
      $output['status']        = "success";   
@@ -322,14 +323,12 @@ class Salesproductselection extends Admin_Controller
             $cart_ids = explode(",",$cart_id);
              foreach($cart_ids as $crtid){
                $result   = $this->cart->remove($crtid);  
-             }
-             
+             } 
            }
-        
-        
         $output['message']       = "Item removed from cart successfully";
         $output['status']        = "success";   
-        $this->data['cartitems'] = $this->cart->contents(); 
+        $this->data['cartitems'] = $this->cart->contents();
+         
         $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
      
         $this->_ajax_output($output, TRUE);

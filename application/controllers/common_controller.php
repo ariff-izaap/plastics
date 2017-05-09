@@ -73,30 +73,27 @@ class Common_controller
         $shipment_company = $this->CI->shipment_model->get_where(array("so_id" => $so_id))->row_array();
         
         $data['so_details']['carrier'] = $shipment_company['ship_company'];
-        //print_r($data['product_details']); exit;
+		$data['order_detail']          = $this->CI->_get_products_details($so_id);
+        $data['carrier']               = $this->CI->db->query("select * from carrier where 1=1")->result_array();
 
-		$data['product_details'] = $this->CI->_get_products_details($so_id);
-        
-        $data['carrier'] = $this->CI->db->query("select * from carrier where 1=1")->result_array();
-
-		if($data['shipment_count'] == 0)
-		{
-			$order = array();
-			foreach ($data['product_details'] as $row)
-			{
-				$order[$row['product_id']]['sku'] 		    = $row['sku'];
-				$order[$row['product_id']]['product_name']  = $row['product_name'];
-				$order[$row['product_id']]['unit_price']    = $row['unit_price'];
-				$order[$row['product_id']]['api_sku'] 		= $row['api_sku'];
-				if(isset($order[$row['product_id']]['qty']))
-					$order[$row['product_id']]['qty'] += $row['qty'];
-				else
-					$order[$row['product_id']]['qty'] = $row['qty'];
-			}
-			
-			$data['order'] = $order;
-			//$data['manual_process'] = $this->CI->load->view('frontend/sales_orders/_partials/manual_process', $data, TRUE);
-		}
+		//if($data['shipment_count'] == 0)
+//		{
+//			$order = array();
+//			foreach ($data['product_details'] as $row)
+//			{
+//				$order[$row['product_id']]['sku'] 		    = $row['sku'];
+//				$order[$row['product_id']]['product_name']  = $row['product_name'];
+//				$order[$row['product_id']]['unit_price']    = $row['unit_price'];
+//				$order[$row['product_id']]['api_sku'] 		= $row['api_sku'];
+//				if(isset($order[$row['product_id']]['qty']))
+//					$order[$row['product_id']]['qty'] += $row['qty'];
+//				else
+//					$order[$row['product_id']]['qty'] = $row['qty'];
+//			}
+//			
+//			$data['order'] = $order;
+//			//$data['manual_process'] = $this->CI->load->view('frontend/sales_orders/_partials/manual_process', $data, TRUE);
+//		}
         		
 		//order total
 		$data['order_total']   = ($data['so_details']['total_amount']);
@@ -107,7 +104,6 @@ class Common_controller
         //get shipping country
         $shipping_address         = get_address_by_contact_id( $data['so_details']['shipping_address_id'], 'data' );
 	  	$data['shipment_country'] = $shipping_address['country'];
-
 		return $data;
 	}
 	

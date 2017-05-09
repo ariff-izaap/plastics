@@ -120,11 +120,11 @@ class Salesorder_model extends App_model
     				product.sku,
     				product.retail_price,
     				product.name as product_name,
-    				address.country,
+    				address.country,soi.qty,
     				';
     	if($order_details_only)
     	{
-    		$fields .= 'sum(soi.quantity) as quantity';
+    		$fields .= 'sum(soi.qty) as quantity';
     	}
     	else 
     	{

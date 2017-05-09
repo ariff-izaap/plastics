@@ -14,8 +14,9 @@
     
   <h2 style="margin-left:24px;" class="container-title">Products in Selection</h2>
   <?php echo $grid; ?>
+    <h2 class="container-title">Products in Shipping Order</h2>
     <div class="container" id="product_shipping_lists">
-       <h2 class="container-title">Products in Shipping Order</h2>
+       
        <div id="updated_cart_items">
          <?php $this->load->view("frontend/salesproductselection/cart_items", $this->data); ?>
        </div>  

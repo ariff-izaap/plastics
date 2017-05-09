@@ -375,55 +375,49 @@ class Salesorder extends Admin_Controller
     function _get_products_details($so_id)
     {
     	$this->load->model('shipment_model');
-    	
+   	 
     	//check if the current SO is having Shipment(s)
     	$result_set = $this->shipment_model->get_where(array('so_id' => $so_id));
   
-    	//if no shipment found, fetch only products vendor-wise products
-    	if(!$result_set->num_rows())
-      {
-    		$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);
-        return $products;
-    	}
     	//fetch product details
-    	$products = $this->salesorder_model->get_product_details_by_sales_order($so_id);      
-    	$vendors = array();
+    	$products = $this->salesorder_model->get_product_details_by_sales_order($so_id,true);      
+    	$vendors  = array();
+        
     	//if no records found, return empty array
-    	if (count($products) == 0)
+    	if(count($products) == 0)
     		return $vendors;
     
     	//sort the products by vendor
-    	foreach ($products as $id => $product)
-    		$vendors[(int)$product['vendor_id']][] = $product;
+    //	foreach ($products as $id => $product)
+    		//$vendors[(int)$product['vendor_id']][] = $product;
             
     	 if($this->input->is_ajax_request()){
     	     $result_set     = $this->CI->shipment_model->get_where(array('so_id' => $so_id));
 		     $shipment_count = $result_set->num_rows();
              $this->data['shipment_count'] = $shipment_count;
            
-           if($shipment_count == 0){  
-        	   foreach($vendors as $row)
-    			{
-    				$order[$row['product_id']]['sku'] 		    = $row['sku'];
-    				$order[$row['product_id']]['product_name']  = $row['product_name'];
-    				$order[$row['product_id']]['unit_price']    = $row['unit_price'];
-    				$order[$row['product_id']]['api_sku'] 		= $row['api_sku'];
-                    $order[$row['product_id']]['soi_id']        = $row['so_item_id'];
-    				if(isset($order[$row['product_id']]['qty']))
-    					$order[$row['product_id']]['qty'] += $row['qty'];
-    				else
-    					$order[$row['product_id']]['qty'] = $row['qty'];
-    			}
-    			
-    			$this->data['order']    = $order;
-           }  
+           //if($shipment_count == 0){  
+//        	   foreach($vendors as $row)
+//    			{
+//    				$order[$row['product_id']]['sku'] 		    = $row['sku'];
+//    				$order[$row['product_id']]['product_name']  = $row['product_name'];
+//    				$order[$row['product_id']]['unit_price']    = $row['unit_price'];
+//    				$order[$row['product_id']]['api_sku'] 		= $row['api_sku'];
+//                    $order[$row['product_id']]['soi_id']        = $row['so_item_id'];
+//    				if(isset($order[$row['product_id']]['qty']))
+//    					$order[$row['product_id']]['qty'] += $row['qty'];
+//    				else
+//    					$order[$row['product_id']]['qty'] = $row['qty'];
+//    			}
+//    			$this->data['order']    = $order;
+//           }  
            $output['status'] = 'success';
     	   $output['content'] = $this->load->view("frontend/sales/_partials/details",$this->data,true);
     	   $this->_ajax_output($output, TRUE); 
     	 }  
          else
          {
-            return $vendors;
+            return $products;
          }   
     	   
     }
@@ -672,7 +666,6 @@ class Salesorder extends Admin_Controller
             else
             {
                 $sales_order_item_id = $this->input->post("sales_order_item_id[]");
-                
                 $i = 0;
                 foreach($sales_order_item_id as $st_id){
                     $this->db->query("update sales_order_item set qty='".$quantity[$i]."' where id='".$st_id."'");
@@ -689,6 +682,8 @@ class Salesorder extends Admin_Controller
                 }
                 $this->db->query("update sales_order set total_amount='".$total_amt."' where id='".$so_id."'");
                 
+                                
+                $output['orderitems']    = $this->load->view("frontend/sales/_partials/order_items",$this->data,true);                
                 $output['message']       = "Item updated successfully";
                 $output['status']        = "success";
             }
