@@ -738,6 +738,20 @@ background-color: #e6e6e6;
     top: -67px;
     z-index: 99999;}
 	.sales-warn { margin-bottom:20px;}
+	.dashboard .form-group { margin-bottom:0px !important; margin-top:0px !important;}
+	 h3.dashboard-title { padding-top:5px !important; padding-bottom:5px !important;}
+	 .dashboard1 .row { margin-left:0px !important;}
+	 .dashboard1 label {
+    padding-left: 0;
+}
+.dashboard1 .invent { width:11% !important;}
+.invent-mb { margin-bottom:6px;}
+.dashboard1 .product-search-btn {
+    margin-right: 10px;
+    margin-top: 7px;
+}
+	
+	
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

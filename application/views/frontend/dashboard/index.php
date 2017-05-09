@@ -11,18 +11,24 @@
 <div class="row-fluid">
 	<div class="container">	
 		<div class="row">
-			<div class="col-md-6">
-				<h3 class="text-center">Customer</h3>
-				<div class="row">
-					<div class="form-group">
-						<label class="col-md-1">Name</label>
-						<div class="col-md-11">
-							<input type="text" name="" class="form-control customer_name" placeholder="Name">
-							<input type="hidden" name="" class="form-control customer_id">
-						</div>
-					</div><br>
-					<div class="row">
+			<div class="col-md-6 panel panel-default panel-bor dashboard">
+            <div class="panel-heading formcontrol-box">
+				<h3 class="text-center dashboard-title">Customer</h3>
+				
+					
+                    
+                    <div class="row">
 						<div class="col-md-6">
+							<div class="form-group">
+								<label class="col-md-3">Name</label>
+								<div class="col-md-9">
+									<input type="text" name="" class="form-control customer_name" placeholder="Name">
+							<input type="hidden" name="" class="form-control customer_id">
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Phone</label>
 								<div class="col-md-9">
@@ -30,6 +36,11 @@
 								</div>
 							</div>
 						</div>
+						
+					</div>
+                    
+					<div class="row">
+						
 						<!--/span-->
 						<div class="col-md-6 text-left">
 							<div class="form-group">
@@ -40,9 +51,7 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-					<div class="row">
-						<div class="col-md-6">
+                        <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Address</label>
 								<div class="col-md-9">
@@ -50,6 +59,9 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="row">
+						
 						<!--/span-->
 						<div class="col-md-6 text-left">
 							<div class="form-group">
@@ -60,9 +72,7 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-					<div class="row">
-						<div class="col-md-6">
+                        <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">State</label>
 								<div class="col-md-9">
@@ -71,6 +81,9 @@
 							</div>
 						</div>
 						<!--/span-->
+					</div>
+					<div class="row">
+						
 						<div class="col-md-6 text-left">
 							<div class="form-group">
 								<label class="control-label col-md-3">Zipcode</label>
@@ -80,9 +93,7 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-					<div class="row">
-						<div class="col-md-6">
+                        <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Fax</label>
 								<div class="col-md-9">
@@ -91,6 +102,9 @@
 							</div>
 						</div>
 						<!--/span-->
+					</div>
+					<div class="row">
+						
 						<div class="col-md-6 text-left">
 							<div class="form-group">
 								<label class="control-label col-md-3">F/M</label>
@@ -103,9 +117,7 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-					<div class="row">
-						<div class="col-md-6">
+                        	<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Lastcall</label>
 								<div class="col-md-9">
@@ -114,6 +126,9 @@
 							</div>
 						</div>
 						<!--/span-->
+					</div>
+					<div class="row">
+					
 						<div class="col-md-6 text-left">
 							<div class="form-group">
 								<label class="control-label col-md-3">Callback</label>
@@ -123,9 +138,7 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-					<div class="row">
-						<div class="col-md-6">
+                        	<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Salesman</label>
 								<div class="col-md-9">
@@ -148,6 +161,9 @@
 							</div>
 						</div>
 						<!--/span-->
+					</div>
+					<div class="row">
+					
 						<div class="col-md-6 text-left">
 							<div class="form-group">
 								<label class="control-label col-md-3">Credit</label>
@@ -171,29 +187,30 @@
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-					<div class="row">
-						<div class="col-md-12">
+                        <div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label col-md-2">Materials</label>
-								<div class="col-md-10">
+								<label class="control-label col-md-3">Materials</label>
+								<div class="col-md-9">
 									<input type="text" class="form-control" placeholder="Materials">
 								</div>
 							</div>
-						</div><br><br>
+						</div>
 						<!--/span-->
-						<div class="col-md-12 text-left">
+					</div>
+					<div class="row">
+						
+						<div class="col-md-6 text-left">
 							<div class="form-group">
-								<label class="control-label col-md-2">Comments</label>
-								<div class="col-md-10">
+								<label class="control-label col-md-3">Comments</label>
+								<div class="col-md-9">
 									<input type="text" name="" class="form-control customer_comments" placeholder="Comments">
 								</div>
 							</div>
 						</div>
 						<!--/span-->
-					</div><br>
-				</div>
-				<div class="row">
+					</div>
+				
+				<div>
 					<button class="btn btn-info customer-search-btn">Search</button>
 					<a href="#POProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info po_history_btn">PO History</a>
 					<a href="#SOProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info so_history_btn">SO History</a>
@@ -203,10 +220,12 @@
 					<a href="#ViewLog" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info view_log">View Log</a>
 				</div>
 			</div>
-			<div class="col-md-6" style="">
-				<h3 class="text-center">Inventory</h3>
+            </div>
+			<div class="col-md-6 panel panel-default panel-bor dashboard dashboard1">
+            <div class="panel-heading formcontrol-box">
+				<h3 class="text-center dashboard-title">Inventory</h3>
 				<div class="row">
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
 							<label class="col-md-4">SKU</label>
 							<div class="col-md-8">
@@ -214,28 +233,28 @@
 							</div>
 						</div>					
 					</div>
-					<div class="col-md-6 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-2">Name</label>
-							<div class="col-md-10">
+							<label class="control-label col-md-3">Name</label>
+							<div class="col-md-9">
 								<input type="text" class="form-control product_name" placeholder="Product Name">
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-1">Qty</label>
+							<label class="control-label col-md-3">Qty</label>
 							<div class="col-md-9">
 								<input type="text" class="form-control product_qty" placeholder="Qty">
 							</div>
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
-					<div class="col-md-5 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Form</label>
-							<div class="col-md-9">
+							<label class="col-md-4">Form</label>
+							<div class="col-md-8">
 								<select name="" class="form-control product_form input-sm">
 									<option value="">--Select--</option>
 									<?php
@@ -255,8 +274,8 @@
 					</div>
 					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-2">Color</label>
-							<div class="col-md-10">
+							<label class="control-label col-md-3">Color</label>
+							<div class="col-md-9">
 								<select name="" class="form-control product_color input-sm">
 									<option value="">--Select--</option>
 									<?php
@@ -274,20 +293,20 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-1">Row</label>
+							<label class="control-label col-md-3">Row</label>
 							<div class="col-md-9">
 								<input type="text" class="form-control product_row" placeholder="Row">
 							</div>
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
-					<div class="col-md-5 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Type</label>
-							<div class="col-md-9">
+							<label class="col-md-4">Type</label>
+							<div class="col-md-8">
 								<select name="" class="form-control product_type input-sm">
 									<option value="">--Select--</option>
 									<?php
@@ -307,21 +326,21 @@
 					</div>
 					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-2">Eq</label>
-							<div class="col-md-10">
+							<label class="control-label col-md-3">Eq</label>
+							<div class="col-md-9">
 								<input type="text" class="form-control product_eq" placeholder="Eq">
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-1">Units</label>
+							<label class="control-label col-md-3">Units</label>
 							<div class="col-md-9">
 								<input type="text" class="form-control product_units" placeholder="Units">
 							</div>
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
 					<div class="col-md-4 padding-zero">
 						<div class="form-group">
@@ -344,25 +363,25 @@
 							</div>
 						</div>					
 					</div>
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-2">Date</label>
+							<label class="control-label col-md-3">Date</label>
 							<div class="col-md-9">
 								<input type="text" class="form-control" placeholder="Date">
 							</div>
 						</div>
 					</div>
-					<div class="col-md-5 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="control-label col-md-2">Buyer</label>
-							<div class="col-md-10">
+							<label class="control-label col-md-3">Buyer</label>
+							<div class="col-md-9">
 								<input type="text" class="form-control" placeholder="Buyer">
 							</div>
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
-					<div class="col-md-5 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
 							<label class="col-md-4">Wholesale</label>
 							<div class="col-md-8">
@@ -370,7 +389,7 @@
 							</div>
 						</div>					
 					</div>
-					<div class="col-md-5 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
 							<label class="control-label col-md-3">Retail</label>
 							<div class="col-md-9">
@@ -378,40 +397,41 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<!-- <a href="#CostCart" data-toggle="modal" class="btn btn-info">Cost</a> -->
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
-					<div class="col-md-12 padding-zero">
-						<label class="col-md-2">From</label>
+					<div class="col-md-12 padding-zero invent-mb">
+						<label class="col-md-2 invent">From</label>
 						<div class="col-md-10">
 							<input type="text" name="" class="form-control input-sm" placeholder="From">
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
-					<div class="col-md-12 padding-zero">
-						<label class="col-md-2">Reference</label>
+					<div class="col-md-12 padding-zero invent-mb">
+						<label class="col-md-2 invent">Reference</label>
 						<div class="col-md-10">
 							<input type="text" name="" class="form-control input-sm product_ref" placeholder="Reference">
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
 					<div class="col-md-12 padding-zero">
-						<label class="col-md-2">Notes</label>
+						<label class="col-md-2 invent">Notes</label>
 						<div class="col-md-10">
 							<input type="text" name="" class="form-control input-sm product_notes" placeholder="Notes">
 						</div>
 					</div>
-				</div><br>
+				</div>
 				<div class="row">
 					<button class="btn btn-info product-search-btn pull-right">Search</button>
 				</div>
 			</div>
+            </div>
 		</div>
-		<div class="clearfix"></div><br>
+		<div class="clearfix"></div>
 		<div class="row ajax_table" style="max-height: 200px;overflow: auto;">
 			<table class="table table-hover table-bordered">
 				<thead>
