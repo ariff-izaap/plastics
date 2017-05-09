@@ -154,6 +154,7 @@ function get_product_details(id)
 		dataType:'json',
 		success:function(data)
 		{
+			$("form#InventoryForm button.disabled").removeClass("disabled");
 			$(".purchase-loader").hide();
 			console.log(data);
 			msg = data.message;

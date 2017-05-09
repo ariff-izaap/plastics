@@ -420,7 +420,7 @@
 						</div>
 						<div class="row">
 							<button class="btn btn-info product-search-btn pull-right" type="button">Search</button>
-							<button type="button" class="btn btn-info product-update-btn pull-right" onclick="update_product();">Update</button>
+							<button type="button" class="btn btn-info disabled product-update-btn pull-right" onclick="update_product();">Update</button>
 						</div>
 					</div>
 				</div>
