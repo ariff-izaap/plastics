@@ -2,7 +2,7 @@
 	<!-- Modal content-->
 	<div class="modal-content">
 	  <div class="modal-header">
-	    <button type="button" class="close close_so_details" data-dismiss="modal">&times;</button>
+	    <button type="button" class="close close_po_details">&times;</button>
 	    <h4 class="modal-title">PO - #<?=$po['po_id'];?></h4>
 	  </div>
 	  <div class="modal-body" style="max-height: 400px;overflow: auto;">
