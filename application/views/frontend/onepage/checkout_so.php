@@ -96,13 +96,13 @@
               </div>
             </div>
           </div>
-        </div><br>
+        </div>
         <div class="row">
-          <div class="col-md-6">
-            <h4>Billing Information</h4><br>
+          <div class="col-md-6 checkoutpo-form">
+            <h4 style="padding-left:14px;">Billing Information</h4><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Business Name</label>
+                <label class="col-md-4">Business Name</label>
                 <div class="col-md-8">
                   <input type="text" name="business_name" class="form-control required" value="<?=$customer['b_name'];?>">
                   <input type="hidden" name="billing_id" class="form-control" value="<?=$customer['b_id'];?>">
@@ -111,7 +111,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">First Name</label>
+                <label class="col-md-4">First Name</label>
                 <div class="col-md-8">
                   <input type="text" name="first_name" class="form-control required" value="<?=$customer['b_fname'];?>">
                 </div>
@@ -119,7 +119,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Last Name</label>
+                <label class="col-md-4">Last Name</label>
                 <div class="col-md-8">
                   <input type="text" name="last_name" class="form-control required" value="<?=$customer['b_lname'];?>">
                 </div>
@@ -127,7 +127,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Email</label>
+                <label class="col-md-4">Email</label>
                 <div class="col-md-8">
                   <input type="text" name="email" class="form-control required" value="<?=$customer['b_email'];?>">
                 </div>
@@ -135,7 +135,7 @@
             </div><div class="clearfix"></div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">URL</label>
+                <label class="col-md-4">URL</label>
                 <div class="col-md-8">
                   <input type="text" name="url" class="form-control required" value="<?=$customer['web_url'];?>">
                 </div>
@@ -143,7 +143,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Mobile</label>
+                <label class="col-md-4">Mobile</label>
                 <div class="col-md-8">
                   <input type="text" name="mobile" class="form-control required" value="<?=$customer['b_mobile'];?>">
                 </div>
@@ -151,7 +151,7 @@
             </div><div class="clearfix"></div><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Address1</label>
+                <label class="col-md-4">Address1</label>
                 <div class="col-md-8">
                   <input type="text" name="address1" class="form-control required" value="<?=$customer['b_address1'];?>">
                 </div>
@@ -159,7 +159,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Address2</label>
+                <label class="col-md-4">Address2</label>
                 <div class="col-md-8">
                   <input type="text" name="address2" class="form-control" value="<?=$customer['b_address2'];?>">
                 </div>
@@ -167,7 +167,7 @@
             </div><div class="clearfix"></div><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">City</label>
+                <label class="col-md-4">City</label>
                 <div class="col-md-8">
                   <input type="text" name="city" class="form-control required" value="<?=$customer['b_city'];?>">
                 </div>
@@ -175,7 +175,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">State</label>
+                <label class="col-md-4">State</label>
                 <div class="col-md-8">
                   <input type="text" name="state" class="form-control required" value="<?=$customer['b_state'];?>">
                 </div>
@@ -183,7 +183,7 @@
             </div><div class="clearfix"></div><br>
              <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Country</label>
+                <label class="col-md-4">Country</label>
                 <div class="col-md-8">
                   <input type="text" name="country" class="form-control required" value="<?=$customer['b_country'];?>">
                 </div>
@@ -191,18 +191,18 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Zipcode</label>
+                <label class="col-md-4">Zipcode</label>
                 <div class="col-md-8">
                   <input type="text" name="zipcode" class="form-control required" value="<?=$customer['b_zipcode'];?>">
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <h4>Shipping Information</h4><br>
+          <div class="col-md-6 checkoutpo-form">
+            <h4 style="padding-left:14px;">Shipping Information</h4><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Name</label>
+                <label class="col-md-4">Name</label>
                 <div class="col-md-8">
                   <input type="text" name="s_name" class="form-control required" value="<?=$customer['s_name'];?>">
                   <input type="hidden" name="ship_id" class="form-control" value="<?=$customer['s_id'];?>">
@@ -211,7 +211,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Mobile</label>
+                <label class="col-md-4">Mobile</label>
                 <div class="col-md-8">
                   <input type="text" name="s_mobile" class="form-control required" value="<?=$customer['s_phone'];?>">
                 </div>
@@ -219,7 +219,7 @@
             </div><div class="clearfix"></div><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Address1</label>
+                <label class="col-md-4">Address1</label>
                 <div class="col-md-8">
                   <input type="text" name="s_address1" class="form-control required" value="<?=$customer['s_address1'];?>">
                 </div>
@@ -227,7 +227,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Address2</label>
+                <label class="col-md-4">Address2</label>
                 <div class="col-md-8">
                   <input type="text" name="s_address2" class="form-control" value="<?=$customer['s_address2'];?>">
                 </div>
@@ -235,7 +235,7 @@
             </div><div class="clearfix"></div><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">City</label>
+                <label class="col-md-4">City</label>
                 <div class="col-md-8">
                   <input type="text" name="s_city" class="form-control required" value="<?=$customer['s_city'];?>">
                 </div>
@@ -243,7 +243,7 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">State</label>
+                <label class="col-md-4">State</label>
                 <div class="col-md-8">
                   <input type="text" name="s_state" class="form-control required" value="<?=$customer['s_state'];?>">
                 </div>
@@ -251,7 +251,7 @@
             </div><div class="clearfix"></div><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Country</label>
+                <label class="col-md-4">Country</label>
                 <div class="col-md-8">
                   <input type="text" name="s_country" class="form-control required" value="<?=$customer['s_country'];?>">
                 </div>
@@ -259,19 +259,19 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">Zipcode</label>
+                <label class="col-md-4">Zipcode</label>
                 <div class="col-md-8">
                   <input type="text" name="s_zipcode" class="form-control required" value="<?=$customer['s_zipcode'];?>">
                 </div>
               </div>
             </div>
           </div>
-        </div><br>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">SO Instructions</label>
+                <label class="col-md-4">SO Instructions</label>
                 <div class="col-md-8">
                   <textarea rows="5" class="form-control" name="so_instructions"></textarea>
                 </div>
@@ -279,14 +279,14 @@
             </div>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
-                <label class="col-md-3">BOL Instructions</label>
+                <label class="col-md-4">BOL Instructions</label>
                 <div class="col-md-8">
                   <textarea rows="5" class="form-control" name="bol_instructions"></textarea>
                 </div>
               </div>
             </div>
           </div>
-        </div><br>
+        </div>
       </form>
       <form action="" method="post" id="CartSOForm">
         <div class="row">
