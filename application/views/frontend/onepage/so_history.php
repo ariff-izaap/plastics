@@ -5,7 +5,7 @@
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title col-md-3">SO History</h4>
     <div class="col-md-2 pull-right">
-				<button class="create-new-so btn btn-warning pull-right">Create SO</button>
+				<button class="create-new-so btn btn-warning pull-right"><i class="fa fa-plus"></i> Create SO</button>
 			</div>
   </div>
   <div class="modal-body">
