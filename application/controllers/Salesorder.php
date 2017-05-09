@@ -256,10 +256,10 @@ class Salesorder extends Admin_Controller
                    
                    log_history($sale_order_item_id,'Sales Order Item',"Sales Order Item <b>#".$sale_order_item_id." has been created.");
                    
-                   $product_data = $this->salesorder_model->get_where(array("id" => $svalue['id']), "quantity","product")->row_array();
+                   $product_data = $this->salesorder_model->get_where(array("id" => $svalue['id']), "available_qty,quantity","product")->row_array();
                    
                    $up_qty = array();
-                   $up_qty['available_qty'] = $product_data['quantity']-$svalue['qty'];
+                   $up_qty['available_qty'] = (!empty($product_data['available_qty']))?$product_data['available_qty']-$svalue['qty']:$product_data['quantity']-$svalue['qty'];
                    $this->salesorder_model->update(array("id" => $svalue['id']),$up_qty,"product");
                 }
                 

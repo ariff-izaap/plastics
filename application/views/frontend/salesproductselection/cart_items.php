@@ -10,7 +10,7 @@
 
 <?php if($request!='updated'){?>
 
-<button type="button" name="update_cart" onclick="sales_update_cart('process','<?php echo $so_id;?>','cart',this)" class="btn btn-warning sales-warn">Update</button>
+<button type="button" name="update_cart" onclick="sales_update_cart('process','<?php echo $so_id;?>','cart','#sales_update_to_cart',this)" class="btn btn-warning sales-warn">Update</button>
 
 <?php } ?>
 

@@ -327,6 +327,7 @@ class Salesproductselection extends Admin_Controller
            }
         $output['message']       = "Item removed from cart successfully";
         $output['status']        = "success";   
+        $this->data['request']   = 'updated';
         $this->data['cartitems'] = $this->cart->contents();
          
         $output['viewlist']      = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);

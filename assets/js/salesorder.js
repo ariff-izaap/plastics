@@ -119,7 +119,7 @@ function get_vendor_details(v_url)
   },'json');
 }
 
-function sales_update_cart(action_type,sales_order_id,ftype,elm)
+function sales_update_cart(action_type,sales_order_id,ftype,formname,elm)
 {
     
     action_type = action_type?action_type:'form';
@@ -135,7 +135,7 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm)
     
     data = {};
 	if(action_type == 'process')
-		data = $("#sales_update_to_cart_edit").serialize();
+		data = $(formname).serialize();
         
         
 	if(!before_ajax(elm, 'Loading....'))
