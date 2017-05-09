@@ -631,6 +631,7 @@ class Dashboard extends Admin_Controller
       $c_id = $this->input->post('c_id');
       $this->data['status'] = "success";
       $this->data['cmt_st'] = "created";
+      $this->data['action'] = "saved";
       $this->data['customer_id'] = $c_id;
       $output['content'] = $this->load->view('frontend/onepage/call_log',$this->data,true);
       $this->_ajax_output($output,TRUE);
@@ -639,6 +640,7 @@ class Dashboard extends Admin_Controller
     public function add_call_log()
     {
       $form = $this->input->post();
+      $action = $form['action'];
       $ins['user_id'] = $form['salesman'];
       $ins['customer_id'] = $form['customer_id'];
       $ins['call_type'] = $form['call_type'];
@@ -646,7 +648,13 @@ class Dashboard extends Admin_Controller
       $ins['log_date'] = $form['log_date'];
       $ins['created_date'] = date('Y-m-d H:i:s');
       $ins['updated_date'] = date('Y-m-d H:i:s');
-      $ins_id = $this->onepage_model->insert($ins,"call_logs");
+      if($action=="saved")
+        $ins_id = $this->onepage_model->insert($ins,"call_logs");
+      else
+      {
+        $id = $form['log_id'];
+        $up = $this->onepage_model->update(array("id"=>$id),$ins,"call_logs");
+      }
       $output['status'] = "success";
       $output['form'] = $ins;
       $this->_ajax_output($output,TRUE);
@@ -703,6 +711,15 @@ class Dashboard extends Admin_Controller
       $output['status'] = "success";
       $output['msg'] = $ins;
       $this->_ajax_output($output,true);
+    }
+
+    function update_logs()
+    {
+      $id = $this->input->post('id');
+      $this->data['action'] = "updated";
+      $this->data['logs'] = $this->onepage_model->get_logs_by_id(array('id'=>$id));
+      $output['content'] = $this->load->view('frontend/onepage/call_log',$this->data,true);
+      $this->_ajax_output($output,TRUE);
     }
    
 }

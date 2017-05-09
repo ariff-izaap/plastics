@@ -356,4 +356,19 @@ $(".view_log").click(function(){
 		}
 	});
 });
-
+  
+function update_logs(id)
+{
+	$("#LogCall").modal('show');
+  $.ajax({
+  	type:"POST",
+  	url:base_url+'dashboard/update_logs',
+  	dataType:'json',
+  	data:{id:id},
+  	success:function(data)
+  	{
+  		console.log(data);
+  		$("#LogCall").html(data.content);
+  	}
+  });
+}

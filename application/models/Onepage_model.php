@@ -200,5 +200,11 @@ class Onepage_model extends App_model
 		$q = $this->db->get();
 		return $q->result_array();
 	}
+	public function get_logs_by_id($where)
+	{
+		$this->db->where($where);
+		$q = $this->db->get('call_logs');
+		return $q->row_array();
+	}
 }
 ?>

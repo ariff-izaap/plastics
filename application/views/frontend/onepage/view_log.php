@@ -10,7 +10,7 @@
     		<div class="col-md-12">
     			<table class="table table-hover table-bordered">
     				<thead>
-    					<th width="8%">SNO</th><th width="15%">Salesman</th><th width="18%">Log Date</th><th width="18%">Call Type</th><th width="41%">Comments</th>
+    					<th width="8%">SNO</th><th width="15%">Salesman</th><th width="18%">Log Date</th><th width="18%">Call Type</th><th width="41%">Comments</th><th>Action</th>
     				</thead>
     				<tbody>
     					<?php
@@ -26,6 +26,10 @@
     									<td><?=displayData($value['log_date'],'datetime');?></td>
     									<td><?=$value['call_type'];?></td>
     									<td><?=$value['call_log'];?></td>
+                      <td>
+                        <button data-dismiss="modal" onclick="update_logs(<?=$value['id'];?>);" class="btn btn-warning">
+                          <i class="fa fa-edit"></i> Edit</button>
+                      </td>
     								</tr>
     							<?php
     						}

@@ -8,7 +8,9 @@
     <div class="modal-body" style="max-height: 450px;overflow: auto;">
     	<div class="succ_msg"></div>
     	<form action="" method="post" id="CallLogForm">
-    		<input type="hidden" name="customer_id" value="<?=$customer_id;?>">
+    		<input type="hidden" name="action" class="action" value="<?=$action;?>">
+    		<input type="hidden" name="log_id" value="<?=$logs['id'];?>">
+    		<input type="hidden" name="customer_id" value="<?=isset($customer_id)?$customer_id:$logs['customer_id'];?>">
     		<div class="row">
     			<div class="col-md-12">
     				<div class="form-group">
@@ -23,7 +25,8 @@
 											foreach ($sales as $key => $value)
 											{
 												?>
-													<option value="<?=$value['id'];?>"><?=$value['first_name'];?></option>
+													<option <?=($value['id']==$logs['user_id'])?"selected":"";?>
+														value="<?=$value['id'];?>"><?=$value['first_name'];?></option>
 												<?php
 											}
 										}
@@ -44,7 +47,8 @@
 											foreach ($type as $key => $value)
 											{
 												?>
-													<option value="<?=$value['id'];?>"><?=$value['name'];?></option>
+													<option <?=($value['id']==$logs['call_type'])?"selected":"";?>
+														value="<?=$value['id'];?>"><?=$value['name'];?></option>
 												<?php
 											}
 										}
@@ -56,14 +60,14 @@
     				<div class="form-group">
     					<label class="col-md-3">Date/Time</label>
     					<div class="col-md-6">
-    						<input type="text" name="log_date" class="datetime required form-control">
+    						<input type="text" name="log_date" class="datetime required form-control" value="<?=$logs['log_date'];?>">
     					</div>
     				</div>
     				<div class="clearfix"></div><br>
     				<div class="form-group">
     					<label class="col-md-3">Comments</label>
     					<div class="col-md-6">
-    						<textarea class="form-control required" name="comments"></textarea>
+    						<textarea class="form-control required" name="comments"><?=$logs['call_log'];?></textarea>
     					</div>
     				</div>
     			</div>
@@ -92,6 +96,7 @@
 	  $(".save-call-log").click(function(){
 	  	valid = true;
 	  	form = $("form#CallLogForm").serialize();
+	  	action = $("form#CallLogForm .action").val();
 	  	elem = $(".required");
 	  	$(elem).each(function(e,cur){
 	  		if($(cur).val()=='')
@@ -118,10 +123,15 @@
 	  				{
 	  					html = '<div class="alert alert-success alert-dismissable">'+
 	  									'<button class="close" data-dismiss="alert">&times;</button>'+
-	  									'Call Log created successfully.'+
+	  									'Call Log '+action+' successfully.'+
 	  								 '</div>';
 	  					$("#LogCall .succ_msg").html(html);
 	  					$("form#CallLogForm")[0].reset();
+	  					if(action=="updated")
+	  					{
+	  						$("#LogCall").modal('hide');
+	  						$(".view_log").trigger('click');
+	  					}
 	  				}
 	  			}
 	  		});
