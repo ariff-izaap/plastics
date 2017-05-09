@@ -10,7 +10,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Vendor : <b><?=get_vendor_by_id($vendor_id)[0]['business_name'];?></b></label>
-						<input type="hidden" name="po_vendor_id" class="po_vendor_id" value="<?=$vendor_id;?>">
+						<input type="hidden" name="po_vendor_id" id="povendorid" value="<?=$vendor_id;?>">
 					</div>
 				</div>
 				<div class="col-md-12">
@@ -111,11 +111,12 @@
 	});
 
 	$(".checkout-po").click(function(){
-		 vendor_id = $(".po_vendor_id").val();
+		 var vendorid = $("#povendorid").val();
+		$("#POProcess .modal-body").html("<div class='text-center'><img src='"+base_url+"/assets/img/default.gif'></div>");
 			$.ajax({
 				type:"POST",
 				url:base_url+'dashboard/checkout_po',
-				data:{vendor_id:vendor_id},
+				data:{vendor_id:vendorid},
 				dataType:'json',
 				success:function(data)
 				{

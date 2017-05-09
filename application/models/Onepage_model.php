@@ -4,9 +4,12 @@ require_once('App_model.php');
 
 class Onepage_model extends App_model
 {
-	public function get_vendor_by_salesman($id)
+	public function get_vendor_by_salesman($id='',$customer='')
 	{
-		$this->db->where("a.salesman_id",$id);
+		if($id!='')
+			$this->db->where("a.salesman_id",$id);
+		if($customer!='')
+			$this->db->like("b.business_name",$customer);
 		$this->db->select("b.*,c.name,c.contact_value,d.city,c.email,b.id as customer_id");
 		$this->db->from("sales_order a");
 		$this->db->join("customer b","b.id=a.customer_id");
@@ -37,9 +40,22 @@ class Onepage_model extends App_model
 		$q = $this->db->get();
 		return $q->row_array();
 	}
-	public function get_products($id)
+	public function get_products($id='',$sku='',$form='',$color='',$type='',$package='',$row='')
 	{
-		$this->db->like('a.name',$id);
+		if($id!='')
+			$this->db->like('a.name',$id);
+		if($sku!='')
+			$this->db->like('a.sku',$sku);
+		if($form!='')
+			$this->db->like('a.form_id',$form);
+		if($color!='')
+			$this->db->like('a.color_id',$color);
+		if($type!='')
+			$this->db->like('a.product',$type);
+		if($package!='')
+			$this->db->like('a.package_id',$package);
+		if($row!='')
+			$this->db->like('a.row',$row);
 		$this->db->select('a.*,b.name as form,c.name as color,d.name as type,e.name as packaging,a.id as product_id');
 		$this->db->from('product a');
 		$this->db->join('product_form b','b.id=a.form_id','left');

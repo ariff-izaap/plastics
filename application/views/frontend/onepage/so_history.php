@@ -26,7 +26,7 @@
 			<div class="col-md-12" style="max-height: 400px;overflow: auto;">
 				<table class="table table-hover table-bordered">
 					<thead>
-						<th>SO ID</th><th>Status</th><th>Amount</th><!-- <th>Paid Status</th> --><th>Ordered Date</th><th>Action</th>
+						<th>SO ID</th><th>Status</th><th>Amount</th><!-- <th>Paid Status</th> --><th>Ordered Date</th><!--<th>Action</th>-->
 					</thead>
 					<tbody>
 						<?php
@@ -35,15 +35,15 @@
 							foreach ($so as $key => $value)
 							{
 								?>
-									<tr>
+									<tr onclick="view_so(<?=$value['id'];?>);">
 										<td><?=$value['id'];?></td>
 										<td><?=$value['order_status'];?></td>
 										<td><?=displayData($value['total_amount'],'money');?></td>
 										<!-- <td><?=$value['is_paid'];?></td> -->
 										<td><?=$value['created_date'];?></td>
-										<td>
+										<!-- <td>
 											<button data-id="<?=$value['id'];?>" class="btn btn-info view_so"><i class="fa fa-eye"></i> View</button>
-										</td>
+										</td> -->
 									</tr>
 								<?php
 							}
@@ -61,9 +61,13 @@
   </div>
 </div>
 </div>
-e
+<style type="text/css">
+	table tbody tr:hover{background: #ccc !important;cursor: pointer;}
+</style>
+
 <script type="text/javascript">
-	$(".view_so").click(function(){
+	function view_so()
+	{
 		$("#SOHistory").modal('hide');
 		so_id = $(this).attr("data-id");
 		$.ajax({
@@ -77,7 +81,7 @@ e
 				$("#SOProcess").html(data.content);
 			}
 		});
-	});
+	}
 
 	$(".create-new-so").click(function(){
 		c_id = $(".customer_id").val();

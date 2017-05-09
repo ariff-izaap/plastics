@@ -23,7 +23,8 @@ class Dashboard extends Admin_Controller
     public function get_customer_salesman()
     {
       $salesman_id = $this->input->post('sale');
-      $this->data['vendors'] = $this->onepage_model->get_vendor_by_salesman($salesman_id);
+      $customer = $this->input->post('customer');
+      $this->data['vendors'] = $this->onepage_model->get_vendor_by_salesman($salesman_id,$customer);
       $output['content'] = $this->load->view('frontend/onepage/table_list',$this->data,true);
       $output['status'] = "success";
       // $output['msg'] = $this->data['vendors'];
@@ -46,8 +47,8 @@ class Dashboard extends Admin_Controller
 
     public function get_products()
     {
-      $id = $this->input->post('product');
-      $this->data['product'] = $this->onepage_model->get_products($id);
+      $form = $this->input->post();
+      $this->data['product'] = $this->onepage_model->get_products($form['product'],$form['sku'],$form['form'],$form['color'],$form['type'],$form['package'],$form['row']);
       $output['content'] = $this->load->view('frontend/onepage/product_table',$this->data,true);
       $output['status'] = "success";
       $output['message'] = $this->data['product'];
@@ -440,7 +441,7 @@ class Dashboard extends Admin_Controller
       $this->data['order_st'] = "created";
       $this->data['po'] = $this->onepage_model->get_po_history($form['vendor_id']);
       $output['content'] = $this->load->view('frontend/onepage/po_history',$this->data,true);
-      $output['msg'] = $po_id;
+      $output['msg'] = $ins;
       $this->cart->destroy();
       $this->_ajax_output($output,TRUE);
     }
@@ -657,6 +658,27 @@ class Dashboard extends Admin_Controller
       $this->data['logs'] = $this->onepage_model->get_call_log(array('customer_id'=>$c_id));
       $output['content'] = $this->load->view('frontend/onepage/view_log',$this->data,true);
       $this->_ajax_output($output,TRUE);
+    }
+
+    public function update_customer()
+    {
+      $form = $this->input->post();      
+      $c_id = $form['customer_id'];
+      $ins['business_name'] = $form['business_name'];
+      $ins['credit_type'] = $form['credit_type'];
+      $up1 = $this->onepage_model->update(array("id"=>$c_id),$ins,"customer");
+      $ins1['phone'] = $form['phone'];
+      $ins1['address1'] = $form['address1'];
+      $ins1['city'] = $form['city'];
+      $ins1['state'] = $form['state'];
+      $ins1['zipcode'] = $form['zipcode'];
+      $up2 = $this->onepage_model->update(array("id"=>$form['address_id']),$ins1,"address");
+      $ins3['name'] = $form['contact_name'];
+      $ins3['contact_value'] = $form['fax'];
+      $ins3['contact_type'] = $form['contact_type'];
+      $up3 = $this->onepage_model->update(array("customer_id"=>$c_id),$ins3,"customer_contact");
+      $output['status'] = "success";
+      $this->_ajax_output($output,true);
     }
 
    

@@ -418,8 +418,8 @@ $(".order-po-btn").click(function(){
 			dataType:'json',
 			success:function(data)
 			{
+  			$("#POProcess").html(data.content);
 				console.log(data);
-				$("#POProcess").html(data.content);
 			}
 		});
 	}

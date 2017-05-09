@@ -12,12 +12,9 @@
 	<div class="container">	
 		<div class="row">
 			<div class="col-md-6 panel panel-default panel-bor dashboard">
-            <div class="panel-heading formcontrol-box">
-				<h3 class="text-center dashboard-title">Customer</h3>
-				
-					
-                    
-                    <div class="row">
+        <div class="panel-heading formcontrol-box">
+					<h3 class="text-center dashboard-title">Customer</h3>
+          <div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="col-md-3">Name</label>
@@ -27,20 +24,16 @@
 								</div>
 							</div>
 						</div>
-                        
-                        <div class="col-md-6">
+            <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Phone</label>
 								<div class="col-md-9">
 									<input type="text" class="form-control customer_phone" placeholder="Phone">
 								</div>
 							</div>
-						</div>
-						
-					</div>
-                    
-					<div class="row">
-						
+						</div>						
+					</div>                    
+					<div class="row">						
 						<!--/span-->
 						<div class="col-md-6 text-left">
 							<div class="form-group">
@@ -51,7 +44,7 @@
 							</div>
 						</div>
 						<!--/span-->
-                        <div class="col-md-6">
+	                      <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Address</label>
 								<div class="col-md-9">
@@ -103,21 +96,19 @@
 						</div>
 						<!--/span-->
 					</div>
-					<div class="row">
-						
+					<div class="row">					
 						<div class="col-md-6 text-left">
 							<div class="form-group">
 								<label class="control-label col-md-3">F/M</label>
 								<div class="col-md-9">
 									<select name="" class="form-control contact_type input-sm">
-										<option value="0">F</option>
-										<option value="1">M</option>
+										<option value="1">F</option>
+										<option value="2">M</option>
 									</select>
 								</div>
 							</div>
 						</div>
-						<!--/span-->
-                        	<div class="col-md-6">
+	          <div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label col-md-3">Lastcall</label>
 								<div class="col-md-9">
@@ -125,7 +116,6 @@
 								</div>
 							</div>
 						</div>
-						<!--/span-->
 					</div>
 					<div class="row">
 					
@@ -197,32 +187,31 @@
 						</div>
 						<!--/span-->
 					</div>
-					<div class="row">
-						
+					<div class="row">							
 						<div class="col-md-6 text-left">
 							<div class="form-group">
-								<label class="control-label col-md-3">Comments</label>
+								<label class="control-label col-md-3">
+									<a href="#CustomerComments" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn disabled btn-info customer_comments">Comments</a>
+								</label>
 								<div class="col-md-9">
 									<input type="text" name="" class="form-control customer_comments" placeholder="Comments">
 								</div>
 							</div>
 						</div>
 						<!--/span-->
+					</div>				
+					<div>
+						<button class="btn btn-info customer-search-btn">Search</button>
+						<a href="#POProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn disabled btn-info po_history_btn">PO History</a>
+						<a href="#SOProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn disabled btn-info so_history_btn">SO History</a>
+						
+						<a href="#LogCall" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info disabled log_call">Log Call</a>
+						<a href="#ViewLog" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info view_log disabled">View Log</a>
 					</div>
-				
-				<div>
-					<button class="btn btn-info customer-search-btn">Search</button>
-					<a href="#POProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info po_history_btn">PO History</a>
-					<a href="#SOProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info so_history_btn">SO History</a>
-					<a href="#CustomerComments" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info 
-					customer_comments">Comments</a>
-					<a href="#LogCall" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info log_call">Log Call</a>
-					<a href="#ViewLog" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info view_log">View Log</a>
 				</div>
-			</div>
-            </div>
-			<div class="col-md-6 panel panel-default panel-bor dashboard dashboard1">
-            <div class="panel-heading formcontrol-box">
+    	</div>
+		<div class="col-md-6 panel panel-default panel-bor dashboard dashboard1">
+    	<div class="panel-heading formcontrol-box">
 				<h3 class="text-center dashboard-title">Inventory</h3>
 				<div class="row">
 					<div class="col-md-4 padding-zero">
@@ -444,7 +433,7 @@
 							foreach (get_all_vendors() as $key => $value)
 							{
 								?>
-									<tr class="customer_row" data-id="<?=$value['id'];?>">
+									<tr class="customer_row" onclick="get_customer_details(<?=$value['id'];?>)">
 										<td><?=$value['business_name'];?></td>
 										<td><?=$value['phone'];?></td>
 										<td><?=$value['contact_name'];?></td>

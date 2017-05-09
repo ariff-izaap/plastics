@@ -1,11 +1,13 @@
 $(".customer-search-btn").click(function(){
 
 	salesman = $(".onepage_salesman").val();
+	customer = $(".customer_name").val();
+
 	$(".purchase-loader").show();
 		$.ajax({
 			type:"POST",
 			url:base_url+'dashboard/get_customer_salesman',
-			data:{sale:salesman},
+			data:{sale:salesman,customer:customer},
 			dataType:'json',
 			success:function(data)
 			{
@@ -19,10 +21,16 @@ $(".customer-search-btn").click(function(){
 $(".product-search-btn").click(function(){
 	$(".purchase-loader").show();
 	product = $(".product_name").val();
+	sku = $(".product_sku").val();
+	form = $(".product_form").val();
+	color = $(".product_color").val();
+	row = $(".product_row").val();
+	type = $(".product_type").val();
+	package = $(".product_package").val();
 	$.ajax({
 		type:"POST",
 		url:base_url+'dashboard/get_products',
-		data:{product:product},
+		data:{product:product,sku:sku,form:form,color:color,row:row,type:type,package:package},
 		dataType:'json',
 		success:function(data)
 		{
@@ -103,9 +111,8 @@ $(".add_so_product_cart_btn").click(function(){
 });
 
 
-	
-$("table tbody tr.customer_row").click(function(){
-	id = $(this).attr("data-id");
+function get_customer_details(id)
+{
 	$(".purchase-loader").show();
 	$.ajax({
 		type:"POST",
@@ -114,12 +121,14 @@ $("table tbody tr.customer_row").click(function(){
 		dataType:'json',
 		success:function(data)
 		{
+			$("a.disabled").removeClass("disabled");
 			$(".purchase-loader").hide();
 			console.log(data);
 			msg = data.message;
 			call = data.call;
 			$(".customer_name").val(msg.business_name);
 			$(".customer_id").val(msg.customer_id);
+			$(".address_id").val(msg.address_id);
 			$(".customer_phone").val(msg.phone);
 			$(".customer_contact").val(msg.customer_contact);
 			$(".customer_address").val(msg.address1);
@@ -133,7 +142,25 @@ $("table tbody tr.customer_row").click(function(){
 			$(".customer_comments").val(msg.comments);
 		}
 	});
-});
+}
+
+function update_customer()
+{
+	form = $("form#CustomerForm").serialize();
+	c_id = $(".customer_id").val();
+	$.ajax({
+		type:"POST",
+		url:base_url+'dashboard/update_customer',
+		data:form,
+		dataType:'json',
+		success:function(data)
+		{
+			console.log(data);
+			get_customer_details(c_id);
+		}
+	});
+}
+
 
 $(".po_history_btn").click(function(){
 		c_id = $(".customer_id").val();
@@ -173,9 +200,6 @@ $(".so_history_btn").click(function(){
 			}
 		});
 });
-
-
-
 
 
 	$(".update_po_cart").click(function(){
@@ -219,7 +243,7 @@ $('a[href^="#"]').click(function (event) {
   event.preventDefault ? event.preventDefault() : event.returnValue = false;
 });
 
-$(".customer_comments").click(function(){
+$("a.customer_comments").click(function(){
 	c_id = $(".customer_id").val();
 	if(c_id=='')
 	{
