@@ -33,7 +33,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Name</label>
+							<label class="col-md-4">Name</label>
 							<div class="col-md-8">
 								<input type="text" name="wname" id="wname" class="form-control required">
 							</div>
@@ -41,7 +41,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Address1</label>
+							<label class="col-md-4">Address1</label>
 							<div class="col-md-8">
 								<input type="text" name="address1" id="address1" class="form-control required">
 							</div>
@@ -49,19 +49,19 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Address2</label>
+							<label class="col-md-4">Address2</label>
 							<div class="col-md-8">
 								<input type="text" name="address2" id="address2" class="form-control">
 							</div>
 						</div>
 					</div>
 				</div>
-			</div><br>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">City</label>
+							<label class="col-md-4">City</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control required" name="city" id="city">
 							</div>
@@ -69,7 +69,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">State</label>
+							<label class="col-md-4">State</label>
 							<div class="col-md-8">
 								<select class="form-control input-sm required" name="state" id="state">
 									<option value="">--Select--</option>
@@ -90,7 +90,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Country</label>
+							<label class="col-md-4">Country</label>
 							<div class="col-md-8">
 								<select class="form-control input-sm required" name="country" id="country">
 									<option value="">--Select--</option>
@@ -111,19 +111,19 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Zipcode</label>
+							<label class="col-md-4">Zipcode</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control required" name="zipcode" id="zipcode">
 							</div>
 						</div>
 					</div>
 				</div>
-			</div><br>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Phone</label>
+							<label class="col-md-4">Phone</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control required" name="phone" id="phone">
 							</div>
@@ -131,7 +131,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Email</label>
+							<label class="col-md-4">Email</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control required" name="email" id="email">
 							</div>
@@ -139,7 +139,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Ship Method</label>
+							<label class="col-md-4">Ship Method</label>
 							<div class="col-md-8">
 								<select name="ship_method" class="form-control required input-sm">
 					      	<option value="">--Select Ship Method--</option>
@@ -160,7 +160,7 @@
 					</div>
 					<div class="col-md-3 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Ship Service</label>
+							<label class="col-md-4">Ship Service</label>
 							<div class="col-md-8">
 								 <select name="ship_service" class="form-control required input-sm">
 					      	<option value="">--Select Service--</option>
@@ -180,13 +180,13 @@
 						</div>
 					</div>
 				</div>
-			</div><br>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Payment Term</label>
-							<div class="col-md-8">
+							<label class="col-md-5">Payment Term</label>
+							<div class="col-md-7">
 								<select name="credit_type" class="form-control input-sm required">
 					      	<option value="">--Select Payment Term--</option>
 					      	<?php
@@ -204,18 +204,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Pickup Date</label>
-							<div class="col-md-8">
+							<label class="col-md-5">Pickup Date</label>
+							<div class="col-md-7">
 								<input type="text" class="form-control singledate required" name="pickup_date">
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 padding-zero">
+					<div class="col-md-4 padding-zero">
 						<div class="form-group">
-							<label class="col-md-3">Delivery Date</label>
-							<div class="col-md-8">
+							<label class="col-md-5">Delivery Date</label>
+							<div class="col-md-7">
 								<input type="text" class="form-control singledate required" name="delivery_date">
 							</div>
 						</div>
@@ -229,13 +229,13 @@
 						</div>
 					</div> -->
 				</div>
-			</div><br>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-6 padding-zero">
 						<div class="form-group">
 							<label class="col-md-3">PO Message</label>
-							<div class="col-md-8">
+							<div class="col-md-9">
 								<textarea rows="5" class="form-control" name="po_message"></textarea>
 							</div>
 						</div>
@@ -243,13 +243,13 @@
 					<div class="col-md-6 padding-zero">
 						<div class="form-group">
 							<label class="col-md-3">PO Notes</label>
-							<div class="col-md-8">
+							<div class="col-md-9">
 								<textarea rows="5" class="form-control" name="po_notes"></textarea>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div><br>
+			</div>
 		</form>
 		<form id="CartPOForm" action="" method="post">
 			<div class="row">

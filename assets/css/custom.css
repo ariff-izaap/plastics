@@ -750,11 +750,20 @@ background-color: #e6e6e6;
     margin-right: 10px;
     margin-top: 7px;
 }
-.dashboard1 .product-update-btn {
+.dashboard1 .product-search-btn, .dashboard1 .product-update-btn {
+    margin-bottom: 23px;
     margin-right: 10px;
-    margin-top: 7px;
+    margin-top: 23px;
 }
-    
+ #CheckoutPO {
+    background: #fafafa;
+    padding: 14px 0;
+	margin-bottom:10px;
+	box-shadow:0px 0px 3px #ccc;
+}   
+#CheckoutPO .row {
+    margin-bottom: 8px;
+}
 	
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
