@@ -36,8 +36,8 @@
   </tr>
   
    <?php 
-         $uri  = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
-        $total = ''; $tot = '';
+         $uri   = ($uri != 'salesproductselection')?$this->uri->segment(2):$uri;
+         $total = ''; $tot = '';
         
        if(count($cartitems)>0) { 
          foreach($cartitems as $ckey => $cvalue) { 
