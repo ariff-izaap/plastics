@@ -3,7 +3,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close close_so_details">&times;</button>
-      <h4 class="modal-title">SO - #</h4>
+      <h4 class="modal-title">SO - #<?=$so['id'];?></h4>
     </div>
     <div class="modal-body" style="max-height: 400px;overflow: auto;">
       <div class="row">
@@ -11,7 +11,7 @@
 			    SO Status : <b><?=$so['order_status'];?></b>
 			  </div>
 			  <div class="col-md-2 span-border ps_sec_blue">
-			    Total : <b><?=displayData($so['total_amount'],'money');?></b>
+			    Total : <b><span class="order_total"><?=displayData($so['total_amount'],'money');?></span></b>
 			  </div>
 			  <div class="col-md-3 span-border nd_sec_yellow">
 			    Payment Term: <b><?=$so['credit'];?></b>
@@ -175,6 +175,7 @@
 				console.log(data);
 				$("#SOProcess .modal-body table.product-cart tbody").html(data.cart);
 				$("#SOProcess .modal-body table.product-cart tfoot td.cart-total").html(data.cart_total);
+				$("#SOProcess .order_total").html(data.cart_total);
 			}
 		});
 	});

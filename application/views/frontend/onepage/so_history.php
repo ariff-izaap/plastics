@@ -64,10 +64,9 @@
 </style>
 
 <script type="text/javascript">
-	function view_so()
+	function view_so(so_id)
 	{
 		$("#SOHistory").modal('hide');
-		so_id = $(this).attr("data-id");
 		$.ajax({
 			type:"POST",
 			url:base_url+'dashboard/get_so_details',

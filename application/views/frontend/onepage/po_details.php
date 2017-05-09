@@ -11,7 +11,7 @@
 			    PO Status : <b><?=$po['order_status'];?></b>
 			  </div>
 			  <div class="col-md-2 span-border ps_sec_blue">
-			    Total : <b><?=displayData($po['total_amount'],'money');?></b>
+			    Total : <b><span class="order_total"><?=displayData($po['total_amount'],'money');?></span></b>
 			  </div>
 			  <div class="col-md-3 span-border nd_sec_yellow">
 			    Paid Status: <b><?=$po['is_paid'];?></b>
@@ -184,6 +184,7 @@
 				console.log(data);
 				$("#POProcess .modal-body table.product-cart tbody").html(data.cart);
 				$("#POProcess .modal-body table.product-cart tfoot td.cart-total").html(data.cart_total);
+				$("#POProcess .order_total").html(data.cart_total);
 			}
 		});
 	});
