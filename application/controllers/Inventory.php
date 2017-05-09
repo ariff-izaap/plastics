@@ -84,7 +84,7 @@ class Inventory extends Admin_Controller
           if($type != 'create'){ 
             
           $this->form_validation->set_rules('name','Product Name','trim|required');
-          $this->form_validation->set_rules('sku','Sku','trim|required');
+          $this->form_validation->set_rules('sku','Sku','trim|required|callback_sku_unique_check['.$edit_id.']');
           $this->form_validation->set_rules('quantity','Quantity','trim|required');
         //$this->form_validation->set_rules('product','Product Type','trim|required');
           $this->form_validation->set_rules('color_id','Color','trim|required');
@@ -501,5 +501,18 @@ class Inventory extends Admin_Controller
             
         $this->_ajax_output($output, TRUE); 
    } 
+   
+   //promo code unique check    
+     function sku_unique_check($str,$id) 
+     {
+        
+        $promo = $this->db->query("select * from product where sku='".$str."' and id !='".$id."'")->row_array();
+    
+        if(count($promo)) {
+             $this->form_validation->set_message('sku_unique_check', 'Sku Already Exists');
+             return FALSE; 
+        }
+       	return TRUE;
+    } 
 }
 ?>

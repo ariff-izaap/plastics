@@ -5,8 +5,8 @@
         <!--<a href="<?php echo $this->previous_url;?>" class="btn btn-sm"><i class="back_icon"></i> Back</a>-->
       </div>
       <div class="col-md-6 action-buttons text-right">
-        <a href="javascript:void(0)" onclick="DeleteCheckedRow(this,'checkbox','inventory/delete_all');" class="btn active access-level" capsOn ><i class="fa fa-trash"></i>Delete</a>
-        <!--
+      <!--  <a href="javascript:void(0)" onclick="DeleteCheckedRow(this,'checkbox','inventory/delete_all');" class="btn active access-level" capsOn ><i class="fa fa-trash"></i>Delete</a>
+        
 <button type="button" class="btn" onclick="inventory_sub();">Create Inventory</button>
 -->
         
