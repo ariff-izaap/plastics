@@ -3,7 +3,10 @@
 <div class="modal-content">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">SO History</h4>
+    <h4 class="modal-title col-md-3">SO History</h4>
+    <div class="col-md-2 pull-right">
+				<button class="create-new-so btn btn-warning pull-right">Create SO</button>
+			</div>
   </div>
   <div class="modal-body">
   	<?php 
@@ -17,11 +20,6 @@
 				<?php
 			}
 			?>
-    <div class="row">
-			<div class="col-md-2 pull-right">
-				<button class="create-new-so btn btn-warning pull-right">Create SO</button>
-			</div>
-		</div><br>
 		<div class="row">
 			<div class="col-md-12" style="max-height: 400px;overflow: auto;">
 				<table class="table table-hover table-bordered">
