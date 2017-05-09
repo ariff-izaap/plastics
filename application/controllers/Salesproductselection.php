@@ -52,6 +52,7 @@ class Salesproductselection extends Admin_Controller
         $this->data['salestype']  = $this->salesorder_model->get_where(array("status" => 1),"*","sale_type")->result_array();
         $this->data['grid']       = $this->load->view('listing/view', $this->data, TRUE);
         $this->data['cartitems']  = $this->cart->contents();
+        $this->data['request']    = 'updated';
         $this->layout->view("frontend/salesproductselection/index");
 	
     }

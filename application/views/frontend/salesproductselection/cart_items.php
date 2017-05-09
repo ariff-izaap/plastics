@@ -8,7 +8,7 @@
           ?>
          
 
-<?php if($uri != 'salesproductselection' && $uri2 !='checkout'){ ?>
+<?php if($request!='updated'){?>
 
 <button type="button" name="update_cart" onclick="sales_update_cart('process','<?php echo $so_id;?>','cart',this)" class="btn btn-warning sales-warn">Update</button>
 
@@ -62,7 +62,7 @@
             <td><?php echo $cvalue['package']; ?></td>
             <td><?php echo $cvalue['row']; ?></td>
            <!--<td><?php //echo $cvalue['equivalent']; ?></td>-->
-            <td> <?php if($uri2=='view' || $uri2 == 'update_salesorder_quantity'){?> 
+            <td> <?php if($request!='updated'){ ?> 
             <input type="text" name="update_qty[]" id="update_qty" onkeypress="return numbersonly(event);" value="<?php echo $cvalue['qty']; ?>" /><?php } else{ echo $cvalue['qty'];  } ?></td>
             <td><?php echo displayData($cvalue['price'],'money'); ?></td>
             <td><?php echo displayData($cvalue['qty']*$cvalue['price'],'money'); ?></td>

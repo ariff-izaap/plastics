@@ -160,9 +160,9 @@ function sales_update_cart(action_type,sales_order_id,ftype,elm,enable)
                 if(rdata.itemtype == 'cart'){
                    $("#item_type").val("cart"); 
                 }
-               // if(enable=='yes'){
+                if(rdata.itemtype !='cart'){
                  $("#product_shipping_lists").html(rdata.content);
-              // } 
+               } 
         	}
         	else if(rdata.status == 'success' && action_type == 'process')
         	{

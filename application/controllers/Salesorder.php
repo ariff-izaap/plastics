@@ -347,6 +347,7 @@ class Salesorder extends Admin_Controller
         $this->data['carrier']       = get_carrier();
         $this->data['stype']         = $saletype;
         $this->data['total']         = $total;
+        $this->data['request']       = 'updated';
         
         if($this->input->is_ajax_request()){
           $output  = $this->load->view('frontend/sales/checkout',$this->data,true);
@@ -660,8 +661,10 @@ class Salesorder extends Admin_Controller
                      }
                      $this->data['itemtype']  = $itemtype;
                      $this->data['cartitems'] = $this->cart->contents();
+                     $this->data['request']   = 'updated';
                      $output['content']       = $this->load->view("frontend/salesproductselection/cart_items",$this->data,true);
                      $output['message']       = "Cart updated successfully";
+                     $output['request']       = "updated";
                      $output['status']        = "success";
                      
                    } 

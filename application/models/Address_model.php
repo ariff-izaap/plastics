@@ -14,8 +14,6 @@ class Address_model extends App_model {
 	{
 		$this->db->select('c.*');
 		$this->db->from('customer_location c');
-       // $this->db->join("country ct","ct.id=c.country");
-	//	$this->db->join('state s', 's.id=c.state');
         $this->db->where('c.id',$contact_id);
 		return $this->db->get()->row_array();
 	}
