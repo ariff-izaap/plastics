@@ -454,6 +454,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 
 <!-- PO Popups -->
 <div id="POProcess" class="modal fade" role="dialog">
@@ -462,6 +463,7 @@
 <!-- SO Popups -->
 <div id="SOProcess" class="modal fade" role="dialog">
 </div>
+
 <!-- PO Product Add -->
 <div id="AddPOProduct" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -483,6 +485,7 @@
     </div>
   </div>
 </div>
+
 <!-- SO Product Add -->
 <div id="AddSOProduct" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -504,16 +507,20 @@
     </div>
   </div>
 </div>
+
 <!-- Customer Comments -->
 <div id="CustomerComments" class="modal fade" role="dialog">
 </div>
+
 <!-- Call Log -->
 <div id="LogCall" class="modal fade" role="dialog">
 </div>
+
 <!-- View Call -->
 <div id="ViewLog" class="modal fade" role="dialog">
 </div>
-<!-- Cost Cart -->
+
+<!-- Cost Inventory -->
 <div id="CostInventory" class="modal fade" role="dialog">
 </div>
 
