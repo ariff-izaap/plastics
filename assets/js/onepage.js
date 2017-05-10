@@ -231,7 +231,8 @@ $(".po_history_btn").click(function(){
 				$("#POProcess").html(data.content);
 			}
 		});
-	});
+});
+
 $(".so_history_btn").click(function(){
 	c_id = $(".customer_id").val();
 	if(c_id=='')
@@ -315,7 +316,6 @@ $("a.customer_comments").click(function(){
 });
 
 
-
 $(".log_call").click(function(){
 	c_id = $(".customer_id").val();
 	if(c_id=='')
@@ -372,4 +372,29 @@ function update_logs(id)
   		$("#LogCall").html(data.content);
   	}
   });
+}
+
+function save_po_changes(id)
+{
+	ship = $(".shipment_service").val();
+	payment = $(".payment_term").val();
+	paid = $(".paid_status").val();
+	delivery = $(".delivery_type").val();
+	release = $(".release_to_sold").val();
+
+	$.ajax({
+		type:"POST",
+		url:base_url+'dashboard/save_po_changes',
+		data:{ship:ship,payment:payment,paid:paid,delivery:delivery,release:release,id:id},
+		dataType:'json',
+		success:function(data)
+		{
+			console.log(data);
+			bootbox.alert("Purchase Order updated successfully.");
+			$("#POProcess").html(data.content);
+			
+
+		}
+	});
+
 }

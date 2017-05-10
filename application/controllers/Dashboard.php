@@ -59,6 +59,7 @@ class Dashboard extends Admin_Controller
       $id = $this->input->post('id');
       $this->data['product'] = $this->onepage_model->get_product_by_id($id);
       $output['status'] = "success";
+      // $output['cost'] = $this->onepage_model->get_inventory_cost($id);
       $output['message'] = $this->data['product'];
       $this->_ajax_output($output,TRUE);
     }
@@ -713,13 +714,30 @@ class Dashboard extends Admin_Controller
       $this->_ajax_output($output,true);
     }
 
-    function update_logs()
+    public function update_logs()
     {
       $id = $this->input->post('id');
       $this->data['action'] = "updated";
       $this->data['logs'] = $this->onepage_model->get_logs_by_id(array('id'=>$id));
       $output['content'] = $this->load->view('frontend/onepage/call_log',$this->data,true);
       $this->_ajax_output($output,TRUE);
+    }
+
+    public function save_po_changes()
+    {
+      $po_id = $this->input->post('id');
+      $up['carrier_id'] = $this->input->post('ship');
+      $up['is_paid'] = $this->input->post('paid');
+      $up['credit_type_id'] = $this->input->post('payment');
+      $up['ship_type_id'] = $this->input->post('delivery');
+      $up['release_to_sold'] = $this->input->post('release');
+      $update = $this->onepage_model->update(array("id"=>$po_id),$up,"purchase_order");
+      $output['status'] = "success";
+      $this->data['po_details'] = $this->onepage_model->get_po_details($po_id);
+      $this->data['po'] = $this->purchase_model->get_purchased_order($po_id);
+      $output['content'] = $this->load->view('frontend/onepage/po_details',$this->data,true);
+      $this->_ajax_output($output,true);
+      
     }
    
 }

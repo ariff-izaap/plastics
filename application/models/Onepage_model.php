@@ -206,5 +206,12 @@ class Onepage_model extends App_model
 		$q = $this->db->get('call_logs');
 		return $q->row_array();
 	}
+	// public function get_inventory_cost($id)
+	// {
+	// 	$this->db->where('id',$where);
+	// 	$this->db->select('wholesale_price,retail_price,shipping_cost');
+	// 	$q = $this->db->get('product');
+	// 	return $q->row_array();	
+	// }
 }
 ?>

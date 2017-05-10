@@ -391,7 +391,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 padding-zero">
-								<!-- <a href="#CostCart" data-toggle="modal" class="btn btn-info">Cost</a> -->
+								<a href="#CostInventory" data-toggle="modal" class="btn btn-info" style="padding:3px;">Cost</a>
 							</div>
 						</div>
 						<div class="row">
@@ -512,6 +512,9 @@
 </div>
 <!-- View Call -->
 <div id="ViewLog" class="modal fade" role="dialog">
+</div>
+<!-- Cost Cart -->
+<div id="CostInventory" class="modal fade" role="dialog">
 </div>
 
 <style type="text/css">
