@@ -97,7 +97,7 @@
 							<div class="col-md-4 padding-zero">
 								<select class="form-control input-sm release_to_sold">
 									<option <?=($po['release_to_sold']=="Yes")?"selected":"";?> value="Yes">Yes</option>
-									<option  <?=($po['release_to_sold']=="No")?"selected":"";?> value="No">No</option>
+									<option <?=($po['release_to_sold']=="No")?"selected":"";?> value="No">No</option>
 								</select>
 							</div>
 						</div>
@@ -236,7 +236,6 @@
 			}
 		});
 	});
-
 	$(".update_po_qty").click(function(){
 		form = $("form#EditPOProduct").serialize();
 		$.ajax({
@@ -254,17 +253,17 @@
 		});
 	});
 	$(".close_po_details").click(function(){
-			c_id = $(".customer_id").val();
-			$.ajax({
-					type:"POST",
-					url:base_url+'dashboard/get_po_history',
-					data:{c_id:c_id},
-					dataType:'json',
-					success:function(data)
-					{
-						console.log(data);
-						$("#POProcess").html(data.content);
-					}
-				});
-});
+		c_id = $(".customer_id").val();
+		$.ajax({
+			type:"POST",
+			url:base_url+'dashboard/get_po_history',
+			data:{c_id:c_id},
+			dataType:'json',
+			success:function(data)
+			{
+				console.log(data);
+				$("#POProcess").html(data.content);
+			}
+		});
+	});
 </script>
