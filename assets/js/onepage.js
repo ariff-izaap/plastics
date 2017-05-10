@@ -392,9 +392,26 @@ function save_po_changes(id)
 			console.log(data);
 			bootbox.alert("Purchase Order updated successfully.");
 			$("#POProcess").html(data.content);
-			
-
 		}
 	});
 
+}
+
+function save_so_changes(id)
+{
+	payment = $(".payment_term").val();
+	ship = $(".shipment_service").val();
+	delivery = $(".delivery_type").val();
+	$.ajax({
+		type:"POST",
+		url:base_url+'dashboard/update_so_changes',
+		data:{id:id,payment:payment,ship:ship,delivery:delivery},
+		dataType:'json',
+		success:function(data)
+		{
+			console.log(data);
+			bootbox.alert("Sales Order updated successfully.");
+			$("#SOProcess").html(data.content);
+		}
+	});
 }

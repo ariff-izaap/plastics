@@ -105,13 +105,10 @@
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-md-8 succ_msg">
-				</div>
 				<div class="col-md-2 pull-right">
 					<button class="btn btn-success pull-right" onclick="save_po_changes(<?=$po['po_id'];?>);">Save</button>
 				</div>
-			</div>
-			<br>
+			</div><br>
 			<div class="row">
 				<div class="col-md-6">
 					<table class="table table-bordered">

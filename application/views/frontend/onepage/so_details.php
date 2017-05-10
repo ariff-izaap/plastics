@@ -10,15 +10,47 @@
 				<div class="col-md-2 span-border">
 			    SO Status : <b><?=$so['order_status'];?></b>
 			  </div>
-			  <div class="col-md-2 span-border ps_sec_blue">
+			  <div class="col-md-2 span-border">
 			    Total : <b><span class="order_total"><?=displayData($so['total_amount'],'money');?></span></b>
 			  </div>
-			  <div class="col-md-3 span-border nd_sec_yellow">
-			    Payment Term: <b><?=$so['credit'];?></b>
+			  <div class="col-md-4 span-border nd_sec_yellow">
+			    <label class="col-md-6">Payment Term: </label>
+			    <div class="col-md-6">
+			    	<select name="payment_term" class="form-control payment_term input-sm">
+			    		<?php
+			    		if(get_credit_type())
+			    		{
+			    			foreach (get_credit_type() as $key => $value)
+			    			{
+			    				?>
+			    					<option <?=($value['name']==$so['credit'])?"selected":"";?>
+			    						value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			    				<?php
+			    			}
+			    		}
+			    		?>
+			    	</select>
+			    </div>
 			  </div>
-			  <div class="col-md-3">
+			  <div class="col-md-4">
 					<div class="form-group">
-						<label class="col-md-12 control-label">Shipment Service : <b><?=$so['carrier'];?></b></label>						
+						<label class="col-md-6 control-label">Shipment Service :</label>
+						<div class="col-md-6">
+							<select name="payment_term" class="form-control shipment_service input-sm">
+				    		<?php
+				    		if(get_carrier())
+				    		{
+				    			foreach (get_carrier() as $key => $value)
+				    			{
+				    				?>
+				    					<option <?=($value['name']==$so['carrier'])?"selected":"";?>
+				    						value="<?=$value['id'];?>"><?=$value['name'];?></option>
+				    				<?php
+				    			}
+				    		}
+				    		?>
+				    	</select>
+						</div>
 					</div>
 				</div>
 			</div><br>
@@ -31,7 +63,23 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label class="control-label">Delivery :<?=$so['ship_type'];?>
+							<label class="col-md-4 control-label">Delivery:</label>
+							<div class="col-md-8">
+								<select class="form-control input-sm delivery_type">
+									<?php
+					    		if(get_shipping_type())
+					    		{
+					    			foreach (get_shipping_type() as $key => $value)
+					    			{
+						    			?>
+						    				<option <?=($so['ship_type']==$value['type'])?"selected":"";?>
+						    					value="<?=$value['id'];?>"><?=$value['type'];?></option>
+						    			<?php
+						    		}
+						    	}
+					    		?>
+								</select>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -45,7 +93,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				<div class="col-md-2 pull-right">
+					<button class="btn pull-right btn-success" onclick="save_so_changes(<?=$so['id'];?>);">Save</button>
+				</div>
+			</div><br>
 			<div class="row">
 				<div class="col-md-6">
 					<table class="table table-bordered">
@@ -194,4 +245,6 @@
 					}
 				});
 });
+
+
 </script>

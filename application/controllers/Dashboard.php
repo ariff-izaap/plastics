@@ -739,6 +739,19 @@ class Dashboard extends Admin_Controller
       $this->_ajax_output($output,true);
       
     }
+    public function update_so_changes()
+    {
+      $so_id = $this->input->post('id');
+      $up['credit_type'] = $this->input->post('payment');
+      $up['carrier_id'] = $this->input->post('ship');
+      $up['shipping_type'] = $this->input->post('delivery');
+      $update = $this->onepage_model->update(array("id"=>$so_id),$up,"sales_order");
+      $output['status'] = "success";
+      $this->data['so_details'] = $this->onepage_model->get_so_details($so_id);
+      $this->data['so'] = $this->onepage_model->get_sales_order($so_id);
+      $output['content'] = $this->load->view('frontend/onepage/so_details',$this->data,true);
+      $this->_ajax_output($output,true);
+    }
    
 }
 ?>
