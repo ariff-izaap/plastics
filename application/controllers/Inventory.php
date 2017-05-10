@@ -229,8 +229,11 @@ class Inventory extends Admin_Controller
     {
         $access_data = $this->inventory_model->get_where(array("id"=>$del_id),'id')->row_array();
         $output      =  array();
-
-        if(count($access_data) > 0){
+        
+        $purchase_order = $this->db->query("select product_id from purchase_order_item where product_id='".$del_id."'")->result_array();
+        $sales_order    = $this->db->query("select product_id from sales_order_item where product_id='".$del_id."'")->result_array();
+        
+        if((count($purchase_order)==0) && (count($sales_order)==0)){
             $this->inventory_model->delete(array("id"=>$del_id));
             $output['message'] = "Record deleted successfuly.";
             $output['status']  = "success";
@@ -505,10 +508,14 @@ class Inventory extends Admin_Controller
    //promo code unique check    
      function sku_unique_check($str,$id) 
      {
+        $where = '';
         
-        $promo = $this->db->query("select * from product where sku='".$str."' and id !='".$id."'")->row_array();
-    
-        if(count($promo)) {
+        if(!empty($id)){
+            $where = " and id !='".$id."'";
+        }
+        
+        $product = $this->db->query("select * from product where sku='".$str."' and id !='".$id."'")->row_array();
+        if(count($product)) {
              $this->form_validation->set_message('sku_unique_check', 'Sku Already Exists');
              return FALSE; 
         }
