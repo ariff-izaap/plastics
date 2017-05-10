@@ -391,7 +391,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 padding-zero">
-								<a href="#CostInventory" data-toggle="modal" class="btn btn-info" style="padding:3px;">Cost</a>
+								<!-- <a href="#CostInventory" data-toggle="modal" class="btn btn-info" style="padding:3px;">Cost</a> -->
 							</div>
 						</div>
 						<div class="row">
