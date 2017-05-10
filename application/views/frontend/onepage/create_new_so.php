@@ -5,17 +5,9 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
       <h4 class="modal-title">Create SO</h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="max-height: 400px;overflow: auto;">
       <div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<label>Vendor : <b><?=get_vendor_by_id($vendor_id)[0]['business_name'];?></b></label>
-						<input type="hidden" name="so_vendor_id" class="so_vendor_id" value="<?=$vendor_id;?>">
-					</div>
-				</div>
-				<div class="col-md-12">
-					
-					
+				<div class="col-md-12">					
 						<table class="table table-bordered table-hover">
 							<thead>
 								<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>

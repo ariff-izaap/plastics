@@ -525,5 +525,5 @@
 </div>
 
 <style type="text/css">
-	.ajax_table table tbody tr:hover{background:#ccc;cursor: pointer;}
+	.ajax_table table tbody tr:hover{background: #ccc;cursor: pointer;}
 </style>

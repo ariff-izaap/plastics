@@ -3,7 +3,12 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close close_so_details">&times;</button>
-      <h4 class="modal-title">SO - #<?=$so['id'];?></h4>
+      <h4 class="col-md-4 modal-title">SO - #<?=$so['id'];?></h4>
+      <?php $so_id = $so['id'];?>
+      <div class="col-md-2 pull-right">
+	    	<a target="_blank" class="btn btn-success" href="<?=site_url('salesorder/print_sales/'.$so_id.'');?>">Print</a
+	    	>
+	    </div>
     </div>
     <div class="modal-body" style="max-height: 400px;overflow: auto;">
       <div class="row">

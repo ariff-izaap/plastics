@@ -450,7 +450,7 @@ class Dashboard extends Admin_Controller
     public function create_new_so()
     {
       $vendor_id = $this->input->post('c_id');
-      $this->data['products'] = $this->onepage_model->get_products_by_vendor($vendor_id);
+      $this->data['products'] = $this->onepage_model->get_products();
       $this->data['vendor_id'] = $vendor_id;
       $output['content'] = $this->load->view('frontend/onepage/create_new_so',$this->data,true);
       $output['product'] = $this->data['products'];
