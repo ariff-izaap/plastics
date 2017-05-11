@@ -299,6 +299,7 @@
 	});
 	$(".close_po_details").click(function(){
 		c_id = $(".customer_id").val();
+		$("#POProcess .modal-body").html("<div class='text-center'><img src='"+base_url+"/assets/img/default.gif'></div>");
 		$.ajax({
 			type:"POST",
 			url:base_url+'dashboard/get_po_history',

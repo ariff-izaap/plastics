@@ -287,6 +287,7 @@
 	});
 
 		$(".close_so_details").click(function(){
+			$("#SOProcess .modal-body").html("<div class='text-center'><img src='"+base_url+"/assets/img/default.gif'></div>");
 			c_id = $(".customer_id").val();
 			$.ajax({
 					type:"POST",
