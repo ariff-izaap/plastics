@@ -10,29 +10,7 @@
         <input type="hidden" name="vendor_id" value="<?=$vendor_id;?>">
         <div class="row">
           <div class="col-md-12 ">
-            <div class="col-md-3 padding-zero">
-              <div class="form-group">
-                <label class="col-md-4">Customer</label>
-                <div class="col-md-8">
-                  <select class="form-control input-sm ship_customer_id required" name="ship_customer_id">
-                    <option value="">--Select--</option>
-                    <?php
-                      if(get_all_vendors())
-                      {
-                        foreach (get_all_vendors() as $key => $value)
-                        {
-                          ?>
-                            <option <?=($customer['id']==$value['id'])?"selected":"";?>
-                              value="<?=$value['id'];?>"><?=$value['business_name'];?></option>
-                          <?php
-                        }
-                      }
-                      ?>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 padding-zero">
+            <div class="col-md-4 padding-zero">
               <div class="form-group">
                 <label class="col-md-3">Shipping</label>
                 <div class="col-md-8">
@@ -53,7 +31,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 padding-zero">
+            <div class="col-md-4 padding-zero">
               <div class="form-group">
                 <label class="col-md-3">Carrier</label>
                 <div class="col-md-8">
@@ -74,7 +52,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 padding-zero">
+            <div class="col-md-4 padding-zero">
               <div class="form-group">
                 <label class="col-md-3">Payment</label>
                 <div class="col-md-8">
@@ -92,6 +70,42 @@
                     }
                     ?>
                   </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 ">
+            <div class="col-md-3 padding-zero">
+              <div class="form-group">
+                <label class="col-md-5">COD Fee</label>
+                <div class="col-md-7 padding-zero">
+                  <input type="text" name="cod_fee" class="form-control" placeholder="COD Fee">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 padding-zero">
+              <div class="form-group">
+                <label class="col-md-6">Freight Paid</label>
+                <div class="col-md-6 padding-zero">
+                  <input type="text" name="freight_paid" class="form-control" placeholder="Freight Paid">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 padding-zero">
+              <div class="form-group">
+                <label class="col-md-3">Amount</label>
+                <div class="col-md-8">
+                  <input type="text" name="amount" class="form-control" placeholder="Amount">
+                </div>
+              </div>
+            </div>
+             <div class="col-md-3 padding-zero">
+              <div class="form-group">
+                <label class="col-md-6">Add. Amount</label>
+                <div class="col-md-6">
+                  <input type="text" name="add_amount" class="form-control" placeholder="Add. Amount">
                 </div>
               </div>
             </div>
@@ -177,15 +191,41 @@
               <div class="form-group">
                 <label class="col-md-4">State</label>
                 <div class="col-md-8">
-                  <input type="text" name="state" class="form-control required" value="<?=$customer['b_state'];?>">
+                  <select class="form-control input-sm">
+                    <?php
+                      if(get_state())
+                      {
+                        foreach (get_state() as $key => $value)
+                        {
+                          ?>
+                            <option <?=($value['name']==$customer['b_state'])?"selected":"";?>
+                              value="<?=$value['name'];?>"><?=$value['name'];?></option>
+                          <?php
+                        }
+                      }
+                    ?>
+                  </select>
                 </div>
               </div>
             </div><div class="clearfix"></div><br>
-             <div class="col-md-6 padding-zero">
+            <div class="col-md-6 padding-zero">
               <div class="form-group">
                 <label class="col-md-4">Country</label>
                 <div class="col-md-8">
-                  <input type="text" name="country" class="form-control required" value="<?=$customer['b_country'];?>">
+                  <select class="form-control input-sm">
+                    <?php
+                      if(get_country())
+                      {
+                        foreach (get_country() as $key => $value)
+                        {
+                          ?>
+                            <option <?=($value['name']==$customer['b_country'])?"selected":"";?>
+                              value="<?=$value['name'];?>"><?=$value['name'];?></option>
+                          <?php
+                        }
+                      }
+                    ?>
+                  </select>
                 </div>
               </div>
             </div>
@@ -245,7 +285,20 @@
               <div class="form-group">
                 <label class="col-md-4">State</label>
                 <div class="col-md-8">
-                  <input type="text" name="s_state" class="form-control required" value="<?=$customer['s_state'];?>">
+                  <select class="form-control input-sm" name="s_state">
+                    <?php
+                      if(get_state())
+                      {
+                        foreach (get_state() as $key => $value)
+                        {
+                          ?>
+                            <option <?=($value['name']==$customer['s_state'])?"selected":"";?>
+                              value="<?=$value['id'];?>"><?=$value['name'];?></option>
+                          <?php
+                        }
+                      }
+                    ?>
+                  </select>
                 </div>
               </div>
             </div><div class="clearfix"></div><br>
@@ -253,7 +306,20 @@
               <div class="form-group">
                 <label class="col-md-4">Country</label>
                 <div class="col-md-8">
-                  <input type="text" name="s_country" class="form-control required" value="<?=$customer['s_country'];?>">
+                   <select class="form-control input-sm" name="s_country">
+                    <?php
+                      if(get_country())
+                      {
+                        foreach (get_country() as $key => $value)
+                        {
+                          ?>
+                            <option <?=($value['name']==$customer['s_country'])?"selected":"";?>
+                              value="<?=$value['id'];?>"><?=$value['name'];?></option>
+                          <?php
+                        }
+                      }
+                    ?>
+                  </select>
                 </div>
               </div>
             </div>
@@ -405,7 +471,7 @@
     }
   });
 
-$(".update_so_cart").click(function(){
+  $(".update_so_cart").click(function(){
     form = $("form#CartSOForm").serialize();
     $.ajax({
       type:"POST",
@@ -420,4 +486,21 @@ $(".update_so_cart").click(function(){
     });
   });
 
+  $(".remove_so_cart").click(function(){
+    rowid = $(this).attr("data-id");
+    con = confirm("Are you sure want to remove?");
+    if(con)
+    {
+      $.ajax({
+        type:"POST",
+        url:base_url+'dashboard/remove_so_cart',
+        data:{rowid:rowid},
+        dataType:'json',
+        success:function(data)
+        {
+          $(".cart-table table").html(data.cart);
+        }
+      });
+    }
+  });
 </script>

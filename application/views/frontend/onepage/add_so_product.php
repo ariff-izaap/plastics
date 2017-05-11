@@ -3,18 +3,14 @@
 	<div class="row">
 	<div class="col-md-12">
 		<div class="form-group">
-			<label>Vendor : <b><?=get_vendor_by_id($vendor_id)[0]['business_name'];?></b></label>
-		</div>
-		<div class="clearfix"></div>
-		<div class="form-group">
 			<label class="col-md-2 padding-zero">Product: </label>
 			<div class="col-md-10">
 				<select class="select2_sample2 form-comtrol" name="product" data-placeholder="--Select--">
 					<option value="">--Select--</option>
 					<?php
-						if(get_products_by_vendor($vendor_id))
+						if(get_products())
 						{
-							foreach (get_products_by_vendor($vendor_id) as $key => $value)
+							foreach (get_products() as $key => $value)
 							{
 								?>
 									<option value="<?=$value['id'];?>"><?=$value['name']." - ".displayData($value['wholesale_price'],'money');?></option>

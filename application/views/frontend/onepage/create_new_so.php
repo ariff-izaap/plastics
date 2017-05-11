@@ -6,9 +6,10 @@
       <h4 class="modal-title">Create SO</h4>
     </div>
     <div class="modal-body" style="max-height: 400px;overflow: auto;">
+    <input type="hidden" name="po_vendor_id" class="so_vendor_id" value="<?=$vendor_id;?>">
       <div class="row">
-				<div class="col-md-12">					
-						<table class="table table-bordered table-hover" style="max-height: 100px;overflow: auto;">
+				<div class="col-md-12" style="max-height: 200px;overflow: auto;">
+						<table class="table table-bordered table-hover">
 							<thead>
 								<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>
 								<th>Available Quantity</th><th>Needed Quantity</th><th>Action</th>
@@ -29,10 +30,10 @@
 														<td><?=displayData($value['wholesale_price'],'money');?></td>
 														<td><?=$value['quantity'];?></td>
 														<td>
-															<input type="number" name="qty" value="1" class="form-control qty_<?=$value['p_id'];?>" max="10" min="1">
+															<input type="number" name="qty" value="1" class="form-control qty_<?=$value['product_id'];?>" max="10" min="1">
 														</td>
 														<td>
-															<a href="javascript:void(0);" class="btn btn-info add-so-cart" data-product-id="<?=$value['p_id'];?>"
+															<a href="javascript:void(0);" class="btn btn-info add-so-cart" data-product-id="<?=$value['product_id'];?>"
 															data-product-name="<?=$value['name'];?>" data-product-sku="<?=$value['sku'];?>" data-product-price="<?=$value['wholesale_price'];?>">
 																<i class="fa fa-plus"></i> Add Cart
 															</a>
@@ -43,8 +44,7 @@
 										}
 									?>
 							</tbody>
-						</table>
-					
+						</table>		
 				</div>
 				<div class="col-md-12 cart-table">
 					<h2 class="col-md-8">Cart</h2>

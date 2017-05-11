@@ -130,6 +130,11 @@ class Onepage_model extends App_model
 		return $this->db->insert_id();
 	}
 
+	public function delete($where,$table)
+	{
+		$this->db->where($where);
+		$this->db->delete($table);
+	}
 	public function update($where,$data,$table)
 	{
 		$this->db->where($where);
@@ -213,5 +218,27 @@ class Onepage_model extends App_model
 	// 	$q = $this->db->get('product');
 	// 	return $q->row_array();	
 	// }
+
+	public function get_so_total($id)
+	{
+		$this->db->where($id);
+		$this->db->select('sum(unit_price * qty) as total_amt,count(id) as items');
+		$q = $this->db->get('sales_order_item');
+		return $q->row_array();
+	}
+	public function get_po_total($id)
+	{
+		$this->db->where($id);
+		$this->db->select('sum(unit_price * qty) as total_amt,count(id) as items');
+		$q = $this->db->get('purchase_order_item');
+		return $q->row_array();
+	}
+
+	public function select($where,$table)
+	{
+		$this->db->where($where);
+		$q = $this->db->get($table);
+		return $q->row_array();
+	}
 }
 ?>

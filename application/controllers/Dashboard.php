@@ -27,7 +27,7 @@ class Dashboard extends Admin_Controller
       $this->data['vendors'] = $this->onepage_model->get_vendor_by_salesman($salesman_id,$customer);
       $output['content'] = $this->load->view('frontend/onepage/table_list',$this->data,true);
       $output['status'] = "success";
-      // $output['msg'] = $this->data['vendors'];
+      $output['msg'] = $this->data['vendors'];
       $this->_ajax_output($output,TRUE);
     }
 
@@ -77,6 +77,7 @@ class Dashboard extends Admin_Controller
     {
       $po_id = $this->input->post('po_id');
       $this->data['po_details'] = $this->onepage_model->get_po_details($po_id);
+      $this->data['logs'] = get_logs("purchase",$po_id);
       $this->data['po'] = $this->purchase_model->get_purchased_order($po_id);
       $output['content'] = $this->load->view('frontend/onepage/po_details',$this->data,true);
       $output['msg'] = $this->data['po_details'];
@@ -121,10 +122,12 @@ class Dashboard extends Admin_Controller
         $up['qty'] = $old_qty + $form['quantity'];
         $up['updated_id'] = get_current_user_id();
         $up['updated_date'] = date("Y-m-d H:i:s");
+        $log = log_history($form['po_id'],"purchase_order","#".$form['po_id']." Product <b>".$ins['name']."</b> has been updated with quantity ".$up['qty'].".");
         $update = $this->purchase_model->update(array("product_id"=>$form['product'],"po_id"=>$form['po_id']),$up,"purchase_order_item");
       }
       else
       {
+        $log = log_history($form['po_id'],"purchase_order","#".$form['po_id']." Product <b>".$ins['name']."</b> has been added with quantity ".$form['quantity'].".");
         $add = $this->onepage_model->insert($ins,"purchase_order_item");
       }
       $this->data['products'] = $this->onepage_model->get_po_details($form['po_id']);
@@ -136,7 +139,7 @@ class Dashboard extends Admin_Controller
       $up1['total_amount'] = array_sum($tot);
       $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up1,"purchase_order");
 
-      $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart'] = $this->load->view('frontend/onepage/view_po_cart',$this->data,true);
       $output['cart_total'] = displayData(array_sum($tot),'money');
       $output['status'] = "success";
       $output['message'] = "Product Added Successfully.";
@@ -149,6 +152,7 @@ class Dashboard extends Admin_Controller
       $ins['qty'] = $form['quantity'];
       $ins['so_id'] = $form['so_id'];
       $ins['vendor_id'] = $form['vendor_id'];
+      $pname = get_product_name($form['product'])['name'];
       $ins['unit_price'] = get_product_price($form['product']);
       $ins['item_status'] = "NEW";
       $ins['created_id'] = get_current_user_id();
@@ -162,10 +166,12 @@ class Dashboard extends Admin_Controller
         $up['qty'] = $old_qty + $form['quantity'];
         $up['updated_id'] = get_current_user_id();
         $up['updated_date'] = date("Y-m-d H:i:s");
+        $log = log_history($form['so_id'],"sales_order","#".$form['so_id']." Product <b>".$pname."</b> has been updated with quantity ".$up['qty'].".");
         $update = $this->purchase_model->update(array("product_id"=>$form['product'],"so_id"=>$form['so_id']),$up,"sales_order_item");
       }
       else
       {
+        $log = log_history($form['so_id'],"sales_order","#".$form['so_id']." Product <b>".$pname."</b> has been added with quantity ".$form['quantity'].".");
         $add = $this->onepage_model->insert($ins,"sales_order_item");
       }
       $po = $this->purchase_model->select_multiple(array("so_id"=>$form['so_id']),"sales_order_item");
@@ -176,7 +182,7 @@ class Dashboard extends Admin_Controller
       $up1['total_amount'] = array_sum($tot);
       $this->data['products'] = $this->onepage_model->get_so_details($form['so_id']);
       $up_id = $this->purchase_model->update(array("id"=>$form['so_id']),$up1,"sales_order");
-      $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart'] = $this->load->view('frontend/onepage/view_so_cart',$this->data,true);
       $output['cart_total'] = displayData(array_sum($tot),'money');
       // $output['content']= $form['quantity'];
       $output['status'] = "success";
@@ -191,6 +197,9 @@ class Dashboard extends Admin_Controller
       {
         $up['qty'] = $value;
         $id = $key;
+        $pid = $this->onepage_model->select(array("id"=>$id,"po_id"=>$form['po_id']),"purchase_order_item");
+        $pname = get_product_name($pid['product_id'])['name'];
+        $log = log_history($form['po_id'],"purchase_order","<b>#".$form['po_id']."</b> Product <b>".$pname."</b> has been updated with quantity ".$value.".");
         $up_id = $this->purchase_model->update(array("id"=>$id),$up,"purchase_order_item");
       }
       $po = $this->purchase_model->select_multiple(array("po_id"=>$form['po_id']),"purchase_order_item");
@@ -201,7 +210,7 @@ class Dashboard extends Admin_Controller
       $up1['total_amount'] = array_sum($tot);
       $this->data['products'] = $this->onepage_model->get_po_details($form['po_id']);
       $up_id = $this->purchase_model->update(array("id"=>$form['po_id']),$up1,"purchase_order");
-      $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart'] = $this->load->view('frontend/onepage/view_po_cart',$this->data,true);
       $output['cart_total'] = displayData(array_sum($tot),'money');
       $output['form'] = $form;
       $output['status'] = "success";
@@ -223,7 +232,7 @@ class Dashboard extends Admin_Controller
       $so_id = $this->input->post('so_id');
       $this->data['so_details'] = $this->onepage_model->get_so_details($so_id);
       $this->data['so'] = $this->onepage_model->get_sales_order($so_id);
-      // echo "<pre>";print_r($this->data['so']);exit;
+      $this->data['logs'] = get_logs("sales_order",$so_id);
       $output['content'] = $this->load->view('frontend/onepage/so_details',$this->data,true);
       $output['msg'] = $this->data['so_details'];
       $this->_ajax_output($output,TRUE);
@@ -237,6 +246,9 @@ class Dashboard extends Admin_Controller
       {
         $up['qty'] = $value;
         $id = $key;
+        $pid = $this->onepage_model->select(array("id"=>$id,"so_id"=>$form['so_id']),"sales_order_item");
+        $pname = get_product_name($pid['product_id'])['name'];
+        $log = log_history($form['so_id'],"sales_order","<b>#".$form['so_id']."</b> Product <b>".$pname."</b> has been updated with quantity ".$value.".");
         $up_id = $this->purchase_model->update(array("id"=>$id),$up,"sales_order_item");
       }
       $po = $this->purchase_model->select_multiple(array("so_id"=>$form['so_id']),"sales_order_item");
@@ -247,7 +259,7 @@ class Dashboard extends Admin_Controller
       $up1['total_amount'] = array_sum($tot);
       $this->data['products'] = $this->onepage_model->get_so_details($form['so_id']);
       $up_id = $this->purchase_model->update(array("id"=>$form['so_id']),$up1,"sales_order");
-      $output['cart'] = $this->load->view('frontend/onepage/view_cart',$this->data,true);
+      $output['cart'] = $this->load->view('frontend/onepage/view_so_cart',$this->data,true);
       $output['cart_total'] = displayData(array_sum($tot),'money');
       $output['form'] = $form;
       $output['status'] = "success";
@@ -453,6 +465,7 @@ class Dashboard extends Admin_Controller
       $up_order = $this->onepage_model->update(array('id'=>$po_id),$up,"purchase_order");
       $this->data['order_st'] = "created";
       $this->data['po'] = $this->onepage_model->get_po_history($form['vendor_id']);
+      $log = log_history($po_id,"purchase_order","<b>#".$po_id."</b> Purchase Order has been created.");
       $output['content'] = $this->load->view('frontend/onepage/po_history',$this->data,true);
       $output['msg'] = $ins;
       $this->cart->destroy();
@@ -547,6 +560,7 @@ class Dashboard extends Admin_Controller
     public function checkout_so()
     {
       $vendor_id = $this->input->post('vendor_id');
+      $this->data['customer'] = $this->onepage_model->get_customer_info($vendor_id);
       $this->data['vendor_id'] = $vendor_id;
       $output['status'] = "success";
       $output['content'] = $this->load->view('frontend/onepage/checkout_so',$this->data,true);
@@ -576,6 +590,11 @@ class Dashboard extends Admin_Controller
       $ins['so_instructions'] = $form['so_instructions'];
       $ins['billing_address_id'] = $form['billing_id'];
       $ins['shipping_address_id'] = $form['ship_id'];
+      $ins['cod_fee'] = $form['cod_fee'];
+      $ins['salesman_id'] = get_current_user_id();
+      $ins['freight_paid'] = $form['freight_paid'];
+      $ins['amount'] = $form['amount'];
+      $ins['add_amount'] = $form['add_amount'];
       $ins['updated_date'] = date("Y-m-d H:i:s");
       $ins['created_date'] = date("Y-m-d H:i:s");
       $ins['created_id'] = get_current_user_id();
@@ -608,10 +627,26 @@ class Dashboard extends Admin_Controller
       $shipment_id = $this->onepage_model->insert($ins2,"shipment");
       $up['shipment_id'] = $shipment_id;
       $update = $this->onepage_model->update(array("so_id"=>$so_id),$up,"sales_order_item");
+
+      /*Shipping Address to store in ordered_address table*/
+      $ins3['name'] = $form['s_name'];
+      $ins3['phone'] = $form['s_mobile'];
+      $ins3['address1'] = $form['s_address1'];
+      $ins3['address2'] = $form['s_address2'];
+      $ins3['city'] = $form['s_city'];
+      $ins3['state'] = $form['s_state'];
+      $ins3['country'] = $form['s_country'];
+      $ins3['zipcode'] = $form['s_zipcode'];
+      $addres_id = $this->onepage_model->insert($ins3,"ordered_address");
+      $up2['order_address_id'] = $addres_id;
+      $update2 = $this->onepage_model->update(array("id"=>$so_id),$up2,"sales_order");
+
       $this->data['order_st'] = "created";
       $this->data['so'] = $this->onepage_model->get_so_history($form['vendor_id']);
+      $log = log_history($so_id,"sales_order","<b>#".$so_id."</b> Sales Order has been created.");
       $output['content'] = $this->load->view('frontend/onepage/so_history',$this->data,true);
-      // $output['msg'] = $ins1;
+      $output['cart'] = $this->cart->contents();
+      $output['msg'] = $ins1;
       $this->cart->destroy();
       $this->_ajax_output($output,TRUE);
     }
@@ -747,6 +782,7 @@ class Dashboard extends Admin_Controller
       $output['status'] = "success";
       $this->data['po_details'] = $this->onepage_model->get_po_details($po_id);
       $this->data['po'] = $this->purchase_model->get_purchased_order($po_id);
+      $log = log_history($po_id,"purchase_order","<b>#".$po_id."</b> Purchase Order status has been updated.");
       $output['content'] = $this->load->view('frontend/onepage/po_details',$this->data,true);
       $this->_ajax_output($output,true);
       
@@ -760,8 +796,48 @@ class Dashboard extends Admin_Controller
       $update = $this->onepage_model->update(array("id"=>$so_id),$up,"sales_order");
       $this->data['so_details'] = $this->onepage_model->get_so_details($so_id);
       $this->data['so']  = $this->onepage_model->get_sales_order($so_id);
+      $log = log_history($so_id,"sales_order","<b>#".$so_id."</b> Sales Order status has been updated.");
       $output['status']  = "success";
       $output['content'] = $this->load->view('frontend/onepage/so_details',$this->data,true);
+      $this->_ajax_output($output,true);
+    }
+
+    public function remove_so_product()
+    {
+      $so_id = $this->input->post('so_id');
+      $id = $this->input->post('rowid');
+      $pid = $this->onepage_model->select(array("id"=>$id,"so_id"=>$so_id),"sales_order_item");
+      $del = $this->onepage_model->delete(array("id"=>$id),"sales_order_item");
+      $so = $this->onepage_model->get_so_total(array("so_id"=>$so_id));
+      $up['total_amount'] = $so['total_amt'];
+      $up['total_items'] = $so['items'];
+      $update = $this->onepage_model->update(array("id"=>$so_id),$up,"sales_order");
+      $this->data['so_details'] = $this->onepage_model->get_so_details($so_id);
+      $this->data['so'] = $this->onepage_model->get_sales_order($so_id);
+      $pname = get_product_name($pid['product_id'])['name'];
+      $log = log_history($so_id,"sales_order","<b>#".$so_id."</b> Product <b>".$pname."</b> has been deleted.");
+      $this->data['logs'] = get_logs("saels_order",$so_id);
+      $output['content'] = $this->load->view('frontend/onepage/so_details',$this->data,true);
+      $output['status'] = $so;
+      $this->_ajax_output($output,true);
+    }
+
+    public function remove_po_product()
+    {
+      $po_id = $this->input->post('po_id');
+      $id = $this->input->post('rowid');
+      $pid = $this->onepage_model->select(array("id"=>$id,"po_id"=>$po_id),"purchase_order_item");
+      $del = $this->onepage_model->delete(array("id"=>$id),"purchase_order_item");
+      $po = $this->onepage_model->get_po_total(array("po_id"=>$po_id));
+      $up['total_amount'] = $po['total_amt'];
+      $update = $this->onepage_model->update(array("id"=>$po_id),$up,"purchase_order");
+      $this->data['po_details'] = $this->onepage_model->get_po_details($po_id);
+      $this->data['po'] = $this->purchase_model->get_purchased_order($po_id);
+      $pname = get_product_name($pid['product_id'])['name'];
+      $log = log_history($po_id,"purchase_order","<b>#".$po_id."</b> Product <b>".$pname."</b> has been deleted.");
+      $this->data['logs'] = get_logs("purchase",$po_id);
+      $output['content'] = $this->load->view('frontend/onepage/po_details',$this->data,true);
+      $output['status'] = $pname;
       $this->_ajax_output($output,true);
     }
 }

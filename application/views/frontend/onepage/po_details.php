@@ -171,8 +171,8 @@
 						<input type="hidden" name="po_id" class="po_id" value="<?=$po_details[0]['po_id'];?>">
 						<table class="table table-hover table-bordered product-cart">
 							<thead>
-								<th>Product Name</th><th>Form</th><th>Color</th><th>Packaging</th><th>Unit Price</th><th>Quantity</th>
-								<th>Total</th>
+								<th>Action</th><th>Product Name</th><th>Form</th><th>Color</th><th>Packaging</th><th>Unit Price</th>
+								<th>Quantity</th><th>Total</th>
 							</thead>
 							<tbody>
 								<?php
@@ -183,6 +183,12 @@
 										$tot[] = $value['unit_price'] * $value['qty'];
 										?>
 											<tr>
+												<td>
+													<a href="javascript:void(0);" class="btn btn-danger" 
+														onclick="remove_po_product(<?=$value['po_id'];?>,<?=$value['rowid'];?>);">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
 												<td><?=$value['name'];?></td>
 												<td><?=$value['form'];?></td>
 												<td><?=$value['color'];?></td>
@@ -199,7 +205,7 @@
 								?>
 							</tbody>
 							<tfoot>
-								<td colspan="6" class="text-right">Total</td>
+								<td colspan="7" class="text-right">Total</td>
 								<td class="cart-total"><?=displayData(array_sum($tot),'money');?></td>
 							</tfoot>
 						</table>
@@ -216,7 +222,40 @@
 					<label><strong>PO Message : </strong><?=$po['po_message'];?></label>
 				</div>
 			</div>
+			<div class="row">
+	  		<div class="col-md-12">
+	  			<button class="btn btn-info" onclick="show_logs();">Show Logs</button>
+	  		</div><br><br><br>
+		  	<div class="col-md-12 LogDiv" style="display: none;">
+		    	<table class="table table-hover table-bordered">
+		    		<thead>
+		    			<th>SNO</th>
+		    			<th>Log Description</th>
+		    			<th>Date</th>
+		    		</thead>
+		    		<tbody>
+		    			<?php
+		    				if($logs)
+		    				{
+		    					$i = 1;
+		    					foreach ($logs as $key => $value)
+		    					{
+		    						?>
+		    							<tr>
+		    								<td><?=$i++;?></td>
+		    								<td><?=$value['action'];?></td>
+		    								<td><?=displayData($value['created_date'],'datetime');?></td>
+		    							</tr>
+		    						<?php
+		    					}
+		    				}
+		    			?>
+		    		</tbody>
+		    	</table>
+		    </div>
+		  </div>
 	  </div>
+
 	  <div class="modal-footer">
 	    <div class="col-md-2 pull-right">
 	      <button class="btn btn-danger close_po_details pull-right">Close</button>

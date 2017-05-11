@@ -417,3 +417,47 @@ function save_so_changes(id)
 		}
 	});
 }
+
+function remove_so_product(so_id,rowid)
+{
+  con = confirm("Are you sure want to remove?");
+  if(con)
+  {
+    $.ajax({
+	    type:"POST",
+	    url:base_url+'dashboard/remove_so_product',
+	    data:{rowid:rowid,so_id:so_id},
+	    dataType:'json',
+	    success:function(data)
+	    {
+	    	console.log(data);
+	      $("#SOProcess").html(data.content);
+	    }
+	  });
+	}
+}
+
+
+function remove_po_product(po_id,rowid)
+{
+  con = confirm("Are you sure want to remove?");
+  if(con)
+  {
+    $.ajax({
+	    type:"POST",
+	    url:base_url+'dashboard/remove_po_product',
+	    data:{rowid:rowid,po_id:po_id},
+	    dataType:'json',
+	    success:function(data)
+	    {
+	    	console.log(data);
+	      $("#POProcess").html(data.content);
+	    }
+	  });
+	}
+}
+
+function show_logs()
+{
+	$(".LogDiv").slideToggle();
+}
