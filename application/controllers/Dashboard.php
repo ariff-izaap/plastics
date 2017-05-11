@@ -485,7 +485,7 @@ class Dashboard extends Admin_Controller
       $output['cart'] = $this->load->view('frontend/onepage/cart_po_content',$this->data,true);
       $this->_ajax_output($output,TRUE);
     }
-     public function add_so_cart()
+    public function add_so_cart()
     {
       $form = $this->input->post();
       $data = array(
@@ -513,21 +513,7 @@ class Dashboard extends Admin_Controller
       $output['msg'] = $this->cart->contents();
       $this->_ajax_output($output,TRUE);
     }
-    // public function update_so_cart()
-    // {
-    //   $rowid = $this->input->post('rowid');
-    //   $qty = $this->input->post('qty');
-    //   $data = array(
-    //     'rowid'  => $rowid,
-    //     'qty'    => $qty);
-    //   $this->cart->update($data);
-    //   $this->data['cart'] = $this->cart->contents();
-    //   $this->data['total'] = $this->cart->total();
-    //   $output['cart'] = $this->load->view('frontend/onepage/cart_so_content',$this->data,true);
-    //   $output['status'] = "success";
-    //   $output['msg'] = $this->cart->contents();
-    //   $this->_ajax_output($output,TRUE);
-    // }
+   
     public function update_so_cart()
     {    
       try
@@ -559,7 +545,7 @@ class Dashboard extends Admin_Controller
 
     public function checkout_so()
     {
-      $vendor_id = $this->input->post('vendor_id');
+
       $this->data['customer'] = $this->onepage_model->get_customer_info($vendor_id);
       $this->data['vendor_id'] = $vendor_id;
       $output['status'] = "success";
