@@ -5,10 +5,10 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
       <h4 class="modal-title">Create SO</h4>
     </div>
-    <div class="modal-body" style="max-height: 400px;overflow: auto;">
+    <div class="modal-body">
     <input type="hidden" name="po_vendor_id" class="so_vendor_id" value="<?=$vendor_id;?>">
       <div class="row">
-				<div class="col-md-12" style="max-height: 200px;overflow: auto;">
+				<div class="col-md-12 so-list">
 						<table class="table table-bordered table-hover">
 							<thead>
 								<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>

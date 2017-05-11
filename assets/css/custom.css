@@ -776,7 +776,19 @@ background-color: #e6e6e6;
 }
 	
 .dashboard1 .panel-heading, .dashboard .panel-heading { min-height:425px !important;}
-	
+.create-form {
+    margin-bottom: 6px;
+}
+.po-list table, .so-list table{
+    display: inline-block;
+    max-height: 233px;
+    overflow: auto;
+}	
+.cart-table {
+    max-height: 180px;
+    overflow: auto;
+}
+
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}

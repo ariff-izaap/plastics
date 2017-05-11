@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-lg create-po">
     <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
@@ -8,12 +8,12 @@
     <div class="modal-body">
       <div class="row">
 				<div class="col-md-12">
-					<div class="form-group">
+					<div class="form-group create-form">
 						<label>Vendor : <b><?=get_vendor_by_id($vendor_id)[0]['business_name'];?></b></label>
 						<input type="hidden" name="po_vendor_id" id="povendorid" value="<?=$vendor_id;?>">
 					</div>
 				</div>
-				<div class="col-md-12">
+				<div class="col-md-12 po-list">
 					<table class="table table-bordered table-hover">
 						<thead>
 							<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>
