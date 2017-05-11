@@ -10,7 +10,7 @@
 <button type="button" class="btn" onclick="inventory_sub();">Create Inventory</button>
 -->
         
-<a class="btn active access-level" onclick="inventory_sub('create','','Add Inventory');" capsOn><i class="fa fa-plus"></i>Create Inventory</a>
+<a class="btn btn-success access-level" onclick="inventory_sub('create','','Add Inventory');" capsOn><i class="fa fa-plus"></i>Create Inventory</a>
 
     </div>
   </div>

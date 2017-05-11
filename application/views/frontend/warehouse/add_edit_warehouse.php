@@ -3,7 +3,7 @@
 			<div class="col-md-6 breadcrumbs-span">
 				<?php echo set_breadcrumb(); ?>
 			</div>
-		<a href="<?=site_url('warehouse');?>" class="btn pull-right">Back</a>
+		<a href="<?=site_url('warehouse');?>" class="btn btn-danger pull-right">Back</a>
 	</div>
 </div>
 <?php display_flashmsg($this->session->flashdata()); ?>

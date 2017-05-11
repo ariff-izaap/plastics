@@ -412,7 +412,6 @@ class Dashboard extends Admin_Controller
       $ins['pickup_date'] = $form['pickup_date'];
       $ins['release_to_sold'] = "No";
       $ins['is_paid'] = "NOT PAID";
-      $ins['ordered_address_id'] = $form['warehouse_id'];
       $ins['ship_type_id'] = $form['ship_method'];
       $ins['carrier_id'] = $form['ship_service'];
       $ins['credit_type_id'] = $form['credit_type'];
@@ -439,6 +438,19 @@ class Dashboard extends Admin_Controller
         $ins['updated_id'] = get_current_user_id();
         $ins_id = $this->onepage_model->insert($ins1,"purchase_order_item");
       }
+      /* Shipping Address to Store in ordered_address table*/
+      $ins2['name'] = $form['wname'];
+      $ins2['address1'] = $form['address1'];
+      $ins2['address2'] = $form['address2'];
+      $ins2['city'] = $form['city'];
+      $ins2['state'] = $form['state'];
+      $ins2['country'] = $form['country'];
+      $ins2['zipcode'] = $form['zipcode'];
+      $ins2['phone'] = $form['phone'];
+      $ins2['email'] = $form['email'];
+      $address_id = $this->onepage_model->insert($ins2,"ordered_address");
+      $up['ordered_address_id'] = $address_id;
+      $up_order = $this->onepage_model->update(array('id'=>$po_id),$up,"purchase_order");
       $this->data['order_st'] = "created";
       $this->data['po'] = $this->onepage_model->get_po_history($form['vendor_id']);
       $output['content'] = $this->load->view('frontend/onepage/po_history',$this->data,true);

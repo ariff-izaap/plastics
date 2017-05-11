@@ -8,7 +8,7 @@
     <div class="modal-body" style="max-height: 400px;overflow: auto;">
       <div class="row">
 				<div class="col-md-12">					
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered table-hover" style="max-height: 100px;overflow: auto;">
 							<thead>
 								<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>
 								<th>Available Quantity</th><th>Needed Quantity</th><th>Action</th>

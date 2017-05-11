@@ -1,7 +1,7 @@
  <div class="row">
     <div class="breadcrumbs">
       <?php echo set_breadcrumb(); ?>
-        <a href="<?php echo $this->previous_url;?>" class="btn btn-sm pull-right"><i class="back_icon"></i> Back</a>
+        <a href="<?php echo $this->previous_url;?>" class="btn btn-danger pull-right"><i class="back_icon"></i> Back</a>
     </div>
   </div>
   <div class="container category">
@@ -26,11 +26,11 @@
         <input type="hidden" name="edit_id" class="form-control" id="edit_id" value="<?php echo $editdata['id'];?>" />
        
     </div>
-     <div class="form-group col-md-4 col-md-offset-4">   
-          <input type="reset" class="form-control btn btn-block" value="RESET" />
+     <div class="form-group col-md-2 col-md-offset-4">   
+          <input type="reset" class="btn btn-warning" value="RESET" />
         </div>
-        <div class="form-group col-md-4">
-          <button type="submit" class="btn btn-block">SAVE</button>
+        <div class="form-group col-md-4 pull-left">
+          <button type="submit" class="btn btn-success">SAVE</button>
         </div>
     </div>
   </form>

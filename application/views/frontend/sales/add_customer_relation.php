@@ -5,7 +5,7 @@
 	      <!--<a href="<?php echo $this->previous_url;?>" class="btn btn-sm"><i class="back_icon"></i> Back</a>-->
 	    </div>
 	    <div class="col-md-6 action-buttons text-right">
-	      <a href="<?php echo site_url('salesorder/customer_relation');?>" class="btn" capsOn>Back</a>
+	      <a href="<?php echo site_url('salesorder/customer_relation');?>" class="btn btn-danger" capsOn>Back</a>
 	  </div>
 	</div>
 	<?php display_flashmsg($this->session->flashdata()); ?>
@@ -139,7 +139,7 @@
 	  	        	</div>
 	    	      	<div class="row">
 	          		<div class="col-md-1 pull-right">
-	          	 		<button type="submit" class="btn btnNext btn-block next-btn">Next<span class="glyphicon glyphicon-menu-right"></span></button>
+	          	 		<button type="submit" class="btn btnNext btn-success next-btn">Next <i class="fa fa-angle-right"></i></button>
 	          	 	</div>
 	      	    	</div>
 	          	</div>
@@ -190,8 +190,8 @@
 	  	        	</div>
 		          	<div class="row">
 		          		<div class="col-md-2 pull-right sales-pagi">
-		        				<button type="submit" class="btn btn-block">Next<span class="glyphicon glyphicon-menu-right"></button>
-		        				<button type="button" class="btn btnPrevious btn-block"><span class="glyphicon glyphicon-menu-left">Previous</button>
+		        				<button type="submit" class="btn btn-success">Next <i class="fa fa-angle-right"></i></button>
+		        				<button type="button" class="btn btnPrevious btn-block"><i class="fa fa-angle-left"></i> Previous</button>
 		          		</div>
 		          	</div>
 		          </div>
@@ -493,7 +493,7 @@
 		          	<div class="row">
 		          		<div class="col-md-2 pull-right">
 		          			<button type="submit" class="btn btn-success access-level" name="submit"><i class="fa fa fa-life-saver"></i>Save</button>
-		          			<button type="button" class="btn btnPrevious btn-block access-level" style="display:inline; width:auto; height:34px;"><i class="fa fa-plus"></i>Previous</button>
+		          			<button type="button" class="btn btnPrevious btn-block access-level" style="display:inline; width:auto; height:34px;"><i class="fa fa-angle-left"></i> Previous</button>
 		          		</div>
 		          	</div>
 		          </div>	        

@@ -4,7 +4,7 @@
 				<?php echo set_breadcrumb(); ?>
 			</div>
 			<?php if($this->action->create==1){?>
-				<a href="<?=site_url('warehouse/add_edit_warehouse');?>" class="btn btn-block warehouse pull-right access-level"><i class="fa fa-plus"></i>Create Warehouse</a>
+				<a href="<?=site_url('warehouse/add_edit_warehouse');?>" class="btn btn-success warehouse pull-right access-level"><i class="fa fa-plus"></i>Create Warehouse</a>
 			<?php }?>
 	</div>
 </div>
