@@ -76,11 +76,11 @@
 					</thead>
 					<tbody>
 						<?php
-						// echo "<pre>";print_r($so['product_details']);echo "</pre>";
-						if($so['product_details'])
+						// echo "<pre>";print_r($so);echo "</pre>";
+						if($so['order_detail'])
 						{
 							$total[] = '';$qty[]='';
-							foreach ($so['product_details'][1] as $key => $value)
+							foreach ($so['order_detail'] as $key => $value)
 							{
 								$po_id = $value['po_id'];
 								$total[] = $value['qty'] * $value['unit_price'];

@@ -100,6 +100,30 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-md-12 padding-zero">
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="control-label">COD Fee : <b><?=($so['cod_fee'])?$so['cod_fee']:"NIL";?></b></label>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="col-md-8 control-label">Fright Paid: <b><?=($so['freight_paid'])?$so['freight_paid']:"NIL";?></b></label>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="control-label">Amount :<b><?=($so['amount'])?$so['amount']:"NIL";?></b>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label">Add. Amount :<b><?=($so['add_amount'])?$so['add_amount']:"NIL";?></b>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-8 pull-left succ_msg">
 				</div>
 				<div class="col-md-2 pull-right">
