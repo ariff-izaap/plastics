@@ -392,8 +392,12 @@ function save_po_changes(id)
 		success:function(data)
 		{
 			console.log(data);
-			bootbox.alert("Purchase Order updated successfully.");
+			html = '<div class="alert alert-dismissable alert-success">'+
+								'<button class="close" data-dismiss="alert">&times;</button>'+
+								'Sales order has been udpated successfully.'+
+							'</div>';
 			$("#POProcess").html(data.content);
+			$("#POProcess .succ_msg").html(html);
 		}
 	});
 
@@ -412,8 +416,12 @@ function save_so_changes(id)
 		success:function(data)
 		{
 			console.log(data);
-			bootbox.alert("Sales Order updated successfully.");
 			$("#SOProcess").html(data.content);
+			html = '<div class="alert alert-dismissable alert-success">'+
+					'<button class="close" data-dismiss="alert">&times;</button>'+
+					'Sales order has been udpated successfully.'+
+				'</div>';
+			$("#SOProcess .succ_msg").html(html);
 		}
 	});
 }

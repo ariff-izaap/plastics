@@ -98,6 +98,10 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 pull-left succ_msg">
+				</div>
 				<div class="col-md-2 pull-right">
 					<button class="btn pull-right btn-success" onclick="save_so_changes(<?=$so['id'];?>);">Save</button>
 				</div>
