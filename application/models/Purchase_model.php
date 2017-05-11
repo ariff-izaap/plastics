@@ -132,8 +132,8 @@ class Purchase_model extends App_model
 		$this->db->join("carrier d","a.carrier_id=d.id");
 		$this->db->join("credit_type e","a.credit_type_id=e.id");
 		$this->db->join("ordered_address f","a.ordered_address_id=f.id");
-		$this->db->join("country g","f.state=g.id");
-		$this->db->join("state h","f.country=h.id");
+		$this->db->join("country g","f.country=g.id");
+		$this->db->join("state h","f.state=h.id");
 		$this->db->join("address j","j.id=b.address_id");
 		$q = $this->db->get();
 		// echo $this->db->last_query();exit;
