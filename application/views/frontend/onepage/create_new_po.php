@@ -111,7 +111,7 @@
 	});
 
 	$(".checkout-po").click(function(){
-		 var vendorid = $("#povendorid").val();
+		var vendorid = $("#povendorid").val();
 		$("#POProcess .modal-body").html("<div class='text-center'><img src='"+base_url+"/assets/img/default.gif'></div>");
 			$.ajax({
 				type:"POST",
@@ -124,10 +124,9 @@
 				$("#POProcess").html(data.content);
 			}
 		});
-});
+  });
 
-
-$(".update_po_cart").click(function(){
+	$(".update_po_cart").click(function(){
 		form = $("form#CartPOForm").serialize();
 		$.ajax({
 			type:"POST",
