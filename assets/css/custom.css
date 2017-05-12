@@ -788,7 +788,10 @@ background-color: #e6e6e6;
     max-height: 180px;
     overflow: auto;
 }
-
+.succ_msg .alert-success {
+    margin: 0;
+    padding: 4px 30px;
+}
 @media (min-width:992px){
 .product-sel .formcontrol-box.ship-box .active-css{padding-left: 0;}
 .postal .form-group { margin-bottom: 0; padding: 0 8px 0 0;}
