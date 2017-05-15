@@ -28,7 +28,7 @@
 	table tbody tr{cursor: pointer;}
 	table tbody tr:hover{background:#ddd;}
 </style>
-<script>
+<script type="text/javascript">
 $(".po_history_btn").click(function(){
 		c_id = $(".customer_id").val();
 		$.ajax({

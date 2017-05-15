@@ -380,12 +380,12 @@
                             </td>
                             <td><?=displayData($value['subtotal'],'money');?></td>
                             <td>
-                              <a href="javascript:void(0);" class="btn btn-danger remove_po_cart" data-id="<?=$value['rowid'];?>">
+                              <a href="javascript:void(0);" class="btn btn-danger remove_so_cart" data-id="<?=$value['rowid'];?>">
                               <i class="fa fa-remove"></i></a>
                             </td>
                           </tr>
                         <?php
-                      } 
+                      }
                     }
                   ?>
               </tbody>
