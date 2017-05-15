@@ -18,15 +18,11 @@
 			  <div class="col-md-2 span-border ps_sec_blue">
 			    Total : <b><span class="order_total"><?=displayData($po['total_amount'],'money');?></span></b>
 			  </div>
-			  <div class="col-md-4 span-border nd_sec_yellow">
-			    <label class="col-md-5">Paid Status:</label>
-			    <div class="col-md-7">
-			    	<select class="form-control input-sm paid_status">
-			    		<option <?=($po['is_paid']=="PAID")?"selected":"";?> value="PAID">PAID</option>
-			    		<option <?=($po['is_paid']=="NOT PAID")?"selected":"";?> value="NOT PAID">NOT PAID</option>
-			    	</select>
-			    </div>
-			  </div>
+			  <div class="col-md-4 padding-zero">
+					<div class="form-group">
+						<label class="col-md-12 control-label">Vendor : <b><?=$po['vendor_name'];?></b></label>						
+					</div>
+				</div>
 			  <div class="col-md-3 span-border nd_sec_yellow">
 			    <label class="pull-left control-label">Payment Term:</label>
 			    <div class="col-md-6">
@@ -49,15 +45,19 @@
 			</div><br>
 			<div class="row">
 				<div class="col-md-12 padding-zero">
-					<div class="col-md-2 padding-zero">
+					<div class="col-md-3 span-border nd_sec_yellow">
+				    <label class="col-md-7">Paid Status:</label>
+				    <div class="col-md-5">
+				    	<select class="form-control input-sm paid_status">
+				    		<option <?=($po['is_paid']=="PAID")?"selected":"";?> value="PAID">PAID</option>
+				    		<option <?=($po['is_paid']=="NOT PAID")?"selected":"";?> value="NOT PAID">NOT PAID</option>
+				    	</select>
+				    </div>
+				  </div>
+					<div class="col-md-3">
 						<div class="form-group">
-							<label class="col-md-12 control-label">Vendor : <b><?=$po['vendor_name'];?></b></label>						
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label col-md-6">Shipment Service :</label>
-							<div class="col-md-6">
+							<label class="control-label col-md-4">Shipment </label>
+							<div class="col-md-8">
 								<select class="form-control input-sm shipment_service">
 					    		<?php
 					    		if(get_carrier())

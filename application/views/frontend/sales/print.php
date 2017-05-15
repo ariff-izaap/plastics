@@ -52,13 +52,13 @@
 			</div>
 		</div><br>
 		<div class="row">
-    	<div class="col-md-4">
+    	<div class="col-md-5 padding-zero">
     		<label>Shipment Type : <strong><?=get_shipping_type($so_details['shipping_type'])[0]['type'];?></strong></label>
     	</div>
     	<div class="col-md-4">
     		<label>Shipment Service : <strong><?=get_carrier($so_details['carrier'])[0]['name'];?></strong></label>
     	</div>
-    	<div class="col-md-4">
+    	<div class="col-md-3 text-right padding-zero">
     		<label>Payment Term : <strong><?=$so['payment_term_name'];?></strong></label>
     	</div>
     </div><br>
@@ -135,28 +135,27 @@
 </html>
 <style type="text/css">
 
-   	/*@import("<?=base_url();?>assets/css/bootstrap.min.css");*/
-		.container{width: 60%;}
-		.border{border: 2px solid black;border-radius: 5px;}
-		.box p{margin: 0;padding: 5px;}
+	.container{width: 60%;}
+	.border{border: 2px solid black;border-radius: 5px;}
+	.box p{margin: 0;padding: 5px;}
+	.padding-zero{padding: 0;}
+	.border-bottom{border-bottom:3px solid black;}
+	hr{border: 1px solid black;}
+	@media print
+	{
+		/*.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-12,.col-md-8{border: 1px solid red;}*/
+		.container{width: 90%;}
+		.col-md-8 {width: 66.66666667%;}
+		.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {float: left;}
+		.col-md-4 {width: 33.33333333%;}
+		.col-md-6 {width: 50%;}
+		.col-md-12 {width: 100%;}
+		.col-md-3 {width: 25%;}
+		.col-md-5 {width: 41.66666667%;}
 		.padding-zero{padding: 0;}
-		.border-bottom{border-bottom:3px solid black;}
 		hr{border: 1px solid black;}
-		@media print
-		{
-			/*.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-12,.col-md-8{border: 1px solid red;}*/
-			.container{width: 90%;}
-			.col-md-8 {width: 66.66666667%;}
-			.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {float: left;}
-			.col-md-4 {width: 33.33333333%;}
-			.col-md-6 {width: 50%;}
-			.col-md-12 {width: 100%;}
-			.col-md-3 {width: 25%;}
-			.col-md-5 {width: 41.66666667%;}
-			.padding-zero{padding: 0;}
-			hr{border: 1px solid black;}
-			.footer-btn{display: none;}
-		}
+		.footer-btn{display: none;}
+	}
 </style>
 <script type="text/javascript">
 	// window.print();

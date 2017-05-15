@@ -11,8 +11,8 @@
 					?>
 						<tr class="customer_row" onclick="get_customer_details(<?=$value['id'];?>);">
 							<td><?=$value['business_name'];?></td>
-							<td><?=$value['name'];?></td>
 							<td><?=$value['contact_value'];?></td>
+							<td><?=$value['name'];?></td>
 							<td><?=$value['city'];?></td>
 							<td><?=$value['email'];?></td>
 						</tr>

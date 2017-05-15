@@ -133,22 +133,22 @@
 			<div class="row">
 				<div class="col-md-6">
 					<table class="table table-bordered">
-					<thead class="greenbg_title txt_13">
-						<tr>
-							<th width="10%">Billing Information</th>
-						</tr>
-					</thead>
-					<tbody class="white_bg gray_bg">
-						<tr>
-							<td id="shipping_address" data-title="Billing Information Edit">
-								<address><strong><?=$so['name'];?></strong> <br><?=$so['address1'];?><br><?=$so['address2'];?>
-			            <br><?=$so['city'].",<br>".$so['state'];?><br>
-			            <?=$so['country']." - ".$so['zipcode'];?><br>
-			            <abbr title="Phone">P:</abbr> <?=$so['phone'];?><br>
-			          </address>
-							</td>
-						</tr>
-					</tbody>
+						<thead class="greenbg_title txt_13">
+							<tr>
+								<th width="10%">Billing Information</th>
+							</tr>
+						</thead>
+						<tbody class="white_bg gray_bg">
+							<tr>
+								<td id="shipping_address" data-title="Billing Information Edit">
+									<address><strong><?=$so['name'];?></strong> <br><?=$so['address1'];?><br><?=$so['address2'];?>
+				            <br><?=$so['city'].",<br>".$so['state'];?><br>
+				            <?=$so['country']." - ".$so['zipcode'];?><br>
+				            <abbr title="Phone">P:</abbr> <?=$so['phone'];?><br>
+				          </address>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 				<div class="col-md-6">
