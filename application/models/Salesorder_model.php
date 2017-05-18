@@ -181,6 +181,13 @@ class Salesorder_model extends App_model
     	
     } 
     
-    
+   function get_billing_address($cus_id)
+   {
+     $this->db->select("a.id");
+     $this->db->from("address a");
+     $this->db->join("customer c","c.address_id=a.id");
+     $this->db->where(array("c.id" => $cus_id));
+     return $this->db->get()->row_array();
+   }  
 }
 ?>

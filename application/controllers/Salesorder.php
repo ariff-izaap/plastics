@@ -174,14 +174,27 @@ class Salesorder extends Admin_Controller
           
           if($this->form_validation->run()){
               $ins_data = array();
-              $ins_data['customer_id']            = $this->input->post('customer_id');
+              $cus_id                             = $this->input->post('customer_id');
+              $billing_id                         = $this->input->post('billing_address_id');
+              $shipping_id                        = $this->input->post('shipping_address_id');
+               
+               if(empty($billing_id)){
+                 $bill_data  = $this->salesorder_model->get_billing_address($cus_id);
+                 $billing_id = $bill_data['id'];
+               } 
+               if(empty($shipping_id)){
+                 $ship_data   = $this->salesorder_model->get_where(array("customer_id" => $cus_id),"id","customer_location")->row_array();
+                 $shipping_id = $ship_data['id'];
+               }
+                
+              $ins_data['customer_id']            = $cus_id;
               $ins_data['salesman_id']            = get_current_user_id(); 
               $ins_data['shipping_type']          = $this->input->post('shipping_type');
               $ins_data['credit_type']            = $this->input->post('credit_type');  
               $ins_data['so_instructions']        = $this->input->post('so_instructions');
               $ins_data['bol_instructions']       = $this->input->post('bol_instructions');
-              $ins_data['shipping_address_id']    = $this->input->post('shipping_address_id');
-              $ins_data['billing_address_id']     = $this->input->post('billing_address_id');
+              $ins_data['shipping_address_id']    = $shipping_id;
+              $ins_data['billing_address_id']     = $billing_id;
              // $ins_data['type']                   = $this->input->post('type');
               $ins_data['order_status']           = "NEW";
               $ins_data['total_items']            = $this->cart->total_items();
@@ -190,6 +203,22 @@ class Salesorder extends Admin_Controller
               $ins_data['amount']                 = $this->input->post('amount');
               $ins_data['add_amount']             = $this->input->post('add_amount');
               $ins_data['total_amount']           = $total;
+              
+              //shipping address
+              $ship_new_data             = array();
+              $ship_first                = $this->input->post('ship_first_name');
+              $ship_last                 = $this->input->post('ship_last_name');
+              $ship_new_data['name']     = $ship_first." ".$ship_last;
+              $ship_new_data['first_name']= $ship_first;
+              $ship_new_data['last_name']= $ship_last;
+              $ship_new_data['address1'] = $this->input->post('ship_address1');
+              $ship_new_data['address2'] = $this->input->post('ship_address2');
+              $ship_new_data['city']     = $this->input->post('city');
+              $ship_new_data['state']    = $this->input->post('state');
+              $ship_new_data['country']  = $this->input->post('country');
+              $ship_new_data['zipcode']  = $this->input->post('zipcode');
+              $ship_new_data['phone']    = $this->input->post('phone');
+              $ship_new_data['email']    = $this->input->post('email');
               
               if($edit_id){
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
@@ -206,6 +235,12 @@ class Salesorder extends Admin_Controller
                 $ins_data['created_id']   = get_current_user_id();  
                 $so_new_id                = $this->salesorder_model->insert($ins_data,"sales_order");    
                 log_history($so_new_id,'Sales Order',"Order <b>#".$so_new_id."</b> has been created.");
+                
+                //add shipping location
+                $ship_location_id         = $this->salesorder_model->insert($ship_new_data,"ordered_address");
+                
+                //update shipping location id to sales order
+                $this->salesorder_model->update(array("id" => $so_new_id),array("order_address_id" => $ship_location_id));
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');

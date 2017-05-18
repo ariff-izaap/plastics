@@ -13,7 +13,7 @@ class Address_model extends App_model {
     function get_address_by_contact_id($contact_id)
 	{
 		$this->db->select('c.*');
-		$this->db->from('customer_location c');
+		$this->db->from('ordered_address c');
         $this->db->where('c.id',$contact_id);
 		return $this->db->get()->row_array();
 	}
