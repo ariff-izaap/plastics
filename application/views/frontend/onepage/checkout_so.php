@@ -112,7 +112,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 checkoutpo-form">
+          <div class="col-md-6 checkoutso-form">
             <h4 style="padding-left:14px;">Billing Information</h4><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">
@@ -238,7 +238,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 checkoutpo-form">
+          <div class="col-md-6 checkoutso-form">
             <h4 style="padding-left:14px;">Shipping Information</h4><br>
             <div class="col-md-6 padding-zero">
               <div class="form-group">

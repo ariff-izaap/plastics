@@ -59,7 +59,7 @@
 							<thead>
 								<th>Product</th><th>SKU</th><th>Unit Price</th><th>Quantity</th><th>Total</th>
 							</thead>
-							<tbody>			
+							<tbody>
 							</tbody>
 						</table>
 					</form>

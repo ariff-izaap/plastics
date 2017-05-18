@@ -426,7 +426,7 @@ $(".order-po-btn").click(function(){
 });
 
 $(".close-po-history").click(function(){
-	$("#POHistory").modal('close');
 	$("#POHistory").css('display','none');
+	$("#POHistory").modal('close');
 });
 </script>

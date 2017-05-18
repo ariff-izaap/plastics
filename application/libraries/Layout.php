@@ -24,8 +24,6 @@ class Layout {
     function __construct()
     {
         $this->CI =& get_instance();
-
-        
     }
 
     public function view($file_name, $type = 'default')

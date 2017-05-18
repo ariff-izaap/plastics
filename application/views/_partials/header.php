@@ -59,8 +59,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
-          
+          <a class="navbar-brand" href="#">          
             <img src="<?php echo include_img_path();?>logo_new.png" alt="Independent Plastics" />
           </a>
         </div>

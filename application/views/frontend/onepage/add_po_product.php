@@ -28,7 +28,7 @@
 		<div class="form-group">
 			<label class="col-md-2 padding-zero">Quantity:</label>
 			<div class="col-md-10">
-				<input type="number" max="10" min="1" name="quantity" class="form-control" placeholder="Quantity">
+				<input type="number" max="10" min="1" name="quantity" autocomplete="off" class="form-control" placeholder="Quantity">
 				<input type="hidden" name="po_id" value="<?=$po_id;?>">
 			</div>
 		</div>

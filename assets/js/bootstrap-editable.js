@@ -2857,7 +2857,7 @@ $(function(){
             //now `clear` is positioned via css
             if(this.$clear) {
                 //can position clear button only here, when form is shown and height can be calculated
-//                var h = this.$input.outerHeight(true) || 20,
+ //                var h = this.$input.outerHeight(true) || 20,
                 var h = this.$clear.parent().height(),
                     delta = (h - this.$clear.height()) / 2;
                     
@@ -6742,7 +6742,7 @@ $(function(){
             var that = this;
 
             items = $(items).map(function (i, item) {
-//                i = $(that.options.item).attr('data-value', item)
+ //                i = $(that.options.item).attr('data-value', item)
                 i = $(that.options.item).data('item', item);
                 i.find('a').html(that.highlighter(item));
                 return i[0];

@@ -38,88 +38,70 @@
 			    </div>
 			  </div>
 			  <div class="col-md-4">
-					<div class="form-group">
-						<label class="col-md-6 control-label">Shipment Service :</label>
-						<div class="col-md-6">
-							<select name="payment_term" class="form-control shipment_service input-sm">
-				    		<?php
-				    		if(get_carrier())
-				    		{
-				    			foreach (get_carrier() as $key => $value)
-				    			{
-				    				?>
-				    					<option <?=($value['name']==$so['carrier'])?"selected":"";?>
-				    						value="<?=$value['id'];?>"><?=$value['name'];?></option>
-				    				<?php
-				    			}
-				    		}
-				    		?>
-				    	</select>
-						</div>
+					<label class="col-md-4 control-label">Shipment:</label>
+					<div class="col-md-8">
+						<select name="payment_term" class="form-control shipment_service input-sm">
+			    		<?php
+			    		if(get_carrier())
+			    		{
+			    			foreach (get_carrier() as $key => $value)
+			    			{
+			    				?>
+			    					<option <?=($value['name']==$so['carrier'])?"selected":"";?>
+			    						value="<?=$value['id'];?>"><?=$value['name'];?></option>
+			    				<?php
+			    			}
+			    		}
+			    		?>
+			    	</select>
 					</div>
 				</div>
 			</div><br>
 			<div class="row">
 				<div class="col-md-12 padding-zero">
 					<div class="col-md-2">
-						<div class="form-group">
-							<label class="control-label">Total Items :<?=$so['total_items'];?></label>
+						<label class="control-label">Total Items :<?=$so['total_items'];?></label>
+					</div>
+					<div class="col-md-3">
+						<label class="col-md-4 control-label">Delivery:</label>
+						<div class="col-md-8">
+							<select class="form-control input-sm delivery_type">
+								<?php
+				    		if(get_shipping_type())
+				    		{
+				    			foreach (get_shipping_type() as $key => $value)
+				    			{
+					    			?>
+					    				<option <?=($so['ship_type']==$value['type'])?"selected":"";?>
+					    					value="<?=$value['id'];?>"><?=$value['type'];?></option>
+					    			<?php
+					    		}
+					    	}
+				    		?>
+							</select>
 						</div>
 					</div>
 					<div class="col-md-3">
-						<div class="form-group">
-							<label class="col-md-4 control-label">Delivery:</label>
-							<div class="col-md-8">
-								<select class="form-control input-sm delivery_type">
-									<?php
-					    		if(get_shipping_type())
-					    		{
-					    			foreach (get_shipping_type() as $key => $value)
-					    			{
-						    			?>
-						    				<option <?=($so['ship_type']==$value['type'])?"selected":"";?>
-						    					value="<?=$value['id'];?>"><?=$value['type'];?></option>
-						    			<?php
-						    		}
-						    	}
-					    		?>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<label class="control-label">Salesman :<b><?=$so['salesman'];?></b>
-						</div>
+						<label class="control-label">Salesman :<b><?=$so['salesman'];?></b>
 					</div>
 					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label">Ordered Date :<b><?=$so['created_date'];?></b>
-						</div>
+						<label class="control-label">Ordered Date :<b><?=$so['created_date'];?></b>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 padding-zero">
 					<div class="col-md-2">
-						<div class="form-group">
-							<label class="control-label">COD Fee : <b><?=($so['cod_fee'])?$so['cod_fee']:"NIL";?></b></label>
-						</div>
+						<label class="control-label">COD Fee : <b><?=($so['cod_fee'])?$so['cod_fee']:"NIL";?></b></label>
 					</div>
 					<div class="col-md-3">
-						<div class="form-group">
-							<label class="col-md-8 control-label">Fright Paid: <b><?=($so['freight_paid'])?$so['freight_paid']:"NIL";?></b></label>
-						</div>
+						<label class="col-md-12 control-label">Freight Paid: <b><?=($so['freight_paid'])?$so['freight_paid']:"NIL";?></b></label>
 					</div>
 					<div class="col-md-3">
-						<div class="form-group">
-							<label class="control-label">Amount :<b><?=($so['amount'])?$so['amount']:"NIL";?></b>
-						</div>
+						<label class="control-label">Amount: <b><?=($so['amount'])?$so['amount']:"NIL";?></b>
 					</div>
 					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label">Add. Amount :<b><?=($so['add_amount'])?$so['add_amount']:"NIL";?></b>
-						</div>
+						<label class="control-label">Add. Amount: <b><?=($so['add_amount'])?$so['add_amount']:"NIL";?></b>
 					</div>
 				</div>
 			</div>

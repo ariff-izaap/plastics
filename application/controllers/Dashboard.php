@@ -545,7 +545,7 @@ class Dashboard extends Admin_Controller
 
     public function checkout_so()
     {
-
+      $vendor_id = $this->input->post('vendor_id');
       $this->data['customer'] = $this->onepage_model->get_customer_info($vendor_id);
       $this->data['vendor_id'] = $vendor_id;
       $output['status'] = "success";
