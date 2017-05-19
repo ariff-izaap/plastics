@@ -19,16 +19,12 @@
  <?php if($uri2 != 'checkout'){ ?>
     <td>#</td>
  <?php } ?>   
-    <td>Product Number</td>
     <td>Product</td>
     <td>Form</td>
     <td>Color</td>
     <td>Type</td>
     <td>Package</td>
     <td>Row</td>
-    <!--
-<td>Equivalent</td>
--->
     <td>Quantity</td>
     <td>Unit Price</td>
     <td>Total</td>
@@ -54,7 +50,7 @@
          <?php if($uri2 != 'checkout'){ ?>
             <td><input type="checkbox" name="sales_order_create" class="cart_checkbox" value="<?php echo $ckey; ?>" /></td>
          <?php } ?>   
-            <td><input type="hidden"  name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" /><?php echo $cvalue['id']; ?></td>
+            <input type="hidden"  name="sales_order_item_id[]" value="<?php echo $cvalue['sot_id']; ?>" />
             <td><?php echo $cvalue['name']; ?></td>
             <td><?php echo $cvalue['form']; ?></td>
             <td><?php echo $cvalue['color']; ?></td>
@@ -75,9 +71,9 @@
         </tr>
  <?php }?>
  <tr class="green_solid_bg" >
-                <td class="text-right" colspan="10"><b>Total Amount:</b></td>
+                <td class="text-right" colspan="9"><b>Total Amount:</b></td>
                 
-                <td><b><?php echo (!empty($total))?": ".displayData($total,'money'):""; ?></b>
+                <td colspan="2"><b><?php echo (!empty($total))?": ".displayData($total,'money'):""; ?></b>
                 
             </td>
             </tr>

@@ -143,6 +143,10 @@ class Salesorder extends Admin_Controller
         
         try
         {
+
+          if(!$this->cart->contents())
+            redirect('Salesproductselection');
+
           if($this->input->post('edit_id'))            
             $edit_id = $this->input->post('edit_id');
            
@@ -165,6 +169,12 @@ class Salesorder extends Admin_Controller
           $this->form_validation->set_rules('ship_zipcode','Zipcode','trim|required');
          // $this->form_validation->set_rules('type','Type','trim|required');
           $this->form_validation->set_rules('shipping_type','Shipping Type','trim|required');
+          $this->form_validation->set_rules('cod_fee','COD Fee','trim');
+          $this->form_validation->set_rules('freight_paid','freight paid','trim');
+          $this->form_validation->set_rules('amount','amount','trim');
+          $this->form_validation->set_rules('add_amount','add amount','trim');
+          $this->form_validation->set_rules('so_instructions','so instructions','trim');
+          $this->form_validation->set_rules('bol_instructions','bol instructions','trim');
          // $this->form_validation->set_rules('credit_type','Credit Type','trim|required');
          // $this->form_validation->set_rules('order_status','Order Status','trim|required');
          // $this->form_validation->set_rules('carrier','Carrier','trim|required');

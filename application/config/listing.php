@@ -348,7 +348,6 @@ $config['salesproductselection_index'] = array(
 	"base_url"	=> 	'/salesproductselection/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(  
-                        'id'=>array('name'=>'Product No', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
 						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),	
                         'form_name' => array('name'=>'Form', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
                         'color_name' => array('name'=>'Color', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),

@@ -36,7 +36,8 @@
     <form name="sales_update_to_cart" id="sales_update_to_cart">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" onclick="popup_close('#updat_cart');" >&times;</button>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3>Cart Items</h3>
       </div>
       
           <div class="modal-body">

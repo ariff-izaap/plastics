@@ -50,7 +50,6 @@
       </select>
     </div>
     <div style="margin-bottom:0px;" class="form-group <?php echo (form_error('credit_type'))?'error':'';?>" data-error="<?php echo (form_error('credit_type'))?form_error('credit_type'):'';?>" >
-      <label>Credit Type</label>
       <select name="credit_type" class="form-group">
         <option value="">Select Credit Type</option>
         <?php if(count($credit_type)>0){ foreach($credit_type as $ckey => $cvalue){ ?>
@@ -82,48 +81,55 @@
     </div> -->
     <div class="ship-col">
     <div class="form-group" >
-     
-      <input type="text" name="cod_fee" onkeypress="return numbersonly(event);" id="cod_fee" placeholder="COD Fee"  />
+     <label>COD Fee</label>
+      <input type="text" name="cod_fee" onkeypress="return numbersonly(event);" value="<?php echo set_value('cod_fee',$editdata['cod_fee']);?>" id="cod_fee" placeholder="COD Fee"  />
     </div>
     
     <div class="form-group" >
-      <input type="text" name="freight_paid" id="freight_paid" placeholder="Freight Paid" />
+      <label>Freight Paid</label>
+      <input type="text" name="freight_paid" id="freight_paid" value="<?php echo set_value('freight_paid',$editdata['freight_paid']);?>" placeholder="Freight Paid" />
     </div>
     
     <div class="form-group" >
-      <input type="text" name="amount" id="amount" onkeypress="return numbersonly(event);" placeholder="Amount" />
+      <label>Amount</label>
+      <input type="text" name="amount" id="amount" onkeypress="return numbersonly(event);" value="<?php echo set_value('amount',$editdata['amount']);?>" placeholder="Amount" />
     </div>
     <div class="form-group" >
-     
-      <input type="text" name="add_amount" id="add_amount" onkeypress="return numbersonly(event);" placeholder="Add Amount" />
+      <label>Add Amount</label>
+      <input type="text" name="add_amount" id="add_amount" onkeypress="return numbersonly(event);" value="<?php echo set_value('add_amount',$editdata['add_amount']);?>" placeholder="Add Amount" />
     </div>
     </div>
     
     <div class="form-group" style="margin-bottom:10px !important" >
-      <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo $editdata['so_instructions']; ?></textarea>
+      <textarea name="so_instructions" class="form-control" placeholder="SO Instructions"><?php echo set_value('so_instructions',$editdata['so_instructions']); ?></textarea>
     </div>
     <div class="form-group" style="margin-bottom:10px !important">     
-      <textarea class="form-control" name="bol_instructions" placeholder="BOL Instructions"><?php echo $editdata['bol_instructions']; ?></textarea>
+      <textarea class="form-control" name="bol_instructions" placeholder="BOL Instructions"><?php echo set_value('bol_instructions',$editdata['bol_instructions']); ?></textarea>
     </div>
   </div>
   </div>
       
 </div> 
 
+
+  <div class="form-group">  
+   <div class="col-md-2 cart-btn" style="margin-bottom:10px;float:right;" >
+    <a href="<?php echo base_url(); ?>/salesproductselection" class="btn btn-info"  >Continue Shopping</a>
+   </div>
+     <div >  
+      <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('form','cartitem','cart','',this)"><i class="fa fa-edit edit"></i>Edit Cart</button>
+   </div>
+  </div> 
+
    <div class="form-group" id="cartItems">
+
      <?php $this->load->view("frontend/salesproductselection/cart_items",$this->data); ?>
    </div>
-   <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
-    <a href="<?php echo base_url(); ?>/salesproductselection" class="btn btn-info"  >Continue Shopping</a>
+  
+   <div class="col-md-6" style="margin-bottom:20px; float:right">
+    <input type="submit" name="so" class="btn btn-primary btn-lg" value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
   </div>
-  <?php if(count($cartitems)>0) {?>
-  <div class="col-md-2">  
-    <button type="button" class="btn pull-right btn-warning" onclick="sales_update_cart('form','cartitem','cart','',this)"><i class="fa fa-edit edit"></i>Edit Cart</button>
- </div>
-   <div style="margin-bottom:20px; float:right; margin-right:34px;" class="cart-btn">
-    <input type="submit" name="so" class="btn btn-primary " value="<?php echo (isset($editdata['btn']))?$editdata['btn']:""; ?>" />
-  </div>
-   <?php } ?>
+
   </form> 
   
   </div>

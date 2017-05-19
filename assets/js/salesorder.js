@@ -150,13 +150,11 @@ function sales_update_cart(action_type,sales_order_id,ftype,formname,elm)
         	after_ajax(elm, rdata);
             
         	if(rdata.status == 'warning'){
-        		$("#updat_cart .modal-body").html(rdata.content);
-            	$("#updat_cart").removeClass('hide');
-                $("#updat_cart").modal();
-                 $("#updat_cart").modal({
-                    backdrop:"static"
-                 });
-                $("#form_access").val("process");
+            
+        		  $("#updat_cart .modal-body").html(rdata.content);
+              $("#updat_cart").modal({backdrop:"static"});  
+                          
+              $("#form_access").val("process");
                 if(rdata.itemtype == 'cart'){
                    $("#item_type").val("cart"); 
                 }
