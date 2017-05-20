@@ -21,7 +21,7 @@
 							<tbody class="white_bg">
 								<tr>
 									<td id="billing_address">
-										<?php echo get_customer_billing_address($so_details['billing_address_id'], 'html');?>
+										<?php echo get_address_by_contact_id($so_details['billing_address_id'], 'html');?>
 									</td>									
 								</tr>
 							</tbody>
@@ -44,7 +44,7 @@
 							<tbody class="white_bg">
 								<tr>
 									<td id="shipping_address">
-										<?php echo get_address_by_contact_id($so_details['order_address_id'], 'html');?>
+										<?php echo get_address_by_contact_id($so_details['shipping_address_id'], 'html');?>
 									</td>
 								</tr>
 							</tbody>

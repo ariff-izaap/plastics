@@ -71,7 +71,7 @@
 		          							foreach (get_state() as $key => $value)
 		          							{
 		          								?>
-		          									<option <?=set_select('state',$value['name'],(($edit_data1['state']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
+		          									<option <?=set_select('state',$value['id'],(($edit_data1['state']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
 		          								<?php
 		          							}
 		          						}
@@ -90,7 +90,7 @@
 		          							foreach (get_country() as $key => $value)
 		          							{
 		          								?>
-		          									<option <?=set_select('country',$value['name'],(($edit_data1['country']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
+		          									<option <?=set_select('country',$value['id'],(($edit_data1['country']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
 		          								<?php
 		          							}
 		          						}
@@ -240,9 +240,9 @@
 			          						if(get_state())
 			          						{
 			          							foreach (get_state() as $key => $value)
-			          							{
+			          							{ 
 			          								?>
-			          									<option <?=set_select('loc_state[]',$value['name'],(($edit_data3['state']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_state[]',$value['id'],(($edit_data3['state']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}
@@ -261,7 +261,7 @@
 			          							foreach (get_country() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_country[]',$value['name'],(($edit_data3['country']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_country[]',$value['id'],(($edit_data3['country']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}
@@ -386,7 +386,7 @@
 			          							foreach (get_state() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_state[]',$value['name'],(($row['state']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_state[]',$value['id'],(($row['state']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}
@@ -405,7 +405,7 @@
 			          							foreach (get_country() as $key => $value)
 			          							{
 			          								?>
-			          									<option <?=set_select('loc_country[]',$value['name'],(($row['country']==$value['name'])?true:false));?> value="<?=$value['name'];?>"><?=$value['name'];?></option>
+			          									<option <?=set_select('loc_country[]',$value['id'],(($row['country']==$value['id'])?true:false));?> value="<?=$value['id'];?>"><?=$value['name'];?></option>
 			          								<?php
 			          							}
 			          						}

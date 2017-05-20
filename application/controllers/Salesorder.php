@@ -220,15 +220,32 @@ class Salesorder extends Admin_Controller
               $ship_last                 = $this->input->post('ship_last_name');
               $ship_new_data['name']     = $ship_first." ".$ship_last;
               $ship_new_data['first_name']= $ship_first;
-              $ship_new_data['last_name']= $ship_last;
+              $ship_new_data['last_name'] = $ship_last;
               $ship_new_data['address1'] = $this->input->post('ship_address1');
               $ship_new_data['address2'] = $this->input->post('ship_address2');
-              $ship_new_data['city']     = $this->input->post('city');
-              $ship_new_data['state']    = $this->input->post('state');
-              $ship_new_data['country']  = $this->input->post('country');
-              $ship_new_data['zipcode']  = $this->input->post('zipcode');
-              $ship_new_data['phone']    = $this->input->post('phone');
-              $ship_new_data['email']    = $this->input->post('email');
+              $ship_new_data['city']     = $this->input->post('ship_city');
+              $ship_new_data['state']    = $this->input->post('ship_state');
+              $ship_new_data['country']  = $this->input->post('ship_country');
+              $ship_new_data['zipcode']  = $this->input->post('ship_zipcode');
+              $ship_new_data['phone']    = $this->input->post('ship_mobile');
+              //$ship_new_data['type']     = 'shipping';
+              
+              //billing address
+              $bill_new_data             = array();
+              $bill_first                = $this->input->post('first_name');
+              $bill_last                 = $this->input->post('last_name');
+              $bill_new_data['name']     = $ship_first." ".$ship_last;
+              $bill_new_data['first_name']= $ship_first;
+              $bill_new_data['last_name'] = $ship_last;
+              $bill_new_data['address1'] = $this->input->post('address1');
+              $bill_new_data['address2'] = $this->input->post('address2');
+              $bill_new_data['city']     = $this->input->post('city');
+              $bill_new_data['state']    = $this->input->post('state');
+              $bill_new_data['country']  = $this->input->post('country');
+              $bill_new_data['zipcode']  = $this->input->post('zipcode');
+              $bill_new_data['phone']    = $this->input->post('mobile');
+              $bill_new_data['email']    = $this->input->post('email');
+              //$bill_new_data['type']     = 'billing';
               
               if($edit_id){
                 $ins_data['updated_date'] = date('Y-m-d H:i:s'); 
@@ -246,11 +263,12 @@ class Salesorder extends Admin_Controller
                 $so_new_id                = $this->salesorder_model->insert($ins_data,"sales_order");    
                 log_history($so_new_id,'Sales Order',"Order <b>#".$so_new_id."</b> has been created.");
                 
-                //add shipping location
+                //add shipping location & billing
                 $ship_location_id         = $this->salesorder_model->insert($ship_new_data,"ordered_address");
+                $bill_location_id         = $this->salesorder_model->insert($bill_new_data,"ordered_address");
                 
                 //update shipping location id to sales order
-                $this->salesorder_model->update(array("id" => $so_new_id),array("order_address_id" => $ship_location_id));
+                $this->salesorder_model->update(array("id" => $so_new_id),array("shipping_address_id" => $ship_location_id, "billing_address_id" => $bill_location_id));
                 
                 //add shipment data
                 $ship_id       = $this->input->post('shipping_type');
@@ -523,9 +541,11 @@ class Salesorder extends Admin_Controller
             //Need to work on this
             if($this->form_validation->run() == TRUE){
                 $data = array();
-                $data['name']               = $price_list_info['name']; 
-                $data['address_1']          = $this->input->post('address1');
-                $data['address_2']          = $this->input->post('address2');
+              //  $data['name']               = $price_list_info['name']; 
+                $data['first_name']         = $this->input->post('first_name');
+                $data['last_name']          = $this->input->post('last_name');
+                $data['address1']           = $this->input->post('address1');
+                $data['address2']           = $this->input->post('address2');
                 $data['phone']              = $this->input->post('phone');
                 $data['city']               = $this->input->post('city');
                 $data['state']              = $this->input->post('state');
@@ -540,7 +560,7 @@ class Salesorder extends Admin_Controller
                 $data['customer_id']        = $so_details['customer_id'];
                                 
                 if($this->data['ship_addr_id']){
-                    $this->address_model->update(array("id" => $this->data['ship_addr_id']),$data,"customer_location");
+                    $this->address_model->update(array("id" => $this->data['ship_addr_id']),$data,"ordered_address");
                     $this->salesorder_model->update( array('id' => $so_details['id']), array("shipping_address_id" => $this->data['ship_addr_id']));
                     $price_list_info['shipping_address_id'] = $this->data['ship_addr_id'];
                     
@@ -589,7 +609,8 @@ class Salesorder extends Admin_Controller
             $price_list_info = array();
              
             if($this->data['bill_addr_id']){
-                $tmp = get_customer_billing_address($this->data['bill_addr_id'], 'data');
+               // $tmp = get_customer_billing_address($this->data['bill_addr_id'], 'data');
+                $tmp = get_address_by_contact_id($this->data['bill_addr_id'], 'data');
                 $price_list_info = array_merge($price_list_info, $tmp);
                 $price_list_info['bill_addr_id'] = $bill_addr_id; 
             }
@@ -616,7 +637,7 @@ class Salesorder extends Admin_Controller
                 $data['updated_date']       = date('Y-m-d H:i:s', local_to_gmt());
                              
                 if($this->data['bill_addr_id']){
-                    $this->address_model->update(array("id" => $this->data['bill_addr_id']),$data,"address");
+                    $this->address_model->update(array("id" => $this->data['bill_addr_id']),$data,"ordered_address");
                     $this->salesorder_model->update( array('id' => $so_id), array("billing_address_id" => $this->data['bill_addr_id']));
                     $price_list_info['billing_address_id'] = $this->data['bill_addr_id'];
                     

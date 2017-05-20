@@ -7,10 +7,14 @@
 					<div class="col-md-12 popup-address">
 						<dl class="dl-horizontal text-left">
                            <div class="form-group" >
-							<label>Name:*</label>
-						
-								<input class="form-control" name="name" id="name" value="<?php echo set_value('name', $price_list_info['name'])?>" type="text">
-								<?php echo form_error('name', '<span class="error_text">', '</span>');?>
+							<label>Firstname:*</label>
+								<input class="form-control" name="first_name" id="first_name" value="<?php echo set_value('first_name', $price_list_info['first_name'])?>" type="text">
+								<?php echo form_error('first_name', '<span class="error_text">', '</span>');?>
+							</div>
+                            <div class="form-group">
+							<label>Lastname:*</label>
+								<input class="form-control" name="last_name" id="last_name" value="<?php echo set_value('last_name', $price_list_info['last_name'])?>" type="text">
+								<?php echo form_error('last_name', '<span class="error_text">', '</span>');?>
 							</div>
 							<div class="form-group" >
 							<label>Address1 :*</label>
@@ -37,7 +41,7 @@
 						        <select class="form-control" name="country" id="country" >
                                    <?php $country = get_country();
                                      foreach($country as $clr): ?>
-                                    <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
+                                    <option value="<?php echo $clr['id'];?>" <?php echo set_select("country",$clr['id'],(isset($clr['id']) && ($clr['id']==$price_list_info['country']))?true:false); ?> > <?php echo $clr['name'];?> </option>
                                   <?php endforeach;?>
                               </select>
 								<?php //echo form_dropdown('country', get_country(), set_value('country', ($price_list_info['country']!='')?$price_list_info['country']:'US'), 'id="shipping_country" class="boot_select_false"');?>
@@ -49,7 +53,7 @@
                               <select class="form-control" name="state" id="state" >
                                    <?php $state = get_state();
                                      foreach($state as $clr): ?>
-                                    <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
+                                    <option value="<?php echo $clr['id'];?>" <?php echo set_select("state",$clr['id'],(isset($clr['id']) && ($clr['id']==$price_list_info['state']))?true:false); ?> > <?php echo $clr['name'];?> </option>
                                   <?php endforeach;?>
                               </select>						
 							</div>

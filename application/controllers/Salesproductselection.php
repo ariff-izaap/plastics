@@ -360,7 +360,7 @@ class Salesproductselection extends Admin_Controller
    {
          $cust_id  = $this->input->post("id");
          $customer = $this->salesorder_model->get_vendors(array("a.id" => $cust_id));
-       
+      // print_r($customer);
          $this->data['custome_data'] = '';
          if(count($customer)>0){
             $this->data['customer_data'] = $customer;

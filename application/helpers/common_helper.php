@@ -127,7 +127,8 @@ function get_address_by_contact_id($cid = 0, $output_type = 'both', $address_tag
 	if(strcmp($output_type, 'data') === 0)
 		return $address;
 	
-	$address_format = format_shipping_address($address, $address_tag);
+	//$address_format = format_shipping_address($address, $address_tag);
+    $address_format = format_address($address, $address_tag);
 	
 	if(strcmp($output_type, 'html') === 0)
 		return $address_format;
@@ -173,7 +174,7 @@ function format_address($address = array(), $address_tag = TRUE)
 	$address_format .= "{$address['address1']} <br />";
 	if(strcmp($address['address2'],'') !== 0)
 		$address_format .= "{$address['address2']} <br />";
-	$address_format .= "{$address['city']} {$address['state']} {$address['zip']} <br />";
+	$address_format .= "{$address['city']}, {$address['state']} ,{$address['zip']} <br />";
 	$address_format .= "{$address['country']} <br />";
 	if(strcmp($address['phone'],'') !== 0)
 		$address_format .= "<abbr title='Phone'>P:</abbr> {$address['phone']}";

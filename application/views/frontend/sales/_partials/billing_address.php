@@ -46,7 +46,7 @@
                               <select class="form-control" name="state" id="state" >
                                    <?php $state = get_state();
                                      foreach($state as $clr): ?>
-                                    <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
+                                    <option value="<?php echo $clr['id'];?>" <?php echo set_select("state",$clr['id'],(isset($clr['id']) && ($clr['id']==$price_list_info['state']))?true:false); ?> > <?php echo $clr['name'];?> </option>
                                   <?php endforeach;?>
                               </select>						
 							</div>
@@ -56,7 +56,7 @@
 						        <select class="form-control" name="country" id="country" >
                                    <?php $country = get_country();
                                      foreach($country as $clr): ?>
-                                    <option value="<?php echo $clr['id'];?>" > <?php echo $clr['name'];?> </option>
+                                    <option value="<?php echo $clr['id'];?>" <?php echo set_select("country",$clr['id'],(isset($clr['id']) && ($clr['id']==$price_list_info['country']))?true:false); ?> > <?php echo $clr['name'];?> </option>
                                   <?php endforeach;?>
                               </select>
 								<?php echo form_error('auto_order', '<span class="error_text">', '</span>');?>

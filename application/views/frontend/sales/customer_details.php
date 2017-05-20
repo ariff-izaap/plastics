@@ -1,6 +1,7 @@
 <div class="clearfix"></div>   
     
-	<?php if(isset($customer_data['status']) && ($customer_data['status'] == 'new')){ ?>
+	<?php //echo "<pre>"; print_r($customer_data); 
+    if(isset($customer_data['status']) && ($customer_data['status'] == 'new')){ ?>
         
         <div class="form-group customer_valid" >
            For this customer no address so you should create create.
@@ -44,17 +45,42 @@
          
           <textarea name="address1" class="form-control" id="address1" placeholder="Address 1"><?php echo set_value('address1', $customer_data['address1']); ?></textarea>
         </div>
-        <div class="form-group  <?php echo (form_error('web_url'))?'error':'';?>" >
-          
-          <textarea name="address2" class="form-control" id="address2" placeholder="Address 2"><?php echo $customer_data['address2'];?></textarea>
+        <div class="form-group  <?php echo (form_error('address2'))?'error':'';?>" data-error="<?php echo (form_error('address2'))? form_error('address2'):'';?>">
+         
+          <textarea name="address2" class="form-control" id="address2" placeholder="Address 2"><?php echo set_value('address2', $customer_data['address2']); ?></textarea>
         </div>
+        
         <div class="form-group  <?php echo (form_error('city'))?'error':'';?>" data-error="<?php echo (form_error('city'))? form_error('city'):'';?>">
          
           <input type="text" name="city" class="form-control" id="city" value="<?php echo set_value('city', $customer_data['city']);?>" placeholder="City" />
         </div>
         <div class="form-group  <?php echo (form_error('state'))?'error':'';?>" data-error="<?php echo (form_error('state'))? form_error('state'):'';?>">
-          
-          <input type="text" name="state" class="form-control" id="state" value="<?php echo set_value('state', $customer_data['state']);?>" placeholder="State" />
+         <select name="state">
+         <option>Select State</option>
+          <?php $state = get_state();
+                if(count($state)>0) { 
+                    foreach(get_state() as $stkey => $stvalue){
+          ?>
+          <option <?php echo set_select('state',$stvalue['id'],(isset($customer_data['state']) && ($customer_data['state']==$stvalue['id']))?true:false); ?> value="<?php echo $stvalue['id']; ?>"><?php echo $stvalue['name']; ?></option>          
+          <?php }} ?>
+          </select>
+          <!--
+<input type="text" name="state" class="form-control" id="state" value="<?php //echo set_value('state', $customer_data['state']);?>" placeholder="State" />
+-->
+        </div>
+         <div class="form-group  <?php echo (form_error('country'))?'error':'';?>" data-error="<?php echo (form_error('country'))? form_error('country'):'';?>">
+         <select name="country">
+         <option>Select Country</option>
+          <?php $country = get_country();
+                if(count($country)>0) {
+                    foreach(get_country() as $ctkey => $ctvalue){
+          ?>
+          <option <?php echo set_select('country',$ctvalue['id'],(isset($customer_data['country']) && ($customer_data['country']==$ctvalue['id']))?true:false); ?> value="<?php echo $ctvalue['id']; ?>"><?php echo $ctvalue['name']; ?></option>          
+          <?php }} ?>
+          </select>
+          <!--
+<input type="text" name="state" class="form-control" id="state" value="<?php //echo set_value('state', $customer_data['state']);?>" placeholder="State" />
+-->
         </div>
         <div class="form-group  <?php echo (form_error('zipcode'))?'error':'';?>" data-error="<?php echo (form_error('zipcode'))? form_error('zipcode'):'';?>">
          
@@ -96,9 +122,33 @@
          
           <input type="text" name="ship_city" class="form-control" id="ship_city" value="<?php echo set_value('ship_city', $customer_data['city']);?>" placeholder="City" />
         </div>
+        
         <div class="form-group  <?php echo (form_error('ship_state'))?'error':'';?>" data-error="<?php echo (form_error('ship_state'))? form_error('ship_state'):'';?>">
-          
-          <input type="text" name="ship_state" class="form-control" id="ship_state" value="<?php echo set_value('ship_state', $customer_data['state']);?>" placeholder="State" />
+         <select name="ship_state">
+             <option>Select State</option>
+              <?php $state = get_state();
+                    if(count($state)>0) { foreach(get_state() as $stkey => $stvalue){
+              ?>
+              <option <?php echo set_select('state',$stvalue['id'],(isset($customer_data['state']) && ($customer_data['state']==$stvalue['id']))?true:false); ?> value="<?php echo $stvalue['id']; ?>"><?php echo $stvalue['name']; ?></option>          
+              <?php }} ?>
+          </select>
+          <!--
+<input type="text" name="state" class="form-control" id="state" value="<?php //echo set_value('state', $customer_data['state']);?>" placeholder="State" />
+-->
+        </div>
+         <div class="form-group  <?php echo (form_error('ship_country'))?'error':'';?>" data-error="<?php echo (form_error('ship_country'))? form_error('ship_country'):'';?>">
+         <select name="ship_country">
+         <option>Select Country</option>
+          <?php $state = get_country();
+                if(count($state)>0) {
+                foreach(get_country() as $ctkey => $ctvalue){
+          ?>
+          <option <?php echo set_select('ship_country',$ctvalue['id'],(isset($customer_data['country']) && ($customer_data['country']==$ctvalue['id']))?true:false); ?> value="<?php echo $ctvalue['id']; ?>"><?php echo $ctvalue['name']; ?></option>          
+          <?php }} ?>
+          </select>
+          <!--
+<input type="text" name="state" class="form-control" id="state" value="<?php //echo set_value('state', $customer_data['state']);?>" placeholder="State" />
+-->
         </div>
         <div class="form-group  <?php echo (form_error('ship_zipcode'))?'error':'';?>" data-error="<?php echo (form_error('ship_zipcode'))? form_error('ship_zipcode'):'';?>">
           
