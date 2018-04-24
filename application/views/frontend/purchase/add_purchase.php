@@ -84,7 +84,7 @@
         
         <div class="form-group col-md-4">
           <label>Select Vendor</label>
-          <select name="vendor_id" class="form-control vendor_select">
+          <select name="vendor_id" class="form-control vendor_select select2_sample2">
             <option value="">--Select--</option>
             <?php
                if($vendor)

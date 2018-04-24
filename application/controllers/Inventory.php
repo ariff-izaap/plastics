@@ -375,6 +375,7 @@ class Inventory extends Admin_Controller
     
     function vendor_add($product_id = 0, $edit_id = 0)
 	{
+    // print_r($this->input->post('product_id'));
 		$this->load->model("product_vendor_model");
 		$this->load->model("vendor_model");
       
@@ -408,7 +409,8 @@ class Inventory extends Admin_Controller
             $data['shipping_cost'] 	    = $this->input->post("shipping_cost", TRUE);
 			$data['shipping_service'] 	= $this->input->post("shipping_service", TRUE);
    
-			if($edit_id){
+			if($edit_id!='')
+      {
 				//product vendor price list details update
 				$this->product_vendor_model->update(array("id" => $edit_id),$data);
 				$message = "Price list updated Successfully.";
@@ -425,7 +427,7 @@ class Inventory extends Admin_Controller
 			}
 			$ajax_return_data['status']     = "success";
 			$ajax_return_data['message']    = $message;
-            $ajax_return_data['product_id'] = $product_id;
+      $ajax_return_data['product_id'] = $product_id;
 
 			$this->_ajax_output($ajax_return_data, TRUE);
 		 }

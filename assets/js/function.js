@@ -635,13 +635,13 @@ function sales_product_search()
 
 function get_form(action,div_id,title,elm,popup,fn_to_call,call_fun_args){
      popup = (popup == false)?false:true;
-
      $.ajax({
           url:base_url+action,
           type: "POST",
           data: {},
           dataType:"json",
           success : function(data){
+            
              //critical error
              if(data.status == "error" && data.error_msg) {
                     alert(data.error_msg);
@@ -676,6 +676,7 @@ function get_form(action,div_id,title,elm,popup,fn_to_call,call_fun_args){
 
 function before_ajax(elm, content)
 {
+  var elm_old_text ="";
 	if(!$(elm).length)
 		return false;
 
@@ -735,7 +736,7 @@ function before_ajax(elm, content)
 
 function after_ajax(elm,data)
 {
-    
+  var elm_old_text = "";   
 	if($(elm).length)
 	{
 		if($(elm).is("a,span"))

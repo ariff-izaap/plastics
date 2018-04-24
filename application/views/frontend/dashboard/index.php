@@ -207,7 +207,16 @@
 						<a href="#SOProcess" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn disabled btn-info so_history_btn">SO History</a>						
 						<a href="#LogCall" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info disabled log_call">Log Call</a>
 						<a href="#ViewLog" data-backdrop="static" data-keyboard="false" data-toggle="modal" class="btn btn-info view_log disabled">View Log</a>
-						<a href="javascript:void(0);" onclick="update_customer();" class="btn btn-info disabled">Update</a>
+						<a href="javascript:void(0);" onclick="update_customer();" class="btn btn-info update-cus-btn disabled">Update</a>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-2 pull-right">
+							<a href="#" onclick="onepage_product_add('','','po');" class="btn btn-danger create-new-po disabled pull-right">Create PO</a>
+						</div>
+						<div class="col-md-2 pull-right">
+							<a href="#" onclick="onepage_product_add('','','so');" class="btn btn-danger create-new-so disabled pull-right">Create SO</a>
+						</div>
 					</div>
 				</div>
     		</div>
@@ -420,7 +429,7 @@
 						</div>
 						<div class="row">
 							<button class="btn btn-info product-search-btn pull-right" type="button">Search</button>
-							<button type="button" class="btn btn-info disabled product-update-btn pull-right" onclick="update_product();">Update</button>
+							<button type="button" class="btn btn-danger disabled product-update-btn pull-left" onclick="update_product();">Update</button>
 						</div>
 					</div>
 				</div>
@@ -435,7 +444,7 @@
 						<?php
 							if(get_all_vendors())
 							{
-								foreach (get_all_vendors() as $key => $value)
+								foreach (get_all_vendors('','20') as $key => $value)
 								{
 									?>
 										<tr class="customer_row" onclick="get_customer_details(<?=$value['id'];?>)">
@@ -455,6 +464,7 @@
 		</div>
 	</div>
 </div>
+<br><br><br><br>
 
 <!-- PO Popups -->
 <div id="POProcess" class="modal fade" role="dialog">
@@ -466,7 +476,7 @@
 
 <!-- PO Product Add -->
 <div id="AddPOProduct" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -477,7 +487,7 @@
         
       </div>
       <div class="modal-footer">
-        <div class="col-md-8 pull-right">
+        <div class="col-md-2 pull-right">
           <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
           <button class="btn btn-primary add_po_product_cart_btn pull-left">Add</button>
         </div>
@@ -507,6 +517,28 @@
     </div>
   </div>
 </div>
+
+
+<div id="AddProducts" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Product</h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-2 pull-right">
+          <button data-dismiss="modal" class="btn btn-danger pull-right">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Customer Comments -->
 <div id="CustomerComments" class="modal fade" role="dialog">

@@ -48,11 +48,11 @@ function get_vendor_by_id($id='')
   return $row;
 }
 
-function get_all_vendors($id='')
+function get_all_vendors($id='',$limit='')
 {
   $CI = get_instance();
   $CI->load->model('purchase_model');
-  $row = $CI->purchase_model->get_vendors();
+  $row = $CI->purchase_model->get_vendors($id,$limit);
   return $row;
 }
 

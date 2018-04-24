@@ -75,7 +75,7 @@ if($uri1 == "accounting" && $uri != "invoices"){
 				<?php endforeach;?>
 
 				<?php
-				if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices')){ ?>
+				if($uri!= 'get_all_products' && $uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule' && $uri1 != 'history' && ($uri1 != 'accounting' || $uri=='invoices')){ ?>
 
 					<th>Action</th>
 
@@ -90,7 +90,7 @@ if($uri1 == "accounting" && $uri != "invoices"){
 			<?php $val = $this->uri->segment(1);?>
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
         <?php
-        	if($uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") && $uri != 'add_product')
+        	if($uri != 'get_all_products' && $uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") && $uri != 'add_product')
         	{ 	
         		?>
 			<td>
@@ -108,7 +108,7 @@ if($uri1 == "accounting" && $uri != "invoices"){
             </td>
            	<?php 
           }
-          else if($uri1 != 'accounting' && $uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") )
+          else if($uri!= 'get_all_products' && $uri1 != 'accounting' && $uri1 != 'history' && ($uri != "add" &&  $uri1 != "purchase") )
         	{ 	
         		?>
 			<td>
@@ -121,6 +121,16 @@ if($uri1 == "accounting" && $uri != "invoices"){
             </td>
            	<?php 
           }
+          else if($uri == 'get_all_products')
+        	{ 	
+        		?>
+        		<td>
+        			<label class="">
+        				<input type="checkbox" name="" class="checkbox" onclick="onepage_product_add(this,'<?=$item['id'];?>','listing');" value="<?=$item['id'];?>">
+        			</label>
+        		</td>
+        		<?php
+        	}
         ?> 
 				<?php foreach ($fields as $field => $row):?>
 
@@ -173,8 +183,9 @@ if($uri1 == "accounting" && $uri != "invoices"){
 	</table>
     </div>
 </div>
-
+<?php if($uri!='get_all_products'){?>
 <div class="pagination text-right pull-right" id="pagination">
 	<?php echo $pagination;?>
 </div>
+<?php }?>
 

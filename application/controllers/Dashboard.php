@@ -22,6 +22,8 @@ class Dashboard extends Admin_Controller
     }
     public function get_customer_salesman()
     {
+      // if($this->cart->contents())
+        $this->cart->destroy();
       $salesman_id = $this->input->post('sale');
       $customer = $this->input->post('customer');
       $this->data['vendors'] = $this->onepage_model->get_vendor_by_salesman($salesman_id,$customer);
@@ -33,6 +35,7 @@ class Dashboard extends Admin_Controller
 
     public function get_customer_by_id()
     {
+      $this->cart->destroy();
       $id = $this->input->post('id');
       $this->data['vendor'] = $this->onepage_model->get_customer_by_id($id);
       $this->data['calls'] = $this->onepage_model->get_calls($id);
@@ -44,7 +47,29 @@ class Dashboard extends Admin_Controller
         $output['call'] = array("log_date"=>'');
       $this->_ajax_output($output,TRUE);
     }
-
+    public function get_all_products()
+    {
+      $this->layout->add_javascripts(array('listing'));
+      $this->load->library('listing');      
+      $this->simple_search_fields = array('name'=> 'Name');
+      $this->_narrow_search_conditions = array("start_date");      
+      $str = '';
+      $this->listing->initialize(array('listing_action' => $str));
+      $listing = $this->listing->get_listings('onepage_model', 'listing');
+      if($this->input->is_ajax_request())
+          $this->_ajax_output(array('listing' => $listing), TRUE);      
+      $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');
+      $this->data['simple_search_fields'] = $this->simple_search_fields;
+      $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
+      $this->data['per_page'] = $this->listing->_get_per_page();
+      $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());      
+      $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);      
+      $this->data['listing'] = $listing;      
+      $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
+      $output['status'] = "success";
+      $output['content'] = $this->layout->view("frontend/onepage/all_products_list",$this->data,true);
+      $this->_ajax_output($output,TRUE);
+    }
     public function get_products()
     {
       $form = $this->input->post();
@@ -744,6 +769,7 @@ class Dashboard extends Admin_Controller
       $up = $this->onepage_model->update(array("id"=>$product_id),$ins,"product");
       $output['status'] = "success";
       $output['msg'] = $ins;
+      $output['pid'] = $product_id;
       $this->_ajax_output($output,true);
     }
 
@@ -824,6 +850,33 @@ class Dashboard extends Admin_Controller
       $this->data['logs'] = get_logs("purchase",$po_id);
       $output['content'] = $this->load->view('frontend/onepage/po_details',$this->data,true);
       $output['status'] = $pname;
+      $this->_ajax_output($output,true);
+    }
+
+    public function onepage_product_add()
+    {
+      $id = $this->input->post('product_id');
+      $method = $this->input->post('method');
+      $output['status'] = "status";
+      if(($method=='' && $id!='') || $method=='listing')
+      {
+        $pro = $this->onepage_model->get_where(array("id"=>$id),"*","product")->row_array();
+         $data = array(
+        'id'      => $pro['sku'],
+        'product_id' => $pro['id'],
+        'qty'     => 1,
+        'price'   => $pro['wholesale_price'],
+        'name'    => $pro['name']);
+        $this->cart->insert($data);
+      }
+      if($method=="listing")
+      {
+        $this->data['cart'] = $this->cart->contents();
+        $this->data['total'] = $this->cart->total();
+        $output['po_cart'] = $this->load->view('frontend/onepage/cart_po_content',$this->data,true);
+        $output['so_cart'] = $this->load->view('frontend/onepage/cart_so_content',$this->data,true);
+      }
+      $output['msg'] =  $this->cart->contents();
       $this->_ajax_output($output,true);
     }
 }

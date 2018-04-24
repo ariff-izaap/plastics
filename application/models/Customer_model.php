@@ -10,9 +10,9 @@ class Customer_model extends App_model
   
   function listing()
   {
-	  $this->_fields = "a.*,b.email,c.name as loc_name";
+	  $this->_fields = "a.*,c.city as loc_name";
     $this->db->from('customer a');
-    $this->db->join("customer_contact b","b.customer_id=a.id");
+    // $this->db->join("customer_contact b","b.customer_id=a.id");
     $this->db->join("customer_location c","c.customer_id=a.id");
     $this->db->group_by('a.id');
 

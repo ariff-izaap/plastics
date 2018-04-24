@@ -99,12 +99,12 @@ $config['salesorder_customer_relation'] = array(
 	"per_page"	=>	"20",
 	"fields"	=> array(
 						'business_name'=>array('name'=>'Customer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
-						'email'=>array('name'=>'Email', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						// 'email'=>array('name'=>'Email', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'loc_name'=>array('name'=>'Location', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						/*'state_name'=>array('name'=>'State', 'data_type' => 'date','sortable' => FALSE, 'default_view'=>1),
 						'phone'=>array('name'=>'Phone', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'zipcode'=>array('name'=>'Zipcode', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)*/),
-	"default_order"	=> "id",
+	"default_order"	=> "a.id",
 	"default_direction" => "DESC"
 );
 
@@ -118,7 +118,7 @@ $config['purchase_add'] = array(
 	"base_url"	=> 	'/purchase/add/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'pid'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'sku'=>array('name'=>'Product ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'name'=>array('name'=>'Product', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'form_name'=>array('name'=>'Form', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
 						'color_name'=>array('name'=>'Color', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
@@ -130,6 +130,30 @@ $config['purchase_add'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+
+
+$config['dashboard_get_all_products'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'frontend/dashboard/get_all_products/filter',
+	"base_url"	=> 	'/dashboard/get_all_products/',
+	"per_page"	=>	"5",
+	"fields"	=> array(   
+			'sku'=>array('name'=>'SKU', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+			'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+			'form_name'=>array('name'=>'Form', 'data_type' => 'String', 'sortable' => FALSE,'default_view'=>1),
+			'color'=>array('name'=>'Color', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+			'type'=>array('name'=>'Type', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+			'equivalent'=>array('name'=>'Equivalent','data_type'=>'String','sortable'=>FALSE,'default_view'=>1),
+			'quantity'=>array('name'=>'Quantity', 'data_type'=>'String','sortable' => FALSE, 'default_view'=>1),
+			'wholesale_price'=>array('name'=>'Wholesale Price', 'data_type' => 'meney', 'sortable' => FALSE, 'default_view'=>1),
+			'row'=>array('name'=>'Row', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+			'packaging'=>array('name'=>'Packaging', 'data_type'=>'String','sortable'=>FALSE,'default_view'=>1),
+			),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
 
 
 

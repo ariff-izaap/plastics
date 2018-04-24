@@ -84,6 +84,7 @@ function add_vendor_price_lists(action,div_id,type)
     // var edit_id = '';
         // edit_id = $("#form_vendor_add #edit_id").val();
      var data = (type == 'add')?$("#form_vendor_add").serialize():"";
+     console.log(data);
       $.ajax({
           url:base_url+action,
           type:"POST",
@@ -91,19 +92,20 @@ function add_vendor_price_lists(action,div_id,type)
           dataType:'json',
           success:function(res)
           {
-            var status = res.status;
-            var output = res.output;
-             bootbox.alert(res.message);
+            console.log(res);
+            // var status = res.status;
+            // var output = res.output;
+            //  bootbox.alert(res.message);
                              
-            if(status == 'success'){
-              get_vendor_price_lists(res.product_id,div_id);
-            }
-            else
-            {
-                $("#"+div_id).find("#myModalLabel").html('Add Vendor');
-                $("#"+div_id).find(".modal-body").html(res.form_view);
-               // init_modal();  
-            }
+            // if(status == 'success'){
+            //   get_vendor_price_lists(res.product_id,div_id);
+            // }
+            // else
+            // {
+            //     $("#"+div_id).find("#myModalLabel").html('Add Vendor');
+            //     $("#"+div_id).find(".modal-body").html(res.form_view);
+            //    // init_modal();  
+            // }
           }
       });    
 }

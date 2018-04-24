@@ -1,4 +1,4 @@
-<?php /*if ($message = $this->service_message->render()) :?>
+s<?php /*if ($message = $this->service_message->render()) :?>
 <?php echo $message;?>
 <?php endif; */?>
 
@@ -22,7 +22,7 @@
       	<?php
       }
     ?>
-		<?php echo $listing;?>				
+		<?php echo $listing;?>
 		</form>	
 	</div>	
 

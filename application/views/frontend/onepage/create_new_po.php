@@ -13,7 +13,7 @@
 						<input type="hidden" name="po_vendor_id" id="povendorid" value="<?=$vendor_id;?>">
 					</div>
 				</div>
-				<div class="col-md-12 po-list">
+				<!--<div class="col-md-12 po-list">
 					<table class="table table-bordered table-hover">
 						<thead>
 							<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>
@@ -50,10 +50,13 @@
 								?>
 						</tbody>
 					</table>
-				</div>
+				</div>-->
 				<div class="col-md-12 cart-table">
 					<h2 class="col-md-8">Cart</h2>
-					<a class="btn btn-warning update_po_cart pull-right"><i class="fa fa-edit"></i> Update Cart</a>
+					<div class="col-md-4">
+						<a class="btn btn-warning update_po_cart pull-right"><i class="fa fa-edit"></i> Update Cart</a>
+						<a id="add_products" class="btn btn-danger pull-left" href="#AddProducts" data-toggle="modal"><i class="fa fa-plus"></i> Add Product</a>
+					</div>
 					<form id="CartPOForm" action="" method="post">
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -74,6 +77,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <script type="text/javascript">
 	$(".add-po-cart").click(function(){
@@ -140,4 +146,19 @@
 			}
 		});
 	});
+
+	$("a#add_products").click(function(){
+		$("#AddProducts .modal-body").html("<div class='text-center'><img src='"+base_url+"/assets/img/default.gif'></div>");
+			$.ajax({
+				type:"POST",
+				url:base_url+'dashboard/get_all_products',
+				data:"",
+				dataType:'json',
+				success:function(data)
+				{
+					console.log(data.listing);
+					$("#AddProducts .modal-body").html(data.listing);
+				}
+		});
+  });
 </script>

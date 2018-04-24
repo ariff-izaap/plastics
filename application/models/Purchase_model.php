@@ -52,7 +52,7 @@ class Purchase_model extends App_model
     }
     return parent::listing();
   }
-  public function get_vendors($where='')
+  public function get_vendors($where='',$limit='')
   {
     if($where)
       $this->db->where($where);
@@ -60,8 +60,10 @@ class Purchase_model extends App_model
     $this->db->from("customer a");
     $this->db->join("address b","a.address_id=b.id");
     $this->db->join("customer_contact c","a.id=c.customer_id");
-    $this->db->join("vendor_price_list d","a.id=d.vendor_id");
+    // $this->db->join("vendor_price_list d","a.id=d.vendor_id");
     $this->db->group_by("a.id");
+    if($limit)
+    	$this->db->limit($limit);
     $q = $this->db->get();
     return $q->result_array();
   }

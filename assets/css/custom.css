@@ -785,7 +785,7 @@ background-color: #e6e6e6;
     overflow: auto;
 }	
 .cart-table {
-    max-height: 180px;
+    max-height: 600px;
     overflow: auto;
 }
 .succ_msg .alert-success {

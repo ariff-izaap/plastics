@@ -2,7 +2,7 @@
 function getAdminUserId()
 {
     $CI = & get_instance();
-    $admin = $CI->session->userdata('admin_data');
+    $admin = $CI->session->userdata('user_data');
     return isset($admin['id'])?$admin['id']:FALSE;
 }
 

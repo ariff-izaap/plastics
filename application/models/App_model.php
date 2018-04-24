@@ -38,8 +38,9 @@ abstract class App_model extends CI_Model
         $this->db->limit($this->listing->_get_per_page(), $this->listing->_get_offset());
         $this->db->order_by($this->listing->_get_order() , $this->listing->_get_direction());
          
-        $list = $this->db->get($this->_table)->result_array();
-     
+        $list = $this->db->get()->result_array();
+
+    
         $count = $this->db->query("select FOUND_ROWS() as count")->row()->count;
          
         return array(

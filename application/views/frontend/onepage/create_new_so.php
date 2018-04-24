@@ -8,7 +8,7 @@
     <div class="modal-body">
     <input type="hidden" name="po_vendor_id" class="so_vendor_id" value="<?=$vendor_id;?>">
       <div class="row">
-				<div class="col-md-12 so-list">
+				<!--<div class="col-md-12 so-list">
 						<table class="table table-bordered table-hover">
 							<thead>
 								<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Packaging</th><th>Wholesale Price</th>
@@ -45,7 +45,7 @@
 									?>
 							</tbody>
 						</table>		
-				</div>
+				</div>-->
 				<div class="col-md-12 cart-table">
 					<h2 class="col-md-8">Cart</h2>
 					<a class="btn btn-warning update_so_cart pull-right"><i class="fa fa-edit"></i> Update Cart</a>

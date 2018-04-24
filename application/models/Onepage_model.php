@@ -4,6 +4,32 @@ require_once('App_model.php');
 
 class Onepage_model extends App_model
 {
+	 function listing()
+  {
+    // $where = "NOT IN(SELECT so_id from invoices)";
+	  $this->_fields = "a.*,b.name as form_name,c.name as color,c.id as color_id,d.name as type,e.name as packaging,a.id as product_id";
+    $this->db->from('product a');
+    $this->db->join('product_form b','b.id=a.form_id','left');
+		$this->db->join('product_color c','b.id=a.color_id','left');
+		$this->db->join('product_type d','a.product=d.id','left');
+		$this->db->join('product_packaging e','a.package_id=e.id','left');
+		$this->db->group_by('a.id');
+    foreach ($this->criteria as $key => $value)
+    {
+      if( !is_array($value) && strcmp($value, '') === 0 )
+          continue;
+      switch ($key)
+      {
+        case 'b.business_name':
+          $this->db->like($key, $value);
+        break;
+        case 'c.ship_date':
+          $this->db->like($key, $value);
+        break;
+      }
+    }
+    return parent::listing();
+  }
 	public function get_vendor_by_salesman($id='',$customer='')
 	{
 		if($id!='')
@@ -11,9 +37,9 @@ class Onepage_model extends App_model
 		if($customer!='')
 			$this->db->like("b.business_name",$customer);
 		$this->db->select("b.*,c.name,c.contact_value,d.city,c.email,b.id as customer_id");
-		$this->db->from("sales_order a");
-		$this->db->join("customer b","b.id=a.customer_id");
-		$this->db->join("customer_contact c","a.customer_id=c.customer_id");
+		// $this->db->from("sales_order a");
+		$this->db->from("customer b");
+		$this->db->join("customer_contact c","b.id=c.customer_id");
 		$this->db->join("address d","d.id=b.address_id");
 		$this->db->group_by('b.id');
 		$q = $this->db->get();
@@ -56,10 +82,10 @@ class Onepage_model extends App_model
 			$this->db->like('a.package_id',$package);
 		if($row!='')
 			$this->db->like('a.row',$row);
-		$this->db->select('a.*,b.name as form,c.name as color,d.name as type,e.name as packaging,a.id as product_id');
+		$this->db->select('a.*,b.name as form,c.name as color,c.id as color_id,d.name as type,e.name as packaging,a.id as product_id');
 		$this->db->from('product a');
 		$this->db->join('product_form b','b.id=a.form_id','left');
-		$this->db->join('product_color c','b.id=a.color_id','left');
+		$this->db->join('product_color c','c.id=a.color_id','left');
 		$this->db->join('product_type d','a.product=d.id','left');
 		$this->db->join('product_packaging e','a.package_id=e.id','left');
 		$this->db->group_by('a.id');
@@ -161,10 +187,10 @@ class Onepage_model extends App_model
 	}
 	public function get_products_by_vendor($id)
 	{
-		$this->db->where('a.vendor_id',$id);
+		// $this->db->where('a.vendor_id',$id);
 		$this->db->select('b.*,c.name as form,d.name as color,e.name as type,f.name as package,b.id as p_id');
-		$this->db->from('vendor_price_list a');
-		$this->db->join('product b','a.product_id=b.id');
+		// $this->db->from('vendor_price_list a');
+		$this->db->from('product b');
 		$this->db->join('product_form c','b.form_id=c.id');
 		$this->db->join('product_color d','b.color_id=d.id');
 		$this->db->join('product_type e','b.product=e.id');

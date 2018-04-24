@@ -1,6 +1,6 @@
 <table class="table table-bordered">
 	<thead>
-		<th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Equivalent</th>
+		<th></th><th>Product Name</th><th>Form</th><th>Color</th><th>Type</th><th>Equivalent</th>
 		<th>Quantity</th><th>Wholesale Price</th><th>Row</th><th>Packaging</th>
 	</thead>
 	<tbody>
@@ -10,16 +10,17 @@
 				foreach ($product as $key => $value)
 				{
 					?>
-						<tr class="product_row" onclick="get_product_details(<?=$value['product_id'];?>)">
-							<td><?=$value['name'];?></td>
-							<td><?=$value['form'];?></td>
-							<td><?=$value['color'];?></td>
-							<td><?=$value['type'];?></td>
-							<td><?=$value['equivalent'];?></td>
-							<td><?=$value['quantity'];?></td>
-							<td><?=displayData($value['wholesale_price'],'money');?></td>
-							<td><?=$value['row'];?></td>
-							<td><?=$value['packaging'];?></td>
+						<tr class="product_row">
+							<td><input type="checkbox" name="product_onepage" onclick="onepage_product_add(this,<?=$value['product_id'];?>);" value="<?=$value['product_id'];?>"></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['name'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['form'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['color'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['type'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['equivalent'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['quantity'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=displayData($value['wholesale_price'],'money');?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['row'];?></td>
+							<td onclick="get_product_details(<?=$value['product_id'];?>)"><?=$value['packaging'];?></td>
 						</tr>
 					<?php
 				}
